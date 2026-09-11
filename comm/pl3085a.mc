@@ -28,7 +28,7 @@ component PL3085A : UARTtoRS485
     spec.workingtemperature = -40°C ~ +85°C
 }
 
-module PL3085A_MDL(pwr::DC(5V))
+module PL3085A_MDL(psnk pwr::DC(5V))
 {
     in UART{TX, RX}
     out RS485{A, B}
