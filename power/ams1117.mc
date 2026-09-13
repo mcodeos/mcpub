@@ -47,9 +47,8 @@ component AMS1117(v_out::UV.VOLT = 3.3V)
     ]
 
     pins = [
-        ps 1 = GND, "Ground (fixed) / ADJ (adjustable)"
-        ps 2 = Vout, "Regulated output"
-        ps 3 = Vin, "Unregulated input"
+        psnk [3,1] = [Vin, GND], "Unregulated input; GND (fixed) / ADJ (adjustable)"
+        psrc [2,1] = [Vout, GND], "Regulated output"
         tab = TAB, "SOT-223 heat tab, tied to Vout (NOT GND)"
     ]
 

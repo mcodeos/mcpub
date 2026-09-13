@@ -26,7 +26,7 @@ component SYS.Clock.MCP7940M(partno)
     else package = PKG.SOIC8
 
     pins = [
-        ps [8,4] = [VCC,VSS]::DC()
+        psnk [8,4] = [VCC,VSS]::DC()
         in [1,2] = XTAL{X1,X2}::XTAL(), ["Crystal X1", "Crystal X2"]
         io [5,6] = I2C{SDA,SCL}::I2C(), ["I2C data", "I2C clock"]
         out 7 = MFP, "used for alarm and square wave output, or GPIO"

@@ -34,7 +34,7 @@ component PCA9555(partno)
         package = "DIP24"
 
     pins = [
-        ps [24,12] = DC{VCC,GND}::DC() | [VDD, VSS]
+        psnk [24,12] = DC{VCC,GND}::DC() | [VDD, VSS]
 
         in [21,2,3] = A[0:2]
         io [23, 22, 1] = I2C{SDA, SCL, INTR}::I2C()
