@@ -17,9 +17,9 @@ use mc.ttl
 // Abstract device-shape base (U180 ruling b3781): the verified single-gate
 // D-type flip-flop shape (CLK/D/Q/_CLR + the VCC/GND power pair) is the
 // binding base; the orderable package grades are variants that override
-// partno/package only. The mclibs TTL.D catalog shape (1..5, with _Q, no
-// power pins) does NOT match this device - see the ledger, the family shape
-// stays a shape reference, not a binding target.
+// partno/package only. The mclibs TTL.D family shape was reformed to this
+// same face in b3789 (U195); the family stays a shape reference, not a
+// binding target.
 abstract component TTL.D.SN74LVC1G175
 {
     vender = "TI"
