@@ -24,31 +24,31 @@ component MCU.US513_20_F                                                  // MCU
 
     pins = [                                                              // 管脚定义
         io [1, 2] = I2C0::I2C(Master)                                     // 管脚1和2可以配置为I2C接口
-                    | GPIO[3, 4]::GPIO(Controller)                        // 也可以配置为GPIO
+                    | GPIO[3, 4]::GPIO(Provider)                        // 也可以配置为GPIO
 
         in [3, 4] = XTAL::XTAL(Oscillator)                                // 32K晶振输入/输出管脚（振荡器侧，承载维持放大器）
         psnk [5, 21] = [VDD, GND]::DC(3.3V)                               // VDD电源输入, 电压3.3V（汇）
         io [6, 7] = UART0::UART.TTL(DCE)                                  // 管脚[6,7]可以配置为串口UART0
                     | I2C1::I2C(Master)                                   // 管脚[6,7]可以配置为I2C接口
-                    | GPIO[5, 6]::GPIO(Controller)                        // 管脚[6,7]也可以配置为GPIO
+                    | GPIO[5, 6]::GPIO(Provider)                        // 管脚[6,7]也可以配置为GPIO
 
         io [8, 9] = PDM[CLK, DATA]
                     | PBus{CLK, DATA}
-                    | GPIO[7, 8]::GPIO(Controller)                        // 管脚[8,9]可以配置为PDM接口，也可以配置为GPIO
+                    | GPIO[7, 8]::GPIO(Provider)                        // 管脚[8,9]可以配置为PDM接口，也可以配置为GPIO
 
-        io [10, 11] = I2C1::I2C(Master) | GPIO[9, 10]::GPIO(Controller),  // 管脚[10,11]可以配置为I2C接口, 也可以配置为GPIO
+        io [10, 11] = I2C1::I2C(Master) | GPIO[9, 10]::GPIO(Provider),  // 管脚[10,11]可以配置为I2C接口, 也可以配置为GPIO
         ["I2C接口", "GPIO"], volt:1.2V, amp:100mA
 
         // Master 线序 [CS, SCLK, MISO, MOSI]：书写序=线序（b3648），故脚号为 [10, 8, 11, 9]
         io [10, 8, 11, 9] = SPI{CSN, SCLK, MISO, MOSI}::SPI(Master)       // 管脚10=CSN, 8=SCLK, 11=MISO, 9=MOSI，按 Master 线序书写
         io [12, 13] = UART1::UART.TTL(DCE)                                // 管脚[12,13]可以配置为串口UART1
-                      | GPIO[5, 6]::GPIO(Controller)                      // 也可以配置为GPIO
+                      | GPIO[5, 6]::GPIO(Provider)                      // 也可以配置为GPIO
 
         psnk [14, 21] = [VDD_CORE, GND]::DC(1.2V)                         // 电源1.2v输入（汇）
         in 15 = AVDD09_CAP                                                // AD电源降噪电容输入管脚
         io [16, 17] = ADC::ADC.DIFF(Receiver) @class(analog)              // 模拟差分输入接口P/N（ADC.DIFF 只有 P/N 两根线）
         io [18, 19] = JTAG::DBG.JTAG.2(TAP)                               // 管脚18和19可以配置为JTAG接口
-                      | GPIO[0,1]::GPIO(Controller)                       // 也可以配置为GPIO
+                      | GPIO[0,1]::GPIO(Provider)                       // 也可以配置为GPIO
         // | I2S::I2S()                         // 也可以配置为I2S接口
 
         io 20 = GPIO[2] | EXT_CLK_IN                                      // 管脚20，可以配置为GPIO, 也可以配置为外部时钟输入
