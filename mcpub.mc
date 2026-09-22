@@ -12,7 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-// MCode is an industrial-grade circuit programming language aimed at precise
-// and efficient circuit programming. This file aggregates the standard
-// components and interfaces of the language as the mcode basic library.
+// Real market-part samples (random selection). Vendor part numbers and
+// manufacturer identity allowed here. Parts may be defined standalone or
+// based on an mclibs abstract component; the dependency direction
+// mcpub -> mclibs -> mcode is one-way.
 
+// import modules
+pub use ./clock/mcp7940m.mc
+pub use ./comm/pl3085a.mc
+pub use ./connector/lp3220.mc
+pub use ./connector/usb_mini_socket.mc
+pub use ./digital/sn74lvc1g175.mc
+pub use ./expand/pca9555.mc
+pub use ./isolation/nsi814x.mc
+pub use ./mcu/tc275.mc
+pub use ./passive/bss138n.mc
+pub use ./power/ams1117.mc
+pub use ./power/tle7368.mc
