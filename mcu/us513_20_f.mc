@@ -39,8 +39,8 @@ component MCU.US513_20_F                                                  // MCU
         io [10, 11] = I2C1::I2C(Master) | GPIO[9, 10]::GPIO(Provider),  // 管脚[10,11]可以配置为I2C接口, 也可以配置为GPIO
         ["I2C接口", "GPIO"], volt:1.2V, amp:100mA
 
-        // Master 线序 [CS, SCLK, MISO, MOSI]：书写序=线序（b3648），故脚号为 [10, 8, 11, 9]
-        io [10, 8, 11, 9] = SPI{CSN, SCLK, MISO, MOSI}::SPI(Master)       // 管脚10=CSN, 8=SCLK, 11=MISO, 9=MOSI，按 Master 线序书写
+        // Master 线序 [SCLK, MOSI, MISO, CS]（b3804 面序），故脚号为 [8, 9, 11, 10]
+        io [8, 9, 11, 10] = SPI{SCLK, MOSI, MISO, CSN}::SPI(Master)       // 管脚8=SCLK, 9=MOSI, 11=MISO, 10=CSN，按 Master 线序书写
         io [12, 13] = UART1::UART.TTL(DCE)                                // 管脚[12,13]可以配置为串口UART1
                       | GPIO[5, 6]::GPIO(Provider)                      // 也可以配置为GPIO
 
