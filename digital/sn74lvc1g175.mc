@@ -14,15 +14,16 @@
 
 use mc.ttl
 
-component TTL.D.SN74LVC1G175(partno)
+// Abstract device-shape base (U180 ruling b3781): the verified single-gate
+// D-type flip-flop shape (CLK/D/Q/_CLR + the VCC/GND power pair) is the
+// binding base; the orderable package grades are variants that override
+// partno/package only. The mclibs TTL.D catalog shape (1..5, with _Q, no
+// power pins) does NOT match this device - see the ledger, the family shape
+// stays a shape reference, not a binding target.
+abstract component TTL.D.SN74LVC1G175
 {
     vender = "TI"
     desc = "Single D-Type Flip-Flop With Asynchronous Clear"
-
-    if (partno == "SN74LVC1G175DBV") package = "SOT23-6"
-    else if (partno == "SN74LVC1G175DCK") package = "SC70-6"
-    else if (partno == "SN74LVC1G175DRY") package = "SON-6"
-    else if (partno == "SN74LVC1G175YZP") package = "DSBGA-6"
 
     standard_signal_level = volt: [low: 0V ~ 0.7V, high:0.7V ~ 5.5V]
 
@@ -45,7 +46,7 @@ component TTL.D.SN74LVC1G175(partno)
         CAP(100nF,10V).Cap([VCC, GND])
     }
 
-    SN74LVC1G175.desc.features = ["Availabel in the Texas Instruments NanoFreeTM Package",
+    desc_features = ["Availabel in the Texas Instruments NanoFreeTM Package",
                 "Supports 5-V VCC Operation",
                 "Inputs Accept Voltages to 5.5V",
                 "Supports Down Translation to VCC",
@@ -60,7 +61,7 @@ component TTL.D.SN74LVC1G175(partno)
                 // "1000-V Charged-Device Model (C101)"}}
                 ]
 
-    SN74LVC1G175.desc.applications = ["TV/Set Top Box/Audio", 
+    desc_applications = ["TV/Set Top Box/Audio", 
                         "EPOS (Electronic Point-of-Sale)",
                         "Motor Drives",
                         "PC/Notebook",
@@ -75,16 +76,39 @@ component TTL.D.SN74LVC1G175(partno)
                         "Storage"
                     ]
 
-    SN74LVC1G175.desc.overall = "This single D-type flip-flop is designed for 1.65-V to 5.5-V VCC operation.
+    desc_overall = "This single D-type flip-flop is designed for 1.65-V to 5.5-V VCC operation.
                 The SN74LVC1G175 device has an asynchronous clear (CLR) input. When CLR is high, 
                 data from the input pin (D) is transferred to the output pin (Q) on the clock\"s (CLK) 
                 rising edge. When CLR is low, Q is forced into the low state, regardless of the clock 
                 edge or data on D.
                 NanoFreeTM package technology is a major breakthrough in IC packaging concepts, using 
                 the die as the package.
-                This device is fully specified for partial-power-down applications using Ioff. The Ioff 
-                circuitry disables the outputs, preventing damaging current backflow through the device 
+                This device is fully specified for partial-power-down applications using Ioff. The Ioff
+                circuitry disables the outputs, preventing damaging current backflow through the device
                 when it is powered down."
 
+}
+
+// Package grade variants: the die and the pinout are shared; the orderable
+// suffix only picks the package.
+component TTL.D.SN74LVC1G175_DBV : TTL.D.SN74LVC1G175
+{
+    partno = "SN74LVC1G175DBV"
+    package = "SOT23-6"
+}
+component TTL.D.SN74LVC1G175_DCK : TTL.D.SN74LVC1G175
+{
+    partno = "SN74LVC1G175DCK"
+    package = "SC70-6"
+}
+component TTL.D.SN74LVC1G175_DRY : TTL.D.SN74LVC1G175
+{
+    partno = "SN74LVC1G175DRY"
+    package = "SON-6"
+}
+component TTL.D.SN74LVC1G175_YZP : TTL.D.SN74LVC1G175
+{
+    partno = "SN74LVC1G175YZP"
+    package = "DSBGA-6"
 }
 
