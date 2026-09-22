@@ -17,15 +17,8 @@
 // based on an mclibs abstract component; the dependency direction
 // mcpub -> mclibs -> mcode is one-way.
 
-// import modules
-pub use ./clock/mcp7940m.mc
-pub use ./comm/pl3085a.mc
-pub use ./connector/lp3220.mc
-pub use ./connector/usb_mini_socket.mc
-pub use ./digital/sn74lvc1g175.mc
-pub use ./expand/pca9555.mc
-pub use ./isolation/nsi814x.mc
-pub use ./mcu/tc275.mc
-pub use ./passive/bss138n.mc
-pub use ./power/ams1117.mc
-pub use ./power/tle7368.mc
+// The library is installed whole (cp.sh copies it into ~/.mcode) but
+// consumed per part file: a project references exactly the sample it
+// needs, e.g. `use mcpub.mcu/tc275.mc`. Unlike mclibs/mcode there is
+// no aggregate import -- loading this entry file registers nothing by
+// design; do not turn it into a full manifest.

@@ -4,7 +4,7 @@
 TARGET_DIR="~/.mcode"
 TARGET_DIR_EXPANDED=$(eval echo "$TARGET_DIR")
 
-# Determine the correct source directory for mclibs files
+# Determine the correct source directory for mcpub files
 # Always use the directory containing this script as the base
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SOURCE_DIR="$SCRIPT_DIR"
@@ -23,28 +23,28 @@ if [ ! -d "$TARGET_DIR_EXPANDED" ]; then
     echo "Target directory created successfully"
 fi
 
-# Check if mclibs subdirectory exists, remove if it does
-LIBS_DIR="$TARGET_DIR_EXPANDED/mclibs"
+# Check if mcpub subdirectory exists, remove if it does
+LIBS_DIR="$TARGET_DIR_EXPANDED/mcpub"
 if [ -d "$LIBS_DIR" ]; then
-    echo "Existing mclibs directory found, removing..."
+    echo "Existing mcpub directory found, removing..."
     rm -rf "$LIBS_DIR"
     if [ $? -ne 0 ]; then
-        echo "Error: Cannot remove existing mclibs directory"
+        echo "Error: Cannot remove existing mcpub directory"
         exit 1
     fi
-    echo "Existing mclibs directory removed successfully"
+    echo "Existing mcpub directory removed successfully"
 fi
 
-# Create mclibs subdirectory in target
+# Create mcpub subdirectory in target
 mkdir -p "$LIBS_DIR"
 
 # Copy only the contents of the source directory to target
-# This ensures we only copy mclibs files, not other project files
-echo "Copying mclibs files from $SOURCE_DIR to $LIBS_DIR..."
+# This ensures we only copy mcpub files, not other project files
+echo "Copying mcpub files from $SOURCE_DIR to $LIBS_DIR..."
 cp -r "$SOURCE_DIR"/* "$LIBS_DIR"
 if [ $? -ne 0 ]; then
-    echo "Error: Cannot copy mclibs files"
+    echo "Error: Cannot copy mcpub files"
     exit 1
 fi
 
-echo "Operation completed: mclibs files successfully copied to $TARGET_DIR/mclibs"
+echo "Operation completed: mcpub files successfully copied to $TARGET_DIR/mcpub"
