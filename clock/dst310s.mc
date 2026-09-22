@@ -30,7 +30,7 @@ component Crystal2.DST310S   // 2-pin passive crystal
     ]
 
     pins = [
-        [1, 2] = XTAL::XTAL()  // 管脚1和2，对应晶振接口XTAL的X1和X2
+        [1, 2] = XTAL::XTAL(Resonator)  // 管脚1和2，对应晶振接口XTAL的X1和X2（无源谐振体侧）
     ]
 
     func setup(GND) {

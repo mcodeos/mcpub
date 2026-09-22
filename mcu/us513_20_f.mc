@@ -26,7 +26,7 @@ component MCU.US513_20_F                                                  // MCU
         io [1, 2] = I2C0::I2C(Master)                                     // 管脚1和2可以配置为I2C接口
                     | GPIO[3, 4]::GPIO(Controller)                        // 也可以配置为GPIO
 
-        in [3, 4] = XTAL::XTAL(32kHz)                                     // 32K晶振输入/输出管脚
+        in [3, 4] = XTAL::XTAL(Oscillator)                                // 32K晶振输入/输出管脚（振荡器侧，承载维持放大器）
         psnk [5, 21] = [VDD, GND]::DC(3.3V)                               // VDD电源输入, 电压3.3V（汇）
         io [6, 7] = UART0::UART.TTL(DCE)                                  // 管脚[6,7]可以配置为串口UART0
                     | I2C1::I2C(Master)                                   // 管脚[6,7]可以配置为I2C接口
