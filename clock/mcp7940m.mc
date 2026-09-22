@@ -22,7 +22,7 @@ component SYS.Clock.MCP7940M(partno)
     else if (partno == "7940MT") package = PKG.MSOP8
     else if (partno == "940M") package = PKG.TSSOP8
     else if (partno == "MCP7940M") package = PKG.DIP8
-    else if (partno == "AU1") package = PKG.TDFN8_2x3
+    else if (partno == "AU1") package = PKG.TDFN8_2X3
     else package = PKG.SOIC8
 
     pins = [

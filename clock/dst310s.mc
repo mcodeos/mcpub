@@ -24,7 +24,7 @@
 component Crystal2.DST310S   // 2-pin passive crystal
 {
     partno = "DST310S"       // 型号是DST310S
-    package = PKG.Xtal_3215  // 封装是3215，即32mm*15mm
+    package = PKG.XTAL_3215  // 封装是3215，即32mm*15mm
     spec = [
         frequency = 32kHz    // 晶振频率是32kHz
     ]
