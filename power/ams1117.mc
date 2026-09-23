@@ -21,6 +21,11 @@
 //    2   = Vout     Regulated output
 //    3   = Vin      Unregulated input
 //    TAB = Vout     SOT-223 heat pad — internally connected to Vout(2), NOT GND (common misconnection)
+//  Pins (ADJ version, separate base — pin 1 is a feedback sense, not GND):
+//    1   = ADJ      Adjust/feedback (1.25V reference)
+//    2   = Vout     Regulated output
+//    3   = Vin      Unregulated input
+//    TAB = Vout     Same as the fixed version
 //
 //  Key parameters:
 //    Iout max 1A;  Dropout typ 1.1V / max 1.3V @ 1A
@@ -32,8 +37,9 @@
 // Abstract device-shape base (U180 ruling b3781): the verified AMS1117 SOT-223
 // shape is the binding base; fixed-output grades are variants that override the
 // orderable partno and pass the output voltage through the formal at the call
-// site. The ADJ grade needs a different pin-1 role (feedback, not GND) and is
-// NOT expressible as a variant under the data lock - filed, not faked.
+// site. The ADJ grade changes a pin role (pin 1: GND -> ADJ feedback), and per
+// the role-grade law (U196 ruling b3839) a role-level grade is a different
+// device shape — it gets its own base (AMS1117_ADJ below), not a variant.
 abstract component AMS1117(v_out::UV.VOLT = 3.3V)
 {
     package = PKG.SOT_223
@@ -99,5 +105,45 @@ component AMS1117_3_3 : AMS1117
 component AMS1117_5_0 : AMS1117
 {
     partno = "AMS1117-5.0"
+}
+
+// ADJ grade (U196 ruling b3839): pin 1 is the ADJ feedback sense, not GND —
+// a role-level grade is a different device shape, so it stands as its own
+// self-sufficient base instead of a variant. One orderable SKU, so it is a
+// concrete component, not an abstract + partno variant pair. The output
+// voltage is set by the external divider; the formal stays pass-at-call-site
+// like the fixed family.
+component AMS1117_ADJ(v_out::UV.VOLT = 3.3V)
+{
+    partno = "AMS1117-ADJ"
+    package = PKG.SOT_223
+    voltage = v_out
+
+    name = "AMS1117 Adjustable Low-Dropout Regulator"
+    description = "1A adjustable-output LDO linear regulator (SOT-223, ADJ grade)"
+
+    spec = [
+        output_voltage = v_out
+        output_current = 1A
+        input_voltage = 15V
+        dropout_voltage = 1.1V
+        reference_voltage = 1.25V
+        output_accuracy = 1.5%
+    ]
+
+    pins = [
+        psnk [3] = [Vin], "Unregulated input"
+        psrc [2] = [Vout], "Regulated output"
+        in 1 = ADJ, "Adjust/feedback sense (1.25V reference at the pin)"
+        tab = TAB, "SOT-223 heat tab, tied to Vout (NOT GND)"
+    ]
+
+    func Regulate([vin]::DC(12V), [adj]::DC(1.25V), [vout]::DC(v_out))
+    {
+        vin -> Vin
+        adj -> ADJ
+        Vout -> vout
+        return vout
+    }
 }
 
