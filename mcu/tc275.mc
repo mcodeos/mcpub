@@ -22,17 +22,13 @@ component TC275
     partno = "TC275"
     package = "PG-LQFP-176-22" // LF-BGA-292-6 / LF-BGA-292-10
 
-    pins = [ 
+    pins = [
         // supply
-        101 = VSS::DC.GND(), "Digital Ground" //.. is there still a need for separate definitions?
-        
-        10 = DC.VDD::DC(1.3V), "Production Device is VDD" 
-            //.. | DC.VDDSB::DC(1.3V), "Emulation SRAM Standby Power Supply"
-        10 = DC.VDDSB::DC(1.3V), "Emulation SRAM Standby Power Supply"
+        psnk [[10,24,68,100,123], 101] = [VDD, VSS]::DC(1.3V), "Digital Core Power Supply (1.3V); pin 100 in turn supplies the main XTAL oscillator/PLL"
+            // VDDSB (emulation SRAM standby) shares pin 10 in this pin map -
+            // unverified against the LQFP-176 datasheet, row disabled
+            // (2026-09-23, b3874).
 
-        [24,68,123] = DC.VDD::DC(1.3V), "Digital Core Power Supply (1.3V)"
-        100 = VDD, "Digital Core Power Supply (1.3V), The supply pin inturn supplies the main XTAL Oscillator/PLL (1.3V)"
-        
         [25, 69, 99, 153] = VEXT, "External Power Supply (5V / 3.3V)"
         104 = VDDP3, "Digital Power Supply for Oscillator, LVDSH and A2 pads (3.3V)"
         154 = VDDP3, "Digital Power Supply for Flash (3.3V)"
@@ -110,10 +106,23 @@ component TC275
 
     func CapDigital(gnd)
     {
-        //..
-        CAP(100nF).Cap([this{10,24,68,100,123}, gnd])
-        CAP(100nF).Cap([this{25,69,99,153}, gnd])
-        CAP(100nF).Cap([[pins{104,154}, pins.155, pins.164], gnd])
+        // One 100nF decoupling capacitor per supply pin (b3874). The
+        // numbered pins.N scalar endpoint form is used because group names
+        // (VDD/VEXT) and the bare pins{...} member form do not expand as
+        // component-body connection endpoints.
+        pins.10 -> [C[1]::CAP(100nF)] -> [gnd]
+        pins.24 -> [C[2]::CAP(100nF)] -> [gnd]
+        pins.68 -> [C[3]::CAP(100nF)] -> [gnd]
+        pins.100 -> [C[4]::CAP(100nF)] -> [gnd]
+        pins.123 -> [C[5]::CAP(100nF)] -> [gnd]
+        pins.25 -> [C[6]::CAP(100nF)] -> [gnd]
+        pins.69 -> [C[7]::CAP(100nF)] -> [gnd]
+        pins.99 -> [C[8]::CAP(100nF)] -> [gnd]
+        pins.153 -> [C[9]::CAP(100nF)] -> [gnd]
+        pins.104 -> [C[10]::CAP(100nF)] -> [gnd]
+        pins.154 -> [C[11]::CAP(100nF)] -> [gnd]
+        pins.155 -> [C[12]::CAP(100nF)] -> [gnd]
+        pins.164 -> [C[13]::CAP(100nF)] -> [gnd]
     }
 
     func CapAnalog(vag1, vag2, vddm)
@@ -125,18 +134,11 @@ component TC275
 
     func Xtal(gnd)
     {
-        //Crystal y(20MHz)
-        //CAP c[1:2](10pF, 10V)
-        //XTAL + y.Cap([c[1:2], gnd])
-
-        XTAL <- Crystal(20MHz).Cap([c[1:2]::CAP(10pF, 10V), gnd])
+        // Load capacitors are owned by the crystal setup (U200 ruling).
+        XTAL2(20MHz, 10pF) y.Setup(gnd) -> [XTAL.X1, XTAL.X2]
     }
 
-    func HwReset()
-    {
-        Switch s
-        Transistor q
-        PORST_IN <- Cap([(R108 - q.g) + R109 + C105, VSS]) + (s - VEXT) 
-        PORST_OUT <- (R105 - _PORST) + q.d + (R106 - VEXT)
-    }
+    // HwReset (b3874 dropped): the PORST RC / switch / discharge-transistor
+    // circuitry is board-side (R105/R106/R108/R109, C105, the switch, the
+    // FET); the book only exposes the _PORST pin (121).
 }
