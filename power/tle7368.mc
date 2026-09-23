@@ -124,13 +124,12 @@ component TLE7368 (partno)
 
         VSW -> IN_LDO2    // LDO2
 
+        // Strap table: SEL_LDO2 to GND selects 2.6 V, to Q_LDO2 selects 3.3 V
         if (vLdo2 == 2.6V){
-            SEL_LDO2 + VSS 
-            Q_LDO2 = volt: 2.6V //..
+            SEL_LDO2 + VSS
         }
         else{
-            SEL_LDO2 + Q_LDO2 
-            Q_LDO2 = volt: 3.3V
+            SEL_LDO2 + Q_LDO2
         }
         
         cldo2.Cap([Q_LDO2, VSS])
@@ -150,13 +149,12 @@ component TLE7368 (partno)
     {
         CAP cstby(2μF,10V)
 
+        // Strap table: SEL_STBY to Q_STBY selects 1.0 V, to VSS selects 2.6 V
         if (vStdby == 1V){
-            SEL_STBY + Q_STBY 
-            Q_STBY = volt: 1.0V
+            SEL_STBY + Q_STBY
         }
         else{
             SEL_STBY + VSS
-            Q_STBY = volt: 2.6V
         }
 
         cstby.Cap([Q_STBY, VSS])
