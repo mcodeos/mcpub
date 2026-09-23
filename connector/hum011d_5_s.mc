@@ -12,18 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-component HUM011D_5_S
-{
-    partno = "HUM011D_5_S"
-    package = "USB-MINI-SOCKET"
+// Real Mini USB B receptacle (HUM011D-5-S). The pin book adopts the mcode
+// USB.MINIB interface (checklist 4.10): 1=VBUS, 2=D-, 3=D+ (@pair(d)), 4=ID,
+// 5=GND; pads 6/7 are GND return; the two shield pads are exposed boundary
+// electrodes (4.9). The pin book matches the mcode USB.SOCK_MINIB base —
+// a library file cannot inherit an mcode component base (the `:` base only
+// resolves in board scope), so the shapes agree by adoption, not derivation.
 
-    pins =
-    [
-        [1, [5,6,7]] = [VBUS, GND]::DC(5V)
-        2 = D\-
-        3 = D\+
-        4 = ID
-        8 = SHIELD3
-        9 = SHIELD4
+component USB.HUM011D_5_S
+{
+    partno = "HUM011D-5-S"
+    package = PKG.USB_MINI
+    voltage = "5V"                    // VBUS is a 5V power rail
+
+    pins = [
+        [1:5] = USB::USB.MINIB(Device)   // interface adoption: 1=VBUS, 2=D\-, 3=D\+, 4=ID, 5=GND
+        [6,7] = GND                      // USB GND return pads
+        8 = SHIELD3 @exposed(esd_contact)  // shield: exposed boundary electrode
+        9 = SHIELD4 @exposed(esd_contact)  // shield: exposed boundary electrode
+    ]
+
+    layout = [
+        right  = [4, 3, 2, 5, 1]
+        bottom = [6:9]
     ]
 }
+
+// Usage Examples:
+// component USB.HUM011D_5_S usbsock
+// usbsock.USB.VBUS -> RES(0R) -> vin.V5V          // interface adoption pins are addressed by group name
+// usbsock.SHIELD3 -> ESDGND                        // exposed shield pad to the protective island
