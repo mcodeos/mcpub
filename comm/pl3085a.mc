@@ -14,7 +14,7 @@
 
 # PL3085A cn.ireader-opto
 
-use /mclibs/comm/uart2rs485.mc
+use mclibs.comm/uart2rs485.mc
 
 component PL3085A : UARTtoRS485
 {
