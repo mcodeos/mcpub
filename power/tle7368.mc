@@ -73,140 +73,99 @@ component TLE7368 (partno)
         right = [36:19]
     ]
 
-    func TLE7368(pwr)
+    // Power entry (b3874): the raw input pair runs a pi-filter onto VCC.
+    // The old 'func TLE7368(pwr)' conflated the partno constructor with the
+    // supply binding and the 'Net.Pai' macro class does not exist, so the
+    // filter is restated with library parts.
+    func PaiIn([vin, vret]::DC(12V))
     {
-        pwr -> [VCC, GND + GNDA]
-    }
-
-    func PaiIn(vin)
-    {
-        Net.Pai pi([CAP(0.1uF, 50V), ECAP(10uF, 50V), ECAP(47uF, 50V), CAP(0.1uF, 50V)], INDUCT(10uH, 2.1A))
-        pi.filter(vin, GND) -> DC
+        vret -> GND
+        vret -> GNDA
+        vin - INDUCT(10uH, 2.1A) - VCC
+        [vin, vret] => CAP(0.1uF, 50V).Cap(_)
+        VCC - CAP.ELEC(10uF, 50V) - vret
+        VCC - CAP.ELEC(47uF, 50V) - vret
+        [VCC, vret] => CAP(0.1uF, 50V).Cap(_)
     }
 
     func Reset()
     {
-        CAP cReset(1nF, 10V).Cap([RT, VSS])
+        CAP cReset(1nF, 10V).Cap([RT, GND])
     }
 
     func Charge()
     {
-        CAP ccp(220nF, 25V), cc1(100nF, 16V), cc2(100nF, 16V)
-        ccp.Cap([CCP, VSS])
-        //.. pins.C1\+ - cc1 - pins.C1\-
-        //.. pins.C2\+ - cc2 - pins.C2\-
-    }
-
-    func Buck()
-    {
-        /*DC.Booster(
-            CAP cboost(100nF, 10V),
-            DIO dstb(),
-            INDUCT lboost( 8uH~220uH, 2.1A, esr<150mΩ),
-            CAP cfilter(4.7uF, 16V)
-        )
-        .boost(BST, SW, GNDA, VSW)*/
+        // The charge-pump reservoir sits on CCP; the C1/C2 flying ceramics
+        // are external parts on the C1+/C1-/C2+/C2- pins (b3874 dropped the
+        // disabled in-book wiring sketch).
+        CAP ccp(220nF, 25V).Cap([CCP, GND])
     }
 
     func QT12LDO1()
     {
-        CAP ct1(4.7μF,10V), ct2(4.7μF,10V), cldo1(1μF,10V)
-        
-        //.. VSW -> pins.FBL_IN
-        ct1.Cap([Q_T1, VSS])
-        ct2.Cap([Q_T1, VSS])
-        cldo1.Cap([Q_LDO1, VSS])
+        CAP ct1(4.7μF,10V).Cap([Q_T1, GND])
+        CAP ct2(4.7μF,10V).Cap([Q_T1, GND])
+        CAP cldo1(1μF,10V).Cap([Q_LDO1, GND])
     }
 
-    func LDO2(vLdo2)
+    func LDO2(vLdo2::UV.VOLT)
     {
-        CAP cldo2(1μF,10V)
+        CAP cldo2(1μF,10V).Cap([Q_LDO2, GND])
 
-        VSW -> IN_LDO2    // LDO2
+        SW -> IN_LDO2    // LDO2 is fed from the buck switch node
 
         // Strap table: SEL_LDO2 to GND selects 2.6 V, to Q_LDO2 selects 3.3 V
         if (vLdo2 == 2.6V){
-            SEL_LDO2 + VSS
+            SEL_LDO2 + GND
         }
         else{
             SEL_LDO2 + Q_LDO2
         }
-        
-        cldo2.Cap([Q_LDO2, VSS])
-    }
-
-    func LDO3(ldo3)
-    {
-        if (ldo3 == "YES"){
-            DC.LDO(TRANS(), CAP(22uF,10V,"Tantalum")) ld
-            ld.ldrop(VSW, DRV_EXT, FB_EXT, GND_A, Q_LDO3)
-        }
-        else
-            DRV_EXT + FB_EXT // no ldo3 configuration
     }
 
     func STDBY(vStdby)
     {
-        CAP cstby(2μF,10V)
-
-        // Strap table: SEL_STBY to Q_STBY selects 1.0 V, to VSS selects 2.6 V
+        // Strap table: SEL_STBY to Q_STBY selects 1.0 V, to GND selects 2.6 V
         if (vStdby == 1V){
             SEL_STBY + Q_STBY
         }
         else{
-            SEL_STBY + VSS
+            SEL_STBY + GND
         }
 
-        cstby.Cap([Q_STBY, VSS])
+        CAP cstby(2μF,10V).Cap([Q_STBY, GND])
     }
 
     func PullUp_RO1()
     {
-        RES(10kΩ).Pullup([RO_1, VCC.MCU]) // LDO1 reset output to MCU
+        RES(10kΩ).Pullup([RO_1, VCC]) // LDO1 reset output to MCU
     }
 
     func PullUp_RO2_FBEXT()
     {
-        RES(10kΩ).Pullup([RO_2, VCC.MCU]) // LDO2/FB_EXT reset output to MCU
-    }
-
-    func Ignite()
-    {
-        //X RES r(100kΩ), TRANS.NMOS q, Switch s
-        RES r(100kΩ)
-        TRANS.NMOS q
-        Switch s
-    }
-
-    func AutoReset()
-    {
-        TTL.D dTrigger.Cap()
-        VEXT + dTrigger.VCC + dTrigger.D
-        VSS + dTrigger.GND
-
-        _PORST -> dTrigger.CLK
-        dTrigger.Q -> EN_UC
-
-        return dTrigger._CLR
-    }
-
-    func StandByTimer(vstby)
-    {
-        SYS.Calendar timer
-        timer(vstby, GND).Cap().Timer()
-        return timer.I2C
+        RES(10kΩ).Pullup([RO_2, VCC]) // LDO2/FB_EXT reset output to MCU
     }
 }
 
-module TLE7368E(pwr, VIN_STBY, EN_IGN, EN_UC, WDI)
+module TLE7368E(psnk pwr{VIN, GND}::DC(12V))
 {
     TLE7368("TLE7368E") tle
     .PaiIn(pwr)
     .Reset()
-    .Ignite(EN_IGN)
-    .AutoReset()
-    .Charge().Buck().QT12LDO1().LDO2().LDO3().STBY()
-    .StandByTimer(VIN_STBY)
+    .Charge()
+    .QT12LDO1()
+    .LDO2(3.3V)   // the V3V3 export selects the 3.3 V tap
+
+    // No LDO3 fitted: with the external NPN solution dropped, DRV_EXT
+    // straps to FB_EXT (b3874 removed the func - boards that fit LDO3
+    // wire the two pins directly).
+    tle.DRV_EXT + tle.FB_EXT
+
+    // (b3874) Out of the chain, per the adopting board: the ignition
+    // switch (Ignite), the PORST trigger (AutoReset; TTL.D lives in mclibs
+    // and the fragment referenced board nets), the buck booster sketch
+    // (Buck) and the stand-by configuration (STDBY / StandByTimer) are
+    // unconsumed faces of the part book.
 
     // =========================================================================
     // Exporting ports: module-body return is deprecated (unsupported) — use declarative io ports + `<-` binding instead.
@@ -216,11 +175,14 @@ module TLE7368E(pwr, VIN_STBY, EN_IGN, EN_UC, WDI)
     io QT2
     io V5V
     io V3V3
-    io V1V3
-    io VEXT
+    // (b3874) io V1V3 and io VEXT dropped: both exports traced to pins that
+    // do not exist on the part (Q_LOD3 was a typo, there is no VEXT pin).
+    // The part makes no 1.3 V core rail; boards source the TC275 VDD/VEXT
+    // pad supplies themselves.
     io VDD_STBY
     io MON_STBY
     io WDO
+    io WDI
     io _PORST
 
     QT1 <- tle.Q_T1
@@ -232,6 +194,7 @@ module TLE7368E(pwr, VIN_STBY, EN_IGN, EN_UC, WDI)
     VDD_STBY <- tle.Q_STBY
     MON_STBY <- tle.MON_STBY
     WDO <- tle.WDO
+    WDI <- tle.WDI
     _PORST <- tle.RO_1 + tle.RO_2
 
     /* module-body return is deprecated (unsupported): export via the io port declarations + `<-` bindings above
