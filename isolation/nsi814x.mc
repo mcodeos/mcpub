@@ -14,8 +14,8 @@
 
 # NSI814x 
 
-use mc.ifs.power
-use mc.std.isolation
+use $::mcode.ifs
+use mclibs.isolation/digitalio.mc
 
 component ISO.NSI8140(partno)
 {

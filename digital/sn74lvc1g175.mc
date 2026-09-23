@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-use mc.ttl
+use mclibs.digital/ttl.mc
 
 // Abstract device-shape base (U180 ruling b3781): the verified single-gate
 // D-type flip-flop shape (CLK/D/Q/_CLR + the VCC/GND power pair) is the
