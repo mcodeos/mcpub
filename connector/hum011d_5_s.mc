@@ -26,7 +26,7 @@ component USB.HUM011D_5_S
     voltage = "5V"                    // VBUS is a 5V power rail
 
     pins = [
-        [1:5] = USB::USB.MINIB(Device)   // interface adoption: 1=VBUS, 2=D\-, 3=D\+, 4=ID, 5=GND
+        [1:5] = USB::USB.MINIB(DEVICE)   // interface adoption: 1=VBUS, 2=D\-, 3=D\+, 4=ID, 5=GND
         [6,7] = GND                      // USB GND return pads
         8 = SHIELD3 @exposed(esd_contact)  // shield: exposed boundary electrode
         9 = SHIELD4 @exposed(esd_contact)  // shield: exposed boundary electrode
