@@ -59,19 +59,10 @@ component ISO.NSI8140(partno)
         DC1 - CAP cap2(100nF, 10V) - DC2
     }
 
-    func Pull(sin[1:4])
-    {
-        if sin[1]==HIGH RES(10kΩ).Pullup([IN.A, DC1.VDD1]) else if sin[1]==LOW RES(10kΩ).Pulldown([IN.A, DC1.GND1])
-        if sin[2]==HIGH RES(10kΩ).Pullup([IN.B, DC1.VDD1]) else if sin[2]==LOW RES(10kΩ).Pulldown([IN.B, DC1.GND1])
-        if sin[3]==HIGH RES(10kΩ).Pullup([IN.C, DC1.VDD1]) else if sin[3]==LOW RES(10kΩ).Pulldown([IN.C, DC1.GND1])
-        if sin[4]==HIGH RES(10kΩ).Pullup([IN.D, DC1.VDD1]) else if sin[4]==LOW RES(10kΩ).Pulldown([IN.D, DC1.GND1])
-    }
-    func Pullup(vdd)
-    {
-        RES(10kΩ).Pullup([IN, vdd])
-    }
-    func Pulldown(gnd)
-    {
-        RES(10kΩ).Pulldown([IN, gnd])
-    }
+    // The strap helpers Pull/Pullup/Pulldown were removed (b4135): their
+    // bodies compared against HIGH/LOW, which no library defines, and the
+    // local names colliding with the RES pull family silently zeroed every
+    // member call inside them (U331 face 1) while merely instantiating the
+    // component poisoned .Pull resolution world-wide (U331 face 2, probe
+    // bforms/nsi P1/P2/P3). Zero consumers repo-wide at removal time.
 }
