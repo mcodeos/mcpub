@@ -43,7 +43,7 @@ abstract component TTL.D.SN74LVC1G175
 
     func Cap()
     {
-        CAP(100nF,10V).Cap([VCC, GND])
+        VCC - CAP(100nF,10V) - GND
     }
 
     desc_features = ["Availabel in the Texas Instruments NanoFreeTM Package",

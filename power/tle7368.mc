@@ -90,7 +90,7 @@ component TLE7368 (partno)
 
     func Reset()
     {
-        CAP cReset(1nF, 10V).Cap([RT, GND])
+        RT - CAP cReset(1nF, 10V) - GND
     }
 
     func Charge()
@@ -98,19 +98,19 @@ component TLE7368 (partno)
         // The charge-pump reservoir sits on CCP; the C1/C2 flying ceramics
         // are external parts on the C1+/C1-/C2+/C2- pins (b3874 dropped the
         // disabled in-book wiring sketch).
-        CAP ccp(220nF, 25V).Cap([CCP, GND])
+        CCP - CAP ccp(220nF, 25V) - GND
     }
 
     func QT12LDO1()
     {
-        CAP ct1(4.7μF,10V).Cap([Q_T1, GND])
-        CAP ct2(4.7μF,10V).Cap([Q_T1, GND])
-        CAP cldo1(1μF,10V).Cap([Q_LDO1, GND])
+        Q_T1 - CAP ct1(4.7μF,10V) - GND
+        Q_T1 - CAP ct2(4.7μF,10V) - GND
+        Q_LDO1 - CAP cldo1(1μF,10V) - GND
     }
 
     func LDO2(vLdo2::UV.VOLT)
     {
-        CAP cldo2(1μF,10V).Cap([Q_LDO2, GND])
+        Q_LDO2 - CAP cldo2(1μF,10V) - GND
 
         SW -> IN_LDO2    // LDO2 is fed from the buck switch node
 
@@ -133,17 +133,17 @@ component TLE7368 (partno)
             SEL_STBY + GND
         }
 
-        CAP cstby(2μF,10V).Cap([Q_STBY, GND])
+        Q_STBY - CAP cstby(2μF,10V) - GND
     }
 
     func PullUp_RO1()
     {
-        RES(10kΩ).Pullup([RO_1, VCC]) // LDO1 reset output to MCU
+        RES(10kΩ).Pull([RO_1, VCC]) // LDO1 reset output to MCU
     }
 
     func PullUp_RO2_FBEXT()
     {
-        RES(10kΩ).Pullup([RO_2, VCC]) // LDO2/FB_EXT reset output to MCU
+        RES(10kΩ).Pull([RO_2, VCC]) // LDO2/FB_EXT reset output to MCU
     }
 }
 

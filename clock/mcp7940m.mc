@@ -40,7 +40,7 @@ component SYS.Clock.MCP7940M(partno)
 
     func Cap()
     {
-        CAP(100nF, 10V).Cap([VCC, VSS])
+        VCC - CAP(100nF, 10V) - VSS
     }
 
     func Xtal()

@@ -58,7 +58,7 @@ component MCU.US513_20_F                                                  // MCU
     func Power([VDD_3V3, GND]::DC(3.3V), [VCC_1V2, GND]::DC(1.2V)) {
         [VDD_3V3, GND] => CAP(1uF, ±10%, CAP.X5R, 10V).Cap(_) -> [VDD, GND]       // VDD去耦：VDD_3V3给this.VDD输入供电
         [VCC_1V2, GND] => CAP(1uF, ±10%, CAP.X5R, 10V).Cap(_) -> [VDD_CORE, GND]  // VDD_CORE去耦：VCC_1V2给this.VDD_CORE输入供电
-        CAP(1uF, ±10%, CAP.X5R, 10V).Cap([AVDD09_CAP, GND])                       // AVDD09_CAP去耦（模拟参考去耦到数字 GND）
+        AVDD09_CAP - CAP(1uF, ±10%, CAP.X5R, 10V) - GND                       // AVDD09_CAP去耦（模拟参考去耦到数字 GND）
     }
 
     func I2C(address) {
@@ -70,7 +70,7 @@ component MCU.US513_20_F                                                  // MCU
             GPIO[2] - RES(100kΩ) -> GND    // GPIO.02通过100K电阻接地。
 
         // I2C接口I2C0的两个信号线各接一颗上拉电阻到VDD，以稳定信号。
-        RES(10kΩ).Pullup([I2C0.SCL, VDD])  // I2C0.SCL 上拉到 VDD
-        RES(10kΩ).Pullup([I2C0.SDA, VDD])  // I2C0.SDA 上拉到 VDD
+        RES(10kΩ).Pull([I2C0.SCL, VDD])  // I2C0.SCL 上拉到 VDD
+        RES(10kΩ).Pull([I2C0.SDA, VDD])  // I2C0.SDA 上拉到 VDD
     }
 }

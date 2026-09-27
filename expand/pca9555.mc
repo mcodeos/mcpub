@@ -45,8 +45,8 @@ component PCA9555(partno)
 
     func Address(address)
     {
-        if (address & 0x01) RES(10kΩ).Pullup([A0, VDD]) else RES(10kΩ).Pulldown([A0, VSS])
-        if (address & 0x02) RES(10kΩ).Pullup([A1, VDD]) else RES(10kΩ).Pulldown([A1, VSS])
-        if (address & 0x04) RES(10kΩ).Pullup([A2, VDD]) else RES(10kΩ).Pulldown([A2, VSS])
+        if (address & 0x01) RES(10kΩ).Pull([A0, VDD]) else RES(10kΩ).Pull([A0, VSS])
+        if (address & 0x02) RES(10kΩ).Pull([A1, VDD]) else RES(10kΩ).Pull([A1, VSS])
+        if (address & 0x04) RES(10kΩ).Pull([A2, VDD]) else RES(10kΩ).Pull([A2, VSS])
     }
 }

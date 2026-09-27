@@ -127,9 +127,9 @@ component TC275
 
     func CapAnalog(vag1, vag2, vddm)
     {
-        CAP(100nF).Cap([VAREF1, vag1])
-        CAP(100nF).Cap([VAREF2, vag2])
-        CAP(100nF).Cap([VDDM, vddm])
+        VAREF1 - CAP(100nF) - vag1
+        VAREF2 - CAP(100nF) - vag2
+        VDDM - CAP(100nF) - vddm
     }
 
     func Xtal(gnd)

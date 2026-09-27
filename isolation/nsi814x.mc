@@ -55,7 +55,8 @@ component ISO.NSI8140(partno)
 
     func Cap()
     {
-        CAP(100nF, 10V) cap[1:2].Cap([DC1,DC2])
+        DC1 - CAP cap1(100nF, 10V) - DC2
+        DC1 - CAP cap2(100nF, 10V) - DC2
     }
 
     func Pull(sin[1:4])
