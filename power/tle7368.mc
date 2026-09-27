@@ -82,10 +82,10 @@ component TLE7368 (partno)
         vret -> GND
         vret -> GNDA
         vin - INDUCT(10uH, 2.1A) - VCC
-        [vin, vret] => CAP(0.1uF, 50V).Cap(_)
+        vin - CAP(0.1uF, 50V) - vret
         VCC - CAP.ELEC(10uF, 50V) - vret
         VCC - CAP.ELEC(47uF, 50V) - vret
-        [VCC, vret] => CAP(0.1uF, 50V).Cap(_)
+        VCC - CAP(0.1uF, 50V) - vret
     }
 
     func Reset()

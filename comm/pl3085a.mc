@@ -34,7 +34,7 @@ module PL3085A_MDL(psnk pwr::DC(5V))
     out RS485{A, B}
 
     PL3085A PL3085(pwr)
-    CAP(100nF,10V).Cap(PL3085{VCC, GND})
+    pwr.VCC - CAP(100nF,10V) - pwr.GND
     DIO.TVS(13.5~15V, 14V).Protect([PL3085.RS485.A, pwr.GND]) //SMBJ12CA
     DIO.TVS(13.5~15V, 14V).Protect([PL3085.RS485.B, pwr.GND]) //SMBJ12CA
     PL3085.IPDMatch().AutoTrans()

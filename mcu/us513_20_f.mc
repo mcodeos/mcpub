@@ -56,8 +56,12 @@ component MCU.US513_20_F                                                  // MCU
 
     // 端子级带参接线宏：把两个域绑到 MCU 电源脚（每个入对在该对延续处放一只本地去耦）
     func Power([VDD_3V3, GND]::DC(3.3V), [VCC_1V2, GND]::DC(1.2V)) {
-        [VDD_3V3, GND] => CAP(1uF, ±10%, CAP.X5R, 10V).Cap(_) -> [VDD, GND]       // VDD去耦：VDD_3V3给this.VDD输入供电
-        [VCC_1V2, GND] => CAP(1uF, ±10%, CAP.X5R, 10V).Cap(_) -> [VDD_CORE, GND]  // VDD_CORE去耦：VCC_1V2给this.VDD_CORE输入供电
+        VDD_3V3 - CAP(1uF, ±10%, CAP.X5R, 10V) - GND
+        VDD_3V3 - VDD
+        GND - this.GND
+        VCC_1V2 - CAP(1uF, ±10%, CAP.X5R, 10V) - GND
+        VCC_1V2 - VDD_CORE
+        GND - this.GND
         AVDD09_CAP - CAP(1uF, ±10%, CAP.X5R, 10V) - GND                       // AVDD09_CAP去耦（模拟参考去耦到数字 GND）
     }
 
