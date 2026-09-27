@@ -33,7 +33,7 @@ component Crystal2.DST310S   // 2-pin passive crystal
         [1, 2] = XTAL::XTAL(RESONATOR)  // 管脚1和2，对应晶振接口XTAL的X1和X2（无源谐振体侧）
     ]
 
-    func setup(GND) {
+    func Setup(GND) {
         XTAL - R442::RES(1MΩ, ±1%)'  // 生成一个电阻1MΩ，精度1%，封装尺寸R0402，缺省NC不焊接，声明实例名字为R442，与晶振并联
         - [                          // 串联谐振电容18pF，精度5%，50V耐压，封装尺寸C0402，缺省NC不焊接
             CAP(18pF, ±5%, CAP.C0G, 50V),

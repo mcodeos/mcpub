@@ -58,7 +58,7 @@ component ISO.NSI8140(partno)
         CAP(100nF, 10V) cap[1:2].Cap([DC1,DC2])
     }
 
-    func pull(sin[1:4])
+    func Pull(sin[1:4])
     {
         if sin[1]==HIGH RES(10kΩ).Pullup([IN.A, DC1.VDD1]) else if sin[1]==LOW RES(10kΩ).Pulldown([IN.A, DC1.GND1])
         if sin[2]==HIGH RES(10kΩ).Pullup([IN.B, DC1.VDD1]) else if sin[2]==LOW RES(10kΩ).Pulldown([IN.B, DC1.GND1])

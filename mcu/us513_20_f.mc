@@ -55,13 +55,13 @@ component MCU.US513_20_F                                                  // MCU
     ]
 
     // 端子级带参接线宏：把两个域绑到 MCU 电源脚（每个入对在该对延续处放一只本地去耦）
-    func power([VDD_3V3, GND]::DC(3.3V), [VCC_1V2, GND]::DC(1.2V)) {
+    func Power([VDD_3V3, GND]::DC(3.3V), [VCC_1V2, GND]::DC(1.2V)) {
         [VDD_3V3, GND] => CAP(1uF, ±10%, CAP.X5R, 10V).Cap(_) -> [VDD, GND]       // VDD去耦：VDD_3V3给this.VDD输入供电
         [VCC_1V2, GND] => CAP(1uF, ±10%, CAP.X5R, 10V).Cap(_) -> [VDD_CORE, GND]  // VDD_CORE去耦：VCC_1V2给this.VDD_CORE输入供电
         CAP(1uF, ±10%, CAP.X5R, 10V).Cap([AVDD09_CAP, GND])                       // AVDD09_CAP去耦（模拟参考去耦到数字 GND）
     }
 
-    func i2c(address) {
+    func I2C(address) {
         //通过设置GPIO.02的电平，来确定I2C0的地址。GPIO.02高电平，I2C0的地址为 addr:0X36；GPIO.02低电平，I2C0的地址为 addr:0X35
 
         if address == 0x36
