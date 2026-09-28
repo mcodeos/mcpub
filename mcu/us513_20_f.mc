@@ -69,7 +69,7 @@ component MCU.US513_20_F                                                  // MCU
         //通过设置GPIO.02的电平，来确定I2C0的地址。GPIO.02高电平，I2C0的地址为 addr:0X36；GPIO.02低电平，I2C0的地址为 addr:0X35
 
         if address == 0x36
-            VDD - RES(100kΩ) - GPIO[2]     // GPIO.02通过100K电阻接电源VDD_3V3，设置GPIO.02高电平（被动上拉，无向——与库 Pullup 助手 `net - this - vcc` 一致；psnk 汇脚不作有向源端）
+            VDD - RES(100kΩ) - GPIO[2]     // GPIO.02通过100K电阻接电源VDD_3V3，设置GPIO.02高电平（被动上拉，无向——与库 Pull 助手一致；psnk 汇脚不作有向源端）
         else                               //if address == 0x35
             GPIO[2] - RES(100kΩ) -> GND    // GPIO.02通过100K电阻接地。
 
