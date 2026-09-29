@@ -43,8 +43,8 @@ component ISO.NSI8140(partno)
 
     if (partno in ["NSI8140N0", "NSI8140N1", "NSI8140W0", "NSI8140W1", "NSI8140W0Q", "NSI8140W1Q"])
         pins += [
-            in [3:6] = IN[A,B,C,D]::DIO(1Mbps)
-            out [14:11] = OUT[A,B,C,D]::DIO(1Mbps)
+            in [3:6] = IN[A,B,C,D]::GPIO(CONSUMER)      // 1 Mbps digital channels (logic side)
+            out [14:11] = OUT[A,B,C,D]::GPIO(PROVIDER)  // 1 Mbps digital channels (logic side)
         ]
 
     func NSI8140(ps1, ps2)

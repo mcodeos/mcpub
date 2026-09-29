@@ -41,14 +41,14 @@ component TLE7368 (partno)
 
         // LDO1, QT1/2
         in 29 = FBL_IN, "Buck converter feedback input plus input for LDO1 and trackers"
-        out [30,17] = [Q_LDO1,GND]::DC(5V, 800mA), "Voltage regulator 1 output, 5V, 800mA current limitition"
+        out [30,17] = [Q_LDO1,GND]::DC(5V), "Voltage regulator 1 output, 5V, 800mA current limitition"
         out [7,17] = [Q_T1,GND]::DC(-5V ~ 40V), "Tracking regulator 1 output"
         out [8,17] = [Q_T2,GND]::DC(-5V ~ 40V), "Tracking regulator 2 output"
 
         // LDO2
         in [5,17] = [IN_LDO2, GND]::DC(), "LDO2 input"
         in 23 = SEL_LDO2, "[VSS, Q_LDO2]: GND to select 2.6 V, to Q_LDO2 to select 3.3 V"
-        out [6,17] = [Q_LDO2,GND]::DC(2.6V,700mA)|[Q_LDO2,GND]::DC(3.3V,700mA), "Voltage regulator 2 output, 700mA current limitition"
+        out [6,17] = [Q_LDO2,GND]::DC(2.6V)|[Q_LDO2,GND]::DC(3.3V), "Voltage regulator 2 output, 700mA current limitition"
 
         // LDO3
         out 32 = DRV_EXT, "Bipolar power stage driver output, Connect the base of an external NPN transistor"

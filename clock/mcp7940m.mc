@@ -48,14 +48,27 @@ component SYS.Clock.MCP7940M(partno)
         XTAL2(32.768kHz, 10nF).Setup(VSS) - XTAL
     }
 
-    desc.features = ["
+    desc = "The MCP7940N Real-Time Clock/Calendar (RTCC) tracks time using internal counters for
+            hours, minutes, seconds, days, months, years, and day of week. Alarms can be configured
+            on all counters up to and including months. For usage and configuration, the MCP7940N
+            supports I2C communications up to 400 kHz.
+            The open-drain, multi-functional output can be configured to assert on an alarm match,
+            to output a selectable frequency square wave, or as a general purpose output.
+            The MCP7940N is designed to operate using a 32.768 kHz tuning fork crystal with external
+            crystal load capacitors. On-chip digital trimming can be used to adjust for frequency
+            variance caused by crystal tolerance and temperature.
+            SRAM and timekeeping circuitry are powered from the back-up supply when main power is
+            lost, allowing the device to maintain accurate time and the SRAM contents. The times
+            when the device switches over to the back-up supply and when primary power returns
+            are both logged by the power-fail time-stamp.
+
             Timekeeping Features:
             • Real-Time Clock/Calendar (RTCC):
               - Hours, Minutes, Seconds, DayofWeek, Day, Month, Year
               - Leap year compensated to 2399
               - 12/24 hour modes
             • Oscillatorfor 32.768kHz Crystals: - Optimized for 6-9pF crystals
-            • On-Chip Digital Trimming/Calibration: 
+            • On-Chip Digital Trimming/Calibration:
               - ±1PPM resolution
               - ±129 PPM range
             • Dual Programmable Alarms
@@ -75,21 +88,6 @@ component SYS.Clock.MCP7940M(partno)
             • Automatic Switch over to Battery Backup
 
             User Memory:
-            • 64-byte Battery-Backed SRAM
-        "]
-
-    desc.overall =   "The MCP7940N Real-Time Clock/Calendar (RTCC) tracks time using internal counters for 
-            hours, minutes, seconds, days, months, years, and day of week. Alarms can be configured 
-            on all counters up to and including months. For usage and configuration, the MCP7940N 
-            supports I2C communications up to 400 kHz.
-            The open-drain, multi-functional output can be configured to assert on an alarm match, 
-            to output a selectable frequency square wave, or as a general purpose output.
-            The MCP7940N is designed to operate using a 32.768 kHz tuning fork crystal with external
-            crystal load capacitors. On-chip digital trimming can be used to adjust for frequency 
-            variance caused by crystal tolerance and temperature.
-            SRAM and timekeeping circuitry are powered from the back-up supply when main power is 
-            lost, allowing the device to maintain accurate time and the SRAM contents. The times 
-            when the device switches over to the back-up supply and when primary power returns 
-            are both logged by the power-fail time-stamp."
+            • 64-byte Battery-Backed SRAM"
 
 }

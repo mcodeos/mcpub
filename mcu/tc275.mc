@@ -135,7 +135,7 @@ component TC275
     func Xtal(gnd)
     {
         // Load capacitors are owned by the crystal setup (U200 ruling).
-        XTAL2(20MHz, 10pF) y.Setup(gnd) -> [XTAL.X1, XTAL.X2]
+        XTAL2(20MHz, 10pF).Setup(gnd) -> [XTAL.X1, XTAL.X2]
     }
 
     // HwReset (b3874 dropped): the PORST RC / switch / discharge-transistor
