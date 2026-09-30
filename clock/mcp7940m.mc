@@ -12,82 +12,76 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# MCP7940M microchip.com
+// Real low-cost I2C RTCC (MCP7940M, Microchip DS20002292C), rewritten from
+// the datasheet. Pins are the verified device face (pin function table 2-1,
+// shared by all five 8-lead packages): 1 X1, 2 X2, 3 NC, 4 VSS, 5 SDA,
+// 6 SCL, 7 MFP, 8 VCC. The TDFN exposed pad ties to VSS or floats.
+//
+// The M member has NO battery backup: an earlier revision of this book
+// carried the MCP7940N description (battery backup, power-fail time-stamp,
+// backup voltage range) — that text belongs to the N and is dropped.
+//
+// The MFP row keeps a plain `out`: @drive is witnessed on interface pin rows
+// only, and the open-drain note stays in the row description (lm66100 ST
+// precedent).
+
+use $::mcode.ifs
 
 component SYS.Clock.MCP7940M(partno)
 {
-    desc = "MCP7940M Battery-Backed I2CTM Real-Time Clock/Calendar with SRAM"
+    desc = "Low-Cost I2C Real-Time Clock/Calendar with 64-byte SRAM.
+            Tracks hours, minutes, seconds, day of week, day, month and year,
+            leap year compensated to 2399, 12/24 hour modes, dual programmable
+            alarms, on-chip digital trimming (±1 PPM resolution, ±129 PPM
+            range), and an open-drain multifunction output (alarm, selectable
+            square wave, or general purpose output). I2C up to 400 kHz.
+            Runs a 32.768 kHz tuning fork crystal with external load
+            capacitors; optimized for 6-9 pF load capacitance crystals."
 
-    if (partno == "MCP7940MT") package = PKG.SOIC8
-    else if (partno == "7940MT") package = PKG.MSOP8
-    else if (partno == "940M") package = PKG.TSSOP8
-    else if (partno == "MCP7940M") package = PKG.DIP8
-    else if (partno == "AU1") package = PKG.TDFN8_2X3
+    // Ordering codes (datasheet section 10.1); T suffix = tape and reel.
+    if (partno == "MCP7940M-I/SN") package = PKG.SOIC8
+    else if (partno == "MCP7940MT-I/SN") package = PKG.SOIC8
+    else if (partno == "MCP7940M-I/MS") package = PKG.MSOP8
+    else if (partno == "MCP7940M-I/ST") package = PKG.TSSOP8
+    else if (partno == "MCP7940MT-I/ST") package = PKG.TSSOP8
+    else if (partno == "MCP7940MT-I/MNY") package = PKG.TDFN8_2X3
+    else if (partno == "MCP7940M-I/P") package = PKG.DIP8
     else package = PKG.SOIC8
 
+    spec = [
+        vcc_req = 1.8V ~ 5.5V              // operating supply window
+        workingtemperature = -40°C ~ +85°C // industrial (I) temperature range
+        xtal_freq = 32.768kHz              // crystal class: CL 6-9 pF
+    ]
+
     pins = [
-        psnk [8,4] = [VCC,VSS]::DC()
+        psnk [8,4] = [VCC,VSS]::DC()    // primary power supply / ground
+
         in [1,2] = XTAL{X1,X2}::XTAL(OSCILLATOR), ["Crystal X1", "Crystal X2"]
-        io [5,6] = I2C{SDA,SCL}::I2C(), ["I2C data", "I2C clock"]
-        out 7 = MFP, "used for alarm and square wave output, or GPIO"
+                                        // the device hosts the sustaining
+                                        // amplifier; X1 doubles as the external
+                                        // clock input (external-oscillator mode)
+
+        io [5,6] = I2C{SDA,SCL}::I2C(SLAVE), ["I2C data", "I2C clock"]
+
+        out 7 = MFP, "multifunction open-drain output (alarm / square wave / GPIO), pull up to VCC"
+
         nc 3 = NC
     ]
 
-    func MCP7940M(pwr)
+    func Power(pwr)
     {
         pwr -> [VCC,VSS]
     }
 
     func Cap()
     {
-        VCC - CAP(100nF, 10V) - VSS
+        VCC - CAP(100nF) - VSS
     }
 
-    func Xtal()
+    func Xtal(gnd)
     {
-        XTAL2(32.768kHz, 10nF).Setup(VSS) - XTAL
+        // Load capacitors are owned by the crystal setup (U200 ruling).
+        XTAL2(32.768kHz, 7pF).Setup(gnd) -> [XTAL.X1, XTAL.X2]
     }
-
-    desc = "The MCP7940N Real-Time Clock/Calendar (RTCC) tracks time using internal counters for
-            hours, minutes, seconds, days, months, years, and day of week. Alarms can be configured
-            on all counters up to and including months. For usage and configuration, the MCP7940N
-            supports I2C communications up to 400 kHz.
-            The open-drain, multi-functional output can be configured to assert on an alarm match,
-            to output a selectable frequency square wave, or as a general purpose output.
-            The MCP7940N is designed to operate using a 32.768 kHz tuning fork crystal with external
-            crystal load capacitors. On-chip digital trimming can be used to adjust for frequency
-            variance caused by crystal tolerance and temperature.
-            SRAM and timekeeping circuitry are powered from the back-up supply when main power is
-            lost, allowing the device to maintain accurate time and the SRAM contents. The times
-            when the device switches over to the back-up supply and when primary power returns
-            are both logged by the power-fail time-stamp.
-
-            Timekeeping Features:
-            • Real-Time Clock/Calendar (RTCC):
-              - Hours, Minutes, Seconds, DayofWeek, Day, Month, Year
-              - Leap year compensated to 2399
-              - 12/24 hour modes
-            • Oscillatorfor 32.768kHz Crystals: - Optimized for 6-9pF crystals
-            • On-Chip Digital Trimming/Calibration:
-              - ±1PPM resolution
-              - ±129 PPM range
-            • Dual Programmable Alarms
-            • Versatile Output Pin:
-              - Clock output with selectable frequency
-              - Alarm output
-              - General purpose output
-            • Power-FailTime-Stamp:
-              - Time logged on switch over to and from Battery mode
-
-            Low-Power Features:
-            • WideVoltageRange:
-              - Operating voltage range of 1.8V to 5.5V - Backup voltage range of 1.3V to 5.5V
-            • LowTypicalTimekeepingCurrent:
-              - Operating from VCC: 1.2μA at 3.3V
-              - Operatingfrombatterybackup: 925nA at 3.0V
-            • Automatic Switch over to Battery Backup
-
-            User Memory:
-            • 64-byte Battery-Backed SRAM"
-
 }
