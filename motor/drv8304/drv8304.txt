@@ -1,0 +1,9391 @@
+Product
+Folder
+
+Order
+Now
+
+Support &
+Community
+
+Tools &
+Software
+
+Technical
+Documents
+
+Reference
+Design
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+DRV8304 38V 三相智能栅极驱动器
+•
+
+1
+
+•
+
+•
+•
+
+•
+
+•
+•
+•
+•
+•
+
+6V 至 38V、三个半桥栅极驱动器，集成了 3 个电
+流检测放大器 (CSA)
+– 40V 绝对最大额定值
+– 针对 12V 和 24V 直流电源轨进行了全面优化
+– 驱动高侧和低侧 N 沟道 MOSFET
+– 支持 100% PWM 占空比
+智能栅极驱动架构
+– 通过可调压摆率控制实现更出色的 EMI 和 EMC
+性能
+– 通过 VGS 握手和最小死区时间插入方法避免击
+穿
+– 15mA 至 150mA 峰值拉电流
+– 30mA 至 300mA 峰值灌电流
+6x、3x、1x 和独立 PWM 模式
+– 支持 120º 传感器式运行模式
+集成栅极驱动器电源
+– 高侧倍增电荷泵
+– 低侧线性稳压器
+集成三个分流放大器
+– 可调增益（5、10、20、40 V/V）
+– 双向或单向支持
+SPI（预览）或硬件器件型号
+支持 1.8V、3.3V 和 5V 逻辑输入
+低功耗睡眠模式
+3.3V、30mA 线性稳压器
+集成式保护 特性
+– VM 欠压闭锁 (UVLO)
+– 电荷泵欠压 (CPUV)
+– MOSFET VDS 过流保护 (OCP)
+– MOSFET 击穿保护
+– 栅极驱动器故障 (GDF)
+– 热警告和热关断 (OTW/OTSD)
+– 故障状态指示器 (nFAULT)
+
+3 说明
+DRV8304 器件是一款集成式栅极驱动器，适用于需要
+12V 和 24V 直流电源轨的三相无刷直流 (BLDC) 电机
+应用 。这些 应用 包括 BLDC 电机的场定向控制
+(FOC)、正弦电流控制和梯形电流控制。该器件集成了
+三个电流检测放大器 (CSA)，可感测 BLDC 电机的相
+电流，从而获得最佳的 FOC 和电流控制系统实现方
+案。AUTOCAL 功能可以自动校准 CSA 失调误差，因
+此可实现精确的电流检测。
+该器件基于智能栅极驱动 (SGD) 架构，因此无需任何
+外部栅极组件（电阻器和齐纳二极管），同时为外部
+FET 提供全面保护。SGD 架构可优化死区时间以避免
+出现任何击穿问题，在通过栅极压摆率控制技术降低电
+磁干扰 (EMI) 方面带来了灵活性，并可通过 VGS 握手
+和死区插入方法防止任何栅极短路问题。强下拉电流还
+可防止任何 dv/dt 栅极导通。
+该器件支持各种 PWM 控制模式（1x、3x、6x 和独立
+模式），从而使用简单接口连接到可通过 30mA、3.3V
+内部稳压器进行供电的控制电路。这些模式可根据具体
+的电机控制要求减少控制器的输出外设数量，并提供控
+制灵活性。该器件还具有 1x 模式，因此可通过使用内
+部阻塞换向表对 BLDC 电机进行传感器式梯形控制。
+该器件也可以配置为以独立模式驱动多个负载（如电磁
+阀）。
+器件信息(1)
+器件型号
+DRV8304
+
+SPI(2)
+
+简化原理图
+6 to 38 V
+PWM
+Controller
+
+打印机
+BLDC 电机模块
+白色家电
+CPAP、风扇和泵
+无人机、机器人和遥控玩具
+ATM 和点钞机
+
+VQFN (40)
+
+接口
+硬件
+
+(1) 如需了解所有可用封装，请参阅数据表末尾的可订购产品附
+录。
+(2) SPI 器件选择仅供预览。
+
+2 应用
+•
+•
+•
+•
+•
+•
+
+封装
+
+DRV8304
+
+ENABLE
+H/W
+nFAULT
+Sense Output
+
+3 Half Bridge
+Smart Gate Driver
+
+Gate
+Drive
+Current
+Sense
+
+N-Channel
+MOSFETs
+
+1 特性
+
+M
+
+3x Shunt Amplifiers
+Built-In Protection
+
+1
+
+An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+intellectual property matters and other important disclaimers. UNLESS OTHERWISE NOTED, this document contains PRODUCTION
+DATA.
+English Data Sheet: SLVSE39
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+目录
+1
+2
+3
+4
+5
+6
+
+特性 .......................................................................... 1
+应用 .......................................................................... 1
+说明 .......................................................................... 1
+修订历史记录 ........................................................... 2
+Pin Configuration and Functions ......................... 3
+Specifications......................................................... 5
+6.1
+6.2
+6.3
+6.4
+6.5
+6.6
+6.7
+
+7
+
+Absolute Maximum Ratings ...................................... 5
+ESD Ratings.............................................................. 5
+Recommended Operating Conditions....................... 5
+Thermal Information .................................................. 6
+Electrical Characteristics........................................... 6
+Timing Requirements .............................................. 10
+Typical Characteristics ............................................ 11
+
+Detailed Description ............................................ 13
+7.1
+7.2
+7.3
+7.4
+7.5
+
+Overview ................................................................. 13
+Functional Block Diagram ....................................... 14
+Feature Description................................................. 16
+Device Functional Modes........................................ 35
+Programming........................................................... 35
+
+7.6 Register Maps ......................................................... 37
+
+8
+
+Application and Implementation ........................ 45
+8.1 Application Information............................................ 45
+8.2 Typical Application ................................................. 45
+
+9
+
+Power Supply Recommendations...................... 53
+9.1 Bulk Capacitance Sizing ......................................... 53
+
+10 Layout................................................................... 54
+10.1 Layout Guidelines ................................................. 54
+10.2 Layout Example .................................................... 55
+
+11 器件和文档支持 ..................................................... 56
+11.1
+11.2
+11.3
+11.4
+11.5
+11.6
+11.7
+
+器件支持................................................................ 56
+文档支持................................................................ 56
+接收文档更新通知 ................................................. 56
+社区资源................................................................ 56
+商标 ....................................................................... 57
+静电放电警告......................................................... 57
+术语表 ................................................................... 57
+
+12 机械、封装和可订购信息 ....................................... 57
+
+4 修订历史记录
+注：之前版本的页码可能与当前版本有所不同。
+Changes from Revision A (June 2018) to Revision B
+•
+
+Page
+
+已更改 将器件的 SPI 版本状态更改成了预览.......................................................................................................................... 1
+
+Changes from Original (November 2017) to Revision A
+
+Page
+
+•
+
+已更改 将数据表状态从预告信息 更改为生产数据 .................................................................................................................. 1
+
+2
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+5 Pin Configuration and Functions
+
+INHB
+
+INLA
+
+INHA
+
+DVDD
+
+AGND
+
+CAL
+
+35
+
+34
+
+33
+
+32
+
+31
+
+CAL
+31
+
+36
+
+AGND
+32
+
+INLB
+
+DVDD
+33
+
+INHC
+
+INHA
+34
+
+37
+
+INLA
+35
+
+38
+
+INHB
+36
+
+INLC
+
+INLB
+37
+
+PGND
+
+INHC
+38
+
+39
+
+INLC
+39
+
+DRV8304S (Preview) RHA Package
+40-Pin VQFN With Exposed Thermal Pad
+Top View
+
+40
+
+PGND
+40
+
+DRV8304H RHA Package
+40-Pin VQFN With Exposed Thermal Pad
+Top View
+
+CPL
+
+1
+
+30
+
+ENABLE
+
+CPL
+
+1
+
+30
+
+ENABLE
+
+CPH
+
+2
+
+29
+
+GAIN
+
+CPH
+
+2
+
+29
+
+nSCS
+
+VCP
+
+3
+
+28
+
+VDS
+
+VCP
+
+3
+
+28
+
+SCLK
+
+VM
+
+4
+
+27
+
+IDRIVE
+
+VM
+
+4
+
+27
+
+SDI
+
+VDRAIN
+
+5
+
+26
+
+MODE
+
+VDRAIN
+
+5
+
+26
+
+SDO
+
+Thermal
+Pad
+
+Thermal
+Pad
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+GHB
+
+SHC
+
+GLC
+
+SPC
+
+SNC
+
+14
+
+GHC
+
+13
+GLB
+
+Not to scale
+
+SHB
+
+SOC
+
+12
+
+SOB
+
+21
+11
+
+22
+
+10
+
+SPB
+
+9
+
+SNA
+
+SNB
+
+SPA
+
+SOC
+
+20
+
+SOB
+
+21
+
+SNC
+
+22
+
+10
+19
+
+9
+
+18
+
+SPA
+SNA
+
+SPC
+
+SOA
+
+GLC
+
+23
+
+17
+
+8
+
+SHC
+
+GLA
+
+16
+
+SOA
+
+15
+
+23
+
+GHB
+
+8
+
+GHC
+
+VREF
+
+GLA
+
+14
+
+nFAULT
+
+24
+
+13
+
+25
+
+7
+
+GLB
+
+6
+
+SHA
+
+SHB
+
+GHA
+
+VREF
+
+12
+
+nFAULT
+
+24
+
+11
+
+25
+
+7
+
+SPB
+
+6
+
+SHA
+
+SNB
+
+GHA
+
+Not to scale
+
+Pin Functions
+PIN
+NAME
+
+NO.
+
+TYPE (1)
+
+DESCRIPTION
+Device analog ground. Connect to system ground.
+
+DRV8304H
+
+DRV8304S
+
+AGND
+
+32
+
+32
+
+PWR
+
+CAL
+
+31
+
+31
+
+I
+
+Amplifier calibration input. Set logic high to internally short amplifier inputs and
+perform offset calibration.
+
+CPH
+
+2
+
+2
+
+PWR
+
+Charge pump switching node. Connect a X5R or X7R, 22-nF, VM-rated ceramic
+capacitor between the CPH and CPL pins.
+
+CPL
+
+1
+
+1
+
+PWR
+
+Charge pump switching node. Connect a X5R or X7R, 22-nF, VM-rated ceramic
+capacitor between the CPH and CPL pins.
+
+DVDD
+
+33
+
+33
+
+PWR
+
+3.3-V internal regulator output. Connect a X5R or X7R, 1-µF, 6.3-V ceramic
+capacitor between the DVDD and AGND pins. This regulator can source up to 30
+mA externally.
+
+ENABLE
+
+30
+
+30
+
+I
+
+Gate driver enable. When this pin is logic low the device enters a low power sleep
+mode. An 5 to 32-µs low pulse can be used to reset fault conditions.
+
+GAIN
+
+29
+
+—
+
+I
+
+Amplifier gain setting. The pin is a 4 level input pin set by an external resistor.
+
+GHA
+
+6
+
+6
+
+O
+
+High-side gate driver output. Connect to the gate of the high-side power MOSFET.
+
+GHB
+
+15
+
+15
+
+O
+
+High-side gate driver output. Connect to the gate of the high-side power MOSFET.
+
+GHC
+
+16
+
+16
+
+O
+
+High-side gate driver output. Connect to the gate of the high-side power MOSFET.
+
+GLA
+
+8
+
+8
+
+O
+
+Low-side gate driver output. Connect to the gate of the low-side power MOSFET.
+
+GLB
+
+13
+
+13
+
+O
+
+Low-side gate driver output. Connect to the gate of the low-side power MOSFET.
+
+GLC
+
+18
+
+18
+
+O
+
+Low-side gate driver output. Connect to the gate of the low-side power MOSFET.
+
+IDRIVE
+
+27
+
+—
+
+I
+
+Gate drive output current setting. This pin is a 7 level input pin set by an external
+resistor.
+
+INHA
+
+34
+
+34
+
+I
+
+High-side gate driver control input. This pin controls the output of the high-side gate
+driver (GHA).
+
+(1)
+
+PWR = power, I = input, O = output, OD = open-drain
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+3
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Pin Functions (continued)
+PIN
+NAME
+
+NO.
+
+TYPE (1)
+
+DESCRIPTION
+
+DRV8304H
+
+DRV8304S
+
+INHB
+
+36
+
+36
+
+I
+
+High-side gate driver control input. This pin controls the output of the high-side gate
+driver (GHB).
+
+INHC
+
+38
+
+38
+
+I
+
+High-side gate driver control input. This pin controls the output of the high-side gate
+driver (GHC).
+
+INLA
+
+35
+
+35
+
+I
+
+Low-side gate driver control input. This pin controls the output of the low-side gate
+driver (GLA).
+
+INLB
+
+37
+
+37
+
+I
+
+Low-side gate driver control input. This pin controls the output of the low-side gate
+driver (GLB).
+
+INLC
+
+39
+
+39
+
+I
+
+Low-side gate driver control input. This pin controls the output of the low-side gate
+driver (GLC).
+
+MODE
+
+26
+
+—
+
+I
+
+PWM input mode setting. This pin is a 4 level input pin set by an external resistor.
+
+nFAULT
+
+25
+
+25
+
+OD
+
+Fault indicator output. This pin is pulled logic low during a fault condition and
+requires an external pullup resistor.
+
+nSCS
+
+—
+
+29
+
+I
+
+Serial chip select. A logic low on this pin enables serial interface communication.
+
+PGND
+
+40
+
+40
+
+PWR
+
+SCLK
+
+—
+
+28
+
+I
+
+Serial clock input. Serial data is shifted out and captured on the corresponding
+rising and falling edge on this pin.
+
+SDI
+
+—
+
+27
+
+I
+
+Serial data input. Data is captured on the falling edge of the SCLK pin.
+
+SDO
+
+—
+
+26
+
+OD
+
+Serial data output. Data is shifted out on the rising edge of the SCLK pin. This pin
+requires an external pullup resistor.
+
+Device power ground. Connect to system ground.
+
+SHA
+
+7
+
+7
+
+I
+
+High-side source sense input. Connect to the high-side power MOSFET source.
+
+SHB
+
+14
+
+14
+
+I
+
+High-side source sense input. Connect to the high-side power MOSFET source.
+
+SHC
+
+17
+
+17
+
+I
+
+High-side source sense input. Connect to the high-side power MOSFET source.
+
+SNA
+
+10
+
+10
+
+I
+
+Shunt amplifier input. Connect to the low-side of the current shunt resistor.
+
+SNB
+
+11
+
+11
+
+I
+
+Shunt amplifier input. Connect to the low-side of the current shunt resistor.
+
+SNC
+
+20
+
+20
+
+I
+
+Shunt amplifier input. Connect to the low-side of the current shunt resistor.
+
+SOA
+
+23
+
+23
+
+O
+
+Shunt amplifier output.
+
+SOB
+
+22
+
+22
+
+O
+
+Shunt amplifier output.
+
+SOC
+
+21
+
+21
+
+O
+
+Shunt amplifier output.
+
+SPA
+
+9
+
+9
+
+I
+
+Low-side source sense and shunt amplifier input. Connect to the low-side power
+MOSFET source and high-side of the current shunt resistor.
+
+SPB
+
+12
+
+12
+
+I
+
+Low-side source sense and shunt amplifier input. Connect to the low-side power
+MOSFET source and high-side of the current shunt resistor.
+
+SPC
+
+19
+
+19
+
+I
+
+Low-side source sense and shunt amplifier input. Connect to the low-side power
+MOSFET source and high-side of the current shunt resistor.
+
+VCP
+
+3
+
+3
+
+PWR
+
+VDRAIN
+
+5
+
+5
+
+I
+
+High-side MOSFET drain sense input. Connect to the common point of the external
+MOSFET drains.
+
+VDS
+
+28
+
+—
+
+I
+
+VDS monitor trip point setting. This pin is a 7 level input pin set by an external
+resistor.
+
+VM
+
+4
+
+4
+
+PWR
+
+Gate driver power supply input. Connect to the bridge power supply. Connect a
+X5R or X7R, 0.1-µF, VM-rated ceramic and greater than or equal to 10-uF local
+capacitance between the VM and PGND pins.
+
+VREF
+
+24
+
+24
+
+PWR
+
+Shunt amplifier power supply input and reference. Connect a X5R or X7R, 0.1-μF,
+6.3-V ceramic capacitor between the VREF and AGND pins.
+
+4
+
+Charge pump output. Connect a X5R or X7R, 1-µF, 16-V ceramic capacitor
+between the VCP and VM pins.
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+over operating ambient temperature range (unless otherwise noted) (1)
+MIN
+
+MAX
+
+UNIT
+
+Power supply voltage (VM)
+
+–0.3
+
+40
+
+V
+
+Voltage differential between any ground pin (AGND, DGND, PGND)
+
+–0.5
+
+0.5
+
+V
+
+Internal logic regulator voltage (DVDD)
+
+–0.3
+
+3.8
+
+V
+
+MOSFET voltage sense (VDRAIN)
+
+–0.3
+
+40
+
+V
+
+Charge pump voltage (VCP, CPH)
+
+–0.3
+
+VM + 13.5
+
+V
+
+Charge pump negative switching pin voltage (CPL)
+
+–0.3
+
+VM
+
+V
+
+Digital pin voltage (SCLK, SDI, nSCS, ENABLE, VDS, IDRIVE, MODE, GAIN, CAL
+INHX, INLX)
+
+–0.3
+
+5.75
+
+V
+
+Open drain output current range (nFAULT, SDO)
+
+0
+
+5
+
+mA
+
+Continuous high-side gate pin voltage (GHX)
+
+–2
+
+VCP + 0.5
+
+V
+
+Pulsed 200 ns high-side gate pin voltage (GHX)
+
+–5
+
+VCP + 0.5
+
+V
+
+High-side gate voltage with respect to SHX (GHX)
+
+–0.3
+
+13.5
+
+V
+
+Continuous phase node pin voltage (SHX)
+
+–2
+
+VM + 2
+
+V
+
+Pulsed 200 ns phase node pin voltage (SHX)
+
+–5
+
+VM + 2
+
+V
+
+Continuous low-side gate pin voltage (GLX)
+
+–1
+
+13.5
+
+V
+
+Pulsed 200 ns low-side gate pin voltage (GLX)
+
+–5
+
+13.5
+
+V
+
+Gate pin source current (GHX, GLX)
+
+Internally limited
+
+Gate pin sink current (GHX, GLX)
+
+A
+
+Internally limited
+
+A
+
+Continuous shunt amplifier input pin voltage (SPX, SNX)
+
+–1
+
+1
+
+V
+
+Pulsed 200 ns shunt amplifier input pin voltage (SPX, SNX)
+
+–2
+
+2
+
+V
+
+Reference pin input voltage (VREF)
+
+–0.3
+
+5.75
+
+V
+
+Shunt amplifier output pin voltage range (SOX)
+
+–0.3
+
+VREF
+
+V
+
+Shunt amplifier output pin current range (SOX)
+
+0
+
+5
+
+mA
+
+Ambient temperature, TA
+
+–40
+
+125
+
+°C
+
+Junction temperature, TJ
+
+–40
+
+150
+
+°C
+
+Storage temperature, Tstg
+
+–65
+
+150
+
+°C
+
+(1)
+
+Stresses beyond those listed under Absolute Maximum Rating may cause permanent damage to the device. These are stress ratings
+only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under Recommended
+Operating Condition. Exposure to absolute-maximum-rated conditions for extended periods may affect device reliability.
+
+6.2 ESD Ratings
+VALUE
+
+V(ESD)
+
+(1)
+(2)
+
+Electrostatic discharge
+
+Human body model (HBM), per
+ANSI/ESDA/JEDEC JS-001, all pins (1)
+
+±2000
+
+Charged device model (CDM), per JEDEC
+specification JESD22-C101, all pins (2)
+
+±500
+
+UNIT
+
+V
+
+JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process. Pins listed as ±2000
+V may actually have higher performance.
+JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process. Pins listed as ±500 V
+may actually have higher performance.
+
+6.3 Recommended Operating Conditions
+over operating ambient temperature range (unless otherwise noted)
+MIN
+
+MAX
+
+UNIT
+
+VVM
+
+Power supply voltage range
+
+6
+
+38
+
+V
+
+VI
+
+Logic level input voltage range
+
+0
+
+5.5
+
+V
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+5
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Recommended Operating Conditions (continued)
+over operating ambient temperature range (unless otherwise noted)
+MIN
+
+MAX
+
+UNIT
+
+(1)
+
+kHz
+
+fPWM
+
+Applied PWM signal (INHX, INLX)
+
+200
+
+IGATE_HS
+
+High-side average gate drive current (GHX)
+
+15 (1)
+
+mA
+
+IGATE_LS
+
+Low-side average gate drive current (GLX)
+
+15 (1)
+
+mA
+
+(1)
+
+mA
+mA
+
+IDVDD
+
+DVDD external load current
+
+ISO
+
+Shunt amplifier output current loading (SOX)
+
+0
+
+5
+
+VOD
+
+Open drain pull up voltage (nFAULT, SDO)
+
+0
+
+5.5
+
+V
+
+IOD
+
+Open drain output current (nFAULT, SDO)
+
+0
+
+5
+
+mA
+
+TA
+
+Operating ambient temperature
+
+–40
+
+125
+
+°C
+
+(1)
+
+30
+
+Power dissipation and thermal limits must be observed
+
+6.4 Thermal Information
+DRV8304
+THERMAL METRIC (1)
+
+RHA (VQFN)
+
+UNIT
+
+32 PINS
+RθJA
+
+Junction-to-ambient thermal resistance
+
+35.1
+
+°C/W
+
+RθJC(top)
+
+Junction-to-case (top) thermal resistance
+
+22.6
+
+°C/W
+
+RθJB
+
+Junction-to-board thermal resistance
+
+14.9
+
+°C/W
+
+ψJT
+
+Junction-to-top characterization parameter
+
+0.4
+
+°C/W
+
+ψJB
+
+Junction-to-board characterization parameter
+
+14.9
+
+°C/W
+
+RθJC(bot)
+
+Junction-to-case (bottom) thermal resistance
+
+2.7
+
+°C/W
+
+(1)
+
+For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+report.
+
+6.5 Electrical Characteristics
+at VVM = 6 to 38 V over operating ambient temperature range (unless otherwise noted)
+PARAMETER
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+MAX
+
+UNIT
+
+POWER SUPPLIES (DVDD, VM)
+IVM
+
+VM operating supply current
+
+ENABLE = 1; INHX = 0 V; INLX = 0 V
+
+5
+
+7
+
+mA
+
+ENABLE = 0; VVM = 24 V; TA = 25°C
+
+20
+
+40
+
+µA
+
+100
+
+µA
+
+40
+
+µs
+
+IVMQ
+
+VM sleep mode supply current
+
+tRST
+
+Reset pulse time
+
+ENABLE = 0 V period to reset faults
+
+tSLEEP
+
+Sleep time
+
+ENABLE = 0 V to driver tri-stated
+
+tWAKE
+
+Wake-up time
+
+VVM > VUVLO; ENABLE = 3.3 V to output transition
+
+VDVDD
+
+Internal logic regulator voltage
+
+IDVDD = 0 to 30 mA
+
+ENABLE = 0, VVM = 24 V, TA = 125°C
+
+(1)
+
+15
+
+200
+
+µs
+
+1
+
+ms
+
+2.9
+
+3.3
+
+3.6
+
+V
+
+7
+
+10
+
+11.5
+
+V
+
+VM = 10 V; IVCP = 0 to 10 mA
+
+6.5
+
+7.5
+
+9.5
+
+V
+
+VM = 8 V; IVCP = 0 to 5 mA
+
+5
+
+6
+
+7.5
+
+V
+
+VM = 6 V; IVCP = 0 to 1 mA
+
+3.8
+
+4.3
+
+6.5
+
+V
+V
+
+CHARGE PUMP (CPH, CPL, VCP)
+VM = 12 to 38 V; IVCP = 0 to 15 mA
+VVCP
+
+VCP operating voltage with
+respect to VM
+
+LOGIC-LEVEL INPUTS (CAL, INHX, INLX, SCLK, SDI, nSCS)
+VIL
+
+Input logic low voltage
+
+0
+
+0.8
+
+VIH
+
+Input logic high voltage
+
+1.5
+
+5.5
+
+VHYS
+
+Input logic hysteresis
+
+100
+
+IIL
+
+Input logic low current
+
+VPIN (Pin Voltage) = 0 V
+
+IIH
+
+Input logic high current
+
+VPIN (Pin Voltage) = 5 V
+
+(1)
+
+Specified by design and characterization data
+
+6
+
+–1
+
+V
+mV
+
+1
+
+µA
+
+100
+
+µA
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+Electrical Characteristics (continued)
+at VVM = 6 to 38 V over operating ambient temperature range (unless otherwise noted)
+PARAMETER
+RPD
+
+TEST CONDITIONS
+
+MIN
+
+Pulldown Resistance to AGND
+(CAL, INHX, INLX, SCLK,
+SDI, nSCS)
+
+TYP
+
+MAX
+
+100
+
+UNIT
+kΩ
+
+LOGIC-LEVEL INPUTS (ENABLE)
+VIL
+
+Input logic low voltage
+
+0
+
+0.6
+
+VIH
+
+Input logic high voltage
+
+1.5
+
+5.5
+
+V
+
+VHYS
+
+Input logic hysteresis
+
+100
+
+IIL
+
+Input logic low current
+
+VPIN (Pin Voltage) = 0 V
+
+–10
+
+10
+
+µA
+
+IIH
+
+Input logic high current
+
+VPIN (Pin Voltage) = 5 V
+
+-5
+
+5
+
+µA
+
+V
+mV
+
+FOUR-LEVEL INPUTS (GAIN, MODE)
+VI1
+
+Input mode 1 voltage
+
+Tied to AGND
+
+VI2
+
+Input mode 2 voltage
+
+45 kΩ ± 5% to AGND
+
+VI3
+
+Input mode 3 voltage
+
+Hi-Z
+
+VI4
+
+Input mode 4 voltage
+
+Tied to DVDD
+
+0
+
+V
+
+1.2
+
+V
+
+2
+
+V
+
+3.3
+
+V
+
+SEVEN-LEVEL INPUTS (IDRIVE, VDS)
+VI1
+
+Input mode 1 voltage
+
+Tied to AGND
+
+VI2
+
+Input mode 2 voltage
+
+18 kΩ ± 5% to AGND
+
+0
+
+V
+
+0.5
+
+V
+
+VI3
+
+Input mode 3 voltage
+
+VI4
+
+Input mode 4 voltage
+
+75 kΩ ± 5% to AGND
+
+1.1
+
+V
+
+Hi-Z
+
+1.65
+
+VI5
+
+V
+
+Input mode 5 voltage
+
+75 kΩ ± 5% to DVDD
+
+2.2
+
+V
+
+VI6
+
+Input mode 6 voltage
+
+18 kΩ ± 5% to DVDD
+
+2.8
+
+V
+
+VI7
+
+Input mode 7 voltage
+
+Tied to DVDD
+
+3.3
+
+V
+
+OPEN-DRAIN OUTPUTS (nFAULT, SDO)
+VOL
+
+Output logic low voltage
+
+IOD = 2 mA
+
+0.1
+
+V
+
+IOZ
+
+Output logic high current
+
+VOD = 5 V
+
+–1
+
+1
+
+µA
+
+VVM = 12 to 38 V; IHS_GATE = 0 to 15 mA
+
+7
+
+10
+
+11.5
+
+VVM = 10 V; IHS_GATE = 0 to 10 mA
+
+6.5
+
+7.5
+
+8.5
+
+VVM = 8 V; IHS_GATE = 0 to 5 mA
+
+5
+
+6
+
+7
+
+VVM = 6 V; IHS_GATE = 0 to 1 mA
+
+3.8
+
+4.3
+
+6.5
+
+VVM = 12 to 38 V; ILS_GATE = 0 to 15 mA
+
+7.5
+
+10
+
+12.5
+
+5.5
+
+7.5
+
+9.5
+
+3.5
+
+6
+
+8.5
+
+3
+
+4.3
+
+6.5
+
+GATE DRIVERS (GHX, GLX, SHX)
+
+VGHS (1)
+
+VGSL (1)
+
+High-side VGS gate drive
+(gate-to-source)
+
+Low-side VGS gate drive (gate- VVM = 10 V; ILS_GATE = 0 to 10 mA
+to-source)
+VVM = 8 V; ILS_GATE = 0 to 5 mA
+VVM = 6 V; ILS_GATE = 0 to 1 mA
+
+tDEAD
+
+Output dead time (SPI Device)
+
+tDEAD
+
+Output dead time (HW Device)
+
+tDRIVE
+
+Peak gate drive time (SPI
+Device)
+
+tDRIVE
+
+Peak gate drive time (HW
+Device)
+
+DEAD_TIME = 00b
+
+40
+
+DEAD_TIME = 01b
+
+120
+
+DEAD_TIME = 10b
+
+200
+
+DEAD_TIME = 11b
+
+400
+120
+
+TDRIVE = 00b
+
+500
+
+TDRIVE = 01b
+
+1000
+
+TDRIVE = 10b
+
+2000
+
+TDRIVE = 11b
+
+4000
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+4000
+
+V
+
+V
+
+ns
+
+ns
+
+ns
+
+ns
+
+7
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Electrical Characteristics (continued)
+at VVM = 6 to 38 V over operating ambient temperature range (unless otherwise noted)
+PARAMETER
+
+IDRIVEP
+
+IDRIVEP
+
+IDRIVEN
+
+IDRIVEN
+
+Peak source gate current
+(high-side and low-side) (SPI
+Device)
+
+Peak source gate current
+(high-side and low-side) (HW
+Device)
+
+Peak sink gate current (highside and low-side) (SPI
+Device)
+
+Peak sink gate current (highside and low-side) (HW
+Device)
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+IDRIVEP_HS or IDRIVEP__LS = 000b
+
+15
+
+IDRIVEP_HS or IDRIVEP__LS = 001b
+
+15
+
+IDRIVEP_HS or IDRIVEP__LS = 010b
+
+45
+
+IDRIVEP_HS or IDRIVEP__LS = 011b
+
+60
+
+IDRIVEP_HS or IDRIVEP__LS = 100b
+
+90
+
+IDRIVEP_HS or IDRIVEP__LS = 101b
+
+105
+
+IDRIVEP_HS or IDRIVEP__LS = 110b
+
+135
+
+IDRIVEP_HS or IDRIVEP__LS = 111b
+
+150
+
+IDRIVE tied to AGND
+
+15
+
+IDRIVE 18 kΩ (±5%) to AGND
+
+45
+
+IDRIVE 75 kΩ (±5%) to AGND
+
+60
+
+IDRIVE Hi-Z ( > 500 kΩ to AGND)
+
+90
+
+IDRIVE 75 kΩ (±5%) to DVDD
+
+105
+
+IDRIVE 18 kΩ (±5%) to DVDD
+
+135
+
+IDRIVE tied to DVDD
+
+150
+
+IDRIVEN_HS or IDRIVEN_LS = 000b
+
+30
+
+IDRIVEN_HS or IDRIVEN_LS = 001b
+
+30
+
+IDRIVEN_HS or IDRIVEN_LS = 010b
+
+90
+
+IDRIVEN_HS or IDRIVEN_LS = 011b
+
+120
+
+IDRIVEN_HS or IDRIVEN_LS = 100b
+
+180
+
+IDRIVEN_HS or IDRIVEN_LS = 101b
+
+210
+
+IDRIVEN_HS or IDRIVEN_LS = 110b
+
+270
+
+IDRIVEN_HS or IDRIVEN_LS = 111b
+
+300
+
+IDRIVE tied to AGND
+
+30
+
+IDRIVE 18 kΩ (±5%) to AGND
+
+90
+
+IDRIVE 75 kΩ (±5%) to AGND
+
+120
+
+IDRIVE Hi-Z ( > 500 kΩ to AGND)
+
+180
+
+IDRIVE 75 kΩ (±5%) to DVDD
+
+210
+
+IDRIVE 18 kΩ (±5%) to DVDD
+
+270
+
+IDRIVE tied to DVDD
+
+300
+
+Source current after tDRIVE
+
+15
+
+Sink current after tDRIVE
+
+30
+
+MAX
+
+UNIT
+
+mA
+
+mA
+
+mA
+
+mA
+
+IHOLD
+
+FET holding current
+
+mA
+
+ISTRONG
+
+FET hold-off strong pulldown
+
+GLX pull-down current during GHX tDRIVE period or
+vice-versa
+
+300
+
+ROFF
+
+FET gate hold-off resistor
+
+GHX to SHX and GLX to PGND
+
+150
+
+tPD
+
+Propagation delay
+
+INHX/INLX tansition to GHX/GLX transition
+
+180
+
+250
+
+mA
+kΩ
+ns
+
+CURRENT SHUNT AMPLIFIERS (SNx, SOx, SPx, VREF)
+
+GCSA
+
+GCSA
+
+8
+
+Amplifier gain (SPI Device)
+
+Amplifier gain (HW Device)
+
+CSA_GAIN = 00b, VREF = 3.3 to 5 V
+
+4.85
+
+5
+
+5.15
+
+CSA_GAIN = 01b, VREF = 3.3 to 5 V
+
+9.7
+
+10
+
+10.3
+
+CSA_GAIN = 10b, VREF = 3.3 to 5 V
+
+19.4
+
+20
+
+20.6
+
+CSA_GAIN = 11b, VREF = 3.3 to 5 V
+
+38.8
+
+40
+
+41.2
+
+Tied to AGND, VREF = 3.3 to 5 V
+
+4.85
+
+5
+
+5.15
+
+45 kΩ ± 5% to AGND, VREF = 3.3 to 5 V
+
+9.7
+
+10
+
+10.3
+
+Hi-Z, VREF = 3.3 to 5 V
+
+19.4
+
+20
+
+20.6
+
+Tied to DVDD, VREF = 3.3 to 5 V
+
+38.8
+
+40
+
+41.2
+
+V/V
+
+V/V
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+Electrical Characteristics (continued)
+at VVM = 6 to 38 V over operating ambient temperature range (unless otherwise noted)
+PARAMETER
+
+tSET
+
+(1)
+
+Settling time to ±1%, 30 pF
+
+VSP, COM (1)
+
+VOFF
+
+VDRIFT
+
+(1)
+
+Drift offset
+
+(1)
+
+SOX output voltage linear
+range
+
+VBIAS
+
+SOX output voltage bias (SPI
+Device)
+
+MIN
+
+TYP
+
+STEP on SOX = 0.5 V; GCSA = 5 V/V, VREF = 3.3 to
+5V
+
+260
+
+STEP on SOX = 0.5 V; GCSA = 10 V/V, VREF = 3.3
+to 5 V
+
+400
+
+STEP on SOX = 0.5 V; GCSA = 20 V/V, VREF = 3.3
+to 5 V
+
+700
+
+STEP on SOX = 0.5 V; GCSA = 40 V/V, VREF = 3.3
+to 5 V
+
+1550
+
+Common-mode input range
+
+Input offset error
+
+VLINEAR
+
+TEST CONDITIONS
+
+MAX
+
+UNIT
+
+ns
+
+–0.5
+
+0.5
+
+V
+
+VSP = VSN = 0 V, GCSA = 5, VREF = 3.3 V ± 10%
+
+–5
+
+5
+
+mV
+
+VSP = VSN = 0 V, GCSA = 10, VREF = 3.3 V ± 10%
+
+–2.5
+
+2.5
+
+mV
+
+VSP = VSN = 0 V, GCSA = 20, VREF = 3.3 V ± 10%
+
+–1.5
+
+1.5
+
+mV
+
+VSP = VSN = 0 V, GCSA = 40, VREF = 3.3 V ± 10%
+
+–1.25
+
+1.25
+
+mV
+
+VSP = VSN = 0 V, GCSA = 5, VREF = 5 V ± 10%
+
+–7
+
+7
+
+mV
+
+VSP = VSN = 0 V, GCSA = 10, VREF = 5 V ± 10%
+
+–3.5
+
+3.5
+
+mV
+
+VSP = VSN = 0 V, GCSA = 20, VREF = 5 V ± 10%
+
+–2.25
+
+2.25
+
+mV
+
+VSP = VSN = 0 V, GCSA = 40, VREF = 5 V ± 10%
+
+–1.5
+
+1.5
+
+mV
+
+VSP = VSN = 0 V
+
+10
+0.25
+
+VSP = VSN = 0 V, VREF_DIV = 0b
+
+VVREF –
+0.3
+
+VSP = VSN = 0 V, VREF_DIV = 1b
+
+VVREF/2
+VVREF/2
+
+VBIAS
+
+SOX output voltage bias (HW
+Device)
+
+VSP = VSN = 0 V
+
+IBIAS
+
+SPX/SNX negative input bias
+current
+
+VSP = VSN = 0 V
+
+VREFUV
+
+VREF undervoltage
+
+IVREF
+
+VREF input current
+
+µV/°C
+VVREF –
+0.25
+
+V
+
+V
+200
+
+2.6
+VREF = 5.0 V
+
+1
+
+V
+
+µA
+V
+
+2
+
+mA
+
+PROTECTION CIRCUITS
+VM falling, UVLO report
+
+5.4
+
+5.8
+
+VM rising, UVLO recovery
+
+5.6
+
+6
+
+VUVLO
+
+VM undervoltage lockout
+
+VUVLO_HYS
+
+VM undervoltage hysteresis
+
+Rising to falling threshold
+
+200
+
+mV
+
+tUVLO_DEG
+(1)
+
+VM undervoltage deglitch time VM falling, UVLO report
+
+10
+
+µs
+
+VCPUV
+
+Charge pump undervoltage
+
+VGS_CLAMP
+
+VDS_OCP
+
+Gate drive clamping voltage
+
+VDS overcurrent trip voltage
+(SPI Device)
+
+With respect to VM
+Positive clamping voltage
+
+2.4
+10.5
+–0.6
+
+VDS_LVL = 000b
+
+0.15
+
+VDS_LVL = 001b
+
+0.24
+
+VDS_LVL = 010b
+
+0.4
+
+VDS_LVL = 011b
+
+0.51
+
+VDS_LVL = 100b
+
+0.6
+
+VDS_LVL = 101b
+
+0.9
+
+VDS_LVL = 110b
+
+1.8
+
+VDS_LVL = 111b
+
+Disabled
+
+Copyright © 2017–2018, Texas Instruments Incorporated
+
+V
+15
+
+Negative clamping voltage
+
+V
+
+V
+
+V
+
+9
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Electrical Characteristics (continued)
+at VVM = 6 to 38 V over operating ambient temperature range (unless otherwise noted)
+PARAMETER
+
+VDS_OCP
+
+VDS overcurrent trip voltage
+(HW Device)
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+VDS tied to AGND
+
+0.15
+
+VDS 18 kΩ (±5%) to AGND
+
+0.24
+
+VDS 75 kΩ (±5%) to AGND
+
+0.4
+
+VDS Hi-Z ( > 500 kΩ to AGND)
+
+0.6
+
+VDS 75 kΩ (±5%) to DVDD
+
+0.9
+
+VDS 18 kΩ (±5%) to DVDD
+
+VSEN_OCP
+
+VSENSE overcurrent trip
+voltage (HW Device)
+
+tOCP_DEG
+
+VDS and VSENSE overcurrent
+deglitch time
+
+tRETRY
+
+Overcurrent retry time (SPI
+Device)
+
+tRETRY
+
+Overcurrent retry time (HW
+Device)
+
+TOTW
+
+(1)
+
+TOTSD (1)
+THYS
+
+(1)
+
+V
+
+Disabled
+
+SEN_LVL = 00b
+VSENSE overcurrent trip
+voltage (SPI Device)
+
+UNIT
+
+1.8
+
+VDS tied to DVDD
+
+VSEN_OCP
+
+MAX
+
+0.25
+
+SEN_LVL = 01b
+
+0.5
+
+SEN_LVL = 10b
+
+0.75
+
+SEN_LVL = 11b
+
+1
+
+V
+
+1
+
+V
+
+4.5
+
+µs
+
+TRETRY = 0b
+
+4
+
+ms
+
+TRETRY = 1b
+
+500
+
+µs
+
+4
+
+ms
+
+Thermal warning temperature
+
+Die temperature (Tj)
+
+120
+
+140
+
+°C
+
+Thermal shutdown
+temperature
+
+Die temperature (Tj)
+
+150
+
+170
+
+°C
+
+Thermal hysteresis
+
+Die temperature (Tj)
+
+20
+
+°C
+
+6.6 Timing Requirements
+PARAMETER
+
+TEST CONDITIONS
+
+MIN
+
+NOM
+
+MAX
+
+UNIT
+
+1
+
+ms
+
+SPI (nSCS, SCLK, SDI, SDO)
+tREADY
+
+SPI ready after after enable
+
+tCLK
+
+SCLK minimum period
+
+200
+
+ns
+
+tCLKH
+
+SCLK minimum high time
+
+100
+
+ns
+
+tCLKL
+
+SCLK minimum low time
+
+100
+
+ns
+
+tSU_SDI
+
+SDI input data setup time
+
+40
+
+ns
+
+tHD_SDI
+
+SDI input data hold time
+
+60
+
+tDLY_SDO
+
+SDO output data delay time
+
+tSU_nSCS
+
+nSCS input setup time
+
+100
+
+ns
+
+tHD_nSCS
+
+nSCS input hold time
+
+100
+
+ns
+
+tHI_nSCS
+
+nSCS minimum high time before active low
+
+600
+
+ns
+
+tEN_nSCS
+
+nSCS enable time
+
+nSCS low to SDO out of high impedance
+
+20
+
+ns
+
+tDIS_nSCS
+
+nSCS disable delay time
+
+nSCS high to SDO high impedance
+
+20
+
+ns
+
+10
+
+VM > UVLO, ENABLE = 3.3 V
+
+ns
+
+SCLK high to SDO valid
+
+60
+
+ns
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+tHI_nSCS
+
+tSU_nSCS
+
+tHD_nSCS
+
+tCLK
+
+tCLKH
+
+X
+
+tCLKL
+
+MSB
+
+LSB
+tSU_SDI
+
+Z
+
+X
+
+tHD_SDI
+
+MSB
+tEN_nSCS
+
+LSB
+
+Z
+tDIS_nSCS
+
+tDLY_SDO
+
+图 1. SPI Slave-Mode Timing Diagram
+
+8
+
+8
+
+7
+
+7
+
+6
+
+6
+
+Supply Current (mA)
+
+Supply Current (mA)
+
+6.7 Typical Characteristics
+
+5
+4
+3
+2
+TA = 40qC
+TA = 25qC
+TA = 125qC
+
+1
+
+5
+
+10
+
+15
+20
+25
+Supply Voltage (V)
+
+30
+
+35
+
+4
+3
+2
+
+0
+-40
+
+40
+
+-20
+
+0
+
+D001
+
+图 2. Supply Current Over Supply Voltage
+
+20
+
+40
+60
+80
+Temperature (qC)
+
+100
+
+120
+
+140
+D002
+
+图 3. Supply Current Over Temperature
+
+100
+
+100
+TA = 40qC
+TA = 25qC
+TA = 125qC
+
+90
+80
+
+90
+80
+
+70
+
+Sleep Current (PA)
+
+Sleep Current (PA)
+
+VVM = 6 V
+VVM = 12 V
+VVM = 24 V
+VVM = 38 V
+
+1
+
+0
+0
+
+5
+
+60
+50
+40
+30
+
+70
+60
+50
+40
+30
+
+20
+
+20
+
+10
+
+10
+
+0
+0
+
+5
+
+10
+
+15
+20
+25
+Supply Voltage (V)
+
+30
+
+35
+
+图 4. Sleep Current Over Supply Voltage
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+40
+D003
+
+VVM = 6 V
+VVM = 12 V
+VVM = 24 V
+VVM = 38 V
+
+0
+-40
+
+-20
+
+0
+
+20
+
+40
+60
+80
+Temperature (qC)
+
+100
+
+120
+
+140
+D004
+
+图 5. Sleep Current Over Temperature
+
+11
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+3.5
+
+3.5
+
+3.4
+
+3.4
+
+3.3
+
+3.3
+
+3.2
+
+3.2
+
+DVDD Voltage (V)
+
+DVDD Voltage (V)
+
+Typical Characteristics (接下页)
+
+3.1
+3
+2.9
+2.8
+2.7
+
+3
+2.9
+2.8
+2.7
+
+TA = 40qC
+TA = 25qC
+TA = 125qC
+
+2.6
+
+3.1
+
+TA = 40qC
+TA = 25qC
+TA = 125qC
+
+2.6
+
+2.5
+
+2.5
+0
+
+5
+
+10
+
+15
+20
+25
+Supply Voltage (V)
+
+30
+
+35
+
+40
+
+0
+
+IDVDD = 0 mA
+
+10
+
+10
+
+VCP Voltage (V)
+
+VCP Voltage (V)
+
+12
+
+8
+6
+4
+VVM = 6 V
+VVM = 8 V
+VVM = 10 V
+VVM = 12 V
+
+2
+
+30
+
+35
+
+40
+D006
+
+6
+9
+Load Current (mA)
+
+12
+
+图 8. VCP Voltage Over Load
+
+8
+6
+4
+VVM = 6 V
+VVM = 8 V
+VVM = 10 V
+VVM = 12 V
+
+2
+
+0
+
+12
+
+15
+20
+25
+Supply Voltage (V)
+
+图 7. DVDD Voltage Over Supply Voltage
+
+12
+
+3
+
+10
+
+IDVDD = 30 mA
+
+图 6. DVDD Voltage Over Supply Voltage
+
+0
+
+5
+
+D005
+
+15
+D007
+
+0
+-40
+
+-20
+
+0
+
+20
+
+40
+60
+80
+Temperature (qC)
+
+100
+
+120
+
+140
+D008
+
+图 9. VCP Voltage Over Temperature
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7 Detailed Description
+7.1 Overview
+The DRV8304 device is an integrated 6-V to 38-V gate driver for 3-phase motor-drive applications. The device
+reduces system component count, cost, and complexity by integrating three independent half-bridge gate drivers,
+charge pump, and linear regulator for the high-side and low-side gate-driver supply voltages. A standard serial
+peripheral interface (SPI) provides a simple method for configuring the various device settings and reading fault
+diagnostic information through an external controller. Alternatively, a hardware interface (H/W) option allows for
+configuring the most commonly used settings through fixed external resistors.
+The gate drivers support external N-channel high-side and low-side power MOSFETs and can drive up to 150mA source, 300-mA sink peak currents with a 15-mA average output current. The high-side gate-drive supply
+voltage is generated using a doubler charge-pump architecture that regulates the VCP output to VVM + 10 V. The
+low-side gate-drive supply voltage is generated using a linear regulator from the VM power supply that regulates
+to 10 V. A smart gate-drive (SGD) architecture provides the ability to dynamically adjust the output gate-drive
+current strength allowing for the gate driver to control the power MOSFET VDS switching speed. This feature
+allows for the removal of external gate-drive resistors and diodes reducing bill of materials (BOM) component
+count, cost, and printed circuit board (PCB) area. The architecture also uses an internal state machine to protect
+against gate-drive short-circuit events, control the half-bridge dead time, and protect against dV/dt parasitic
+turnon of the external power MOSFET.
+The DRV8304 device integrates three, bidirectional current-shunt amplifiers for monitoring the current level
+through each of the external half-bridges using a low-side shunt resistor. The gain setting of the shunt amplifier
+can be adjusted through the SPI (DRV8304S) or hardware (DRV8304H) interface with the SPI providing
+additional flexibility to adjust the output bias point.
+In addition to the high level of device integration, the DRV8304 device provides a wide range of integrated
+protection features. These features include power-supply undervoltage lockout (UVLO), charge-pump
+undervoltage lockout (CPUV), VDS overcurrent monitoring (OCP), gate-driver short-circuit detection (GDF), and
+overtemperature shutdown (OTW and OTSD). Fault events are indicated by the nFAULT pin with detailed
+information available in the SPI registers on the SPI device version.
+The DRV8304 device is available in 0.5-mm pin pitch, VQFN surface-mount packages. The VQFN package size
+is 6 mm × 6 mm.
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+13
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.2 Functional Block Diagram
+VM
+
+1 …F
+
+bulk
+
++
+
+Power
+1 …F
+
+VCP
+
+VCP
+CPH
+
+22 nF
+
+HS
+VCP
+Charge
+Pump
+
+1 …F
+
+AGND
+
+GHA
+SHA
+
+CPL
+DVDD
+
+HS
+
+VGLS
+LS
+
+30 mA
+
+VM
+
+VDRAIN
+
+VM
+
+LS
+
+GLA
+
+3.3-V LDO
+Gate Driver
+
+VGLS LDO
+
+PGND
+
+ENABLE
+VM
+VCP
+
+INHA
+HS
+
+HS
+
+GHB
+
+INLA
+SHB
+Digital
+Core
+
+INHB
+
+VGLS
+LS
+
+LS
+
+GLB
+
+INLB
+Gate Driver
+
+INHC
+
+INLC
+
+Control
+Inputs
+
+MODE
+
+VM
+VCP
+
+IDRIVE
+HS
+
+HS
+
+GHC
+
+VDS
+SHC
+GAIN
+
+VGLS
+
+CAL
+
+nFAULT
+
+LS
+
+LS
+
+GLC
+
+Gate Driver
+
+Outputs
+
+SPC
+AV
+
+VCC
+
+RSENSE
+SNC
+
+VREF
+
+SPB
+AV
+
+0.1 µF
+SOC
+
+SPA
+
+SOB
+SOA
+
+RSENSE
+SNB
+
+Output Offset
+Bias
+
+AV
+
+RSENSE
+SNA
+
+CAL
+
+PPAD
+
+图 10. Block Diagram for DRV8304H
+14
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+Functional Block Diagram (接下页)
+VM
+
+1 …F
+
+bulk
+
++
+
+VM
+
+Power
+1 …F
+
+VCP
+
+VCP
+CPH
+
+22 nF
+
+HS
+VCP
+Charge
+Pump
+
+1 …F
+
+AGND
+
+GHA
+SHA
+
+LS
+DVDD
+
+HS
+
+VGLS
+
+CPL
+
+30 mA
+
+VM
+
+VDRAIN
+
+VM
+
+LS
+
+GLA
+
+3.3-V LDO
+Gate Driver
+
+VGLS LDO
+
+PGND
+
+ENABLE
+VM
+VCP
+
+INHA
+HS
+
+HS
+
+GHB
+
+INLA
+SHB
+Digital
+Core
+
+INHB
+
+INLB
+
+VGLS
+LS
+
+Control
+Inputs
+
+LS
+
+GLB
+
+Gate Driver
+
+INHC
+
+INLC
+
+VM
+VCP
+nFAULT
+
+Outputs
+
+HS
+
+HS
+
+GHC
+SHC
+
+VGLS
+SCLK
+
+LS
+
+SPI
+
+LS
+
+GLC
+
+SDI
+Gate Driver
+SDO
+SPC
+nSCS
+AV
+
+RSENSE
+
+VCC
+SNC
+VREF
+
+SPB
+
+0.1 µF
+
+AV
+
+RSENSE
+SNB
+
+SOC
+
+SPA
+
+SOB
+SOA
+
+AV
+
+Output Offset
+Bias
+
+RSENSE
+SNA
+
+CAL
+
+PPAD
+
+图 11. Block Diagram for DRV8304S
+版权 © 2017–2018, Texas Instruments Incorporated
+
+15
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.3 Feature Description
+表 1 lists the recommended values of the external components for the gate driver.
+表 1. DRV8304 Gate-Driver External Components
+
+(1)
+
+COMPONENTS
+
+PIN 1
+
+PIN 2
+
+RECOMMENDED
+
+CVM1
+
+VM
+
+PGND
+
+X5R or X7R, 0.1-µF, VM-rated capacitor
+
+CVM2
+
+VM
+
+PGND
+
+≥ 10 µF, VM-rated capacitor
+
+CVCP
+
+VCP
+
+VM
+
+X5R or X7R, 16-V, 1-µF capacitor
+
+CSW
+
+CPH
+
+CPL
+
+X5R or X7R, 22-nF, VM-rated capacitor
+
+CDVDD
+
+DVDD
+
+AGND
+
+X5R or X7R, 1-µF, 6.3-V capacitor
+
+RnFAULT
+
+VCC
+
+(1)
+
+nFAULT
+
+5.1-kΩ, Pullup resistor
+
+RSDO
+
+VCC (1)
+
+SDO
+
+5.1-kΩ, Pullup resistor, DRV8304 SPI device
+
+RIDRIVE
+
+IDRIVE
+
+AGND or DVDD
+
+DRV8304 hardware interface
+
+RVDS
+
+VDS
+
+AGND or DVDD
+
+DRV8304 hardware interface
+
+RMODE
+
+MODE
+
+AGND or DVDD
+
+DRV8304 hardware interface
+
+RGAIN
+
+GAIN
+
+AGND or DVDD
+
+DRV8304 hardware interface
+
+CVREF
+
+VREF
+
+AGND or DGND
+
+X5R or X7R, 0.1-µF, VREF-rated capacitor (Optional)
+
+RASENSE
+
+SPA
+
+SNA and PGND
+
+Sense shunt resistor based on current regulation limit
+
+RBSENSE
+
+SPB
+
+SNB and PGND
+
+Sense shunt resistor based on current regulation limit
+
+RCSENSE
+
+SPC
+
+SNC and PGND
+
+Sense shunt resistor based on current regulation limit
+
+The VCC pin is not a pin on the DRV8304 device, but a VCC supply voltage pullup is required for the open-drain output nFAULT and
+SDO. These pins can also be pulled up to DVDD.
+
+7.3.1 3-Phase Smart Gate Drivers
+The DRV8304 device integrates three, half-bridge gate drivers, each capable of driving high-side and low-side Nchannel power MOSFETs. A doubler charge pump provides the proper gate-bias voltage to the high-side
+MOSFET across a wide operating-voltage range in addition to providing 100% duty-cycle support. An internal
+linear regulator provides the gate-bias voltage for the low-side MOSFETs. The half-bridge gate drivers can be
+used in combination to drive a 3-phase motor or separately to drive other types of loads.
+The DRV8304 device implements a smart gate-drive architecture which allows the user to dynamically adjust the
+gate drive current without requiring external gate current limiting resistors. Additionally, this architecture provides
+a variety of protection features for the external MOSFETs including automatic dead-time insertion, parasitic dV/dt
+gate turnon prevention, and gate-fault detection.
+7.3.1.1 PWM Control Modes
+The DRV8304 device provides four different PWM-control modes to support various commutation and control
+methods. Texas Instruments does not recommend changing the MODE pin or PWM_MODE register during
+operation of the power MOSFETs.
+7.3.1.1.1 6x PWM Mode (PWM_MODE = 00b or MODE Pin Tied to AGND)
+
+In this mode, each half-bridge supports three output states: low, high, or high-impedance (Hi-Z). The
+corresponding INHx and INLx signals control the output state as listed in 表 2.
+表 2. 6x PWM Mode Truth Table
+
+16
+
+INLx
+
+INHx
+
+GLx
+
+GHx
+
+SHx
+
+0
+
+0
+
+L
+
+L
+
+Hi-Z
+
+0
+
+1
+
+L
+
+H
+
+H
+
+1
+
+0
+
+H
+
+L
+
+L
+
+1
+
+1
+
+L
+
+L
+
+Hi-Z
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7.3.1.1.2 3x PWM Mode (PWM_MODE = 01b or MODE Pin = 47 kΩ to AGND)
+
+In this mode, the INHx pin controls each half-bridge and supports two output states: low or high. The INLx pin is
+used to change the half-bridge to high impedance. If the high-impedance (Hi-Z) sate is not required, tie all INLx
+pins logic high. The corresponding INHx and INLx signals control the output state as listed in 表 3.
+表 3. 3x PWM Mode Truth Table
+INLx
+
+INHx
+
+GLx
+
+GHx
+
+SHx
+
+0
+
+X
+
+L
+
+L
+
+Hi-Z
+
+1
+
+0
+
+H
+
+L
+
+L
+
+1
+
+1
+
+L
+
+H
+
+H
+
+7.3.1.1.3 1x PWM Mode (PWM_MODE = 10b or MODE Pin = Hi-Z)
+
+In this mode, the DRV8304 device uses 6-step block commutation tables that are stored internally. This feature
+allows for a 3-phase BLDC motor to be controlled using a single PWM sourced from a simple controller. The
+PWM is applied on the INHA pin and determines the output frequency and duty cycle of the half-bridges.
+The half-bridge output states are managed by the INLA, INHB, and INLB pins which are used as state logic
+inputs. The state inputs can be controlled by an external controller or connected directly to hall sensor digital
+outputs from the motor (INLA = HALL_A, INHB = HALL_B, INLB = HALL_C). The 1x PWM mode normally
+operates with synchronous rectification, however it can be configured to use asynchronous diode freewheeling
+rectification on the SPI device. This configuration is set using the 1PWM_COM bit through the SPI registers.
+The INHC input controls the direction through the 6-step commutation table which is used to change the direction
+of the motor when hall sensors are directly controlling the INLA, INHB, and INLB state inputs. Tie the INHC pin
+low if this feature is not required.
+The INLC input brakes the motor by turning off all high-side MOSFETs and turning on all low-side MOSFETs
+when it is pulled low. This brake is independent of the states of the other input pins. Tie the INLC pin high if this
+feature is not required.
+表 4. Synchronous 1x PWM Mode
+LOGIC AND HALL INPUTS
+STATE
+
+INHC = 0
+
+GATE-DRIVE OUTPUTS
+INHC = 1
+
+PHASE A
+
+INLA
+
+INHB
+
+INLB
+
+INLA
+
+INHB
+
+INLB
+
+GHA
+
+PHASE B
+
+GLA
+
+GHB
+
+PHASE C
+
+GLB
+
+GHC
+
+GLC
+
+DESCRIPTION
+
+Stop
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+L
+
+L
+
+L
+
+L
+
+L
+
+L
+
+Stop
+
+Align
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+PWM
+
+!PWM
+
+L
+
+H
+
+L
+
+H
+
+Align
+
+1
+
+1
+
+1
+
+0
+
+0
+
+0
+
+1
+
+L
+
+L
+
+PWM
+
+!PWM
+
+L
+
+H
+
+B→C
+
+2
+
+1
+
+0
+
+0
+
+0
+
+1
+
+1
+
+PWM
+
+!PWM
+
+L
+
+L
+
+L
+
+H
+
+A→C
+
+3
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+PWM
+
+!PWM
+
+L
+
+H
+
+L
+
+L
+
+A→B
+
+4
+
+0
+
+0
+
+1
+
+1
+
+1
+
+0
+
+L
+
+L
+
+L
+
+H
+
+PWM
+
+!PWM
+
+C→B
+
+5
+
+0
+
+1
+
+1
+
+1
+
+0
+
+0
+
+L
+
+H
+
+L
+
+L
+
+PWM
+
+!PWM
+
+C→A
+
+6
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+L
+
+H
+
+PWM
+
+!PWM
+
+L
+
+L
+
+B→A
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+17
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+表 5. Asynchronous 1x PWM Mode 1PWM_COM = 1 (SPI Only)
+LOGIC AND HALL INPUTS
+INHC = 0
+
+STATE
+
+GATE-DRIVE OUTPUTS
+INHC = 1
+
+PHASE A
+
+INLA
+
+INHB
+
+INLB
+
+INLA
+
+INHB
+
+INLB
+
+PHASE B
+
+GHA
+
+GLA
+
+GHB
+
+PHASE C
+
+GLB
+
+GHC
+
+GLC
+
+DESCRIPTION
+
+Stop
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+L
+
+L
+
+L
+
+L
+
+L
+
+L
+
+Stop
+
+Align
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+PWM
+
+L
+
+L
+
+H
+
+L
+
+H
+
+Align
+
+1
+
+1
+
+1
+
+0
+
+0
+
+0
+
+1
+
+L
+
+L
+
+PWM
+
+L
+
+L
+
+H
+
+B→C
+
+2
+
+1
+
+0
+
+0
+
+0
+
+1
+
+1
+
+PWM
+
+L
+
+L
+
+L
+
+L
+
+H
+
+A→C
+
+3
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+PWM
+
+L
+
+L
+
+H
+
+L
+
+L
+
+A→B
+
+4
+
+0
+
+0
+
+1
+
+1
+
+1
+
+0
+
+L
+
+L
+
+L
+
+H
+
+PWM
+
+L
+
+C→B
+
+5
+
+0
+
+1
+
+1
+
+1
+
+0
+
+0
+
+L
+
+H
+
+L
+
+L
+
+PWM
+
+L
+
+C→A
+
+6
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+L
+
+H
+
+PWM
+
+L
+
+L
+
+L
+
+B→A
+
+图 12 and 图 13 show the different possible configurations in 1x PWM mode.
+DRV8304
+
+DRV8304
+INHA
+MCU_PWM
+
+MCU_GPIO
+
+INLA
+
+M
+
+PWM
+
+MCU_PWM
+
+INHA
+INLA
+
+INHB
+
+MCU_GPIO
+
+STATE1
+
+STATE2
+
+STATE2
+MCU_GPIO
+
+DIR
+
+INLC
+MCU_GPIO
+
+INLC
+
+STATE0
+
+STATE1
+
+INHC
+
+INHC
+MCU_GPIO
+
+H
+
+H
+
+INLB
+
+INLB
+MCU_GPIO
+
+M
+
+STATE0
+INHB
+
+MCU_GPIO
+
+PWM
+
+H
+
+DIR
+nBRAKE
+
+nBRAKE
+
+图 13. 1x PWM—Hall Sensor
+
+图 12. 1x PWM—Simple Controller
+
+7.3.1.1.4 Independent PWM Mode (PWM_MODE = 11b or MODE Pin Tied to DVDD)
+
+In this mode, the corresponding input pin independently controls each high-side and low-side gate driver. This
+control mode allows for the DRV8304 device to drive separate high-side and low-side loads with each halfbridge. These types of loads include unidirectional brushed DC motors, solenoids, and low-side and high-side
+switches. In this mode, if the system is configured in a half-bridge configuration, simultaneously turning on both
+the high-side and low-side MOSFETs causes shoot-through current in external MOSFETs and can cause them
+to damage.
+表 6. Independent PWM Mode Truth Table
+
+18
+
+INLx
+
+INHx
+
+GLx
+
+GHx
+
+0
+
+0
+
+L
+
+L
+
+0
+
+1
+
+L
+
+H
+
+1
+
+0
+
+H
+
+L
+
+1
+
+1
+
+H
+
+H
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+Because the high-side and low-side VDS overcurrent monitors share the SHx sense line, using the monitors if
+both the high-side and low-side gate drivers of one half-bridge are split and being used is not possible. In this
+case, connect the SHx pin to the high-side driver and disable the VDS overcurrent monitors as shown in 图 14.
+Disable
+VDS
+
++
+±
+
+VM
+VDRAIN
+
+VCP
+GHx
+
+HS
+
+INHx
+
+Load
+
+SHx
+INLx
+
+VGLS
+GLx
+
+LS
+
+Load
+
+SPx
+
+Gate Driver
+Disable
+VDS
+
++
+±
+
+图 14. Independent PWM High-Side and Low-Side Drivers
+If the half-bridge is used to implement only a high-side or low-side driver, using the VDS overcurrent monitors is
+still possible. Connect the SHx pin as shown in 图 15 or 图 16. The unused gate driver and the corresponding
+input can be left disconnected.
+VDS
+
++
+±
+
+VDS
+
+VM
+
++
+±
+
+VCP
+
+VCP
+INHx
+
+GHx
+
+HS
+
+INHx
+
+GHx
+
+HS
+
+VGLS
+
+INLx
+
+GLx
+
+LS
+
+Load
+
+SPx
+
+Gate Driver
+
+Load
+
+SHx
+
+SHx
+INLx
+
+VM
+VDRAIN
+
+VDRAIN
+
+VGLS
+GLx
+
+LS
+
+SPx
+
+Gate Driver
+
++
+VDS ±
+
++
+VDS ±
+
+图 15. Single High-Side Driver
+
+图 16. Single Low-Side Driver
+
+7.3.1.2 Device Interface Modes
+The DRV8304 device supports two different interface modes (SPI and hardware) to allow the end application to
+design for either flexibility or simplicity. The two interface modes share the same four pins, allowing the different
+versions to be pin-to-pin compatible. This allows for application designers to evaluate with one interface version
+and potentially switch to another with minimal modifications to their design.
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+19
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.3.1.2.1 Serial Peripheral Interface (SPI)
+
+The SPI device supports a serial communication bus that allows for an external controller to send and receive
+data with the DRV8304 device. This bus allows for the external controller to configure device settings and read
+detailed fault information. The interface is a four wire interface using the SCLK, SDI, SDO, and nSCS pins.
+• The SCLK pin is an input which accepts a clock signal to determine when data is captured and propagated on
+SDI and SDO.
+• The SDI pin is the data input.
+• The SDO pin is the data output. The SDO pin uses an open-drain structure and requires an external pullup
+resistor.
+• The nSCS pin is the chip select input. A logic low signal on this pin enables SPI communication with the
+DRV8304 device.
+For more information on the SPI, see the SPI Communication section.
+7.3.1.2.2 Hardware Interface
+
+The hardware interface device converts the four SPI pins into four resistor configurable inputs, GAIN, IDRIVE,
+MODE, and VDS. This option allows for the application designer to configure the most commonly used device
+settings by tying the pin logic high or logic low, or with a simple pullup or pulldown resistor. This configuration
+removes the requirement for a SPI bus from the external controller. General fault information can still be obtained
+through the nFAULT pin.
+• The GAIN pin configures the current shunt-amplifier gain.
+• The IDRIVE pin configures the gate-drive current strength.
+• The MODE pin configures the PWM control mode.
+• The VDS pin configures the voltage threshold of the VDS overcurrent monitors.
+For more information on the hardware interface, see the Pin Diagrams section.
+DVDD
+RGAIN
+
+SCLK
+
+SPI
+
+DVDD
+GAIN
+DVDD
+
+Hardware
+Interface
+
+DVDD
+IDRIVE
+
+SDI
+
+DVDD
+
+VCC
+RPU
+
+MODE
+
+SDO
+
+DVDD
+VDS
+
+nSCS
+
+RVDS
+
+图 17. SPI
+
+图 18. Hardware Interface
+
+7.3.1.3 Gate Driver Voltage Supplies
+The high-side gate-drive voltage supply is created using a doubler charge pump that operates from the VM
+voltage supply input. The charge pump allows the gate driver to properly bias the high-side MOSFET gate with
+respect to the source across a wide input supply-voltage range. The charge pump is regulated to maintain a fixed
+output voltage of VVM + 10 V and supports an average output current of 15 mA. When VVM is less than 12 V, the
+charge pump operates in full doubler mode and generates VVCP = 2 × VVM – 1.5 V when unloaded. The charge
+pump is continuously monitored for undervoltage to prevent under-driven MOSFET conditions. The charge pump
+requires a X5R or X7R, 1-µF, 16-V ceramic capacitor between the VM and VCP pins to act as the storage
+capacitor. Additionally, a X5R or X7R, 22-nF, VM-rated ceramic capacitor is required between the CPH and CPL
+pins to act as the flying capacitor.
+
+20
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+VM
+VM
+
+1 …F
+VCP
+
+CPH
+VM
+22 nF
+
+Charge
+Pump
+Control
+
+CPL
+
+图 19. Charge Pump Architecture
+The low-side gate-drive voltage is created using a linear regulator that operates from the VM voltage supply
+input. The linear regulator allows the gate driver to properly bias the low-side MOSFET gate with respect to
+ground. The linear regulator output is fixed at 10 V and supports an output current of 15 mA.
+7.3.1.4 Smart Gate-Drive Architecture
+The DRV8304 gate drivers use an adjustable, complimentary, push-pull topology for both the high-side and lowside drivers. This topology allows for both a strong pullup and pulldown of the external MOSFET gates.
+Additionally, the gate drivers use a smart gate-drive architecture to provide additional control of the external
+power MOSFETs, take additional steps to protect the MOSFETs, and allow for optimal tradeoffs between
+efficiency and robustness. This architecture is implemented through two components called IDRIVE and TDRIVE
+which are detailed in the IDRIVE: MOSFET Slew-Rate Control section and TDRIVE: MOSFET Gate Drive
+Control section. 图 20 shows the high-level functional block diagram of the gate driver.
+The IDRIVE gate-drive current and TDRIVE gate-drive time should be initially selected based on the parameters of
+the external power MOSFET used in the system and the desired rise and fall times (see the Application and
+Implementation section).
+The high-side gate driver also implements a Zener clamp diode to help protect the external MOSFET gate from
+overvoltage conditions in the case of external short-circuit events on the MOSFET.
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+21
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+VCP
+
+INHx
+
+INLx
+
+VM
+
+GHx
+
+Level
+Shifters
+
+150 k
+SHx
+
+Logic
+VGLS
+
+GLx
+
+Level
+Shifters
+
+150 k
+PGND
+
+图 20. Gate Driver Block Diagram
+7.3.1.4.1 IDRIVE: MOSFET Slew-Rate Control
+
+The IDRIVE component implements adjustable gate-drive current to control the MOSFET VDS slew rates. The
+MOSFET VDS slew rates are a critical factor for optimizing radiated emissions, energy and duration of diode
+recovery spikes, dV/dt gate turnon leading to shoot-through, and switching voltage transients related to parasitics
+in the external half-bridge. IDRIVE operates on the principal that the MOSFET VDS slew rates are predominately
+determined by the rate of gate charge (or gate current) delivered during the MOSFET Qgd or Miller charging
+region. By allowing the gate driver to adjust the gate current, it can effectively control the slew rate of the external
+power MOSFETs.
+IDRIVE allows the DRV8304 device to dynamically switch between gate drive currents either through a register
+setting on the SPI device or the IDRIVE pin on hardware interface device. The SPI and hardware devices
+provide 7 IDRIVE settings ranging from 15-mA to 150-mA source and 30-mA to 300-mA sink. The gate-drive
+current setting is delivered to the gate during the turnon and turnoff of the external power MOSFET for the tDRIVE
+duration. After the MOSFET turnon or turnoff, the gate driver switches to a smaller hold current (IHOLD) to improve
+the gate driver efficiency. Additional details on the IDRIVE settings are described in the Register Maps section for
+the SPI device and in the Pin Diagrams section for the hardware interface device.
+7.3.1.4.2 TDRIVE: MOSFET Gate Drive Control
+
+The TDRIVE component is an integrated gate-drive state machine that provides automatic dead-time insertion
+through switching handshaking, parasitic dV/dt gate turnon prevention, and MOSFET gate-fault detection.
+The first component of the TDRIVE state machine is automatic dead-time insertion. Dead time is the period of
+time between the switching of the external high-side and low-side MOSFETs to ensure that they do not cross
+conduct and cause shoot-through. The DRV8304 device uses the VGS voltage monitors to measure the MOSFET
+gate-to-source voltage and determine the proper time to switch instead of relying on a fixed time value. This
+feature allows the gate-driver dead time to adjust for variation in the system such a temperature drift and
+variation in the MOSFET parameters. An additional digital dead time (tDEAD) can be inserted and is adjustable
+through the registers on the SPI device.
+The second component focuses on parasitic dV/dt gate turnon prevention. To implement this, the TDRIVE state
+machine enables a strong pulldown current (ISTRONG) on the opposite MOSFET gate whenever a MOSFET is
+switching. The strong pulldown happens for the tDRIVE duration. This feature helps remove parasitic charge that
+couples into the MOSFET gate when the half-bridge switch-node voltage slews rapidly.
+22
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+The third component implements a gate-fault detection scheme to detect pin-to-pin solder defects, a MOSFET
+gate failure, or a MOSFET gate stuck-high or stuck-low voltage condition. This implementation is done with a pair
+of VGS gate-to-source voltage monitors for each half-bridge gate driver. When the gate driver receives a
+command to change the state of the half-bridge it begins to monitor the gate voltage of the external MOSFET. If,
+at the end of the tDRIVE period, the VGS voltage has not reached the proper threshold, the gate driver reports a
+fault. To ensure that a false fault is not detected, a tDRIVE time should be selected that is longer than the time
+required to charge or discharge the MOSFET gate. The tDRIVE time does not increase the PWM time and will
+terminate if another PWM command is received while active. Additional details on the TDRIVE settings are
+described in the Register Maps section for SPI device and in the Pin Diagrams section for hardware interface
+device.
+注
+If the mode is set to independent PWM mode, then the IDRIVE current is automatically set
+for the IHOLD period.
+图 21 shows an example of the TDRIVE state machine in operation.
+
+VINHx
+
+tPD
+
+tPD
+VINLx
+
+tDEAD
+tDEAD
+VGHx
+IDRIVE
+ISTRONG
+IDRIVE
+
+IHOLD
+
+IHOLD
+
+IGHx
+
+IHOLD
+
+ISTRONG
+IHOLD
+
+IHOLD
+
+tDEAD
+tDEAD
+IDRIVE
+
+IHOLD
+
+IHOLD
+
+ISTRONG
+
+IGLx
+
+IHOLD
+
+ISTRONG
+
+IDRIVE
+tDRIVE
+
+IHOLD
+
+VGLx
+
+IHOLD
+
+tDRIVE
+
+图 21. TDRIVE State Machine
+7.3.1.4.3 Gate Drive Clamp
+
+A clamping structure limits the gate-drive output voltage to the VGS,CLAMP voltage to help protect the external
+high-side MOSFETs from gate overvoltage damage. The positive voltage clamp is realized using a series of
+diodes. The negative voltage clamp uses the body diodes of the internal pulldown gate driver as shown in 图 22.
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+23
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+VGHS
+VM
+IREVERSE
+GHx
+
+VGS > VCLAMP
+ICLAMP
+SHx
+Predriver
+VGS negative
+VGLS
+
+GLx
+
+RSENSE
+PGND
+
+图 22. Gate Drive Clamp
+7.3.1.4.4 Propagation Delay
+
+The propagation delay time (tpd) is measured as the time between an input logic edge to a detected output
+change. This time comprises three parts consisting of the digital input deglitcher delay, the digital propagation
+delay, and the delay through the analog gate drivers.
+The input deglitcher prevents high-frequency noise on the input pins from affecting the output state of the gate
+drivers. To support multiple control modes and dead-time insertion, a small digital delay is added as the input
+command propagates through the device. Lastly, the analog gate drivers have a small delay that contributes to
+the overall propagation delay of the device.
+In order for the output to change state during normal operation, one MOSFET must first be turned off. The
+MOSFET gate is ramped down according to the IDRIVE setting, and the observed propagation delay ends when
+the MOSFET gate falls below the threshold voltage.
+7.3.1.4.5 MOSFET VDS Monitors
+
+The gate drivers implement adjustable VDS voltage monitors to detect overcurrent or short-circuit conditions on
+the external power MOSFETs. When the monitored voltage is greater than the VDS trip point (VVDS_OCP) for
+longer than the deglitch time (tOCP), an overcurrent condition is detected and action is taken according to the
+device VDS fault mode.
+The high-side VDS monitors measure the voltage between the VDRAIN and SHx pins and the low-side VDS
+monitors measure the voltage between the SHx and SPx pins. If the current shunt amplifier is unused, tie the SP
+pins to the common ground point of the external half-bridges.
+For the SPI device, the reference point of the low-side VDS monitor can be changed between the SPx and SNx
+pins if desired with the LS_REF register setting.
+
+24
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+The VVDS_OCP threshold is programmable from 0.15 V to 1.8 V. Additional information on the VDS monitor levels
+are described in the Register Maps section for the SPI device and in the Pin Diagrams section hardware
+interface device.
+DRV8304
+High-Side VDS OCP Monitor
+VDRAIN
+
++
+
+VM
+
+±
+VDS,OCP
+
+GHx
+
++
+±
+
+SHx
+
+Low-Side VDS OCP Monitor
+GLx
++
+±
+
+SPX
+
+VDS,OCP
+
++
+
+0
+1
+
+±
+
+SNX
+
+RSENSE
+
+LS_REF
+(DRV8304S only)
+
+图 23. DRV8304 VDS Monitors
+7.3.1.4.6 VDRAIN Sense Pin
+
+The DRV8304 device provides a separate sense pin for the common point of the high-side MOSFET drain. This
+pin is called VDRAIN. This pin allows the sense line for the overcurrent monitors (VDRAIN) and the power supply
+(VM) to remain separate and prevent noise on the VDRAIN sense line. This separation also allows for a small
+filter to be implemented on the gate driver supply (VM) or to insert a boost converter to support lower voltage
+operation if desired. Care must still be taken when the filter or separate supply is designed because the VM
+supply is still the reference point for the VCP charge pump that supplies the high-side gate drive voltage (VGSH).
+The VM supply must not drift to far from the VDRAIN supply to avoid violating the VGS voltage specification of the
+external power MOSFETs.
+7.3.2 DVDD Linear Voltage Regulator
+A 3.3-V, 30-mA linear regulator is integrated into the DRV8304 device and is available for use by external
+circuitry. This regulator can provide the supply voltage for a low-power microcontroller or other low-current
+supporting circuitry. The output of the DVDD regulator should be bypassed near the DVDD pin with a X5R or
+X7R, 1-µF, 6.3-V ceramic capacitor routed directly back to the adjacent AGND ground pin.
+The DVDD nominal, no-load output voltage is 3.3 V. When the DVDD load current exceeds 30 mA, the regulator
+functions like a constant-current source. The output voltage drops significantly with a current load greater than 30
+mA.
+VM
+
+REF
+
++
+±
+
+DVDD
+
+3.3 V, 30 mA
+maximum
+1 …F
+
+AGND
+
+图 24. DVDD Linear Regulator Block Diagram
+版权 © 2017–2018, Texas Instruments Incorporated
+
+25
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Use 公式 1 to calculate the power dissipated in the device because of the DVDD linear regulator.
+P
+VVM VDVDD u IDVDD
+
+(1)
+
+For example, at VVM = 24 V, drawing 20 mA out of DVDD results in a power dissipation as shown in 公式 2.
+P 24 V 3.3 V u 20 mA 414 mW
+
+(2)
+
+7.3.3 Pin Diagrams
+图 25 shows the input structure for the logic-level pins, INHx, INLx, CAL, nSCS, SCLK, and SDI. The input can
+be driven with a voltage or external resistor.
+
+DVDD
+STATE
+
+RESISTANCE
+
+INPUT
+
+VIH
+
+Tied to DVDD
+
+Logic High
+
+VIL
+
+Tied to AGND
+
+Logic Low
+RPD
+
+图 25. Logic-Level Input Pin Structure (INHx, INLx, CAL, nSCS, SCLK, and SDI)
+图 26 shows the input structure for the logic-level ENABLE pin. The input can be driven with a voltage or external
+resistor. The ENABLE pin is latched when the device is powered-up.
+5V
+
+RPU2
+Latch
+
+VEXT
+STATE
+
+RESISTANCE
+
+INPUT
+RPU1
+
+VIH
+
+Tied to VEXT
+
+Logic High
+
+VIL
+
+Tied to AGND
+
+Logic Low
+
+图 26. Logic-Level Input Pin Structure (ENABLE)
+
+26
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+图 27 shows the structure of the four-level input pins, MODE and GAIN, on the hardware interface device. The
+input can be set with an external resistor. The MODE and GAIN pins are latched when the device is powered-up.
+MODE
+
+GAIN
+
+Independent
+
+40 V/V
+
+1x PWM
+
+20V/V
+
+3x PWM
+
+10 V/V
+
+6x PWM
+
+5 V/V
+
+DVDD
+STATE
+
+RESISTANCE
+
+DVDD
++
+
+VI4
+
+Tied to DVDD
+
+VI3
+
+Hi-Z (>500 kŸ WR
+AGND)
+
+VI2
+
+47 NŸ “5%
+to AGND
+
+VI1
+
+Tied to AGND
+
+RPU
+
+±
+
++
+
+RPD
+
+±
+
++
+±
+
+图 27. Four-Level Input Pin Structure (MODE and GAIN)
+图 28 shows the structure of the seven-level input pins, IDRIVE and VDS, on the hardware interface device. The
+input can be set with an external resistor. The IDRIVE and VDS pins are latched when the device is powered-up.
+IDRIVE
+
+VDS
+
+150/300 mA
+
+Disabled
+
+135/270 mA
+
+1.8 V
+
+105/210 mA
+
+0.9 V
+
+90/180 mA
+
+0.6 V
+
+60/120 mA
+
+0.4 V
+
+45/90 mA
+
+0.24 V
+
+15/30 mA
+
+0.15 V
+
++
+STATE
+VI7
+
+Tied to DVDD
+
+VI6
+
+18 k ± 5%
+to DVDD
+
+VI5
+
+75 k ± 5%
+to DVDD
+
+VI4
+
+Hi-Z (>500 kŸ
+to AGND)
+
+VI3
+
+75 k ± 5%
+to AGND
+
+VI2
+VI1
+
+±
+
+RESISTANCE
+
+18 NŸ “5%
+to AGND
+Tied to AGND
+
+DVDD
+
+DVDD
+
++
+±
+
+RPU
+
++
+±
+
+RPD
+
+DVDD
++
+
+Latch
+
+±
+
++
+±
++
+±
+
+图 28. Seven-Level Input Pin Structure (IDRIVE and VDS)
+图 29 shows the structure of the open-drain output pin, nFAULT. The open-drain output requires an external
+pullup resistor to function properly.
+版权 © 2017–2018, Texas Instruments Incorporated
+
+27
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+DVDD
+
+RPU
+
+STATE
+
+STATUS
+
+No Fault
+
+Inactive
+
+OUTPUT
+
+Fault
+
+Active
+
+Active
+Inactive
+
+图 29. Open-Drain Output Pin Structure
+7.3.4 Low-Side Current-Shunt Amplifiers
+The DRV8304 device integrates three, high-performance low-side current-shunt amplifiers for current
+measurements using low-side shunt resistors in the external half-bridges. Low-side current measurements are
+commonly used to implement overcurrent protection, external torque control, or brushless DC commutation with
+the external controller. All three amplifiers can be used to sense the current in each of the half-bridge legs or one
+amplifier can be used to sense the sum of the half-bridge legs. The current shunt amplifiers include features such
+as programmable gain, offset calibration, unidirectional and bidirectional support, and a voltage reference pin
+(VREF).
+7.3.4.1 Bidirectional Current Sense Operation
+The SOx pin on the DRV8304 outputs an analog voltage equal to the voltage across the SPx and SNx pins
+multiplied by the gain setting (GCSA) as shown in 图 30. The gain setting is adjustable between four different
+levels (5 V/V, 10 V/V, 20 V/V, and 40 V/V). Use 公式 3 to calculate the current through the shunt resistor.
+VVREF
+VSOx
+2
+I
+GCSA u RSENSE
+(3)
+R2
+R3
+
+R4
+
+R5
+R6
+
+SOx
+
+I
+R1
+
+VCC
+
+±
+
+VREF
+
++
+
+0.1 …F
+
+R2
+
+SPx
+
+R1
+
+RSENSE
+SNx
+
+½
+
++
+
+R3
+
+±
+R4
+
+R5
+
+图 30. Bidirectional Current-Sense Configuration
+图 31 and 图 32 show the detail of the amplifier operational range. In bi-directional operation, the amplifier output
+for 0-V input is set at VREF / 2. Any change in the differential input results in a corresponding change in the
+output times the CSA_GAIN factor. The amplifier has a defined linear region in which it can maintain operation.
+28
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+SO (V)
+VREF
+
+VREF / 2
+VLINEAR
+
+SP ± SN (V)
+
+图 31. Bidirectional Current-Sense Output
+I
+SP
+SO
+
+R
+
+AV
+SN
+
+SO
+VREF
+SP ± SN
+±0.3 V
+
+VVREF ± 0.25 V
+
+±I × R
+VSO(range±)
+
+VSO(off)max
+VVREF / 2
+
+VOFF,
+VDRIFT
+
+0V
+
+VSO(off)min
+
+VSO(range+)
+0.25 V
+
+I×R
+0.3 V
+
+0V
+
+图 32. Bidirectional Current Sense Regions
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+29
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.3.4.2 Unidirectional Current Sense Operation (SPI only)
+On the DRV8304 SPI device, use the VREF_DIV bit to remove the VREF divider. In this case the shunt amplifier
+operates unidirectionally and the SOx outputs an analog voltage equal to the voltage across the SPx and SNx
+pins multiplied by the gain setting (GCSA). Use 公式 4 to calculate the current through the shunt resistor.
+
+I
+
+VVREF
+
+0.3
+
+VSOX
+
+GCSA u RSENSE
+
+(4)
+R2
+R3
+
+R4
+
+R5
+R6
+
+SOx
+
+I
+R1
+±
++
+
+SPx
+
+R1
+
+RSENSE
+SNx
+
+VCC
+VREF
+0.1 …F
+
+R2
+
+0.3 V
++
+
+-
+
++
+
+R3
+
+±
+R4
+
+R5
+
+图 33. Unidirectional Current-Sense Configuration
+图 34 and 图 35 show the detail of the amplifier operational range. In unidirectional operation, the amplifier output
+for 0-V input is set at VREF – 0.3 V. In this operating mode the amplifier output only responds to a positive
+current through the shunt resistor. The amplifier has a defined linear region in which it can maintain operation.
+SO (V)
+VREF
+
+VVREF ± 0.3 V
+
+VLINEAR
+
+SP ± SN (V)
+
+图 34. Unidirectional Current-Sense Output
+30
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+I
+SP
+SO
+
+R
+
+AV
+SN
+
+SO
+VREF
+VVREF ± 0.25 V
+VSO(off)max
+VOFF,
+VVREF ± 0.3 V
+
+VDRIFT
+
+SP ± SN
+0V
+
+VSO(off)min
+
+VSO(range)
+
+I×R
+0.3 V
+
+0.25 V
+0V
+
+图 35. Unidirectional Current-Sense Regions
+7.3.4.3 Offset Calibration
+The DRV8304 device provides an auto calibration feature to minimize the amplifier input offset on power up or
+during an ENABLE reset pulse to account for temperature and device variation. Auto calibration is performed on
+both the hardware and SPI device options. The auto calibration begins immediately after the VREF pin crosses
+the minimum operational VREF voltage and completes in several µs (max 500 µs). During auto calibration, the
+inputs to the amplifier are disconnected from SPX and SNX pin and shorted internally. After auto calibration the
+amplifiers are ready for operation.
+For the SPI device option, auto calibration can also be performed during run time by setting the AUTOCAL bit. If
+the AUTOCAL bit is already set once, then the user must reset the bit and again set it to perform the autocalibration. The user must wait for at least 500 µs before another write to ensure a successful calibration. The
+user is recommended not to sample CSA outputs during the AUTOCAL operation.
+In addition to this, the device also supports an external calibration through the SPI registers (SPI_CAL) in SPI
+device or through CAL pin in hardware device variant. When the calibration is enabled (CAL pin or SPI_CAL),
+the inputs to the amplifier are shorted internally, and the amplifier voltage can be observed though SOX pin for
+doing the external calibration. For the best results, perform offset calibration when the external MOSFETS are
+not switching to reduce the potential noise impact to the amplifier. DC calibration can be done at any time, even
+when the half-bridges are operating. 图 36 shows a diagram of the calibration mode
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+31
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+R2
+R3
+
+R4
+
+R5
+R6
+SOx
+CAL
+±
+CAL
+
++
+VREF
+R2
+1/2
+
++
+
+CAL
+
+SPX
+SNX
+
+RSENSE
+
+CAL
+
+R3
+
+±
+R4
+
+R5
+
+图 36. Amplifier Calibration Mode
+7.3.5 Gate-Driver Protection Circuits
+The DRV8304 device is fully protected against VM undervoltage, charge pump undervoltage, MOSFET VDS
+overcurrent, gate driver shorts, and overtemperature events.
+表 7. Fault Action and Response
+FAULT
+
+CONDITION
+
+CONFIGURATION
+
+REPORT
+
+GATE DRIVER
+
+LOGIC
+
+RECOVERY
+
+VM
+undervoltage
+(UVLO)
+
+VVM < VUVLO
+
+—
+
+nFAULT
+
+Hi-Z
+
+Disabled
+
+Automatic:
+VVM > VUVLO
+
+Charge pump
+undervoltage
+(CPUV)
+
+DIS_CPUV = 0b
+
+nFAULT
+
+Hi-Z
+
+Active
+
+VVCP < VCPUV
+
+DIS_CPUV = 1b
+
+None
+
+Active
+
+Active
+
+OCP_MODE = 00b
+
+nFAULT
+
+Hi-Z
+
+Active
+
+Latched:
+CLR_FLT, ENABLE Pulse
+
+OCP_MODE = 01b
+
+nFAULT
+
+Hi-Z
+
+Active
+
+Retry:
+tRETRY
+
+OCP_MODE = 10b
+
+nFAULT
+
+Active
+
+Active
+
+No action
+
+OCP_MODE = 11b
+
+None
+
+Active
+
+Active
+
+No action
+
+OCP_MODE = 00b
+
+nFAULT
+
+Hi-Z
+
+Active
+
+Latched:
+CLR_FLT, ENABLE Pulse
+
+OCP_MODE = 01b
+
+nFAULT
+
+Hi-Z
+
+Active
+
+Retry:
+tRETRY
+
+VDS overcurrent
+(VDS_OCP)
+
+VSENSE
+overcurrent
+(SEN_OCP)
+
+Gate driver fault
+(GDF)
+
+32
+
+VDS > VVDS_OCP
+
+VSP > VSEN_OCP
+
+OCP_MODE = 10b
+
+nFAULT
+
+Active
+
+Active
+
+No action
+
+OCP_MODE = 11b or
+DIS_SEN = 1b
+
+None
+
+Active
+
+Active
+
+No action
+
+DIS_GDF = 0b
+
+nFAULT
+
+Hi-Z
+
+Active
+
+Latched:
+CLR_FLT, ENABLE Pulse
+
+DIS_GDF = 1b
+
+None
+
+Active
+
+Active
+
+No action
+
+Gate voltage stuck > tDRIVE
+
+Thermal
+warning
+(OTW)
+
+TJ > TOTW
+
+Thermal
+shutdown
+(OTSD)
+
+TJ > TOTSD
+
+Automatic:
+VVCP > VCPUV
+
+OTW_REP = 1b
+
+nFAULT
+
+Active
+
+Active
+
+Automatic:
+TJ < TOTW – THYS
+
+OTW_REP = 0b
+
+None
+
+Active
+
+Active
+
+No action
+
+—
+
+nFAULT
+
+Hi-Z
+
+Active
+
+Automatic:
+TJ < TOTSD – THYS
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7.3.5.1 VM Supply Undervoltage Lockout (UVLO)
+If at any time the input supply voltage on the VM pin falls below the VUVLO threshold, all of the external MOSFETs
+are disabled, the charge pump is disabled, and the nFAULT pin is driven low. The FAULT and VM_UVLO bits
+are also latched high in the registers on the SPI device. Normal operation resumes (gate driver operation and the
+nFAULT pin is released) when the VM undervoltage condition is removed. The VM_UVLO bit remains set until
+cleared through the CLR_FLT bit or an ENABLE pin reset pulse (tRST).
+7.3.5.2 VCP Charge-Pump Undervoltage Lockout (CPUV)
+If at any time the voltage on the VCP pin (charge pump) falls below the VCPUV threshold voltage of the charge
+pump, all of the external MOSFETs are disabled and the nFAULT pin is driven low. The FAULT and CPUV bits
+are also latched high in the registers on the SPI device. Normal operation resumes (gate-driver operation and the
+nFAULT pin is released) when the VCP undervoltage condition is removed. The CPUV bit remains set until
+cleared through the CLR_FLT bit or an ENABLE pin reset pulse (tRST). Setting the DIS_CPUV bit high on the SPI
+device disables this protection feature. On the hardware interface device, the CPUV protection is always
+enabled.
+7.3.5.3 MOSFET VDS Overcurrent Protection (VDS_OCP)
+A MOSFET overcurrent event is sensed by monitoring the VDS voltage drop across the external MOSFET RDS(on).
+If the voltage across an enabled MOSFET exceeds the VVDS_OCP threshold for longer than the tOCP_DEG deglitch
+time, a VDS_OCP event is recognized and action is taken according to the OCP_MODE. On hardware interface
+devices, the VVDS_OCP threshold is set with the VDS pin, the tOCP_DEG is fixed at 4.5 µs, and the OCP_MODE is
+configured for 4-ms automatic retry. Moreover, the VDS_OCP can be disabled by tying the VDS pin to DVDD.
+On SPI devices, the VVDS_OCP threshold is set through the VDS_LVL SPI register, and the OCP_MODE bit can
+operate in four different modes: VDS latched shutdown, VDS automatic retry, VDS report only, and VDS disabled.
+7.3.5.3.1 VDS Latched Shutdown (OCP_MODE = 00b)
+
+After a VDS_OCP event in this mode, all the external MOSFETs are disabled and the nFAULT pin is driven low.
+The FAULT, VDS_OCP, and corresponding MOSFET OCP bits are latched high in the SPI registers. Normal
+operation resumes (gate driver operation and the nFAULT pin is released) when the VDS_OCP condition is
+removed and a clear faults command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST).
+7.3.5.3.2 VDS Automatic Retry (OCP_MODE = 01b)
+
+After a VDS_OCP event in this mode, all the external MOSFETs are disabled and the nFAULT pin is driven low.
+The FAULT, VDS_OCP, and corresponding MOSFET OCP bits are latched high in the SPI registers. Normal
+operation resumes automatically (gate driver operation and the nFAULT pin is released) after the tRETRY time
+elapses. The FAULT, VDS_OCP, and MOSFET OCP bits remain latched until the tRETRY period expires.
+7.3.5.3.3 VDS Report Only (OCP_MODE = 10b)
+
+No protective action occurs after a VDS_OCP event in this mode. The overcurrent event is reported by driving
+the nFAULT pin low and latching the FAULT, VDS_OCP, and corresponding MOSFET OCP bits high in the SPI
+registers. The gate drivers continue to operate normally. The external controller manages the overcurrent
+condition by acting appropriately. The reporting clears (nFAULT pin is released) when the VDS_OCP condition is
+removed and a clear faults command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST).
+7.3.5.3.4 VDS Disabled (OCP_MODE = 11b)
+
+No action occurs after a VDS_OCP event in this mode.
+7.3.5.4 VSENSE Overcurrent Protection (SEN_OCP)
+Half-bridge overcurrent is also monitored by sensing the voltage drop across the external current-sense resistor
+with the SPX pin. If at any time, the voltage on the SP input of the current-sense amplifier exceeds the VSEN_OCP
+threshold for longer than the tOCP_DEG deglitch time, a SEN_OCP event is recognized and action is done
+according to the OCP_MODE bit. On the hardware interface device, the VSENSE threshold is fixed at 1 V, tOCP_DEG
+is fixed at 4 µs, and the OCP_MODE bit for VSENSE is fixed for 4-ms automatic retry. On the SPI device, the
+VSENSE threshold is set through the SEN_LVL SPI register and the OCP_MODE bit can operate in four different
+modes: VSENSE latched shutdown, VSENSE automatic retry, VSENSE report only, and VSENSE disabled.
+版权 © 2017–2018, Texas Instruments Incorporated
+
+33
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.3.5.4.1 VSENSE Latched Shutdown (OCP_MODE = 00b)
+
+After a SEN_OCP event in this mode, all the external MOSFETs are disabled and the nFAULT pin is driven low.
+The FAULT and SEN_OCP bits are latched high in the SPI registers. Normal operation resumes (gate driver
+operation and the nFAULT pin is released) when the SEN_OCP condition is removed and a clear faults
+command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST).
+7.3.5.4.2 VSENSE Automatic Retry (OCP_MODE = 01b)
+
+After a SEN_OCP event in this mode, all the external MOSFETs are disabled and the nFAULT pin is driven low.
+The FAULT, SEN_OCP, and corresponding sense OCP bits are latched high in the SPI registers. Normal
+operation resumes automatically (gate driver operation and the nFAULT pin is released) after the tRETRY time
+elapses. The FAULT, SEN_OCP, and sense OCP bits remain latched until the tRETRY period expires.
+7.3.5.4.3 VSENSE Report Only (OCP_MODE = 10b)
+
+No protective action occurs after a SEN_OCP event in this mode. The overcurrent event is reported by driving
+the nFAULT pin low and latching the FAULT and SEN_OCP bits high in the SPI registers. The gate drivers
+continue to operate. The external controller manages the overcurrent condition by acting appropriately. The
+reporting clears (nFAULT released) when the SEN_OCP condition is removed and a clear faults command is
+issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST).
+7.3.5.4.4 VSENSE Disabled (OCP_MODE = 11b or DIS_SEN = 1b)
+
+No action occurs after a SEN_OCP event in this mode. The SEN_OCP bit can be disabled independently of the
+VDS_OCP bit by using the DIS_SEN SPI register.
+7.3.5.5 Gate Driver Fault (GDF)
+The GHx and GLx pins are monitored such that if the voltage on the external MOSFET gate does not increase or
+decrease after the tDRIVE time, a gate driver fault is detected. This fault might be encountered if the GHx or GLx
+pins are shorted to the PGND, SHx, or VM pins. Additionally, a gate driver fault might be encountered if the
+selected IDRIVE setting is not sufficient to turn on the external MOSFET within the tDRIVE period. After a gate drive
+fault is detected, all external MOSFETs are disabled and the nFAULT pin is driven low. In addition, the FAULT,
+GDF, and corresponding VGS bits are latched high in the SPI registers. Normal operation resumes (gate driver
+operation and the nFAULT pin is released) when the gate-driver fault condition is removed and a clear fault
+command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST). On the SPI device, setting
+the DIS_GDF_UVLO bit high disables this protection feature.
+Gate driver faults can indicate that the selected IDRIVE or tDRIVE settings are too low to slew the external MOSFET
+in the desired time. Increasing either the IDRIVE or tDRIVE setting can resolve a gate driver fault in these cases.
+Alternatively, if a gate-to-source short occurs on the external MOSFET, a gate driver fault is reported because of
+the MOSFET gate not turning on.
+7.3.5.6 Thermal Warning (OTW)
+If the die temperature exceeds the trip point of the thermal warning (TOTW), the OTW bit is set in the registers of
+the SPI device. The device performs no additional action and continues to function. When the die temperature
+decreases below the hysteresis point of the thermal warning, the OTW bit clears automatically. The OTW bit can
+also be configured to report on the nFAULT pin by setting the OTW_REP bit to 1b through the SPI registers.
+7.3.5.7 Thermal Shutdown (OTSD)
+If the die temperature exceeds the trip point of the thermal shutdown limit (TOTSD), all the external MOSFETs are
+disabled, the charge pump is shut down, and the nFAULT pin is driven low. In addition, the FAULT and TSD bits
+are latched high. Normal operation resumes (gate driver operation and the nFAULT pin is released) when the
+overtemperature condition is removed. The TSD bit remains latched high indicating that a thermal event occurred
+until a clear fault command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST). This
+protection feature cannot be disabled.
+
+34
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7.4 Device Functional Modes
+7.4.1 Gate Driver Functional Modes
+7.4.1.1 Sleep Mode
+The ENABLE pin manages the state of the DRV8304 device. When the ENABLE pin is low, the device enters a
+low-power sleep mode. In sleep mode, all gate drivers are disabled, all external MOSFETs are disabled, the
+charge pump is disabled, the DVDD regulator is disabled, and the SPI bus is disabled. The tSLEEP time must
+elapse after a falling edge on the ENABLE pin before the device enters sleep mode. The device comes out of
+sleep mode automatically if the ENABLE pin is pulled high. The tWAKE time must elapse before the device is
+ready for inputs.
+In sleep mode and when VVM < VUVLO, all external MOSFETs are disabled. The high-side gate pins, GHx, are
+pulled to the SHx pin by an internal resistor and the low-side gate pins, GLx, are pulled to the PGND pin by an
+internal resistor.
+注
+During power up and power down of the device through the ENABLE pin, the nFAULT pin
+is held low as the internal regulators enable or disable. After the regulators have enabled
+or disabled, the nFAULT pin is automatically released. The duration that the nFAULT pin
+is low does not exceed the tSLEEP or tWAKE time.
+7.4.1.2 Operating Mode
+When the ENABLE pin is high and VVM > VUVLO, the device enters operating mode. The tWAKE time must elapse
+before the device is ready for inputs. In this mode the charge pump, low-side gate regulator, DVDD regulator,
+and SPI bus are active and hardware inputs are latched.
+注
+If the ENABLE pin is left floating, the device will be in Operating Mode.
+7.4.1.3 Fault Reset (CLR_FLT or ENABLE Reset Pulse)
+In the case of device latched faults, the DRV8304 device enters a partial shutdown state to help protect the
+external power MOSFETs and system.
+When the fault condition has been removed the device can reenter the operating state by either setting the
+CLR_FLT SPI bit on the SPI device or issuing a result pulse to the ENABLE pin on either interface variant. The
+ENABLE reset pulse (tRST) consists of a high-to-low-to-high transition on the ENABLE pin. The low period of the
+sequence should fall with the tRST time window or else the device will begin the complete shutdown sequence.
+The reset pulse has no effect on any of the regulators, device settings, or other functional blocks
+
+7.5 Programming
+This section applies only to the DRV8304 SPI device.
+7.5.1 SPI Communication
+7.5.1.1 SPI
+On the DRV8304 SPI device, an SPI bus is used to set device configurations, operating parameters, and read
+out diagnostic information. The SPI operates in slave mode and connects to a master controller. The SPI input
+data (SDI) word consists of a 16-bit word, with a 5-bit command and 11 bits of data. The SPI output data (SDO)
+word consists of 11-bit register data. The first 5 bits are don’t care bits.
+A valid frame must meet the following conditions:
+• The SCLK pin should be low when the nSCS pin transitions from high to low and from low to high.
+• The nSCS pin should be pulled high for at least 400 ns between words.
+• When the nSCS pin is pulled high, any signals at the SCLK and SDI pins are ignored and the SDO pin is
+版权 © 2017–2018, Texas Instruments Incorporated
+
+35
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Programming (接下页)
+placed in the Hi-Z state.
+Data is captured on the falling edge of the SCLK pin and data is propagated on the rising edge of the SCLK
+pin.
+The most significant bit (MSB) is shifted in and out first.
+A full 16 SCLK cycles must occur for the transaction to be valid.
+If the data word sent to the SDI pin is less than or more than 16 bits, a frame error occurs and the data word
+is ignored.
+For a write command, the existing data in the register being written to is shifted out on the SDO pin following
+the 5-bit command data.
+
+•
+•
+•
+•
+•
+
+7.5.1.1.1 SPI Format
+
+The SDI input data word is 16 bits long and consists of the following format:
+• 1 read or write bit, W (bit B15)
+• 4 address bits, A (bits B14 through B11)
+• 11 data bits, D (bits B11 through B0)
+The SDO output data word is 16 bits long and the first 5 bits are don't care bits. The data word is the content of
+the register being accessed.
+For a write command (W0 = 0), the response word on the SDO pin is the data currently in the register being
+written to.
+For a read command (W0 = 1), the response word is the data currently in the register being read.
+表 8. SDI Input Data Word Format
+R/W
+
+ADDRESS
+
+DATA
+
+B15
+
+B14
+
+B13
+
+B12
+
+B11
+
+B10
+
+B9
+
+B8
+
+B7
+
+B6
+
+B5
+
+B4
+
+B3
+
+B2
+
+B1
+
+B0
+
+W0
+
+A3
+
+A2
+
+A1
+
+A0
+
+D10
+
+D9
+
+D8
+
+D7
+
+D6
+
+D5
+
+D4
+
+D3
+
+D2
+
+D1
+
+D0
+
+表 9. SDO Output Data Word Format
+DON'T CARE BITS
+
+DATA
+
+B15
+
+B14
+
+B13
+
+B12
+
+B11
+
+B10
+
+B9
+
+B8
+
+B7
+
+B6
+
+B5
+
+B4
+
+B3
+
+B2
+
+B1
+
+B0
+
+X
+
+X
+
+X
+
+X
+
+X
+
+D10
+
+D9
+
+D8
+
+D7
+
+D6
+
+D5
+
+D4
+
+D3
+
+D2
+
+D1
+
+D0
+
+nSCS
+
+SCLK
+
+SDI
+
+X
+
+MSB
+
+LSB
+
+X
+
+SDO
+
+Z
+
+MSB
+
+LSB
+
+Z
+
+Capture
+Point
+
+Propagate
+Point
+
+图 37. SPI Slave Timing Diagram
+
+36
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7.6 Register Maps
+This section applies only to the DRV8304 SPI device.
+注
+Do not modify reserved registers or addresses not listed in the register map (表 10). Writing to these registers may have
+unintended effects. For all reserved bits, the default value is 0. To help prevent erroneous SPI writes from the master controller,
+set the LOCK bits to lock the SPI registers.
+表 10. DRV8304S Register Map
+Name
+
+10
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+0
+
+Type
+
+Address
+
+Fault Status 1
+
+FAULT
+
+VDS_OCP
+
+GDF
+
+UVLO
+
+OTSD
+
+VDS_HA
+
+VDS_LA
+
+VDS_HB
+
+VDS_LB
+
+VDS_HC
+
+VDS_LC
+
+R
+
+0h
+
+VGS Status 2
+
+SA_OC
+
+SB_OC
+
+SC_OC
+
+OTW
+
+CPUV
+
+VGS_HA
+
+VGS_LA
+
+VGS_HB
+
+VGS_LB
+
+VGS_HC
+
+VGS_LC
+
+R
+
+1h
+
+Driver Control
+
+Reserved
+
+DIS_CPUV
+
+DIS_GDF
+
+OTW_REP
+
+1PWM_COM
+
+1PWM_DIR
+
+COAST
+
+BRAKE
+
+CLR_FLT
+
+RW
+
+2h
+
+Gate Drive HS
+
+LOCK
+
+Gate Drive LS
+
+CBC
+
+TDRIVE
+
+OCP Control
+
+TRETRY
+
+DEAD_TIME
+
+CSA Control
+
+Reserved
+
+VREF_DIV
+
+Reserved
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+LS_REF
+
+PWM_MODE
+
+Reserved
+
+IDRIVEP_HS
+
+Reserved
+
+IDRIVEN_HS
+
+RW
+
+3h
+
+Reserved
+
+IDRIVEP_LS
+
+Reserved
+
+IDRIVEN_LS
+
+RW
+
+4h
+
+VDS_LVL
+
+RW
+
+5h
+
+RW
+
+6h
+
+RW
+
+7h
+
+OCP_MODE
+
+OCP_ACT
+
+CSA_GAIN
+
+DIS_SEN
+Reserved
+
+Reserved
+SPI_CAL
+
+AUTOCAL
+
+Reserved
+
+SEN_LVL
+
+37
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.6.1 Status Registers (DRV8304S Only)
+The status registers are used to reporting warning and fault conditions. The status registers are read-only
+registers
+Complex bit access types are encoded to fit into small table cells. 表 11 shows the codes that are used for
+access types in this section.
+表 11. Status Registers Access Type Codes
+Access Type
+
+Code
+
+Description
+
+R
+
+Read
+
+Read Type
+R
+
+Reset or Default Value
+-n
+
+Value after reset or the default
+value
+
+7.6.1.1 Fault Status Register 1 (Address = 0x00) [reset = 0x00]
+The fault status register 1 is shown in 图 38 and described in 表 12.
+Register access type: Read only
+图 38. Fault Status Register 1
+10
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+0
+
+FAULT
+
+VDS_OCP
+
+GDF
+
+UVLO
+
+OTSD
+
+VDS_HA
+
+VDS_LA
+
+VDS_HB
+
+VDS_LB
+
+VDS_HC
+
+VDS_LC
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+表 12. Fault Status Register 1 Field Descriptions
+
+38
+
+Bit
+
+Field
+
+Type
+
+Default
+
+Description
+
+10
+
+FAULT
+
+R
+
+0b
+
+Logic OR of FAULT status registers. Mirrors nFAULT pin.
+
+9
+
+VDS_OCP
+
+R
+
+0b
+
+Indicates VDS monitor overcurrent fault condition
+
+8
+
+GDF
+
+R
+
+0b
+
+Indicates gate drive fault condition
+
+7
+
+UVLO
+
+R
+
+0b
+
+Indicates undervoltage lockout fault condition
+
+6
+
+OTSD
+
+R
+
+0b
+
+Indicates overtemperature shutdown
+
+5
+
+VDS_HA
+
+R
+
+0b
+
+Indicates VDS overcurrent fault on the A high-side MOSFET
+
+4
+
+VDS_LA
+
+R
+
+0b
+
+Indicates VDS overcurrent fault on the A low-side MOSFET
+
+3
+
+VDS_HB
+
+R
+
+0b
+
+Indicates VDS overcurrent fault on the B high-side MOSFET
+
+2
+
+VDS_LB
+
+R
+
+0b
+
+Indicates VDS overcurrent fault on the B low-side MOSFET
+
+1
+
+VDS_HC
+
+R
+
+0b
+
+Indicates VDS overcurrent fault on the C high-side MOSFET
+
+0
+
+VDS_LC
+
+R
+
+0b
+
+Indicates VDS overcurrent fault on the C low-side MOSFET
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7.6.1.2 Fault Status Register 2 (Address = 0x01) [reset = 0x00]
+The fault status register 2 is shown in 图 39 and described in 表 13.
+Register access type: Read only
+图 39. Fault Status Register 2
+10
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+0
+
+SA_OC
+
+SB_OC
+
+SC_OC
+
+OTW
+
+CPUV
+
+VGS_HA
+
+VGS_LA
+
+VGS_HB
+
+VGS_LB
+
+VGS_HC
+
+VGS_LC
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+R-0b
+
+表 13. Fault Status Register 2 Field Descriptions
+Bit
+
+Field
+
+Type
+
+Default
+
+Description
+
+10
+
+SA_OC
+
+R
+
+0b
+
+Indicates overcurrent on phase A sense amplifier (DRV8304S)
+
+9
+
+SB_OC
+
+R
+
+0b
+
+Indicates overcurrent on phase B sense amplifier (DRV8304S)
+
+8
+
+SC_OC
+
+R
+
+0b
+
+Indicates overcurrent on phase C sense amplifier (DRV8304S)
+
+7
+
+OTW
+
+R
+
+0b
+
+Indicates overtemperature warning
+
+6
+
+CPUV
+
+R
+
+0b
+
+Indicates charge pump undervoltage fault condition
+
+5
+
+VGS_HA
+
+R
+
+0b
+
+Indicates gate drive fault on the A high-side MOSFET
+
+4
+
+VGS_LA
+
+R
+
+0b
+
+Indicates gate drive fault on the A low-side MOSFET
+
+3
+
+VGS_HB
+
+R
+
+0b
+
+Indicates gate drive fault on the B high-side MOSFET
+
+2
+
+VGS_LB
+
+R
+
+0b
+
+Indicates gate drive fault on the B low-side MOSFET
+
+1
+
+VGS_HC
+
+R
+
+0b
+
+Indicates gate drive fault on the C high-side MOSFET
+
+0
+
+VGS_LC
+
+R
+
+0b
+
+Indicates gate drive fault on the C low-side MOSFET
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+39
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.6.2 Control Registers (DRV8304S Only)
+The control registers are used to configure the device. The control registers are read and write capable
+Complex bit access types are encoded to fit into small table cells. 表 14 shows the codes that are used for
+access types in this section.
+表 14. Control Registers Access Type Codes
+Access Type
+
+Code
+
+Description
+
+R
+
+Read
+
+W
+
+Write
+
+Read Type
+R
+Write Type
+W
+
+Reset or Default Value
+-n
+
+Value after reset or the default
+value
+
+7.6.2.1 Driver Control Register (Address = 0x02) [reset = 0x00]
+The driver control register is shown in 图 40 and described in 表 15.
+Register access type: Read/Write
+图 40. Driver Control Register
+10
+
+9
+
+8
+
+7
+
+Reserved
+
+DIS
+_CPUV
+
+DIS
+_GDF
+
+OTW
+_REP
+
+R/W-0b
+
+R/W-0b
+
+R/W-0b
+
+R/W-0b
+
+6
+
+5
+
+4
+
+3
+
+PWM_MODE
+
+1PWM
+_COM
+
+1PWM
+_DIR
+
+R/W-00b
+
+R/W-0b
+
+R/W-0b
+
+2
+
+1
+
+0
+
+COAST
+
+BRAKE
+
+CLR
+_FLT
+
+R/W-0b
+
+R/W-0b
+
+R/W-0b
+
+表 15. Driver Control Field Descriptions
+Bit
+
+Field
+
+Type
+
+Default
+
+Description
+
+10
+
+Reserved
+
+R/W
+
+0b
+
+Reserved
+
+9
+
+DIS_CPUV
+
+R/W
+
+0b
+
+0b = Charge-pump undervoltage lockout fault is enabled
+
+8
+
+DIS_GDF
+
+R/W
+
+0b
+
+7
+
+OTW_REP
+
+R/W
+
+0b
+
+6-5
+
+PWM_MODE
+
+R/W
+
+00b
+
+1b = Charge-pump undervoltage lockout fault is disabled
+0b = Gate drive fault is enabled
+1b = Gate drive fault is disabled
+0b = OTW is not reported on nFAULT or the FAULT bit
+1b = OTW is reported on nFAULT and the FAULT bit
+00b = 6x PWM Mode
+01b = 3x PWM mode
+10b = 1x PWM mode
+11b = Independent PWM mode
+4
+
+1PWM_COM
+
+R/W
+
+0b
+
+0b = 1x PWM mode uses synchronous rectification
+1b = 1x PWM mode uses asynchronous rectification (diode
+freewheeling)
+
+40
+
+3
+
+1PWM_DIR
+
+R/W
+
+0b
+
+In 1x PWM mode this bit is ORed with the INHC (DIR) input
+
+2
+
+COAST
+
+R/W
+
+0b
+
+Write a 1b to this bit to put all MOSFETs in the Hi-Z state
+
+1
+
+BRAKE
+
+R/W
+
+0b
+
+Write a 1b to this bit to turn on all three low-side MOSFETs in 1x
+PWM mode.
+This bit is ORed with the INLC (BRAKE) input.
+
+0
+
+CLR_FLT
+
+R/W
+
+0b
+
+Write a 1b to this bit to clear latched fault bits.
+This bit automatically resets after being written.
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7.6.2.2 Gate Drive HS Register (Address = 0x03) [reset = 0x377]
+The gate drive HS register is shown in 图 41 and described in 表 16.
+Register access type: Read/Write
+图 41. Gate Drive HS Register
+10
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+LOCK
+
+Reserved
+
+IDRIVEP_HS
+
+Reserved
+
+IDRIVEN_HS
+
+R/W-011b
+
+R/W-0b
+
+R/W-111b
+
+R/W-0b
+
+R/W-111b
+
+0
+
+表 16. Gate Drive HS Field Descriptions
+Bit
+
+Field
+
+Type
+
+Default
+
+Description
+
+10-8
+
+LOCK
+
+R/W
+
+011b
+
+Write 110b to lock the settings by ignoring further register writes
+except to these bits and address 0x02h bits 0-2.
+Writing any sequence other than 110b has no effect when
+unlocked.
+Write 011b to this register to unlock all registers.
+Writing any sequence other than 011b has no effect when
+locked.
+
+7
+
+Reserved
+
+R/W
+
+0b
+
+Reserved
+
+6-4
+
+IDRIVEP_HS
+
+R/W
+
+111b
+
+000b = 15 mA
+001b = 15 mA
+010b = 45 mA
+011b = 60 mA
+100b = 90 mA
+101b = 105 mA
+110b = 135 mA
+111b = 150 mA
+
+3
+
+Reserved
+
+R/W
+
+0b
+
+Reserved
+
+2-0
+
+IDRIVEN_HS
+
+R/W
+
+111b
+
+000b = 30 mA
+001b = 30 mA
+010b = 90 mA
+011b = 120 mA
+100b = 180 mA
+101b = 210 mA
+110b = 270 mA
+111b = 300 mA
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+41
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.6.2.3 Gate Drive LS Register (Address = 0x04) [reset = 0x777]
+The gate drive LS register is shown in 图 42 and described in 表 17.
+Register access type: Read/Write
+图 42. Gate Drive LS Register
+10
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+CBC
+
+TDRIVE
+
+Reserved
+
+IDRIVEP_LS
+
+Reserved
+
+IDRIVEN_LS
+
+R/W-1b
+
+R/W-11b
+
+R/W-0b
+
+R/W-111b
+
+R/W-0b
+
+R/W-111b
+
+0
+
+表 17. Gate Drive LS Register Field Descriptions
+Bit
+
+Field
+
+Type
+
+Default
+
+Description
+
+10
+
+CBC
+
+R/W
+
+1b
+
+In retry OCP_MODE, for both VDS_OCP and SEN_OCP, the
+fault is automatically cleared when a PWM input is given
+
+9-8
+
+TDRIVE
+
+R/W
+
+11b
+
+00b = 500-ns peak gate-current drive time
+01b = 1000-ns peak gate-current drive time
+10b = 2000-ns peak gate-current drive time
+11b = 4000-ns peak gate-current drive time
+
+7
+
+Reserved
+
+R/W
+
+0b
+
+Reserved
+
+6-4
+
+IDRIVEP_LS
+
+R/W
+
+111b
+
+000b = 15 mA
+001b = 15 mA
+010b = 45 mA
+011b = 60 mA
+100b = 90 mA
+101b = 105 mA
+110b = 135 mA
+111b = 150 mA
+
+3
+
+Reserved
+
+R/W
+
+0b
+
+Reserved
+
+2-0
+
+IDRIVEN_LS
+
+R/W
+
+111b
+
+000b = 30 mA
+001b = 30 mA
+010b = 90 mA
+011b = 120 mA
+100b = 180 mA
+101b = 210 mA
+110b = 270 mA
+111b = 300 mA
+
+42
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+7.6.2.4 OCP Control Register (Address = 0x05) [reset = 0x145]
+The OCP control register is shown in 图 43 and described in 表 18.
+Register access type: Read/Write
+图 43. OCP Control Register
+10
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+TRETRY
+
+DEAD_TIME
+
+OCP_MODE
+
+OCP_ACT
+
+Reserved
+
+VDS_LVL
+
+R/W-0b
+
+R/W-01b
+
+R/W-01b
+
+R/W-0b
+
+R/W-00b
+
+R/W-101b
+
+0
+
+表 18. OCP Control Field Descriptions
+Bit
+
+Field
+
+Type
+
+Default
+
+Description
+
+10
+
+TRETRY
+
+R/W
+
+0b
+
+0b = VDS_OCP and SEN_OCP retry time is 4 ms
+
+9-8
+
+DEAD_TIME
+
+R/W
+
+01b
+
+1b = VDS_OCP and SEN_OCP retry time is 50 µs
+00b = 50-ns dead time
+01b = 100-ns dead time
+10b = 200-ns dead time
+11b = 400-ns dead time
+7-6
+
+OCP_MODE
+
+R/W
+
+01b
+
+00b = Overcurrent causes a latched fault
+01b = Overcurrent causes an automatic retrying fault
+10b = Overcurrent is report only but no action is taken
+11b = Overcurrent is not reported and no action is taken
+
+5
+
+OCP_ACT
+
+R/W
+
+0b
+
+0b = All three half-bridges are shutdown in response to
+VDS_OCP and SEN_OCP
+1b = Associated half-bridge is shutdown in response to
+VDS_OCP and SEN_OCP
+
+4-3
+
+Reserved
+
+R/W
+
+00b
+
+Reserved
+
+2-0
+
+VDS_LVL
+
+R/W
+
+101b
+
+000b = 0.15 V
+001b = 0.24 V
+010b = 0.40V
+011b = 0.51 V
+100b = 0.60 V
+101b = 0.90 V
+110b = 1.8 V
+111b = VDS Disabled
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+43
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+7.6.2.5 CSA Control Register (Address = 0x06) [reset = 0x283]
+The CSA control register is shown in 图 44 and described in 表 19.
+Register access type: Read/Write
+图 44. CSA Control Register
+10
+
+9
+
+8
+
+Reserved
+
+VREF
+_DIV
+
+LS
+_REF
+
+R/W-0b
+
+R/W-1b
+
+R/W-0b
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+CSA_GAIN
+
+DIS
+_SEN
+
+SPI
+_CAL
+
+AUTO
+CAL
+
+1
+
+0
+
+Reserved
+
+SEN_LVL
+
+R/W-10b
+
+R/W-0b
+
+R/W-0b
+
+R/W-0b
+
+R/W-0b
+
+R/W-11b
+
+表 19. CSA Control Field Descriptions
+Bit
+
+Field
+
+Type
+
+Default
+
+Description
+
+10
+
+Reserved
+
+R/W
+
+0b
+
+Reserved
+
+9
+
+VREF_DIV
+
+R/W
+
+1b
+
+0b = Sense amplifier reference voltage is VREF (unidirectional
+mode)
+1b = Sense amplifier reference voltage is VREF divided by 2
+
+8
+
+LS_REF
+
+R/W
+
+0b
+
+0b = VDS_OCP for the low-side MOSFET is measured
+across SHx to SPx
+1b = VDS_OCP for the low-side MOSFET is measured across
+SHx to SNx
+
+7-6
+
+CSA_GAIN
+
+R/W
+
+10b
+
+00b = 5-V/V shunt amplifier gain
+01b = 10-V/V shunt amplifier gain
+10b = 20-V/V shunt amplifier gain
+11b = 40-V/V shunt amplifier gain
+
+5
+
+DIS_SEN
+
+R/W
+
+0b
+
+4
+
+SPI_CAL
+
+R/W
+
+0b
+
+3
+
+AUTOCAL
+
+R/W
+
+0b
+
+0b = Sense overcurrent fault is enabled
+1b = Sense overcurrent fault is disabled
+0b = Disable sense amplifier CAL function
+1b = Enable sense amplifier CAL function
+0b = AUTOCAL operation remains disabled in run mode
+1b = Perform AUTOCAL operation
+
+2
+
+Reserved
+
+R/W
+
+0b
+
+Reserved
+
+1-0
+
+SEN_LVL
+
+R/W
+
+11b
+
+00b = Sense OCP 0.25 V
+01b = Sense OCP 0.5 V
+10b = Sense OCP 0.75 V
+11b = Sense OCP 1 V
+
+44
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+8 Application and Implementation
+注
+Information in the following applications sections is not part of the TI component
+specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+responsible for determining suitability of components for their purposes. Customers should
+validate and test their design implementation to confirm system functionality.
+
+8.1 Application Information
+The DRV8304 device is primarily used in 3-phase brushless DC motor control applications. The design
+procedures in the Typical Application section highlight how to use and configure the DRV8304 device.
+
+8.2 Typical Application
+8.2.1 Primary Application
+In this application the amplifiers are configured to sense bi-directional currents in each of the three half-bridge
+legs.
+Power and Charge Pump
+3.3 V, 30 mA
+1 µF
+
+DVDD
+AGND
+
+VM
+GND
+
+VM
+Three Phase Inverter
+GND
+
+VM
+
+Gate Driver
+VDD
+
+GND
+
+Power
+
+GP-O
+GP-O
+GP-I
+
+GPIO
+
+PWM1, PWW2
+PWM
+PWM3, PWM4
+Module
+PWM5, PWM6
+
+SPI SCLK
+SDI
+(DAC and External
+Resistor for H/W I/F) SDO
+nSCS
+Analog to Digital
+Converters
+
+3x ADC
+
+GHB
+SHB
+GLB
+
+INHA, INLA
+INHB,INLB
+INHC, INLC
+
+SCLK
+SDI
+SDO
+nSCS
+SOA
+SOB
+SOC
+
+Microcontroller
+
+BLDC Motor
+
+GHA
+SHA
+GLA
+
+ENABLE
+CAL
+nFAULT
+
+GHC
+SHC
+GLC
+
+MODE
+IDRIVE
+VDS
+GAIN
+
+Smart Gate Drive
+150 mA, 300 mA
+(Fully Protected)
+
+SPA, SNA
+SPV, SNB
+SPC, SNC
+DRV8304
+
+图 45. Primary Application Schematic
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+45
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Typical Application (接下页)
+8.2.1.1 Design Requirements
+表 20 lists the example input parameters for the system design.
+表 20. Design Parameters
+EXAMPLE DESIGN PARAMETER
+Nominal supply voltage
+Supply voltage range
+
+REFERENCE
+VVM
+
+MOSFET part number
+
+EXAMPLE VALUE
+24 V
+8 V to 38 V
+CSD18514Q5A
+
+MOSFET total gate charge
+
+Qg
+
+MOSFET gate to drain charge
+
+Qgd
+
+29 nC (typical) at VVGS = 10 V
+5 nC (typical)
+
+Target output rise time
+
+tr
+
+100 to 300 ns
+
+Target output fall time
+
+tf
+
+50 to 150 ns
+
+PWM frequency
+
+ƒPWM
+
+45 kHz
+
+Maximum motor current
+
+Imax
+
+50 A
+
+Winding sense current range
+
+ISENSE
+
+–20 A to +20 A
+
+Motor RMS current
+
+IRMS
+
+14.14 A
+
+Sense resistor power rating
+
+PSENSE
+
+2W
+
+System ambient temperature
+
+TA
+
+–20°C to +105°C
+
+8.2.1.2 Detailed Design Procedure
+8.2.1.2.1 External MOSFET Support
+
+The DRV8304 MOSFET support is based on the charge-pump capacity and output PWM switching frequency.
+For a quick calculation of MOSFET driving capacity, use 公式 5 and 公式 6 for three phase BLDC motor
+applications.
+Trapezoidal 120° Commutation:IVCP > Qg ×ƒPWM
+Sinusoidal 180° Commutation:IVCP > 3 × Qg ×ƒPWM
+
+(5)
+
+where
+•
+•
+•
+
+ƒPWM is the maximum desired PWM switching frequency.
+IVCP is the charge pump capacity, which depends on the VM pin voltage.
+The multiplier based on the commutation control method, may vary based on implementation.
+
+(6)
+
+8.2.1.2.1.1 Example
+
+If a system at VVM = 8 V (IVCP = 15 mA) uses a maximum PWM switching frequency of 45 kHz, then the charge
+pump can support MOSFETs using trapezoidal commutation with a Qg < 333 nC, and MOSFETs with sinusoidal
+commutation Qg < 111 nC. When the VM voltage (VVM) is 8 V, the maximum DRV8304 gate-drive voltage (VGSH)
+is 7.3 V. Therefore, at 7.3-V gate drive, the target FET (part number CSD18514Q5A) only has a gate charge of
+approximately 22 nC. Therefore, with this FET, the system can have an adequate margin.
+8.2.1.2.2 IDRIVE Configuration
+
+The gate drive current strength, IDRIVE, is selected based on the gate-to-drain charge of the external MOSFETs
+and the target rise and fall times at the outputs. If IDRIVE is selected to be too low for a given MOSFET, then the
+MOSFET may not turn on completely within the tDRIVE time and a gate drive fault may be asserted. Additionally,
+slow rise and fall times will lead to higher switching power losses. TI recommends adjusting these values in
+system with the required external MOSFETs and motor to determine the best possible setting for any application.
+The IDRIVEP and IDRIVEN current for both the low-side and high-side MOSFETs are independently adjustable on
+the SPI device through the SPI registers. On hardware interface devices, both source and sink settings are
+selected simultaneously on the IDRIVE pin.
+For MOSFETs with a known gate-to-drain charge (Qgd), desired rise time (tr), and a desired fall time (tf), use 公式
+7 and 公式 8 to calculate the value of IDRIVEP and IDRIVEN (respectively).
+46
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+IDRIVEP !
+
+IDRIVEN !
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+Qgd
+tr
+
+(7)
+
+Qgd
+tf
+
+(8)
+
+8.2.1.2.2.1 Example
+
+Use 公式 9 and 公式 10 to calculate the value of IDRIVEP1 and IDRIVEP2 (respectively) for a gate to drain charge of
+5 nC and a rise time from 100 to 300 ns.
+5 nC
+IDRIVEP1
+50 mA
+100 ns
+(9)
+5 nC
+IDRIVEP2
+16.67 mA
+300 ns
+(10)
+Select a value for IDRIVEP that is between 16.67 mA and 50 mA. For this example, the value of IDRIVEP was
+selected as 45-mA source.
+Use 公式 11 and 公式 12 to calculate the value of IDRIVEN1 and IDRIVEN2 (respectively) for a gate to drain charge of
+5 nC and a fall time from 50 to 150 ns.
+5 nC
+IDRIVEN1
+100 mA
+50 ns
+(11)
+5 nC
+IDRIVEN2
+33.33 mA
+150 ns
+(12)
+Select a value for IDRIVEN that is between 33.33 mA and 100 mA. For this example, the value of IDRIVEN was
+selected as 90-mA sink.
+8.2.1.2.3 VDS Overcurrent Monitor Configuration
+
+The VDS monitors are configured based on the worst-case motor current and the RDS(on) of the external
+MOSFETs as shown in 公式 13.
+VDS _ OCP ! Imax u RDS(on)max
+(13)
+8.2.1.2.3.1 Example
+
+The goal of this example is to set the VDS monitor to trip at a current greater than 50 A. According to the
+CSD18514Q5A 40 V N-Channel NexFET™ Power MOSFET data sheet, the RDS(on) value is 1.8 times higher at
+175°C, and the maximum RDS(on) value at a VGS of 10 V is 4.9 mΩ. From these values, the approximate worstcase value of RDS(on) is 1.8 × 4.9 mΩ = 8.82 mΩ.
+Using 公式 13 with a value of 8.82 mΩ for RDS(on) and a worst-case motor current of 50 A, 公式 14 shows the
+calculated the value of the VDS monitors.
+VDS _ OCP ! 50 A u 8.82 m:
+
+VDS _ OCP ! 0.441 V
+
+(14)
+
+For this example, the value of VDS_OCP was selected as 0.51 V.
+The deglitch time for the VDS overcurrent monitor is fixed at 4.5 µs.
+8.2.1.2.4 Sense-Amplifier Bidirectional Configuration
+
+The sense-amplifier gain and the sense-resistor value on the DRV8304 device are selected based on the target
+current range, VREF voltage supply, sense-resistor power rating, and operating temperature range. In
+bidirectional operation of the sense amplifier, the dynamic range at the output is approximately calculated as
+shown in 公式 15.
+VVREF
+VO
+VVREF 0.25 V
+2
+(15)
+版权 © 2017–2018, Texas Instruments Incorporated
+
+47
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+Use 公式 16 to calculate the approximate value of the selected sense resistor with VO calculated using 公式 15.
+VO
+R
+PSENSE ! IRMS2 u R
+AV u I
+(16)
+From 公式 15 and 公式 16, select a target gain setting based on the power rating of the target-sense resistor.
+8.2.1.2.4.1 Example
+
+In this system example, the value of the VREF voltage is 3.3 V with a sense current from –20 to +20 A. The
+linear range of the SOx output is 0.25 V to VVREF – 0.25 V (from the VLINEAR specification). The differential range
+of the sense amplifier input is –0.3 to +0.3 V (VDIFF).
+3.3 V
+VO
+3.3 V 0.25 V
+1.4 V
+(17)
+2
+1.4 V
+R
+2 W ! 14.142 u R o R 10 m:
+A V u 20 A
+(18)
+
+10 m: !
+
+1.4 V
+o AV ! 7
+A V u 20 A
+
+(19)
+
+Therefore, the gain setting must be selected as 10 V/V or 20 V/V and the value of the sense resistor must be
+less than 10 mΩ to meet the power requirement for the sense resistor. For this example, the gain setting was
+selected as 10 V/V. The value of the resistor and worst case current can be verified that R < 10 mΩ and Imax =
+20 A does not violate the differential range specification of the sense amplifier input (VSPxD).
+I
+SP
+SO
+
+R
+
+AV
+SN
+
+SO
+VREF
+SP ± SN
+VVREF ± 0.25 V
+
+±0.3 V
+±I × R
+
+VSO(range±)
+
+VSO(off)max
+VVREF / 2
+
+VOFF,
+VDRIFT
+
+0V
+
+VSO(off)min
+
+VSO(range+)
+I×R
+0.25 V
+
+0.3 V
+
+0V
+
+图 46. Sense Amplifier Configuration
+
+48
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+8.2.1.3 Application Curves
+
+图 47. IDRIVE Maximum Setting
+
+图 48. IDRIVE Minimum Setting
+
+图 49. Gate Drive 80% Duty Cycle
+
+图 50. Gate Drive 20% Duty Cycle
+
+图 51. Motor Operation at 80% PWM Duty
+
+图 52. Motor Operation at 20% PWM Duty
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+49
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+50
+
+www.ti.com.cn
+
+图 53. Motor Starting With PWM Duty Change
+
+图 54. Motor Starting With Supply Voltage Change
+
+图 55. Motor Performance at Speed Change
+
+图 56. Motor Performance at Load Change
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+8.2.2 Alternative Application
+In this application, a single-sense amplifier is used in unidirectional mode for a summing current-sense scheme
+often used in trapezoidal or hall-based BLDC commutation control.
+Power and Charge Pump
+
+3.3 V, 30 mA
+
+VM
+GND
+
+DVDD
+AGND
+
+1 …F
+
+VM
+Three Phase Inverter
+GND
+
+VM
+
+Gate Driver
+VDD
+
+GND
+
+GPIO
+
+PWM
+Module
+
+ENABLE
+CAL
+nFAULT
+
+GP-O
+GP-O
+GP-I
+
+PWM1, PWW2
+PWM3, PWM4
+PWM5, PWM6
+
+SPI
+(DAC and External
+Resistor for H/W I/F)
+
+Analog-to-Digital
+Converters 1x ADC
+
+GHB
+SHB
+GLB
+
+INHA, INLA
+INHB,INLB
+INHC, INLC
+
+SCLK
+SDI
+SDO
+nSCS
+
+SCLK
+SDI
+SDO
+nSCS
+SOA
+SOB
+SOC
+
+CSA Output
+
+Microcontroller
+
+BLDC Motor
+
+GHA
+SHA
+GLA
+
+Power
+
+GHC
+SHC
+GLC
+Smart Gate Drive
+150 mA, 300 mA
+(Fully Protected)
+
+MODE
+IDRIVE
+VDS
+GAIN
+SPA, SNA
+SPV, SNB
+SPC, SNC
+
+Current Sense
+
+Single Channel
+
+DRV8304
+
+图 57. Alternative Application Schematic
+8.2.2.1 Design Requirements
+表 21 lists the example design input parameters for system design.
+表 21. Design Parameters
+EXAMPLE DESIGN PARAMETER
+
+REFERENCE
+
+EXAMPLE VALUE
+
+ADC reference voltage
+
+VVREF
+
+3.3 V
+
+Sensed current
+
+ISENSE
+
+0 to 20 A
+
+Motor RMS current
+
+IRMS
+
+14.14 A
+
+Sense-resistor power rating
+
+PSENSE
+
+3W
+
+System ambient temperature
+
+TA
+
+–20°C to +125°C
+
+8.2.2.2 Detailed Design Procedure
+8.2.2.2.1 Sense-Amplifier Unidirectional Configuration
+
+The sense amplifiers are configured to be unidirectional through the registers on the SPI device by writing a 0b to
+the VREF_DIV bit.
+The sense-amplifier gain and sense resistor values are selected based on the target current range, VREF,
+sense-resistor power rating, and operating temperature range. In unidirectional operation of the sense amplifier,
+use 公式 20 to calculate the approximate value of the dynamic range at the output.
+VO
+VVREF 0.25 V 0.25 V VVREF 0.5 V
+(20)
+Use 公式 21 to calculate the approximate value of the selected sense resistor.
+VO
+R
+PSENSE ! IRMS2 u R
+AV u I
+where
+版权 © 2017–2018, Texas Instruments Incorporated
+
+51
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+•
+
+VO
+
+VVREF
+
+www.ti.com.cn
+
+0.5 V
+
+(21)
+
+From 公式 20 and 公式 21, select a target gain setting based on the power rating of a target sense resistor.
+8.2.2.2.1.1 Example
+
+In this system example, the value of VREF is 3.3 V with a sense current from 0 to 40 A. The linear range of the
+SOx output for the DRV8304 device is 0.25 V to VVREF – 0.25 V (from the VLINEAR specification). The differential
+range of the sense-amplifier input is –0.3 to +0.3 V (VDIFF).
+VO 3.3 V 0.5 V 2.8 V
+(22)
+
+R
+
+2.8 V
+A V u 20 A
+
+15 m: !
+
+3 W ! 14.142 u R o R 15 m:
+(23)
+
+2.8 V
+o A V ! 9.3
+A V u 20 A
+
+(24)
+
+Therefore, the gain setting must be selected as 10 V/V or 20 V/V and the value of the sense resistor must be
+less than 15 mΩ to meet the power requirement for the sense resistor. For this example, the gain setting was
+selected as 20 V/V. The value of the resistor and worst-case current can be verified that R < 15 mΩ and Imax =
+20 A does not violate the differential range specification of the sense amplifier input (VSPxD).
+I
+SP
+SO
+
+R
+
+AV
+SN
+
+SO
+VREF
+VVREF ± 0.25 V
+VSO(off)max
+VOFF,
+VVREF ± 0.3 V
+
+SP ± SN
+
+VDRIFT
+
+0V
+
+VSO(off)min
+
+VSO(range)
+
+I×R
+0.3 V
+
+0.25 V
+0V
+
+图 58. Sense Amplifier Configuration
+
+52
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+9 Power Supply Recommendations
+The DRV8304 device is designed to operate from an input voltage supply (VM) range from 6 V to 38 V. A 0.1-µF
+ceramic capacitor rated for VM must be placed as close to the device as possible. In addition, a bulk capacitor
+must be included on the VM pin but can be shared with the bulk bypass capacitance for the external power
+MOSFETs. Additional bulk capacitance is required to bypass the external half-bridge MOSFETs and should be
+sized according to the application requirements.
+
+9.1 Bulk Capacitance Sizing
+Having appropriate local bulk capacitance is an important factor in motor drive system design. It is generally
+beneficial to have more bulk capacitance, while the disadvantages are increased cost and physical size. The
+amount of local capacitance depends on a variety of factors including:
+• The highest current required by the motor system
+• The power supply's type, capacitance, and ability to source current
+• The amount of parasitic inductance between the power supply and motor system
+• The acceptable supply voltage ripple
+• Type of motor (brushed DC, brushless DC, stepper)
+• The motor startup and braking methods
+The inductance between the power supply and motor drive system will limit the rate current can change from the
+power supply. If the local bulk capacitance is too small, the system will respond to excessive current demands or
+dumps from the motor with a change in voltage. When adequate bulk capacitance is used, the motor voltage
+remains stable and high current can be quickly supplied.
+The data sheet provides a recommended minimum value, but system level testing is required to determine the
+appropriate sized bulk capacitor.
+Parasitic Wire
+Inductance
+Motor Drive System
+
+Power Supply
+
+VM
+
++
+
++
+
+Motor Driver
+±
+GND
+
+Local
+Bulk Capacitor
+
+IC Bypass
+Capacitor
+
+图 59. Motor Drive Supply Parasitics Example
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+53
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+10 Layout
+10.1 Layout Guidelines
+Bypass the VM pin to the PGND pin using a low-ESR ceramic bypass capacitor with a recommended value of
+0.1 µF. Place this capacitor as close to the VM pin as possible with a thick trace or ground plane connected to
+the PGND pin. Additionally, bypass the VM pin using a bulk capacitor rated for VM. This component can be
+electrolytic. This capacitance must be at least 10 µF.
+Additional bulk capacitance is required to bypass the high current path on the external MOSFETs. This bulk
+capacitance should be placed such that it minimizes the length of any high current paths through the external
+MOSFETs. The connecting metal traces should be as wide as possible, with numerous vias connecting PCB
+layers. These practices minimize inductance and allow the bulk capacitor to deliver high current.
+Place a low-ESR ceramic capacitor between the CPL and CPH pins. This capacitor should be 22 nF, rated for
+VM, and be of type X5R or X7R. Additionally, place a low-ESR ceramic capacitor between the VCP and VM pins.
+This capacitor should be 1 µF, rated for 16 V, and be of type X5R or X7R.
+Bypass the DVDD pin to the AGND pin with a 1-µF low-ESR ceramic capacitor rated for 6.3 V and of type X5R
+or X7R. Place this capacitor as close to the pin as possible and minimize the path from the capacitor to the
+AGND pin.
+The VDRAIN pin can be shorted directly to the VM pin. However, if a significant distance is between the device
+and the external MOSFETs, use a dedicated trace to connect to the common point of the drains of the high-side
+external MOSFETs. Do not connect the SNx pins directly to the PGND pin. Instead, use dedicated traces to
+connect these pins to the sources of the low-side external MOSFETs. These recommendations allow for more
+accurate VDS sensing of the external MOSFETs for overcurrent detection.
+Minimize the loop length for the high-side and low-side gate drivers. The high-side loop is from the GHx pin of
+the device to the high-side power MOSFET gate, then follows the high-side MOSFET source back to the SHx
+pin. The low-side loop is from the GLx pin of the device to the low-side power MOSFET gate, then follows the
+low-side MOSFET source back to the PGND pin.
+
+54
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+SOA
+SOB
+SOC
+
+G
+N
+D
+
+S
+
+D
+
+S
+
+D
+
+S
+
+D
+
+G
+
+D
+
+D
+
+G
+
+D
+
+S
+
+D
+
+S
+
+D
+
+S
+
+D
+
+G
+
+D
+
+S
+
+D
+
+S
+
+D
+
+S
+
+S
+
+D
+
+S
+
+D
+
+OUTC
+
+CAL
+ENABLE
+nSCS
+SCLK
+SDI
+SDO
+nFAULT
+VREF
+
+10.2 Layout Example
+
+21 SOC
+
+23 SOA
+
+22 SOB
+
+25 nFAULT
+
+24 VREF
+
+27 SDI
+
+26 SDO
+
+29 nSCS
+
+18 GLC
+
+GND
+
+GND
+
+17 SHC
+
+DRV8304RHA
+
+16 GHC
+15 GHB
+
+Thermal Pad
+
+14 SHB
+13 GLB
+12 SPB
+11 SNB
+
+S
+
+D
+
+G
+
+D
+
+S
+
+D
+
+S
+
+D
+
+OUTB
+
+20 SNC
+
+GND
+
+GND
+GND
+
+S
+
+D
+
+G
+
+D
+
+D
+
+G
+
+D
+
+S
+
+D
+
+S
+
+D
+
+S
+
+OUTA
+
+DVDD
+INHA
+INLA
+INHB
+INLB
+INHC
+INLC
+
+GND
+
+19 SPC
+
+CPL 1
+CPH 2
+VCP 3
+VM 4
+VDRAIN 5
+GHA 6
+SHA 7
+GLA 8
+SPA 9
+SNA 10
+
+CAL 31
+AGND 32
+DVDD 33
+INHA 34
+INLA 35
+INHB 36
+INLB 37
+INHC 38
+INLC 39
+PGND 40
+
+28 SCLK
+
+30 ENABLE
+
+GND
+
+图 60. Layout Example
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+55
+
+DRV8304
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+www.ti.com.cn
+
+11 器件和文档支持
+11.1 器件支持
+请参阅以下 TI 设计以获取开发支持：
+效率大于 95% 且适用于无刷直流伺服驱动器的 10.8V/30W 4.3cm2 功率级参考设计 TI 设计
+11.1.1 器件命名规则
+下图显示了说明完整器件名称的图例：
+DRV830
+
+Prefix
+DRV83 ± Brushless-DC three-phase
+
+Series
+4 ± 40 V device
+
+(4)
+
+(H) (RHA) (R)
+
+Tape and Reel
+R ± Tape and Reel (higher SPQ)
+T ± Small Tape and Reel
+Package
+RHA ± 6 × 6 × 0.9 mm QFN
+Interface
+S ± SPI
+H ± Hardware
+
+11.2 文档支持
+11.2.1 相关文档
+请参阅如下相关文档：
+• 德州仪器 (TI)，《AN-1149 开关电源布局指南》应用报告
+• 德州仪器 (TI)，《BOOSTXL-DRV8304H EVM 用户指南》用户指南
+• 德州仪器 (TI)，《BOOSTXL-DRV8304x EVM GUI 用户指南》用户指南
+• 德州仪器 (TI)，《BOOSTXL-DRV8304x EVM 传感器式软件用户指南》用户指南
+• 德州仪器 (TI)，《BOOSTXL-DRV8304x EVM 无传感器软件用户指南》用户指南
+• 德州仪器 (TI)，《轻松实现无刷直流电机 - 传感器式电机控制》TI 技术手册
+• 德州仪器 (TI)，《使用 TI 智能栅极驱动器轻松实现无刷直流 (BLDC) 电机的场定向控制 (FOC)》TI 技术手册
+• 德州仪器 (TI)，《采用 BLDC 电机的高效真空吸尘器硬件设计注意事项》应用报告
+• 德州仪器 (TI)，《采用 BLDC 电机的电动自行车硬件设计注意事项》应用报告
+• 德州仪器 (TI)，《工业电机驱动解决方案指南》
+• 德州仪器 (TI)，《开关电源布局指南》应用报告
+• 德州仪器 (TI)，《采用 TI 智能栅极驱动技术进行电机驱动保护》TI 技术手册
+• 德州仪器 (TI)，《QFN/SON PCB 连接》应用报告
+• 德州仪器 (TI)，《采用 TI 智能栅极驱动技术缩减电机驱动 BOM 和 PCB 面积》TI 技术手册
+• 德州仪器 (TI)，《采用 TI 智能栅极驱动技术降低 EMI 辐射发射》TI 技术手册
+• 德州仪器 (TI)，《采用 MSP430™ 的传感器式三相 BLDC 电机控制》应用报告
+• 德州仪器 (TI)，《TI 电机栅极驱动器的 IDRIVE 和 TDRIVE 认知》应用报告
+
+11.3 接收文档更新通知
+要接收文档更新通知，请导航至 TI.com.cn 上的器件产品文件夹。单击右上角的通知我 进行注册，即可每周接收产
+品信息更改摘要。有关更改的详细信息，请查看任何已修订文档中包含的修订历史记录。
+
+11.4 社区资源
+下列链接提供到 TI 社区资源的连接。链接的内容由各个分销商“按照原样”提供。这些内容并不构成 TI 技术规范，
+并且不一定反映 TI 的观点；请参阅 TI 的 《使用条款》。
+TI E2E™ 在线社区 TI 的工程师对工程师 (E2E) 社区。此社区的创建目的在于促进工程师之间的协作。在
+56
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+DRV8304
+www.ti.com.cn
+
+ZHCSI91B – NOVEMBER 2017 – REVISED JULY 2018
+
+社区资源 (接下页)
+e2e.ti.com 中，您可以咨询问题、分享知识、拓展思路并与同行工程师一道帮助解决问题。
+设计支持
+
+TI 参考设计支持 可帮助您快速查找有帮助的 E2E 论坛、设计支持工具以及技术支持的联系信息。
+
+11.5 商标
+NexFET, MSP430, E2E are trademarks of Texas Instruments.
+All other trademarks are the property of their respective owners.
+
+11.6 静电放电警告
+ESD 可能会损坏该集成电路。德州仪器 (TI) 建议通过适当的预防措施处理所有集成电路。如果不遵守正确的处理措施和安装程序 , 可
+能会损坏集成电路。
+ESD 的损坏小至导致微小的性能降级 , 大至整个器件故障。 精密的集成电路可能更容易受到损坏 , 这是因为非常细微的参数更改都可
+能会导致器件与其发布的规格不相符。
+
+11.7 术语表
+SLYZ022 — TI 术语表。
+这份术语表列出并解释术语、缩写和定义。
+
+12 机械、封装和可订购信息
+以下页面包含机械、封装和可订购信息。这些信息是指定器件的最新可用数据。数据如有变更，恕不另行通知，且
+不会对此文档进行修订。如需获取此数据表的浏览器版本，请查阅左侧的导航栏。
+
+版权 © 2017–2018, Texas Instruments Incorporated
+
+57
+
+PACKAGE OPTION ADDENDUM
+
+www.ti.com
+
+6-Feb-2020
+
+PACKAGING INFORMATION
+Orderable Device
+
+Status
+(1)
+
+Package Type Package Pins Package
+Drawing
+Qty
+
+Eco Plan
+
+Lead/Ball Finish
+
+MSL Peak Temp
+
+(2)
+
+(6)
+
+(3)
+
+Op Temp (°C)
+
+Device Marking
+(4/5)
+
+DRV8304HRHAR
+
+ACTIVE
+
+VQFN
+
+RHA
+
+40
+
+2500
+
+Green (RoHS
+& no Sb/Br)
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 125
+
+DRV8304H
+
+DRV8304HRHAT
+
+ACTIVE
+
+VQFN
+
+RHA
+
+40
+
+250
+
+Green (RoHS
+& no Sb/Br)
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 125
+
+DRV8304H
+
+DRV8304SRHAR
+
+ACTIVE
+
+VQFN
+
+RHA
+
+40
+
+2500
+
+Green (RoHS
+& no Sb/Br)
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 125
+
+DRV8304S
+
+(1)
+
+The marketing status values are defined as follows:
+ACTIVE: Product device recommended for new designs.
+LIFEBUY: TI has announced that the device will be discontinued, and a lifetime-buy period is in effect.
+NRND: Not recommended for new designs. Device is in production to support existing customers, but TI does not recommend using this part in a new design.
+PREVIEW: Device has been announced but is not in production. Samples may or may not be available.
+OBSOLETE: TI has discontinued the production of the device.
+(2)
+
+RoHS: TI defines "RoHS" to mean semiconductor products that are compliant with the current EU RoHS requirements for all 10 RoHS substances, including the requirement that RoHS substance
+do not exceed 0.1% by weight in homogeneous materials. Where designed to be soldered at high temperatures, "RoHS" products are suitable for use in specified lead-free processes. TI may
+reference these types of products as "Pb-Free".
+RoHS Exempt: TI defines "RoHS Exempt" to mean products that contain lead but are compliant with EU RoHS pursuant to a specific EU RoHS exemption.
+Green: TI defines "Green" to mean the content of Chlorine (Cl) and Bromine (Br) based flame retardants meet JS709B low halogen requirements of <=1000ppm threshold. Antimony trioxide based
+flame retardants must also meet the <=1000ppm threshold requirement.
+(3)
+
+MSL, Peak Temp. - The Moisture Sensitivity Level rating according to the JEDEC industry standard classifications, and peak solder temperature.
+
+(4)
+
+There may be additional marking, which relates to the logo, the lot trace code information, or the environmental category on the device.
+
+(5)
+
+Multiple Device Markings will be inside parentheses. Only one Device Marking contained in parentheses and separated by a "~" will appear on a device. If a line is indented then it is a continuation
+of the previous line and the two combined represent the entire Device Marking for that device.
+(6)
+
+Lead/Ball Finish - Orderable Devices may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead/Ball Finish values may wrap to two lines if the finish
+value exceeds the maximum column width.
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information
+provided by third parties, and makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and
+continues to take reasonable steps to provide representative and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals.
+TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers and other limited information may not be available for release.
+
+Addendum-Page 1
+
+Samples
+
+PACKAGE OPTION ADDENDUM
+
+www.ti.com
+
+6-Feb-2020
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+Addendum-Page 2
+
+PACKAGE MATERIALS INFORMATION
+www.ti.com
+
+11-Oct-2019
+
+TAPE AND REEL INFORMATION
+
+*All dimensions are nominal
+
+Device
+
+Package Package Pins
+Type Drawing
+
+SPQ
+
+Reel
+Reel
+A0
+Diameter Width (mm)
+(mm) W1 (mm)
+
+B0
+(mm)
+
+K0
+(mm)
+
+P1
+(mm)
+
+W
+Pin1
+(mm) Quadrant
+
+DRV8304HRHAR
+
+VQFN
+
+RHA
+
+40
+
+2500
+
+330.0
+
+16.4
+
+6.3
+
+6.3
+
+1.1
+
+12.0
+
+16.0
+
+Q2
+
+DRV8304HRHAT
+
+VQFN
+
+RHA
+
+40
+
+250
+
+180.0
+
+DRV8304SRHAR
+
+VQFN
+
+RHA
+
+40
+
+2500
+
+330.0
+
+16.4
+
+6.3
+
+6.3
+
+1.1
+
+12.0
+
+16.0
+
+Q2
+
+16.4
+
+6.3
+
+6.3
+
+1.1
+
+12.0
+
+16.0
+
+Q2
+
+Pack Materials-Page 1
+
+PACKAGE MATERIALS INFORMATION
+www.ti.com
+
+11-Oct-2019
+
+*All dimensions are nominal
+
+Device
+
+Package Type
+
+Package Drawing
+
+Pins
+
+SPQ
+
+Length (mm)
+
+Width (mm)
+
+Height (mm)
+
+DRV8304HRHAR
+
+VQFN
+
+RHA
+
+40
+
+2500
+
+367.0
+
+367.0
+
+35.0
+
+DRV8304HRHAT
+
+VQFN
+
+RHA
+
+40
+
+250
+
+210.0
+
+185.0
+
+35.0
+
+DRV8304SRHAR
+
+VQFN
+
+RHA
+
+40
+
+2500
+
+367.0
+
+367.0
+
+35.0
+
+Pack Materials-Page 2
+
+重要声明和免责声明
+TI 均以“原样”提供技术性及可靠性数据（包括数据表）、设计资源（包括参考设计）、应用或其他设计建议、网络工具、安全信息和其他资
+源，不保证其中不含任何瑕疵，且不做任何明示或暗示的担保，包括但不限于对适销性、适合某特定用途或不侵犯任何第三方知识产权的暗示
+担保。
+所述资源可供专业开发人员应用TI 产品进行设计使用。您将对以下行为独自承担全部责任：(1) 针对您的应用选择合适的TI 产品；(2) 设计、
+验证并测试您的应用；(3) 确保您的应用满足相应标准以及任何其他安全、安保或其他要求。所述资源如有变更，恕不另行通知。TI 对您使用
+所述资源的授权仅限于开发资源所涉及TI 产品的相关应用。除此之外不得复制或展示所述资源，也不提供其它TI或任何第三方的知识产权授权
+许可。如因使用所述资源而产生任何索赔、赔偿、成本、损失及债务等，TI对此概不负责，并且您须赔偿由此对TI 及其代表造成的损害。
+TI 所提供产品均受TI 的销售条款 (http://www.ti.com.cn/zh-cn/legal/termsofsale.html) 以及ti.com.cn上或随附TI产品提供的其他可适用条款的约
+束。TI提供所述资源并不扩展或以其他方式更改TI 针对TI 产品所发布的可适用的担保范围或担保免责声明。IMPORTANT NOTICE
+邮寄地址：上海市浦东新区世纪大道 1568 号中建大厦 32 楼，邮政编码：200122
+Copyright © 2020 德州仪器半导体技术（上海）有限公司
+
+
