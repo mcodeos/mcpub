@@ -15,7 +15,7 @@
 // Real LIN J2602 transceiver (MCP2003, 8-pin PDIP/SOIC; Microchip marks the
 // part Not Recommended for New Designs in favor of MCP2003B -- kept as the
 // industry-standard LIN pinout specimen), transcribed from DS20002230G
-// (p.1 package drawing; pinout page-verified:
+// (bullet specs p.1; pinout page-verified:
 // 1 RXD, 2 CS, 3 WAKE, 4 TXD, 5 VSS, 6 LBUS, 7 VBB, 8 VREN).
 // Pins ride the mclibs LIN transceiver shape.
 
@@ -24,4 +24,15 @@ use mclibs.comm/lin.mc
 component MCP2003 : UARTtoLIN
 {
     partno = "MCP2003"
+    package = PKG.SOIC8      // 8-pin PDIP / SOIC share one pinout (p.1);
+                             // a 4x4 DFN body is also offered
+
+    spec = [
+        vbb = 6V ~ 27V, "continuous supply voltage"                   // p.1 bullet
+        vloaddump = 43V, "load dump protected"                        // p.1 bullet
+        rate = 20kbps, "max bus baud rate, LIN"                       // p.1 bullet: 20 Kbaud
+        esd = 20kV, "ESD immunity on VBB, IEC 61000-4-2 (LBUS pm 14 kV)"  // p.1 bullet
+        ipd = 5uA, "low-power mode current, receiver monitoring the bus"  // p.1 bullet
+        temp = -40°C ~ +125°C, "extended operating temperature range" // p.1 bullet
+    ]
 }
