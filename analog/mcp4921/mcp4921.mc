@@ -13,12 +13,28 @@
 # limitations under the License.
 
 // Real single-channel 12-bit write-only SPI DAC (MCP4921, 8-pin PDIP/SOIC/
-// MSOP), transcribed from DS22248A (p.1 package drawing + Table 3-1 p.17;
-// pinout page-verified). Pins ride the mclibs SPI DAC shape.
+// MSOP), transcribed from DS22248A (bullet specs p.1; DC accuracy Table 3-1
+// p.3; AC characteristics p.4; pinout page-verified). Pins ride the mclibs
+// SPI DAC shape.
 
 use mclibs.analog/dac.mc
 
 component DAC.MCP4921 : DAC.C1SPI
 {
     partno = "MCP4921"
+    package = PKG.SOIC8      // 8-pin PDIP / SOIC / MSOP share one pinout
+                             // (DS22248A Section 9.0 package drawings); the
+                             // SOIC-8 body is stated as the default
+
+    spec = [
+        vdd = 2.7V ~ 5.5V, "single-supply operating voltage"    // p.1 bullet
+        resolution = 12, "bits of resolution"                   // p.1 bullet, Table 3-1
+        inl = 2, "INL error max, LSb (pm 2)"                    // Table 3-1: INL pm 2 LSb max, monotonic by design
+        dnl = 0.75, "DNL error max, LSb (pm 0.75)"              // Table 3-1: DNL pm 0.75 LSb max
+        fclk = 20MHz, "SPI clock support, max"                  // p.1 bullet
+        settling = 4.5us, "output settling time (1/2 LSb)"      // p.1 bullet
+        slew = 0.55V/us, "output slew rate, typ"                // p.4 AC table: SR 0.55 V/us
+        ishort = 24mA, "short-circuit output current, max"      // p.4 AC table: ISC 24 mA max (15 mA typ)
+        temp = -40°C ~ +125°C, "operating temperature range"    // p.1 bullet
+    ]
 }
