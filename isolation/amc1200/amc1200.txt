@@ -1,0 +1,4644 @@
+Product
+Folder
+
+Sample &
+Buy
+
+Support &
+Community
+
+Tools &
+Software
+
+Technical
+Documents
+
+Reference
+Design
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+AMC1200/B Fully-Differential Isolation Amplifier
+1 Features
+
+3 Description
+
+•
+
+The AMC1200 and AMC1200B are precision isolation
+amplifiers with an output separated from the input
+circuitry by a silicon dioxide (SiO2) barrier that is
+highly resistant to magnetic interference. This barrier
+has been certified to provide galvanic isolation of up
+to 4250 VPEAK (AMC1200B) or 4000 VPEAK
+(AMC1200) according to UL1577 and VDE V 088410. Used in conjunction with isolated power supplies,
+these devices prevent noise currents on a high
+common mode voltage line from entering the local
+ground and interfering with or damaging sensitive
+circuitry.
+
+1
+
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+•
+•
+
+±250-mV Input Voltage Range Optimized for
+Shunt Resistors
+Very Low Nonlinearity: 0.075% Maximum at 5 V
+Low Offset Error: 1.5 mV Maximum
+Low Noise: 3.1 mVRMS Typical
+Low High-Side Supply Current:
+8 mA Maximum at 5 V
+Input Bandwidth: 60 kHz Minimum
+Fixed Gain: 8 (0.5% accuracy)
+High Common Mode Rejection Ratio: 108 dB
+3.3-V Operation on Low-Side
+Certified Galvanic Isolation:
+– UL1577 and VDE V 0884-10 Approved
+– Isolation Voltage: 4250 VPEAK (AMC1200B)
+– Working Voltage: 1200 VPEAK
+– Transient Immunity: 10 kV/µs Minimum
+Typical 10-Year Lifespan at Rated Working
+Voltage (see Application Report SLLA197)
+Fully Specified Over the Extended Industrial
+Temperature Range
+
+2 Applications
+•
+
+Shunt Resistor Based Current Sensing in:
+– Motor Control
+– Green Energy
+– Frequency Inverters
+– Uninterruptible Power Supplies
+
+The input of the AMC1200 or AMC1200B is optimized
+for direct connection to shunt resistors or other low
+voltage level signal sources. The excellent
+performance of the device supports accurate current
+control resulting in system-level power saving and,
+especially in motor-control applications, lower torque
+ripple. The common mode voltage of the output
+signal is automatically adjusted to either the 3-V or
+5-V low-side supply.
+The AMC1200 and AMC1200B are fully specified
+over the extended industrial temperature range of
+–40°C to 105°C and are available in a wide-body
+SOIC-8 package (DWV) and a gullwing-8 package
+(DUB).
+Device Information(1)
+PART NUMBER
+AMC1200,
+AMC1200B
+
+PACKAGE
+
+BODY SIZE (NOM)
+
+SOP (8)
+
+9.50 mm × 6.57 mm
+
+SOIC (8)
+
+5.85 mm × 7.50 mm
+
+(1) For all available packages, see the orderable addendum at
+the end of the data sheet.
+
+Simplified Schematic
+VDD1
+
+VDD2
+5V
+2.55 V
+
+0V
+
+VINP
+
+VOUTP
+
+VINN
+
+VOUTN
+
+2V
+
+250 mV
+3.3 V
+1.29 V
+
+GND1
+
+2V
+
+GND2
+
+1
+
+An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+intellectual property matters and other important disclaimers. PRODUCTION DATA.
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+Table of Contents
+1
+2
+3
+4
+5
+6
+
+Features .................................................................. 1
+Applications ........................................................... 1
+Description ............................................................. 1
+Revision History..................................................... 2
+Pin Configuration and Functions ......................... 3
+Specifications......................................................... 4
+6.1
+6.2
+6.3
+6.4
+6.5
+6.6
+
+7
+
+Absolute Maximum Ratings ..................................... 4
+ESD Ratings.............................................................. 4
+Recommended Operating Conditions....................... 4
+Thermal Information .................................................. 4
+Electrical Characteristics........................................... 5
+Typical Characteristics .............................................. 6
+
+Detailed Description ............................................ 11
+7.1 Overview ................................................................. 11
+7.2 Functional Block Diagram ....................................... 11
+7.3 Feature Description................................................. 11
+
+7.4 Device Functional Modes........................................ 13
+
+8
+
+Application and Implementation ........................ 15
+8.1 Application Information............................................ 15
+8.2 Typical Applications ................................................ 15
+
+9 Power Supply Recommendations...................... 18
+10 Layout................................................................... 18
+10.1 Layout Guidelines ................................................. 18
+10.2 Layout Example .................................................... 19
+
+11 Device and Documentation Support ................. 20
+11.1
+11.2
+11.3
+11.4
+11.5
+11.6
+
+Documentation Support ........................................ 20
+Related Links ........................................................ 20
+Community Resources.......................................... 20
+Trademarks ........................................................... 20
+Electrostatic Discharge Caution ............................ 20
+Glossary ................................................................ 20
+
+12 Mechanical, Packaging, and Orderable
+Information ........................................................... 21
+
+4 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+Changes from Revision C (September 2013) to Revision D
+•
+
+Page
+
+Added ESD Ratings table, Feature Description section, Device Functional Modes, Application and Implementation
+section, Power Supply Recommendations section, Layout section, Device and Documentation Support section, and
+Mechanical, Packaging, and Orderable Information section ................................................................................................. 1
+
+Changes from Revision B (August 2012) to Revision C
+
+Page
+
+•
+
+Deleted device graphic ........................................................................................................................................................... 1
+
+•
+
+Added DWV (SOIC-9) package to document......................................................................................................................... 1
+
+•
+
+Changed last paragraph of Description section ..................................................................................................................... 1
+
+•
+
+Added DWV pin out drawing .................................................................................................................................................. 3
+
+•
+
+Added DWV column to Thermal Information table ................................................................................................................. 4
+
+•
+
+Added row for DWV package to L(I01) and L(I02) parameters in Package Characteristics table ....................................... 12
+
+Changes from Revision A (August 2011) to Revision B
+
+Page
+
+•
+
+Changed Isolation Voltage feature bullet................................................................................................................................ 1
+
+•
+
+Added AMC1200B device to data sheet ................................................................................................................................ 1
+
+•
+
+Changed title for Figure 25 ................................................................................................................................................... 10
+
+•
+
+Changed CTI parameter minimum value in Electrical Characteristics from ≥ 175 to ≥ 400................................................. 12
+
+Changes from Original (April 2011) to Revision A
+
+Page
+
+•
+
+Changed sign for maximum junction temperature from minus to plus (typo)......................................................................... 4
+
+•
+
+Added "0.5-V step" to test condition for Rise/fall time parameter .......................................................................................... 5
+
+•
+
+Changed Figure 12................................................................................................................................................................. 6
+
+•
+
+Changed Figure 13................................................................................................................................................................. 7
+
+•
+
+Changed surge immunity parameter from ±4000 to ±6000.................................................................................................. 12
+
+2
+
+Submit Documentation Feedback
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+5 Pin Configuration and Functions
+DUB Package
+8-Pin SOP
+Top View
+
+DWV Package
+8-Pin SOIC
+Top View
+
+VDD1
+
+1
+
+8
+
+VDD2
+
+VDD1
+
+1
+
+8
+
+VDD2
+
+VINP
+
+2
+
+7
+
+VOUTP
+
+VINP
+
+2
+
+7
+
+VOUTP
+
+VINN
+
+3
+
+6
+
+VOUTN
+
+VINN
+
+3
+
+6
+
+VOUTN
+
+GND1
+
+4
+
+5
+
+GND2
+
+GND1
+
+4
+
+5
+
+GND2
+
+Pin Functions
+PIN
+
+I/O
+
+DESCRIPTION
+
+NO.
+
+NAME
+
+1
+
+VDD1
+
+Power
+
+High-side power supply
+
+2
+
+VINP
+
+Analog input
+
+Noninverting analog input
+
+3
+
+VINN
+
+Analog input
+
+Inverting analog input
+
+4
+
+GND1
+
+Power
+
+High-side analog ground
+
+5
+
+GND2
+
+Power
+
+Low-side analog ground
+
+6
+
+VOUTN
+
+Analog output
+
+Inverting analog output
+
+7
+
+VOUTP
+
+Analog output
+
+Noninverting analog output
+
+8
+
+VDD2
+
+Power
+
+Low-side power supply
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+3
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+Over the operating ambient temperature range, unless otherwise noted. (1)
+Supply voltage, VDD1 to GND1 or VDD2 to GND2
+Analog input voltage at VINP, VINN
+Input current to any pin except supply pins
+
+MIN
+
+MAX
+
+UNIT
+
+–0.5
+
+6
+
+V
+
+GND1 – 0.5
+
+VDD1 + 0.5
+
+V
+
+–10
+
+10
+
+mA
+
+150
+
+°C
+
+150
+
+°C
+
+Maximum junction temperature, TJ Max
+Storage Temperature, Tstg
+(1)
+
+–65
+
+Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress ratings
+only, and functional operation of the device at these or any other conditions beyond those indicated is not implied. Exposure to absolute
+maximum rated conditions for extended periods may affect device reliability.
+
+6.2 ESD Ratings
+VALUE
+
+V(ESD)
+
+(1)
+(2)
+
+Electrostatic discharge
+
+Human-body model (HBM) JEDEC standard 22, test method A114C.01 (1)
+
+±2500
+
+Charged-device model (CDM), per JEDEC specification JESD22C101 (2)
+
+±1000
+
+UNIT
+
+V
+
+JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+6.3 Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)
+MIN
+TA
+
+Operating ambient temperature range
+
+–40
+
+VDD1
+
+High-side power supply
+
+4.5
+
+VDD2
+
+Low-side power supply
+
+2.7
+
+NOM
+
+MAX
+
+UNIT
+
+105
+
+°C
+
+5
+
+5.5
+
+V
+
+5
+
+5.5
+
+V
+
+6.4 Thermal Information
+AMC1200, AMC1200B
+THERMAL METRIC
+
+(1)
+
+DUB (SOP)
+
+DWV (SOIC)
+
+8 PINS
+
+8 PINS
+
+UNIT
+
+RθJA
+
+Junction-to-ambient thermal resistance
+
+75.1
+
+102.8
+
+°C/W
+
+RθJC(top)
+
+Junction-to-case (top) thermal resistance
+
+61.6
+
+49.8
+
+°C/W
+
+RθJB
+
+Junction-to-board thermal resistance
+
+39.8
+
+56.6
+
+°C/W
+
+ψJT
+
+Junction-to-top characterization parameter
+
+27.2
+
+16
+
+°C/W
+
+ψJB
+
+Junction-to-board characterization parameter
+
+39.4
+
+55.2
+
+°C/W
+
+(1)
+
+4
+
+For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+report, SPRA953.
+
+Submit Documentation Feedback
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+6.5 Electrical Characteristics
+All minimum/maximum specifications at TA = –40°C to 105°C and within the specified voltage range, unless otherwise noted.
+Typical values are at TA = 25°C, VDD1 = 5 V, and VDD2 = 3.3 V.
+PARAMETER
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+MAX
+
+UNIT
+
+INPUT
+Maximum input voltage before
+clipping
+
+VINP – VINN
+
+Differential input voltage
+
+VINP – VINN
+
+±320
+
+mV
+
+–250
+
+250
+
+mV
+
+VCM
+
+Common mode operating range
+
+–0.16
+
+VDD1
+
+V
+
+VOS
+
+Input offset voltage
+
+–1.5
+
+±0.2
+
+1.5
+
+mV
+
+TCVOS
+
+Input offset thermal drift
+
+–10
+
+±1.5
+
+10
+
+µV/K
+
+CMRR
+
+Common mode rejection ratio
+
+CIN
+
+Input capacitance to GND1
+
+CIND
+
+Differential input capacitance
+
+RIN
+
+Differential input resistance
+
+VIN from 0 V to 5 V at 0 Hz
+
+108
+
+dB
+
+VIN from 0 V to 5 V at 50 kHz
+
+95
+
+dB
+
+VINP or VINN
+
+3
+
+pF
+
+3.6
+
+pF
+
+Small-signal bandwidth
+
+60
+
+28
+
+kΩ
+
+100
+
+kHz
+
+OUTPUT
+Nominal gain
+GERR
+
+Gain error
+
+TCGERR
+
+Gain error thermal drift
+Nonlinearity
+
+8
+Initial, at TA = 25°C
+
+–0.5%
+
+±0.05%
+
+0.5%
+
+–1%
+
+±0.05%
+
+1%
+
+±56
+4.5 V ≤ VDD2 ≤ 5.5 V
+
+–0.075%
+
+±0.015%
+
+0.075%
+
+2.7 V ≤ VDD2 ≤ 3.6 V
+
+–0.1%
+
+±0.023%
+
+0.1%
+
+Nonlinearity thermal drift
+Output noise
+PSRR
+
+Power-supply rejection ratio
+Rise/fall time
+VIN to VOUT signal delay
+
+CMTI
+
+ROUT
+
+2.4
+
+ppm/K
+
+VINP = VINN = 0 V
+
+3.1
+
+mVRMS
+
+vs VDD1, 10-kHz ripple
+
+80
+
+dB
+
+vs VDD2, 10-kHz ripple
+
+61
+
+0.5-V step, 10% to 90%
+
+3.66
+
+6.6
+
+µs
+
+0.5-V step, 50% to 10%, unfiltered output
+
+1.6
+
+3.3
+
+µs
+
+0.5-V step, 50% to 50%, unfiltered output
+
+3.15
+
+5.6
+
+µs
+
+0.5-V step, 50% to 90%, unfiltered output
+
+5.26
+
+9.9
+
+µs
+
+Common mode transient immunity VCM = 1 kV
+Output common mode voltage
+
+ppm/K
+
+dB
+
+10
+
+15
+
+2.7 V ≤ VDD2 ≤ 3.6 V
+
+1.15
+
+1.29
+
+1.45
+
+kV/µs
+V
+
+4.5 V ≤ VDD2 ≤ 5.5 V
+
+2.4
+
+2.55
+
+2.7
+
+V
+
+Short circuit current
+
+20
+
+mA
+
+Output resistance
+
+2.5
+
+Ω
+
+POWER SUPPLY
+VDD1
+
+High-side supply voltage
+
+4.5
+
+VDD2
+
+Low-side supply voltage
+
+2.7
+
+IDD1
+
+High-side supply current
+
+IDD2
+
+Low-side supply current
+
+PDD1
+
+High-side power dissipation
+
+PDD2
+
+Low-side power dissipation
+
+5
+
+5.5
+
+V
+
+5
+
+5.5
+
+V
+
+5.4
+
+8
+
+mA
+
+2.7 V < VDD2 < 3.6 V
+
+3.8
+
+6
+
+mA
+
+4.5 V < VDD2 < 5.5 V
+
+4.4
+
+7
+
+mA
+
+27
+
+44
+
+mW
+
+2.7 V < VDD2 < 3.6 V
+
+11.4
+
+21.6
+
+mW
+
+4.5 V < VDD2 < 5.5 V
+
+22
+
+38.5
+
+mW
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+5
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+6.6 Typical Characteristics
+At VDD1 = VDD2 = 5 V, VINP = –250 mV to 250 mV, and VINN = 0 V, unless otherwise noted.
+2
+
+2
+
+1.5
+
+1.5
+
+1
+
+1
+Input Offset (mV)
+
+Input Offset (mV)
+
+VDD2 = 2.7 V to 3.6 V
+
+0.5
+0
+−0.5
+
+0.5
+0
+−0.5
+
+−1
+
+−1
+
+−1.5
+
+−1.5
+
+−2
+4.5
+
+4.75
+
+5
+VDD1 (V)
+
+5.25
+
+−2
+2.7
+
+5.5
+
+3
+
+3.3
+
+3.6
+
+VDD2 (V)
+
+Figure 1. Input Offset vs High-Side Supply Voltage
+
+Figure 2. Input Offset vs Low-Side Supply Voltage
+
+2
+
+2
+1.5
+
+1
+
+1
+Input Offset (mV)
+
+Input Offset (mV)
+
+VDD2 = 4.5 V to 5.5 V
+1.5
+
+0.5
+0
+−0.5
+
+0.5
+0
+−0.5
+
+−1
+
+−1
+
+−1.5
+
+−1.5
+
+−2
+4.5
+
+4.75
+
+5
+VDD2 (V)
+
+5.25
+
+−2
+−40 −25 −10
+
+5.5
+
+130
+
+40
+
+120
+
+30
+
+110
+
+20
+
+100
+90
+80
+
+−30
+
+Figure 5. Common Mode Rejection Ratio vs Input Frequency
+
+6
+
+Submit Documentation Feedback
+
+110 125
+
+−10
+
+60
+100
+
+95
+
+0
+
+−20
+
+1
+10
+Input Frequency (kHz)
+
+80
+
+10
+
+70
+
+50
+0.1
+
+20 35 50 65
+Temperature (°C)
+
+Figure 4. Input Offset vs Temperature
+
+Input Current (µA)
+
+CMRR (dB)
+
+Figure 3. Input Offset vs Low-Side Supply Voltage
+
+5
+
+−40
+−400
+
+−300
+
+−200
+
+−100
+0
+100
+Input Voltage (mV)
+
+200
+
+300
+
+400
+
+Figure 6. Input Current vs Input Voltage
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+Typical Characteristics (continued)
+At VDD1 = VDD2 = 5 V, VINP = –250 mV to 250 mV, and VINN = 0 V, unless otherwise noted.
+120
+
+1
+0.8
+0.6
+0.4
+
+100
+
+Gain Error (%)
+
+Input Bandwidth (kHz)
+
+110
+
+90
+80
+
+0.2
+0
+−0.2
+−0.4
+−0.6
+
+70
+
+−0.8
+60
+−40 −25 −10
+
+5
+
+20 35 50 65
+Temperature (°C)
+
+80
+
+95
+
+−1
+4.5
+
+110 125
+
+Figure 7. Input Bandwidth vs Temperature
+
+5.25
+
+5.5
+
+1
+VDD2 = 2.7 V to 3.6 V
+
+0.6
+
+0.6
+
+0.4
+
+0.4
+
+0.2
+0
+−0.2
+
+0.2
+0
+−0.2
+
+−0.4
+
+−0.4
+
+−0.6
+
+−0.6
+
+−0.8
+
+−0.8
+
+−1
+2.7
+
+3
+
+3.3
+
+VDD2 = 4.5 V to 5.5 V
+
+0.8
+
+Gain Error (%)
+
+Gain Error (%)
+
+5
+VDD1 (V)
+
+Figure 8. Gain Error vs High-Side Supply Voltage
+
+1
+0.8
+
+−1
+4.5
+
+3.6
+
+VDD2 (V)
+
+Figure 9. Gain Error vs Low-Side Supply Voltage
+0.8
+
+0
+
+0.6
+
+−10
+
+Normalized Gain (dB)
+
+10
+
+0.2
+0
+−0.2
+−0.4
+
+−50
+
+−70
+80
+
+95
+
+Figure 11. Gain Error vs Temperature
+
+110 125
+
+5.5
+
+−40
+
+−0.8
+20 35 50 65
+Temperature (°C)
+
+5.25
+
+−30
+
+−60
+
+5
+
+5
+VDD2 (V)
+
+−20
+
+−0.6
+
+−1
+−40 −25 −10
+
+4.75
+
+Figure 10. Gain Error vs Low-Side Supply Voltage
+
+1
+
+0.4
+Gain Error (%)
+
+4.75
+
+−80
+
+1
+
+10
+100
+Input Frequency (kHz)
+
+500
+
+Figure 12. Normalized Gain vs Input Frequency
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+7
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+Typical Characteristics (continued)
+At VDD1 = VDD2 = 5 V, VINP = –250 mV to 250 mV, and VINN = 0 V, unless otherwise noted.
+0
+
+5
+
+−30
+
+4.5
+
+−60
+
+VOUTP
+VOUTN
+
+4
+Output Voltage (V)
+
+Output Phase (°)
+
+−90
+−120
+−150
+−180
+−210
+−240
+
+3.5
+3
+2.5
+2
+1.5
+
+−270
+1
+
+−300
+
+0.5
+
+−330
+−360
+
+1
+
+10
+100
+Input Frequency (kHz)
+
+0
+−400
+
+1000
+
+Figure 13. Output Phase vs Input Frequency
+
+−200
+
+−100
+0
+100
+Input Voltage (mV)
+
+200
+
+300
+
+400
+
+Figure 14. Output Voltage vs Input Voltage
+
+3.6
+3.3
+
+−300
+
+0.1
+VDD2 = 2.7 V to 3.6 V
+
+VOUTP
+VOUTN
+
+3
+
+0.08
+0.06
+
+2.4
+
+Nonlinearity (%)
+
+Output Voltage (V)
+
+2.7
+2.1
+1.8
+1.5
+1.2
+
+0.04
+0.02
+0
+−0.02
+−0.04
+
+0.9
+−0.06
+
+0.6
+
+−0.08
+
+0.3
+0
+−400
+
+−300
+
+−200
+
+−100
+0
+100
+Input Voltage (mV)
+
+200
+
+300
+
+−0.1
+4.5
+
+400
+
+Figure 15. Output Voltage vs Input Voltage
+VDD2 = 2.7 V to 3.6 V
+
+5.5
+
+0.06
+
+0.06
+
+0.04
+
+0.04
+
+0.02
+0
+−0.02
+−0.04
+
+0.02
+0
+−0.02
+−0.04
+
+−0.06
+
+−0.06
+
+−0.08
+
+−0.08
+3
+
+3.3
+
+−0.1
+4.5
+
+VDD2 (V)
+
+5
+VDD2 (V)
+
+Figure 17. Nonlinearity vs Low-Side Supply Voltage
+
+Figure 18. Nonlinearity vs Low-Side Supply Voltage
+
+Submit Documentation Feedback
+
+3.6
+
+VDD2 = 4.5 V to 5.5 V
+
+0.08
+
+Nonlinearity (%)
+
+Nonlinearity (%)
+
+5.25
+
+0.1
+
+0.08
+
+8
+
+5
+VDD1 (V)
+
+Figure 16. Nonlinearity vs High-Side Supply Voltage
+
+0.1
+
+−0.1
+2.7
+
+4.75
+
+4.75
+
+5.25
+
+5.5
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+Typical Characteristics (continued)
+At VDD1 = VDD2 = 5 V, VINP = –250 mV to 250 mV, and VINN = 0 V, unless otherwise noted.
+0.1
+
+0.1
+VDD2 = 3 V
+VDD2 = 5 V
+
+0.08
+
+0.06
+
+0.06
+
+0.04
+
+0.04
+
+Nonlinearity (%)
+
+Nonlinearity (%)
+
+0.08
+
+0.02
+0
+−0.02
+−0.04
+
+0.02
+0
+−0.02
+−0.04
+
+−0.06
+
+−0.06
+
+−0.08
+
+−0.08
+
+−0.1
+−250 −200 −150 −100 −50
+0
+50 100
+Input Voltage (mV)
+
+150
+
+200
+
+−0.1
+−40 −25 −10
+
+250
+
+2600
+
+100
+
+2400
+
+90
+
+2200
+
+80
+
+2000
+
+70
+
+1800
+1600
+1400
+
+110 125
+
+20
+
+800
+
+10
+100
+
+VDD1
+VDD2
+
+40
+30
+
+10
+
+95
+
+50
+
+1000
+
+1
+
+80
+
+60
+
+1200
+
+600
+0.1
+
+20 35 50 65
+Temperature (°C)
+
+Figure 20. Nonlinearity vs Temperature
+
+PSRR (dB)
+
+Noise (nV/sqrt(Hz))
+
+Figure 19. Nonlinearity vs Input Voltage
+
+5
+
+0
+
+1
+
+10
+Ripple Frequency (kHz)
+
+Frequency (kHz)
+
+Figure 21. Output Noise Density vs Frequency
+
+100
+
+Figure 22. Power-Supply Rejection Ratio vs Ripple
+Frequency
+
+10
+
+Output Rise/Fall Time (µs)
+
+9
+8
+500 mV/div
+
+7
+6
+5
+4
+
+200 mV/div
+
+3
+2
+
+500 mV/div
+
+1
+0
+−40 −25 −10
+
+5
+
+20 35 50 65
+Temperature (°C)
+
+80
+
+95
+
+Time (2 ms/div)
+
+110 125
+
+Figure 23. Output Rise and Fall Time vs Temperature
+
+Figure 24. Full-Scale Step Response
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+9
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+Typical Characteristics (continued)
+At VDD1 = VDD2 = 5 V, VINP = –250 mV to 250 mV, and VINN = 0 V, unless otherwise noted.
+10
+
+5
+
+8
+Signal Delay (µs)
+
+7
+6
+5
+4
+3
+2
+1
+0
+−40 −25 −10
+
+5
+
+20 35 50 65
+Temperature (°C)
+
+80
+
+95
+
+VDD2 rising
+VDD2 falling
+
+Output Common−Mode Voltage (V)
+
+50% to 10%
+50% to 50%
+50% to 90%
+
+9
+
+4
+
+3
+
+2
+
+1
+
+0
+3.5
+
+110 125
+
+Figure 25. Output Signal Delay Time vs Temperature
+
+3.7
+
+3.8
+
+3.9
+4
+4.1
+VDD2 (V)
+
+4.2
+
+4.3
+
+4.4
+
+4.5
+
+Figure 26. Output Common Mode Voltage vs Low-Side
+Supply Voltage
+
+5
+
+8
+VDD2 = 2.7 V to 3.6 V
+VDD2 = 4.5 V to 5.5 V
+
+Output Common−Mode Voltage (V)
+
+3.6
+
+IDD1
+IDD2
+
+7
+Supply Current (mA)
+
+4
+
+3
+
+2
+
+6
+5
+4
+3
+2
+
+1
+1
+0
+−40 −25 −10
+
+5
+
+20 35 50 65
+Temperature (°C)
+
+80
+
+95
+
+0
+4.5
+
+110 125
+
+Figure 27. Output Common Mode Voltage vs Temperature
+
+4.75
+
+5
+Supply Voltage (V)
+
+5.25
+
+5.5
+
+Figure 28. Supply Current vs Supply Voltage
+
+8
+
+8
+7
+
+6
+
+6
+
+Supply Current (mA)
+
+IDD2 (mA)
+
+VDD2 = 2.7 V to 3.6 V
+7
+
+5
+4
+3
+2
+1
+0
+2.7
+
+5
+4
+3
+2
+1
+
+3
+
+3.3
+
+3.6
+
+IDD1
+IDD2
+
+0
+−40 −25 −10
+
+VDD2 (V)
+
+Figure 29. Low-Side Supply Current vs Low-Side Supply
+Voltage
+
+10
+
+Submit Documentation Feedback
+
+5
+
+20 35 50 65
+Temperature (°C)
+
+80
+
+95
+
+110 125
+
+Figure 30. Supply Current vs Temperature
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+7 Detailed Description
+7.1 Overview
+The AMC1200 is a fully-differential precision isolation amplifier. The analog input signal is converted to a digital
+signal and then transferred across a capacitive isolation barrier. The digital modulation used in the AMC1200
+together with the isolation barrier characteristics result in excellent reliability and transient immunity.
+After processing the digital signal with a low-pass filter, an analog signal is provided at the outputs. The main
+building blocks are shown in the Functional Block Diagram section.
+The SiO2-based capacitive isolation barrier supports a high level of magnetic field immunity, as described in
+application report, ISO72x Digital Isolator Magnetic-Field Immunity (SLLA181), available for download at
+www.ti.com.
+
+7.2 Functional Block Diagram
+VDD1
+
+VDD2
+Isolation
+Barrier
+
+2.5-V
+Reference
+
+2.56-V
+Reference
+
+DATA
+
+TX
+
+RX
+
+VINP
+
+VOUTP
+
+Retiming and
+3rd order
+active
+low-pass filter
+
+û-Modulator
+VINN
+TX
+
+VOUTN
+
+RX
+
+CLK
+RC oscillator
+
+GND1
+
+GND2
+
+7.3 Feature Description
+7.3.1 Insulation Characteristics
+PARAMETER
+VIORM
+
+VPR
+
+VIOTM
+
+VISO
+
+RS
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+MAX
+
+UNIT
+
+1200
+
+VPEAK
+
+Qualification test: after Input/Output Safety Test
+Subgroup 2/3 VPR = VIORM × 1.2, t = 10 s, partial
+discharge < 5 pC
+
+1140
+
+VPEAK
+
+Qualification test: method a, after environmental tests
+subgroup 1, VPR = VIORM × 1.6, t = 10 s, partial
+discharge < 5 pC
+
+1920
+
+VPEAK
+
+100% production test: method b1, VPR = VIORM x 1.875,
+t = 1 s, partial discharge < 5 pC
+
+2250
+
+VPEAK
+
+AMC1200
+
+4000
+
+VPEAK
+
+AMC1200B
+
+4250
+
+VPEAK
+
+Qualification test: VTEST = VISO,
+t = 60 s
+
+AMC1200
+
+4000
+
+VPEAK
+
+AMC1200B
+
+4250
+
+VPEAK
+
+100% production test: VTEST =
+1.2 x VISO, t = 1 s
+
+AMC1200
+
+4800
+
+VPEAK
+
+5100
+
+VPEAK
+
+Maximum working
+insulation voltage
+
+Input to output test voltage
+
+Transient overvoltage
+
+Qualification test: t = 60 s
+
+Insulation voltage per UL
+
+Insulation resistance
+
+AMC1200B
+
+VIO = 500 V at TS
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+> 109
+Submit Documentation Feedback
+
+Ω
+11
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+Feature Description (continued)
+PARAMETER
+PD
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+Pollution degree
+
+MAX
+
+UNIT
+
+2
+
+°
+
+7.3.2 IEC 61000-4-5 Ratings
+PARAMETER
+VIOSM
+
+TEST CONDITIONS
+
+Surge immunity
+
+1.2-μs/50-μs voltage surge and 8-μs/20-μs current surge
+
+VALUE
+
+UNIT
+
+±6000
+
+V
+
+7.3.3 IEC 60664-1 Ratings (1)
+PARAMETER
+
+TEST CONDITIONS
+
+Basic isolation group
+
+Installation classification
+
+(1)
+
+SPECIFICATION
+
+Material group
+
+II
+
+Rated mains voltage ≤ 150 VRMS
+
+I-IV
+
+Rated mains voltage ≤ 300 VRMS
+
+I-IV
+
+Rated mains voltage ≤ 400 VRMS
+
+I-III
+
+Rated mains voltage < 600 VRMS
+
+I-III
+
+Over operating free-air temperature range (unless otherwise noted).
+
+7.3.4 Package Characteristics (1)
+PARAMETER
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+MAX
+
+UNIT
+
+L(I01)
+
+Minimum air gap (clearance)
+
+Shortest terminal to terminal
+distance through air
+
+DWV package
+DUB package
+
+7
+
+mm
+
+Minimum external tracking
+(creepage)
+
+Shortest terminal to terminal
+distance across the package
+surface
+
+DWV package
+
+8
+
+mm
+
+L(I02)
+
+DUB package
+
+7
+
+mm
+
+CTI
+
+Tracking resistance
+(comparative tracking index)
+
+DIN IEC 60112/VDE 0303 part 1
+
+≥ 400
+
+V
+
+Minimum internal gap
+(internal clearance)
+
+Distance through the insulation
+
+0.014
+
+mm
+
+RIO
+
+Isolation resistance
+
+8
+
+mm
+
+Input to output, VIO = 500 V, all pins on each side of
+the barrier tied together to create a two-terminal
+device, TA < 85°C
+
+> 1012
+
+Ω
+
+Input to output, VIO = 500 V,
+85°C ≤ TA < TA max
+
+> 1011
+
+Ω
+
+CIO
+
+Barrier capacitance input to
+output
+
+VI = 0.5 VPP at 1 MHz
+
+1.2
+
+pF
+
+CI
+
+Input capacitance to ground
+
+VI = 0.5 VPP at 1 MHz
+
+3
+
+pF
+
+(1)
+
+Creepage and clearance requirements should be applied according to the specific equipment isolation standards of a specific
+application. Take care to maintain the creepage and clearance distance of the board design to ensure that the mounting pads of the
+isolator on the printed-circuit-board (PCB) do not reduce this distance. Creepage and clearance on a PCB become equal according to
+the measurement techniques shown in the TI Isolation Glossary. Techniques such as inserting grooves and/or ribs on the PCB are used
+to help increase these specifications.
+
+7.3.5 IEC Safety Limiting Values
+Safety limiting intends to prevent potential damage to the isolation barrier upon failure of input or output (I/O)
+circuitry. A failure of the I/O circuitry can allow low resistance to ground or the supply and, without current
+limiting, dissipate sufficient power to overheat the die and damage the isolation barrier, potentially leading to
+secondary system failures.
+PARAMETER
+IS
+
+Safety input, output, or supply current
+
+TC
+
+Maximum case temperature
+
+12
+
+Submit Documentation Feedback
+
+TEST CONDITIONS
+
+MIN
+
+θJA = 246°C/W, VIN = 5.5 V, TJ = 150°C, TA = 25°C
+
+TYP
+
+MAX
+
+UNIT
+
+10
+
+mA
+
+150
+
+°C
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+The safety-limiting constraint is the operating virtual junction temperature range specified in the Absolute
+Maximum Ratings table. The power dissipation and junction-to-air thermal impedance of the device installed in
+the application hardware determine the junction temperature. The assumed junction-to-air thermal resistance in
+the Thermal Information table is that of a device installed in the JESD51-3, Low Effective Thermal Conductivity
+Test Board for Leaded Surface Mount Packages and is conservative. The power is the recommended maximum
+input voltage times the current. The junction temperature is then the ambient temperature plus the power times
+the junction-to-air thermal resistance.
+7.3.6 Regulatory Information
+VDE/IEC
+
+UL
+
+Certified according to VDE V 0884-10
+
+Recognized under 1577 component recognition program
+
+Certificate number: 40016131
+
+File number: E181974
+
+7.3.7 Isolation Amplifier
+The AMC1200 device consists of a second order delta-sigma modulator input stage including an internal
+reference and clock generator. The output of the modulator and clock signal are differentially transmitted over the
+integrated capacitive isolation barrier that separates the high- and low-voltage domains. The received bitstream
+and clock signals are synchronized and processed by a third-order analog filter with a nominal gain of 8 on the
+low-side and presented as a differential output of the device, as shown in Functional Block Diagram section.
+7.3.8 Analog Input
+The analog input range is tailored to directly accommodate a voltage drop across a shunt resistor used for
+current sensing. However, there are two restrictions on the analog input signals, VINP and VINN. If the input
+voltage exceeds the range AGND – 0.5 V to AVDD + 0.5 V, the input current must be limited to 10 mA to prevent
+the implemented input protection diodes from damage. In addition, the linearity and the noise performance of the
+device are ensured only when the differential analog input voltage remains within ±250 mV.
+The differential analog input of the AMC1200 and AMC1200B devices is a switched-capacitor circuit based on a
+second-order modulator stage that digitizes the input signal into a 1-bit output stream. These devices compare
+the differential input signal (VIN = VINP – VINN) against the internal reference of 2.5 V using internal capacitors
+that are continuously charged and discharged with a typical frequency of 10 MHz. With the S1 switches closed,
+CIND charges to the voltage difference across VINP and VINN. For the discharge phase, both S1 switches open
+first and then both S2 switches close. CIND discharges to approximately AGND + 0.8 V during this phase.
+Figure 31 shows the simplified equivalent input circuitry.
+VDD1
+
+GND1
+GND1
+CINP = 3pF
+
+3pF
+400W
+
+VINP
+
+S1
+
+S2
+
+Equivalent
+Circuit
+
+AGND + 0.8V
+
+VINP
+
+CIND = 3.6pF
+S1
+
+400W
+
+VINN
+
+RIN = 28kW
+S2
+VINN
+
+AGND + 0.8V
+
+3pF
+
+CINN = 3pF
+
+GND1
+
+RIN =
+
+GND1
+
+1
+fCLK · CDIFF
+
+GND1
+
+(fCLK = 10MHz)
+
+Figure 31. Equivalent Input Circuit
+
+7.4 Device Functional Modes
+The AMC1200 is operational when the power supplies VDD1 and VDD2 are applied as specified in the
+Recommended Operating Conditions section.
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+13
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+Device Functional Modes (continued)
+The AMC1200 does not have any additional functional modes.
+
+14
+
+Submit Documentation Feedback
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+8 Application and Implementation
+NOTE
+Information in the following applications sections is not part of the TI component
+specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+responsible for determining suitability of components for their purposes. Customers should
+validate and test their design implementation to confirm system functionality.
+
+8.1 Application Information
+The AMC1200 and AMC1200B devices offer unique linearity, high input common mode rejection, low DC errors
+and low temperature drift. These features make the AMC1200 a robust, high-performance isolation amplifier for
+industrial applications where high voltage isolation is required.
+
+8.2 Typical Applications
+8.2.1 Motor Control
+Figure 32 shows a typical operation of the AMC1200 and AMC1200B devices in a motor-control application.
+Measurement of the motor phase current is done through the shunt resistor, RSHUNT (in this case, a two-terminal
+shunt).
+HV+
+
+Floating
+Power Supply
+
+Gated
+Drive
+Circuit
+
+Isolation
+Barrier
+
+R1
+
+VDD1
+D1
+5.1V
+
+C5(1)
+0.1mF
+VINP
+
+To Load
+
+VOUTP
+
+C2(1)
+330pF
+C3
+10pF
+(optional)
+
+Power
+Supply
+
+VDD2
+
+C1(1)
+0.1mF
+
+R2
+12W
+R3
+12W
+
+RSHUNT
+
+TMC320
+C/F28xxx
+
+AMC1200
+AMC1200B
+
+ADC
+C4
+10pF
+(optional)
+
+VINN VOUTN
+
+GND1
+
+GND2
+
+Gated
+Drive
+Circuit
+
+HV-
+
+(1)
+
+Place these capacitors as close as possible to the AMC device.
+
+Figure 32. Typical Application Diagram
+The high-side power supply (VDD1) for the AMC1200 and AMC1200B are derived from the power supply of the
+upper gate driver. Further details are provided in the Power Supply Recommendations section.
+The high transient immunity of the AMC1200 and AMC1200B ensures reliable and accurate operation even in
+high-noise environments such as the power stages of the motor drives.
+As shown in Figure 37, TI recommends placing the bypass and filter capacitors as close as possible to the AMC
+device to ensure best performance.
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+15
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+Typical Applications (continued)
+8.2.1.1 Design Requirements
+For better performance, the differential input signal is filtered using RC filters (components R2, R3, and C2).
+Optionally, C3 and C4 can be used to reduce charge dumping from the inputs. In this case, take care when
+choosing the quality of these capacitors; mismatch in values of these capacitors leads to a common mode error
+at the modulator input. If implemented, TI recommends using NP0 capacitors for C2, C3 and C4.
+Isolation
+Barrier
+
+Phase
+
+TMC320
+C/F28xxx
+
+R1
+Device
+1
+C1(1)
+0.1 mF
+
+R2
+12 W
+RSHUNT
+
+R3
+12 W
+
+2
+
+VDD1
+
+VINP
+
+VDD2
+
+VOUTP
+
+14
+
+13
+
+C5(1)
+0.1 mF R
+
+(1)
+
+C2
+330 pF
+
+C
+3
+
+C3
+10 pF
+(optional)
+
+C4
+10 pF
+(optional)
+
+4
+
+VINN VOUTN
+
+GND1
+
+GND2
+
+11
+
+ADC
+
+R
+
+9
+
+Figure 33. Shunt-Based Current Sensing with the AMC1200
+Similar to the current measurements, isolated voltage measurements can be performed as described in the .
+8.2.1.2 Detailed Design Procedure
+The floating ground reference (GND1) is derived from the end of the shunt resistor, which is connected to the
+negative input of the AMC1200 (VINN). If a four-terminal shunt is used, the inputs of the AMC1200 are
+connected to the inner leads and GND1 is connected to one of the outer shunt leads. The differential input of the
+AMC1200 ensures accurate operation even in noisy environments.
+TI recommends limiting the value of resistors R2 and R3 to less than 24 Ω to avoid the incomplete settling of the
+AMC1200 input circuitry. The section provides more details on the AMC1200 input circuitry.
+The differential output of the AMC1200 can either directly drive an analog-to-digital converter (ADC) input or can
+be further filtered before being processed by the ADC. For more information on the general procedure to design
+the filtering and driving stages for SAR ADCs, consult the TI Precision Designs 18 bit, 1Msps Data Acquisition
+Block Optimized for Lowest Distortion and Noise (SLAU515), and 18 bit Data Acquisition Block Optimized for
+Lowest Power (SLAU513) available for download at www.ti.com
+
+16
+
+Submit Documentation Feedback
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+Typical Applications (continued)
+8.2.1.3 Application Curve
+In frequency inverter applications the power switches must be protected in case of an overcurrent condition. To
+allow fast powering off of the system, low delay caused by the isolation amplifier is required. Figure 34 shows the
+typical full-scale step response of the AMC1200.
+
+500 mV/div
+
+200 mV/div
+
+500 mV/div
+Time (2 ms/div)
+
+Figure 34. Typical Step Response of the AMC1200
+8.2.2 Isolated Voltage Measurement
+The AMC1200 and AMC1200B can also be used for isolated voltage measurement applications, as shown in a
+simplified way in Figure 35. In such applications, usually a resistor divider (R1 and R2 in Figure 35) is used to
+match the relatively small input voltage range of the AMC device. R2 and the input resistance RIN of the
+AMC1200 also create a resistance divider that results in additional gain error. With the assumption that R1 and
+RIN have a considerably higher value than R2, the resulting total gain error can be estimated using Equation 1:
+R
+GERRTOT = GERR + 2
+RIN
+where
+•
+
+GERR = the gain error of AMC device.
+
+(1)
+
+L1
+R1
+
+R2
+
+RIN
+
+L2
+
+Figure 35. Voltage Measurement Application
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+17
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+9 Power Supply Recommendations
+In a typical frequency inverter application, the high-side power supply for the AMC1200 (VDD1) is derived from
+the system supply, as shown in Figure 36. For lowest cost, a Zener diode can be used to limit the voltage to 5 V
+± 10%. TI recommends using a 0.1-µF, low-ESR decoupling capacitor for filtering this power-supply. TI also
+recommends using a 0.1-µF decoupling capacitor for filtering the power-supply on the VDD2 side. For best
+performance, place these capacitors (C1 and C4) as close as possible to the VDD1 and VDD2 pins respectively.
+If better filtering is required, an additional 1-µF to 10-µF capacitor can be used in parallel to C1 and C4.
+HV+
+
+Floating
+Power Supply
+20 V
+
+R1
+800 
+
+Gate Driver
+
+Z1
+1N751A
+
+AMC1200
+5.1 V
+
+VDD1
+
+VDD2
+
+3.3 V, or 5.0 V
+C4
+0.1F
+
+C1
+0.1F
+GND1
+
+GND2
+
+VINP
+
+VOUTP
+
+RSHUNT
+to load
+R2
+12 
+
+C3
+330pF
+
+ADS7263
+
+VINN
+Gate Driver
+
+VOUTN
+
+R3
+12 
+
+HV-
+
+Figure 36. Zener Diode Based High-Side Supply
+For higher power efficiency and better performance, a buck converter can be used; an example of such an
+approach is based on the LM5017. A reference design including performance test results and layout
+documentation can be downloaded at PMP9480, Isolated Bias Supplies + Isolated Amplifier Combo for Line
+Voltage or Current Measurement.
+
+10 Layout
+10.1 Layout Guidelines
+A layout recommendation showing the critical placement of the decoupling capacitors that be placed as close as
+possible to the AMC1200 while maintaining a differential routing of the input signals is shown in Figure 37.
+To maintain the isolation barrier and the high CMTI of the device, the distance between the high-side ground
+(GND1) and the low-side ground (GND2) should be kept at maximum; that is, the entire area underneath the
+device should be kept free of any conducting materials.
+
+18
+
+Submit Documentation Feedback
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+10.2 Layout Example
+Top View
+
+12 W
+SMD 0603
+To Shunt
+12 W
+SMD 0603
+
+330 pF
+SMD
+0603
+
+LEGEND
+Top layer; copper pour and traces
+
+VDD1
+
+VDD2
+
+VINP
+
+VOUTP
+
+0.1 mF
+SMD
+1206
+
+0.1mF
+0.1 mF
+SMD
+1206
+
+AMC1200
+AMC1200B
+VINN
+
+VOUTN
+
+GND1
+
+GND2
+
+To Filter or ADC
+
+SMD
+1206
+
+Clearance area.
+Keep free of any
+conductive materials.
+
+High-side area
+Controller-side area
+Via
+
+Figure 37. Layout Recommendation
+
+Submit Documentation Feedback
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+19
+
+AMC1200, AMC1200B
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+www.ti.com
+
+11 Device and Documentation Support
+11.1 Documentation Support
+11.1.1 Related Documentation
+For related documentation see the following:
+• TI Isolation Glossary, SLLA353
+• 18 bit, 1Msps Data Acquisition Block Optimized for Lowest Distortion and Noise, SLAU515
+• 18 bit Data Acquisition Block Optimized for Lowest Power, SLAU513
+• High-Voltage Lifetime of the ISO72x Family of Digital Isolators, SLLA197
+• ISO72x Digital Isolator Magnetic-Field Immunity, SLLA181
+• AMC1100: Replacement of Input Main Sensing Transformer in Inverters with Isolate Amplifier, SLAA552
+• Isolated Current Sensing Reference Design Solution, 5A, 2kV, TIPD121
+• Isolated Bias Supplies + Isolated Amplifier Combo for Line Voltage or Current Measurement, PMP9480
+• TPS62120 Data Sheet, SLVSAD5
+• MSP430F471xx Data Sheet, SLAS626
+• SN6501 Data Sheet, SLLSEA0
+• LM5017 Data Sheet, SNVS783
+
+11.2 Related Links
+The following table lists quick access links. Categories include technical documents, support and community
+resources, tools and software, and quick access to sample or buy.
+Table 1. Related Links
+PARTS
+
+PRODUCT FOLDER
+
+SAMPLE & BUY
+
+TECHNICAL
+DOCUMENTS
+
+TOOLS &
+SOFTWARE
+
+SUPPORT &
+COMMUNITY
+
+AMC1200
+
+Click here
+
+Click here
+
+Click here
+
+Click here
+
+Click here
+
+AMC1200B
+
+Click here
+
+Click here
+
+Click here
+
+Click here
+
+Click here
+
+11.3 Community Resources
+The following links connect to TI community resources. Linked contents are provided "AS IS" by the respective
+contributors. They do not constitute TI specifications and do not necessarily reflect TI's views; see TI's Terms of
+Use.
+TI E2E™ Online Community TI's Engineer-to-Engineer (E2E) Community. Created to foster collaboration
+among engineers. At e2e.ti.com, you can ask questions, share knowledge, explore ideas and help
+solve problems with fellow engineers.
+Design Support TI's Design Support Quickly find helpful E2E forums along with design support tools and
+contact information for technical support.
+
+11.4 Trademarks
+E2E is a trademark of Texas Instruments.
+All other trademarks are the property of their respective owners.
+
+11.5 Electrostatic Discharge Caution
+This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled with
+appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may be more
+susceptible to damage because very small parametric changes could cause the device not to meet its published specifications.
+
+11.6 Glossary
+SLYZ022 — TI Glossary.
+This glossary lists and explains terms, acronyms, and definitions.
+20
+
+Submit Documentation Feedback
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+AMC1200, AMC1200B
+www.ti.com
+
+SBAS542D – APRIL 2011 – REVISED JULY 2015
+
+12 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+Copyright © 2011–2015, Texas Instruments Incorporated
+
+Product Folder Links: AMC1200 AMC1200B
+
+Submit Documentation Feedback
+
+21
+
+PACKAGE OPTION ADDENDUM
+www.ti.com
+
+6-Feb-2026
+
+PACKAGING INFORMATION
+Orderable part number
+
+(1)
+
+Status
+
+Material type
+
+(1)
+
+(2)
+
+Package | Pins
+
+Package qty | Carrier
+
+RoHS
+(3)
+
+Lead finish/
+Ball material
+
+MSL rating/
+Peak reflow
+
+(4)
+
+(5)
+
+Op temp (°C)
+
+Part marking
+(6)
+
+AMC1200BDUB
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+50 | TUBE
+
+Yes
+
+NIPDAU
+
+Level-4-260C-72 HR
+
+-40 to 105
+
+1200B
+
+AMC1200BDUB.A
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+50 | TUBE
+
+Yes
+
+NIPDAU
+
+Level-4-260C-72 HR
+
+-40 to 105
+
+1200B
+
+AMC1200BDUBR
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+1200B
+
+AMC1200BDUBR.A
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+1200B
+
+AMC1200BDUBRG4
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+1200B
+
+AMC1200BDUBRG4.A
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+1200B
+
+AMC1200BDWV
+
+Active
+
+Production
+
+SOIC (DWV) | 8
+
+64 | TUBE
+
+Yes
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 105
+
+AMC1200B
+
+AMC1200BDWV.A
+
+Active
+
+Production
+
+SOIC (DWV) | 8
+
+64 | TUBE
+
+Yes
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 105
+
+AMC1200B
+
+AMC1200BDWVR
+
+Active
+
+Production
+
+SOIC (DWV) | 8
+
+1000 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 105
+
+AMC1200B
+
+AMC1200BDWVR.A
+
+Active
+
+Production
+
+SOIC (DWV) | 8
+
+1000 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 105
+
+AMC1200B
+
+AMC1200BDWVRG4
+
+Active
+
+Production
+
+SOIC (DWV) | 8
+
+1000 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 105
+
+AMC1200B
+
+AMC1200BDWVRG4.A
+
+Active
+
+Production
+
+SOIC (DWV) | 8
+
+1000 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 105
+
+AMC1200B
+
+AMC1200SDUB
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+50 | TUBE
+
+Yes
+
+NIPDAU
+
+Level-4-260C-72 HR
+
+-40 to 105
+
+AMC1200
+
+AMC1200SDUB.A
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+50 | TUBE
+
+Yes
+
+NIPDAU
+
+Level-4-260C-72 HR
+
+-40 to 105
+
+AMC1200
+
+AMC1200SDUBR
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+AMC1200
+
+AMC1200SDUBR.A
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+AMC1200
+
+AMC1200SDUBRG4
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+AMC1200
+
+AMC1200SDUBRG4.A
+
+Active
+
+Production
+
+SOP (DUB) | 8
+
+350 | LARGE T&R
+
+Yes
+
+NIPDAU
+
+Level-3-260C-168 HR
+
+-40 to 105
+
+AMC1200
+
+Status: For more details on status, see our product life cycle.
+
+(2)
+
+Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+(3)
+
+RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+
+Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+Addendum-Page 1
+
+PACKAGE OPTION ADDENDUM
+www.ti.com
+
+6-Feb-2026
+
+(5)
+
+MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+(6)
+
+Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+OTHER QUALIFIED VERSIONS OF AMC1200 :
+
+• Automotive : AMC1200-Q1
+NOTE: Qualified Version Definitions:
+
+• Automotive - Q100 devices qualified for high-reliability automotive applications targeting zero defects
+
+Addendum-Page 2
+
+PACKAGE MATERIALS INFORMATION
+www.ti.com
+
+10-Aug-2026
+
+TAPE AND REEL INFORMATION
+REEL DIMENSIONS
+
+TAPE DIMENSIONS
+K0
+
+P1
+
+B0 W
+Reel
+Diameter
+Cavity
+A0
+B0
+K0
+W
+P1
+
+A0
+
+Dimension designed to accommodate the component width
+Dimension designed to accommodate the component length
+Dimension designed to accommodate the component thickness
+Overall width of the carrier tape
+Pitch between successive cavity centers
+
+Reel Width (W1)
+QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+Sprocket Holes
+
+Q1
+
+Q2
+
+Q1
+
+Q2
+
+Q3
+
+Q4
+
+Q3
+
+Q4
+
+User Direction of Feed
+
+Pocket Quadrants
+
+*All dimensions are nominal
+
+Device
+
+AMC1200BDUBR
+
+Package Package Pins
+Type Drawing
+SOP
+
+DUB
+
+8
+
+SPQ
+
+Reel
+Reel
+A0
+Diameter Width (mm)
+(mm) W1 (mm)
+
+350
+
+330.0
+
+24.4
+
+B0
+(mm)
+
+K0
+(mm)
+
+P1
+(mm)
+
+W
+Pin1
+(mm) Quadrant
+
+13.1
+
+9.75
+
+6.0
+
+16.0
+
+24.0
+
+Q1
+
+AMC1200BDUBRG4
+
+SOP
+
+DUB
+
+8
+
+350
+
+330.0
+
+24.4
+
+13.1
+
+9.75
+
+6.0
+
+16.0
+
+24.0
+
+Q1
+
+AMC1200BDWVR
+
+SOIC
+
+DWV
+
+8
+
+1000
+
+330.0
+
+16.4
+
+12.15
+
+6.2
+
+3.05
+
+16.0
+
+16.0
+
+Q1
+
+AMC1200BDWVRG4
+
+SOIC
+
+DWV
+
+8
+
+1000
+
+330.0
+
+16.4
+
+12.15
+
+6.2
+
+3.05
+
+16.0
+
+16.0
+
+Q1
+
+AMC1200SDUBR
+
+SOP
+
+DUB
+
+8
+
+350
+
+330.0
+
+24.4
+
+13.1
+
+9.75
+
+6.0
+
+16.0
+
+24.0
+
+Q1
+
+AMC1200SDUBRG4
+
+SOP
+
+DUB
+
+8
+
+350
+
+330.0
+
+24.4
+
+13.1
+
+9.75
+
+6.0
+
+16.0
+
+24.0
+
+Q1
+
+Pack Materials-Page 1
+
+PACKAGE MATERIALS INFORMATION
+www.ti.com
+
+10-Aug-2026
+
+TAPE AND REEL BOX DIMENSIONS
+
+Width (mm)
+
+W
+
+L
+
+H
+
+*All dimensions are nominal
+
+Device
+
+Package Type
+
+Package Drawing
+
+Pins
+
+SPQ
+
+Length (mm)
+
+Width (mm)
+
+Height (mm)
+
+AMC1200BDUBR
+
+SOP
+
+DUB
+
+8
+
+350
+
+356.0
+
+356.0
+
+45.0
+
+AMC1200BDUBRG4
+
+SOP
+
+DUB
+
+8
+
+350
+
+356.0
+
+356.0
+
+45.0
+
+AMC1200BDWVR
+
+SOIC
+
+DWV
+
+8
+
+1000
+
+353.0
+
+353.0
+
+32.0
+
+AMC1200BDWVRG4
+
+SOIC
+
+DWV
+
+8
+
+1000
+
+353.0
+
+353.0
+
+32.0
+
+AMC1200SDUBR
+
+SOP
+
+DUB
+
+8
+
+350
+
+356.0
+
+356.0
+
+45.0
+
+AMC1200SDUBRG4
+
+SOP
+
+DUB
+
+8
+
+350
+
+356.0
+
+356.0
+
+45.0
+
+Pack Materials-Page 2
+
+PACKAGE MATERIALS INFORMATION
+www.ti.com
+
+10-Aug-2026
+
+TUBE
+T - Tube
+height
+
+L - Tube length
+
+W - Tube
+width
+
+B - Alignment groove width
+*All dimensions are nominal
+
+Device
+
+Package Name
+
+Package Type
+
+Pins
+
+SPQ
+
+L (mm)
+
+W (mm)
+
+T (µm)
+
+B (mm)
+
+AMC1200BDUB
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+AMC1200BDUB
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+13.51
+
+7.36
+
+6.91
+
+13
+
+7300
+
+AMC1200BDUB.A
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+6.6
+
+13.51
+
+7.36
+
+6.91
+
+AMC1200BDUB.A
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+13
+
+7300
+
+6.6
+
+AMC1200BDWV
+
+DWV
+
+SOIC
+
+8
+
+64
+
+505.46
+
+13.94
+
+4826
+
+6.6
+
+AMC1200BDWV.A
+
+DWV
+
+SOIC
+
+8
+
+64
+
+505.46
+
+13.94
+
+4826
+
+6.6
+
+AMC1200SDUB
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+13.51
+
+7.36
+
+6.91
+
+AMC1200SDUB
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+13
+
+7300
+
+6.6
+
+AMC1200SDUB.A
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+13.51
+
+7.36
+
+6.91
+
+AMC1200SDUB.A
+
+DUB
+
+SOP
+
+8
+
+50
+
+532.13
+
+13
+
+7300
+
+6.6
+
+Pack Materials-Page 3
+
+PACKAGE OUTLINE
+
+DUB0008A
+
+SOP - 4.85 mm max height
+SCALE 1.200
+
+SMALL OUTLINE PACKAGE
+
+C
+10.7
+TYP
+10.1
+
+SEATING PLANE
+
+PIN 1 ID
+
+A
+
+0.1 C
+8
+
+1
+
+6X 2.54
+9.55
+9.02
+NOTE 3
+
+2X
+7.62
+4X
+(1.524)
+
+4
+5
+4X (0.99)
+
+B
+
+6.87
+6.37
+
+8X
+
+0.555
+0.355
+0.1 C A B
+
+6.82
+6.32
+TOP MOLD
+
+0.355
+TYP
+0.204
+
+SEE DETAIL A
+4.85 MAX
+0.635
+GAGE PLANE
+
+0 -8
+
+1.45
+1.15
+
+0.38 MIN
+
+DETAIL A
+TYPICAL
+
+4222355/G 04/2019
+
+NOTES:
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+exceed 0.254 mm per side.
+
+www.ti.com
+
+EXAMPLE BOARD LAYOUT
+
+DUB0008A
+
+SOP - 4.85 mm max height
+SMALL OUTLINE PACKAGE
+
+8X (2.35)
+
+8X (2.35)
+
+SYMM
+
+SYMM
+1
+
+1
+
+8
+
+8
+(R0.05)
+TYP
+
+8X (0.65)
+
+(R0.05)
+TYP
+
+8X (0.65)
+
+SYMM
+
+SYMM
+
+6X (2.54)
+
+6X (2.54)
+5
+
+4
+
+5
+
+4
+
+(9.1)
+
+(9.45)
+
+IPC-7351 NOMINAL
+6.75 mm CLEARANCE/CREEPAGE
+
+HV / ISOLATION OPTION
+7.1 mm CLEARANCE/CREEPAGE
+
+LAND PATTERN EXAMPLES
+EXPOSED METAL SHOWN
+SCALE:5X
+
+SOLDER MASK
+OPENING
+
+0.07 MAX
+ALL AROUND
+
+METAL UNDER
+SOLDER MASK
+
+METAL
+
+EXPOSED METAL
+
+SOLDER MASK
+OPENING
+
+EXPOSED METAL
+
+0.07 MIN
+ALL AROUND
+
+NON SOLDER MASK
+DEFINED
+
+SOLDER MASK
+DEFINED
+
+SOLDER MASK DETAILS
+NOT TO SCALE
+
+4222355/G 04/2019
+
+NOTES: (continued)
+4. Publication IPC-7351 may have alternate designs.
+5. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+www.ti.com
+
+EXAMPLE STENCIL DESIGN
+
+DUB0008A
+
+SOP - 4.85 mm max height
+SMALL OUTLINE PACKAGE
+
+8X (2.35)
+
+8X (2.35)
+
+SYMM
+1
+
+SYMM
+1
+8
+
+8
+(R0.05)
+TYP
+
+8X (0.65)
+
+(R0.05)
+TYP
+
+8X (0.65)
+
+SYMM
+
+SYMM
+
+6X (2.54)
+
+6X (2.54)
+5
+
+4
+
+5
+
+4
+
+(9.1)
+
+(9.45)
+
+IPC-7351 NOMINAL
+6.75 mm CLEARANCE/CREEPAGE
+
+HV / ISOLATION OPTION
+7.1 mm CLEARANCE/CREEPAGE
+
+SOLDER PASTE EXAMPLE
+BASED ON 0.125 mm THICK STENCIL
+SCALE:5X
+
+4222355/G 04/2019
+
+NOTES: (continued)
+6. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+design recommendations.
+7. Board assembly site may have different recommendations for stencil design.
+
+www.ti.com
+
+PACKAGE OUTLINE
+
+DWV0008A
+
+SOIC - 2.8 mm max height
+SCALE 2.000
+
+SOIC
+
+C
+SEATING PLANE
+11.5 0.25
+TYP
+
+PIN 1 ID
+AREA
+
+0.1 C
+6X 1.27
+
+8
+
+1
+
+2X
+3.81
+
+5.95
+5.75
+NOTE 3
+4
+
+5
+
+0.51
+0.31
+0.25
+C A
+
+8X
+A
+
+7.6
+7.4
+NOTE 4
+
+B
+
+B
+
+2.8 MAX
+
+0.33
+TYP
+0.13
+
+SEE DETAIL A
+(2.286)
+
+0.25
+GAGE PLANE
+
+0 -8
+
+0.46
+0.36
+
+1.0
+0.5
+(2)
+
+DETAIL A
+TYPICAL
+
+4218796/A 09/2013
+
+NOTES:
+1. All linear dimensions are in millimeters. Dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+exceed 0.15 mm, per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm, per side.
+
+www.ti.com
+
+EXAMPLE BOARD LAYOUT
+
+DWV0008A
+
+SOIC - 2.8 mm max height
+SOIC
+
+8X (1.8)
+
+SEE DETAILS
+
+SYMM
+
+8X (0.6)
+
+SYMM
+
+6X (1.27)
+
+(10.9)
+
+LAND PATTERN EXAMPLE
+
+9.1 mm NOMINAL CLEARANCE/CREEPAGE
+SCALE:6X
+
+METAL
+
+SOLDER MASK
+OPENING
+
+SOLDER MASK
+OPENING
+
+METAL
+
+0.07 MAX
+ALL AROUND
+
+0.07 MIN
+ALL AROUND
+
+NON SOLDER MASK
+DEFINED
+
+SOLDER MASK
+DEFINED
+
+SOLDER MASK DETAILS
+4218796/A 09/2013
+
+NOTES: (continued)
+5. Publication IPC-7351 may have alternate designs.
+6. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+www.ti.com
+
+EXAMPLE STENCIL DESIGN
+
+DWV0008A
+
+SOIC - 2.8 mm max height
+SOIC
+
+8X (1.8)
+
+SYMM
+
+8X (0.6)
+
+SYMM
+
+6X (1.27)
+(10.9)
+
+SOLDER PASTE EXAMPLE
+
+BASED ON 0.125 mm THICK STENCIL
+SCALE:6X
+
+4218796/A 09/2013
+
+NOTES: (continued)
+7. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+design recommendations.
+8. Board assembly site may have different recommendations for stencil design.
+
+www.ti.com
+
+IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+Copyright © 2026, Texas Instruments Incorporated
+Last updated 10/2025
+
+
