@@ -1,0 +1,1205 @@
+A4950
+Full-Bridge DMOS PWM Motor Driver
+Description
+
+Features and Benefits
+• Low RDS(on) outputs
+• Overcurrent protection (OCP)
+▫ Motor short protection
+▫ Motor lead short to ground protection
+▫ Motor lead short to battery protection
+• Low Power Standby mode
+• Adjustable PWM current limit
+• Synchronous rectification
+• Internal undervoltage lockout (UVLO)
+• Crossover-current protection
+
+Designed for pulse width modulated (PWM) control of DC
+motors, the A4950 is capable of peak output currents to ±3.5 A
+and operating voltages to 40 V.
+Input terminals are provided for use in controlling the speed and
+direction of a DC motor with externally applied PWM control
+signals. Internal synchronous rectification control circuitry is
+provided to lower power dissipation during PWM operation.
+Internal circuit protection includes overcurrent protection,
+motor lead short to ground or supply, thermal shutdown with
+hysteresis, undervoltage monitoring of VBB, and crossovercurrent protection.
+
+Package: 8-pin SOICN with exposed
+thermal pad (suffix LJ)
+
+The A4950 is provided in a low-profile 8-pin SOICN package
+with exposed thermal pad (suffix LJ) that is lead (Pb) free, with
+100% matte tin leadframe plating.
+
+Not to scale
+
+Functional Block Diagram
+Load Supply
+
+OSC
+
+IN1
+
+Charge
+Pump
+
+VBB
+
+Control
+Logic
+Disable
+
+IN2
+
+TSD
+UVLO
+
+OUT1
+OUT2
+
+7V
+GND
+LSS
+VREF
+
+A4950-DS, Rev. 2
+
+÷ 10
+
+(Optional)
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+
+Selection Guide
+Part Number
+
+Packing
+
+A4950ELJTR-T
+
+3000 pieces per 13-in. reel
+
+Absolute Maximum Ratings
+Characteristic
+
+Rating
+
+Unit
+
+VBB
+
+40
+
+V
+
+Logic Input Voltage Range
+
+VIN
+
+–0.3 to 6
+
+V
+
+VREF Input Voltage Range
+
+VREF
+
+–0.3 to 6
+
+V
+
+Load Supply Voltage
+
+Symbol
+
+Notes
+
+Sense Voltage (LSS pin)
+
+VS
+
+–0.5 to 0.5
+
+V
+
+Motor Outputs Voltage
+
+VOUT
+
+–2 to 42
+
+V
+
+Output Current
+
+IOUT
+
+Duty cycle = 100%
+
+3.5
+
+A
+
+Transient Output Current
+
+iOUT
+
+TW < 500 ns
+
+6
+
+A
+
+Operating Temperature Range
+
+TA
+
+Temperature Range E
+
+–40 to 85
+
+°C
+
+Maximum Junction Temperature
+
+TJ(max)
+
+150
+
+°C
+
+Tstg
+
+–55 to 150
+
+°C
+
+Storage Temperature Range
+
+Thermal Characteristics may require derating at maximum conditions, see application information
+Characteristic
+Package Thermal Resistance
+
+Symbol
+RθJA
+
+Value
+
+Unit
+
+On 2-layer PCB with 0.8 in .2 exposed 2-oz. copper each side
+
+Test Conditions*
+
+62
+
+ºC/W
+
+On 4-layer PCB based on JEDEC standard
+
+35
+
+ºC/W
+
+*Additional thermal information available on the Allegro website.
+
+Terminal List Table
+Pin-out Diagram
+GND
+
+1
+
+IN2
+
+2
+
+IN1
+
+3
+
+VREF
+
+4
+
+PAD
+
+Number
+
+Name
+
+1
+
+GND
+
+Ground
+
+Function
+
+2
+
+IN2
+
+Logic input 2
+
+8 OUT2
+
+3
+
+IN1
+
+Logic input 1
+
+7 LSS
+
+4
+
+VREF
+
+Analog input
+
+5
+
+VBB
+
+Load supply voltage
+
+6
+
+OUT1
+
+DMOS full bridge output 1
+
+7
+
+LSS
+
+Power return – sense resistor connection
+
+8
+
+OUT2
+
+DMOS full bridge output 2
+
+–
+
+PAD
+
+Exposed pad for enhanced thermal dissipation
+
+6 OUT1
+5 VBB
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+2
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+
+ELECTRICAL CHARACTERISTICS Valid at TJ = 25°C, unless otherwise specified
+Characteristics
+
+Symbol
+
+Test Conditions
+
+Min.
+
+Typ.
+
+Max.
+
+Unit
+
+8
+
+–
+
+40
+
+V
+
+General
+Load Supply Voltage Range
+
+VBB
+
+RDS(on) Sink + Source Total
+
+RDS(on)
+
+Load Supply Current
+
+IBB
+
+Body Diode Forward Voltage
+
+Vf
+
+IOUT = |2.5 A|, TJ = 25°C
+
+–
+
+0.6
+
+0.8
+
+Ω
+
+IOUT = |2.5 A|, TJ = 125°C
+
+–
+
+0.96
+
+1.3
+
+Ω
+
+fPWM < 30 kHz
+
+–
+
+10
+
+–
+
+mA
+
+Low Power Standby mode
+
+–
+
+–
+
+10
+
+μA
+
+Source diode, If = –2.5 A
+
+–
+
+–
+
+1.5
+
+V
+
+Sink diode, If = 2.5 A
+
+–
+
+–
+
+1.5
+
+V
+
+Logic Inputs
+Logic Input Voltage Range
+
+VIN(1)
+
+2.0
+
+–
+
+–
+
+V
+
+VIN(0)
+
+–
+
+–
+
+0.8
+
+V
+
+VIN(STANDBY) Low Power Standby mode
+
+–
+
+–
+
+0.4
+
+V
+
+IIN(1)
+
+VIN = 2.0 V
+
+–
+
+40
+
+100
+
+μA
+
+IIN(0)
+
+VIN = 0.8 V
+
+–
+
+16
+
+40
+
+μA
+
+RLOGIC(PD) VIN = 0 V = IN1 = IN2
+
+–
+
+50
+
+–
+
+kΩ
+
+VHYS
+
+–
+
+250
+
+550
+
+mV
+
+Crossover Delay
+
+tCOD
+
+50
+
+–
+
+500
+
+ns
+
+VREF Input Voltage Range
+
+VREF
+
+Logic Input Current
+Logic Input Pull-Down Resistance
+Input Hysteresis
+
+RR
+
+Timing
+
+Current Gain
+Blank Time
+Constant Off-time
+
+AV
+
+0
+
+–
+
+5
+
+V
+
+VREF / ISS , VREF = 5 V
+
+9.5
+
+–
+
+10.5
+
+V/V
+
+VREF / ISS , VREF = 2.5 V
+
+9.0
+
+–
+
+10.0
+
+V/V
+
+VREF / ISS , VREF = 1 V
+
+8.0
+
+–
+
+10.0
+
+V/V
+
+tBLANK
+
+2
+
+3
+
+4
+
+μs
+
+toff
+
+16
+
+25
+
+34
+
+μs
+
+–
+
+1
+
+1.5
+
+ms
+
+–
+
+–
+
+30
+
+μs
+
+VBB increasing
+
+7
+
+7.5
+
+7.95
+
+V
+
+Standby Timer
+
+tst
+
+Power-Up Delay
+
+tpu
+
+IN1 = IN2 < VIN(STANDBY)
+
+Protection Circuits
+UVLO Enable Threshold
+
+VBBUVLO
+
+UVLO Hysteresis
+
+VBBUVLOhys
+
+–
+
+500
+
+–
+
+mV
+
+Thermal Shutdown Temperature
+
+TJTSD
+
+Temperature increasing
+
+–
+
+160
+
+–
+
+°C
+
+Thermal Shutdown Hysteresis
+
+TTSDhys
+
+Recovery = TJTSD – TTSDhys
+
+–
+
+15
+
+–
+
+°C
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+3
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+
+Characteristic Performance
+
+PWM Control Timing Diagram
+
+VIN(1)
+IN1
+GND
+VIN(1)
+IN2
+GND
+
++IREG
+
+IOUT(x)
+
+0A
+
+-IREG
+
+Forward/
+Fast Decay
+
+Reverse/
+Fast Decay
+
+Forward/
+Slow Decay
+
+Reverse/
+Slow Decay
+
+PWM Control Truth Table
+
+IN1
+
+IN2
+
+10×VS > VREF
+
+OUT1
+
+OUT2
+
+0
+
+1
+
+False
+
+L
+
+H
+
+Reverse
+
+Function
+
+1
+
+0
+
+False
+
+H
+
+L
+
+Forward
+
+0
+
+1
+
+True
+
+H/L
+
+L
+
+Chop (mixed decay), reverse
+
+1
+
+0
+
+True
+
+L
+
+H/L
+
+Chop (mixed decay), forward
+
+1
+
+1
+
+False
+
+L
+
+L
+
+Brake (slow decay); after a Chop command
+
+0
+
+0
+
+False
+
+Z
+
+Z
+
+Coast, enters Low Power Standby mode after 1 ms
+
+Note: Z indicates high impedance.
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+4
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+
+Functional Description
+
+Device Operation
+The A4950 is designed to operate DC motors. The output drivers
+are all low-RDS(on) , N-channel DMOS drivers that feature internal synchronous rectification to reduce power dissipation. The
+current in the output full bridge is regulated with fixed off-time
+pulse width modulated (PWM) control circuitry. The IN1 and IN2
+inputs allow two-wire control for the bridge.
+Protection circuitry includes internal thermal shutdown, and protection against shorted loads, or against output shorts to ground
+or supply. Undervoltage lockout prevents damage by keeping the
+outputs off until the driver has enough voltage to operate normally.
+Standby Mode
+Low Power Standby mode is activated when both input (INx)
+pins are low for longer than 1 ms. Low Power Standby mode
+disables most of the internal circuitry, including the charge pump
+and the regulator. When the A4950 is coming out of standby
+mode, the charge pump should be allowed to reach its regulated
+voltage (a maximum delay of 200 μs) before any PWM commands are issued to the device.
+Internal PWM Current Control
+Initially, a diagonal pair of source and sink FET outputs are
+enabled and current flows through the motor winding and the
+optional external current sense resistor, RS . When the voltage
+across RS equals the comparator trip value, then the current sense
+comparator resets the PWM latch. The latch then turns off the
+sink and source FETs (Mixed Decay mode).
+VREF
+The maximum value of current limiting is set by the selection of
+RSx and the voltage at the VREF pin. The transconductance function is approximated by the maximum value of current limiting,
+
+ITripMAX (A), which is set by:
+ITripMAX =
+
+VREF
+10 RS
+
+where VREF is the input voltage on the VREF pin (V) and RS is
+the resistance of the sense resistor (Ω) on the LSS terminal.
+Overcurrent Protection
+A current monitor will protect the IC from damage due to output
+shorts. If a short is detected, the IC will latch the fault and disable
+the outputs. The fault latch can only be cleared by coming out of
+Low Power Standby mode or by cycling the power to VBB. During OCP events, Absolute Maximum Ratings may be exceeded
+for a short period of time before the device latches.
+Shutdown
+If the die temperature increases to approximately 160°C, the full
+bridge outputs will be disabled until the internal temperature falls
+below a hysteresis, TTSDhys , of 15°C. Internal UVLO is present
+on VBB to prevent the output drivers from turning-on below the
+UVLO threshold.
+Braking
+The braking function is implemented by driving the device in
+Slow Decay mode, which is done by applying a logic high to both
+inputs, after a bridge-enable Chop command (see PWM Control
+Truth Table). Because it is possible to drive current in both directions through the DMOS switches, this configuration effectively
+shorts-out the motor-generated BEMF, as long as the Chop command is asserted. The maximum current can be approximated by
+VBEMF / RL . Care should be taken to ensure that the maximum
+ratings of the device are not exceeded in worse case braking situations: high speed and high-inertia loads.
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+5
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+
+Synchronous Rectification
+When a PWM off-cycle is triggered by an internal fixed off-time
+cycle, load current will recirculate. The A4950 synchronous rectification feature turns-on the appropriate DMOSFETs during the
+current decay, and effectively shorts out the body diodes with the
+low RDS(on) driver. This significantly lowers power dissipation.
+When a zero current level is detected, synchronous rectification is
+turned off to prevent reversal of the load current.
+
+Mixed Decay Operation
+The bridges operate in Mixed Decay mode. Referring to the
+lower panel of the figure below, as the trip point is reached, the
+device goes into fast decay mode for 50% of the fixed off-time
+period. After this fast decay portion the device switches to slow
+decay mode for the remainder of the off-time. During transitions
+from fast decay to slow decay, the drivers are forced off for the
+Crossover Delay, tCOD . This feature is added to prevent shootthrough in the bridge. During this “dead time” portion, synchronous rectification is not active, and the device operates in fast
+decay and slow decay only.
+
+Mixed Decay Mode Operation
+VPHASE
+
++
+IOUT
+
+See Enlargement A
+0
+
+–
+
+Enlargement A
+Fixed Off-Time, toff = 25 μs
+0.50 × toff
+
+0.50 × toff
+
+ITrip
+IOUT
+
+Fast Decay
+
+tCOD
+
+tCOD
+
+Slow Decay
+
+tCOD
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+6
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+Application Information
+
+Sense Pin (LSS)
+In order to use PWM current control, a low-value resistor is
+placed between the LSS pin and ground for current sensing purposes. To minimize ground-trace IR drops in sensing the output
+current level, the current sensing resistor should have an independent ground return to the star ground point. This trace should be
+as short as possible. For low-value sense resistors, the IR drops in
+the PCB can be significant, and should be taken into account.
+
+of the device makes a good location for the star ground point. The
+exposed pad can be connected to ground for this purpose.
+
+When selecting a value for the sense resistor be sure not to
+exceed the maximum voltage on the LSS pin of ±500 mV at
+maximum load. During overcurrent events, this rating may be
+exceeded for short durations.
+
+Layout
+The PCB should have a thick ground plane. For optimum
+electrical and thermal performance, the A4950 must be soldered
+directly onto the board. On the underside of the A4950 package is
+an exposed pad, which provides a path for enhanced thermal dissipation. The thermal pad must be soldered directly to an exposed
+surface on the PCB in order to achieve optimal thermal conduction. Thermal vias are used to transfer heat to other layers of the
+PCB.
+
+Ground
+A star ground should be located as close to the A4950 as possible.
+The copper ground plane directly under the exposed thermal pad
+
+The load supply pin, VBB, should be decoupled with an electrolytic capacitor (typically 100 μF) in parallel with a lower valued
+ceramic capacitor placed as close as practicable to the device.
+
+GND
+
+Solder
+
+A4950
+
+GND
+
+Trace (2 oz.)
+Signal (1 oz.)
+Ground (1 oz.)
+
+PCB
+
+Thermal (2 oz.)
+
+OUT2
+
+Thermal Vias
+
+RS
+
+OUT1
+
+C1
+
+A4950
+C2
+BULK
+CAPACITANCE
+
+1 GND
+
+VBB
+
+IN2
+
+OUT2
+
+PAD
+
+LSS
+
+IN1
+
+OUT1
+
+VREF
+
+VBB
+
+RS
+
+VBB
+C1
+
+GND
+
+C2
+
+GND
+
+Bill of Materials
+Item
+
+Reference
+
+Value
+
+Units
+
+Description
+
+1
+
+RS
+
+0.25
+(for VREF = 5 V, IOUT = 2 A)
+
+Ω
+
+2512, 1 W, 1% or better,
+carbon film chip resistor
+
+2
+
+C1
+
+0.22
+
+μF
+
+X5R minimum, 50 V or greater
+
+3
+
+C2
+
+100
+
+μF
+
+Electrolytic, 50 V or greater
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+7
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+
+Package LJ, 8-Pin SOICN
+with exposed thermal pad
+
+4.90 ±0.10
+
+0.65
+
+8°
+0°
+
+8
+
+B
+A
+
+1
+
+3.90 ±0.10
+
+6.00 ±0.20
+
+2
+
+SEATING PLANE
+GAUGE PLANE
+
+Branded Face
+SEATING
+PLANE
+
+0.10 C
+
+1.27 BSC
+
+1
+
+1.27
+0.40
+0.25 BSC
+
+0.51
+0.31
+
+2.41
+
+1.04 REF
+
+3.30 NOM
+
+8X
+
+C
+
+5.60
+
+2
+3.30
+
+C
+
+PCB Layout Reference View
+
+For Reference Only; not for tooling use (reference MS-012BA)
+Dimensions in millimeters
+Dimensions exclusive of mold flash, gate burrs, and dambar protrusions
+Exact case and lead configuration at supplier discretion within limits shown
+
+1.70 MAX
+0.15
+0.00
+
+1.27
+
+1.75
+
+0.25
+0.17
+2.41 NOM
+
+8
+
+A Terminal #1 mark area
+B
+
+Exposed thermal pad (bottom surface); dimensions may vary with device
+
+C
+
+Reference land pattern layout (reference IPC7351
+SOIC127P600X175-9AM); all pads a minimum of 0.20 mm from all
+adjacent pads; adjust as necessary to meet application process
+requirements and PCB layout tolerances; when mounting on a multilayer
+PCB, thermal vias at the exposed thermal pad land can improve thermal
+dissipation (reference EIA/JEDEC Standard JESD51-5)
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+8
+
+A4950
+
+Full-Bridge DMOS PWM Motor Driver
+
+Revision History
+Revision
+
+Revision Date
+
+Rev. 2
+
+November 9, 2011
+
+Description of Revision
+Update PWM timing, AV
+
+Copyright ©2011, Allegro MicroSystems, Inc.
+Allegro MicroSystems, Inc. reserves the right to make, from time to time, such departures from the detail specifications as may be required to permit improvements in the performance, reliability, or manufacturability of its products. Before placing an order, the user is cautioned to verify that the
+information being relied upon is current.
+Allegro’s products are not to be used in life support devices or systems, if a failure of an Allegro product can reasonably be expected to cause the
+failure of that life support device or system, or to affect the safety or effectiveness of that device or system.
+The information included herein is believed to be accurate and reliable. However, Allegro MicroSystems, Inc. assumes no responsibility for its use;
+nor for any infringement of patents or other rights of third parties which may result from its use.
+
+For the latest version of this document, visit our website:
+www.allegromicro.com
+
+Allegro MicroSystems, Inc.
+115 Northeast Cutoff
+Worcester, Massachusetts 01615-0036 U.S.A.
+1.508.853.5000; www.allegromicro.com
+
+9
+
+
