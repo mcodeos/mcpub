@@ -296,8 +296,8 @@ component CC2652R {
                 @ds(p=29, trust=max, cond="GPIO-wide thresholds")
         )   # → Pass C
 
-        [35] = RESET_N::CTRL(
-            # active low, NO internal pullup (Table 7-1, p.7)
+        [35] = _RESET::CTRL(
+            # active low (datasheet RESET_N), NO internal pullup (Table 7-1, p.7)
             tlow = t_reset(1us)              # p.17: shortest recognized reset
                 @ds(p=17, trust=max)         # → doc (debugger pairing; R10)
         )
