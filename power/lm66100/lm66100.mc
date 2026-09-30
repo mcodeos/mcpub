@@ -45,8 +45,8 @@ component ORING.LM66100
     pins = [
         psnk [1,2] = [VIN, GND]::DC()              // input sink (window in spec)
         psrc [6,2] = [VOUT, GND]::DC(1V ~ 5.5V)    // pass-through output (datasheet VOUT window)
-        in 3 = CE                                  // chip enable, active low (may tie to VOUT; do not float)
-        out 5 = ST                                 // status output, active-low open-drain
+        in 3 = _CE                                 // chip enable (datasheet CE; may tie to VOUT, do not float)
+        out 5 = _ST                                 // status output, open drain (datasheet ST)
         nc 4 = NC
     ]
 }

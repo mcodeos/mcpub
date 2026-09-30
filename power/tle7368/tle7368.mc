@@ -65,7 +65,7 @@ component TLE7368 (partno)
         out 3 = RO_1, "Reset output Q_LDO1"
         out 4 = RO_2, "Reset output Q_LDO2 and FB_EXT"
         in 24 = WDI, volt: -0.3V ~ 5.5V, "Window Watchdog input, Apply a watchdog trigger signal to this pin"
-        out 25 = WDO, volt: -0.3V ~ 5.5V, "Window Watchdog output, Open drain output, active low"
+        out 25 = _WDO, volt: -0.3V ~ 5.5V, "Window Watchdog output, open drain (datasheet WDO)"
     ]
 
     layout = [
@@ -193,7 +193,7 @@ module TLE7368E(psnk pwr{VIN, GND}::DC(12V))
     // VEXT <- tle.VEXT     // X pin 'VEXT' not defined on TLE7368
     VDD_STBY <- tle.Q_STBY
     MON_STBY <- tle.MON_STBY
-    WDO <- tle.WDO
+    WDO <- tle._WDO
     WDI <- tle.WDI
     _PORST <- tle.RO_1 + tle.RO_2
 
@@ -209,7 +209,7 @@ module TLE7368E(psnk pwr{VIN, GND}::DC(12V))
         VDD_STBY <- tle.Q_STBY,
         MON_STBY <- tle.MON_STBY,
 
-        WDO <- tle.WDO,
+        WDO <- tle._WDO,
         _PORST <- tle.RO_1 + tle.RO_2
     ]
     */
