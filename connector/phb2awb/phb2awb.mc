@@ -1,0 +1,56 @@
+# Copyright 2026 MCode
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+// Real 2-pole wire-to-board terminal (LHE PHB-2AWB, A2005-SR02), transcribed
+// from the two source documents beside this file (PHB.txt = series spec
+// sheet, PHB2.txt = series approval drawing). A terminal block, not an
+// electroacoustic part: the board's speaker drive reaches the speaker wire
+// through these two solder pads.
+//
+// Series ratings (PHB.txt): 100V AC/DC rated voltage, 2A rated current,
+// contact resistance 20mOhm max, insulation resistance 1000MOhm min,
+// withstand 800V AC for one minute, ambient -25 to +85 degC, wire range
+// AWG#30-#22 (UL E217379). Construction (PHB2.txt): housing LCP beige,
+// wafer and solder pads brass tin-plated; pole count is per order
+// (PHB-2..18AWB); the 2P size ships without a polarizing key, so the two
+// poles carry no documented polarity.
+//
+// The leaf stays a passive two-terminal: no direction words, no interface
+// adoption (ruling-19 census A1: passive pairing data is carried by the
+// net's other side), neutral pole names after the mclibs passive-leaf form.
+
+component WTB.PHB2AWB
+{
+    partno = "PHB-2AWB"      // LHE A2005-SR02, PHB series 2P variant
+    package = PKG.PHB2       // 2P wafer, 2.00mm pitch, THT solder pads
+
+    pins = [
+        1 = A, "Pole 1 solder pad (no polarity documented: the 2P size has no polarizing key)"
+        2 = B, "Pole 2 solder pad (no polarity documented: the 2P size has no polarizing key)"
+    ]
+
+    spec = [
+        vr = 100V, "rated voltage, AC/DC"                          // series spec sheet
+        ir = 2A, "rated current, AC/DC"
+        rcontact = 20mΩ, "contact resistance, max"
+        rins = 1000MΩ, "insulation resistance, min"
+        vwithstand = 800V, "withstand voltage, 800V AC for one minute"
+        temp = -25°C ~ +85°C, "ambient temperature"
+    ]
+}
+
+// Usage Examples:
+// component WTB.PHB2AWB spk_term
+// lpa.VO1 -> SPK.P; lpa.VO2 -> SPK.N          // amp legs onto the SPK net pair
+// SPK.P -> spk_term.A; SPK.N -> spk_term.B    // net pair lands on the two poles
