@@ -18,7 +18,7 @@
 
 use mclibs.analog/dac.mc
 
-component DAC.MCP4921 : DAC.SPI1
+component DAC.MCP4921 : DAC.SPIC1
 {
     partno = "MCP4921"
 }
