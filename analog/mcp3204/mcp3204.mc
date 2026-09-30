@@ -18,7 +18,7 @@
 
 use mclibs.analog/adc.mc
 
-component ADC.MCP3204 : ADC.SPIC4
+component ADC.MCP3204 : ADC.C4SPI
 {
     partno = "MCP3204"
 }
