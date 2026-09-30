@@ -1,0 +1,189 @@
+# CST92F32 (Chipsea BLE 5.0 low-power SoC) -- corpus twin of efr32mg21.mc
+# and cc2530.mc, written under the same ruling set so the form can be
+# compared across vendors:
+#   ruling 25  axis words carry parameters: tx(0dBm)
+#   ruling 26  value lists are kvalue dicts [typ: ..., max: ...]
+#   ruling 27  hot/return pins share one face: [RAIL, GND] pair form, pin
+#              groups ordered by rail name
+#   ruling 28  single call form: key = Meta(axis..., value = literal)
+#   ruling 29  drive-class axis is one word ma with a current argument,
+#              ma(N mA); single-class sheets drop the axis (deleted, not
+#              defaulted)
+# Source: CST92F32 User Manual V1.1 (Chipsea Technologies, Shenzhen;
+# 2022-07-26; initial release V1.0 2020-09-29), 10 pages, cited per row
+# from the pdftotext -layout extraction (cache: cst92f32.txt).
+# QFN32 4x4 mm, exposed die pad = the ground return (Table 1, p.6); the
+# sheet numbers it "pin 0", the corpus does not: unnumbered pads spell
+# [pad] (no invented numbers, die-pad canon 2026-09-30).
+# This is a SHORT datasheet: the whole electrical section is one page
+# (p.8, Tables 2-6) and there are NO per-peripheral, timing, charger or
+# audio tables -- honest gaps are marked where cc2530/efr32mg21 have rows
+# this datasheet simply does not carry.
+
+@source(cst92f32.pdf, "CST92F32 User Manual V1.1", vendor = Chipsea)
+
+# -- §1 metas --------------------------------------------------------------
+# The schema lives in mcode/meta/ (ruling 13: one authority face per
+# domain) -- this file only REFERENCES it (one value one source):
+#   core.mc   receiver / output / absmax / temp_range
+#   power.mc  supply_range / current_draw
+#   level.mc  drive_level
+#   radio.mc  radio_band / radio_rate / rf_sens / rf_pout / rf_maxin
+# Corpus note: this sheet prints ONE VOH/VOL pair with no drive classes,
+# so the drive_level kind axis is DROPPED, not defaulted (ruling 29:
+# single-class deletion is legal).
+component CST92F32 {
+    pins = [
+
+        # ── Main supply VDD (pin 8, "3.3 V power input", Table 1 p.6),
+        #    return = exposed die pad. ONE operating range serves the whole
+        #    chip (Table 3 VIN row 1.8/3.3/3.6 V, p.8); there is no per-rail
+        #    split, so the same window rides AVDD/VDD_RF below as a
+        #    transcription of the shared row, not a per-rail fact. ──
+        psnk [[8], [pad]] = [VDD, GND]::DC(
+            vin  = supply_range(1.8V ~ 3.6V)     @ds(p=8, trust=max)   # VIN row, Table 3
+            vmax = absmax(0V ~ 3.6V)             @ds(p=8, trust=max)   # absmax VIN, Table 2
+            # iabsmax: the absmax table (p.8) lists voltages and
+            # temperatures only -- no current-limit row exists to
+            # transcribe (honest gap, same shape as cc2530's).
+            idraw = [   # Table 4 (p.8); the typ column ONLY -- no min/max
+                        # power columns are printed (honest gap)
+                current_draw(mode = tx(0dBm), value = [typ: 8mA])
+                                @ds(p=8, trust=max, cond="TX at 0 dBm output")
+                current_draw(mode = rx, value = [typ: 8mA])
+                                @ds(p=8, trust=max)
+                current_draw(mode = sleep, value = [typ: 2uA])
+                                @ds(p=8, trust=max, cond="wake by timer or IO")
+                current_draw(mode = off, value = [typ: 0.7uA])
+                                @ds(p=8, trust=max, cond="wake by IO only")
+            ]   # -> Pass D (per-mode slots against capacity)
+        )
+
+        # ── Analog supply AVDD (pin 15, "3.3 V analog power input",
+        #    Table 1 p.7). No analog-current table exists: cc2530 carries a
+        #    full peri_current addend list and efr32mg21 an ADC row -- this
+        #    datasheet has no peripheral-current rows at all (honest gap). ──
+        psnk [[15], [pad]] = [AVDD, GND]::DC(
+            vin  = supply_range(1.8V ~ 3.6V)     @ds(p=8, trust=max)   # shared VIN row
+            vmax = absmax(0V ~ 3.6V)             @ds(p=8, trust=max)
+        )
+
+        # ── Radio supply VDD_RF (pin 25): the pin table says connect to
+        #    DCDC_OUT *or* 3.3 V (p.7) -- an ALTERNATIVE-SOURCE choice no
+        #    face can carry as a demand (same inter-rail ordering family
+        #    efr32mg21 files on RFVDD). Table 4 prints RX/TX as whole-chip
+        #    rows with no supply split, so the radio budget rides VDD above;
+        #    nothing per-rail to land here (honest gap). ──
+        psnk [[25], [pad]] = [VDD_RF, GND]::DC(
+            vin  = supply_range(1.8V ~ 3.6V)     @ds(p=8, trust=max)
+            vmax = absmax(0V ~ 3.6V)             @ds(p=8, trust=max)
+        )
+
+        # ── On-chip regulator pins: outputs of internal rails the pin
+        #    table names by nominal voltage only (p.6/p.7). No load-current,
+        #    accuracy or ripple rows exist anywhere (honest gap). ──
+        psnk [9] = DCDC_SW      # 1.35 V BUCK switch node (p.6); no external
+                                # spec printed -- bare face
+        psnk [12] = DCDC_OUT(
+            vout = output(1.35V)             @ds(p=7)   # nominal, pin table
+        )   # also feeds the 1.2-V LDO input (p.7); VDD_RF may connect here
+        psnk [11] = DVDD_OUT(
+            vout = output(1.2V)              @ds(p=6)   # nominal, digital-core LDO
+        )
+        psnk [10] = CP_OUT(
+            vout = output(2.35V@vdd<2.35V)   @ds(p=6, cond="chargepump, internal FLASH supply; else tracks VDD")
+        )
+
+        # ── GPIO: 20 pins on this package. The feature page says "34 or
+        #    20 GPIO" (p.5) -- the 34 count belongs to a larger package;
+        #    Table 1 (p.6-7) wires 20. ONE DC class: VIH/VIL/VOH/VOL
+        #    (Table 3, p.8) are VDD-relative windows transcribed as
+        #    printed; the relative-window literal stays the eval batch's
+        #    debt (same shape as cc2530's VDD+0.3 body row). No drive
+        #    current, no leakage, no pull value anywhere (honest gaps).
+        #    FLAG (datasheet self-inconsistency): p.5 claims 18 external
+        #    interrupt inputs, but Table 1 marks TEN pins EXTI-incapable
+        #    (P18-P20, P23-P25, P31-P34 = pins 20-22, 26-28, 29-32),
+        #    leaving 10 EXTI-capable pins. Both facts transcribed as
+        #    printed; the machine gate owns the verdict. ──
+        io [1, 2, 3, 4, 6, 7, 13, 14, 18, 19, 20, 21, 22, 26, 27, 28, 29, 30, 31, 32] =
+                GPIO::GPIO(
+                    vin  = receiver([low: 0V ~ 0.3V, high: vdd - 0.3V ~ vdd + 0.3V])
+                                @ds(p=8, trust=max, cond="VIL max / VIH min-max as printed")
+                    vout = drive_level(value = [low: 0V ~ 0.3V, high: vdd - 0.3V ~ vdd + 0.3V])
+                                @ds(p=8, trust=max, cond="VOL max / VOH min-max as printed")
+                )   # -> Pass C (E4124 level window)
+        # Analog aliases off the same pins (Table 1, p.7): P14/P15 = analog
+        # port 3/4 (pins 13/14); P16/P17 = analog port 5/6 + 32k XTAL in/out
+        # (pins 18/19); P18/P19 = mic PGA diff +/- (pins 20/21); P20 = mic
+        # bias output (pin 22). All GPIO wake inputs (p.5).
+
+        # ── RF: ONE single-ended antenna pin ("single-ended RFIO", p.4;
+        #    Table 1 pin 24, type "RF Port", p.7). RF_SE, not RF_DIFF --
+        #    the face TYPE is the pairing key (ruling 19). ──
+        rf [24] = RF{ANT}::RF_SE(
+            band  = radio_band(2400MHz ~ 2483MHz)   @ds(p=8)   # Freq row, Table 5
+            rate  = radio_rate([125kbps, 500kbps, 1Mbps, 2Mbps])
+                    @ds(p=4, cond="four supported PHY rates")
+                    # FLAG: a plain rate SET -- the envelope list is the
+                    # closest value shape; the four points are
+                    # alternatives, not a sweep. sens below carries the
+                    # same four as value@rate conditions.
+            pout  = rf_pout([min: -20dBm, typ: 0dBm, max: 10dBm])
+                    @ds(p=8, trust=max, cond="3 dBm step (p.4 feature row)")
+            sens  = rf_sens([-103dBm@125kbps, -98dBm@500kbps,
+                             -97dBm@1Mbps, -94dBm@2Mbps])
+                    @ds(p=8, trust=max, cond="GFSK at 125k/500k, BLE at 1M/2M; ~5 dB loss near f = 2480-16n MHz, n = 0..4 (Table 6 note)")
+            maxin = rf_maxin(-5dBm)   @ds(p=8, trust=max, cond="typ column only, Table 6")
+        )
+
+        # ── 16 MHz crystal (XTAL_IN pin 16 / XTAL_OUT pin 17, Table 1
+        #    p.7; "16M XTAL" feature p.5; XTAL_IN doubles as an external
+        #    clock input). The datasheet prints NO crystal demand rows --
+        #    no accuracy, ESR or load-cap window (honest gap: the xtal_*
+        #    demand family cc2530 transcribes has nothing to read here).
+        [16, 17] = XOSC{XTAL_IN, XTAL_OUT}    # 16 MHz (p.7)
+
+        # 32 kHz crystal rides P16/P17 (pins 18/19, "32K XTAL in/out",
+        # p.7): an ALIAS-grade face (GPIO + 32k xtal on one pin) -- the
+        # pin-profile ② debt cc2530 already files; no rows forced here.
+        # Mic bias/PGA on pins 20/21/22 (p.7): differential mic PGA +/- and
+        # bias output. No audio/analog table exists in this datasheet -- no
+        # PGA gain, bias voltage, PDM or ADC rows (honest gap; the
+        # analog-intent landing, U112 family, would own these).
+
+        # ── Control inputs (Table 1, p.6/p.7) ──
+        [23] = RESET_N::CTRL    # active-low reset input; no timing rows
+                                # printed (honest gap vs cc2530 p.12)
+        [5]  = BOOT0::CTRL      # boot select 0, input (p.6)
+    ]
+
+    # ── whole-part facts (ruling 19, third sentence) ──────────────────────
+    spec = [
+        ta = temp_range(-40C ~ 85C)   @ds(p=8, trust=max)   # operating temp, Table 2
+        # wake: NO wake/timing table exists in this datasheet (honest gap;
+        # cc2530 p.5 and efr32mg21 p.42 both carry one) -- the wake_time
+        # instance is not forced.
+        # Storage -55 ~ +150 C and soldering 220 C / 10 s also live in the
+        # absmax table (p.8); no consuming walk -- left as comments (R10).
+    ]
+}
+
+# ── pairing story (what the engine actually walks) ────────────────────────
+# 1. Power net (regulator/LDO --- VDD/AVDD/VDD_RF):
+#      covers: vout window ⊆ supply_range(1.8 ~ 3.6 V)             → Pass C
+#      leq: every idraw slot <= capacity on the source face        → Pass D
+# 2. GPIO net (pin --- peer input): slotwise containment, low and   → Pass C
+# 3. RF link: band covers channel demand, rate floors throughput;  → Pass C
+#    link budget: peer pout - path loss >= sens, pout <= maxin     → Pass C-2
+#
+# ── open points this transcription files ──
+# - VDD_RF dual source (DCDC_OUT or 3.3 V): alternative-supply demand has
+#   no face shape (efr32mg21's rail-ordering gap, second witness).
+# - EXTI count 18 (p.5) vs 10 capable pins (Table 1) -- flagged at the io
+#   face; machine gate owns the verdict.
+# - Relative windows (vdd - 0.3V / vdd + 0.3V) still lack a meta-era
+#   literal (shared eval-batch debt).
+# - Plain-set radio_rate list: envelope shape borrowed, flagged at the row.
+# - Internal regulator outputs (1.35 V BUCK / 1.2 V LDO / chargepump) carry
+#   nominal-only vout with no accuracy or load rows to pair against.

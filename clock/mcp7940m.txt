@@ -1,0 +1,6517 @@
+MCP7940M
+Low-Cost I2C Real-Time Clock/Calendar with SRAM
+Timekeeping Features
+
+General Description
+
+• Real-Time Clock/Calendar (RTCC):
+- Hours, Minutes, Seconds, Day of Week, Day,
+Month, Year
+- Leap year compensated to 2399
+- 12/24 hour modes
+• Oscillator for 32.768 kHz Crystals:
+- Optimized for 6-9 pF crystals
+• On-Chip Digital Trimming/Calibration:
+- ±1 PPM resolution
+- ±129 PPM range
+• Dual Programmable Alarms
+• Versatile Output Pin:
+- Clock output with selectable frequency
+- Alarm output
+- General purpose output
+
+The MCP7940M Real-Time Clock/Calendar (RTCC)
+tracks time using internal counters for hours, minutes,
+seconds, days, months, years, and day of week.
+Alarms can be configured on all counters up to and
+including months. For usage and configuration, the
+MCP7940M supports I2C communications up to 400
+kHz.
+
+Low-Power Features
+
+Package Types
+
+• Wide Voltage Range:
+- Operating voltage range of 1.8V to 5.5V
+• Low Typical Timekeeping Current:
+- Operating from VCC: 1.2 μA at 3.3V
+
+User Memory
+• 64-byte SRAM
+
+The open-drain, multi-functional output can be
+configured to assert on an alarm match, to output a
+selectable frequency square wave, or as a general
+purpose output.
+The MCP7940M is designed to operate using a 32.768
+kHz tuning fork crystal with external crystal load
+capacitors. On-chip digital trimming can be used to
+adjust for frequency variance caused by crystal
+tolerance and temperature.
+
+SOIC, MSOP, TSSOP, PDIP
+TDFN
+X1
+
+1
+
+8
+
+VCC
+
+X1 1
+
+8 VCC
+
+X2
+
+2
+
+7
+
+MFP
+
+X2 2
+
+7 MFP
+
+SCL
+
+NC 3
+
+6 SCL
+
+VSS 4
+
+5 SDA
+
+NC
+VSS
+
+3
+4
+
+6
+5
+
+SDA
+
+Operating Ranges
+• 2-Wire Serial Interface, I2C Compatible
+- I2C clock rate up to 400 kHz
+• Temperature Range:
+- Industrial (I): -40°C to +85°C
+
+Packages:
+• 8-Lead SOIC, MSOP, TSSOP, PDIP and 2x3
+TDFN
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 1
+
+MCP7940M
+FIGURE 1-1:
+
+TYPICAL APPLICATION SCHEMATIC
+VCC
+
+VCC
+
+VCC
+8
+VCC
+
+6
+PIC® MCU
+
+5
+7
+
+CX1
+
+1
+
+SCL
+MCP7940M
+2
+X2
+SDA
+
+32.768 KHZ
+
+X1
+
+CX2
+
+MFP
+VSS
+4
+
+FIGURE 1-2:
+VCC
+VSS
+
+SCL
+SDA
+
+BLOCK DIAGRAM
+Power
+Supply
+
+Control Logic
+
+I2C Interface
+and Addressing
+
+Configuration
+
+Seconds
+SRAM
+Minutes
+
+X1
+32.768 kHz
+Oscillator
+
+Hours
+
+Clock Divider
+
+X2
+
+Day of Week
+Digital Trimming
+
+Square Wave
+Output
+
+Date
+
+Alarms
+
+Month
+Year
+
+MFP
+
+ 2012-2018 Microchip Technology Inc.
+
+Output Logic
+
+DS20002292C-page 2
+
+MCP7940M
+1.0
+
+ELECTRICAL CHARACTERISTICS
+
+Absolute Maximum Ratings (†)
+VCC.............................................................................................................................................................................6.5V
+All inputs and outputs (except SDA and SCL) w.r.t. VSS .................................................................... -0.6V to VCC +1.0V
+SDA and SCL w.r.t. VSS ............................................................................................................................... -0.6V to 6.5V
+Storage temperature ...............................................................................................................................-65°C to +150°C
+Ambient temperature with power applied ................................................................................................-40°C to +125°C
+ESD protection on all pins   4 kV
+† NOTICE: Stresses above those listed under “Absolute Maximum Ratings” may cause permanent damage to the
+device. This is a stress rating only and functional operation of the device at those or any other conditions above those
+indicated in the operational listings of this specification is not implied. Exposure to maximum rating conditions for
+extended periods may affect device reliability.
+
+TABLE 1-1:
+
+DC CHARACTERISTICS
+
+DC CHARACTERISTICS
+Param.
+No.
+
+Sym.
+
+Electrical Characteristics:
+Industrial (I):
+VCC = +1.8V to 5.5V
+
+Characteristic
+
+Min.
+
+Typ.(2)
+
+Max.
+
+TA = -40°C to +85°C
+
+Units
+
+Conditions
+
+D1
+
+VIH
+
+High-level input voltage
+
+0.7 VCC
+
+—
+
+—
+
+V
+
+—
+
+D2
+
+VIL
+
+Low-level input voltage
+
+—
+
+—
+
+0.3 VCC
+0.2 VCC
+
+V
+V
+
+VCC  2.5V
+VCC < 2.5V
+
+D3
+
+VHYS
+
+Hysteresis of Schmitt
+Trigger inputs
+(SDA, SCL pins)
+
+0.05
+VCC
+
+—
+
+—
+
+V
+
+(Note 1)
+
+D4
+
+VOL
+
+Low-level output voltage
+(MFP, SDA pins)
+
+—
+
+—
+
+0.40
+
+V
+
+IOL = 3.0 mA @ VCC = 4.5V
+IOL = 2.1 mA @ VCC = 2.5V
+
+D5
+
+ILI
+
+Input leakage current
+
+—
+
+—
+
+±1
+
+A
+
+VIN = VSS or VCC
+
+D6
+
+ILO
+
+Output leakage current
+
+—
+
+—
+
+±1
+
+A
+
+VOUT = VSS or VCC
+
+D7
+
+CIN,
+COUT
+
+Pin capacitance
+(SDA, SCL, MFP pins)
+
+—
+
+—
+
+10
+
+pF
+
+VCC = 5.0V (Note 1)
+TA = 25°C, f = 1 MHz
+
+D8
+
+COSC
+
+Oscillator pin
+capacitance (X1, X2 pins)
+
+—
+
+3
+
+—
+
+pF
+
+(Note 1)
+
+D9
+
+ICCREAD
+
+SRAM/RTCC register
+ICCWRITE operating current
+
+—
+
+—
+
+300
+
+A
+
+VCC = 5.5V, SCL = 400 kHz
+
+—
+
+—
+
+400
+
+A
+
+VCC = 5.5V, SCL = 400 kHz
+
+D10
+
+ICCDAT
+
+VCC data-retention
+current (oscillator off)
+
+—
+
+—
+
+1
+
+A
+
+SCL, SDA, VCC = 5.5V
+
+D11
+
+ICCT
+
+Timekeeping current
+
+—
+
+1.2
+
+—
+
+A
+
+VCC = 3.3V (Note 1)
+
+Note 1:
+2:
+
+This parameter is not tested but ensured by characterization.
+Typical measurements taken at room temperature.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 3
+
+MCP7940M
+TABLE 1-2:
+
+AC CHARACTERISTICS
+Electrical Characteristics:
+Industrial (I):
+VCC = +1.8V to 5.5V
+
+AC CHARACTERISTICS
+Param.
+Symbol
+No.
+
+Characteristic
+
+TA = -40°C to +85°C
+
+Min.
+
+Typ.
+
+Max.
+
+Units
+
+Conditions
+
+1
+
+FCLK
+
+Clock frequency
+
+—
+—
+
+—
+—
+
+100
+400
+
+kHz
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+2
+
+THIGH
+
+Clock high time
+
+4000
+600
+
+—
+—
+
+—
+—
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+3
+
+TLOW
+
+Clock low time
+
+4700
+1300
+
+—
+—
+
+—
+—
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+4
+
+TR
+
+SDA and SCL rise time
+(Note 1)
+
+—
+—
+
+—
+—
+
+1000
+300
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+5
+
+TF
+
+SDA and SCL fall time
+(Note 1)
+
+—
+—
+
+—
+—
+
+1000
+300
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+6
+
+THD:STA Start condition hold time
+
+4000
+600
+
+—
+—
+
+—
+—
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+7
+
+TSU:STA
+
+4700
+600
+
+—
+—
+
+—
+—
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+Start condition setup time
+
+8
+
+THD:DAT Data input hold time
+
+0
+
+—
+
+—
+
+ns
+
+(Note 2)
+
+9
+
+TSU:DAT
+
+Data input setup time
+
+250
+100
+
+—
+—
+
+—
+—
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+10
+
+TSU:STO
+
+Stop condition setup time
+
+4000
+600
+
+—
+—
+
+—
+—
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+11
+
+TAA
+
+Output valid from clock
+
+—
+—
+
+—
+—
+
+3500
+900
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+12
+
+TBUF
+
+Bus free time: Time the bus
+must be free before a new
+transmission can start
+
+4700
+1300
+
+—
+—
+
+—
+—
+
+ns
+
+1.8V  VCC < 2.5V
+2.5V  VCC  5.5V
+
+13
+
+TSP
+
+Input filter spike suppression
+(SDA and SCL pins)
+
+—
+
+—
+
+50
+
+ns
+
+(Note 1)
+
+14
+
+FOSC
+
+Oscillator frequency
+
+—
+
+32.768
+
+—
+
+kHz
+
+—
+
+15
+
+TOSF
+
+Oscillator timeout period
+
+1
+
+—
+
+—
+
+ms
+
+(Note 1)
+
+Note 1:
+2:
+
+Not 100% tested.
+As a transmitter, the device must provide an internal minimum delay time to bridge the undefined region
+(minimum 300 ns) of the falling edge of SCL to avoid unintended generation of Start or Stop conditions.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 4
+
+MCP7940M
+I2C BUS TIMING DATA
+
+FIGURE 1-3:
+
+5
+
+SCL
+
+7
+
+SDA
+In
+
+D3
+
+2
+
+3
+
+8
+
+9
+
+4
+
+10
+
+6
+13
+11
+
+12
+
+SDA
+Out
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 5
+
+MCP7940M
+2.0
+
+PIN DESCRIPTIONS
+
+The descriptions of the pins are listed in Table 2-1.
+
+TABLE 2-1:
+Name
+X1
+X2
+NC
+Vss
+SDA
+SCL
+MFP
+VCC
+Note:
+
+2.1
+
+PIN FUNCTION TABLE
+8-pin
+SOIC
+
+8-pin
+MSOP
+
+8-pin
+TSSOP
+
+8-pin
+TDFN
+
+8-pin
+PDIP
+
+Function
+
+1
+1
+1
+1
+1
+Quartz Crystal Input, External Oscillator Input
+2
+2
+2
+2
+2
+Quartz Crystal Output
+3
+3
+3
+3
+3
+Not Connected
+4
+4
+4
+4
+4
+Ground
+5
+5
+5
+5
+5
+Bidirectional Serial Data (I2C)
+6
+6
+6
+6
+6
+Serial Clock (I2C)
+7
+7
+7
+7
+7
+Multifunction Pin
+8
+8
+8
+8
+8
+Primary Power Supply
+Exposed pad on TFDN can be connected to VSS or left floating.
+
+Serial Data (SDA)
+
+This is a bidirectional pin used to transfer addresses
+and data into and out of the device. It is an open-drain
+terminal. Therefore, the SDA bus requires a pull-up
+resistor to VCC (typically 10 k for 100 kHz, 2 k for
+400 kHz). For normal data transfer, SDA is allowed to
+change only during SCL low. Changes during SCL high
+are reserved for indicating the Start and Stop
+conditions.
+
+2.2
+
+Serial Clock (SCL)
+
+This input is used to synchronize the data transfer to
+and from the device.
+
+2.3
+
+Oscillator Input/Output (X1, X2)
+
+These pins are used as the connections for an external
+32.768 kHz quartz crystal and load capacitors. X1 is
+the crystal oscillator input and X2 is the output. The
+MCP7940M is designed to allow for the use of external
+load capacitors in order to provide additional flexibility
+when choosing external crystals. The MCP7940M is
+optimized for crystals with a specified load capacitance
+of 6-9 pF.
+X1 also serves as the external clock input when the
+MCP7940M is configured to use an external oscillator.
+
+2.4
+
+Multifunction Pin (MFP)
+
+This is an output pin used for the alarm and square
+wave output functions. It can also serve as a general
+purpose output pin by controlling the OUT bit in the
+CONTROL register.
+The MFP is an open-drain output and requires a pull-up
+resistor to VCC (typically 10 k). This pin may be left
+floating if not used.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 6
+
+MCP7940M
+3.0
+
+I2C BUS CHARACTERISTICS
+
+3.1.1.3
+
+3.1
+
+I2C Interface
+
+A low-to-high transition of the SDA line while the clock
+(SCL) is high determines a Stop condition. All
+operations must end with a Stop condition.
+
+The MCP7940M supports a bidirectional 2-wire bus
+and data transmission protocol. A device that sends
+data onto the bus is defined as transmitter, and a
+device receiving data as receiver. The bus has to be
+controlled by a master device which generates the
+Start and Stop conditions, while the MCP7940M works
+as slave. Both master and slave can operate as
+transmitter or receiver but the master device
+determines which mode is activated.
+3.1.1
+
+BUS CHARACTERISTICS
+
+The following bus protocol has been defined:
+• Data transfer may be initiated only when the bus
+is not busy.
+• During data transfer, the data line must remain
+stable whenever the clock line is high. Changes in
+the data line while the clock line is high will be
+interpreted as a Start or Stop condition.
+Accordingly, the following bus conditions have been
+defined (Figure 3-1).
+3.1.1.1
+
+Bus Not Busy (A)
+
+Both data and clock lines remain high.
+3.1.1.2
+
+Start Data Transfer (B)
+
+A high-to-low transition of the SDA line while the clock
+(SCL) is high determines a Start condition. All
+commands must be preceded by a Start condition.
+
+FIGURE 3-1:
+(A)
+
+3.1.1.4
+
+Stop Data Transfer (C)
+
+Data Valid (D)
+
+The state of the data line represents valid data when,
+after a Start condition, the data line is stable for the
+duration of the high period of the clock signal.
+The data on the line must be changed during the low
+period of the clock signal. There is one bit of data per
+clock pulse.
+Each data transfer is initiated with a Start condition and
+terminated with a Stop condition. The number of the
+data bytes transferred between the Start and Stop
+conditions is determined by the master device.
+3.1.1.5
+
+Acknowledge
+
+Each receiving device, when addressed, is obliged to
+generate an Acknowledge signal after the reception of
+each byte. The master device must generate an extra
+clock pulse which is associated with this Acknowledge
+bit.
+A device that acknowledges must pull down the SDA
+line during the Acknowledge clock pulse in such a way
+that the SDA line is stable-low during the high period of
+the Acknowledge-related clock pulse. Of course, setup
+and hold times must be taken into account. During
+reads, a master must signal an end of data to the slave
+by NOT generating an Acknowledge bit on the last byte
+that has been clocked out of the slave. In this case, the
+slave (MCP7940M) will leave the data line high to
+enable the master to generate the Stop condition.
+
+DATA TRANSFER SEQUENCE ON THE SERIAL BUS
+(B)
+
+(D)
+
+Start
+Condition
+
+Address or
+Acknowledge
+Valid
+
+(D)
+
+(C)
+
+(A)
+
+SCL
+
+SDA
+
+ 2012-2018 Microchip Technology Inc.
+
+Data
+Allowed
+to Change
+
+Stop
+Condition
+
+DS20002292C-page 7
+
+MCP7940M
+FIGURE 3-2:
+
+ACKNOWLEDGE TIMING
+Acknowledge
+Bit
+1
+
+SCL
+
+2
+
+3
+
+SDA
+
+4
+
+5
+
+6
+
+7
+
+Data from transmitter
+Transmitter must release the SDA line at this point
+allowing the Receiver to pull the SDA line low to
+acknowledge the previous eight bits of data.
+
+3.1.2
+
+8
+
+9
+
+1
+
+2
+
+3
+
+Data from transmitter
+Receiver must release the SDA line at this point
+so the Transmitter can continue sending data.
+
+DEVICE ADDRESSING
+
+The control byte is the first byte received following the
+Start condition from the master device (Figure 3-3).
+The control byte begins with a 4-bit control code. For
+the MCP7940M, this is set ‘1101’ for register read and
+write operations. The next three bits are non-configurable Chip Select bits that must always be set to ‘1’.
+The last bit of the control byte defines the operation to
+be performed. When set to a ‘1’ a read operation is
+selected, and when set to a ‘0’ a write operation is
+selected.
+The combination of the 4-bit control code and the three
+Chip Select bits is called the slave address. Upon
+receiving a valid slave address, the slave device outputs an acknowledge signal on the SDA line. Depending on the state of the R/W bit, the MCP7940M will
+select a read or a write operation.
+
+FIGURE 3-3:
+
+CONTROL BYTE FORMAT
+Acknowledge Bit
+Read/Write Bit
+
+Start Bit
+
+Chip Select
+Bits
+
+Control Code
+S
+
+1
+
+1
+
+0
+
+1
+
+1
+
+1
+
+1 R/W ACK
+
+RTCC Register/SRAM Control Byte
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 8
+
+MCP7940M
+4.0
+
+FUNCTIONAL DESCRIPTION
+
+4.1
+
+The MCP7940M is a highly-integrated Real-Time
+Clock/Calendar (RTCC). Using an on-board, lowpower oscillator, the current time is maintained in seconds, minutes, hours, day of week, date, month, and
+year. The MCP7940M also features 64 bytes of general
+purpose SRAM. Two alarm modules allow interrupts to
+be generated at specific times with flexible comparison
+options. Digital trimming can be used to compensate
+for inaccuracies inherent with crystals.
+The RTCC configuration and Status registers are used
+to access all of the modules featured on the
+MCP7940M.
+
+FIGURE 4-1:
+
+Memory Organization
+
+The MCP7940M features two different blocks of memory: the RTCC registers and general purpose SRAM
+(Figure 4-1). They share the same address space,
+accessed through the ‘1101111X’ control byte.
+Unused locations are not accessible. The MCP7940M
+will not acknowledge if the address is out of range, as
+shown in the shaded region of the memory map in
+Figure 4-1.
+The RTCC registers are contained in addresses 0x000x1F. Table 4-1 shows the detailed RTCC register
+map. There are 64 bytes of user-accessible SRAM,
+located in the address range 0x20-0x5F. The SRAM is
+a separate block from the RTCC registers.
+
+MEMORY MAP
+RTCC Registers/SRAM
+0x00
+Time and Date
+0x06
+0x07
+0x09
+0x0A
+
+Configuration and Trimming
+Alarm 0
+
+0x10
+0x11
+Alarm 1
+0x17
+0x18
+RESERVED – Do Not Use
+0x1F
+0x20
+
+SRAM (64 Bytes)
+
+0x5F
+0x60
+
+Unimplemented; device does not ACK
+
+0xFF
+I2C Address: 1101111x
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 9
+
+MCP7940M
+TABLE 4-1:
+
+DETAILED RTCC REGISTER MAP
+
+Addr.
+
+Register Name
+
+Bit 7
+
+Bit 6
+
+Bit 5
+
+00h
+
+RTCSEC
+
+ST
+
+SECTEN2
+
+SECTEN1
+
+01h
+
+RTCMIN
+
+—
+
+MINTEN2
+
+MINTEN1
+
+02h
+
+RTCHOUR
+
+—
+
+12/24
+
+AM/PM
+HRTEN1
+
+Bit 4
+
+Bit 3
+
+Bit 2
+
+Bit 1
+
+Bit 0
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+—
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+Section 4.3 “Timekeeping”
+
+03h
+
+RTCWKDAY
+
+—
+
+—
+
+OSCRUN
+
+—
+
+04h
+
+RTCDATE
+
+—
+
+—
+
+DATETEN1
+
+DATETEN0
+
+DATEONE3 DATEONE2 DATEONE1 DATEONE0
+
+05h
+
+RTCMTH
+
+—
+
+—
+
+LPYR
+
+MTHTEN0
+
+MTHONE3
+
+MTHONE2
+
+MTHONE1
+
+06h
+
+RTCYEAR
+
+YRTEN3
+
+YRTEN2
+
+YRTEN1
+
+YRTEN0
+
+YRONE3
+
+YRONE2
+
+YRONE1
+
+YRONE0
+
+07h
+
+CONTROL
+
+OUT
+
+SQWEN
+
+ALM1EN
+
+ALM0EN
+
+EXTOSC
+
+CRSTRIM
+
+SQWFS1
+
+SQWFS0
+
+08h
+
+OSCTRIM
+
+SIGN
+
+TRIMVAL6
+
+TRIMVAL5
+
+TRIMVAL4
+
+TRIMVAL3
+
+TRIMVAL2
+
+TRIMVAL1
+
+TRIMVAL0
+
+09h
+
+Reserved
+
+0Ah
+
+ALM0SEC
+
+—
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+0Bh
+
+ALM0MIN
+
+—
+
+MINTEN2
+
+MINTEN1
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+0Ch
+
+ALM0HOUR
+
+—
+
+12/24(2)
+
+AM/PM
+HRTEN1
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+0Dh
+
+ALM0WKDAY
+
+ALMPOL
+
+ALM0IF
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+0Eh
+
+ALM0DATE
+
+—
+
+—
+
+DATETEN1
+
+DATETEN0
+
+DATEONE3 DATEONE2 DATEONE1 DATEONE0
+
+0Fh
+
+ALM0MTH
+
+—
+
+—
+
+—
+
+MTHTEN0
+
+MTHONE3
+
+MTHONE2
+
+MTHONE1
+
+MTHONE0
+
+10h
+
+Reserved
+
+11h
+
+ALM1SEC
+
+—
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+12h
+
+ALM1MIN
+
+—
+
+MINTEN2
+
+MINTEN1
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+13h
+
+ALM1HOUR
+
+—
+
+12/24(2)
+
+AM/PM
+HRTEN1
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+ALM1IF
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+MTHONE0
+
+Reserved – Do not use
+
+Section 4.4 “Alarms”
+
+ALM0MSK2 ALM0MSK1 ALM0MSK0
+
+Reserved – Do not use
+
+Section 4.4 “Alarms”
+
+14h
+
+ALM1WKDAY
+
+ALMPOL(3)
+
+15h
+
+ALM1DATE
+
+—
+
+—
+
+DATETEN1
+
+DATETEN0
+
+DATEONE3 DATEONE2 DATEONE1 DATEONE0
+
+16h
+
+ALM1MTH
+
+—
+
+—
+
+—
+
+MTHTEN0
+
+MTHONE3
+
+17h-1Fh Reserved
+
+Note 1:
+2:
+3:
+
+ALM1MSK2 ALM1MSK1 ALM1MSK0
+
+MTHONE2
+
+MTHONE1
+
+MTHONE0
+
+Reserved – Do not use
+
+Grey areas are unimplemented.
+The 12/24 bits in the ALMxHOUR registers are read-only and reflect the value of the 12/24 bit in the
+RTCHOUR register.
+The ALMPOL bit in the ALM1WKDAY register is read-only and reflects the value of the ALMPOL bit in the
+ALM0WKDAY register.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 10
+
+MCP7940M
+4.2
+
+Oscillator Configuration
+
+EQUATION 4-1:
+
+The MCP7940M can be operated in two different oscillator configurations: using an external crystal or using
+an external clock input.
+
+4.2.1
+
+Figure 4-2 shows the pin connections when using an
+external crystal.
+
+FIGURE 4-2:
+
+CRYSTAL OPERATION
+MCP7940M
+X1
+
+CX1
+
+To Internal
+Logic
+Quartz
+Crystal
+
+CX2
+
+ST
+
+X2
+
+Note 1: The ST bit must be set to enable the
+crystal oscillator circuit.
+2: Always verify oscillator performance over
+the voltage and temperature range that is
+expected for the application.
+
+4.2.1.1
+
+Choosing Load Capacitors
+
+CL is the effective load capacitance as seen by the
+crystal, and includes the physical load capacitors, pin
+capacitance, and stray board capacitance. Equation 4-1
+can be used to calculate CL.
+CX1 and CX2 are the external load capacitors. They
+must be chosen to match the selected crystal’s specified load capacitance.
+Note:
+
+CX1  CX2
+C L = ---------------------------+ C STRAY
+CX1 + CX2
+
+EXTERNAL CRYSTAL
+
+The crystal oscillator circuit on the MCP7940M is
+designed to operate with a standard 32.768 kHz tuning
+fork crystal and matching external load capacitors. By
+using external load capacitors, the MCP7940M allows
+for a wide selection of crystals. Suitable crystals have
+a load capacitance (CL) of 6-9 pF. Crystals with a load
+capacitance of 12.5 pF are not recommended.
+
+LOAD CAPACITANCE
+CALCULATION
+
+Where:
+C L = Effective load capacitance
+C X 1 = Capacitor value on X1 + C OSC
+C X 2 = Capacitor value on X2 + C OSC
+C STRAY = PCB stray capacitance
+
+4.2.1.2
+
+Layout Considerations
+
+The oscillator circuit should be placed on the same
+side of the board as the device. Place the oscillator
+circuit close to the respective oscillator pins. The load
+capacitors should be placed next to the oscillator
+itself, on the same side of the board.
+Use a grounded copper pour around the oscillator circuit to isolate it from surrounding circuits. The
+grounded copper pour should be routed directly to VSS.
+Do not run any signal traces or power traces inside the
+ground pour. Also, if using a two-sided board, avoid any
+traces on the other side of the board where the crystal
+is placed.
+Layout suggestions are shown in Figure 4-3. In-line
+packages may be handled with a single-sided layout
+that completely encompasses the oscillator pins. With
+fine-pitch packages, it is not always possible to completely surround the pins and components. A suitable
+solution is to tie the broken guard sections to a mirrored
+ground layer. In all cases, the guard trace(s) must be
+returned to ground.
+For additional information and design guidance on
+oscillator circuits, refer to these Microchip Application
+Notes, available at the corporate website
+(www.microchip.com):
+• AN1365, “Recommended Usage of Microchip
+Serial RTCC Devices”
+• AN1519, “Recommended Crystals for Microchip
+Stand-Alone Real-Time Clock Calendar Devices”
+
+If the load capacitance is not correctly
+matched to the chosen crystal’s specified
+value, the crystal may give a frequency
+outside of the crystal manufacturer’s
+specifications.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 11
+
+MCP7940M
+FIGURE 4-3:
+
+SUGGESTED PLACEMENT OF THE OSCILLATOR CIRCUIT
+
+Single-Sided and In-line Layouts:
+Copper Pour
+(tied to ground)
+
+Fine-Pitch (Dual-Sided) Layouts:
+
+Oscillator
+Crystal
+
+Top Layer Copper Pour
+(tied to ground)
+Bottom Layer
+Copper Pour
+(tied to ground)
+X1
+
+X1
+CX1
+
+CX1
+
+X2
+
+Oscillator
+Crystal
+CX2
+
+GND
+
+CX2
+
+GND
+
+`
+
+X2
+
+DEVICE PINS
+
+DEVICE PINS
+
+4.2.2
+
+4.2.3
+
+EXTERNAL CLOCK INPUT
+
+A 32.768 kHz external clock source can be connected
+to the X1 pin (Figure 4-4). When using this configuration, the X2 pin should be left floating.
+Note:
+
+The EXTOSC bit must be set to enable an
+external clock source.
+
+FIGURE 4-4:
+
+EXTERNAL CLOCK INPUT
+OPERATION
+
+OSCILLATOR FAILURE STATUS
+
+The MCP7940M features an oscillator failure flag,
+OSCRUN, that indicates whether or not the oscillator is
+running. The OSCRUN bit is automatically set after 32
+oscillator cycles are detected. If no oscillator cycles are
+detected for more than TOSF, then the OSCRUN bit is
+automatically cleared (Figure 4-5). This can occur if the
+oscillator is stopped by clearing the ST bit or due to
+oscillator failure.
+
+MCP7940M
+X1
+
+Clock from
+Ext. Source
+
+FIGURE 4-5:
+
+OSCILLATOR FAILURE STATUS TIMING DIAGRAM
+
+X1
+32 Clock Cycles
+
+TOSF
+
+< TOSF
+
+OSCRUN Bit
+
+TABLE 4-2:
+
+SUMMARY OF REGISTERS ASSOCIATED WITH OSCILLATOR CONFIGURATION
+Bit 7
+
+Bit 6
+
+Bit 5
+
+Bit 4
+
+Bit 3
+
+Bit 2
+
+RTCSEC
+
+ST
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1 SECONE0
+
+14
+
+RTCWKDAY
+
+—
+
+—
+
+OSCRUN
+
+—
+
+—
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+16
+
+CONTROL
+
+OUT
+
+SQWEN
+
+ALM1EN
+
+ALM0EN
+
+EXTOSC
+
+CRSTRIM
+
+SQWFS1
+
+SQWFS0
+
+24
+
+Legend:
+
+Bit 1
+
+Bit 0
+
+Register
+on Page
+
+Name
+
+— = unimplemented location, read as ‘0’. Shaded cells are not used by oscillator configuration.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 12
+
+MCP7940M
+4.3
+
+Timekeeping
+
+The MCP7940M maintains the current time and date
+using an external 32.768 kHz crystal or clock source.
+Separate registers are used for tracking seconds, minutes, hours, day of week, date, month, and year. The
+MCP7940M automatically adjusts for months with less
+than 31 days and compensates for leap years from
+2001 to 2399. The year is stored as a two-digit value.
+Both 12-hour and 24-hour time formats are supported
+and are selected using the 12/24 bit.
+The day of week value counts from 1 to 7, increments
+at midnight, and the representation is user-defined (i.e.,
+the MCP7940M does not require 1 to equal Sunday,
+etc.).
+
+4.3.1
+
+DIGIT CARRY RULES
+
+The following list explains which timer values cause a
+digit carry when there is a rollover:
+• Time of day: from 11:59:59 PM to 12:00:00 AM
+(12-hour mode) or 23:59:59 to 00:00:00 (24-hour
+mode), with a carry to the Date and Weekday
+fields
+• Date: carries to the Month field according to Table
+5-3
+• Weekday: from 7 to 1 with no carry
+• Month: from 12/31 to 01/01 with a carry to the
+Year field
+• Year: from 99 to 00 with no carry
+
+All time and date values are stored in the registers as
+binary-coded decimal (BCD) values.
+
+TABLE 4-3:
+
+When reading from the timekeeping registers, the registers are buffered to prevent errors due to rollover of
+counters. The following events cause the buffers to be
+updated:
+
+Month
+
+Name
+
+Maximum Date
+
+01
+
+January
+
+31
+
+02
+
+February
+
+28 or 29(1)
+
+03
+
+March
+
+31
+
+04
+
+April
+
+30
+
+05
+
+May
+
+31
+
+• When a read is initiated from the RTCC registers
+(addresses 0x00 to 0x1F)
+• During an RTCC register read operation, when
+the register address rolls over from 0x1F to 0x00
+
+DAY TO MONTH ROLLOVER
+SCHEDULE
+
+06
+
+June
+
+30
+
+The timekeeping registers should be read in a single
+operation to utilize the on-board buffers and avoid
+rollover issues.
+
+07
+
+July
+
+31
+
+Note 1: Loading invalid values into the time and
+date registers will result in undefined
+operation.
+
+10
+
+October
+
+31
+
+11
+
+November
+
+30
+
+December
+
+31
+
+2: To avoid rollover issues when loading
+new time and date values, the oscillator/
+clock input should be disabled by clearing
+the ST bit for External Crystal mode and
+the EXTOSC bit for External Clock Input
+mode. After waiting for the OSCRUN bit
+to clear, the new values can be loaded
+and the ST or EXTOSC bit can then be
+re-enabled.
+
+ 2012-2018 Microchip Technology Inc.
+
+08
+
+August
+
+31
+
+09
+
+September
+
+30
+
+12
+Note 1:
+
+29 during leap years, otherwise 28.
+
+DS20002292C-page 13
+
+MCP7940M
+REGISTER 4-1:
+
+RTCSEC: TIMEKEEPING SECONDS VALUE REGISTER (ADDRESS 0x00)
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+ST
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7
+
+ST: Start Oscillator bit
+1 = Oscillator enabled
+0 = Oscillator disabled
+
+bit 6-4
+
+SECTEN<2:0>: Binary-Coded Decimal Value of Second’s Tens Digit
+Contains a value from 0 to 5
+
+bit 3-0
+
+SECONE<3:0>: Binary-Coded Decimal Value of Second’s Ones Digit
+Contains a value from 0 to 9
+
+ 2012-2018 Microchip Technology Inc.
+
+x = Bit is unknown
+
+DS20002292C-page 14
+
+MCP7940M
+REGISTER 4-2:
+
+RTCMIN: TIMEKEEPING MINUTES VALUE REGISTER (ADDRESS 0x01)
+
+U-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+—
+
+MINTEN2
+
+MINTEN1
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+x = Bit is unknown
+
+bit 7
+
+Unimplemented: Read as ‘0’
+
+bit 6-4
+
+MINTEN<2:0>: Binary-Coded Decimal Value of Minute’s Tens Digit
+Contains a value from 0 to 5
+
+bit 3-0
+
+MINONE<3:0>: Binary-Coded Decimal Value of Minute’s Ones Digit
+Contains a value from 0 to 9
+
+REGISTER 4-3:
+
+RTCHOUR: TIMEKEEPING HOURS VALUE REGISTER (ADDRESS 0x02)
+
+U-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+—
+
+12/24
+
+AM/PM
+HRTEN1
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+x = Bit is unknown
+
+If 12/24 = 1 (12-hour format):
+bit 7
+
+Unimplemented: Read as ‘0’
+
+bit 6
+
+12/24: 12 or 24 Hour Time Format bit
+1 = 12-hour format
+0 = 24-hour format
+
+bit 5
+
+AM/PM: AM/PM Indicator bit
+1 = PM
+0 = AM
+
+bit 4
+
+HRTEN0: Binary-Coded Decimal Value of Hour’s Tens Digit
+Contains a value from 0 to 1
+
+bit 3-0
+
+HRONE<3:0>: Binary-Coded Decimal Value of Hour’s Ones Digit
+Contains a value from 0 to 9
+
+If 12/24 = 0 (24-hour format):
+bit 7
+
+Unimplemented: Read as ‘0’
+
+bit 6
+
+12/24: 12 or 24 Hour Time Format bit
+1 = 12-hour format
+0 = 24-hour format
+
+bit 5-4
+
+HRTEN<1:0>: Binary-Coded Decimal Value of Hour’s Tens Digit
+Contains a value from 0 to 2.
+
+bit 3-0
+
+HRONE<3:0>: Binary-Coded Decimal Value of Hour’s Ones Digit
+Contains a value from 0 to 9
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 15
+
+MCP7940M
+REGISTER 4-4:
+
+RTCWKDAY: TIMEKEEPING WEEKDAY VALUE REGISTER (ADDRESS 0x03)
+
+U-0
+
+U-0
+
+R-0
+
+U-0
+
+U-0
+
+R/W-0
+
+R/W-0
+
+R/W-1
+
+—
+
+—
+
+OSCRUN
+
+—
+
+—
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7-6
+
+Unimplemented: Read as ‘0’
+
+bit 5
+
+OSCRUN: Oscillator Status bit
+1 = Oscillator is enabled and running
+0 = Oscillator has stopped or has been disabled
+
+x = Bit is unknown
+
+bit 4-3
+
+Unimplemented: Read as ‘0’
+
+bit 2-0
+
+WKDAY<2:0>: Binary-Coded Decimal Value of Day of Week
+Contains a value from 1 to 7. The representation is user-defined.
+
+REGISTER 4-5:
+
+RTCDATE: TIMEKEEPING DATE VALUE REGISTER (ADDRESS 0x04)
+
+U-0
+
+U-0
+
+R/W-0
+
+—
+
+—
+
+DATETEN1
+
+R/W-0
+
+R/W-0
+
+DATETEN0 DATEONE3
+
+R/W-0
+
+R/W-0
+
+R/W-1
+
+DATEONE2
+
+DATEONE1
+
+DATEONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7-6
+
+Unimplemented: Read as ‘0’
+
+bit 5-4
+
+DATETEN<1:0>: Binary-Coded Decimal Value of Date’s Tens Digit
+Contains a value from 0 to 3
+
+bit 3-0
+
+DATEONE<3:0>: Binary-Coded Decimal Value of Date’s Ones Digit
+Contains a value from 0 to 9
+
+ 2012-2018 Microchip Technology Inc.
+
+x = Bit is unknown
+
+DS20002292C-page 16
+
+MCP7940M
+REGISTER 4-6:
+
+RTCMTH: TIMEKEEPING MONTH VALUE REGISTER (ADDRESS 0x05)
+
+U-0
+
+U-0
+
+R-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-1
+
+—
+
+—
+
+LPYR
+
+MTHTEN0
+
+MTHONE3
+
+MTHONE2
+
+MTHONE1
+
+MTHONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+x = Bit is unknown
+
+bit 7-6
+
+Unimplemented: Read as ‘0’
+
+bit 5
+
+LPYR: Leap Year bit
+1 = Year is a leap year
+0 = Year is not a leap year
+
+bit 4
+
+MTHTEN0: Binary-Coded Decimal Value of Month’s Tens Digit
+Contains a value of 0 or 1
+
+bit 3-0
+
+MTHONE<3:0>: Binary-Coded Decimal Value of Month’s Ones Digit
+Contains a value from 0 to 9
+
+REGISTER 4-7:
+
+RTCYEAR: TIMEKEEPING YEAR VALUE REGISTER (ADDRESS 0x06)
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-1
+
+YRTEN3
+
+YRTEN2
+
+YRTEN1
+
+YRTEN0
+
+YRONE3
+
+YRONE2
+
+YRONE1
+
+YRONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7-4
+
+YRTEN<3:0>: Binary-Coded Decimal Value of Year’s Tens Digit
+Contains a value from 0 to 9
+
+bit 3-0
+
+YRONE<3:0>: Binary-Coded Decimal Value of Year’s Ones Digit
+Contains a value from 0 to 9
+
+TABLE 4-4:
+
+x = Bit is unknown
+
+SUMMARY OF REGISTERS ASSOCIATED WITH TIMEKEEPING
+Register
+on Page
+
+Name
+
+Bit 7
+
+Bit 6
+
+Bit 5
+
+Bit 4
+
+Bit 3
+
+Bit 2
+
+Bit 1
+
+Bit 0
+
+RTCSEC
+
+ST
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+14
+
+RTCMIN
+
+—
+
+MINTEN2
+
+MINTEN1
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+15
+
+RTCHOUR
+
+—
+
+12/24
+
+AM/PM
+HRTEN1
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+15
+
+RTCWKDAY
+
+—
+
+—
+
+OSCRUN
+
+—
+
+—
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+16
+
+RTCDATE
+
+—
+
+—
+
+DATETEN1 DATETEN0 DATEONE3 DATEONE2 DATEONE1 DATEONE0
+
+16
+
+RTCMTH
+
+—
+
+—
+
+LPYR
+
+MTHTEN0
+
+MTHONE3
+
+MTHONE2
+
+MTHONE1
+
+MTHONE0
+
+17
+
+RTCYEAR
+
+YRTEN3
+
+YRTEN2
+
+YRTEN1
+
+YRTEN0
+
+YRONE3
+
+YRONE2
+
+YRONE1
+
+YRONE0
+
+17
+
+Legend:
+
+— = unimplemented location, read as ‘0’. Shaded cells are not used in timekeeping.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 17
+
+MCP7940M
+4.4
+
+Alarms
+
+TABLE 4-5:
+
+ALARM MASKS
+
+The MCP7940M features two independent alarms.
+Each alarm can be used to either generate an interrupt
+at a specific time in the future, or to generate a periodic
+interrupt every minute, hour, day, day of week, or
+month.
+
+ALMxMSK<2:0>
+
+Alarm Asserts on Match of
+
+000
+
+Seconds
+
+001
+
+Minutes
+
+010
+
+Hours
+
+There is a separate interrupt flag, ALMxIF, for each
+alarm. The interrupt flags are set by hardware when the
+chosen alarm mask condition matches (Table 4-5).
+The interrupt flags must be cleared in software.
+
+011
+
+Day of Week
+
+100
+
+Date
+
+101
+
+Reserved
+
+110
+
+Reserved
+
+111
+
+Seconds, Minutes, Hours, Day of
+Week, Date, and Month
+
+If either alarm module is enabled by setting the corresponding ALMxEN bit in the CONTROL register, and if
+the square wave clock output is disabled (SQWEN =
+0), then the MFP will operate in Alarm Interrupt Output
+mode. Refer to Section 4.5 “Output Configurations”
+for details.
+
+Note 1: The alarm interrupt flags must be cleared
+by the user. If a flag is cleared while the
+corresponding alarm condition still
+matches, the flag will be set again, generating another interrupt.
+
+Both Alarm0 and Alarm1 offer identical operation. All
+time and date values are stored in the registers as
+binary-coded decimal (BCD) values.
+Note:
+
+2: Loading invalid values into the alarm registers will result in undefined operation.
+
+Throughout this section, references to the
+register and bit names for the alarm modules are referred to generically by the use
+of ‘x’ in place of the specific module number. Thus, “ALMxSEC” might refer to the
+seconds register for Alarm0 or Alarm1.
+
+FIGURE 4-6:
+
+ALARM BLOCK DIAGRAM
+Alarm0
+Registers
+
+Timekeeping
+Registers
+
+Alarm1
+Registers
+
+ALM0SEC
+
+RTCSEC
+
+ALM1SEC
+
+ALM0MIN
+
+RTCMIN
+
+ALM1MIN
+
+ALM0HOUR
+
+RTCHOUR
+
+ALM1HOUR
+
+ALM0WKDAY
+
+RTCWKDAY
+
+ALM1WKDAY
+
+ALM0DATE
+
+RTCDATE
+
+ALM1DATE
+
+ALM0MTH
+
+RTCMTH
+
+ALM1MTH
+
+Alarm0 Mask
+
+ALM0MSK<2:0>
+
+ 2012-2018 Microchip Technology Inc.
+
+Comparator
+
+Comparator
+
+Set
+ALM0IF
+
+Set
+ALM1IF
+
+MFP Output Logic
+
+Alarm1 Mask
+
+MFP
+
+ALM1MSK<2:0>
+
+DS20002292C-page 18
+
+MCP7940M
+4.4.1
+
+CONFIGURING THE ALARM
+
+In order to configure the alarm modules, the following
+steps need to be performed:
+1.
+2.
+3.
+4.
+5.
+
+6.
+
+Load the timekeeping registers and enable the
+oscillator
+Configure the ALMxMSK<2:0> bits to select the
+desired alarm mask
+Set or clear the ALMPOL bit according to the
+desired output polarity
+Ensure the ALMxIF flag is cleared
+Based on the selected alarm mask, load the
+alarm match value into the appropriate register(s)
+Enable the alarm module by setting the
+ALMxEN bit
+
+REGISTER 4-8:
+
+ALMxSEC: ALARM0/1 SECONDS VALUE REGISTER (ADDRESSES 0x0A/0x11)
+
+U-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+—
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+x = Bit is unknown
+
+bit 7
+
+Unimplemented: Read as ‘0’
+
+bit 6-4
+
+SECTEN<2:0>: Binary-Coded Decimal Value of Second’s Tens Digit
+Contains a value from 0 to 5
+
+bit 3-0
+
+SECONE<3:0>: Binary-Coded Decimal Value of Second’s Ones Digit
+Contains a value from 0 to 9
+
+REGISTER 4-9:
+
+ALMxMIN: ALARM0/1 MINUTES VALUE REGISTER (ADDRESSES 0x0B/0x12)
+
+U-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+—
+
+MINTEN2
+
+MINTEN1
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7
+
+Unimplemented: Read as ‘0’
+
+bit 6-4
+
+MINTEN<2:0>: Binary-Coded Decimal Value of Minute’s Tens Digit
+Contains a value from 0 to 5
+
+bit 3-0
+
+MINONE<3:0>: Binary-Coded Decimal Value of Minute’s Ones Digit
+Contains a value from 0 to 9
+
+ 2012-2018 Microchip Technology Inc.
+
+x = Bit is unknown
+
+DS20002292C-page 19
+
+MCP7940M
+REGISTER 4-10:
+
+ALMxHOUR: ALARM0/1 HOURS VALUE REGISTER (ADDRESSES 0x0C/0x13)
+
+U-0
+
+R-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+—
+
+12/24
+
+AM/PM
+HRTEN1
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+x = Bit is unknown
+
+If 12/24 = 1 (12-hour format):
+bit 7
+
+Unimplemented: Read as ‘0’
+
+bit 6
+
+12/24: 12 or 24 Hour Time Format bit(1)
+1 = 12-hour format
+0 = 24-hour format
+
+bit 5
+
+AM/PM: AM/PM Indicator bit
+1 = PM
+0 = AM
+
+bit 4
+
+HRTEN0: Binary-Coded Decimal Value of Hour’s Tens Digit
+Contains a value from 0 to 1
+
+bit 3-0
+
+HRONE<3:0>: Binary-Coded Decimal Value of Hour’s Ones Digit
+Contains a value from 0 to 9
+
+If 12/24 = 0 (24-hour format):
+bit 7
+
+Unimplemented: Read as ‘0’
+
+bit 6
+
+12/24: 12 or 24 Hour Time Format bit(1)
+1 = 12-hour format
+0 = 24-hour format
+
+bit 5-4
+
+HRTEN<1:0>: Binary-Coded Decimal Value of Hour’s Tens Digit
+Contains a value from 0 to 2.
+
+bit 3-0
+
+HRONE<3:0>: Binary-Coded Decimal Value of Hour’s Ones Digit
+Contains a value from 0 to 9
+
+Note 1:
+
+This bit is read-only and reflects the value of the 12/24 bit in the RTCHOUR register.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 20
+
+MCP7940M
+REGISTER 4-11:
+
+ALMxWKDAY: ALARM0/1 WEEKDAY VALUE REGISTER (ADDRESSES 0x0D/
+0x14)
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-1
+
+ALMPOL
+
+ALMxMSK2
+
+ALMxMSK1
+
+ALMxMSK0
+
+ALMxIF
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+x = Bit is unknown
+
+bit 7
+
+ALMPOL: Alarm Interrupt Output Polarity bit
+1 = Asserted output state of MFP is a logic high level
+0 = Asserted output state of MFP is a logic low level
+
+bit 6-4
+
+ALMxMSK<2:0>: Alarm Mask bits
+000 = Seconds match
+001 = Minutes match
+010 = Hours match (logic takes into account 12-/24-hour operation)
+011 = Day of week match
+100 = Date match
+101 = Reserved; do not use
+110 = Reserved; do not use
+111 = Seconds, Minutes, Hour, Day of Week, Date and Month
+
+bit 3
+
+ALMxIF: Alarm Interrupt Flag bit(1,2)
+1 = Alarm match occurred (must be cleared in software)
+0 = Alarm match did not occur
+
+bit 2-0
+
+WKDAY<2:0>: Binary-Coded Decimal Value of Day bits
+Contains a value from 1 to 7. The representation is user-defined.
+
+Note 1:
+2:
+
+If a match condition still exists when this bit is cleared, it will be set again automatically.
+The ALMxIF bit cannot be written to a 1 in software. Writing to the ALMxWKDAY register will always clear
+the ALMxIF bit.
+
+REGISTER 4-12:
+
+ALMxDATE: ALARM0/1 DATE VALUE REGISTER (ADDRESSES 0x0E/0x15)
+
+U-0
+
+U-0
+
+R/W-0
+
+—
+
+—
+
+DATETEN1
+
+R/W-0
+
+R/W-0
+
+DATETEN0 DATEONE3
+
+R/W-0
+
+R/W-0
+
+R/W-1
+
+DATEONE2
+
+DATEONE1
+
+DATEONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7-6
+
+Unimplemented: Read as ‘0’
+
+bit 5-4
+
+DATETEN<1:0>: Binary-Coded Decimal Value of Date’s Tens Digit
+Contains a value from 0 to 3
+
+bit 3-0
+
+DATEONE<3:0>: Binary-Coded Decimal Value of Date’s Ones Digit
+Contains a value from 0 to 9
+
+ 2012-2018 Microchip Technology Inc.
+
+x = Bit is unknown
+
+DS20002292C-page 21
+
+MCP7940M
+REGISTER 4-13:
+
+ALMxMTH: ALARM0/1 MONTH VALUE REGISTER (ADDRESSES 0x0F/0x16)
+
+U-0
+
+U-0
+
+U-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-1
+
+—
+
+—
+
+—
+
+MTHTEN0
+
+MTHONE3
+
+MTHONE2
+
+MTHONE1
+
+MTHONE0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+x = Bit is unknown
+
+bit 7-5
+
+Unimplemented: Read as ‘0’
+
+bit 4
+
+MTHTEN0: Binary-Coded Decimal Value of Month’s Tens Digit
+Contains a value of 0 or 1
+
+bit 3-0
+
+MTHONE<3:0>: Binary-Coded Decimal Value of Month’s Ones Digit
+Contains a value from 0 to 9
+
+TABLE 4-6:
+
+SUMMARY OF REGISTERS ASSOCIATED WITH ALARMS
+
+Name
+
+Bit 7
+
+Bit 6
+
+Bit 5
+
+Bit 4
+
+Bit 3
+
+Bit 2
+
+Bit 1
+
+Bit 0
+
+Register
+on Page
+
+ALM0SEC
+
+—
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+19
+
+ALM0MIN
+
+—
+
+MINTEN2
+
+MINTEN1
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+19
+
+ALM0HOUR
+
+—
+
+12/24
+
+AM/PM
+HRTEN1
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+20
+
+ALM0WKDAY
+
+ALMPOL
+
+ALM0MSK2
+
+ALM0MSK1
+
+ALM0MSK0
+
+ALM0IF
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+21
+
+ALM0DATE
+
+—
+
+—
+
+DATETEN1
+
+DATETEN0
+
+DATEONE3
+
+DATEONE2
+
+DATEONE1
+
+DATEONE0
+
+21
+
+ALM0MTH
+
+—
+
+—
+
+—
+
+MTHTEN0
+
+MTHONE3
+
+MTHONE2
+
+MTHONE1
+
+MTHONE0
+
+22
+
+ALM1SEC
+
+—
+
+SECTEN2
+
+SECTEN1
+
+SECTEN0
+
+SECONE3
+
+SECONE2
+
+SECONE1
+
+SECONE0
+
+19
+
+ALM1MIN
+
+—
+
+MINTEN2
+
+MINTEN1
+
+MINTEN0
+
+MINONE3
+
+MINONE2
+
+MINONE1
+
+MINONE0
+
+19
+
+ALM1HOUR
+
+—
+
+12/24
+
+AM/PM
+HRTEN1
+
+HRTEN0
+
+HRONE3
+
+HRONE2
+
+HRONE1
+
+HRONE0
+
+20
+
+ALM1WKDAY
+
+ALMPOL
+
+ALM1MSK2
+
+ALM1MSK1
+
+ALM1MSK0
+
+ALM1IF
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+21
+
+ALM1DATE
+
+—
+
+—
+
+DATETEN1
+
+DATETEN0
+
+DATEONE3
+
+DATEONE2
+
+DATEONE1
+
+DATEONE0
+
+21
+
+ALM1MTH
+
+—
+
+—
+
+—
+
+MTHTEN0
+
+MTHONE3
+
+MTHONE2
+
+MTHONE1
+
+MTHONE0
+
+22
+
+CONTROL
+
+OUT
+
+SQWEN
+
+ALM1EN
+
+ALM0EN
+
+EXTOSC
+
+CRSTRIM
+
+SQWFS1
+
+SQWFS0
+
+24
+
+Legend:
+
+— = unimplemented location, read as ‘0’. Shaded cells are not used by alarms.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 22
+
+MCP7940M
+4.5
+
+Output Configurations
+
+TABLE 4-7:
+
+SQWEN ALM0EN ALM1EN
+
+The MCP7940M features Square Wave Clock Output,
+Alarm Interrupt Output, and General Purpose Output
+modes. All of the output functions are multiplexed onto
+MFP according to Table 4-7.
+If none of the output functions are being used, the MFP
+can safely be left floating.
+Note:
+
+The MFP is an open-drain output and
+requires a pull-up resistor to VCC (typically
+10 k).
+
+FIGURE 4-7:
+
+MFP OUTPUT MODES
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+1
+
+1
+
+x
+
+x
+
+Mode
+General Purpose
+Output
+Alarm Interrupt
+Output
+Square Wave Clock
+Output
+
+MFP OUTPUT BLOCK DIAGRAM
+MCP7940M
+SQWFS<1:0>
+32.768 kHz
+
+X1
+
+8.192 kHz
+4.096 kHz
+
+Postscaler
+
+EXTOSC
+
+X2
+
+Digital
+Trim
+
+ST
+
+1 Hz
+64 Hz
+
+11
+10
+01
+00
+
+MUX
+
+Oscillator
+
+0
+1
+
+CRSTRIM
+
+ALM1EN,ALM0EN
+ALMPOL
+11
+
+1
+
+10
+
+0
+
+01
+OUT
+
+ALM0IF
+
+00
+
+MFP
+
+1
+MUX
+
+ALM1IF
+
+0
+SQWEN
+
+1
+0
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 23
+
+MCP7940M
+REGISTER 4-14:
+
+CONTROL: RTCC CONTROL REGISTER (ADDRESS 0x07)
+
+R/W-1
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+OUT
+
+SQWEN
+
+ALM1EN
+
+ALM0EN
+
+EXTOSC
+
+CRSTRIM
+
+SQWFS1
+
+SQWFS0
+
+bit 7
+
+bit 6
+
+bit 5
+
+bit 4
+
+bit 3
+
+bit 2
+
+bit 1
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7
+
+x = Bit is unknown
+
+OUT: Logic Level for General Purpose Output bit
+Square Wave Clock Output Mode (SQWEN = 1):
+Unused.
+Alarm Interrupt Output mode (ALM0EN = 1 or ALM1EN = 1):
+Unused.
+General Purpose Output mode (SQWEN = 0, ALM0EN = 0, and ALM1EN = 0):
+1 = MFP signal level is logic high
+0 = MFP signal level is logic low
+
+bit 6
+
+SQWEN: Square Wave Output Enable bit
+1 = Enable Square Wave Clock Output mode
+0 = Disable Square Wave Clock Output mode
+
+bit 5
+
+ALM1EN: Alarm 1 Module Enable bit
+1 = Alarm 1 enabled
+0 = Alarm 1 disabled
+
+bit 4
+
+ALM0EN: Alarm 0 Module Enable bit
+1 = Alarm 0 enabled
+0 = Alarm 0 disabled
+
+bit 3
+
+EXTOSC: External Oscillator Input bit
+1 = Enable X1 pin to be driven by external 32.768 kHz source
+0 = Disable external 32.768 kHz input
+
+bit 2
+
+CRSTRIM: Coarse Trim Mode Enable bit
+Coarse Trim mode results in the MCP7940M applying digital trimming every 64 Hz clock cycle.
+1 = Enable Coarse Trim mode. If SQWEN = 1, MFP will output trimmed 64 Hz(1) nominal clock signal.
+0 = Disable Coarse Trim mode
+See Section 4.6 “Digital Trimming” for details
+
+bit 1-0
+
+SQWFS<1:0>: Square Wave Clock Output Frequency Select bits
+If SQWEN = 1 and CRSTRIM = 0:
+Selects frequency of clock output on MFP
+00 = 1 Hz(1)
+01 = 4.096 kHz(1)
+10 = 8.192 kHz(1)
+11 = 32.768 kHz
+If SQWEN = 0 or CRSTRIM = 1:
+Unused.
+
+Note 1:
+
+The 8.192 kHz, 4.096 kHz, 64 Hz, and 1 Hz square wave clock output frequencies are affected by digital
+trimming.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 24
+
+MCP7940M
+4.5.1
+
+SQUARE WAVE OUTPUT MODE
+
+The MCP7940M can be configured to generate a
+square wave clock signal on MFP. The input clock
+frequency, FOSC, is divided according to the
+SQWFS<1:0> bits as shown in Table 4-8.
+Note:
+
+All of the clock output rates are affected by
+digital trimming except for the 1:1
+postscaler value (SQWFS<1:0> = 11).
+
+TABLE 4-8:
+
+CLOCK OUTPUT RATES
+
+SQWFS<1:0>
+
+Postscaler
+
+Nominal
+Frequency
+
+00
+
+1:32,768
+
+1 Hz
+
+01
+
+1:8
+
+4.096 kHz
+
+10
+
+1:4
+
+8.192 kHz
+
+11
+
+1:1
+
+32.768 kHz
+
+Note 1:
+
+Nominal frequency assumes FOSC is
+32.768 kHz.
+
+4.5.2
+
+ALARM INTERRUPT OUTPUT
+MODE
+
+The MFP will provide an interrupt output when enabled
+alarms match and the square wave clock output is disabled. This prevents the user from having to poll the
+alarm interrupt flag to check for a match.
+The ALMxIF flags control when the MFP is asserted, as
+described in the following sections.
+
+4.5.2.1
+
+Single Alarm Operation
+
+If ALMPOL = 1, the ALM0IF and ALM1IF flags are
+OR’d together and the result is output on MFP. If
+ALMPOL = 0, the ALM0IF and ALM1IF flags are AND’d
+together, and the result is inverted and output on MFP
+(Table 4-10). This provides the user with flexible
+options for combining alarms.
+Note:
+
+If ALMPOL = 0 and both alarms are
+enabled, the MFP will only assert when
+both ALM0IF and ALM1IF are set.
+
+TABLE 4-10:
+
+DUAL ALARM OUTPUT
+TRUTH TABLE
+
+ALMPOL
+
+ALM0IF
+
+ALM1IF
+
+MFP
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+1
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+1
+
+0
+
+1
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+1
+
+1
+
+1
+
+0
+
+1
+
+1
+
+1
+
+1
+
+1
+
+4.5.3
+
+GENERAL PURPOSE OUTPUT
+MODE
+
+If the square wave clock output and both alarm modules are disabled, the MFP acts as a general purpose
+output. The output logic level is controlled by the OUT
+bit.
+
+When only one alarm module is enabled, the MFP output
+is based on the corresponding ALMxIF flag and the
+ALMPOL flag. If ALMPOL = 1, the MFP output reflects
+the value of the ALMxIF flag. If ALMPOL = 0, the MFP
+output reflects the inverse of the ALMxIF flag (Table 49).
+
+TABLE 4-9:
+
+SINGLE ALARM OUTPUT
+TRUTH TABLE
+
+ALMPOL
+
+ALMxIF(1)
+
+MFP
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+0
+
+1
+
+1
+
+1
+
+Note 1: ALMxIF refers to the interrupt flag corresponding to the alarm module that is
+enabled.
+
+4.5.2.2
+
+Dual Alarm Operation
+
+When both alarm modules are enabled, the MFP output is determined by a combination of the ALM0IF,
+ALM1IF, and ALMPOL flags.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 25
+
+MCP7940M
+TABLE 4-11:
+
+SUMMARY OF REGISTERS ASSOCIATED WITH OUTPUT CONFIGURATION
+
+Name
+
+Bit 7
+
+Bit 6
+
+Bit 5
+
+Bit 4
+
+Bit 3
+
+Bit 2
+
+Bit 1
+
+Bit 0
+
+Register
+on Page
+
+ALM0WKDAY
+
+ALMPOL
+
+ALM0MSK2
+
+ALM0MSK1
+
+ALM0MSK0
+
+ALM0IF
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+21
+
+ALM1WKDAY
+
+ALMPOL
+
+ALM1MSK2
+
+ALM1MSK1
+
+ALM1MSK0
+
+ALM1IF
+
+WKDAY2
+
+WKDAY1
+
+WKDAY0
+
+21
+
+CONTROL
+
+OUT
+
+SQWEN
+
+ALM1EN
+
+ALM0EN
+
+EXTOSC
+
+CRSTRIM
+
+SQWFS1
+
+SQWFS0
+
+24
+
+Legend:
+
+— = unimplemented location, read as ‘0’. Shaded cells are not used in output configuration.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 26
+
+MCP7940M
+4.6
+
+Digital Trimming
+
+The MCP7940M features digital trimming to correct for
+inaccuracies of the external crystal or clock source, up
+to roughly ±129 PPM when CRSTRIM = 0. In addition
+to compensating for intrinsic inaccuracies in the clock,
+this feature can also be used to correct for error due to
+temperature variation. This can enable the user to
+achieve high levels of accuracy across a wide temperature operating range.
+
+occurs once per minute when CRSTRIM = 0. The SIGN
+bit specifies whether to add cycles or to subtract them.
+The TRIMVAL<6:0> bits are used to specify by how
+many clock cycles to adjust. Each step in the
+TRIMVAL<6:0> value equates to adding or subtracting
+two clock pulses to or from the 32.768 kHz clock signal.
+This results in a correction of roughly 1.017 PPM per
+step when CRSTRIM = 0. Setting TRIMVAL<6:0> to
+0x00 disables digital trimming.
+
+Digital trimming consists of the MCP7940M periodically
+adding or subtracting clock cycles, resulting in small
+adjustments in the internal timing. The adjustment
+
+REGISTER 4-15:
+
+OSCTRIM: OSCILLATOR DIGITAL TRIM REGISTER (ADDRESS 0x08)
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+R/W-0
+
+SIGN
+
+TRIMVAL6
+
+TRIMVAL5
+
+TRIMVAL4
+
+TRIMVAL3
+
+TRIMVAL2
+
+TRIMVAL1
+
+TRIMVAL0
+
+bit 7
+
+bit 0
+
+Legend:
+R = Readable bit
+
+W = Writable bit
+
+U = Unimplemented bit, read as ‘0’
+
+-n = Value at POR
+
+‘1’ = Bit is set
+
+‘0’ = Bit is clear
+
+bit 7
+
+SIGN: Trim Sign bit
+1 = Add clocks to correct for slow time
+0 = Subtract clocks to correct for fast time
+
+bit 6-0
+
+TRIMVAL<6:0>: Oscillator Trim Value bits
+When CRSTRIM = 0:
+1111111 = Add or subtract 254 clock cycles every minute
+1111110 = Add or subtract 252 clock cycles every minute
+•
+•
+•
+0000010 = Add or subtract 4 clock cycles every minute
+0000001 = Add or subtract 2 clock cycles every minute
+0000000 = Disable digital trimming
+
+x = Bit is unknown
+
+When CRSTRIM = 1:
+1111111 = Add or subtract 254 clock cycles 128 times per second
+1111110 = Add or subtract 252 clock cycles 128 times per second
+•
+•
+•
+0000010 = Add or subtract 4 clock cycles 128 times per second
+0000001 = Add or subtract 2 clock cycles 128 times per second
+0000000 = Disable digital trimming
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 27
+
+MCP7940M
+4.6.1
+
+CALIBRATION
+
+In order to perform calibration, the number of error
+clock pulses per minute must be found and the corresponding trim value must be loaded into
+TRIMVAL<6:0>.
+There are two methods for determining the trim value.
+The first method involves measuring an output frequency directly and calculating the deviation from ideal.
+The second method involves observing the number of
+seconds gained or lost over a period of time.
+Once the OSCTRIM register has been loaded, digital
+trimming will automatically occur every minute.
+
+4.6.1.1
+
+4.6.1.2
+
+Calibration by Observing Time
+Deviation
+
+To calibrate the MCP7940M by observing the deviation
+over time, perform the following steps:
+1.
+2.
+
+3.
+
+4.
+
+Calibration by Measuring Frequency
+
+Ensure TRIMVAL<6:0> is reset to 0x00.
+Load the timekeeping registers to synchronize
+the MCP7940M with a known-accurate reference time.
+Enable the crystal oscillator or external clock
+input by setting the ST bit or EXTOSC bit,
+respectively.
+Observe how many seconds are gained or lost
+over a period of time (larger time periods offer
+more accuracy).
+Calculate the PPM deviation (see Equation 4-3).
+
+To calibrate the MCP7940M by measuring the output
+frequency, perform the following steps:
+
+5.
+
+1.
+
+EQUATION 4-3:
+
+2.
+3.
+4.
+5.
+
+6.
+
+Enable the crystal oscillator or external clock
+input by setting the ST bit or EXTOSC bit,
+respectively.
+Ensure TRIMVAL<6:0> is reset to 0x00.
+Select an output frequency by setting
+SQWFS<1:0>.
+Set SQWEN to enable the square wave output.
+Measure the resulting output frequency using a
+calibrated measurement tool, such as a
+frequency counter.
+Calculate the number of error clocks per minute
+(see Equation 4-2).
+
+EQUATION 4-2:
+
+CALCULATING TRIM
+VALUE FROM MEASURED
+FREQUENCY
+
+32768
+ F IDEAL – F MEAS   ------------------  60
+F
+IDEAL
+TRIMVAL<6:0> = --------------------------------------------------------------------------------2
+
+SecDeviation
+PPM = -----------------------------------  1000000
+ExpectedSec
+Where:
+ExpectedSec = Number of seconds in chosen period
+SecDeviation = Number of seconds gained or lost
+• If the MCP7940M has gained time relative to
+the reference clock, then the oscillator is
+faster than ideal and the SIGN bit must be
+cleared.
+• If the MCP7940M has lost time relative to the
+reference clock, then the oscillator is slower
+than ideal and the SIGN bit must be set.
+6. Calculate the trim value (see Equation 4-4).
+
+EQUATION 4-4:
+
+Where:
+F IDEAL = Ideal frequency based on SQWFS<1:0>
+F MEAS = Measured frequency
+• If the number of error clocks per minute is negative, then the oscillator is faster than ideal
+and the SIGN bit must be cleared.
+• If the number of error clocks per minute is positive, then the oscillator is slower than ideal
+and the SIGN bit must be set.
+7. Load the correct value into TRIMVAL<6:0>.
+Note:
+
+CALCULATING ERROR
+PPM
+
+CALCULATING TRIM
+VALUE FROM ERROR
+PPM
+
+PPM  32768  60
+TRIMVAL<6:0> = ------------------------------------------1000000  2
+7.
+
+Load the correct value into TRIMVAL<6:0>.
+Note 1: Choosing a longer time period for observing deviation will improve accuracy.
+2: Large temperature variations during the
+observation period can skew results.
+
+Using a lower output frequency and/or
+averaging the measured frequency over a
+number of clock pulses will reduce the
+effects of jitter and improve accuracy.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 28
+
+MCP7940M
+4.6.2
+
+COARSE TRIM MODE
+
+When CRSTRIM = 1, Coarse Trim mode is enabled.
+While in this mode, the MCP7940M will apply trimming
+at a rate of 128 Hz. If SQWEN is set, the MFP will output a trimmed 64 Hz nominal clock signal.
+
+By monitoring the MFP output frequency while in this
+mode, the user can easily observe the TRIMVAL<6:0>
+value affecting the clock timing.
+Note:
+
+Because trimming is applied at a rate of 128 Hz rather
+than once every minute, each step of the
+TRIMVAL<6:0> value has a significantly larger effect
+on the resulting time deviation and output clock
+frequency.
+
+TABLE 4-12:
+Name
+
+SUMMARY OF REGISTERS ASSOCIATED WITH DIGITAL TRIMMING
+Bit 7
+
+Bit 6
+
+Bit 5
+
+Bit 4
+
+CONTROL
+
+OUT
+
+SQWEN
+
+ALM1EN
+
+ALM0EN
+
+OSCTRIM
+
+SIGN
+
+TRIMVAL6
+
+TRIMVAL5
+
+TRIMVAL4
+
+Legend:
+
+With Coarse Trim mode enabled, the
+TRIMVAL<6:0> value has a drastic effect
+on timing. Leaving the mode enabled
+during normal operation will likely result in
+inaccurate time.
+
+Bit 2
+
+Bit 1
+
+Bit 0
+
+Register
+on Page
+
+EXTOSC
+
+CRSTRIM
+
+SQWFS1
+
+SQWFS0
+
+24
+
+TRIMVAL3
+
+TRIMVAL2
+
+TRIMVAL1
+
+TRIMVAL0
+
+27
+
+Bit 3
+
+— = unimplemented location, read as ‘0’. Shaded cells are not used by digital trimming.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 29
+
+MCP7940M
+5.0
+
+ON-BOARD MEMORY
+
+location. The MCP7940M stores the data byte into
+memory and acknowledges again, and the master
+generates a Stop condition (Figure 5-1).
+
+The MCP7940M has 64 bytes of SRAM for general
+purpose usage.
+
+If an attempt is made to write to an address past 0x5F,
+the MCP7940M will not acknowledge the address or
+data bytes, and no data will be written. After a byte
+Write command, the internal Address Pointer will point
+to the address location following the one that was just
+written.
+
+Although the SRAM is a separate block from the RTCC
+registers, they are accessed using the same control
+byte, ‘1101111X’.
+
+5.1
+
+SRAM/RTCC Registers
+
+The RTCC registers are located at addresses 0x00 to
+0x1F, and the SRAM is located at addresses 0x20 to
+0x5F. The SRAM can be accessed while the RTCC
+registers are being internally updated. The SRAM is not
+initialized by a Power-On Reset (POR).
+
+5.1.1
+
+5.1.2
+
+The write control byte, address, and the first data byte
+are transmitted to the MCP7940M in the same way as
+in a byte write. But instead of generating a Stop condition, the master transmits additional data bytes. Upon
+receipt of each byte, the MCP7940M responds with an
+Acknowledge, during which the data is latched into
+memory and the Address Pointer is internally incremented by one. As with the byte write operation, the
+master ends the command by generating a Stop condition (Figure 5-2).
+
+SRAM/RTCC REGISTER BYTE
+WRITE
+
+Following the Start condition from the master, the control code and the R/W bit (which is a logic low) are
+clocked onto the bus by the master transmitter. This
+indicates to the addressed slave receiver that the
+address byte will follow after it has generated an
+Acknowledge bit during the ninth clock cycle. Therefore, the next byte transmitted by the master is the
+address and will be written into the Address Pointer of
+the MCP7940M. After receiving another Acknowledge
+bit from the MCP7940M, the master device transmits
+the data byte to be written into the addressed memory
+
+FIGURE 5-1:
+
+There is no limit to the number of bytes that can be written in a single command. However, because the RTCC
+registers and SRAM are separate blocks, writing past
+the end of each block will cause the Address Pointer to
+roll over to the beginning of the same block. Specifically, the Address Pointer will roll over from 0x1F to
+0x00, and from 0x5F to 0x20.
+
+SRAM/RTCC BYTE WRITE
+BUS ACTIVITY
+MASTER
+SDA LINE
+
+S
+T
+A
+R
+T
+
+CONTROL
+BYTE
+
+ADDRESS
+BYTE
+
+S1101111 0
+
+S
+T
+O
+P
+
+DATA
+
+P
+
+0
+A
+C
+K
+
+BUS ACTIVITY
+
+FIGURE 5-2:
+
+SRAM/RTCC REGISTER
+SEQUENTIAL WRITE
+
+A
+C
+K
+
+A
+C
+K
+
+SRAM/RTCC SEQUENTIAL WRITE
+
+BUS ACTIVITY
+MASTER
+
+S
+T
+A
+R
+T
+
+SDA LINE
+
+S11011110
+
+CONTROL
+BYTE
+
+BUS ACTIVITY
+
+ 2012-2018 Microchip Technology Inc.
+
+ADDRESS
+BYTE
+
+DATA BYTE 0
+
+DATA BYTE N
+
+S
+T
+O
+P
+P
+
+0
+A
+C
+K
+
+A
+C
+K
+
+A
+C
+K
+
+A
+C
+K
+
+DS20002292C-page 30
+
+MCP7940M
+5.1.3
+
+SRAM/RTCC REGISTER CURRENT
+ADDRESS READ
+
+‘0’). After the address is sent, the master generates a
+Start condition following the Acknowledge. This terminates the write operation, but not before the internal
+Address Pointer is set. Then, the master issues the
+control byte again but with the R/W bit set to a ‘1’. The
+MCP7940M will then issue an Acknowledge and transmit the 8-bit data word. The master will not acknowledge the transfer but it does generate a Stop condition
+which causes the MCP7940M to discontinue transmission (Figure 5-4). After a random Read command, the
+internal address counter will point to the address location following the one that was just read.
+
+The MCP7940M contains an address counter that
+maintains the address of the last byte accessed, internally incremented by one. Therefore, if the previous
+read access was to address n (n is any legal address),
+the next current address read operation would access
+data from address n + 1.
+Upon receipt of the control byte with R/W bit set to ‘1’,
+the MCP7940M issues an Acknowledge and transmits
+the 8-bit data word. The master will not acknowledge
+the transfer but does generate a Stop condition and the
+MCP7940M discontinues transmission (Figure 5-3).
+
+FIGURE 5-3:
+
+SRAM/RTCC CURRENT
+ADDRESS READ
+
+S
+T
+BUS ACTIVITY A
+CONTROL
+MASTER
+BYTE
+R
+T
+SDA LINE
+S 1 1 0 1 1 1 1 1
+
+P
+N
+O
+A
+C
+K
+
+SRAM/RTCC REGISTER RANDOM
+READ
+
+Because the RTCC registers and SRAM are separate
+blocks, reading past the end of each block will cause
+the Address Pointer to roll over to the beginning of the
+same block. Specifically, the Address Pointer will roll
+over from 0x1F to 0x00, and from 0x5F to 0x20.
+
+Random read operations allow the master to access
+any memory location in a random manner. To perform
+this type of read operation, first the address must be
+set. This is done by sending the address to the
+MCP7940M as part of a write operation (R/W bit set to
+
+FIGURE 5-4:
+
+SRAM/RTCC RANDOM READ
+
+BUS ACTIVITY
+MASTER
+SDA LINE
+
+S
+T
+A
+R
+T
+
+CONTROL
+BYTE
+
+BUS ACTIVITY
+MASTER
+
+S
+T
+A
+R
+T
+
+ADDRESS
+BYTE
+
+S1 1 0 1 1 1 1 0
+
+CONTROL
+BYTE
+
+A
+C
+K
+
+P
+N
+O
+A
+C
+K
+
+A
+C
+K
+
+SRAM/RTCC SEQUENTIAL READ
+CONTROL
+BYTE
+
+DATA n
+
+DATA n + 1
+
+DATA n + 2
+
+DATA n + X
+
+S
+T
+O
+P
+P
+
+SDA LINE
+BUS ACTIVITY
+
+S
+T
+O
+P
+
+DATA
+BYTE
+
+S 1 1 0 1 1 1 1 1
+A
+C
+K
+
+BUS ACTIVITY
+
+FIGURE 5-5:
+
+SRAM/RTCC REGISTER
+SEQUENTIAL READ
+
+Sequential reads are initiated in the same way as a
+random read except that after the MCP7940M transmits the first data byte, the master issues an Acknowledge as opposed to the Stop condition used in a
+random read. This Acknowledge directs the
+MCP7940M to transmit the next sequentially
+addressed 8-bit word (Figure 5-5). Following the final
+byte transmitted to the master, the master will NOT
+generate an Acknowledge but will generate a Stop condition. To provide sequential reads, the MCP7940M
+contains an internal Address Pointer which is incremented by one at the completion of each operation.
+This Address Pointer allows the entire memory block to
+be serially read during one operation.
+
+S
+T
+O
+P
+
+DATA
+BYTE
+
+A
+C
+K
+
+BUS ACTIVITY
+
+5.1.4
+
+5.1.5
+
+A
+C
+K
+
+ 2012-2018 Microchip Technology Inc.
+
+A
+C
+K
+
+A
+C
+K
+
+A
+C
+K
+
+N
+O
+A
+C
+K
+
+DS20002292C-page 31
+
+MCP7940M
+6.0
+
+PACKAGING INFORMATION
+
+6.1
+
+Package Marking Information
+8-Lead SOIC (3.90 mm)
+
+Example:
+
+XXXXXXXT
+XXXXYYWW
+NNN
+
+7940MI
+SN e3 1419
+13F
+
+Example:
+
+8-Lead TSSOP
+
+XXXX
+
+940M
+
+TYWW
+
+I419
+
+NNN
+
+13F
+Example:
+
+8-Lead MSOP
+
+XXXXXT
+
+7940MI
+
+YWWNNN
+
+41913F
+
+Example:
+
+8-Lead PDIP (300 mil)
+
+XXXXXXXX
+T/XXXNNN
+YYWW
+
+MCP7940M
+I/P e313F
+
+8-Lead 2x3 TDFN
+
+Example:
+
+1419
+
+XXX
+YWW
+NN
+
+AU1
+419
+13
+
+1st Line Marking Codes
+
+Part Number
+MCP7940M
+
+SOIC
+
+TSSOP
+
+MSOP
+
+TDFN
+
+PDIP
+
+7940MT
+
+940M
+
+7940MT
+
+AU1
+
+MCP7940M
+
+T = Temperature grade
+
+Legend: XX...X
+Y
+YY
+WW
+NNN
+
+e3
+
+*
+
+Note:
+
+Customer-specific information
+Year code (last digit of calendar year)
+Year code (last 2 digits of calendar year)
+Week code (week of January 1 is week ‘01’)
+Alphanumeric traceability code
+JEDEC® designator for Matte Tin (Sn)
+This package is RoHs compliant. The JEDEC designator ( e3 )
+can be found on the outer packaging for this package.
+
+In the event the full Microchip part number cannot be marked on one line, it will
+be carried over to the next line, thus limiting the number of available
+characters for customer-specific information.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 32
+
+MCP7940M
+8-Lead Plastic Small Outline (SN) - Narrow, 3.90 mm (.150 In.) Body [SOIC]
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+2X
+0.10 C A–B
+D
+A
+
+D
+
+NOTE 5
+
+N
+
+E
+2
+
+E1
+2
+
+E1
+
+E
+
+NOTE 1
+
+2
+
+1
+
+e
+B
+
+NX b
+0.25
+
+C A–B D
+
+NOTE 5
+
+TOP VIEW
+0.10 C
+C
+
+A A2
+
+SEATING
+PLANE
+
+8X
+A1
+
+SIDE VIEW
+
+0.10 C
+
+h
+R0.13
+h
+R0.13
+
+H
+
+SEE VIEW C
+
+VIEW A–A
+
+0.23
+
+L
+(L1)
+
+VIEW C
+Microchip Technology Drawing No. C04-057-SN Rev D Sheet 1 of 2
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 33
+
+MCP7940M
+8-Lead Plastic Small Outline (SN) - Narrow, 3.90 mm (.150 In.) Body [SOIC]
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+Units
+Dimension Limits
+Number of Pins
+N
+e
+Pitch
+Overall Height
+A
+Molded Package Thickness
+A2
+§
+Standoff
+A1
+Overall Width
+E
+Molded Package Width
+E1
+Overall Length
+D
+Chamfer (Optional)
+h
+Foot Length
+L
+L1
+Footprint
+Foot Angle
+c
+Lead Thickness
+b
+Lead Width
+Mold Draft Angle Top
+Mold Draft Angle Bottom
+
+MIN
+
+1.25
+0.10
+
+0.25
+0.40
+0°
+0.17
+0.31
+5°
+5°
+
+MILLIMETERS
+NOM
+8
+1.27 BSC
+6.00 BSC
+3.90 BSC
+4.90 BSC
+1.04 REF
+-
+
+MAX
+
+1.75
+0.25
+
+0.50
+1.27
+8°
+0.25
+0.51
+15°
+15°
+
+Notes:
+1. Pin 1 visual index feature may vary, but must be located within the hatched area.
+2. § Significant Characteristic
+3. Dimensions D and E1 do not include mold flash or protrusions. Mold flash or
+protrusions shall not exceed 0.15mm per side.
+4. Dimensioning and tolerancing per ASME Y14.5M
+BSC: Basic Dimension. Theoretically exact value shown without tolerances.
+REF: Reference Dimension, usually without tolerance, for information purposes only.
+5. Datums A & B to be determined at Datum H.
+Microchip Technology Drawing No. C04-057-SN Rev D Sheet 2 of 2
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 34
+
+MCP7940M
+8-Lead Plastic Small Outline (SN) - Narrow, 3.90 mm Body [SOIC]
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+SILK SCREEN
+
+C
+
+Y1
+
+X1
+E
+
+RECOMMENDED LAND PATTERN
+
+Units
+Dimension Limits
+E
+Contact Pitch
+Contact Pad Spacing
+C
+Contact Pad Width (X8)
+X1
+Contact Pad Length (X8)
+Y1
+
+MIN
+
+MILLIMETERS
+NOM
+1.27 BSC
+5.40
+
+MAX
+
+0.60
+1.55
+
+Notes:
+1. Dimensioning and tolerancing per ASME Y14.5M
+BSC: Basic Dimension. Theoretically exact value shown without tolerances.
+Microchip Technology Drawing C04-2057-SN Rev B
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 35
+
+MCP7940M
+ 
+" #
+
+      !
+
+1 % & %! % 2" ) '   %    2 $%  %"%
+%% 033)))&    &3 2
+
+D
+N
+
+E
+E1
+
+NOTE 1
+
+1
+
+2
+
+b
+e
+
+c
+A
+
+φ
+
+A2
+
+A1
+
+L
+
+L1
+
+4%
+&  5&%
+6!&(  $
+
+55* *
+6
+
+6
+
+67
+
+8
+
+9
+
+%
+
+
+
+7 ; %
+
+
+
+<
+
+<
+
+
+
+9
+
+
+
++
+
+
+
++
+
+<
+
++
+
+ ""2
+
+2
+
+%" $$
+
+:+./
+
+
+7 ="%
+
+*
+
+ ""2="%
+
+*
+
+,
+
+
+
+ ""25%
+
+
+
+
+
+,
+
+,
+
+1
+
+%5%
+
+5
+
++
+
+:
+
++
+
+1
+
+% %
+
+5
+
+1
+
+%
+
+
+
+>
+
+<
+
+9>
+
+
+
+
+
+<
+
+
+
+5"
+
+2
+
+:./
++
+
+*1
+
+5"="%
+(
+
+<
+,
+"  #
+  !"#$%! & '(!%&! %( %")% %  % " 
+ &   "*"  %!"& "$   % !    "$   % !     %#"+&&   "
+, &  "%    *-+
+./0 . &    %#%!
+))% !%%   
+*10 $ &  '! !)% !%%  '$ $ &%  !
+  
+  
+
+ 2012-2018 Microchip Technology Inc.
+
+     ) /9:.
+
+DS20002292C-page 36
+
+MCP7940M
+
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 37
+
+MCP7940M
+
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 38
+
+MCP7940M
+
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 39
+
+MCP7940M
+
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 40
+
+MCP7940M
+8-Lead Plastic Dual In-Line (P) - 300 mil Body [PDIP]
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+D
+
+A
+
+N
+
+B
+
+E1
+
+NOTE 1
+1
+
+2
+
+TOP VIEW
+
+E
+
+C
+
+A2
+
+A
+
+PLANE
+L
+
+c
+
+A1
+e
+
+eB
+
+8X b1
+8X b
+.010
+
+C
+
+SIDE VIEW
+
+END VIEW
+
+Microchip Technology Drawing No. C04-018D Sheet 1 of 2
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 41
+
+MCP7940M
+8-Lead Plastic Dual In-Line (P) - 300 mil Body [PDIP]
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+ALTERNATE LEAD DESIGN
+(VENDOR DEPENDENT)
+
+DATUM A
+
+DATUM A
+
+b
+
+b
+
+e
+2
+
+e
+2
+
+e
+
+Units
+Dimension Limits
+Number of Pins
+N
+e
+Pitch
+Top to Seating Plane
+A
+Molded Package Thickness
+A2
+Base to Seating Plane
+A1
+Shoulder to Shoulder Width
+E
+Molded Package Width
+E1
+Overall Length
+D
+Tip to Seating Plane
+L
+c
+Lead Thickness
+Upper Lead Width
+b1
+b
+Lower Lead Width
+Overall Row Spacing
+eB
+§
+
+e
+
+MIN
+
+.115
+.015
+.290
+.240
+.348
+.115
+.008
+.040
+.014
+-
+
+INCHES
+NOM
+8
+.100 BSC
+.130
+.310
+.250
+.365
+.130
+.010
+.060
+.018
+-
+
+MAX
+
+.210
+.195
+.325
+.280
+.400
+.150
+.015
+.070
+.022
+.430
+
+Notes:
+1. Pin 1 visual index feature may vary, but must be located within the hatched area.
+2. § Significant Characteristic
+3. Dimensions D and E1 do not include mold flash or protrusions. Mold flash or
+protrusions shall not exceed .010" per side.
+4. Dimensioning and tolerancing per ASME Y14.5M
+BSC: Basic Dimension. Theoretically exact value shown without tolerances.
+Microchip Technology Drawing No. C04-018D Sheet 2 of 2
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 42
+
+MCP7940M
+
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 43
+
+MCP7940M
+
+Note:
+
+For the most current package drawings, please see the Microchip Packaging Specification located at
+http://www.microchip.com/packaging
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 44
+
+MCP7940M
+ 
+" #
+
+$ %  &" '(")*+*,-. $%"!
+
+1 % & %! % 2" ) '   %    2 $%  %"%
+%% 033)))&    &3 2
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 45
+
+MCP7940M
+APPENDIX A:
+
+REVISION HISTORY
+
+TABLE 6-1:
+
+Revision A (02/2012)
+Original release of this document.
+
+Revision B (06/2014)
+Updated overall content for improved clarity. Added
+detailed descriptions of registers. Updated block diagram and application schematic.
+Defined names for all bits and registers, and renamed
+the bits shown in Table 6-1 for clarification.
+Renamed the DC characteristics shown in Table 6-2
+for clarification.
+Updated 8-Lead PDIP Package.
+
+TABLE 6-2:
+
+BIT NAME CHANGES
+
+Old Bit Name
+
+New Bit Name
+
+OSCON
+
+OSCRUN
+
+LP
+
+LPYR
+
+SQWE
+
+SQWEN
+
+ALM0
+
+ALM0EN
+
+ALM1
+
+ALM1EN
+
+RS0
+
+SQWFS0
+
+RS1
+
+SQWFS1
+
+RS2
+
+CRSTRIM
+
+CALIBRATION
+
+TRIMVAL<6:0>
+
+ALM0POL
+
+ALMPOL
+
+ALM1POL
+
+ALMPOL
+
+ALM0C<2:0>
+
+ALM0MSK<2:0>
+
+ALM1C<2:0>
+
+ALM1MSK<2:0>
+
+DC CHARACTERISTIC NAME CHANGES
+
+Old Name
+Operating current SRAM
+
+Old Symbol
+ICC Read
+
+New Name
+SRAM/RTCC register operating current
+
+ICC Write
+
+New Symbol
+ICCREAD
+ICCWRITE
+
+Operating current
+
+IVCC
+
+Timekeeping current
+
+ICCT
+
+Standby current
+
+ICCS
+
+VCC data retention current (oscillator off)
+
+ICCDAT
+
+Revision C (07/2018)
+Updated Section 4.5.1 Square Wave Output Mode.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 46
+
+MCP7940M
+THE MICROCHIP WEBSITE
+
+CUSTOMER SUPPORT
+
+Microchip provides online support via our WWW site at
+www.microchip.com. This website is used as a means
+to make files and information easily available to
+customers. Accessible by using your favorite Internet
+browser, the website contains the following
+information:
+
+Users of Microchip products can receive assistance
+through several channels:
+
+• Product Support – Data sheets and errata,
+application notes and sample programs, design
+resources, user’s guides and hardware support
+documents, latest software releases and archived
+software
+• General Technical Support – Frequently Asked
+Questions (FAQ), technical support requests,
+online discussion groups, Microchip consultant
+program member listing
+• Business of Microchip – Product selector and
+ordering guides, latest Microchip press releases,
+listing of seminars and events, listings of
+Microchip sales offices, distributors and factory
+representatives
+
+• Distributor or Representative
+• Local Sales Office
+• Field Application Engineer (FAE)
+• Technical Support
+Customers
+should
+contact
+their
+distributor,
+representative or Field Application Engineer (FAE) for
+support. Local sales offices are also available to help
+customers. A listing of sales offices and locations is
+included in the back of this document.
+Technical support is available through the website
+at: http://microchip.com/support
+
+CUSTOMER CHANGE NOTIFICATION
+SERVICE
+Microchip’s customer notification service helps keep
+customers current on Microchip products. Subscribers
+will receive e-mail notification whenever there are
+changes, updates, revisions or errata related to a
+specified product family or development tool of interest.
+To register, access the Microchip website at
+www.microchip.com. Under “Support”, click on
+“Customer Change Notification” and follow the
+registration instructions.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 47
+
+MCP7940M
+PRODUCT IDENTIFICATION SYSTEM
+To order or obtain information, e.g., on pricing or delivery, refer to the factory or the listed sales office. Not every possible ordering
+combination is listed below.
+
+PART NO.
+Device
+
+X
+
+/XX
+
+Temperature Package
+Range
+
+Examples:
+a)
+b)
+
+Device:
+
+MCP7940M =
+MCP7940MT=
+
+1.8V - 5.5V I2C™ Serial RTCC
+1.8V - 5.5V I2C Serial RTCC
+(Tape and Reel)
+
+c)
+d)
+
+Temperature I
+Range:
+
+=
+
+-40°C to +85°C
+
+Package:
+
+=
+=
+
+8-Lead Plastic Small Outline (3.90 mm body)
+8-Lead Plastic Thin Shrink Small Outline
+(4.4 mm)
+8-Lead Plastic Micro Small Outline
+8-Lead Plastic Dual Flat, No Lead
+8-Lead Plastic PDIP (300mil body)
+
+SN
+ST
+
+MS
+=
+MNY(1) =
+P
+=
+
+e)
+f)
+g)
+
+MCP7940M-I/SN: Industrial Temperature,
+SOIC package.
+MCP7940MT-I/SN: Industrial Temperature,
+SOIC package, Tape and Reel.
+MCP7940MT-I/MNY: Industrial Temperature, TDFN package, Tape and Reel
+MCP7940M-I/P: Industrial Temperature,
+PDIP package.
+MCP7940M-I/MS: Industrial Temperature
+MSOP package.
+MCP7940M-I/ST: Industrial Temperature,
+TSSOP package.
+MCP7940MT-I/ST: Industrial Temperature,
+TSSOP package, Tape and Reel.
+
+Note 1: "Y" indicates a Nickel Palladium Gold (NiPdAu) finish.
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 48
+
+Note the following details of the code protection feature on Microchip devices:
+•
+
+Microchip products meet the specification contained in their particular Microchip Data Sheet.
+
+•
+
+Microchip believes that its family of products is one of the most secure families of its kind on the market today, when used in the
+intended manner and under normal conditions.
+
+•
+
+There are dishonest and possibly illegal methods used to breach the code protection feature. All of these methods, to our
+knowledge, require using the Microchip products in a manner outside the operating specifications contained in Microchip’s Data
+Sheets. Most likely, the person doing so is engaged in theft of intellectual property.
+
+•
+
+Microchip is willing to work with the customer who is concerned about the integrity of their code.
+
+•
+
+Neither Microchip nor any other semiconductor manufacturer can guarantee the security of their code. Code protection does not
+mean that we are guaranteeing the product as “unbreakable.”
+
+Code protection is constantly evolving. We at Microchip are committed to continuously improving the code protection features of our
+products. Attempts to break Microchip’s code protection feature may be a violation of the Digital Millennium Copyright Act. If such acts
+allow unauthorized access to your software or other copyrighted work, you may have a right to sue for relief under that Act.
+
+Information contained in this publication regarding device
+applications and the like is provided only for your convenience
+and may be superseded by updates. It is your responsibility to
+ensure that your application meets with your specifications.
+MICROCHIP MAKES NO REPRESENTATIONS OR
+WARRANTIES OF ANY KIND WHETHER EXPRESS OR
+IMPLIED, WRITTEN OR ORAL, STATUTORY OR
+OTHERWISE, RELATED TO THE INFORMATION,
+INCLUDING BUT NOT LIMITED TO ITS CONDITION,
+QUALITY, PERFORMANCE, MERCHANTABILITY OR
+FITNESS FOR PURPOSE. Microchip disclaims all liability
+arising from this information and its use. Use of Microchip
+devices in life support and/or safety applications is entirely at
+the buyer’s risk, and the buyer agrees to defend, indemnify and
+hold harmless Microchip from any and all damages, claims,
+suits, or expenses resulting from such use. No licenses are
+conveyed, implicitly or otherwise, under any Microchip
+intellectual property rights unless otherwise stated.
+
+Microchip received ISO/TS-16949:2009 certification for its worldwide
+headquarters, design and wafer fabrication facilities in Chandler and
+Tempe, Arizona; Gresham, Oregon and design centers in California
+and India. The Company’s quality system processes and procedures
+are for its PIC® MCUs and dsPIC® DSCs, KEELOQ® code hopping
+devices, Serial EEPROMs, microperipherals, nonvolatile memory and
+analog products. In addition, Microchip’s quality system for the design
+and manufacture of development systems is ISO 9001:2000 certified.
+
+Trademarks
+The Microchip name and logo, the Microchip logo, AnyRate, AVR,
+AVR logo, AVR Freaks, BitCloud, chipKIT, chipKIT logo,
+CryptoMemory, CryptoRF, dsPIC, FlashFlex, flexPWR, Heldo,
+JukeBlox, KeeLoq, Kleer, LANCheck, LINK MD, maXStylus,
+maXTouch, MediaLB, megaAVR, MOST, MOST logo, MPLAB,
+OptoLyzer, PIC, picoPower, PICSTART, PIC32 logo, Prochip
+Designer, QTouch, SAM-BA, SpyNIC, SST, SST Logo,
+SuperFlash, tinyAVR, UNI/O, and XMEGA are registered
+trademarks of Microchip Technology Incorporated in the U.S.A.
+and other countries.
+ClockWorks, The Embedded Control Solutions Company,
+EtherSynch, Hyper Speed Control, HyperLight Load, IntelliMOS,
+mTouch, Precision Edge, and Quiet-Wire are registered
+trademarks of Microchip Technology Incorporated in the U.S.A.
+Adjacent Key Suppression, AKS, Analog-for-the-Digital Age, Any
+Capacitor, AnyIn, AnyOut, BodyCom, CodeGuard,
+CryptoAuthentication, CryptoAutomotive, CryptoCompanion,
+CryptoController, dsPICDEM, dsPICDEM.net, Dynamic Average
+Matching, DAM, ECAN, EtherGREEN, In-Circuit Serial
+Programming, ICSP, INICnet, Inter-Chip Connectivity,
+JitterBlocker, KleerNet, KleerNet logo, memBrain, Mindi, MiWi,
+motorBench, MPASM, MPF, MPLAB Certified logo, MPLIB,
+MPLINK, MultiTRAK, NetDetach, Omniscient Code Generation,
+PICDEM, PICDEM.net, PICkit, PICtail, PowerSmart, PureSilicon,
+QMatrix, REAL ICE, Ripple Blocker, SAM-ICE, Serial Quad I/O,
+SMART-I.S., SQI, SuperSwitcher, SuperSwitcher II, Total
+Endurance, TSHARC, USBCheck, VariSense, ViewSpan,
+WiperLock, Wireless DNA, and ZENA are trademarks of
+Microchip Technology Incorporated in the U.S.A. and other
+countries.
+SQTP is a service mark of Microchip Technology Incorporated in
+the U.S.A.
+Silicon Storage Technology is a registered trademark of
+Microchip Technology Inc. in other countries.
+GestIC is a registered trademark of Microchip Technology
+Germany II GmbH & Co. KG, a subsidiary of Microchip
+Technology Inc., in other countries.
+All other trademarks mentioned herein are property of their
+respective companies.
+© 2018, Microchip Technology Incorporated, All Rights
+Reserved.
+ISBN: 978-1-5224-3341-5
+
+ 2012-2018 Microchip Technology Inc.
+
+DS20002292C-page 49
+
+Worldwide Sales and Service
+AMERICAS
+
+ASIA/PACIFIC
+
+ASIA/PACIFIC
+
+EUROPE
+
+Corporate Office
+2355 West Chandler Blvd.
+Chandler, AZ 85224-6199
+Tel: 480-792-7200
+Fax: 480-792-7277
+Technical Support:
+http://www.microchip.com/
+support
+Web Address:
+www.microchip.com
+
+Australia - Sydney
+Tel: 61-2-9868-6733
+
+India - Bangalore
+Tel: 91-80-3090-4444
+
+China - Beijing
+Tel: 86-10-8569-7000
+
+India - New Delhi
+Tel: 91-11-4160-8631
+
+Austria - Wels
+Tel: 43-7242-2244-39
+Fax: 43-7242-2244-393
+
+China - Chengdu
+Tel: 86-28-8665-5511
+
+India - Pune
+Tel: 91-20-4121-0141
+
+Denmark - Copenhagen
+Tel: 45-4450-2828
+Fax: 45-4485-2829
+
+China - Chongqing
+Tel: 86-23-8980-9588
+
+Japan - Osaka
+Tel: 81-6-6152-7160
+
+Finland - Espoo
+Tel: 358-9-4520-820
+
+China - Dongguan
+Tel: 86-769-8702-9880
+
+Japan - Tokyo
+Tel: 81-3-6880- 3770
+
+China - Guangzhou
+Tel: 86-20-8755-8029
+
+Korea - Daegu
+Tel: 82-53-744-4301
+
+France - Paris
+Tel: 33-1-69-53-63-20
+Fax: 33-1-69-30-90-79
+
+China - Hangzhou
+Tel: 86-571-8792-8115
+
+Korea - Seoul
+Tel: 82-2-554-7200
+
+China - Hong Kong SAR
+Tel: 852-2943-5100
+
+Malaysia - Kuala Lumpur
+Tel: 60-3-7651-7906
+
+China - Nanjing
+Tel: 86-25-8473-2460
+
+Malaysia - Penang
+Tel: 60-4-227-8870
+
+China - Qingdao
+Tel: 86-532-8502-7355
+
+Philippines - Manila
+Tel: 63-2-634-9065
+
+China - Shanghai
+Tel: 86-21-3326-8000
+
+Singapore
+Tel: 65-6334-8870
+
+Germany - Munich
+Tel: 49-89-627-144-0
+Fax: 49-89-627-144-44
+
+China - Shenyang
+Tel: 86-24-2334-2829
+
+Taiwan - Hsin Chu
+Tel: 886-3-577-8366
+
+Germany - Rosenheim
+Tel: 49-8031-354-560
+
+China - Shenzhen
+Tel: 86-755-8864-2200
+
+Taiwan - Kaohsiung
+Tel: 886-7-213-7830
+
+Israel - Ra’anana
+Tel: 972-9-744-7705
+
+China - Suzhou
+Tel: 86-186-6233-1526
+
+Taiwan - Taipei
+Tel: 886-2-2508-8600
+
+China - Wuhan
+Tel: 86-27-5980-5300
+
+Thailand - Bangkok
+Tel: 66-2-694-1351
+
+Italy - Milan
+Tel: 39-0331-742611
+Fax: 39-0331-466781
+
+China - Xian
+Tel: 86-29-8833-7252
+
+Vietnam - Ho Chi Minh
+Tel: 84-28-5448-2100
+
+Atlanta
+Duluth, GA
+Tel: 678-957-9614
+Fax: 678-957-1455
+Austin, TX
+Tel: 512-257-3370
+Boston
+Westborough, MA
+Tel: 774-760-0087
+Fax: 774-760-0088
+Chicago
+Itasca, IL
+Tel: 630-285-0071
+Fax: 630-285-0075
+Dallas
+Addison, TX
+Tel: 972-818-7423
+Fax: 972-818-2924
+Detroit
+Novi, MI
+Tel: 248-848-4000
+Houston, TX
+Tel: 281-894-5983
+Indianapolis
+Noblesville, IN
+Tel: 317-773-8323
+Fax: 317-773-5453
+Tel: 317-536-2380
+
+China - Xiamen
+Tel: 86-592-2388138
+China - Zhuhai
+Tel: 86-756-3210040
+
+Los Angeles
+Mission Viejo, CA
+Tel: 949-462-9523
+Fax: 949-462-9608
+Tel: 951-273-7800
+Raleigh, NC
+Tel: 919-844-7510
+New York, NY
+Tel: 631-435-6000
+San Jose, CA
+Tel: 408-735-9110
+Tel: 408-436-4270
+Canada - Toronto
+Tel: 905-695-1980
+Fax: 905-695-2078
+
+ 2012-2018 Microchip Technology Inc.
+
+Germany - Garching
+Tel: 49-8931-9700
+Germany - Haan
+Tel: 49-2129-3766400
+Germany - Heilbronn
+Tel: 49-7131-67-3636
+Germany - Karlsruhe
+Tel: 49-721-625370
+
+Italy - Padova
+Tel: 39-049-7625286
+Netherlands - Drunen
+Tel: 31-416-690399
+Fax: 31-416-690340
+Norway - Trondheim
+Tel: 47-7289-7561
+Poland - Warsaw
+Tel: 48-22-3325737
+Romania - Bucharest
+Tel: 40-21-407-87-50
+Spain - Madrid
+Tel: 34-91-708-08-90
+Fax: 34-91-708-08-91
+Sweden - Gothenberg
+Tel: 46-31-704-60-40
+Sweden - Stockholm
+Tel: 46-8-5090-4654
+UK - Wokingham
+Tel: 44-118-921-5800
+Fax: 44-118-921-5820
+
+DS20002292C-page 50
+10/25/17
+
+

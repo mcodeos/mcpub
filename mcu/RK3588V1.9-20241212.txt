@@ -1,0 +1,6594 @@
+RK3588 Datasheet
+
+Rev 1.9
+
+Rockchip
+RK3588
+Datasheet
+Revision History
+Date
+
+Revision
+
+Description
+
+2024-12-12
+
+1.9
+
+Update digital GPIO power parameters in 3.1; Add the
+LPDDR5X description
+
+2024-08-21
+
+1.8
+
+Update digital GPIO power parameters in 3.2; Add the
+timing requirement of display interface and VOP
+
+2023-11-17
+
+1.7
+
+Add the part number RK3588-D
+
+2023-10-16
+
+1.6
+
+Update the feature description about HDMI/eDP TX
+Digital Power; Update the pin information and operating
+temperature range
+
+2022-08-02
+
+1.5
+
+Update the feature description
+
+2022-05-24
+
+1.4
+
+Update package dimension and block diagram
+
+2022-03-28
+
+1.3
+
+Update package information and operating condition
+
+2022-03-14
+
+1.2
+
+Update recommended operating condition
+
+2022-01-24
+
+1.1
+
+Update the description
+
+2021-12-20
+
+1.0
+
+Initial release for special reference
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+1
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Table of Content
+Table of Content ...................................................................................................... 2
+Figure Index ........................................................................................................... 3
+Table Index............................................................................................................. 4
+Warranty Disclaimer ................................................................................................. 5
+Chapter 1 Introduction ..................................................................................... 6
+1.1 Overview ............................................................................................... 6
+1.2 Features ................................................................................................ 6
+1.3 Block Diagram ...................................................................................... 16
+Chapter 2 Package Information.........................................................................18
+2.1 Order Information ................................................................................. 18
+2.2 Top Marking ......................................................................................... 18
+2.3 Package Dimension ............................................................................... 19
+2.4 MSL Information ................................................................................... 20
+2.5 Lead Finish/Ball Material Information ....................................................... 20
+2.6 Pin Number List .................................................................................... 20
+Chapter 3 Electrical Specification ......................................................................29
+3.1 Absolute Ratings ................................................................................... 29
+3.2 Recommended Operating Conditions ........................................................ 30
+3.3 DC Characteristics ................................................................................. 32
+3.4 Electrical Characteristics for General IO .................................................... 32
+3.5 Electrical Characteristics for PLL .............................................................. 33
+3.6 Electrical Characteristics for PCIe2/SATA Interface ..................................... 33
+3.7 Electrical Characteristics for MIPI CDPHY interface ..................................... 34
+3.8 Electrical Characteristics for MIPI CSI DPHY interface ................................. 34
+3.9 Electrical Characteristics for SARADC ....................................................... 34
+3.10 Electrical Characteristics for TSADC ........................................................ 34
+Chapter 4 Thermal Management .......................................................................35
+4.1 Overview ............................................................................................. 35
+4.2 Package Thermal Characteristics ............................................................. 35
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+2
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Figure Index
+Fig. 1-1 Block Diagram ........................................................................................... 17
+Fig. 2-1 Package Definition ..................................................................................... 18
+Fig. 2-2 Package Top View ...................................................................................... 19
+Fig. 2-3 Package Bottom View ................................................................................. 19
+Fig. 2-4 Package Side View ..................................................................................... 20
+Fig. 2-5 Package Dimension .................................................................................... 20
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+3
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Table Index
+Table 2-1 Pin Number Order Information ................................................................... 20
+Table 3-1 Absolute Ratings ...................................................................................... 29
+Table 3-2 Recommended Operating Conditions ........................................................... 30
+Table 3-3 DC Characteristics.................................................................................... 32
+Table 3-4 Electrical Characteristics for Digital General IO ............................................. 32
+Table 3-5 Electrical Characteristics for INT PLL ........................................................... 33
+Table 3-6 Electrical Characteristics for FRAC PLL ......................................................... 33
+Table 3-7 Electrical Characteristics for DDR PLL .......................................................... 33
+Table 3-8 Electrical Characteristics for PCIe2/SATA Interface ........................................ 33
+Table 3-9 Electrical Characteristics for MIPI CDPHY interface ........................................ 34
+Table 3-10 Electrical Characteristics for SARADC ........................................................ 34
+Table 3-11 Electrical Characteristics for TSADC .......................................................... 34
+Table 4-1 Thermal Resistance Characteristics ............................................................. 35
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+4
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Warranty Disclaimer
+Copyright © 2024 Rockchip Electronics Co., Ltd. All rights reserved.
+No part of this document may be reproduced, transmitted or used in any form or by
+any means without the written prior consent of Rockchip Electronics Co., Ltd.
+Trademark
+Rockchip is a registered trademark of Rockchip Electronics Co., Ltd. in the People’s
+Republic of China and other countries/areas. Other brands, product names mentioned
+in this document are the property of their respective owners.
+Disclaimer
+Rockchip Electronics Co., Ltd. (“Rockchip”) may make changes to any information in
+this document at any time without any prior notice.
+Information in this document is provided just as a reference or typical applications. All
+or part of product features described in this document may not be within the purchase
+scope or the usage scope, and may be subject to the third party licensing
+requirements. All statements, information in this document is provided "AS IS" without
+warranties of any kind, either express or implied. Actual performance of Rockchip
+products may vary in different applications. Third party licenses maybe required to use
+some features supported by Rockchip products. Customers shall be solely and
+exclusively responsible to obtain all appropriately required third party licenses prior to
+its such use. Should customers use the features supported by Rockchip products
+without any required third party license, customers shall indemnify and hold Rockchip
+and its subsidiaries, affiliates as well as distributors harmless against all claims, costs,
+damages, and expenses, and reasonable attorney fees arising out of any claim
+associated with such unauthorized use.
+Rockchip products are not intended for use in military, airplane, medical devices,
+lifesaving or life sustaining applications (“Unintended Uses”). Customers shall take any
+and all actions to ensure using Rockchip products in a lawful manner and shall be liable
+for Unintended Uses.
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+5
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Chapter 1 Introduction
+1.1 Overview
+RK3588 is a low power, high performance processor for ARM-based PC and Edge Computing
+device, personal mobile internet device and other digital multimedia applications, and
+integrates quad-core Cortex-A76 and quad-core Cortex-A55 with separately NEON
+coprocessor.
+Many embedded powerful hardware engines provide optimized performance for high-end
+application. RK3588 supports H.265 and VP9 decoder by 8K@60fps, H.264 decoder by
+8K@30fps, and AV1 decoder by 4K@60fps, also support H.264 and H.265 encoder by
+8K@30fps, high-quality JPEG encoder/decoder, specialized image preprocessor and
+postprocessor.
+Embedded 3D GPU makes RK3588 completely compatible with OpenGLES 1.1, 2.0, and 3.2,
+OpenCL up to 2.2 and Vulkan1.2. Special 2D hardware engine with MMU will maximize
+display performance and provide very smoothly operation.
+RK3588 introduces a new generation totally hardware-based maximum 48-Megapixel ISP
+(image signal processor). It implements a lot of algorithm accelerators, such as HDR, 3A,
+LSC, 3DNR, 2DNR, sharpening, dehaze, fisheye correction, gamma correction and so on.
+The build-in NPU supports INT4/INT8/INT16/FP16 hybrid operation and computing power is
+up to 6TOPs. In addition, with its strong compatibility, network models based on a series of
+frameworks such as TensorFlow/MXNet/PyTorch/Caffe can be easily converted.
+RK3588 has high-performance quad channel external memory interface
+(LPDDR4/LPDDR4X/LPDDR5/LPDDR5X) capable of sustaining demanding memory
+bandwidths, also provides a complete set of peripheral interface to support very flexible
+applications.
+
+1.2 Features
+
+1.2.1 Microprocessor
+
+
+
+
+
+
+
+
+
+
+
+
+
+Quad-core ARM Cortex-A76 MPCore processor and quad-core ARM Cortex-A55 MPCore
+processor, both are high-performance, low-power and cached application processor
+DSU (DynamIQ Shared Unit) comprises the L3 memory system, control logic, and
+external interfaces to support a DynamIQ cluster
+Full implementation of the ARM architecture v8-A instruction set, ARM Neon Advanced
+SIMD (single instruction, multiple data) support for accelerating media and signal
+processing
+ARMv8 Cryptography Extensions
+Trustzone technology support
+Integrated 64KB L1 instruction cache, 64KB L1 data cache and 512KB L2 cache for
+each Cortex-A76
+Integrated 32KB L1 instruction cache, 32KB L1 data cache and 128KB L2 cache for
+each Cortex-A55
+Quad-core Cortex-A76 and Quad-core Cortex-A55 share 3MB L3 cache
+Eight separate power domains for CPU core system to support internal power switch
+and externally turn on/off based on different application scenarios
+ PD_CPU_0: 1st Cortex-A55 + Neon + FPU + L1/L2 I/D Cache
+ PD_CPU_1: 2nd Cortex-A55 + Neon + FPU + L1/L2 I/D Cache
+ PD_CPU_2: 3rd Cortex-A55 + Neon + FPU + L1/L2 I/D Cache
+ PD_CPU_3: 4th Cortex-A55 + Neon + FPU + L1/L2 I/D Cache
+ PD_CPU_4: 1st Cortex-A76 + Neon + FPU + L1/L2 I/D Cache
+ PD_CPU_5: 2nd Cortex-A76 + Neon + FPU + L1/L2 I/D Cache
+ PD_CPU_6: 3rd Cortex-A76 + Neon + FPU + L1/L2 I/D Cache
+ PD_CPU_7: 4th Cortex-A76 + Neon + FPU + L1/L2 I/D Cache
+Three isolated voltage domains to support DVFS, one for A76_0 and A76_1, one for
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+6
+
+RK3588 Datasheet
+
+Rev 1.9
+
+A76_2 and A76_3, the other for DSU and Cortex-A55.
+
+1.2.2 Memory Organization
+
+
+
+
+Internal on-chip memory
+ BootRom
+ Support system boot from the following device:
+ SPI interface
+ eMMC interface
+ SD/MMC interface
+ Support system code download by the following interface:
+ USB OTG interface
+ Share Memory in the voltage domain of VD_LOGIC
+ PMU SRAM in VD_PMU for low power application
+External off-chip memory
+ Dynamic Memory Interface
+ Compatible with JEDEC standards LPDDR4/LPDDR4X/LPDDR5/LPDDR5X
+ Support four channels, each channel 16bits data widths
+ Support up to 2 ranks (chip selects) for each channel
+ Totally up to 32GB address space
+ Low power modes, such as power-down and self-refresh for SDRAM
+ eMMC Interface
+ Fully compliant with JEDEC eMMC 5.1 and eMMC 5.0 specification
+ Backward compliant with eMMC 4.51 and earlier versions specification.
+ Support HS400, HS200, DDR50 and legacy operating modes
+ Support three data bus width: 1bit, 4bits or 8bits
+ SD/MMC Interface
+ Compatible with SD3.0, MMC ver4.51
+ Data bus width is 4bits
+ Flexible Serial Flash Interface(FSPI)
+ Support transfer data from/to serial flash device
+ Support 1bit, 2bits or 4bits data bus width
+ Support 2 chips select
+
+1.2.3 System Component
+
+
+
+
+
+
+
+
+MCU
+ Three Cortex-M0 MCUs inside RK3588
+ MCU in VD_PMU integrate 16KB Cache and 16KB TCM
+ MCU in VD_NPU integrate 16KB Cache and 64KB TCM
+ MCU in PD_CENTER integrate 32KB TCM
+ Integrated Programmable Interrupt Controller, all IRQ lines connected to GIC
+for CPU also connect to MCU in VD_PMU(PMU_M0) and PD_CENTER(DDR_M0)
+ Integrated Debug Controller with JTAG interface
+CRU (clock & reset unit)
+ Support total 18 PLLs to generate all clocks
+ One oscillator with 24MHz clock input
+ Support clock gating control for individual components
+ Support global soft-reset control for whole chip, also individual soft-reset for each
+component
+PMU(power management unit)
+ Multiple configurable work modes to save power by different frequency or
+automatic clock gating control or power domain on/off control
+ Lots of wakeup sources in different mode
+ Support 10 separate voltage domains
+ Support 45 separate power domains, which can be power up/down by software
+based on different application scenes
+Timer
+ Support 12 secure timers with 64bits counter and interrupt-based operation
+ Support 18 non-secure timers with 64bits counter and interrupt-based operation
+ Support two operation modes: free-running and user-defined count for each timer
+ Support timer work state checkable
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+7
+
+RK3588 Datasheet
+
+
+
+
+
+
+
+
+
+
+Rev 1.9
+
+PWM
+ Support 16 on-chip PWMs(PWM0~PWM15) with interrupt-based operation
+ Programmable pre-scaled operation to bus clock and then further scaled
+ Embedded 32-bit timer/counter facility
+ Support capture mode
+ Support continuous mode or one-shot mode
+ Provides reference mode and output various duty-cycle waveform
+ Optimized for IR application for PWM3, PWM7, PWM11, PWM15
+Watchdog
+ 32-bit watchdog counter
+ Counter counts down from a preset value to 0 to indicate the occurrence of a
+timeout
+ WDT can perform two types of operations when timeout occurs:
+ Generate a system reset
+ First generate an interrupt and if this is not cleared by the service routine by
+the time a second timeout occurs then generate a system reset
+ Totally five Watchdog for CPU and MCU
+Interrupt Controller
+ Support 12 PPI interrupt source and 480 SPI interrupt sources input from different
+components inside RK3588
+ Support 16 software-triggered interrupts
+ Input interrupt level is fixed, high-level sensitive for SPI and low-level sensitive for
+PPI
+ Support different interrupt priority for each interrupt source, and they are always
+software-programmable
+DMAC
+ Micro-code programming based DMA
+ Linked list DMA function is supported to complete scatter-gather transfer
+ Support data transfer types including memory-to-memory, memory-to-peripherals,
+peripherals-to-memory
+ Totally three embedded DMA controllers for peripheral system
+ Each DMAC features:
+ Support 8 channels
+ 32 hardware request from peripherals
+ 2 interrupt output
+ Support TrustZone technology and programmable secure state for each DMA
+channel
+Secure System
+ Embedded two cipher engine
+ Support Link List Item (LLI) DMA transfer
+ Support SHA-1, SHA-256/224, SHA-512/384, MD5, SM3 with hardware padding
+ Support HMAC of SHA-1, SHA-256, SHA-512, MD5, SM3 with hardware padding
+ Support AES-128, AES-192, AES-256 encrypt & decrypt cipher
+ Support AES ECB/CBC/OFB/CFB/CTR/CTS/XTS/CCM/GCM/CBC-MAC/CMAC
+mode
+ Support SM4 ECB/CBC/OFB/CFB/CTR/CTS/XTS/CCM/GCM/CBC-MAC/CMAC
+mode
+ Support DES & TDES cipher, with ECB/CBC/OFB/CFB mode
+ Support up to 4096 bits PKA mathematical operations for RSA/ECC/SM2
+ Support generating random numbers
+ Support keyladder to guarantee key secure
+ Support data scrambling for all DDR types
+ Support secure OTP
+ Support secure debug
+ Support secure DFT test
+ Support secure OS
+ Except CPU, the other masters in the SoC can also support security and nonsecurity mode by software-programmable
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+8
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Some slave components in SoC can only be addressed by security master and the
+other slave components can be addressed by security master or non-security
+master by software-programmable
+ System SRAM(share memory), part of space is addressed only in security mode
+ External DDR space can be divided into 16 parts, each part can be softwareprogrammable to be enabled by each master
+Mailbox
+ Three Mailbox in SoC to service CPU and MCU communication
+ Support four mailbox elements per mailbox, each element includes one data word,
+one command word register and one flag bit that can represent one interrupt
+ Provide 32 lock registers for software to use to indicate whether mailbox is
+occupied
+Decompression
+ Support for decompressing GZIP files
+ Support for decompressing LZ4 files, including the General Structure of LZ4 Frame
+format and the Legacy Frame format.
+ Support for decompressing data in DEFLATE format
+ Support for decompressing data in ZLIB format
+ Support Hash32 check in LZ4 decompression process
+ Support the limit size function of the decompressed data to prevent the memory
+from being maliciously destroyed during the decompression process
+
+
+
+
+
+
+1.2.4 Video CODEC
+
+
+
+
+Video Decoder
+ Real-time video decoder of MPEG-1, MPEG-2, MPEG-4, H.263, H.264, H.265, VC-1,
+VP9, VP8, MVC, AV1
+ MMU Embedded
+ Multi-channel decoder in parallel for less resolution
+②
+ H.264 AVC/MVC Main10 L6.0 : 8K@30fps (7680x4320)
+ VP9 Profile0/2 L6.1
+: 8K@60fps (7680x4320)
+ H.265 HEVC/MVC Main10 L6.1 : 8K@60fps (7680x4320)
+ AVS2 Profile0/2 L10.2.6
+: 8K@60fps (7680x4320)
+ AV1 Main Profile 8/10bit L5.3 : 4K@60fps (3840x2160)
+ MPEG-2 up to MP
+: 1080p@60fps (1920x1088)
+ MPEG-1 up to MP
+: 1080p@60fps (1920x1088)
+ VC-1 up to AP level 3
+: 1080p@60fps (1920x1088)
+ VP8 version2
+: 1080p@60fps (1920x1088)
+Video Encoder
+ Real-time H.265/H.264 video encoding
+ Support up to 8K@30fps
+ Multi-channel encoder in parallel for less resolution
+
+1.2.5 JPEG CODEC
+
+
+
+
+JPEG Encoder
+ Baseline (DCT sequential)
+ Encoder size is from 96x96 to 8192x8192(67Mpixels)
+ Up to 90 million pixels per second
+ Embedded four encoder units
+JPEG Decoder
+ Decoder size is from 48x48 to 65536x65536
+ Support YUV400/YUV411/YUV420/YUV422/YUV440/YUV444
+ Support up to 1080P@280fps, and 560 million pixels per second
+ Support MJPEG
+ Embedded four encoder units
+
+1.2.6 Neural Process Unit
+
+
+
+
+
+Neural network acceleration engine with processing performance up to 6 TOPS
+Include triple NPU core, and support triple core co-work, dual core co-work, and work
+independently
+Support integer 4, integer 8, integer 16, float 16, Bfloat 16 and tf32 operation
+Embedded 384KBx3 internal buffer
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+9
+
+RK3588 Datasheet
+
+
+
+
+Rev 1.9
+
+Multi-task, multi-scenario in parallel
+Support deep learning frameworks: TensorFlow, Caffe, Tflite, Pytorch, Onnx NN,
+Android NN, etc.
+One isolated voltage domain to support DVFS
+
+1.2.7 Graphics Engine
+
+
+
+
+
+
+3D Graphics Engine
+ ARM Mali-G610 MP4
+ High performance OpenGLES 1.1, 2.0 and 3.2, OpenCL 2.2, Vulkan1.2 etc.
+ Embedded 4 shader cores with shared hierarchical tiler
+ Provide MMU and L2 Cache with 4x 256KB size
+ The latest Valhall architecture
+ ARM Frame Buffer Compression(AFBC) 1.3
+ Support Serial Wire debug for embedded MCU
+ One isolated voltage domain to support DVFS
+2D Graphics Engine
+ Source format: ARGB/RGB888/RGB565/YUV420/YUV422/BPP
+ Destination formats: ARGB/RGB888/RGB565/YUV420/YUV422
+ Max resolution: 8192x8192 source, 4096x4096 destination
+ Block transfer and Transparency mode
+ Color fill with gradient fill, and pattern fill
+ Alpha blending modes including global alpha, per pixel alpha (color/alpha channel
+separately) and fading
+ Arbitrary non-integer scaling ratio, from 1/8 to 8
+ 0, 90, 180, 270 degree rotation, x-mirror, y-mirror & rotation operation
+ ROP2, ROP3, ROP4
+ Support 4k/64k page size MMU
+Image Enhancement Processor
+ Image format
+ Input data: YUV420/YUV422, semi-planar/planar, UV swap
+ Output data: YUV420/YUV422, semi-planar, UV swap, Tile mode
+ YUV down sampling conversion from 422 to 420
+ Max resolution for dynamic image up to 1920x1080
+ De-interlace
+
+1.2.8 Video Input Interface
+
+
+
+
+
+
+MIPI interface
+ Two MIPI DC(DPHY/CPHY) combo PHY
+ Support to use DPHY or CPHY
+ Each MIPI DPHY V1.2, 4lanes, 2.5Gbps per lane
+ Each MIPI CPHY V1.1, 3lanes, 2.5Gsps per lane
+ Four MIPI CSI DPHY
+ Each MIPI DPHY V1.2, 2lanes, 2.5Gbps per lane
+ Support to combine 2 DPHY together to one 4lanes
+ Support camera input combination:
+ 2 MIPI DCPHY + 4 MIPI CSI DPHY(2 lanes), totally support 6 cameras input
+ 2 MIPI DCPHY + 1 MIPI CSI DPHY(4 lanes) + 2 MIPI CSI DPHY(2 lanes), totally
+support 5 cameras input
+ 2 MIPI DCPHY + 2 MIPI CSI DPHY(4 lanes), totally support 4 cameras input
+DVP interface
+ One 8/10/12/16-bit standard DVP interface, up to 150MHz input data
+ Support BT.601/BT.656 and BT.1120 VI interface
+ Support the polarity of pixel_clk, hsync, vsync configurable
+HDMI RX interface
+ Single-port HDMI 2.0 RX PHY, 4 lanes, no sideband channels
+ Data rate support in HDMI 2.0 mode
+ 6Gbps down to 3.4Gbps
+ Data rate support in HDMI 1.4 mode
+ 3.4Gbps down to 250Mbps
+ HDMI 2.0 video formats
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+10
+
+RK3588 Datasheet
+
+Rev 1.9
+
+TMDS Scrambler to enable support for 2160p@60 Hz with RGB/YCbCr4:4:4 or
+YCbCr4:2:2
+ Supports YCbCr 4:2:0 to enable 2160p@60Hz at lower HDMI link speeds
+HDMI 1.4b video formats
+ All CEA-861-E video formats up to 1080p@120Hz
+ HDMI 1.4b 4K x 2K video formats(3840x2160p@24Hz/25Hz/30Hz and
+4096x2160p@24Hz)
+ HDMI 1.4b 3D video modes with up to 340 MHz(TMDS clock)
+Support HDCP2.3 and HDCP1.4
+
+
+
+
+
+
+1.2.9 Image Signal Processor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Video Capture(VICAP)
+ Support BT601, BT656, BT1120
+ Support receiving six interfaces of MIPI CSI/DSI, up to four IDs for each interface
+ Support five CSI data formats: RAW8/10/12/14, YUV422
+ Support three modes of HDR: virtual channel mode, identification code mode, line
+counter mode
+ Support RAW data through to ISP0/1
+Maximum input
+ 48M：8064x6048@15 dual ISP
+ 32M：6528x4898@30 dual ISP
+ 16M：4672x3504@30 single ISP
+3A: include AE/Histogram, AF, AWB statistics output
+FPN: Fixed Pattern Noise removal
+BLC: Black Level Correction
+DPCC: Static/Dynamic defect pixel cluster correction
+PDAF: Phase Detection Auto Focus
+LSC: Lens shading correction
+Bayer-2DNR: Spatial Bayer-raw De-noising
+Bayer-3DNR: Temporal Bayer-raw De-noising
+CAC: Chromatic Aberration Correction
+HDR: 3-Frame Merge into High-Dynamic Range
+DRC: HDR Dynamic Range Compression, Tone mapping
+GIC: Green Imbalance Correction
+Debayer: Advanced Adaptive Demosaic with Chromatic Aberration Correction
+CCM/CSM: Color correction matrix; RGB2YUV etc
+Gamma: Gamma out correction
+Dehaze/Enhance: Automatic Dehaze and Effect enhancement
+3DLUT: 3D-Lut Color Palette for Customer
+LDCH: Lens-distortion only in the horizontal direction
+YUV-2DNR: Spatial YUV De-noising
+Sharp: Image Sharpening and boundary filtering
+CMSK: privacy mask
+GAIN: image local gain
+Support multi-sensor reuse ISP
+FishEye Correction(FEC)
+ Input mode and data format
+ Support RASTER: YUV422SP, YUV422I, YUV420SP
+ Output mode and data format
+ RASTER: YUV422SP, YUV422I, YUV420SP
+ FBCE: YUV422SP, YUV420SP
+ Support 16x8, 32x16 two density
+ Support up to 4 times reduction factor
+ Resolution 128x128~4095x4095
+ Y Interpolation: Bicubic; C Interpolation: Biliner
+
+1.2.10 Display interface
+
+
+HDMI/eDP TX interface
+ Support two HDMI/eDP TX combo interface, but HDMI and eDP can not work at the
+same time for each interface
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+11
+
+RK3588 Datasheet
+
+
+
+
+
+
+
+Rev 1.9
+
+ Support x1, x2 and x4 configuration for each interface
+ Support all the data rates for HDMI FRL: 3, 6, 8, 10 and 12Gbps
+ Support 1.62Gbps, 2.7Gbps and 5.4Gbps for eDP
+ Support up to 7680x4320@60Hz for HDMI TX, and 4K@60Hz for eDP
+ Support RGB/YUV(up to 10bit) format for HDMI TX
+ Support RGB, YCbCr 4:4:4, YCbCr 4:2:2 and 8/10 bit per component video format
+for eDP
+ Support DSC 1.2a for HDMI TX
+ Support HDCP2.3 for HDMI TX, and HDCP1.3 for eDP
+ Requirement of HDMI TX interface video timing
+ Suggest following the CTA-861 standard
+ When the video timing is not standard, HSYNC/HBP/HFP is suggested 4 pixel
+aligned
+DP TX interface
+ Support 2 DP TX 1.4a interface which combo with USB3.1 Gen1
+ Support 1/2/4lanes for each interface
+ Support 1.62Gbps, 2.7Gbps, 5.4Gbps and 8.1Gbps Serializer
+ Support up to 7680x4320@30Hz
+ Support RGB/YUV(up to 10bit) format
+ Support Single Stream Transport(SST)
+ Support DP Alt mode on USB Type-C
+ Support HDCP2.3, HDCP 1.3
+ Requirement of interface video timing
+ Suggest following the CTA-861 standard
+ When the video timing is not standard, the Min value of HSYNC/HBP/HFP is 16
+pixel
+MIPI DSI interface
+ Support 2 MIPI DPHY 2.0 or CPHY 1.1 interface
+ Support 4 data lanes and 4.5Gbps maximum data rate per lane for DPHY
+ Support 3 data trios and 2.0Gsps maximum data rate per trio for CPHY
+ Support max resolution 4K@60Hz
+ Support dual MIPI display: left-right mode
+ Support RGB(up to 10bit) format
+ Support DSC 1.1/1.2a
+ Requirement of interface video timing
+ The Min value of HSYNC/HBP/HFP is 4 pixel
+ HTOTAL and HACTIVE must be 4 pixel aligned
+ HYSNC/HBP/HFP is suggested 4 pixel aligned
+BT.1120 video output interface
+ Support up to 1920x1080@60Hz
+ Support RGB(up to 8bit) format
+ Up to 150MHz data rate
+
+1.2.11 Video Output Processor
+
+
+
+
+
+
+Video ports
+ Video Port0, max output resolution: 7680x4320@60Hz
+ Video Port1, max output resolution: 4096x4320@60Hz
+ Video Port2, max output resolution: 4096x4320@60Hz
+ Video Port3, max output resolution: 2048x1080@60Hz
+Cluster 0/1/2/3
+ Max input and output resolution 4096x4320
+ Support AFBCD
+ Support RGB/YUV/YUYV format
+ Support scale up/down ratio 4~1/4
+ Support rotation
+ESMART 0/1/2/3
+ Max input and output resolution 4096x4320
+ Support RGB/YUV/YUYV format
+ Support scale up/down ratio 8~1/8
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+12
+
+RK3588 Datasheet
+
+
+
+
+
+
+
+
+Rev 1.9
+
+ Support 4 region
+Overlay
+ Support up to 8 layers overlay: 4 cluster/4 ESMART
+ Support RGB/YUV domain overlay
+Post process
+ HDR
+ HDR10/HDR HLG
+ HDR2SDR/SDR2HDR
+ 3D-LUT/P2I/CSC/BCSH/DITHER/CABC/GAMMA/COLORBAR
+Write back
+ Format: ARGB8888/RGB888/RGB565/YUV420
+ Max resolution: 1920x1080
+Requirement of VOP interface video timing
+ HACTIVE must be 4 pixel aligned
+ When enabling split mode or MIPI dual channel mode or yuv420 format, the POST
+HSYNC/HBP/HFP must be 2 pixel aligned
+ When enabling MIPI DSC video mode, the min value of POST HSYNC/HBP/HFP is 16
+pixel, the Min value of DSC_SYS_CTRL HSYNC/HBP/HFP is 8 pixel
+
+1.2.12 Audio Interface
+
+
+
+
+
+
+
+
+
+
+
+
+I2S0/I2S1 with 8 channels
+ I2S0 support up to 8 channels TX or 8 channels RX path
+ I2S1 support up to 8 channels TX and 8 channels RX path
+ Audio resolution from 16bits to 32bits
+ Sample rate up to 192KHz
+ Provides master and slave work mode, software configurable
+ Support 3 I2S formats (normal, left-justified, right-justified)
+ Support 4 PCM formats (early, late1, late2, late3)
+ Support TDM normal, 1/2 cycle left shift, 1 cycle left shift, 2 cycle left shift, right
+shift mode serial audio data transfer
+ I2S, PCM and TDM mode cannot be used at the same time
+I2S2/I2S3 with 2 channels
+ Up to 2 channels for TX and 2 channels RX path
+ Audio resolution from 16bits to 32bits
+ Sample rate up to 192KHz
+ Provides master and slave work mode, software configurable
+ Support 3 I2S formats (normal, left-justified, right-justified)
+ Support 4 PCM formats (early, late1, late2, late3)
+ I2S and PCM cannot be used at the same time
+SPDIF0/SPDIF1
+ Support two 16-bit audio data store together in one 32-bit wide location
+ Support biphase format stereo audio data output
+ Support 16 to 31 bit audio data left or right justified in 32-bit wide sample data
+buffer
+ Support 16, 20, 24 bits audio data transfer in linear PCM mode
+ Support non-linear PCM transfer
+PDM0/PDM1
+ Up to 8 channels
+ Audio resolution from 16bits to 24bits
+ Sample rate up to 192KHz
+ Support PDM master receive mode
+Digital Audio Codec
+ Support 2 channels digital DAC
+ Support I2S/PCM interface, master and slave mode
+ Support 16 bit sample resolution
+ Support three modes of mixing for every digital DAC channel
+ Support volume control
+VAD(Voice Activity Detection)
+ Support read voice data from I2S/PDM
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+13
+
+RK3588 Datasheet
+
+
+
+
+Rev 1.9
+
+Support voice amplitude detection
+Support Multi-Mic array data storing
+Support a level combined interrupt
+
+1.2.13 Connectivity
+
+
+
+
+
+
+SDIO interface
+ Compatible with SDIO3.0 protocol
+ 4-bit data bus widths
+GMAC 10/100/1000M Ethernet controller
+ Support two Ethernet controllers
+ Support 10/100/1000-Mbps data transfer rates with the RGMII interfaces
+ Support 10/100-Mbps data transfer rates with the RMII interfaces
+ Support both full-duplex and half-duplex operation
+USB3.1 Gen1
+ Support USB3.1 Gen1,equal to USB3.2 Gen1 and USB3.0,up to 5Gbps datarate
+ Embedded 2 USB3.1 OTG interfaces which combo with DP TX (USB3OTG_0 and
+USB3OTG_1)
+ Embedded 1 USB3.1 Host interface which combo with Combo PIPE PHY2
+(USB3OTG_2)
+ Compatible Specification
+ Universal Serial Bus 3.0 Specification, Revision 1.0
+ Universal Serial Bus Specification, Revision 2.0 (exclude USB3OTG_2)
+ eXtensible Host Controller Interface for Universal Serial Bus (xHCI), Revision
+1.1
+ Support Control/Bulk (including stream)/Interrupt/Isochronous Transfer
+ Simultaneous IN and OUT transfer for USB3.1 Gen1
+ Descriptor caching and data pre-fetching used to improve system performance in
+high-latency systems
+ LPM protocol in USB 2.0 (exclude USB3OTG_2) and U0, U1, U2, and U3 states for
+USB3.1 Gen1
+ USB3.1 Gen1 Device Features
+ Up to 10 IN endpoints, including control endpoint 0
+ Up to 6 OUT endpoints, including control endpoint 0
+ Up to 16 endpoint transfer resources, each one for each endpoint
+ Flexible endpoint configuration for multiple applications/USB set-configuration
+modes
+ Hardware handles ERDY and burst
+ Stream-based bulk endpoints with controller automatically initiating data
+movement
+ Isochronous endpoints with isochronous data in data buffers
+ Flexible Descriptor with rich set of features to support buffer interrupt
+moderation, multiple transfers, isochronous, control, and scattered buffering
+support
+ USB3.1 Gen1 xHCI Host Features
+ Support up to 64 devices
+ Support 1 interrupter
+ Support 1 USB2.0 port (exclude USB3OTG_2) and 1 Super-Speed port
+ Support standard or open-source xHCI and class driver
+ USB3.1 Gen1 Dual-Role Device (DRD) Features
+ Static Device Operation
+ Static Host Operation
+ USB3.1/USB2.0 OTG A device and B device basing on ID, USB3OTG_2 only
+support USB3.1 Gen1
+ Not Support USB3.1/USB2.0 OTG session request protocol (SRP), host
+negotiation protocol (HNP) and Role Swap Protocol (RSP)
+ Miscellaneous Features
+ USB2.0 PHY support Battery Charge detection
+ USB3OTG_0 and USB3OTG_1 support USB Type-C and DP Alt Mode
+ USB3OTG_2 PHY combos with PCIE and SATA
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+14
+
+RK3588 Datasheet
+
+
+
+
+
+
+
+
+
+
+
+
+Rev 1.9
+
+USB 2.0 Host
+ Compatible with USB 2.0 specification
+ Support two USB 2.0 Host
+ Supports high-speed(480Mbps), full-speed(12Mbps) and low-speed(1.5Mbps) mode
+ Support Enhanced Host Controller Interface Specification (EHCI), Revision 1.0
+ Support Open Host Controller Interface Specification (OHCI), Revision 1.0a
+Combo PIPE PHY Interface
+ Support three Combo PIPE PHYs with PCIe2.1/SATA3.0/USB3.1 controller
+ Combo PIPE PHY0 support one of the following interfaces
+ SATA
+ PCIe2.1
+ Combo PIPE PHY1 support one of the following interfaces
+ SATA
+ PCIe2.1
+ Combo PIPE PHY2 support one of the following interfaces
+ SATA
+ PCIe2.1
+ USB3.1 Gen1
+ PCIe2.1 Interface
+ Compatible with PCI Express Base Specification Revision 2.1
+ Support 1 lane for each PCIe2.1 interface
+ Support Root Complex(RC) only
+ Support 5Gbps data rate
+ SATA Interface
+ Compatible with Serial ATA 3.1 and AHCI revision 1.3.1
+ Support eSATA
+ Support 1 port for each SATA interface
+ Support 6Gbps data rate
+PCIe3.0 Interface
+ Compatible with PCI Express Base Specification Revision 3.0
+ Support dual operation mode: Root Complex(RC) and End Point(EP)
+ Support data rates: 2.5Gbps(PCIe1.1), 5Gbps(PCIe2.1), 8Gps(PCIe3.0)
+ Support aggregation and bifurcation with 1x 4lanes, 2x 2lanes, 4x 1lanes and 1x
+2lanes + 2x 1lanes
+SPI interface
+ Support 6 SPI Controllers(SPI0-SPI4)
+ Support two chip-select output
+ Support serial-master and serial-slave mode, software-configurable
+I2C Master controller
+ Support 9 I2C Master(I2C0-I2C8)
+ Support 7bits and 10bits address mode
+ Software programmable clock frequency
+ Data on the I2C-bus can be transferred at rates of up to 100k bits/s in the
+Standard-mode, up to 400k bits/s in the Fast-mode
+UART interface
+ Support 10 UART interfaces(UART0-UART9)
+ Embedded two 64-byte FIFO for TX and RX operation respectively
+ Support 5bit, 6bit, 7bit, 8bit serial data transmit or receive
+ Standard asynchronous communication bits such as start, stop and parity
+ Support different input clock for UART operation to get up to 4Mbps baud rate
+ Support auto flow control mode for all UART
+
+1.2.14 Others
+
+
+Multiple group of GPIO
+ All of GPIOs can be used to generate interrupt
+ Support level trigger and edge trigger interrupt
+ Support configurable polarity of level trigger interrupt
+ Support configurable rising edge, falling edge and both edge trigger interrupt
+ Support configurable pull direction(a weak pull-up and a weak pull-down)
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+15
+
+RK3588 Datasheet
+
+
+
+
+
+
+
+
+Rev 1.9
+
+ Support configurable drive strength
+Temperature Sensor (TS-ADC)
+ Support User-Defined Mode and Automatic Mode
+ In User-Defined Mode, start_of_conversion can be controlled completely by
+software, and also can be generated by hardware.
+ In Automatic Mode, the temperature of alarm(high/low temperature) interrupt can
+be configurable
+ In Automatic Mode, the temperature of system reset can be configurable
+ Support to 7 channel TS-ADC, the temperature criteria of each channel can be
+configurable
+ -40~125°C temperature range and 1°C temperature resolution
+Successive approximation ADC (SARADC)
+ 12-bit resolution
+ Up to 1MS/s sampling rate
+ 8 single-ended input channels
+OTP
+ Support 32Kbit space and higher 4k address space is non-secure part.
+ Support read and program word mask in secure model
+ Support maximum 32 bit OTP program operation
+ Support maximum 16 word OTP read operation
+ Program and Read state can be read
+ Program fail address record
+Package Type
+ FCBGA1088L (body: 23mm x 23mm; ball size: 0.36mm; ball pitch: 0.65mm)
+
+1.3 Block Diagram
+
+The following figure shows the basic block diagram.
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+16
+
+RK3588 Datasheet
+System Peripheral
+
+Rev 1.9
+
+RK3588
+
+Clock & Reset
+PMU
+
+18x PLL
+System register
+
+USB OTG0 3.1/2.0/TypeC
+Cortex-A76
+Quad-Core
+
+Cortex-A55
+Quad-Core
+
+(64K/64K L1 I/D Cache)
+
+(32K/32K L1 I/D Cache)
+
+2MB L2 Cache
+
+512KB L2 Cache
+
+USB OTG1 3.1/2.0/TypeC
+
+2x USB Host 2.0
+SATA3/PCIe2.1/USB3Host
+
+30x Timer
+
+3MB L3 Cache
+
+16x PWM
+
+Dual-cluster Core
+
+5x Watchdog
+
+Connectivity
+
+MCU (Cortex-M0) x3
+
+2x Crypto
+
+2x SATA3/PCIe2.1
+PCIe3.0
+PDM/Audio PWM
+
+SAR-ADC
+
+High Performance NPU
+
+TS-ADC
+
+1MB Share Memory
+
+Interrupt Controller
+
+4x I2S/PCM/TDM
+
+2x SPDIF(8ch)
+
+3x DMAC
+
+Multi-Media Processor
+
+10x UART
+
+6x PVTM
+
+GPU Mali-G610 MP4
+
+6x SPI
+
+3x Mailbox
+
+Multi-Media
+Interface
+
+2D Graphics Engine
+
+Dual pipe ISP
+
+8K 10-bits Video
+Decoder
+
+8K Video Encoder
+
+JPEG Encoder/Decoder
+
+Image Enhancement
+Processor
+
+9x I2C
+2x Giga-Ethernet
+
+SDIO 3.0
+
+2x MIPI-CSI D/C PHY
+2x MIPI-DSI DPHY
+2x HDMI2.1 TX/eDP1.3
+2x DP1.4 (Combo with USB3)
+
+HDMI RX 2.0
+
+External Memory Interface
+eMMC5.1
+
+SD3.0/MMC4.5
+
+LPDDR4/LPDDR4X/LPDDR5/LPDDR5X
+Quad-channel x16bits
+
+GPIO
+
+Embedded
+Memory
+SRAM
+ROM
+OTP
+
+Fig. 1-1 Block Diagram
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+17
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Chapter 2 Package Information
+2.1 Order Information
+Orderable
+Device
+
+RoHS
+status
+
+Package
+
+Package QTY
+
+Device Feature
+
+RK3588
+
+RoHS
+
+FCBGA1088L
+
+600PCS by tray
+
+Application processor
+
+RK3588-D
+
+RoHS
+
+FCBGA1088L
+
+600PCS by tray
+
+Application processor with the
+Dolby function
+
+2.2 Top Marking
+
+Rockchip : Brand Name
+RKXXXX : Chip Name
+
+ABC
+: Subcontractor Code
+XXXXXX : Die Lot NO #
+DEFG : Date Code
+NXXXXXX FXX : Sub-lot info in
+OSAT
+
+The first pin
+
+Rockchip : Brand Name
+RKXXXX : Chip Name
+ABC
+: Subcontractor Code
+XXXXXX : Die Lot NO #
+DEFG : Date Code
+NXXXXXX FXX : Sub-lot info in
+OSAT
+
+The first pin
+
+Fig. 2-1 Package definition
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+18
+
+RK3588 Datasheet
+
+Rev 1.9
+
+2.3 Package Dimension
+
+Fig. 2-2 Package Top View
+
+Fig. 2-3 Package Bottom View
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+19
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Fig. 2-4 Package Side View
+
+Fig. 2-5 Package Dimension
+
+2.4 MSL Information
+Moisture sensitivity level：MSL3
+
+2.5 Lead Finish/Ball Material Information
+Lead finish/Ball material：SnAgCu
+
+2.6 Pin Number List
+Table 2-1 Pin Number Order Information
+Pin Name
+VSS_1
+DDR_CH1_DQ10_C
+DDR_CH1_DQ8_C
+DDR_CH1_DQ14_C
+DDR_CH1_DQ12_C
+DDR_CH1_DQ4_C
+DDR_CH1_DQ6_C
+DDR_CH1_DQ0_C
+DDR_CH1_DQ2_C
+DDR_CH1_A4_C
+VSS_2
+DDR_CH1_CKB_C
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+Pin
+A1
+A2
+A3
+A4
+A5
+A6
+A7
+A8
+A9
+A10
+A11
+A12
+
+Pin Name
+VSS_12
+VSS_13
+VSS_14
+VSS_15
+VSS_16
+DDR_CH0_DQ15_B
+DDR_CH0_DQ8_B
+VSS_34
+DDR_CH1_DM1_C
+DDR_CH1_DQS1N_C
+DDR_CH1_WCK1P_C
+DDR_CH1_DQS0N_C
+
+Pin
+C5
+C6
+C7
+C8
+C9
+D1
+D2
+D3
+D4
+D5
+D7
+D9
+
+20
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+DDR_CH1_CKB_D
+VSS_3
+DDR_CH1_A4_D
+DDR_CH1_DQ2_D
+DDR_CH1_DQ0_D
+DDR_CH1_DQ6_D
+DDR_CH1_DQ4_D
+DDR_CH1_DQ12_D
+DDR_CH1_DQ14_D
+DDR_CH1_DQ8_D
+DDR_CH1_DQ10_D
+PCIE30X1_1_CLKREQN_M2/DP0_HPDIN_M2/I2C2_SDA_M4/UA
+RT6_RX_M1/SPI4_MISO_M2/GPIO1_A0_d
+PCIE30X1_1_WAKEN_M2/DP1_HPDIN_M2/SATA1_ACT_LED_M
+1/I2C2_SCL_M4/UART6_TX_M1/SPI4_MOSI_M2/GPIO1_A1_d
+VOP_POST_EMPTY/I2C4_SDA_M3/UART6_RTSN_M1/PWM0_M2
+/SPI4_CLK_M2/GPIO1_A2_d
+HDMI_TX1_SDA_M2/I2C4_SCL_M3/UART6_CTSN_M1/PWM1_M
+2/SPI4_CS0_M2/GPIO1_A3_d
+PCIE30_PORT1_REF_CLKP
+PCIE30_PORT1_TX0N
+
+Pin
+A13
+A14
+A15
+A16
+A17
+A18
+A19
+A20
+A21
+A22
+A23
+A24
+
+Pin Name
+DDR_CH1_A6_C
+DDR_CH1_LP4/4X_CKE0/LP5_CS0_C
+DDR_CH1_A3_C
+DDR_CH1_A6_D
+DDR_CH1_LP4/4X_CKE0/LP5_CS0_D
+DDR_CH1_WCK0N_D
+DDR_CH1_LP4/4X_CS1_D
+DDR_CH1_DM0_D
+DDR_CH1_DQS1P_D
+DDR_CH1_DM1_D
+VSS_35
+VSS_36
+
+Pin
+D10
+D11
+D13
+D14
+D16
+D17
+D19
+D20
+D21
+D22
+D23
+D24
+
+A25
+
+D25
+
+PCIE30_PORT1_RX0N
+PCIE30_PORT1_RESREF
+VSS_4
+DDR_CH0_DQ14_A
+DDR_CH0_DQ15_A
+VSS_248
+DDR_CH0_DQS1N_A
+DDR_CH0_DQS1P_A
+VSS_249
+VCCIO2_1V8
+AVSS_15
+HDMI/eDP_TX0_VDD_0V75
+AVSS_16
+VSS_250
+VDD_GPU_MEM_0
+VDD_GPU_0
+VDD_GPU_7
+VDD_GPU_11
+VSS_251
+VSS_252
+VSS_253
+VSS_254
+VSS_255
+VSS_256
+VSS_257
+VSS_258
+VSS_259
+
+A32
+A33
+A34
+AA1
+AA2
+AA3
+AA4
+AA5
+AA6
+AA7
+AA8
+AA9
+AA10
+AA11
+AA12
+AA13
+AA14
+AA15
+AA16
+AA17
+AA18
+AA19
+AA20
+AA21
+AA22
+AA23
+AA24
+
+MIPI_CSI1_AVCC0V75
+
+AA25
+
+MIPI_CSI1_AVCC1V8
+
+AA26
+
+HDMI_TX0_HPD_M1/PCIE30X2_PERSTN_M2/HDMI_RX_HPDIN
+_M1/MCU_JTAG_TCK_M1/UART9_RX_M2/SPI0_CS0_M3/GPIO3
+_D4_d
+GMAC1_PTP_REF_CLK/HDMI_TX1_HPD_M1/I2C3_SCL_M1/SPI
+1_MOSI_M1/GPIO3_B7_d
+GMAC1_TXD2/SDIO_D0_M1/I2S3_MCLK/FSPI_D0_M2/I2C6_S
+DA_M4/PWM10_M0/SPI4_MISO_M1/GPIO3_A0_u
+GMAC1_TXD3/SDIO_D1_M1/I2S3_SCLK/AUDDSM_LN/FSPI_D1
+_M2/I2C6_SCL_M4/PWM11_IR_M0/SPI4_MOSI_M1/GPIO3_A1
+_u
+VSS_260
+
+AA27
+
+PDM1_SDI2_M1/PCIE30X4_WAKEN_M3/SPI0_MISO_M2/
+GPIO1_B1_d
+PDM1_SDI3_M1/PCIE30X4_PERSTN_M3/UART4_RX_M2/
+SPI0_MOSI_M2/GPIO1_B2_d
+PDM1_CLK1_M1/PCIE30X1_0_WAKEN_M2/SATA0_ACT_L
+ED_M1/UART4_TX_M2/SPI0_CLK_M2/GPIO1_B3_d
+I2S0_SDI0/GPIO1_D4_d
+PDM0_CLK0_M0/I2C4_SDA_M4/PWM15_IR_M2/GPIO1_
+C6_d
+I2S0_LRCK/I2C2_SCL_M3/UART4_RTSN/GPIO1_C5_d
+VSS_37
+PCIE30_PORT0_TX0P
+PCIE30_PORT0_TX0N
+DDR_CH0_DQ13_B
+DDR_CH0_DQ14_B
+VSS_38
+DDR_CH0_DM1_B
+DDR_CH1_DQS1P_C
+VSS_39
+DDR_CH1_WCK1N_C
+VSS_40
+DDR_CH1_DQS0P_C
+DDR_CH1_RESET_C
+DDR_CH1_LP4/4X_CKE1/LP5_CS1_C
+VSS_41
+DDR_CH1_A2_C
+DDR_CH1_A3_D
+DDR_CH1_LP4/4X_CKE1/LP5_CS1_D
+DDR_CH1_WCK0P_D
+VSS_42
+DDR_CH1_LP4/4X_CS0_D
+VSS_43
+DDR_CH1_DQS1N_D
+VSS_44
+VSS_45
+PDM1_CLK0_M1/PCIE30X1_0_PERSTN_M2/UART7_RX_M
+2/SPI0_CS0_M2/GPIO1_B4_u
+PCIE30X1_0_CLKREQN_M2/UART7_TX_M2/SPI0_CS1_M
+2/GPIO1_B5_u
+MIPI_CAMERA1_CLK_M0/SPDIF0_TX_M0/PCIE30X2_WA
+KEN_M3/HDMI_RX_HPDIN_M2/I2C5_SCL_M3/UART1_TX
+_M1/GPIO1_B6_d
+MIPI_CAMERA2_CLK_M0/SPDIF1_TX_M0/PCIE30X2_PER
+STN_M3/HDMI_RX_CEC_M2/SATA2_ACT_LED_M1/I2C5_
+SDA_M3/UART1_RX_M1/PWM13_M2/GPIO1_B7_u
+I2S0_SDI1/PDM0_SDI3_M0/I2C1_SDA_M4/UART4_RX_
+M0/PWM1_M1/SPI1_CS0_M2/GPIO1_D3_d
+I2S0_SDO0/I2C4_SCL_M4/UART4_CTSN/GPIO1_C7_d
+
+AA30
+
+PDM0_CLK1_M0/I2C2_SDA_M3/PWM11_IR_M2/SPI4_CS
+1_M0/GPIO1_C4_d
+
+E30
+
+AA31
+
+E31
+
+EMMC_D5/I2C1_SDA_M3/UART5_TX_M2/GPIO2_D5_u
+EMMC_D3/FSPI_D3_M0/GPIO2_D3_u
+EMMC_RSTN/I2C2_SCL_M2/UART5_RTSN_M1/GPIO2_A3_d
+DDR_CH0_DQ9_A
+DDR_CH0_DQ8_A
+VSS_261
+DDR_CH0_DM1_A
+VSS_262
+AVSS_17
+AVSS_18
+AVSS_19
+HDMI/eDP_TX0_AVDD_0V75
+AVSS_20
+VSS_263
+VDD_GPU_MEM_1
+VDD_GPU_1
+VDD_GPU_6
+VDD_GPU_10
+VSS_264
+VSS_265
+VSS_266
+
+AA32
+AA33
+AA34
+AB1
+AB2
+AB3
+AB4
+AB5
+AB6
+AB7
+AB8
+AB9
+AB10
+AB11
+AB12
+AB13
+AB14
+AB15
+AB16
+AB17
+AB18
+
+I2S0_SCLK/I2C6_SCL_M1/UART3_CTSN/PWM7_IR_M2/S
+PI4_CS0_M0/GPIO1_C3_d
+VSS_46
+PCIE30_PORT0_REF_CLKP
+PCIE30_PORT0_REF_CLKN
+DDR_CH0_DQ4_B
+DDR_CH0_DQ12_B
+VSS_47
+DDR_CH0_DQS1N_B
+DDR_CH0_DQS1P_B
+VSS_48
+DDR_CH1_DM0_C
+VSS_49
+VSS_50
+VSS_51
+DDR_CH1_A1_C
+VSS_52
+VSS_53
+VSS_54
+VSS_55
+DDR_CH1_ZQ_D
+VSS_56
+VSS_57
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+A26
+A27
+A28
+A30
+
+AA28
+AA29
+
+D26
+D27
+D28
+D29
+D30
+D31
+D32
+D33
+E1
+E2
+E3
+E4
+E5
+E6
+E7
+E8
+E9
+E10
+E11
+E12
+E13
+E14
+E16
+E17
+E18
+E19
+E20
+E21
+E22
+E23
+E24
+E25
+E26
+
+E27
+
+E28
+E29
+
+E32
+E33
+E34
+F1
+F2
+F3
+F4
+F5
+F7
+F8
+F9
+F10
+F11
+F12
+F13
+F14
+F15
+F16
+F18
+F19
+F20
+
+21
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+VSS_267
+VSS_268
+VDD_NPU_6
+VDD_NPU_5
+
+Pin
+AB19
+AB20
+AB21
+AB22
+
+VDD_NPU_2
+
+AB23
+
+VSS_269
+
+AB24
+
+MIPI_CSI0_AVCC0V75
+
+AB25
+
+MIPI_CSI0_AVCC1V8
+
+AB26
+
+VSS_270
+
+AB27
+
+PCIE30X4_BUTTON_RSTN/DP1_HPDIN_M0/MCU_JTAG_TMS_M
+1/UART9_TX_M2/PWM11_IR_M3/SPI0_CS1_M3/GPIO3_D5_d
+VSS_271
+GMAC0_PPSTRING/FSPI_CS1N_M1/HDMI_TX1_SCL_M0/I2C4_
+SCL_M1/UART7_TX_M0/GPIO2_B5_u
+GMAC0_PTP_REFCLK/FSPI_CS0N_M1/HDMI_TX1_SDA_M0/I2C
+4_SDA_M1/UART7_RX_M0/GPIO2_B4_u
+VSS_272
+GMAC0_MDIO/I2C0_SCL_M1/UART9_CTSN_M0/PWM6_M2/SPI
+3_MOSI_M0/GPIO4_C5_d
+GMAC0_MDC/I2C7_SDA_M1/UART9_RTSN_M0/PWM5_M2/SPI3
+_MISO_M0/GPIO4_C4_d
+DDR_CH0_DQ10_A
+DDR_CH0_DQ11_A
+VSS_273
+VSS_274
+AVSS_21
+HDMI/eDP_TX0_VDD_CMN_1V8
+HDMI/eDP_TX0_VDD_IO_1V8
+AVSS_22
+HDMI/eDP_TX1_AVDD_0V75
+AVSS_23
+VSS_275
+VSS_276
+VDD_GPU_2
+VDD_GPU_5
+VDD_GPU_9
+VSS_277
+VDD_LOGIC_5
+VDD_LOGIC_4
+VDD_LOGIC_3
+VSS_278
+VSS_279
+
+AC21
+
+VDD_NPU_4
+VDD_NPU_1
+VSS_280
+VCCIO6_1V8
+VCCIO6
+VSS_281
+GMAC1_TXD0/I2S2_SDO_M1/UART2_RTSN/GPIO3_B3_u
+GMAC1_TXD1/I2S2_MCLK_M1/UART2_CTSN/GPIO3_B4_u
+GMAC0_PPSCLK/TEST_CLKOUT_M1/HDMI_TX1_CEC_M0/UART
+9_RX_M0/SPI1_CS1_M0/GPIO2_C4_d
+GMAC0_RXD3/SDIO_D1_M0/FSPI_D1_M1/UART6_TX_M0/GPIO
+2_A7_u
+GMAC0_RXD2/SDIO_D0_M0/FSPI_D0_M1/UART6_RX_M0/GPI
+O2_A6_u
+GMAC0_TXD2/SDIO_D3_M0/FSPI_D3_M1/I2C8_SDA_M1/UART
+6_CTSN_M0/GPIO2_B1_u
+GMAC0_TXD3/SDIO_CMD_M0/I2C3_SCL_M3/GPIO2_B2_u
+SDMMC_D1/PDM1_SDI2_M0/JTAG_TMS_M1/I2C3_SDA_M4/UA
+RT2_RX_M1/PWM9_M1/GPIO4_D1_u
+SDMMC_D0/PDM1_SDI3_M0/JTAG_TCK_M1/I2C3_SCL_M4/UA
+RT2_TX_M1/PWM8_M1/GPIO4_D0_u
+OTP_VDDOTP_0V75
+NC
+AVSS_24
+HDMI/eDP_TX1_VDD_CMN_1V8
+HDMI/eDP_TX1_VDD_IO_1V8
+AVSS_25
+HDMI/eDP_TX1_VDD_0V75
+AVSS_26
+VSS_282
+VSS_283
+VDD_GPU_3
+VDD_GPU_4
+VDD_GPU_8
+VSS_284
+VDD_LOGIC_0
+VDD_LOGIC_1
+VDD_LOGIC_2
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+Pin
+F21
+F22
+F23
+F24
+
+AB28
+
+Pin Name
+VSS_58
+VSS_59
+VSS_60
+MIPI_CAMERA3_CLK_M0/HDMI_RX_SCL_M2/I2C8_SCL_
+M2/UART1_RTSN_M1/PWM14_M2/GPIO1_D6_u
+MIPI_CAMERA4_CLK_M0/PCIE30X2_CLKREQN_M3/HDMI
+_RX_SDA_M2/I2C8_SDA_M2/UART1_CTSN_M1/PWM15_
+IR_M3/GPIO1_D7_u
+I2S0_SDO1/I2C7_SCL_M0/UART6_TX_M2/SPI1_MISO_
+M2/GPIO1_D0_d
+I2S0_SDO2/I2S0_SDI3/PDM0_SDI1_M0/I2C7_SDA_M0/
+UART6_RX_M2/SPI1_MOSI_M2/GPIO1_D1_d
+I2S0_SDO3/I2S0_SDI2/PDM0_SDI2_M0/I2C1_SCL_M4/
+UART4_TX_M0/PWM0_M1/SPI1_CLK_M2/GPIO1_D2_d
+I2S0_MCLK/I2C6_SDA_M1/UART3_RTSN/PWM3_IR_M2/
+SPI4_CLK_M0/GPIO1_C2__d
+VSS_61
+
+AB29
+AB30
+
+PCIE30_PORT0_RX1P
+PCIE30_PORT0_RX1N
+
+F32
+F33
+
+AB31
+
+DDR_CH0_DQ6_B
+
+G1
+
+AB32
+AB33
+
+DDR_CH0_DQ5_B
+VSS_62
+
+G2
+G3
+
+AB34
+
+DDR_CH0_DM0_B
+
+G4
+
+AC1
+AC2
+AC3
+AC4
+AC5
+AC6
+AC7
+AC8
+AC9
+AC10
+AC11
+AC12
+AC13
+AC14
+AC15
+AC16
+AC17
+AC18
+AC19
+AC20
+
+G6
+G8
+G9
+G10
+G11
+G12
+G13
+G14
+G15
+G16
+G18
+G19
+G20
+G21
+G22
+G23
+G24
+G25
+G26
+G27
+
+AC22
+AC23
+AC24
+AC25
+AC26
+AC27
+AC28
+AC29
+AC30
+
+VSS_63
+DDR_CH1_ZQ_C
+DDR_CH1_WCK0P_C
+VSS_64
+DDR_CH1_LP4/4X_CS0_C
+DDR_CH1_A0_C
+DDR_CH1_A2_D
+DDR_CH1_A1_D
+VSS_65
+DDR_CH1_DQS0N_D
+DDR_CH1_WCK1N_D
+VSS_66
+VCCIO1_1V8
+VSS_67
+VSS_68
+PCIE30_PORT0_AVDD1V8
+PCIE30_PORT0_AVDD0V75
+VSS_69
+PDM0_SDI0_M0/SPI1_CS1_M2/GPIO1_D5_d
+I2C3_SCL_M0/UART3_TX_M0/SPI4_MOSI_M0/GPIO1_C1
+_z
+I2C3_SDA_M0/UART3_RX_M0/SPI4_MISO_M0/GPIO1_C
+0_z
+PCIE20_2_REFCLKN
+PCIE20_2_REFCLKP
+VSS_70
+PCIE30_PORT0_RX0P
+PCIE30_PORT0_RX0N
+DDR_CH0_DQ0_B
+DDR_CH0_DQ7_B
+VSS_71
+DDR_CH0_WCK1P_B
+
+AC31
+
+DDR_CH0_WCK1N_B
+
+H5
+
+AC32
+
+VSS_72
+
+H6
+
+AC33
+
+DDR_CH0_ZQ_B
+
+H7
+
+AC34
+AD1
+
+DDR_CH1_WCK0N_C
+VSS_73
+
+H9
+H10
+
+AD2
+
+DDR_CH1_LP4/4X_CS1_C
+
+H11
+
+AD3
+AD4
+AD5
+AD6
+AD7
+AD8
+AD9
+AD10
+AD11
+AD12
+AD13
+AD14
+AD15
+AD16
+AD17
+AD18
+AD19
+
+VSS_74
+DDR_CH1_VDDQ_CKE
+VSS_75
+DDR_CH1_A0_D
+DDR_CH1_DQS0P_D
+DDR_CH1_WCK1P_D
+VSS_76
+VCCIO4_1V8
+VCCIO4
+VSS_77
+PCIE30_PORT1_AVDD1V8
+PCIE30_PORT1_AVDD0V75
+VSS_78
+VSS_79
+AVSS_1
+PCIE20_2_TXN/SATA30_2_TXN/USB30_SSTXN
+PCIE20_2_TXP/SATA30_2_TXP/USB30_SSTXP
+
+H12
+H13
+H14
+H15
+H16
+H18
+H19
+H20
+H21
+H22
+H23
+H24
+H25
+H26
+H28
+H29
+H30
+
+F25
+
+F26
+F27
+F28
+F30
+F31
+
+G29
+G30
+G31
+G32
+G33
+G34
+H1
+H2
+H3
+H4
+
+22
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+VSS_285
+VSS_286
+VDD_NPU_3
+VDD_NPU_0
+VSS_287
+VSS_288
+VSS_289
+GMAC1_RXD2/SDIO_D2_M1/I2S3_LRCK/AUDDSM_LP/FSPI_D2
+_M2/UART8_TX_M1/SPI4_CLK_M1/GPIO3_A2_u
+GMAC1_TXCLK/SDIO_CMD_M1/I2S3_SDI/AUDDSM_RP/UART8
+_RTSN_M1/SPI4_CS1_M1/GPIO3_A4_d
+GMAC1_TXEN/I2S2_SCLK_M1/UART3_TX_M1/PWM12_M0/GPI
+O3_B5_u
+ETH0_REFCLKO_25M/I2S2_SDI_M0/I2C6_SCL_M2/SPI1_CS0_
+M0/GPIO2_C3_d
+GMAC0_RXD1/I2C6_SDA_M2/UART9_TX_M0/SPI1_MOSI_M0/
+GPIO2_C2_d
+GMAC0_RXD0/I2C2_SCL_M1/UART1_CTSN_M0/SPI1_MISO_M
+0/GPIO2_C1_d
+GMAC0_TXD0/I2S2_MCLK_M0/I2C5_SCL_M4/UART1_RX_M0/G
+PIO2_B6_d
+GMAC0_TXD1/I2S2_SCLK_M0/I2C5_SDA_M4/UART1_TX_M0/G
+PIO2_B7_d
+SDMMC_CLK/PDM1_CLK0_M0/TEST_CLKOUT_M0/MCU_JTAG_T
+MS_M0/UART5_TX_M0/GPIO4_D5_d
+SDMMC_CMD/PDM1_CLK1_M0/MCU_JTAG_TCK_M0/UART5_RX
+_M0/PWM7_IR_M1/GPIO4_D4_u
+VSS_290
+HDMI_RX_VPH3V3
+HDMI_RX_DVDD3V3
+AVSS_27
+AVSS_28
+HDMI_RX_AVDD0V75
+AVSS_29
+VSS_291
+VSS_292
+VSS_293
+VSS_294
+VSS_295
+VSS_296
+VSS_297
+VSS_298
+VSS_299
+VSS_300
+VDD_NPU_MEM_0
+VDD_NPU_MEM_1
+VSS_301
+VSS_302
+GMAC1_RXD3/SDIO_D3_M1/I2S3_SDO/AUDDSM_RN/FSPI_D3
+_M2/UART8_RX_M1/SPI4_CS0_M1/GPIO3_A3_u
+GMAC1_TXER/I2S2_SDI_M1/UART2_RX_M2/PWM3_IR_M1/GPI
+O3_B2_d
+GMAC1_MCLKINOUT/I2S2_LRCK_M1/UART3_RX_M1/PWM13_
+M0/GPIO3_B6_d
+CLK32K_OUT1/GPIO2_C5_d
+GMAC0_RXDV_CRS/UART7_RTSN_M0/PWM2_M2/SPI3_CS0_M
+0/GPIO4_C2_d
+GMAC0_RXCLK/SDIO_D2_M0/FSPI_D2_M1/I2C8_SCL_M1/UAR
+T6_RTSN_M0/GPIO2_B0_u
+GMAC0_TXCLK/SDIO_CLK_M0/FSPI_CLK_M1/I2C3_SDA_M3/G
+PIO2_B3_d
+GMAC0_TXEN/I2S2_LRCK_M0/I2C2_SDA_M1/UART1_RTSN_M
+0/SPI1_CLK_M0/GPIO2_C0_d
+SDMMC_D3/PDM1_SDI0_M0/JTAG_TMS_M0/I2C8_SDA_M0/UA
+RT5_RTSN_M0/PWM10_M1/GPIO4_D3_u
+SDMMC_D2/PDM1_SDI1_M0/JTAG_TCK_M0/I2C8_SCL_M0/UA
+RT5_CTSN_M0/GPIO4_D2_u
+HDMI_RX_REXT
+AVSS_30
+HDMI_RX_CLKN
+HDMI_RX_CLKP
+AVSS_31
+AVSS_32
+AVSS_33
+AVSS_34
+AVSS_35
+AVSS_36
+AVSS_37
+AVSS_38
+TSADC_TEST_OUT_TS
+
+Pin
+AD20
+AD21
+AD22
+AD23
+AD24
+AD25
+AD26
+AD27
+
+Pin Name
+AVSS_2
+PCIE20_1_REFCLKP
+PCIE20_1_REFCLKN
+DDR_CH0_DQ2_B
+DDR_CH0_DQ1_B
+VSS_80
+VSS_81
+VSS_82
+
+Pin
+H31
+H32
+H33
+J1
+J2
+J3
+J4
+J5
+
+AD28
+
+VSS_83
+
+J6
+
+AD29
+
+DDR_CH0_DQS0N_B
+
+J7
+
+AD30
+
+DDR_CH0_DQS0P_B
+
+J8
+
+AD31
+
+VSS_84
+
+J10
+
+AD32
+
+VSS_85
+
+J11
+
+AD33
+
+VSS_86
+
+J12
+
+AD34
+
+VSS_87
+
+J13
+
+AE1
+
+VSS_88
+
+J14
+
+AE2
+
+VSS_89
+
+J15
+
+AE3
+AE4
+AE5
+AE6
+AE7
+AE8
+AE9
+AE11
+AE12
+AE13
+AE14
+AE15
+AE16
+AE18
+AE19
+AE20
+AE21
+AE22
+AE23
+AE24
+AE26
+AE27
+
+VSS_90
+VSS_91
+VSS_92
+VSS_93
+VSS_94
+VSS_95
+VSS_96
+VSS_97
+VSS_98
+AVSS_3
+AVSS_4
+AVSS_5
+PCIE20_2_RXN/SATA30_2_RXN/USB30_SSRXN
+PCIE20_2_RXP/SATA30_2_RXP/USB30_SSRXP
+AVSS_6
+PCIE20_1_RXP/SATA30_1_RXP
+PCIE20_1_RXN/SATA30_1_RXN
+DDR_CH0_A4_B
+DDR_CH0_DQ3_B
+VSS_99
+DDR_CH0_WCK0N_B
+DDR_CH0_WCK0P_B
+
+J16
+J18
+J19
+J20
+J21
+J22
+J23
+J24
+J25
+J27
+J28
+J29
+J30
+J31
+J32
+J33
+J34
+K1
+K2
+K3
+K4
+K5
+
+AE28
+
+VSS_100
+
+K6
+
+AE29
+
+DDR_CH0_RESET_B
+
+K7
+
+AE30
+AE31
+
+VSS_101
+VSS_102
+
+K8
+K9
+
+AE32
+
+DDR_CH1_VDDQ_0
+
+K11
+
+AE33
+
+DDR_CH1_VDDQ_1
+
+K12
+
+AE34
+
+DDR_CH1_VDDQ_2
+
+K13
+
+AF1
+
+DDR_CH1_VDDQ_3
+
+K14
+
+AF2
+
+DDR_CH1_VDDQ_4
+
+K15
+
+AF3
+AF4
+AF5
+AF6
+AF7
+AF8
+AF11
+AF12
+AF13
+AF14
+AF15
+AF16
+AF18
+
+K16
+K18
+K19
+K20
+K21
+K22
+K23
+K24
+K26
+K27
+K28
+K29
+K30
+
+MIPI_D/C_PHY1_VREG
+MIPI_D/C_PHY0_VREG
+AVSS_39
+VSS_303
+VSS_304
+VSS_305
+VSS_306
+VSS_307
+
+AF19
+AF20
+AF21
+AF22
+AF24
+AF25
+AF27
+AF28
+
+DDR_CH1_PLL_AVDD1V8
+VSS_103
+VDD_LOGIC_8
+VDD_LOGIC_9
+VSS_104
+VSS_105
+VDD_CPU_BIG1_9
+VDD_CPU_BIG1_0
+AVSS_7
+PCIE20_SATA30_USB30_2_AVDD_1V8
+PCIE20_SATA30_USB30_2_AVDD_0V85
+CLK32K_IN/CLK32K_OUT0/GPIO0_B2_u
+SPI2_CS0_M2/I2C1_SDA_M1/PWM5_M0/UART0_TX_M1/
+GPIO0_B1_z
+AVSS_8
+AVSS_9
+PCIE20_1_TXP/SATA30_1_TXP
+PCIE20_1_TXN/SATA30_1_TXN
+VSS_106
+DDR_CH0_A5_B
+VSS_107
+DDR_CH0_LP4/4X_CKE1/LP5_CS1_B
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+K31
+K32
+K33
+K34
+L1
+L2
+L3
+L4
+
+23
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+VSS_308
+VSS_309
+VSS_310
+VSS_311
+GMAC0_TXER/I2C0_SDA_M1/UART7_CTSN_M0/PWM7_IR_M3/
+SPI3_CLK_M0/GPIO4_C6_d
+GMAC0_MCLKINOUT/I2S2_SDO_M0/I2C7_SCL_M1/PWM4_M1/
+SPI3_CS1_M0/GPIO4_C3_d
+HDMI_TX0_SBDN/eDP_TX0_AUXN
+HDMI_TX0_SBDP/eDP_TX0_AUXP
+AVSS_40
+HDMI_RX_D0N
+HDMI_RX_D0P
+AVSS_41
+AVSS_42
+USB20_HOST0_REXT
+AVSS_43
+USB20_AVDD_1V8
+AVSS_44
+TYPEC1_DP1_VDDH_1V8
+TYPEC0_DP0_VDDH_1V8
+AVSS_45
+TYPEC1_DP1_REXT
+AVSS_46
+MIPI_D/C_PHY1_VDD
+MIPI_D/C_PHY0_VDD
+AVSS_47
+AVSS_48
+
+Pin
+AF29
+AF30
+AF31
+AF32
+AF33
+
+Pin Name
+DDR_CH0_LP4/4X_CKE0/LP5_CS0_B
+VSS_108
+DDR_CH0_LP4/4X_CS0_B
+DDR_CH0_LP4/4X_CS1_B
+VSS_109
+
+Pin
+L5
+L6
+L7
+L8
+L9
+
+AF34
+
+DDR_CH0_VDDQ_CK
+
+L10
+
+AG1
+AG2
+AG3
+AG4
+AG5
+AG6
+AG7
+AG9
+AG10
+AG11
+AG12
+AG13
+AG14
+AG15
+AG16
+AG18
+AG19
+AG20
+AG21
+AG22
+
+L11
+L12
+L13
+L14
+L15
+L16
+L17
+L18
+L19
+L20
+L21
+L22
+L23
+L24
+L25
+L26
+L27
+L28
+L29
+L30
+
+CIF_D13/PCIE20X1_2_PERSTN_M0/HDMI_RX_CEC_M1/UART4
+_TX_M1/PWM9_M2/SPI0_MISO_M3/GPIO3_D1_d
+CIF_D15/PCIE30X2_WAKEN_M2/HDMI_RX_SDA_M1/I2C7_SDA
+_M2/UART9_CTSN_M2/PWM10_M2/SPI0_CLK_M3/GPIO3_D3_
+d
+CIF_D14/PCIE30X2_CLKREQN_M2/HDMI_RX_SCL_M1/I2C7_S
+CL_M2/UART9_RTSN_M2/SPI0_MOSI_M3/GPIO3_D2_d
+CIF_D10/PCIE30X4_PERSTN_M2/HDMI_TX1_SCL_M1/SPI3_MI
+SO_M3/GPIO3_C6_u
+GMAC1_RXD1/MIPI_CAMERA3_CLK_M1/PWM9_M0/GPIO3_B0_
+u
+GMAC1_RXD0/MIPI_CAMERA2_CLK_M1/PWM8_M0/GPIO3_A7_
+u
+VSS_312
+MIPI_CSI1_D0P
+MIPI_CSI1_D0N
+MIPI_CSI0_D0P
+MIPI_CSI0_D0N
+HDMI_TX0_D3N/eDP_TX0_D3N
+HDMI_TX0_D3P/eDP_TX0_D3P
+AVSS_49
+HDMI_RX_D1N
+HDMI_RX_D1P
+AVSS_50
+USB20_HOST1_REXT
+USB20_DVDD_0V75
+AVSS_51
+AVSS_52
+TYPEC1_DP1_VDD_0V85
+TYPEC0_DP0_VDDA_0V85
+AVSS_53
+TYPEC0_DP0_REXT
+SARADC_AVDD_1V8
+MIPI_D/C_PHY1_VDD_1V2
+MIPI_D/C_PHY0_VDD_1V2
+AVSS_54
+AVSS_55
+AVSS_56
+CIF_D12/PCIE20X1_2_WAKEN_M0/HDMI_TX0_SDA_M2/I2C5_
+SDA_M0/UART4_RX_M1/PWM8_M2/SPI3_CLK_M3/GPIO3_D0_
+u
+CIF_D9/FSPI_CS1N_M2/PCIE30X4_WAKEN_M2/HDMI_TX1_SD
+A_M1/UART5_RX_M1/SPI3_CS1_M3/GPIO3_C5_u
+CIF_D8/FSPI_CS0N_M2/PCIE30X4_CLKREQN_M2/HDMI_TX1_C
+EC_M2/UART5_TX_M1/SPI3_CS0_M3/GPIO3_C4_u
+ETH1_REFCLKO_25M/MIPI_CAMERA1_CLK_M1/I2C4_SCL_M0/
+GPIO3_A6_d
+GMAC1_RXDV_CRS/MIPI_CAMERA4_CLK_M1/UART2_TX_M2/P
+WM2_M1/GPIO3_B1_d
+GMAC1_RXCLK/SDIO_CLK_M1/MIPI_CAMERA0_CLK_M1/FSPI_
+CLK_M2/I2C4_SDA_M0/UART8_CTSN_M1/GPIO3_A5_d
+MIPI_CSI1_D1P
+MIPI_CSI1_D1N
+MIPI_CSI0_D1P
+MIPI_CSI0_D1N
+HDMI_TX0_D0N/eDP_TX0_D0N
+HDMI_TX0_D0P/eDP_TX0_D0P
+AVSS_57
+HDMI_RX_D2N
+
+AG23
+
+DDR_CH1_VDD_0
+DDR_CH1_VDD_1
+DDR_CH1_VDD_2
+DDR_CH1_VDD_3
+DDR_CH1_PLL_DVDD
+DDR_CH1_PLL_AVSS
+DDR_CH1_VDD_MIF_0
+DDR_CH1_VDD_MIF_1
+VSS_110
+VSS_111
+VSS_112
+VSS_113
+VDD_CPU_BIG1_8
+VDD_CPU_BIG1_1
+VSS_114
+AVSS_10
+PCIE20_SATA30_1_AVDD_1V8
+PCIE20_SATA30_1_AVDD_0V85
+SPI2_MISO_M2/I2C0_SCL_M0/GPIO0_B3_z
+SPI2_CS1_M2/I2C1_SCL_M1/UART0_RX_M1/GPIO0_B0_
+z
+AVSS_11
+
+AG24
+
+PCIE20_0_REFCLKP
+
+L32
+
+AG25
+
+PCIE20_0_REFCLKN
+
+L33
+
+AG26
+
+DDR_CH0_CKB_B
+
+M1
+
+AG28
+
+DDR_CH0_CK_B
+
+M2
+
+AG29
+
+VSS_115
+
+M3
+
+AG30
+AG31
+AG32
+AG33
+AG34
+AH2
+AH3
+AH4
+AH5
+AH6
+AH8
+AH9
+AH10
+AH11
+AH12
+AH13
+AH14
+AH15
+AH16
+AH18
+AH19
+AH20
+AH21
+AH22
+AH23
+AH24
+
+DDR_CH0_A1_B
+VSS_116
+DDR_CH0_A6_B
+DDR_CH0_A0_B
+VSS_117
+DDR_CH0_VDDQ_0
+DDR_CH0_PLL_AVSS
+DDR_CH0_PLL_AVDD1V8
+DDR_CH1_VDDQ_CK
+VSS_118
+VSS_119
+VDD_CPU_BIG0_0
+VDD_CPU_BIG0_9
+VSS_120
+VDD_CPU_BIG0_MEM_0
+VSS_121
+VDD_CPU_BIG1_MEM_0
+VSS_122
+VDD_CPU_BIG1_7
+VDD_CPU_BIG1_2
+VSS_123
+AVSS_12
+PCIE20_SATA30_0_AVDD_1V8
+PCIE20_SATA30_0_AVDD_0V85
+TVSS
+PMIC_INT_L/GPIO0_A7_u
+
+M5
+M6
+M7
+M8
+M9
+M10
+M11
+M12
+M13
+M14
+M15
+M16
+M17
+M18
+M19
+M20
+M21
+M22
+M23
+M24
+M25
+M26
+M27
+M28
+M29
+M30
+
+AH25
+
+NPOR_u
+
+M31
+
+AH26
+
+AVSS_13
+
+M32
+
+AH27
+
+PCIE20_0_TXN/SATA30_0_TXN
+
+M33
+
+AH29
+
+PCIE20_0_TXP/SATA30_0_TXP
+
+M34
+
+AH30
+
+DDR_CH0_CKB_A
+
+N1
+
+AH31
+AH32
+AH33
+AH34
+AJ1
+AJ2
+AJ3
+AJ4
+
+DDR_CH0_CK_A
+VSS_124
+DDR_CH0_A3_B
+DDR_CH0_A2_B
+VSS_125
+DDR_CH0_LP4/4X_CKE1/LP5_CS1_A
+DDR_CH0_VDDQ_CKE
+VSS_126
+
+N2
+N3
+N4
+N5
+N6
+N7
+N8
+N9
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+L31
+
+24
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+HDMI_RX_D2P
+AVSS_58
+AVSS_59
+AVSS_60
+USB20_AVDD_3V3
+AVSS_61
+AVSS_62
+TYPEC1_DP1_VDDA_0V85
+TYPEC0_DP0_VDD_0V85
+AVSS_63
+AVSS_64
+AVSS_65
+MIPI_D/C_PHY1_VDD_1V8
+MIPI_D/C_PHY0_VDD_1V8
+AVSS_66
+AVSS_67
+AVSS_68
+CIF_D11/PCIE20X1_2_CLKREQN_M0/HDMI_TX0_SCL_M2/I2C5
+_SCL_M0/SPI3_MOSI_M3/GPIO3_C7_u
+BT1120_D14/PCIE20X1_2_WAKEN_M1/HDMI_TX0_SDA_M0/I2
+C8_SCL_M3/SPI3_CS0_M1/GPIO4_C0_u
+BT1120_D11/PCIE30X4_WAKEN_M1/HDMI_RX_CEC_M0/SATA1
+_ACT_LED_M0/UART9_RX_M1/PWM12_M1/SPI3_MISO_M1/GPI
+O4_B5_d
+BT1120_D12/PCIE30X4_PERSTN_M1/HDMI_RX_HPDIN_M0/SA
+TA0_ACT_LED_M0/I2C5_SCL_M1/PWM13_M1/SPI3_MOSI_M1/
+GPIO4_B6_d
+BT1120_D13/PCIE20X1_2_CLKREQN_M1/HDMI_TX0_SCL_M0/I
+2C5_SDA_M1/SPI3_CLK_M1/GPIO4_B7_u
+VSS_313
+MIPI_CSI1_CLK0P
+MIPI_CSI1_CLK0N
+MIPI_CSI0_CLK0P
+MIPI_CSI0_CLK0N
+HDMI_TX0_D1N/eDP_TX0_D1N
+HDMI_TX0_D1P/eDP_TX0_D1P
+AVSS_69
+AVSS_70
+USB20_HOST0_DP
+AVSS_71
+TYPEC1_USB20_OTG_ID
+TYPEC1_USB20_OTG_DP
+AVSS_72
+AVSS_73
+AVSS_74
+AVSS_75
+AVSS_76
+SARADC_IN5
+SARADC_IN2
+SARADC_IN7
+MIPI_DPHY1_RX_D0P/MIPI_CPHY1_RX_TRIO0_B
+MIPI_DPHY1_RX_D1P/MIPI_CPHY1_RX_TRIO1_A
+MIPI_DPHY1_RX_CLKP/MIPI_CPHY1_RX_TRIO1_C
+MIPI_DPHY1_RX_D2P/MIPI_CPHY1_RX_TRIO2_B
+MIPI_DPHY1_RX_D3P/NO_USE
+AVSS_77
+BT1120_D15/SPDIF1_TX_M2/PCIE20X1_2_PERSTN_M1/HDMI_
+TX0_CEC_M0/I2C8_SDA_M3/PWM6_M1/SPI3_CS1_M1/GPIO4_
+C1_d
+CIF_HREF/BT1120_D8/I2S1_SDO1_M0/PCIE30X1_1_BUTTON_
+RSTN/I2C7_SCL_M3/UART8_RTSN_M0/PWM14_M1/SPI0_CS0_
+M1/GPIO4_B2_u
+CIF_CLKIN/BT1120_CLKOUT/I2S1_SDI3_M0/PCIE30X2_PERST
+N_M1/I2C6_SDA_M3/UART8_TX_M0/SPI2_CS1_M1/GPIO4_B0
+_d
+CIF_D5/BT1120_D5/I2S1_SDI0_M0/PCIE30X1_0_PERSTN_M1/
+I2C3_SDA_M2/UART3_TX_M2/SPI2_MOSI_M1/GPIO4_A5_d
+VSS_314
+
+Pin
+AJ5
+AJ7
+AJ8
+AJ9
+AJ10
+AJ11
+AJ12
+AJ13
+AJ14
+AJ15
+AJ16
+AJ18
+AJ19
+AJ20
+AJ21
+AJ22
+AJ23
+AJ24
+
+Pin Name
+DDR_CH0_VDDQ_1
+VSS_127
+DDR_CH0_PLL_DVDD
+DDR_CH0_VDD_MIF_0
+VSS_128
+VSS_129
+VDD_CPU_BIG0_1
+VDD_CPU_BIG0_8
+VSS_130
+VDD_CPU_BIG0_MEM_1
+VSS_131
+VDD_CPU_BIG1_MEM_1
+VSS_132
+VDD_CPU_BIG1_6
+VDD_CPU_BIG1_3
+VSS_133
+VSS_134
+OSC_1V8
+
+Pin
+N10
+N11
+N12
+N13
+N14
+N15
+N16
+N17
+N18
+N19
+N20
+N21
+N22
+N23
+N24
+N25
+N26
+N27
+
+AJ25
+
+PMUIO1_1V8
+
+N28
+
+AJ26
+
+VSS_135
+
+N29
+
+AJ27
+
+SPI2_MOSI_M2/I2C0_SDA_M0/GPIO0_A6_z
+
+N30
+
+AJ28
+
+N31
+
+AJ30
+AJ31
+AJ32
+AJ33
+AJ34
+AK2
+AK3
+AK4
+AK5
+AK6
+AK7
+AK8
+AK9
+AK10
+AK11
+AK12
+AK13
+AK14
+AK15
+AK16
+AK17
+AK18
+AK19
+AK20
+AK21
+AK22
+AK23
+AK24
+
+SPI2_CLK_M2/SDMMC_PWREN/PMU_DEBUG/GPIO0_A5_
+d
+AVSS_14
+PCIE20_0_RXP/SATA30_0_RXP
+PCIE20_0_RXN/SATA30_0_RXN
+VSS_136
+DDR_CH0_A5_A
+VSS_137
+DDR_CH0_A2_A
+DDR_CH0_A3_A
+VSS_138
+DDR_CH0_LP4/4X_CKE0/LP5_CS0_A
+VSS_139
+VSS_140
+DDR_CH0_VDDQ_2
+VSS_141
+DDR_CH0_VDD_3
+DDR_CH0_VDD_MIF_1
+VSS_142
+VSS_143
+VDD_CPU_BIG0_2
+VDD_CPU_BIG0_7
+VSS_144
+VSS_145
+VSS_146
+VSS_147
+VSS_148
+VDD_CPU_BIG1_5
+VDD_CPU_BIG1_4
+VSS_149
+
+AK25
+
+VSS_150
+
+P26
+
+AK26
+
+PMU_0V75
+
+P27
+
+AK27
+
+PMUIO2
+
+P28
+
+AK28
+
+P29
+
+VSS_315
+
+AK29
+
+CIF_D0/BT1120_D0/I2S1_MCLK_M0/PCIE30X1_1_CLKREQN_M
+1/UART9_RTSN_M1/SPI0_MISO_M1/GPIO4_A0_d
+MIPI_CSI1_D2P
+MIPI_CSI1_D2N
+MIPI_CSI0_D2P
+MIPI_CSI0_D2N
+HDMI_TX0_D2N/eDP_TX0_D2N
+HDMI_TX0_D2P/eDP_TX0_D2P
+AVSS_78
+AVSS_79
+AVSS_80
+USB20_HOST0_DM
+USB20_HOST1_DP
+TYPEC1_USB20_VBUSDET
+TYPEC1_USB20_OTG_DM
+TYPEC1_SBU1/DP1_AUXP
+
+AK30
+
+I2S1_MCLK_M1/JTAG_TCK_M2/I2C1_SCL_M0/UART2_TX
+_M0/PCIE30X1_1_CLKREQN_M0/GPIO0_B5_d
+I2S1_SDI0_M1/GPU_AVS/UART0_TX_M0/I2C4_SCL_M2/
+DP1_HPDIN_M1/PWM4_M0/PCIE30X1_0_PERSTN_M0/G
+PIO0_C5_u
+SDMMC_DET/GPIO0_A4_u
+
+AK31
+AK32
+AK33
+AK34
+AL1
+AL2
+AL3
+AL4
+AL5
+AL6
+AL7
+AL8
+AL9
+AL10
+
+TSADC_SHUT_ORG/TSADC_SHUT/GPIO0_A1_z
+REFCLK_OUT/GPIO0_A0_d
+VSS_151
+DDR_CH0_A4_A
+DDR_CH0_DQ3_A
+VSS_152
+VSS_153
+DDR_CH0_LP4/4X_CS0_A
+DDR_CH0_LP4/4X_CS1_A
+VSS_154
+VSS_155
+DDR_CH0_VDDQ_3
+VSS_156
+DDR_CH0_VDD_2
+
+P32
+P33
+P34
+R1
+R2
+R3
+R5
+R6
+R7
+R8
+R9
+R10
+R11
+R12
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+N32
+N33
+N34
+P1
+P2
+P3
+P4
+P5
+P6
+P7
+P8
+P9
+P10
+P11
+P12
+P13
+P14
+P15
+P16
+P17
+P18
+P19
+P20
+P21
+P22
+P23
+P24
+P25
+
+P30
+
+P31
+
+25
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+AVSS_81
+TYPEC0_USB20_OTG_DP
+AVSS_82
+TYPEC0_USB20_OTG_ID
+TYPEC0_SBU1/DP0_AUXP
+SARADC_IN1
+SARADC_IN6
+MIPI_DPHY1_RX_D0N/MIPI_CPHY1_RX_TRIO0_A
+MIPI_DPHY1_RX_D1N/MIPI_CPHY1_RX_TRIO0_C
+MIPI_DPHY1_RX_CLKN/MIPI_CPHY1_RX_TRIO1_B
+MIPI_DPHY1_RX_D2N/MIPI_CPHY1_RX_TRIO2_A
+MIPI_DPHY1_RX_D3N/MIPI_CPHY1_RX_TRIO2_C
+AVSS_83
+MIPI_CAMERA0_CLK_M0/SPDIF1_TX_M1/I2S1_SDO0_M0/PCIE
+30X1_0_BUTTON_RSTN/SATA2_ACT_LED_M0/I2C6_SCL_M3/U
+ART8_RX_M0/SPI0_CS1_M1/GPIO4_B1_u
+VSS_316
+CIF_CLKOUT/BT1120_D10/I2S1_SDO3_M0/PCIE30X4_CLKREQ
+N_M1/DP0_HPDIN_M0/SPDIF0_TX_M1/UART9_TX_M1/PWM11
+_IR_M1/GPIO4_B4_u
+CIF_D6/BT1120_D6/I2S1_SDI1_M0/PCIE30X2_CLKREQN_M1/I
+2C5_SCL_M2/UART3_RX_M2/SPI2_CLK_M1/GPIO4_A6_d
+CIF_D4/BT1120_D4/PCIE30X1_0_WAKEN_M1/I2C3_SCL_M2/U
+ART0_RX_M2/SPI2_MISO_M1/GPIO4_A4_d
+
+Pin
+AL11
+AL12
+AL13
+AL14
+AL15
+AL16
+AL17
+AL18
+AL19
+AL20
+AL21
+AL22
+AL23
+AL24
+
+Pin Name
+VSS_157
+VDD_VDENC_0
+VSS_158
+VDD_CPU_BIG0_3
+VDD_CPU_BIG0_6
+VSS_159
+VSS_160
+VSS_161
+VSS_162
+VSS_163
+VSS_164
+VSS_165
+VSS_166
+VSS_167
+
+Pin
+R13
+R14
+R15
+R16
+R17
+R18
+R19
+R20
+R21
+R22
+R23
+R24
+R25
+R26
+
+AL25
+AL26
+
+PMUIO2_1V8
+VSS_168
+
+R27
+R28
+
+AL27
+
+R29
+
+CIF_D3/BT1120_D3/PCIE30X1_0_CLKREQN_M1/UART0_TX_M
+2/GPIO4_A3_d
+CIF_D1/BT1120_D1/I2S1_SCLK_M0/PCIE30X1_1_WAKEN_M1/
+UART9_CTSN_M1/SPI0_MOSI_M1/GPIO4_A1_d
+MIPI_CSI1_D3P
+MIPI_CSI1_D3N
+MIPI_CSI0_D3P
+MIPI_CSI0_D3N
+HDMI/eDP_TX0_REXT
+HDMI_TX1_D3P/eDP_TX1_D3P
+AVSS_84
+HDMI_TX1_D1P/eDP_TX1_D1P
+USB20_HOST1_DM
+AVSS_85
+AVSS_86
+TYPEC1_SBU2/DP1_AUXN
+TYPEC0_USB20_OTG_DM
+TYPEC0_USB20_VBUSDET
+TYPEC0_SBU2/DP0_AUXN
+SARADC_IN0_BOOT
+SARADC_IN4
+AVSS_87
+AVSS_88
+AVSS_89
+AVSS_90
+AVSS_91
+CIF_VSYNC/BT1120_D9/I2S1_SDO2_M0/PCIE20X1_2_BUTTON
+_RSTN/I2C7_SDA_M3/UART8_CTSN_M0/PWM15_IR_M1/GPIO4
+_B3_u
+AVSS_92
+CIF_D7/BT1120_D7/I2S1_SDI2_M0/PCIE30X2_WAKEN_M1/I2
+C5_SDA_M2/SPI2_CS0_M1/GPIO4_A7_d
+AVSS_93
+CIF_D2/BT1120_D2/I2S1_LRCK_M0/PCIE30X1_1_PERSTN_M1
+/SPI0_CLK_M1/GPIO4_A2_d
+VSS_317
+MIPI_CSI1_CLK1P
+MIPI_CSI1_CLK1N
+
+AL29
+
+I2S1_SCLK_M1/JTAG_TMS_M2/I2C1_SDA_M0/UART2_R
+X_M0/PCIE30X1_1_WAKEN_M0/GPIO0_B6_d
+PDM0_CLK1_M1/PWM2_M0/UART0_RX_M0/I2C4_SDA_M
+2/DP0_HPDIN_M1/PCIE30X1_0_WAKEN_M0/GPIO0_C4_
+d
+PMIC_SLEEP2/GPIO0_A3_d
+
+AL30
+
+PMIC_SLEEP1/GPIO0_A2_d
+
+R32
+
+AL31
+AL32
+AL33
+AL34
+AM2
+AM3
+AM4
+AM5
+AM7
+AM8
+AM9
+AM10
+AM12
+AM14
+AM15
+AM16
+AM17
+AM18
+AM20
+AM22
+AM23
+AM24
+AM25
+
+VSS_169
+XIN_24M
+DDR_CH0_DQ2_A
+DDR_CH0_DQ1_A
+VSS_170
+DDR_CH0_RESET_A
+DDR_CH0_A6_A
+VSS_171
+DDR_CH0_A0_A
+DDR_CH0_A1_A
+VSS_172
+DDR_CH0_VDDQ_4
+VSS_173
+DDR_CH0_VDD_1
+VSS_174
+VDD_VDENC_1
+VSS_175
+VDD_CPU_BIG0_4
+VDD_CPU_BIG0_5
+VSS_176
+VSS_177
+VSS_178
+VDD_CPU_LIT_MEM_1
+
+R33
+R34
+T1
+T2
+T3
+T4
+T5
+T6
+T7
+T8
+T9
+T10
+T11
+T12
+T13
+T14
+T15
+T16
+T17
+T18
+T19
+T20
+T21
+
+AM26
+AM27
+
+VDD_CPU_LIT_MEM_0
+VSS_179
+
+T22
+T23
+
+AM28
+AM29
+
+VSS_180
+VSS_181
+
+T24
+T25
+
+AM30
+AM31
+AM32
+
+T26
+T27
+T28
+
+MIPI_CSI0_CLK1P
+
+AM33
+
+MIPI_CSI0_CLK1N
+HDMI/eDP_TX1_REXT
+
+AM34
+AN1
+
+HDMI_TX1_SBDP/eDP_TX1_AUXP
+HDMI_TX1_D0P/eDP_TX1_D0P
+HDMI_TX1_D1N/eDP_TX1_D1N
+HDMI_TX1_D2P/eDP_TX1_D2P
+AVSS_94
+TYPEC1_SSRX1P/DP1_TX0P
+TYPEC1_SSTX1N/DP1_TX1N
+TYPEC1_SSRX2P/DP1_TX2P
+TYPEC1_SSTX2N/DP1_TX3N
+AVSS_95
+TYPEC0_SSRX1P/DP0_TX0P
+TYPEC0_SSTX1N/DP0_TX1N
+TYPEC0_SSRX2P/DP0_TX2P
+TYPEC0_SSTX2N/DP0_TX3N
+SARADC_IN3
+MIPI_DPHY1_TX_D0P/MIPI_CPHY1_TX_TRIO0_B
+MIPI_DPHY1_TX_D1P/MIPI_CPHY1_TX_TRIO1_A
+MIPI_DPHY1_TX_CLKP/MIPI_CPHY1_TX_TRIO1_C
+
+AN2
+AN4
+AN5
+AN6
+AN7
+AN8
+AN9
+AN10
+AN11
+AN12
+AN13
+AN14
+AN15
+AN16
+AN17
+AN18
+AN19
+AN20
+
+VSS_182
+VSS_183
+I2S1_LRCK_M1/PWM0_M0/I2C2_SCL_M0/SPI0_CS1_M0
+/PCIE30X1_1_PERSTN_M0/GPIO0_B7_d
+I2S1_SDI1_M1/NPU_AVS/UART0_RTSN/PWM5_M1/SPI0
+_CLK_M0/PCIE30X4_CLKREQN_M0/SATA_CP_POD/GPIO
+0_C6_u
+PMIC_SLEEP5/GPIO0_C3_d
+PDM0_CLK0_M1/PWM1_M0/I2C2_SDA_M0/SPI0_MOSI_
+M0/PCIE30X1_0_CLKREQN_M0/GPIO0_C0_d
+PMIC_SLEEP4/GPIO0_C2_d
+VSS_184
+XOUT_24M
+DDR_CH0_DQ0_A
+DDR_CH0_DQ7_A
+VSS_185
+DDR_CH0_DQS0N_A
+DDR_CH0_DQS0P_A
+DDR_CH0_VDD_0
+VSS_186
+VSS_187
+VDD_VDENC_2
+VSS_188
+VSS_189
+VSS_190
+PLL_AVDD1V8
+PLL_AVSS
+VSS_191
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+AL28
+
+R30
+
+R31
+
+T29
+
+T30
+T31
+T32
+T33
+T34
+U1
+U2
+U3
+U4
+U5
+U11
+U12
+U13
+U14
+U15
+U16
+U17
+U18
+U19
+U20
+
+26
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+MIPI_DPHY1_TX_D2P/MIPI_CPHY1_TX_TRIO2_B
+MIPI_DPHY1_TX_D3P/NO_USE
+AVSS_96
+MIPI_DPHY0_TX_D0P/MIPI_CPHY0_TX_TRIO0_B
+MIPI_DPHY0_TX_D1P/MIPI_CPHY0_TX_TRIO1_A
+MIPI_DPHY0_TX_CLKP/MIPI_CPHY0_TX_TRIO1_C
+MIPI_DPHY0_TX_D2P/MIPI_CPHY0_TX_TRIO2_B
+MIPI_DPHY0_TX_D3P/NO_USE
+MIPI_DPHY0_RX_D0P/MIPI_CPHY0_RX_TRIO0_B
+HDMI_TX1_D3N/eDP_TX1_D3N
+MIPI_DPHY0_RX_D1P/MIPI_CPHY0_RX_TRIO1_A
+AVSS_97
+MIPI_DPHY0_RX_CLKP/MIPI_CPHY0_RX_TRIO1_C
+MIPI_DPHY0_RX_D2P/MIPI_CPHY0_RX_TRIO2_B
+MIPI_DPHY0_RX_D3P/NO_USE
+AVSS_98
+HDMI_TX1_D0N/eDP_TX1_D0N
+HDMI_TX1_D2N/eDP_TX1_D2N
+TYPEC1_USB20_OTG1_REXT
+TYPEC1_SSRX1N/DP1_TX0N
+TYPEC1_SSTX1P/DP1_TX1P
+TYPEC1_SSRX2N/DP1_TX2N
+TYPEC1_SSTX2P/DP1_TX3P
+TYPEC0_USB20_OTG0_REXT
+TYPEC0_SSRX1N/DP0_TX0N
+TYPEC0_SSTX1P/DP0_TX1P
+TYPEC0_SSRX2N/DP0_TX2N
+TYPEC0_SSTX2P/DP0_TX3P
+AVSS_99
+MIPI_DPHY1_TX_D0N/MIPI_CPHY1_TX_TRIO0_A
+MIPI_DPHY1_TX_D1N/MIPI_CPHY1_TX_TRIO0_C
+HDMI_TX1_SBDN/eDP_TX1_AUXN
+MIPI_DPHY1_TX_CLKN/MIPI_CPHY1_TX_TRIO1_B
+MIPI_DPHY1_TX_D2N/MIPI_CPHY1_TX_TRIO2_A
+MIPI_DPHY1_TX_D3N/MIPI_CPHY1_TX_TRIO2_C
+AVSS_100
+MIPI_DPHY0_TX_D0N/MIPI_CPHY0_TX_TRIO0_A
+
+Pin
+AN21
+AN22
+AN23
+AN24
+AN25
+AN26
+AN27
+AN28
+AN29
+AN3
+AN30
+AN31
+AN32
+AN33
+AN34
+AP1
+AP4
+AP6
+AP7
+AP8
+AP9
+AP10
+AP11
+AP12
+AP13
+AP14
+AP15
+AP16
+AP17
+AP18
+AP19
+AP2
+AP20
+AP21
+AP22
+AP23
+AP24
+
+MIPI_DPHY0_TX_D1N/MIPI_CPHY0_TX_TRIO0_C
+
+AP25
+
+MIPI_DPHY0_TX_CLKN/MIPI_CPHY0_TX_TRIO1_B
+MIPI_DPHY0_TX_D2N/MIPI_CPHY0_TX_TRIO2_A
+
+AP26
+AP27
+
+MIPI_DPHY0_TX_D3N/MIPI_CPHY0_TX_TRIO2_C
+MIPI_DPHY0_RX_D0N/MIPI_CPHY0_RX_TRIO0_A
+MIPI_DPHY0_RX_D1N/MIPI_CPHY0_RX_TRIO0_C
+MIPI_DPHY0_RX_CLKN/MIPI_CPHY0_RX_TRIO1_B
+MIPI_DPHY0_RX_D2N/MIPI_CPHY0_RX_TRIO2_A
+MIPI_DPHY0_RX_D3N/MIPI_CPHY0_RX_TRIO2_C
+AVSS_101
+DDR_CH0_DQ11_B
+DDR_CH1_DQ11_C
+DDR_CH1_DQ9_C
+DDR_CH1_DQ15_C
+DDR_CH1_DQ13_C
+VSS_5
+DDR_CH1_DQ5_C
+DDR_CH1_DQ7_C
+DDR_CH1_DQ1_C
+DDR_CH1_DQ3_C
+DDR_CH1_A5_C
+DDR_CH1_CK_C
+DDR_CH1_CK_D
+DDR_CH1_A5_D
+DDR_CH1_DQ3_D
+DDR_CH1_DQ1_D
+DDR_CH1_DQ7_D
+DDR_CH1_DQ5_D
+VSS_6
+DDR_CH1_DQ13_D
+DDR_CH1_DQ15_D
+DDR_CH1_DQ9_D
+DDR_CH1_DQ11_D
+VSS_7
+HDMI_TX1_SCL_M2/SPI2_MISO_M0/GPIO1_A4_d
+
+AP28
+AP29
+AP30
+AP31
+AP32
+AP33
+AP34
+B1
+B2
+B3
+B4
+B5
+B6
+B7
+B8
+B9
+B10
+B11
+B12
+B13
+B14
+B15
+B16
+B17
+B18
+B19
+B20
+B21
+B22
+B23
+B24
+B25
+
+HDMI_TX0_HPD_M0/SPI2_MOSI_M0/GPIO1_A5_d
+
+B26
+
+VSS_8
+
+B27
+
+PCIE30_PORT1_REF_CLKN
+
+B28
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+Pin Name
+VDD_CPU_LIT_7
+VDD_CPU_LIT_0
+VSS_192
+VSS_193
+VSS_194
+VSS_195
+PMIC_SLEEP3/GPIO0_C1_d
+LITCPU_AVS/SPI3_CLK_M2/GPIO0_D3_u
+VSS_196
+DDR_CH0_DQ6_A
+DDR_CH0_DQ5_A
+VSS_197
+VSS_198
+VSS_199
+DDR_CH0_WCK0N_A
+DDR_CH0_WCK0P_A
+VSS_200
+VSS_201
+VSS_202
+VSS_203
+VDD_VDENC_MEM_0
+VDD_VDENC_MEM_1
+VDD_VDENC_3
+VSS_204
+VDD_LOGIC_6
+VDD_LOGIC_7
+VSS_205
+VSS_206
+PLL_DVDD0V75
+VDD_CPU_LIT_6
+VDD_CPU_LIT_1
+VSS_207
+VSS_208
+VSS_209
+EMMCIO_1V8
+VSS_210
+I2S1_SDO3_M1/CPU_BIG1_AVS/I2C1_SDA_M2/HDMI_T
+X0_SCL_M1/SPI3_CS1_M2/SATA_MP_SWITCH/GPIO0_D
+5_u
+I2S1_SDO2_M1/PDM0_SDI2_M1/PWM3_IR_M0/I2C1_SC
+L_M2/HDMI_TX0_SDA_M1/SPI3_CS0_M2/PCIE30X2_PE
+RSTN_M0/SATA_CPDET/GPIO0_D4_u
+VSS_211
+I2S1_SDI2_M1/PDM0_SDI0_M1/I2C6_SDA_M0/UART1_
+RTSN_M2/PWM6_M0/SPI0_MISO_M0/PCIE30X4_WAKEN
+_M0/GPIO0_C7_d
+EMMC_D2/FSPI_D2_M0/GPIO2_D2_u
+EMMC_D7/FSPI_CS1N_M0/GPIO2_D7_u
+EMMC_CLKOUT/GPIO2_A1_d
+DDR_CH0_DQ4_A
+VSS_212
+VSS_213
+DDR_CH0_WCK1P_A
+DDR_CH0_WCK1N_A
+VSS_214
+VSS_215
+DDR_CH0_ZQ_A
+VSS_216
+VSS_217
+VSS_218
+VSS_219
+VDD_VDENC_5
+VDD_VDENC_4
+VSS_220
+VSS_221
+VSS_222
+VSS_223
+VSS_224
+VSS_225
+VDD_CPU_LIT_5
+VDD_CPU_LIT_2
+VSS_226
+VSS_227
+VCCIO5_1V8
+VCCIO5
+VSS_228
+PMIC_SLEEP6/PDM0_SDI3_M1/GPIO0_D6_d
+I2S1_SDO1_M1/I2C0_SDA_M2/UART1_RX_M2/HDMI_R
+X_SCL_M0/SPI3_MOSI_M2/PCIE30X2_WAKEN_M0/HDMI
+_TX1_CEC_M1/GPIO0_D2_u
+I2S1_SDO0_M1/CPU_BIG0_AVS/I2C0_SCL_M2/UART0_
+CTSN/UART1_TX_M2/HDMI_RX_SDA_M0/SPI0_CS0_M0/
+PCIE30X2_CLKREQN_M0/HDMI_TX0_CEC_M1/GPIO0_D1
+_u
+I2S1_SDI3_M1/PDM0_SDI1_M1/I2C6_SCL_M0/UART1_C
+TSN_M2/PWM7_IR_M0/SPI3_MISO_M2/PCIE30X4_PERS
+TN_M0/GPIO0_D0_d
+EMMC_D6/FSPI_CS0N_M0/GPIO2_D6_u
+
+Pin
+U21
+U22
+U23
+U24
+U30
+U31
+U32
+U33
+U34
+V1
+V2
+V3
+V4
+V5
+V6
+V7
+V8
+V9
+V10
+V11
+V12
+V13
+V14
+V15
+V16
+V17
+V18
+V19
+V20
+V21
+V22
+V23
+V24
+V25
+V26
+V27
+V28
+
+V29
+
+V30
+V31
+
+V32
+V33
+V34
+W1
+W2
+W3
+W4
+W5
+W6
+W7
+W8
+W9
+W10
+W11
+W12
+W13
+W14
+W15
+W16
+W17
+W18
+W19
+W20
+W21
+W22
+W23
+W24
+W25
+W26
+W27
+W28
+W29
+
+W30
+
+W31
+
+W32
+
+27
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Pin Name
+PCIE30_PORT1_TX1N
+PCIE30_PORT1_TX0P
+PCIE30_PORT1_RX1N
+PCIE30_PORT1_RX0P
+VSS_9
+PCIE30_PORT0_RESREF
+DDR_CH0_DQ9_B
+DDR_CH0_DQ10_B
+VSS_10
+VSS_11
+VSS_17
+VSS_18
+VSS_19
+VSS_20
+VSS_21
+VSS_22
+VSS_23
+VSS_24
+VSS_25
+DDR_CH1_RESET_D
+VSS_26
+VSS_27
+VSS_28
+VSS_29
+HDMI_TX1_HPD_M0/SPI2_CLK_M0/GPIO1_A6_d
+PDM1_SDI0_M1/PCIE30X1_1_PERSTN_M2/PWM3_IR_M3/SPI2
+_CS0_M0/GPIO1_A7_u
+VSS_30
+PDM1_SDI1_M1/PCIE30X4_CLKREQN_M3/SPI2_CS1_M0/GPIO
+1_B0_u
+VSS_31
+PCIE30_PORT1_TX1P
+
+Pin
+B29
+B30
+B31
+B32
+B33
+B34
+C1
+C2
+C3
+C4
+C10
+C11
+C12
+C13
+C14
+C15
+C16
+C17
+C18
+C19
+C20
+C21
+C22
+C23
+C24
+C25
+
+Pin Name
+EMMC_D1/FSPI_D1_M0/GPIO2_D1_u
+EMMC_CMD/FSPI_CLK_M0/GPIO2_A0_u
+DDR_CH0_DQ12_A
+DDR_CH0_DQ13_A
+VSS_229
+DDR_CH0_DM0_A
+VSS_230
+VSS_231
+VCCIO2
+VSS_232
+VSS_233
+VSS_234
+VSS_235
+VSS_236
+VSS_237
+VSS_238
+VSS_239
+VSS_240
+VSS_241
+VSS_242
+VSS_243
+VSS_244
+VDD_CPU_LIT_4
+VDD_CPU_LIT_3
+VSS_245
+VSS_246
+
+Pin
+W33
+W34
+Y1
+Y2
+Y3
+Y4
+Y5
+Y6
+Y7
+Y8
+Y9
+Y10
+Y11
+Y12
+Y13
+Y14
+Y15
+Y16
+Y17
+Y18
+Y19
+Y20
+Y21
+Y22
+Y23
+Y24
+
+C26
+C27
+
+Y26
+Y27
+
+VSS_32
+
+C30
+
+PCIE30_PORT1_RX1P
+
+C31
+
+VSS_33
+PCIE30_PORT0_TX1P
+PCIE30_PORT0_TX1N
+
+C32
+C33
+C34
+
+VCCIO3_1V8
+GMAC1_PPSCLK/PCIE30X2_BUTTON_RSTN/UART7_RX_
+M1/SPI1_CLK_M1/GPIO3_C1_d
+VSS_247
+GMAC1_PPSTRIG/I2C3_SDA_M1/UART7_TX_M1/SPI1_M
+ISO_M1/GPIO3_C0_d
+GMAC1_MDIO/MIPI_TE1/I2C8_SDA_M4/UART7_CTSN_M
+1/PWM15_IR_M0/SPI1_CS1_M1/GPIO3_C3_d
+GMAC1_MDC/MIPI_TE0/I2C8_SCL_M4/UART7_RTSN_M1
+/PWM14_M0/SPI1_CS0_M1/GPIO3_C2_d
+EMMC_D4/I2C1_SCL_M3/UART5_RX_M2/GPIO2_D4_u
+EMMC_D0/FSPI_D0_M0/GPIO2_D0_u
+EMMC_DATA_STROBE/I2C2_SDA_M2/UART5_CTSN_M1/
+GPIO2_A2_d
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+C28
+C29
+
+Y28
+Y29
+Y30
+Y31
+Y32
+Y33
+Y34
+
+28
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Chapter 3 Electrical Specification
+3.1 Absolute Ratings
+The below table provides the absolute ratings.
+Absolute maximum or minimum ratings specify the values beyond which the device may be
+damaged permanently. Long-term exposure to absolute maximum ratings conditions may
+affect device reliability.
+Table 3-1 Absolute ratings
+Parameters
+
+Related Power Group
+
+Supply voltage for CPU
+
+Supply voltage for CPU memory
+Supply voltage for GPU
+Supply voltage for GPU memory
+Supply voltage for NPU
+Supply voltage for NPU memory
+Supply voltage for VCODEC
+Supply voltage for VCODEC memory
+Supply voltage for core logic
+
+0.75V supply voltage
+
+0.85V supply voltage
+
+1.2V supply voltage
+
+1.8V supply voltage
+
+Min
+
+Max
+
+Unit
+
+-0.3
+
+1.1
+
+V
+
+-0.3
+
+1.1
+
+V
+
+VDD_GPU
+
+-0.3
+
+1.1
+
+V
+
+VDD_GPU_MEM
+
+-0.3
+
+1.1
+
+V
+
+VDD_NPU
+
+-0.3
+
+1.1
+
+V
+
+VDD_NPU_MEM
+
+-0.3
+
+1.1
+
+V
+
+VDD_VDENC
+
+-0.3
+
+0.95
+
+V
+
+VDD_VDENC_MEM
+
+-0.3
+
+0.95
+
+V
+
+VDD_LOGIC
+
+-0.3
+
+0.95
+
+V
+
+-0.3
+
+0.95
+
+V
+
+-0.3
+
+1.00
+
+V
+
+-0.3
+
+1.35
+
+V
+
+-0.5
+
+1.98
+
+V
+
+VDD_CPU_BIG0
+VDD_CPU_BIG1
+VDD_CPU_LIT
+VDD_CPU_BIG0_MEM
+VDD_CPU_BIG1_MEM
+VDD_CPU_LIT_MEM
+
+PMU_0V75
+PLL_DVDD0V75
+USB20_DVDD_0V75
+HDMI/eDP_TX0_VDD_0V75
+HDMI/eDP_TX0_AVDD_0V75
+HDMI/eDP_TX1_VDD_0V75
+HDMI/eDP_TX1_AVDD_0V75
+HDMI_RX_AVDD0V75
+MIPI_CSI0_AVCC0V75
+MIPI_CSI1_AVCC0V75
+PCIE30_PORT0_AVDD0V75
+PCIE30_PORT1_AVDD0V75
+OTP_VDDOTP_0V75
+DDR_CH0_VDD
+DDR_CH0_VDD_MIF
+DDR_CH0_PLL_DVDD
+DDR_CH1_VDD
+DDR_CH1_VDD_MIF
+DDR_CH1_PLL_DVDD
+TYPEC0_DP0_VDD_0V85
+TYPEC0_DP0_VDDA_0V85
+TYPEC1_DP1_VDD_0V85
+TYPEC1_DP1_VDDA_0V85
+MIPI_D/C_PHY0_VDD
+MIPI_D/C_PHY1_VDD
+PCIE20_SATA30_0_AVDD_0V85
+PCIE20_SATA30_1_AVDD_0V85
+PCIE20_SATA30_USB30_2_AVDD_0V85
+MIPI_D/C_PHY0_VDD_1V2
+MIPI_D/C_PHY1_VDD_1V2
+DDR_CH0_PLL_AVDD1V8
+DDR_CH1_PLL_AVDD1V8
+PLL_AVDD1V8
+USB20_AVDD_1V8
+TYPEC0_DP0_VDDH_1V8
+TYPEC1_DP1_VDDH_1V8
+HDMI/eDP_TX0_VDD_CMN_1V8
+HDMI/eDP_TX0_VDD_IO_1V8
+HDMI/eDP_TX1_VDD_CMN_1V8
+HDMI/eDP_TX1_VDD_IO_1V8
+MIPI_CSI0_AVCC1V8
+MIPI_CSI1_AVCC1V8
+MIPI_D/C_PHY0_VDD_1V8
+MIPI_D/C_PHY1_VDD_1V8
+PCIE20_SATA30_0_AVDD_1V8
+PCIE20_SATA30_1_AVDD_1V8
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+29
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Parameters
+
+Related Power Group
+
+3.3V supply voltage
+
+1.8V only GPIO supply voltage
+
+1.8V/3.3V GPIO supply voltage
+
+Supply voltage for DDR IO
+(LPDDR4/4X 0.6V; LPDDR5/5X 0.5V)
+Supply voltage for DDR IO
+(LPDDR4/4X 1.1V; LPDDR5/5X 1.05V)
+
+PCIE20_SATA30_USB30_2_AVDD_1V8
+PCIE30_PORT0_AVDD1V8
+PCIE30_PORT1_AVDD1V8
+SARADC_AVDD_1V8
+OSC_1V8
+USB20_AVDD_3V3
+HDMI_RX_DVDD3V3
+HDMI_RX_VPH3V3
+PMUIO1_1V8
+EMMCIO_1V8
+VCCIO1_1V8
+VCCIO3_1V8
+PMUIO2
+VCCIO2
+VCCIO4
+VCCIO5
+VCCIO6
+DDR_CH0_VDDQ
+DDR_CH0_VDDQ_CK
+DDR_CH1_VDDQ
+DDR_CH1_VDDQ_CK
+DDR_CH0_VDDQ_CKE
+DDR_CH1_VDDQ_CKE
+
+Min
+
+Max
+
+Unit
+
+-0.5
+
+3.63
+
+V
+
+-0.5
+
+1.98
+
+V
+
+-0.5
+
+3.63
+
+V
+
+-0.3
+
+0.7
+
+V
+
+-0.3
+
+1.25
+
+V
+
+Storage Temperature
+
+Tstg
+
+-40
+
+125
+
+℃
+
+Max Conjunction Temperature
+
+Tj
+
+NA
+
+125
+
+℃
+
+3.2 Recommended Operating Conditions
+The following table describes the recommended operating conditions.
+Table 3-2 Recommended operating conditions
+Parameters
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Voltage for CPU BigCore 0
+
+VDD_CPU_BIG0
+
+0.55
+
+0.75
+
+1.05
+
+V
+
+Voltage for CPU BigCore 0
+Memory
+
+VDD_CPU_BIG0_MEM
+
+0.675
+
+0.75
+
+1.05
+
+V
+
+Voltage for CPU BigCore 1
+
+VDD_CPU_BIG1
+
+0.55
+
+0.75
+
+1.05
+
+V
+
+VDD_CPU_BIG1_MEM
+
+0.675
+
+0.75
+
+1.05
+
+V
+
+VDD_CPU_LIT
+
+0.55
+
+0.75
+
+0.95
+
+V
+
+VDD_CPU_LIT_MEM
+
+0.675
+
+0.75
+
+0.95
+
+V
+
+VDD_GPU
+
+0.55
+
+0.75
+
+0.95
+
+V
+
+VDD_GPU_MEM
+
+0.675
+
+0.75
+
+0.95
+
+V
+
+VDD_NPU
+
+0.55
+
+0.75
+
+0.95
+
+V
+
+VDD_NPU_MEM
+
+0.675
+
+0.75
+
+0.95
+
+V
+
+VDD_VDENC
+
+0.675
+
+0.75
+
+0.825
+
+V
+
+VDD_VDENC_MEM
+
+0.675
+
+0.75
+
+0.825
+
+V
+
+VDD_LOGIC
+
+0.675
+
+0.75
+
+0.825
+
+V
+
+PMU_0V75
+
+0.675
+
+0.75
+
+0.825
+
+V
+
+1.65
+
+1.8
+
+1.95
+
+V
+
+2.7
+1.65
+
+3.3
+1.8
+
+3.6
+1.95
+
+V
+
+1.65
+
+1.8
+
+1.95
+
+V
+
+0.675
+
+0.85
+
+0.935
+
+V
+
+0.675
+
+0.85
+
+0.8925
+
+V
+
+1.62
+
+1.8
+
+1.98
+
+V
+
+0.57
+
+0.6
+
+0.63
+
+V
+
+Voltage for CPU BigCore 1
+Memory
+Voltage for CPU LitCore and
+DSU
+Voltage for CPU LitCore and
+DSU Memory
+Voltage for GPU
+Voltage for GPU Memory
+Voltage for NPU
+Voltage for NPU Memory
+Voltage for VCODEC
+Voltage for VCODEC Memory
+Voltage for Logic
+Voltage for PMU
+Digital GPIO Power (1.8V
+only)
+Digital GPIO Power
+(3.3V/1.8V)
+eMMC IO Power (1.8V)
+DDR CH0 Logic power(0.85V)
+DDR CH0_PLL power(0.85V)
+DDR CH0_PLL power(1.8V)
+LPDDR4 IO VDDQ power
+
+PMUIO1_1V8, VCCIO1_1V8,
+VCCIO3_1V8
+PMUIO2, VCCIO2, VCCIO4, VCCIO5,
+VCCIO6
+EMMCIO_1V8
+DDR_CH0_VDD, DDR_CH0_VDD_MIF,
+DDR_CH1_VDD, DDR_CH1_VDD_MIF,
+DDR_CH0_PLL_DVDD,
+DDR_CH1_PLL_DVDD
+DDR_CH0_PLL_AVDD1V8,
+DDR_CH1_PLL_AVDD1V8
+DDR_CH0_VDDQ, DDR_CH0_VDDQ_CK,
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+30
+
+RK3588 Datasheet
+Parameters
+
+Rev 1.9
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+1.045
+
+1.1
+
+1.155
+
+V
+
+0.475
+
+0.5
+
+0.525
+
+V
+
+1.0
+
+1.05
+
+1.1
+
+V
+
+DDR_CH1_VDDQ, DDR_CH1_VDDQ_CK
+LPDDR4 Retention IO VDDQ
+Power
+
+LPDDR5 Retention IO VDDQ
+Power
+
+DDR_CH0_VDDQ_CKE,
+DDR_CH1_VDDQ_CKE
+DDR_CH0_VDDQ, DDR_CH0_VDDQ_CK,
+DDR_CH1_VDDQ, DDR_CH1_VDDQ_CK
+DDR_CH0_VDDQ_CKE,
+DDR_CH1_VDDQ_CKE
+
+PLL Analog Power(0.75V)
+
+PLL_DVDD0V75
+
+0.675
+
+0.75
+
+0.8925
+
+V
+
+PLL Analog Power(1.8V)
+
+PLL_AVDD1V8
+
+1.62
+
+1.8
+
+1.98
+
+V
+
+USB 2.0 Analog Power (0.75V)
+
+USB20_DVDD_0V75
+
+0.6975
+
+0.75
+
+0.825
+
+V
+
+USB 2.0 Analog Power (1.8V)
+
+USB20_AVDD_1V8
+
+1.674
+
+1.8
+
+1.98
+
+V
+
+USB 2.0 Analog Power (3.3V)
+
+USB20_AVDD_3V3
+
+3.069
+
+3.3
+
+3.63
+
+V
+
+0.8075
+
+0.85
+
+0.8925
+
+V
+
+1.71
+
+1.8
+
+1.89
+
+V
+
+0.8
+
+0.85
+
+0.935
+
+V
+
+1.62
+
+1.8
+
+1.98
+
+V
+
+0.7125
+
+0.75
+
+0.8925
+
+V
+
+1.71
+
+1.8
+
+1.89
+
+V
+
+0.675
+
+0.75
+
+0.825
+
+V
+
+1.62
+
+1.8
+
+1.98
+
+V
+
+0.7125
+
+0.85
+
+0.8925
+
+V
+
+1.14
+
+1.2
+
+1.26
+
+V
+
+1.71
+
+1.8
+
+1.89
+
+V
+
+HDMI_RX_AVDD0V75
+
+0.675
+
+0.75
+
+0.825
+
+V
+
+HDMI_RX_DVDD3V3
+
+3.135
+
+3.3
+
+3.465
+
+V
+
+HDMI RX Analog Power(3.3V)
+
+HDMI_RX_VPH3V3
+
+3.135
+
+3.3
+
+3.465
+
+V
+
+HDMI/eDP TX Digital Power
+(0.75V)
+HDMI/eDP TX Analog Power
+(0.75V)
+HDMI/eDP TX Analog Power
+(1.8V)
+HDMI/eDP TX Analog Power
+(1.8V)
+
+HDMI/eDP_TX0_VDD_0V75,
+HDMI/eDP_TX1_VDD_0V75
+HDMI/eDP_TX0_AVDD_0V75,
+HDMI/eDP_TX1_AVDD_0V75
+HDMI/eDP_TX0_VDD_CMN_1V8,
+HDMI/eDP_TX1_VDD_CMN_1V8
+HDMI/eDP_TX0_VDD_IO_1V8,
+HDMI/eDP_TX1_VDD_IO_1V8
+
+0.675
+
+0.75
+
+0.85
+
+V
+
+0.675
+
+0.75
+
+0.85
+
+V
+
+1.62
+
+1.8
+
+1.98
+
+V
+
+1.62
+
+1.8
+
+1.98
+
+V
+
+SARADC Analog Power(1.8V)
+
+SARADC_AVDD_1V8
+
+1.62
+
+1.8
+
+1.98
+
+V
+
+OTP Analog Power(0.75V)
+
+OTP_VDDOTP_0V75
+
+0.675
+
+0.75
+
+0.825
+
+V
+
+OSC Analog Power(1.8V)
+
+OSC_1V8
+
+1.65
+
+1.8
+
+1.95
+
+V
+
+OSC input clock frequency
+
+NA
+
+24
+
+NA
+
+MHz
+
+Max CPU frequency
+
+NA
+
+NA
+
+2.2-2.4
+
+GHz
+
+Max GPU frequency
+
+NA
+
+NA
+
+1000
+
+MHz
+
+Max NPU frequency
+
+NA
+
+NA
+
+1000
+
+MHz
+
+0
+
+NA
+
+80
+
+℃
+
+LPDDR5 IO VDDQ power
+
+USB & DP Analog Power
+(0.85V)
+USB & DP Analog Power
+(1.8V)
+Combo PIPE PHY Analog
+Power(0.85V)
+Combo PIPE PHY Analog
+Power(1.8V)
+PCIe30 Analog Power(0.75V)
+PCIe30 Analog Power(1.8V)
+MIPI CSI DPHY Analog
+Power(0.75V)
+MIPI CSI DPHY Analog
+Power(1.8V)
+MIPI DCPHY Analog Power
+(0.85V)
+MIPI DCPHY Analog Power
+(1.2V)
+MIPI DCPHY Analog Power
+(1.8V)
+HDMI RX Analog
+Power(0.75V)
+HDMI RX Analog Power(3.3V)
+
+Ambient Operating
+Temperature
+
+TYPEC0_DP0_VDD_0V85,
+TYPEC0_DP0_VDDA_0V85,
+TYPEC1_DP1_VDD_0V85,
+TYPEC1_DP1_VDDA_0V85
+TYPEC0_DP0_VDDH_1V8,
+TYPEC1_DP1_VDDH_1V8
+PCIE20_SATA30_0_AVDD_0V85,
+PCIE20_SATA30_1_AVDD_0V85,
+PCIE20_SATA30_USB30_2_AVDD_0V85
+PCIE20_SATA30_0_AVDD_1V8,
+PCIE20_SATA30_1_AVDD_1V8,
+PCIE20_SATA30_USB30_2_AVDD_1V8
+PCIE30_PORT0_AVDD0V75,
+PCIE30_PORT1_AVDD0V75
+PCIE30_PORT0_AVDD1V8,
+PCIE30_PORT1_AVDD1V8
+MIPI_CSI0_AVCC0V75,
+MIPI_CSI1_AVCC0V75
+MIPI_CSI0_AVCC1V8,
+MIPI_CSI1_AVCC1V8
+MIPI_D/C_PHY0_VDD,
+MIPI_D/C_PHY1_VDD
+MIPI_D/C_PHY0_VDD_1V2,
+MIPI_D/C_PHY1_VDD_1V2
+MIPI_D/C_PHY0_VDD_1V8,
+MIPI_D/C_PHY1_VDD_1V8
+
+TA
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+31
+
+RK3588 Datasheet
+
+Rev 1.9
+
+3.3 DC Characteristics
+Table 3-3 DC Characteristics
+Parameters
+
+Digital
+3.3V/1.8V GPIO
+@3.3V
+
+Digital
+3.3V/1.8V GPIO
+@1.8V
+
+Digital 1.8V only
+GPIO
+@1.8V
+
+eMMC IO
+@1.8V
+
+DDR IO
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Input Low Voltage
+
+VIL
+
+VSS
+
+NA
+
+0.3*VDDO
+
+V
+
+Input High Voltage
+
+VIH
+
+0.7*VDDO
+
+NA
+
+VDDO
+
+V
+
+Output Low Voltage
+
+VOL
+
+VSS
+
+NA
+
+0.25*DVDD
+
+V
+
+Output High Voltage
+
+VOH
+
+0.75*DVDD
+
+NA
+
+DVDD
+
+V
+
+Pullup Resistor
+
+RRPU
+
+10
+
+NA
+
+100
+
+Kohm
+
+Pulldown Resistor
+
+RRPD
+
+10
+
+NA
+
+100
+
+Kohm
+
+Input Low Voltage
+
+VIL
+
+VSS
+
+NA
+
+0.3*VDDO
+
+V
+
+Input High Voltage
+
+VIH
+
+0.7*VDDO
+
+NA
+
+VDDO
+
+V
+
+Output Low Voltage
+
+VOL
+
+VSS
+
+NA
+
+0.25*DVDD
+
+V
+
+Output High Voltage
+
+VOH
+
+0.75*DVDD
+
+NA
+
+DVDD
+
+V
+
+Pullup Resistor
+
+RRPU
+
+10
+
+NA
+
+50
+
+Kohm
+
+Pulldown Resistor
+
+RRPD
+
+10
+
+NA
+
+50
+
+Kohm
+
+Input Low Voltage
+
+VIL
+
+VSS
+
+NA
+
+0.3*VDDO
+
+V
+
+Input High Voltage
+
+VIH
+
+0.7*VDDO
+
+NA
+
+VDDO
+
+V
+
+Output Low Voltage
+
+VOL
+
+VSS
+
+NA
+
+0.25*DVDD
+
+V
+
+Output High Voltage
+
+VOH
+
+0.75*DVDD
+
+NA
+
+DVDD
+
+V
+
+Pullup Resistor
+
+RRPU
+
+10
+
+NA
+
+50
+
+Kohm
+
+Pulldown Resistor
+
+RRPD
+
+10
+
+NA
+
+50
+
+Kohm
+
+Input Low Voltage
+
+VIL
+
+VSS
+
+NA
+
+0.35*DVDD
+
+V
+
+Input High Voltage
+
+VIH
+
+0.65*DVDD
+
+NA
+
+DVDD
+
+V
+
+Output Low Voltage
+
+VOL
+
+VSS
+
+NA
+
+0.45
+
+V
+
+Output High Voltage
+
+VOH
+
+DVDD-0.45
+
+NA
+
+DVDD
+
+V
+
+Pullup Resistor
+
+RRPU
+
+10
+
+NA
+
+50
+
+Kohm
+
+Pulldown Resistor
+
+RRPD
+
+10
+
+NA
+
+50
+
+Kohm
+
+Input Low Voltage
+
+VIL
+
+NA
+
+NA
+
+Vref-0.14
+
+V
+
+Input High Voltage
+
+VIH
+
+Vref+0.14
+
+NA
+
+NA
+
+V
+
+Output Log Voltage
+
+VOL
+
+NA
+
+NA
+
+0.2
+
+V
+
+Output High Voltage
+
+VOH
+
+0.25
+
+NA
+
+NA
+
+Input Low Current
+
+IIL
+
+-100/-500
+
+NA
+
+100/500
+
+Input High Current
+
+IIH
+
+-100/-500
+
+NA
+
+100/500
+
+V
+Room/Hot
+uA
+Room/Hot
+uA
+
+Note: VDDO and DVDD are both IO power Supply
+
+3.4 Electrical Characteristics for General IO
+Table 3-4 Electrical Characteristics for Digital General IO
+Parameters
+
+Digital
+3.3V/1.8V
+GPIO
+@3.3V
+
+Symbol
+
+Test condition
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Input leakage current
+
+IPAD
+
+DVDD=Max, VPAD=0V
+or DVDD
+
+-10
+
+NA
+
+10
+
+uA
+
+Input Hysteresis for Schmitt
+Trigger Operation
+
+VH
+
+0.08*
+VDDO
+
+NA
+
+NA
+
+V
+
+Input pullup resistor current
+
+IRPU
+
+VPAD = 0V
+
+-20
+
+NA
+
+-180
+
+uA
+
+Input pulldown resistor
+current
+
+IRPD
+
+VPAD = VDDO
+
+20
+
+NA
+
+180
+
+uA
+
+IPAD
+
+DVDD=Max, VPAD=0V
+or DVDD
+
+Input leakage current
+Digital
+3.3V/1.8V
+GPIO
+@1.8V
+
+-10
+
+NA
+
+10
+
+uA
+
+0.1*
+VDDO
+
+NA
+
+NA
+
+V
+
+VPAD = 0V
+
+-20
+
+NA
+
+-180
+
+uA
+
+IRPD
+
+VPAD = VDDO
+
+20
+
+NA
+
+180
+
+uA
+
+IPAD
+
+DVDD=Max, VPAD=0V
+or DVDD
+
+-10
+
+NA
+
+10
+
+uA
+
+Input Hysteresis for Schmitt
+Trigger Operation
+
+VH
+
+Input pullup resistor current
+
+IRPU
+
+Input pulldown resistor
+current
+Input leakage current
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+32
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Parameters
+Digital 1.8V
+only GPIO
+@1.8V
+
+eMMC IO
+@1.8V
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+0.1*
+VDDO
+
+NA
+
+NA
+
+V
+
+VPAD = 0V
+
+-20
+
+NA
+
+-170
+
+uA
+
+IRPD
+
+VPAD = VDDO
+
+20
+
+NA
+
+170
+
+uA
+
+Input leakage current
+
+IPAD
+
+DVDD=Max, VPAD=0V
+or DVDD
+
+-10
+
+NA
+
+10
+
+uA
+
+Input Hysteresis for Schmitt
+Trigger Operation
+
+VH
+
+0.1*
+DVDD
+
+NA
+
+NA
+
+V
+
+Input pullup resistor current
+
+IRPU
+
+VPAD = 0V
+
+-20
+
+NA
+
+-170
+
+uA
+
+Input pulldown resistor
+current
+
+IRPD
+
+VPAD = VDDO
+
+20
+
+NA
+
+170
+
+uA
+
+Input Hysteresis for Schmitt
+Trigger Operation
+
+VH
+
+Input pullup resistor current
+
+IRPU
+
+Input pulldown resistor
+current
+
+Test condition
+
+Note: VDDO and DVDD are both IO power Supply
+
+3.5 Electrical Characteristics for PLL
+Table 3-5 Electrical Characteristics for INT PLL
+Parameters
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Input clock frequency
+
+Symbol
+FFIN
+
+4.5
+
+-
+
+300
+
+MHz
+
+Reference frequency(FFIN/p)
+
+FFREE
+
+4.5
+
+7
+
+12
+
+MHz
+
+Frequency of PLL’s output
+
+FFOUT
+
+35.2
+
+-
+
+4500
+
+MHz
+
+Frequency of VCO’s output
+
+FFVCO
+
+2250
+
+-
+
+4500
+
+MHz
+
+-
+
+-
+
+150
+
+Cycles
+
+Lock time
+
+TLT
+
+Test condition
+
+Measured at all FFIN and FFOUT range.
+RESETB=High
+
+Table 3-6 Electrical Characteristics for FRAC PLL
+Parameters
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Input clock frequency
+
+Symbol
+FFIN
+
+6
+
+-
+
+300
+
+MHz
+
+Reference frequency(FFIN/p)
+
+FFREE
+
+6
+
+20
+
+30
+
+MHz
+
+Frequency of PLL’s output
+
+FFOUT
+
+35.2
+
+-
+
+4500
+
+MHz
+
+Frequency of VCO’s output
+
+FFVCO
+
+2250
+
+-
+
+4500
+
+MHz
+
+-
+
+-
+
+500
+
+Cycles
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+6
+
+-
+
+300
+
+MHz
+
+Lock time
+
+TLT
+
+Test condition
+
+Measured at all FFIN and FFOUT range.
+RESETB=High
+
+Table 3-7 Electrical Characteristics for DDR PLL
+Parameters
+
+Symbol
+
+Input clock frequency
+
+Test condition
+
+FFIN
+
+Reference frequency(FFIN/p)
+
+FFREE
+
+6
+
+20
+
+30
+
+MHz
+
+Frequency of PLL’s output
+
+FFOUT
+
+51.6
+
+-
+
+6600
+
+MHz
+
+Frequency of VCO’s output
+
+FFVCO
+
+3300
+
+-
+
+6600
+
+MHz
+
+-
+
+-
+
+500
+
+Cycles
+
+Lock time
+
+TLT
+
+Measured at all FFIN and FFOUT range.
+RESETB=High
+
+Notes:
+
+①
+
+p is the input divider value
+
+3.6 Electrical Characteristics for PCIe2/SATA Interface
+Table 3-8 Electrical Characteristics for PCIe2/SATA Interface
+Parameters
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+VTX_DIFF_PP
+
+800
+
+1000
+
+1200
+
+mV
+
+VTX_DIFF_PP_LOW
+
+400
+
+NA
+
+1200
+
+mV
+
+RTX_DIFF_DC
+
+80
+
+100
+
+120
+
+ohm
+
+Transmitter
+Differential Peak-Peak
+TX Output Voltage Swing
+Differential Peak-Peak Low Power
+TX Output Voltage Swing
+The output impedance
+Single Ended Output Resistance Matching
+
+RTX_DC_OFFSET
+
+NA
+
+NA
+
+5
+
+%
+
+Transmitter output common mode voltage
+
+VTX_DC_CM
+
+400
+
+NA
+
+800
+
+mV
+
+Maximum mismatch between TXP and TXM for both time and amp
+
+VTX_CM_AC_PP_ACTIVE
+
+NA
+
+NA
+
+50
+
+mV
+
+The amount of voltage change allowed during Receiver Detection
+
+VTX_RCV_DETECT
+
+NA
+
+NA
+
+600
+
+mV
+
+TX de-emphasis
+
+VTX_DE_RATIO
+
+3.0
+
+3.5
+
+4.0
+
+dB
+
+AC Coupling Capacitor(USB3.1/PCIe)
+
+CAC_COUPLING
+
+75
+
+NA
+
+200
+
+nF
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+33
+
+RK3588 Datasheet
+
+Rev 1.9
+Parameters
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+6
+
+NA
+
+12
+
+nF
+
+AC Coupling Capacitor(SATA)
+Output rising time for 20% to 80%
+
+Tr
+
+25
+
+NA
+
+NA
+
+ps
+
+Output falling time for 20% to 80%
+
+Tf
+
+25
+
+NA
+
+NA
+
+ps
+
+Transmitter short circuit limit
+
+ITX_SHORT
+
+NA
+
+NA
+
+20
+
+mA
+
+Output differential skew
+
+TSKEW_DIFF
+
+-15
+
+NA
+
+15
+
+ps
+
+Input Voltage Swing
+
+VRXDPP_C
+
+250
+
+NA
+
+1200
+
+mVpp
+
+The input differential impedance
+
+RRXD_C
+
+80
+
+100
+
+120
+
+Ohm
+
+Single Ended input Resistance Matching
+
+RRXD_C_MS
+
+NA
+
+NA
+
+5
+
+%
+
+Receiver
+
+3.7 Electrical Characteristics for MIPI CDPHY interface
+Table 3-9 Electrical Characteristics for MIPI CDPHY interface
+Parameters
+
+Symbol
+VIH
+
+LP-RX
+
+VIL
+Tskewcal
+(initial)
+
+Skew
+Calibration
+Tskewcal
+(periodic)
+
+Description
+Logic1 input voltage
+Logic0 input voltage, not in
+ULPS state
+Duration for which the
+transmitter drives the skewcalibration pattern in the initial
+skew calibration mode
+Duration for which the
+transmitter drives the skewcalibration pattern in the
+periodic skew calibration mode
+
+Test condition
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+All conditions
+
+880
+
+NA
+
+NA
+
+mV
+
+All conditions
+
+NA
+
+NA
+
+550
+
+mV
+
+NA
+
+NA
+
+100
+
+us
+
+2^15
+
+NA
+
+NA
+
+UI
+
+NA
+
+NA
+
+10
+
+us
+
+2^13
+
+NA
+
+NA
+
+UI
+
+>1.5Gbps
+
+>1.5Gbps
+(optional)
+
+3.8 Electrical Characteristics for MIPI CSI DPHY interface
+Table 3-10 Electrical Characteristics for MIPI CSI DPHY interface
+Parameters
+
+Symbol
+
+Common-mode interference beyond 450 MHz
+
+ΔVCMRX(HF)
+
+Min
+
+Typ
+
+Max
+
+Units
+
+NA
+
+NA
+
+100
+
+mV
+
+NA
+
+NA
+
+50
+
+mV
+
+-50
+
+NA
+
+50
+
+mV
+
+Common-mode interference 50MHz-450MHz
+
+ΔVCMRX(LF)
+
+-25
+
+NA
+
+25
+
+mV
+
+Common-mode termination
+
+CCM
+
+NA
+
+NA
+
+60
+
+pF
+
+Input pulse rejection
+
+eSPIKE
+
+NA
+
+NA
+
+300
+
+V.ps
+
+Minimum pulse width response
+
+TMIN-RX
+
+20
+
+NA
+
+NA
+
+ns
+
+Peak interference amplitude
+
+VINT
+
+NA
+
+NA
+
+200
+
+mV
+
+Interference frequency
+
+fINT
+
+450
+
+NA
+
+NA
+
+MHz
+
+3.9 Electrical Characteristics for SARADC
+Table 3-10 Electrical Characteristics for SARADC
+Parameters
+
+Symbol
+
+Test condition
+
+Resolution
+Anglog Input Range
+
+AIN
+
+Differential Non-Linearity
+
+DNL
+
+Integral Non-Linearity
+
+INL
+
+Top Offset Voltage Error
+
+EOT
+
+Bottom Offset Voltage Error
+
+EOB
+
+PD = Low
+Fs = 1MS/s
+FCLK = 20MHz
+FSOC = 1MHz
+FAIN = 10kHz ramp wave
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+NA
+
+12
+
+NA
+
+Bit
+
+AVSS18
+
+NA
+
+AVDD18
+
+V
+
+NA
+
+±1.0
+
+±3.0
+
+LSB
+
+NA
+
+±2.0
+
+±6.0
+
+LSB
+
+NA
+
+±10
+
+±20
+
+LSB
+
+NA
+
+±10
+
+±20
+
+LSB
+
+3.10 Electrical Characteristics for TSADC
+Table 3-11 Electrical Characteristics for TSADC
+Parameters
+
+Symbol
+
+Test condition
+Temp: -40 ~ 125℃
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+NA
+
+±3
+
+±5
+
+℃
+
+Accuracy from -40℃ to 125℃
+
+TJACC
+
+Sensing Temperature Range
+
+TRANGE
+
+-40
+
+NA
+
+125
+
+℃
+
+Resolution
+
+TLSB
+
+NA
+
+1
+
+NA
+
+℃
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+Supply: 1.62V ~ 1.98V
+
+34
+
+RK3588 Datasheet
+
+Rev 1.9
+
+Chapter 4 Thermal Management
+4.1 Overview
+For reliability and operability concerns, the absolute maximum junction temperature has to
+be below 125℃.
+
+4.2 Package Thermal Characteristics
+Table 4-1 provides the thermal resistance characteristics for the package used on the SoC.
+The resulting simulation data for reference only, please prevail in kind test.
+Table 4-1 Thermal Resistance Characteristics
+Parameter
+
+Symbol
+
+Typical
+
+Unit
+
+Junction-to-ambient thermal resistance
+
+𝜽𝑱𝑨
+
+8.7
+
+(℃/𝑾)
+
+Junction-to-board thermal resistance
+
+𝜽𝑱𝑩
+
+3.5
+
+(℃/𝑾)
+
+Junction-to-case thermal resistance
+
+𝜽𝑱𝑪
+
+0.12
+
+(℃/𝑾)
+
+Note: The testing PCB is 10 layers, 114mmx101mm, Ambient temperature is 25℃.
+
+Copyright © 2024, Rockchip Electronics Co., Ltd.
+
+35
+
+

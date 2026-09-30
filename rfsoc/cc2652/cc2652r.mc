@@ -1,0 +1,574 @@
+# CC2652R (SimpleLink multiprotocol 2.4 GHz wireless MCU) -- corpus twin of
+# efr32mg21.mc / cc2530.mc, written under the same ruling set so the form can
+# be compared across vendors:
+#   ruling 25  axis words carry parameters: tx(5dBm), standby(rcosc_lf),
+#              sce(24MHz), rx(1Mbps)
+#   ruling 26  value lists are kvalue dicts [typ: ..., max: ...]
+#   ruling 27  hot/return pins share one face: [RAIL, GND] pair form, pin
+#              groups ordered by rail name. The return for EVERY rail is the
+#              exposed ground pad (EGP) -- not a numbered pin (Table 7-1
+#              note 3, p.8: "EGP is the only ground connection for the
+#              device"), so the return member is spelled [pad].
+#   ruling 28  single call form: key = Meta(axis..., value = literal)
+#   ruling 29  drive-class axis is one word ma with a current argument:
+#              ma(4mA) -- compound tokens (ma4 / ma8) are retired
+# Source: cc2652r.pdf (SWRS207J, January 2018, revised November 2023), the
+# English original (cc2652r.cn.pdf is the translation, unused). Page numbers
+# are the printed TI page numbers; tables were re-extracted with
+# pdftotext -layout (cache cc2652r.txt) and the values cross-checked against
+# the MIN/TYP/MAX header column positions -- one ambiguity flagged inline
+# (DAC settling-time rows, p.24).
+# RGZ VQFN-48, 7 x 7 mm, Figure 7-1 p.6 + Table 7-1 p.7-8. TI gives NO
+# per-rail draw split (one power-consumption table, p.10), so like cc2530
+# every rail face carries the whole chip budget -- conservative, and the
+# gap is a datasheet fact, said again at each rail face.
+
+@source(cc2652r.pdf, "CC2652R datasheet SWRS207J, revised November 2023", vendor = TI)
+
+# -- §1 metas --------------------------------------------------------------
+# The schema lives in mcode/meta/ (ruling 13: one authority face per
+# domain) -- this file only REFERENCES it (one value one source):
+#   core.mc   receiver / output / absmax / temp_range / rc_osc /
+#             temp_sense / spi_timing
+#   power.mc  supply_range / current_draw / wake_time / peri_current
+#   level.mc  drive_level (kind = ma(N mA), ruling 29) / io_pull / t_reset
+#   radio.mc  radio_band / radio_rate / rf_sens / rf_pout / rf_maxin /
+#             rf_tol / rf_reject / rf_block / rf_spur / rf_evm / rf_phase
+#   xtal.mc   xtal_freq / xtal_esr / xtal_cl / xtal_start
+# File-specific facts that stay with this transcription: the mode axis
+# words are the datasheet's own power-mode names (Table 8-5, p.10) --
+# reset / shutdown / standby(osc) / idle(osc) / active(48MHz), plus the
+# radio rows rx / tx(pout) and the sensor-controller rows sce(f); the RF
+# stack axis is ieee154 | ble1m.
+# ── §2 the component (SWRS207J, full transcription) ─────────────────────
+
+component CC2652R {
+    pins = [
+
+        # ── power: ONE face instance per RAIL (ruling 19: per-rail, not
+        # per-pin). Hot and return group in ONE face, [RAIL, pad] (ruling 27).
+        # TI splits NO per-rail draw: §8.5 measures the whole device on
+        # VDDS = 3.0 V with DC/DC enabled (p.10 preamble), so EVERY rail face
+        # below carries the same whole-chip budget -- conservative, and the
+        # repetition is the §8-1 adopt-form debt already on record from
+        # cc2530. All mode words are the datasheet's own (Table 8-5, p.10):
+        # Reset / Shutdown / Standby (with and without cache retention) /
+        # Idle / Active, plus the radio rows of §8.6 (p.11) and the Sensor
+        # Controller Engine rows ISCE (p.10). ──
+        psnk [[44], [pad]] = [VDDS, GND]::DC(
+            # 44 = VDDS main supply (Table 7-1, p.8); pad = EGP.
+            vin   = supply_range(1.8V ~ 3.8V)            # p.9 rec. operating
+                @ds(p=9, trust=max)
+            vmax  = absmax(-0.3V ~ 4.1V)                 # p.9 absmax supply
+                @ds(p=9, trust=max)
+            idraw = [                                    # p.10 §8.5 + p.11 §8.6
+                current_draw(mode = reset, value = 150nA)
+                    @ds(p=10, trust=max, cond="RESET_N asserted or VDDS below POR")
+                current_draw(mode = shutdown, value = 150nA)
+                    @ds(p=10, trust=max, cond="no clocks running, no retention")
+                current_draw(mode = standby(rcosc_lf), value = 0.94uA)
+                    @ds(p=10, trust=max, cond="RTC + CPU + 80 kB RAM + partial
+                          register retention, no cache retention")
+                current_draw(mode = standby(xosc_lf), value = 1.09uA)
+                    @ds(p=10, trust=max, cond="no cache retention")
+                current_draw(mode = standby(rcosc_lf), value = 3.2uA)
+                    @ds(p=10, trust=max, cond="cache retention")
+                current_draw(mode = standby(xosc_lf), value = 3.3uA)
+                    @ds(p=10, trust=max, cond="cache retention")
+                current_draw(mode = idle(rcosc_hf), value = 675uA)
+                    @ds(p=10, trust=max, cond="supply systems and RAM powered")
+                current_draw(mode = active(48MHz), value = 3.39mA)
+                    @ds(p=10, trust=max, cond="CoreMark, RCOSC_HF")
+                current_draw(mode = rx, value = 6.9mA)
+                    @ds(p=11, trust=max, cond="2440 MHz")
+                current_draw(mode = tx(0dBm), value = 7.0mA)
+                    @ds(p=11, trust=max, cond="2440 MHz, 0 dBm setting")
+                current_draw(mode = tx(5dBm), value = 9.2mA)
+                    @ds(p=11, trust=max, cond="2.4 GHz PA (BLE), +5 dBm setting")
+                current_draw(mode = sce(24MHz), value = 808.5uA)
+                    @ds(p=10, trust=max, cond="sensor controller active, infinite loop")
+                current_draw(mode = sce(2MHz), value = 30.1uA)
+                    @ds(p=10, trust=max, cond="sensor controller low-power mode")
+            ]   # -> Pass D (per-mode slots against capacity)
+            iperi = [                                    # p.10 §8.5 delta rows
+                peri_current(unit = pdomain, value = 97.7uA) @ds(p=10, cond="domain enabled")
+                peri_current(unit = serial,  value = 7.2uA)  @ds(p=10, cond="domain enabled")
+                peri_current(unit = rfcore,  value = 210.9uA) @ds(p=10, cond="clock on, RF core idle")
+                peri_current(unit = udma,    value = 63.9uA) @ds(p=10, cond="clock on, idle")
+                peri_current(unit = timers,  value = 81.0uA) @ds(p=10, cond="one GPTimer")
+                peri_current(unit = i2c,     value = 10.1uA) @ds(p=10, cond="clock on, idle")
+                peri_current(unit = i2s,     value = 26.3uA) @ds(p=10, cond="clock on, idle")
+                peri_current(unit = ssi,     value = 82.9uA) @ds(p=10, cond="clock on, idle")
+                peri_current(unit = uart,    value = 167.5uA) @ds(p=10, cond="one UART running")
+                peri_current(unit = crypto,  value = 25.6uA) @ds(p=10, cond="one SSI running")
+                peri_current(unit = pka,     value = 84.7uA) @ds(p=10, cond="clock on, idle")
+                peri_current(unit = trng,    value = 35.6uA) @ds(p=10, cond="clock on, idle")
+            ]                                            # -> Pass D (budget addend)
+            # p.9 absmax lists voltages and storage temperature only -- NO
+            # current-limit rows exist to transcribe, and note 5 (p.9) rules
+            # out injection current on any GPIO pin (honest gap, same shape
+            # as cc2530's)
+        )
+        psnk [[13], [pad]] = [VDDS2, GND]::DC(
+            # 13 = VDDS2 DIO supply (Table 7-1, p.8). Note 3, p.9:
+            # VDDS_DCDC, VDDS2 and VDDS3 must be at the same potential as
+            # VDDS. Rows mirror the VDDS block -- no per-rail split exists.
+            vin   = supply_range(1.8V ~ 3.8V)            @ds(p=9, trust=max)
+            vmax  = absmax(-0.3V ~ 4.1V)                 @ds(p=9, trust=max)
+            idraw = [                                    # whole budget, p.10-11
+                current_draw(mode = reset, value = 150nA)          @ds(p=10)
+                current_draw(mode = shutdown, value = 150nA)       @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 0.94uA) @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 1.09uA)  @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 3.2uA)  @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 3.3uA)   @ds(p=10)
+                current_draw(mode = idle(rcosc_hf), value = 675uA)     @ds(p=10)
+                current_draw(mode = active(48MHz), value = 3.39mA)     @ds(p=10)
+                current_draw(mode = rx, value = 6.9mA)                 @ds(p=11)
+                current_draw(mode = tx(0dBm), value = 7.0mA)           @ds(p=11)
+                current_draw(mode = tx(5dBm), value = 9.2mA)           @ds(p=11)
+                current_draw(mode = sce(24MHz), value = 808.5uA)       @ds(p=10)
+                current_draw(mode = sce(2MHz), value = 30.1uA)         @ds(p=10)
+            ]                                            # -> Pass D
+            iperi = [                                    # p.10 delta rows
+                peri_current(unit = pdomain, value = 97.7uA)  @ds(p=10)
+                peri_current(unit = serial,  value = 7.2uA)   @ds(p=10)
+                peri_current(unit = rfcore,  value = 210.9uA) @ds(p=10)
+                peri_current(unit = udma,    value = 63.9uA)  @ds(p=10)
+                peri_current(unit = timers,  value = 81.0uA)  @ds(p=10)
+                peri_current(unit = i2c,     value = 10.1uA)  @ds(p=10)
+                peri_current(unit = i2s,     value = 26.3uA)  @ds(p=10)
+                peri_current(unit = ssi,     value = 82.9uA)  @ds(p=10)
+                peri_current(unit = uart,    value = 167.5uA) @ds(p=10)
+                peri_current(unit = crypto,  value = 25.6uA)  @ds(p=10)
+                peri_current(unit = pka,     value = 84.7uA)  @ds(p=10)
+                peri_current(unit = trng,    value = 35.6uA)  @ds(p=10)
+            ]                                            # -> Pass D (budget addend)
+        )
+        psnk [[22], [pad]] = [VDDS3, GND]::DC(
+            # 22 = VDDS3 DIO supply (Table 7-1, p.8); same potential as VDDS
+            # (note 3, p.9). Rows mirror the VDDS block -- no per-rail split.
+            vin   = supply_range(1.8V ~ 3.8V)            @ds(p=9, trust=max)
+            vmax  = absmax(-0.3V ~ 4.1V)                 @ds(p=9, trust=max)
+            idraw = [                                    # whole budget, p.10-11
+                current_draw(mode = reset, value = 150nA)          @ds(p=10)
+                current_draw(mode = shutdown, value = 150nA)       @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 0.94uA) @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 1.09uA)  @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 3.2uA)  @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 3.3uA)   @ds(p=10)
+                current_draw(mode = idle(rcosc_hf), value = 675uA)     @ds(p=10)
+                current_draw(mode = active(48MHz), value = 3.39mA)     @ds(p=10)
+                current_draw(mode = rx, value = 6.9mA)                 @ds(p=11)
+                current_draw(mode = tx(0dBm), value = 7.0mA)           @ds(p=11)
+                current_draw(mode = tx(5dBm), value = 9.2mA)           @ds(p=11)
+                current_draw(mode = sce(24MHz), value = 808.5uA)       @ds(p=10)
+                current_draw(mode = sce(2MHz), value = 30.1uA)         @ds(p=10)
+            ]                                            # -> Pass D
+            iperi = [                                    # p.10 delta rows
+                peri_current(unit = pdomain, value = 97.7uA)  @ds(p=10)
+                peri_current(unit = serial,  value = 7.2uA)   @ds(p=10)
+                peri_current(unit = rfcore,  value = 210.9uA) @ds(p=10)
+                peri_current(unit = udma,    value = 63.9uA)  @ds(p=10)
+                peri_current(unit = timers,  value = 81.0uA)  @ds(p=10)
+                peri_current(unit = i2c,     value = 10.1uA)  @ds(p=10)
+                peri_current(unit = i2s,     value = 26.3uA)  @ds(p=10)
+                peri_current(unit = ssi,     value = 82.9uA)  @ds(p=10)
+                peri_current(unit = uart,    value = 167.5uA) @ds(p=10)
+                peri_current(unit = crypto,  value = 25.6uA)  @ds(p=10)
+                peri_current(unit = pka,     value = 84.7uA)  @ds(p=10)
+                peri_current(unit = trng,    value = 35.6uA)  @ds(p=10)
+            ]                                            # -> Pass D (budget addend)
+        )
+        psnk [[34], [pad]] = [VDDS_DCDC, GND]::DC(
+            # 34 = DC/DC converter supply (Table 7-1, p.8). Unused-pin table
+            # (Table 7-2, p.8): tie to VDDS when the converter is off. The
+            # datasheet carries NO converter spec table (no efficiency, no
+            # inductor value beyond Table 7-2's note) -- honest gap, the
+            # converter lives in the TRM.
+            vin   = supply_range(1.8V ~ 3.8V)            @ds(p=9, trust=max)
+            vmax  = absmax(-0.3V ~ 4.1V)                 @ds(p=9, trust=max)
+            idraw = [                                    # whole budget, p.10-11
+                current_draw(mode = reset, value = 150nA)          @ds(p=10)
+                current_draw(mode = shutdown, value = 150nA)       @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 0.94uA) @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 1.09uA)  @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 3.2uA)  @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 3.3uA)   @ds(p=10)
+                current_draw(mode = idle(rcosc_hf), value = 675uA)     @ds(p=10)
+                current_draw(mode = active(48MHz), value = 3.39mA)     @ds(p=10)
+                current_draw(mode = rx, value = 6.9mA)                 @ds(p=11)
+                current_draw(mode = tx(0dBm), value = 7.0mA)           @ds(p=11)
+                current_draw(mode = tx(5dBm), value = 9.2mA)           @ds(p=11)
+                current_draw(mode = sce(24MHz), value = 808.5uA)       @ds(p=10)
+                current_draw(mode = sce(2MHz), value = 30.1uA)         @ds(p=10)
+            ]                                            # -> Pass D
+        )
+        psnk [[45, 48], [pad]] = [VDDR, GND]::DC(
+            # 45 = VDDR, 48 = VDDR_RF (Table 7-1, p.7-8): internal 1.68-V
+            # rail fed BY the on-chip DC/DC or LDO -- the regulator OUTPUT,
+            # not an external input. Note 2/5, p.7-8: do not supply external
+            # circuitry from it; VDDR_RF must be tied to VDDR when the DC/DC
+            # is unused. The whole-chip current flows through this rail on
+            # its way from VDDS, so the budget lands here too.
+            vin  = supply_range(1.68V)
+                @ds(p=8, trust=max, cond="regulator output trimmed to 1.68 V,
+                      Table 7-1 note 6")
+            # no absmax row for VDDR itself in Table 8-1 (the crystal-pin
+            # limit references VDDR + 0.3, max 2.25 V) -- honest gap
+            idraw = [                                    # whole budget, p.10-11
+                current_draw(mode = reset, value = 150nA)          @ds(p=10)
+                current_draw(mode = shutdown, value = 150nA)       @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 0.94uA) @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 1.09uA)  @ds(p=10)
+                current_draw(mode = standby(rcosc_lf), value = 3.2uA)  @ds(p=10)
+                current_draw(mode = standby(xosc_lf), value = 3.3uA)   @ds(p=10)
+                current_draw(mode = idle(rcosc_hf), value = 675uA)     @ds(p=10)
+                current_draw(mode = active(48MHz), value = 3.39mA)     @ds(p=10)
+                current_draw(mode = rx, value = 6.9mA)                 @ds(p=11)
+                current_draw(mode = tx(0dBm), value = 7.0mA)           @ds(p=11)
+                current_draw(mode = tx(5dBm), value = 9.2mA)           @ds(p=11)
+                current_draw(mode = sce(24MHz), value = 808.5uA)       @ds(p=10)
+                current_draw(mode = sce(2MHz), value = 30.1uA)         @ds(p=10)
+            ]                                            # -> Pass D
+        )
+
+        # Regulator support pins -- BOM-demand faces (G12 family), bare like
+        # cc2530's DCOUPL: the values live in the design guide, not here.
+        psnk [23] = DCOUPL    # decoupling of the internal 1.27 V regulated
+                              # digital supply (Table 7-1 note 2, p.7)
+        psnk [33] = DCDC_SW   # converter switch output; external inductor to
+                              # VDDR, removable when DC/DC unused (p.8)
+        # GND has no standalone group: EGP (exposed pad) is the ONLY ground
+        # connection (Table 7-1 note 3, p.8) and rides every power face
+        # above as the return member (ruling 27).
+
+        # ── GPIO: 31 DIOs, TWO drive classes. ma(8mA) (IOCURR = 2) exists only
+        # on the six high-drive pins bolded in Figure 7-1 (p.6): 10, 11, 12,
+        # 24, 26, 27. Thresholds are PROPORTIONS of VDDS (0.2 / 0.8,
+        # Table 8-16 bottom rows, p.29) -- relative windows transcribed as
+        # expressions, eval-engine debt (same family as efr32mg21's 0.3/0.7).
+        # VOH/VOL print under the TYP column although they are limit specs
+        # -- FLAG (p.29): transcribed as printed; which trust level the
+        # judged slot reads is the machine gate's call. ──
+        io [5, 6, 7, 8, 9, 14, 15, 16, 17, 18, 19, 20, 21, 28, 29, 30, 31, 32,
+            36, 37, 38, 39, 40, 41, 42, 43] =
+                GPIO::GPIO(
+                    vmax = absmax(-0.3V ~ vdds + 0.3V)   @ds(p=9, trust=max)   # max 4.1 V
+                    vin  = receiver([low: 0V ~ 0.2 * vdds, high: 0.8 * vdds ~ vdds])
+                        @ds(p=29, trust=max, cond="VIL max 0.2 VDDS / VIH min
+                          0.8 VDDS; hysteresis 0.35 V at 1.8 V, 0.42 V at 3.8 V")
+                                                                          # → Pass C
+                    vout = drive_level(kind = ma(4mA),
+                               value = [low: 0V ~ 0.40V, high: 2.63V ~ vdds])
+                        @ds(p=29, trust=max, cond="IOCURR = 1, VDDS = 3.0 V;
+                          1.8-V rows print VOH 1.59 / VOL 0.21")          # → Pass C
+                    rpu = io_pull([73uA@vdds-1.8V, 282uA@vdds-3.8V])
+                        @ds(p=29, cond="pullup current, Vpad = 0 V")      # → doc
+                    rpd = io_pull([19uA@vdds-1.8V, 110uA@vdds-3.8V])
+                        @ds(p=29, cond="pulldown current, Vpad = VDDS")   # → doc
+                )
+                # pins 36-43 are the analog-capable DIOs (p.6): the ADC-mode
+                # absmax windows of Table 8-1 (p.9) -- VDDS when input scaling
+                # is on, 1.49 V / VDDS / 2.9 when off -- narrow these six
+                # pins' window in ADC use; no separate face until the ADC
+                # pin-face work lands (R9 note at the adc row in spec)
+        io [10, 11, 12, 24, 26, 27] = GPIO::GPIO(   # the high-drive members
+                    vmax = absmax(-0.3V ~ vdds + 0.3V)   @ds(p=9, trust=max)   # max 4.1 V
+                    vin  = receiver([low: 0V ~ 0.2 * vdds, high: 0.8 * vdds ~ vdds])
+                        @ds(p=29, trust=max, cond="same GPIO-wide thresholds")
+                    vout = drive_level(kind = ma(8mA),
+                               value = [low: 0V ~ 0.42V, high: 2.59V ~ vdds])
+                        @ds(p=29, trust=max, cond="IOCURR = 2, VDDS = 3.0 V;
+                          1.8-V rows print VOH 1.56 / VOL 0.24")          # → Pass C
+                    rpu = io_pull([73uA@vdds-1.8V, 282uA@vdds-3.8V])
+                        @ds(p=29, cond="pullup current, Vpad = 0 V")      # → doc
+                    rpd = io_pull([19uA@vdds-1.8V, 110uA@vdds-3.8V])
+                        @ds(p=29, cond="pulldown current, Vpad = VDDS")   # → doc
+                )
+                # 24 = JTAG_TMSC (I/O, high-drive, Table 7-1 p.7) rides this
+                # face: TI gives NO separate JTAG DC table, so the GPIO-wide
+                # windows are the only printed numbers for it
+        [25] = JTAG{TCKC}(
+            # TCKC is input-only digital (Table 7-1, p.7); thresholds reuse
+            # the GPIO-wide rows -- honest reuse, no dedicated DC table
+            vin = receiver([low: 0V ~ 0.2 * vdds, high: 0.8 * vdds ~ vdds])
+                @ds(p=29, trust=max, cond="GPIO-wide thresholds")
+        )   # → Pass C
+
+        [35] = RESET_N::CTRL(
+            # active low, NO internal pullup (Table 7-1, p.7)
+            tlow = t_reset(1us)              # p.17: shortest recognized reset
+                @ds(p=17, trust=max)         # → doc (debugger pairing; R10)
+        )
+
+        # ── Antenna: a DIFFERENTIAL pair (RF_P/RF_N, p.7); every TX table
+        # says "differential mode, delivered to a single-ended 50 ohm load
+        # through a balun" (p.15/17) -- the balun is board-side. The face
+        # TYPE is the pairing key (ruling 19). ──
+        rf [1, 2] = RF{RF_P, RF_N}::RF_DIFF(
+            # ── service faces ──
+            band = radio_band(2360MHz ~ 2500MHz)     @ds(p=11)   # → Pass C
+            rate = [radio_rate(125kbps), radio_rate(500kbps),    # BLE LE Coded S=8/S=2
+                    radio_rate(1Mbps), radio_rate(2Mbps),        # BLE LE 1M/2M
+                    radio_rate(250kbps)]                         # IEEE 802.15.4-2006
+                @ds(p=11, cond="five PHYs, per-stack tables p.12-17")   # → Pass C
+            rfmax = absmax(5dBm)                     @ds(p=9)    # → Pass B (RF-pin
+                                              # input level, Table 8-1)
+            # ── receive section; conducted, antenna input, CC26x2REM-7ID
+            #    reference design, Tc = 25 C, VDDS = 3.0 V, DC/DC on ──
+            sens = [
+                rf_sens(mode = rx(125kbps), value = -105dBm)
+                    @ds(p=12, cond="BLE LE Coded S=8, diff mode, BER 1e-3")
+                rf_sens(mode = rx(500kbps), value = -100dBm)
+                    @ds(p=12, cond="BLE LE Coded S=2, diff mode, BER 1e-3")
+                rf_sens(mode = rx(1Mbps), value = -97dBm)
+                    @ds(p=13, cond="BLE LE 1M, diff mode, BER 1e-3")
+                rf_sens(mode = rx(2Mbps), value = -91dBm)
+                    @ds(p=13, cond="BLE LE 2M, SMA, BER 1e-3")
+                rf_sens(mode = rx(250kbps), value = -99dBm)
+                    @ds(p=16, cond="IEEE 802.15.4, PER 1%")
+            ]                                                    # → Pass C-2
+            maxin = rf_maxin(5dBm)                               # → Pass C-2
+                @ds(p=13, cond="receiver saturation > 5 dBm, same cell in
+                      every PHY table (p.12/13/16)")
+            rej = [
+                rf_reject(mode = ieee154, value = [36dB@adj+5M, 36dB@adj-5M,
+                              57dB@alt+10M, 57dB@alt-10M, 59dB@chan>=±15M])
+                    @ds(p=16, cond="wanted -82 dBm, PER 1%")     # → doc
+                rf_reject(mode = ble1m, value = [7dB@+1M, 4dB@-1M,
+                              39dB@+2M, 33dB@-2M, 36dB@+3M, 40dB@-3M,
+                              36dB@+4M, 45dB@-4M, 40dB@>=±5M, 33dB@image,
+                              4dB@image+1M, 41dB@image-1M])
+                    @ds(p=13, cond="wanted -67 dBm, BER 1e-3; X / Y where
+                          X is +N MHz, Y is -N MHz")             # → doc
+            ]
+            blk = [
+                rf_block(mode = ieee154, value = [57dB@+5M, 62dB@+10M,   # p.16
+                              62dB@+20M, 65dB@+50M, 59dB@-5M, 59dB@-10M,
+                              63dB@-20M, 65dB@-50M])
+                    @ds(p=16, cond="CW jammer, wanted -97 dBm (3 dB above
+                          sensitivity)")                         # → doc
+                rf_block(mode = ble1m, value = [-10dBm@30-2000M,
+                              -18dBm@2003-2399M, -12dBm@2484-2997M,
+                              -2dBm@3-12.75G])
+                    @ds(p=13, cond="out-of-band blocking, one exception at
+                          Fwanted/2 per BLE spec")               # → doc
+                rf_reject(mode = ble1m, value = [-42dBm@2402M-imd])
+                    @ds(p=13, cond="intermodulation: wanted 2402 MHz at
+                          -64 dBm, interferers 2405 + 2408 MHz") # → doc
+            ]
+            rxtol = [
+                rf_tol(mode = ieee154, value = [freq: 350ppm, sym: 1000ppm])
+                    @ds(p=16, cond="p.16 prints both as minimum tolerances")  # → Pass C-2
+                rf_tol(mode = ble1m, value = [freq: 350kHz, rate: 750ppm])
+                    @ds(p=13, cond="> -650/+750 ppm on 37-byte packets;
+                          freq error > -350/+350 kHz")           # → Pass C-2
+            ]
+            rspur = [
+                rf_spur(mode = ieee154, value = [-66dBm@30-1000M,
+                              -53dBm@1-12.75G])
+                    @ds(p=16, cond="50-ohm single-ended load")   # → doc
+                rf_spur(mode = ble1m, value = [-59dBm@30-1000M,
+                              -47dBm@1-12.75G])
+                    @ds(p=13, cond="50-ohm single-ended load")   # → doc
+            ]
+            # ── transmit section ──
+            pout = rf_pout(5dBm)                                 # → Pass C-2
+                @ds(p=15, cond="max output power, +5 dBm setting; same cell
+                      in the IEEE 802.15.4 table p.17")
+            prange = rf_pout(26dB)                               # → doc
+                @ds(p=15, cond="output power programmable range, both stacks")
+            tspur = [
+                rf_spur(mode = ble1m-tx, value = [-36dBm@<1G-outside,
+                              -54dBm@<1G-etsi, -55dBm@<1G-fcc, -42dBm@>1G,
+                              -42dBm@harm2, -42dBm@harm3])
+                    @ds(p=15, cond="+5 dBm setting; ETSI EN 300 328/300 440
+                          class 2, FCC CFR47 Part 15, ARIB STD-T66")  # → doc
+                rf_spur(mode = ieee154-tx, value = [-36dBm@<1G-outside,
+                              -47dBm@<1G-etsi, -55dBm@<1G-fcc, -42dBm@>1G,
+                              -42dBm@harm2, -42dBm@harm3])
+                    @ds(p=17, cond="+5 dBm setting; note 2 p.17: lower power
+                          or <100% duty at 2480 MHz for FCC band edge")  # → doc
+            ]
+            evm = rf_evm(2%)                     @ds(p=17, cond="+5 dBm setting")  # → doc
+            # zload: NO matching-network impedance row in this datasheet --
+            # the balun/load spec lives in the reference-design doc (honest
+            # gap; cc2530 had 69 ohm + j29 from its own datasheet)
+        )
+
+        # ── 48 MHz crystal demands (p.18 §8.14.3.1) -- these pair with the
+        # crystal library part when it is transcribed (R9: demand side
+        # lands, supply side pending). Crystal-pin absmax (Table 8-1, p.9):
+        # -0.3 V ~ VDDR + 0.3, max 2.25 V -- no face carries it yet, the
+        # relative-window literal is the eval batch's debt. ──
+        [46, 47] = XOSC{X48M_N, X48M_P}::XTAL48M(
+            freq  = xtal_freq(48MHz)             @ds(p=18)          # → Pass C
+            esr   = xtal_esr(20Ω ~ 60Ω)          @ds(p=18, cond="6 pF < CL <= 9 pF;
+                          for 5 pF < CL <= 6 pF the max is 80 ohm")  # → Pass C
+            cl    = xtal_cl(5pF ~ 9pF)           @ds(p=18, cond="typ 7 pF incl
+                          reference-design parasitics, trimmable via CCFG")  # → Pass C
+            tstart= xtal_start([typ: 200us])     @ds(p=18, cond="TI-provided
+                          power driver; may increase otherwise")       # → doc
+            # no crystal-accuracy row in §8.14.3.1 -- the tolerance demand
+            # lives in the PROTOCOL tables (rf_tol, p.13/16); motional
+            # inductance prints as LM < 3e-25/CL^2 H (p.18), a formula on
+            # CL, kept out of the face until an expression-valued row has a
+            # consumer (honest gap)
+        )
+        # ── 32.768 kHz crystal demands (p.18 §8.14.3.4) ──
+        [3, 4] = XOSC{X32K_Q1, X32K_Q2}::XTAL32K(
+            freq  = xtal_freq(32.768kHz)         @ds(p=18)          # → Pass C
+            esr   = xtal_esr(30kΩ ~ 100kΩ)       @ds(p=18, cond="typ 30k, max 100k")  # → Pass C
+            cl    = xtal_cl(6pF ~ 12pF)          @ds(p=18, cond="typ 7 pF with TI
+                          reference designs; crystals with other CL may be used")  # → Pass C
+        )
+    ]
+
+    # ── §3 body spec: what NO single pin owns ─────────────────────────────
+    spec = [
+        ta   = temp_range(-40C ~ 105C)   # p.9 operating JUNCTION temperature
+            @ds(p=9)                     # → Pass E? (derating walk absent --
+                                         #  first semantic ruling candidate
+                                         #  after working point ⑳);
+                                         #  storage Tstg -40C ~ 150C, p.9
+
+        # wake/timing table (p.17 §8.14.2): reset/shutdown wake prints as a
+        # RANGE in one cell -- FLAG: kept as a range value@mode point.
+        wake = wake_time([(850us ~ 4ms)@reset, (850us ~ 4ms)@shutdown,
+                          160us@standby, 14us@idle])
+            @ds(p=17, cond="times exclude software overhead; reset/shutdown
+                 wake depends on remaining VDDR capacitor charge")
+            # → Pass C-2 (require-paired)
+        tentry = wake_time(36us@standby)         # → doc (sleep-entry budget)
+            @ds(p=17, cond="Active to Standby")
+
+        # supply supervisor modules (p.9 §8.4) — internal, doc layer:
+        bod = rc_osc([por: 1.1V ~ 1.55V, bod-rise: 1.77V, bod-preboot: 1.70V,
+                      bod-fall: 1.75V])          @ds(p=9)            # → doc
+
+        # supply slew-rate demands (p.9 §8.3) -- the BOARD must respect
+        # these into VDDS: a demand whose landing is the regulator pair
+        vslew = rc_osc([rise: 0V/us ~ 100mV/us, fall: 0V/us ~ 20mV/us])
+            @ds(p=9, cond="falling row assumes a 22 uF input cap for coin
+                 cells")                                                 # → doc
+
+        # ESD (p.9 §8.2) — whole-device survival facts:
+        # → doc (ESD budget walk absent; R10)
+        esd = rc_osc([hbm: 2kV, cdm: 500V])
+            @ds(p=9, cond="ANSI/ESDA/JEDEC JS-001 / JS-002, all pins")
+
+        # thermal resistance (p.11 §8.8) — RGZ VQFN-48:
+        # → doc (derating walk absent; R10; theta_ja in core wants a board
+        #  axis this datasheet does not give)
+        theta = rc_osc([rja: 23.4K/W, rjc-top: 13.3K/W, rjb: 8.0K/W,
+                        psi-jt: 0.1K/W, psi-jb: 7.9K/W, rjc-bot: 1.7K/W])
+            @ds(p=11, cond="RGZ VQFN-48 package")
+
+        # flash (p.11 §8.7): endurance/retention print in the MIN column,
+        # currents/times under TYP —
+        # → doc (BOM/lifetime walk absent; R10)
+        flash = rc_osc([sector: 8KB, endurance-bank: 30kcyc,   # p.11
+                        endurance-sector: 60kcyc, row-writes: 83,
+                        retention: 11.4yr@105C, erase-i: 10.7mA,
+                        erase-t: 10ms, write-i: 6.2mA, write-t: 21.6us])
+            @ds(p=11, cond="erase/write time grow with aging (note 4)")
+
+        # ADC (p.22-23 §8.15.1) — internal analog peripheral with no
+        # external endpoint of its own: the admission gate REFUSES to fake
+        # a landing (R9). The analog-capable pins 36-43 are its future pin
+        # anchor. Full ENOB/THD/SINAD/SFDR ladder in the PDF table.
+        # → doc
+        adc = rc_osc([in-range: 0V ~ VDDS, res: 12bit, rate: 200ksps,   # p.22
+                      offset: -0.24lsb, gain: 7.14lsb, inl: ±4lsb,
+                      enob: 9.8bit ~ 11.6bit, sinad: 60dB ~ 68dB,
+                      sfdr: 73dB ~ 75dB, conv: 50t, supply: 0.42mA ~ 0.6mA,
+                      vref-scaled: 4.3V, vref-fixed: 1.48V, zin: >1MΩ])
+            @ds(p=22, cond="Tc 25 C, VDDS 3.0 V, scaling enabled; TI driver
+                 applies gain/offset correction")
+
+        # DAC (p.24-26 §8.15.2) — same R9 status; main rows only, the full
+        # per-VREF offset ladder stays in the PDF table.
+        # FLAG (p.24): the 13 / 13.8 values print on the settling-time
+        # condition rows under TYP while the UNIT cell reads "1 / FDAC" --
+        # cycles-vs-time ambiguity left exactly as printed.
+        # → doc
+        dac = rc_osc([res: 8bit, vdds: 1.8V ~ 3.8V, fdac: 16kHz ~ 1000kHz,   # p.24
+                      settle: 1/FDAC, cap-load: 20pF ~ 200pF,
+                      res-load: 10MΩ, short-i: 400uA, zmax: 46.3kΩ ~ 88.9kΩ])
+            @ds(p=24, cond="fdac 16-250 kHz buffer ON / 16-1000 kHz buffer
+                 OFF; zmax ladder over VDDS 1.8-3.8 V and charge-pump state")
+
+        # analog temperature sensor (p.27 §8.15.3.1) — internal, doc layer:
+        tsens = temp_sense([res: 2C, acc-cold: 4C@-40-0C, acc: 2.5C@0-105C,
+                            voltco: 3.6C/V])
+            @ds(p=27, cond="auto-compensated for VDDS by the TI driver")  # → doc
+
+        # battery monitor (p.27 §8.15.3.2) — internal, doc layer:
+        batmon = rc_osc([res: 25mV, range: 1.8V ~ 3.8V, inl: 23mV,
+                         acc: 22.5mV@vdds-3.0V, offset: -32mV, gain: -1%])
+            @ds(p=27)                                                    # → doc
+
+        # comparators (p.28 §8.15.4) — internal, doc layer:
+        cmplp = rc_osc([in-range: 0V ~ VDDS, clk: SCLK_LF,
+                        ref: 0.024V ~ 2.865V, offset: 5mV, decision: 1t])
+            @ds(p=28, cond="low-power clocked comparator; ref from internal
+                 8-bit DAC, VDDS-referenced")                            # → doc
+        cmpct = rc_osc([in-range: 0V ~ VDDS, offset: 5mV, decision: 0.78us,
+                        supply: 8.6uA])
+            @ds(p=28, cond="continuous-time comparator, internal ref")   # → doc
+
+        # programmable current source (p.28 §8.15.5):
+        # → doc (capacitive-sensing walk absent; R10)
+        isrc = rc_osc([range: 0.25uA ~ 20uA, res: 0.25uA])
+            @ds(p=28, cond="logarithmic range")
+
+        # SSI timing (p.20 §8.14.4) — pins muxed across any DIO, so the
+        # instance waits for the mux/alias pin-face work; rows kept here.
+        # → doc (interface-timing walk absent; R10), R9 open on pin anchor.
+        ssi = spi_timing([cycle: 12t ~ 65024t, duty: 50%, clk: 48MHz])
+            @ds(p=20, cond="TI power driver pins the SSI system clock to
+                 48 MHz; high/low time 0.5 x cycle")
+
+        # UART (p.21 §8.14.5):
+        uart = rc_osc([rate: 3MBaud])     @ds(p=21, cond="maximum rate")  # → doc
+
+        # RSSI (p.13 / p.16) — measurement faces, doc layer:
+        rssi = rc_osc([range-ieee154: 95dB, range-ble1m: 70dB, acc: 4dB])
+            @ds(p=13, cond="dynamic range 95 dB (802.15.4, p.16) / 70 dB
+                 (BLE 1M, p.13); accuracy +-4 dB both stacks")           # → doc
+
+        # internal clocks (p.18 §8.14.3) — R9 open: no pin to land on; the
+        # analog-intent face (U112, suspended) is the missing landing.
+        clk48r = rc_osc([nom: 48MHz, uncal: 1%, cal: 0.25%, start: 5us])
+            @ds(p=18, cond="RCOSC_HF, calibrated vs XOSC_HF")            # → doc
+        clk2r  = rc_osc([nom: 2MHz, start: 5us])
+            @ds(p=18, cond="RCOSC_MF")                                   # → doc
+        clk32kr = rc_osc([nom: 32.8kHz, tempco: 50ppm/C])
+            @ds(p=19, cond="RCOSC_LF; RTC tick compensable by the TI power
+                 driver, note p.19")                                     # → doc
+
+        # §8.16 Typical Characteristics (p.30-35) are GRAPHS ONLY (current
+        # and sensitivity vs V/t/f): no discrete values exist to transcribe
+        # -- honest gap, values-in-figures stay out of the corpus.
+        # FLAG (p.2 prose): "lowest standby current of 11 uA at 105 C"
+        # appears ONLY in §3 Description prose -- no §8 table row carries
+        # it, so it is recorded here as a comment, not as data.
+    ]
+}
+
+# ── §4 the pairing story (what the engine actually walks) ────────────────
+#
+# 1. Power net (regulator OUT --- VDDS):
+#      covers: vout window ⊆ vin(1.8 ~ 3.8 V)                      → Pass C
+#      leq: every idraw slot + iperi addend <= capacity            → Pass D
+#      vmax rows judge against the rail envelope, not the peer.    → Pass B
+# 2. Link budget (peer radio --- RF_P/RF_N):
+#      rf_pout(5dBm) <= peer rf_maxin(5dBm) only with path loss    → Pass C-2
+#      rf_sens rows + path loss >= peer pout - fading margin       → Pass C-2
+#      rf_tol windows pair the peer crystal accuracy               → Pass C-2
+# 3. Level pairing (driver --- receiver):
+#      drive_level covers receiver windows on every GPIO crossing  → Pass C
+#      (E4124 level-window gate; 0.2/0.8 VDDS proportions on both
+#      sides of a 3.3-V driver meeting this 3.8-V-max pin is the
+#      interesting violation the window gate owes)

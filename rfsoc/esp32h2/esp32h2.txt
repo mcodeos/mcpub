@@ -1,0 +1,3473 @@
+ESP32-H2 系列芯片
+技术规格书 版本 1.3
+
+ RISC-V 32 位单核微处理器
+ 低功耗蓝牙和 IEEE 802.15.4
+ 芯片封装内叠封 3.3 V flash
+ 19 个 GPIO
+ QFN32 (4×4 mm) 封装
+
+
+
+
+ 包括：
+    ESP32-H2FH2S
+
+    ESP32-H2FH4S
+
+
+
+
+                        www.espressif.com
+产品概述
+ESP32-H2 是一款低功耗的 MCU 系统级芯片 (SoC)，支持 2.4 GHz 低功耗蓝牙 (Bluetooth® LE) 和 802.15.4 无
+线通信。芯片集成了 RISC-V 32 位处理器、低功耗蓝牙基带、802.15.4 基带、RF 模块以及外设。
+
+芯片的功能框图如下图所示。
+
+
+                        Espressif ESP32-H2 Bluetooth® Low Energy + IEEE 802.15.4 SoC
+
+            CPU and Memory                                                     RF                           Wireless Digital Circuits
+                RISC-V 32-bit                        2.4 GHz Balun +                        32 MHz          802.15.4         802.15.4
+                Microprocessor                            Switch                           XTAL OSC           MAC            Baseband
+
+                                                                                           Fast RC
+     Cache          SRAM
+                                                                2.4 GHz
+                                                                                                            Bluetooth LE Link Controller
+                                 Interrupt         2.4 GHz                       RF        Oscillator
+                                   Matrix          Receiver    Transmitter   Synthesizer
+     JTAG            ROM                                                                      PLL             Bluetooth LE Baseband
+
+
+                                     Peripherals                                                                     Security
+
+                       System                                      GPIO                    LP GPIO         SHA     RSA      AES     RNG
+      GDMA                             General-
+                        Timer          purpose
+                                        Timers                                              eFuse
+                                                                    ADC                                       HMAC           RSA_DS
+                                                                                           Controller
+    Event Task          Pulse
+                                                              USB Serial/                     RTC                              Flash
+      Matrix           Counter          PARLIO                                                             Secure Boot
+                                                                JTAG                         Timer                           Encryption
+
+                                                                                                            Permission
+      SPI0/1             SPI2                I2S                                                                                ECC
+                                                              Main System                    RTC             Control
+                                                               Watchdog                    Watchdog
+                                                                Timers                      Timer              TEE
+      UART              TWAI®                I2C                                                                            ECDSA_DS
+
+                                                              Temperature
+      RMT             LED PWM          MCPWM
+                                                                Sensor                      Super                  LP System
+                                         Analog PAD Voltage                                Watchdog
+       Brown-out Detector                                                                                  LP Memory            PMU
+                                            Comparator
+
+
+
+
+   Power consumption
+               Normal
+               Low power consumption components capable of working in Deep-sleep mode
+
+
+                                                     ESP32-H2 功能框图
+
+
+更多关于功耗的信息，请参考章节 4.1.3.6 电源管理单元。
+
+
+
+
+乐鑫信息科技                                                                   2                              ESP32-H2 系列芯片技术规格书 v1.3
+                                                              反馈文档意见
+产品特性
+蓝牙
+
+  • 低功耗蓝牙 (Bluetooth LE)：通过 Bluetooth 5.3 认证
+
+  • 蓝牙 mesh
+
+  • Bluetooth LE 长距传输（Coded PHY，125 Kbps 和 500 Kbps）
+
+  • Bluetooth LE 高速传输 (2 Mbps)
+
+  • Bluetooth LE 广播扩展 (Advertising Extensions) 和多广播 (Multiple Advertising Sets)
+
+  • 支持广播设备 (Broadcaster), 扫描设备 (Observer), 中心设备 (Central) 和外围设备 (Peripheral) 同时运行
+
+  • 支持多连接 (Multiple Connections)
+
+  • 功率控制 (LE Power Control)
+
+
+802.15.4
+
+  • 兼容 IEEE 标准 802.15.4-2015
+
+  • 2.4 GHz 频段内支持 250 Kbps 数据速率，OQPSK PHY
+
+  • 支持 Thread 1.4
+
+  • 支持 Zigbee 3.0
+
+  • 支持 Matter
+
+  • 支持其他应用层协议（HomeKit、MQTT 等）
+
+
+CPU 和存储
+
+  • RISC-V 32 位单核处理器
+
+  • 时钟频率：最高 96 MHz
+
+  • CoreMark® 得分：
+
+      – 主频 96 MHz：303.38 CoreMark; 3.16 CoreMark/MHz
+
+  • 四级流水线架构
+
+  • 128 KB ROM
+
+  • 320 KB SRAM
+
+  • 4 KB LP 存储器
+
+  • 2 MB 或 4 MB 封装内 flash
+
+  • 16 KB cache
+
+  • 支持 SPI 协议：SPI、Dual SPI、Quad SPI、QPI，可外接 flash 和其他 SPI 设备
+
+  • 支持 flash 在线编程
+
+
+
+
+乐鑫信息科技                                         3                 ESP32-H2 系列芯片技术规格书 v1.3
+                                          反馈文档意见
+高级外设接口
+
+ • 19 个可编程 GPIO
+
+    – 3 个 strapping 管脚：GPIO8、GPIO9 和 GPIO25
+
+ • 数字接口：
+
+    – 2 个 SPI 接口用于连接 flash
+
+    – 通用 SPI 接口
+
+    – 2 个 UART
+
+    – 2 个 I2C
+
+    – I2S
+
+    – 红外收发器，2 个发送通道和 2 个接收通道
+
+    – 脉冲计数器
+
+    – LED PWM 控制器，多达 6 个通道
+
+    – USB 串口/JTAG 控制器
+
+    – 电机控制脉宽调制器
+
+    – 通用 DMA 控制器（简称 GDMA），3 个接收通道和 3 个发送通道
+
+    – TWAI® 控制器，兼容 ISO 11898-1（CAN 规范 2.0）
+
+    – SoC 事件任务矩阵
+
+    – 并行 IO 控制器
+
+ • 模拟接口：
+
+    – 12 位模/数转换器，多达 5 个通道
+
+    – 温度传感器
+
+    – 欠压检测器
+
+ • 定时器
+
+    – 2 个 54 位通用定时器
+
+    – 52 位系统定时器
+
+    – 3 个看门狗定时器
+
+
+功耗管理
+
+ • 通过选择时钟频率、占空比、RF 工作模式和单独控制内部器件的电源，实现精准电源控制
+
+ • 针对典型场景设计的不同功耗模式：Active、Modem-sleep、Light-sleep、Deep-sleep
+
+ • Deep-sleep 模式下功耗低至 7 µA
+
+ • Deep-sleep 模式下 LP 存储器仍保持工作
+
+
+
+
+乐鑫信息科技                                  4       ESP32-H2 系列芯片技术规格书 v1.3
+                                   反馈文档意见
+安全机制
+
+ • 安全启动 - 保障固件完整性
+
+ • Flash 加密 - 加密和解密存储器
+
+ • 4096 位 OTP，用户可用的高达 1792 位
+
+ • 加密硬件加速器：
+
+     – AES-128/256 (FIPS PUB 197)
+
+        * ECB/CBC/CFB/OFB/CTR (FIPS PUB 800-38A)
+
+     – SHA 加速器 (FIPS PUB 180-4)
+
+     – RSA 加速器
+
+     – ECC 加速器
+
+     – ECDSA 数字签名外设 (ECDSA_DS)
+
+     – HMAC
+
+     – RSA 数字签名外设 (RSA_DS)
+
+ • 访问权限管理 (APM)
+
+ • 随机数生成器 (RNG)
+
+ • 电源毛刺检测器
+
+
+RF 模块
+
+ • 天线开关、射频巴伦 (balun)、功率放大器、低噪声放大器
+
+ • 低功耗蓝牙接收器灵敏度 (125 Kbps) 高达 -106.5 dBm
+
+ • 802.15.4 接收器灵敏度 (250 Kbps) 高达 -102.5 dBm
+
+
+应用
+低功耗芯片 ESP32-H2 专为物联网 (IoT) 设备而设计，应用领域包括：
+
+ • 智能家居                                       • Matter 解决方案
+
+ • 工业自动化
+                                              • 服务机器人
+ • 医疗保健
+                                              • 通用低功耗 IoT 传感器集线器
+ • 消费电子产品
+
+ • 智慧农业                                       • 通用低功耗 IoT 数据记录器
+
+
+
+
+乐鑫信息科技                                    5             ESP32-H2 系列芯片技术规格书 v1.3
+                                     反馈文档意见
+目录
+
+
+
+      说明：
+
+      点击链接或扫描二维码确保您使用的是最新版本的文档：
+      https://www.espressif.com/documentation/esp32-h2_datasheet_cn.pdf
+
+
+
+
+目录
+
+产品概述                                                                                            2
+产品特性                                                                                            3
+应用                                                                                              5
+
+1       ESP32-H2 系列型号对比                                                                        11
+1.1     命名规则                                                                                   11
+1.2     型号对比                                                                                   11
+
+2       管脚                                                                                     12
+2.1     管脚布局                                                                                   12
+2.2     管脚概述                                                                                   13
+2.3     IO 管脚                                                                                  15
+        2.3.1   IO MUX 功能                                                                      15
+        2.3.2   模拟功能                                                                           17
+        2.3.3   GPIO 限制                                                                        18
+2.4     模拟管脚                                                                                   19
+2.5     电源                                                                                     20
+        2.5.1   电源管脚                                                                           20
+        2.5.2   电源管理                                                                           20
+        2.5.3   芯片上电和复位                                                                        21
+
+3       启动配置项                                                                                  22
+3.1     芯片启动模式控制                                                                               23
+3.2     ROM 日志打印控制                                                                             23
+3.3     JTAG 信号源控制                                                                             24
+
+4       功能描述                                                                                   25
+4.1     系统                                                                                     25
+        4.1.1   微处理器和主控                                                                        25
+                4.1.1.1   ESP-RISC-V CPU                                                       25
+                4.1.1.2   RISC-V 追踪编码器                                                         26
+                4.1.1.3   GDMA 控制器                                                             26
+        4.1.2   存储器组织结构                                                                        26
+                4.1.2.1   内部存储器                                                                27
+                4.1.2.2   外部存储器                                                                28
+                4.1.2.3   eFuse 控制器                                                            28
+
+
+
+乐鑫信息科技                                                 6                  ESP32-H2 系列芯片技术规格书 v1.3
+                                                 反馈文档意见
+目录
+
+
+      4.1.3   系统组件                                                       28
+              4.1.3.1    IO MUX 和 GPIO 交换矩阵                              28
+              4.1.3.2    复位                                              29
+              4.1.3.3    时钟                                              29
+              4.1.3.4    中断矩阵                                            30
+              4.1.3.5    事件任务矩阵                                          30
+              4.1.3.6    电源管理单元                                          31
+              4.1.3.7    系统定时器                                           31
+              4.1.3.8    定时器组                                            31
+              4.1.3.9    看门狗定时器                                          32
+              4.1.3.10   权限控制                                            32
+              4.1.3.11   系统寄存器                                           33
+              4.1.3.12   辅助调试                                            33
+      4.1.4   加密和安全组件                                                    33
+              4.1.4.1    AES 加速器                                         33
+              4.1.4.2    ECC 加速器                                         34
+              4.1.4.3    HMAC 加速器                                        34
+              4.1.4.4    RSA 加速器                                         34
+              4.1.4.5    SHA 加速器                                         35
+              4.1.4.6    RSA 数字签名外设 (RSA_DS)                             35
+              4.1.4.7    ECDSA 数字签名外设 (ECDSA_DS)                         35
+              4.1.4.8    片外存储器加密与解密                                      36
+              4.1.4.9    随机数发生器                                          36
+              4.1.4.10   电源毛刺检测器                                         36
+              4.1.4.11   安全启动                                            36
+4.2   外设                                                                 38
+      4.2.1   通讯接口                                                       38
+              4.2.1.1    UART 控制器                                        38
+              4.2.1.2    SPI 控制器                                         38
+              4.2.1.3    I2C 控制器                                         39
+              4.2.1.4    I2S 控制器                                         40
+              4.2.1.5    脉冲计数控制器                                         41
+              4.2.1.6    USB 串口/JTAG 控制器                                 41
+              4.2.1.7    双线汽车接口                                          42
+              4.2.1.8    LED PWM 控制器                                     42
+              4.2.1.9    电机控制脉宽调制器                                       43
+              4.2.1.10   红外遥控                                            44
+              4.2.1.11   并行 IO 控制器                                       44
+      4.2.2   模拟信号处理                                                     45
+              4.2.2.1    SAR ADC                                         45
+              4.2.2.2    温度传感器                                           45
+              4.2.2.3    模拟电压比较器                                         46
+4.3   无线通信                                                               47
+      4.3.1   无线电                                                        47
+              4.3.1.1    2.4 GHz 接收器                                     47
+              4.3.1.2    2.4 GHz 发射器                                     47
+
+
+乐鑫信息科技                                         7    ESP32-H2 系列芯片技术规格书 v1.3
+                                           反馈文档意见
+目录
+
+
+              4.3.1.3    时钟生成器                                        47
+      4.3.2   低功耗蓝牙                                                   47
+              4.3.2.1    低功耗蓝牙物理层                                     47
+              4.3.2.2    低功耗蓝牙链路控制器                                   47
+      4.3.3   802.15.4                                                48
+              4.3.3.1    802.15.4 物理层                                 48
+              4.3.3.2    802.15.4 MAC                                 48
+
+5     电气特性                                                            49
+5.1   绝对最大额定值                                                         49
+5.2   建议工作条件                                                          49
+5.3   直流电气特性 (3.3 V, 25 °C)                                           49
+5.4   ADC 特性                                                          50
+5.5   功耗特性                                                            50
+      5.5.1   Active 模式下的 RF 功耗                                       51
+      5.5.2   其他功耗模式下的功耗                                              51
+5.6   可靠性                                                             52
+
+6     射频特性                                                            53
+6.1   低功耗蓝牙射频                                                         53
+      6.1.1   低功耗蓝牙射频发射器 (TX) 特性                                      53
+      6.1.2   低功耗蓝牙射频接收器 (RX) 特性                                      54
+6.2   802.15.4 射频                                                     56
+      6.2.1   802.15.4 射频发射器 (TX) 特性                                  57
+      6.2.2   802.15.4 射频接收器 (RX) 特性                                  57
+
+7     封装                                                              58
+
+
+相关文档和资源                                                               59
+
+
+附录 A – ESP32-H2 管脚总览                                                  60
+
+
+技术规格书版本号管理                                                            61
+
+
+修订历史                                                                  62
+
+
+
+
+乐鑫信息科技                                    8      ESP32-H2 系列芯片技术规格书 v1.3
+                                        反馈文档意见
+表格
+
+
+
+表格
+ 1-1   ESP32-H2 系列芯片对比                                          11
+ 2-1   管脚概述                                                     13
+ 2-2 通过 IO MUX 连接的外设信号                                          15
+ 2-3 IO MUX 管脚功能                                                15
+ 2-4 连接模拟功能的模拟信号                                                17
+ 2-5 模拟功能                                                       17
+ 2-6 模拟管脚                                                       19
+ 2-7 电源管脚                                                       20
+ 2-8 电压稳压器                                                      20
+ 2-9 上电和复位时序参数说明                                                21
+ 3-1   Strapping 管脚的默认配置                                        22
+ 3-2 Strapping 管脚的时序参数说明                                        22
+ 3-3 芯片启动模式控制                                                   23
+ 3-4 UART0 ROM 日志打印控制                                           24
+ 3-5 USB 串口/JTAG ROM 日志打印控制                                     24
+ 3-6 JTAG 信号源控制                                                 24
+ 5-1   绝对最大额定值                                                  49
+ 5-2 建议工作条件                                                     49
+ 5-3 直流电气特性 (3.3 V, 25 °C)                                      49
+ 5-4 ADC 特性                                                     50
+ 5-5 ADC 校准结果                                                   50
+ 5-6 Active 模式下的低功耗蓝牙功耗                                         51
+ 5-7 Active 模式下 802.15.4 功耗特性                                   51
+ 5-8 Modem-sleep 下的功耗                                           51
+ 5-9 低功耗模式下的功耗                                                  52
+ 5-10 可靠性认证                                                     52
+ 6-1   低功耗蓝牙射频规格                                                53
+ 6-2 低功耗蓝牙 - 发射器特性 - 1 Mbps                                     53
+ 6-3 低功耗蓝牙 - 发射器特性 - 2 Mbps                                     53
+ 6-4 低功耗蓝牙 - 发射器特性 - 125 Kbps                                   54
+ 6-5 低功耗蓝牙 - 发射器特性 - 500 Kbps                                   54
+ 6-6 低功耗蓝牙 - 接收器特性 - 1 Mbps                                     55
+ 6-7 低功耗蓝牙 - 接收器特性 - 2 Mbps                                     55
+ 6-8 低功耗蓝牙 - 接收器特性 - 125 Kbps                                   56
+ 6-9 低功耗蓝牙 - 接收器特性 - 500 Kbps                                   56
+ 6-10 802.15.4 射频规格                                             57
+ 6-11 802.15.4 发射器特性 - 250 Kbps                                 57
+ 6-12 802.15.4 接收器特性 - 250 Kbps                                 57
+
+
+
+
+乐鑫信息科技                              9      ESP32-H2 系列芯片技术规格书 v1.3
+                                  反馈文档意见
+插图
+
+
+
+插图
+ 1-1   ESP32-H2 系列芯片命名规则                                  11
+ 2-1   ESP32-H2 管脚布局（俯视图）                                 12
+ 2-2 ESP32-H2 电源管理                                        21
+ 2-3 上电和复位时序参数图                                           21
+ 3-1   Strapping 管脚的时序参数图                                 23
+ 4-1   地址映射结构                                             27
+ 7-1   QFN32 (4×4 mm) 封装                                  58
+
+
+
+
+乐鑫信息科技                        10     ESP32-H2 系列芯片技术规格书 v1.3
+                            反馈文档意见
+1 ESP32-H2 系列型号对比
+
+
+
+1 ESP32-H2 系列型号对比
+
+1.1 命名规则
+
+
+ ESP32-H2       F            H/N               x              S
+
+
+                                                                          安全性增强版
+
+                                                                          封装内 flash 大小
+                                                                          环境温度
+                                                                          H：高温
+                                                                          N：正常
+
+                                                                          封装内 flash
+
+                                                                          芯片系列
+                        图 1-1. ESP32-H2 系列芯片命名规则
+
+
+
+1.2   型号对比
+
+                         表 1-1. ESP32-H2 系列芯片对比
+
+              物料编号 1         封装内 Flash 2           环境温度 3     SPI 电压
+              ESP32-H2FH2S   2 MB (Quad SPI)   –40 ∼ 105 °C       3.3 V
+              ESP32-H2FH4S   4 MB (Quad SPI)   –40 ∼ 105 °C       3.3 V
+              1 更多关于芯片丝印和包装的信息，请参考章节 7 封装。
+              2 封装内带有 flash 的芯片变型（即 QFN32 封装版本）
+                                              ，与封装内
+               flash 连接的管脚未引出。
+              3 环境温度指乐鑫芯片外部的推荐环境温度。
+
+
+
+
+乐鑫信息科技                                 11                   ESP32-H2 系列芯片技术规格书 v1.3
+                                   反馈文档意见
+2   管脚
+
+
+
+2 管脚
+
+2.1 管脚布局
+
+
+
+
+                                           30 VDD3P3
+                                VDD3P3
+                                                        29 XTAL_P    28 XTAL_N   27 VDD3P3     26 GPIO27         25 GPIO26
+                      ANT
+
+                      32        31
+
+         VDD3P3   1                                                                                                              24 GPIO25
+
+
+         VDD3P3   2                                                                                                              23 U0TXD
+
+
+          GPIO0   3                                                                                                              22 U0RXD
+
+
+          GPIO1   4                                                                                                              21   GPIO22
+
+
+          MTMS    5
+                                                       ESP32-H2                                                                  20 VDDPST2
+
+
+          MTDO    6                                                                                                              19   VDDA_PMU
+
+
+          MTCK    7                                                                          33 GND                              18   VBAT
+
+
+           MTDI   8                                                                                                              17   CHIP_EN
+
+                                10
+
+
+
+
+                                                                                                                 XTAL_32K_N 16
+                                                        12           13
+
+
+
+                                                                                               XTAL_32K_P 15
+                      9                                                          14
+
+
+                                GPIO8      GPIO9 11
+                                                        GPIO10
+                      VDDPST1
+                                                                     GPO11       GPIO12
+
+
+
+
+                                         图 2-1. ESP32-H2 管脚布局（俯视图）
+
+
+
+
+乐鑫信息科技                                                              12                                         ESP32-H2 系列芯片技术规格书 v1.3
+                                                           反馈文档意见
+2   管脚
+
+
+
+2.2 管脚概述
+ESP32-H2 芯片集成了多个需要与外界通讯的外设。由于芯片封装尺寸小、管脚数量有限，传送所有输入输出信
+号的唯一方法是管脚多路复用。管脚多路复用由软件可编程的寄存器控制（详见 《ESP32-H2 技术参考手册》
+> 章节 IO MUX 和 GPIO 交换矩阵）。
+
+总体而言，ESP32-H2 芯片的管脚可分为以下几类：
+
+    • IO 管脚，具有以下预设功能：
+
+         – 每个 IO 管脚都预设了 IO MUX 功能 – 见表 2-3 IO MUX 管脚功能
+
+         – 部分 IO 管脚预设了模拟功能 – 见表 2-5 模拟功能
+
+     预设功能即每个 IO 管脚直接连接至一组特定的片上组件信号。运行时，可通过映射寄存器配置连接管脚
+     的组件信号。
+
+    • 模拟管脚，专用于模拟功能 – 见表 2-6 模拟管脚
+
+    • 电源管脚，为芯片组件和非电源管脚供电 – 见表 2-7 电源管脚
+
+
+根据是否可在 Deep-sleep/Light-sleep 模式下工作，ESP32-H2 芯片的 IO 管脚也可分为：
+
+    • 数字管脚 (GPIO0 ~ GPIO5, GPIO22 ~ GPIO27)：不可在 Deep-sleep 模式下工作。可在 Light-sleep 模式下
+     工作但需要确保 XPD TOP 控制的电源域不掉电。更多信息见《ESP32-H2 技术参考手册》 > 章节 低功耗
+     管理。
+
+    • LP 管脚 (GPIO8 ~ GPIO14)：可在芯片任意模式工作。
+
+表 2-1 管脚概述简要介绍了所有管脚。更多信息，详见下文相应章节，或参考附录 A – ESP32-H2 管脚总览。
+
+                                         表 2-1. 管脚概述
+
+          管脚    管脚           管脚   供电                    管脚配置 3             管脚功能 1
+          序号    名称           类型   管脚 2             复位时       复位后          IO MUX   模拟
+          1     VDD3P3       电源
+          2     VDD3P3       电源
+          3     GPIO0        IO   VDDPST1                                 IO MUX
+          4     GPIO1        IO   VDDPST1                                 IO MUX   模拟
+          5     MTMS         IO   VDDPST1          IE        IE           IO MUX   模拟
+          6     MTDO         IO   VDDPST1          IE        IE           IO MUX   模拟
+          7     MTCK         IO   VDDPST1                    IE4          IO MUX   模拟
+          8     MTDI         IO   VDDPST1                    IE           IO MUX   模拟
+          9     VDDPST1      电源
+          10    GPIO8        IO   VDDPST1          IE        IE           IO MUX
+          11    GPIO9        IO   VDDPST1          IE, WPU   IE, WPU      IO MUX
+          12    GPIO10       IO   VDDPST1                                 IO MUX   模拟
+          13    GPIO11       IO   VDDPST1                                 IO MUX   模拟
+          14    GPIO12       IO   VDDA_PMU/VBAT                           IO MUX
+          15    XTAL_32K_P   IO   VDDA_PMU/VBAT                           IO MUX   模拟
+          16    XTAL_32K_N   IO   VDDA_PMU/VBAT                           IO MUX   模拟
+          17    CHIP_EN      模拟   VBAT
+          18    VBAT         电源
+                                                                                   见下页
+
+
+
+乐鑫信息科技                                       13                    ESP32-H2 系列芯片技术规格书 v1.3
+                                          反馈文档意见
+2   管脚
+
+
+                                               表 2-1 – 接上页
+           管脚      管脚            管脚     供电                    管脚配置 3          管脚功能 1
+           序号      名称            类型     管脚 2             复位时    复位后          IO MUX   模拟
+           19      VDDA_PMU      电源
+           20      VDDPST2       电源
+           21      GPIO22        IO     VDDPST2                              IO MUX
+           22      U0RXD         IO     VDDPST2                 IE, WPU      IO MUX
+           23      U0TXD         IO     VDDPST2                 IE, WPU      IO MUX
+           24      GPIO25        IO     VDDPST2          IE     IE           IO MUX
+           25      GPIO26        IO     VDDPST2                 IE           IO MUX   模拟
+           26      GPIO27        IO     VDDPST2                 IE, USB_PU   IO MUX   模拟
+           27      VDD3P3        电源
+           28      XTAL_N        模拟
+           29      XTAL_P        模拟
+           30      VDD3P3        电源
+           31      VDD3P3        电源
+           32      ANT           模拟
+           33      GND           电源
+
+    1. 加粗功能为默认启动模式下管脚的默认功能，详见章节 3.1 芯片启动模式控制。
+
+    2. GPIO26 和 GPIO27 的默认驱动电流为 40 mA，剩余其他管脚的默认驱动电流为 20 mA。
+
+    3. 管脚配置一栏为复位时和复位后预设配置缩写：
+         • IE – 输入使能
+         • WPU – 内部弱上拉电阻使能
+         • WPD – 内部弱下拉电阻使能
+         • USB_PU – USB 上拉电阻使能
+            – USB 管脚（GPIO26 和 GPIO27）默认开启 USB 功能，此时管脚是否上拉由 USB 上拉决定。USB 上拉由 USB_SERIAL_JTAG_DP/
+                DM_PULLUP 控制，USB 上拉电阻的具体阻值可通过 USB_SERIAL_JTAG_PULLUP_VALUE 位控制，详见 《ESP32-H2 技术参考手册》
+                > 章节 USB 串口/JTAG 控制器。
+            – USB 管脚关闭 USB 功能时，用作普通 GPIO，默认禁用管脚内部弱上/下拉电阻，可通过 IO_MUX_GPIOn_FUN_WPU/WPD
+                配置，详见 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交换矩阵。
+
+    4. EFUSE_DIS_PAD_JTAG 的值为
+         • 0 - 弱上拉电阻使能
+         • 1 - 管脚浮空
+
+
+
+
+乐鑫信息科技                                             14                ESP32-H2 系列芯片技术规格书 v1.3
+                                               反馈文档意见
+2   管脚
+
+
+
+2.3 IO 管脚
+2.3.1 IO MUX 功能
+IO MUX 能让一个输入/输出管脚连接多个输入/输出信号。ESP32-H2 的每个 IO 管脚可在表 2-3 IO MUX 管脚功
+能 列出的五个信号（IO MUX 功能，即 F0-F4）中选择，连接任意一个。
+
+五个信号中：
+
+    • 部分源自 GPIO 交换矩阵（GPIO0、GPIO1 等）
+                                  。GPIO 交换矩阵包含内部信号传输线路，用于映射信号，能令
+        管脚连接几乎任一外设信号。这种映射虽然灵活，但可能影响传输信号的速度，造成延迟。如何通过 GPIO
+        交换矩阵连接外设信号，详见 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交换矩阵。
+
+    • 部分直接源自特定外设（U0TXD、MTCK 等）
+                             ，包括 UART0、JTAG 和 SPI2 - 详见表 2-2 通过 IO MUX 连接
+        的外设信号。
+
+                                  表 2-2. 通过 IO MUX 连接的外设信号
+
+          管脚功能      信号                                描述
+          U0TXD     发送数据 (Transmit)
+                                                      UART0 接口
+          U0RXD     接收数据 (Receive)
+          MTCK      测试时钟 (Test clock)
+          MTDO      测试数据输出 (Test Data Out)
+                                                      用于调试功能的 JTAG 接口
+          MTDI      测试数据输入 (Test Data In)
+          MTMS      测试模式选择 (Test Mode Select)
+          FSPIQ     数据输出 (Data out)
+          FSPID     数据输入 (Data in)
+          FSPIHD    暂停 (Hold)                         用于快速 SPI 传输的 SPI2 主接口。支持单线、双
+          FSPIWP    写保护 (Write protect)               线、四线 SPI 模式
+          FSPICLK   时钟 (Clock)
+          FSPICS…   片选 (Chip select)
+
+
+
+
+表 2-3 IO MUX 管脚功能 列出了管脚的 IO MUX 功能。
+
+                                           表 2-3. IO MUX 管脚功能
+
+    管脚     IO MUX /                                        IO MUX 功能 1, 2, 3
+           GPIO 名称
+    序号     2             F0        类型 3      F1        类型        F2             类型       F3   类型   F4   类型
+
+    3      GPIO0         GPIO0     I/O/T     GPIO0     I/O/T     FSPIQ          I1/O/T
+    4      GPIO1         GPIO1     I/O/T     GPIO1     I/O/T     FSPICS0        I1/O/T
+    5      GPIO2         MTMS      I1        GPIO2     I/O/T     FSPIWP         I1/O/T
+    6      GPIO3         MTDO      O/T       GPIO3     I/O/T     FSPIHD         I1/O/T
+    7      GPIO4         MTCK      I1        GPIO4     I/O/T     FSPICLK        I1/O/T
+    8      GPIO5         MTDI      I1        GPIO5     I/O/T     FSPID          I1/O/T
+    10     GPIO8         GPIO8     I/O/T     GPIO8     I/O/T
+    11     GPIO9         GPIO9     I/O/T     GPIO9     I/O/T
+    12     GPIO10        GPIO10    I/O/T     GPIO10    I/O/T
+    13     GPIO11        GPIO11    I/O/T     GPIO11    I/O/T
+    14     GPIO12        GPIO12    I/O/T     GPIO12    I/O/T
+    15     GPIO13        GPIO13    I/O/T     GPIO13    I/O/T
+                                                                                                        见下页
+
+
+乐鑫信息科技                                                15                       ESP32-H2 系列芯片技术规格书 v1.3
+                                                  反馈文档意见
+2   管脚
+
+
+                                            表 2-3 – 接上页
+    管脚     IO MUX /                                  IO MUX 功能 1, 2, 3
+           GPIO 名称
+    序号     2          F0       类型 3    F1         类型       F2             类型    F3   类型   F4   类型
+
+    16     GPIO14     GPIO14   I/O/T   GPIO14     I/O/T
+    21     GPIO22     GPIO22   I/O/T   GPIO22     I/O/T
+    22     GPIO23     U0RXD    I1      GPIO23     I/O/T    FSPICS1        O/T
+    23     GPIO24     U0TXD    O       GPIO24     I/O/T    FSPICS2        O/T
+    24     GPIO25     GPIO25   I/O/T   GPIO25     I/O/T    FSPICS3        O/T
+    25     GPIO26     GPIO26   I/O/T   GPIO26     I/O/T    FSPICS4        O/T
+    26     GPIO27     GPIO27   I/O/T   GPIO27     I/O/T    FSPICS5        O/T
+    1 加粗表示默认启动模式下的默认管脚功能，详见章节 3.1 芯片启动模式控制。
+    2 高亮 的单元格，详见章节 2.3.3 GPIO 限制。
+    3 每个 IO MUX 功能 (Fn，n = 0 ~ 4) 均对应一个“类型”
+                                          。以下是各个“类型”的含义：
+         • I – 输入。O – 输出。T – 高阻。
+         • I1 – 输入；如果该管脚分配了 Fn 以外的功能，则 Fn 的输入信号恒为 1。
+         • I0 – 输入；如果该管脚分配了 Fn 以外的功能，则 Fn 的输入信号恒为 0。
+
+
+
+
+乐鑫信息科技                                          16                       ESP32-H2 系列芯片技术规格书 v1.3
+                                            反馈文档意见
+2   管脚
+
+
+
+2.3.2 模拟功能
+部分 IO 管脚具有模拟功能，可用于任意功耗模式下的模拟外设（如 ADC）。模拟功能连接内部模拟信号，详见
+表 2-4 连接模拟功能的模拟信号。
+
+                                 表 2-4. 连接模拟功能的模拟信号
+
+    管脚功能         信号                                       描述
+    ADC1_CHn     ADC1 通道 n 信号                             ADC1 通道 n 接口
+    XTAL_32K_N   负极性时钟信号 (Negative clock signal)          连接 ESP32-H2 有源晶振/无源晶振的外部 32
+    XTAL_32K_P   正极性时钟信号 (Positive clock signal)          kHz 时钟输入/输出
+    USB_D-       数据 -（负极性 USB 信号）
+                                                          USB 串口/JTAG 控制器的 USB 接口信号
+    USB_D+       数据 + （正极性 USB 信号）
+    ZCDn         GPIO Pad 上的电压                            模拟 Pad 电压比较功能
+
+
+
+表 2-5 模拟功能 列出了 IO 管脚的模拟功能。
+
+                                          表 2-5. 模拟功能
+
+                         管脚     模拟                          模拟功能 2
+                         序号     IO 名称 1            F0           F1
+                         4      GPIO1                           ADC1_CH0
+                         5      GPIO2                           ADC1_CH1
+                         6      GPIO3                           ADC1_CH2
+                         7      GPIO4                           ADC1_CH3
+                         8      GPIO5                           ADC1_CH4
+                         12     GPIO10             ZCD0
+                         13     GPIO11             ZCD1
+                         15     XTAL_32K_P         XTAL_32K_P
+                         16     XTAL_32K_N         XTAL_32K_N
+                         25     GPIO26             USB_D-
+                         26     GPIO27             USB_D+
+                         1 加粗表示默认启动模式下的默认管脚功能，详见章节 3.1
+
+                             芯片启动模式控制。
+                         2 高亮 的单元格，详见章节 2.3.3 GPIO 限制。
+
+
+
+
+乐鑫信息科技                                        17                     ESP32-H2 系列芯片技术规格书 v1.3
+                                           反馈文档意见
+2   管脚
+
+
+
+2.3.3 GPIO 限制
+ESP32-H2 的所有 IO 管脚都有 GPIO 功能。这些 IO 管脚是多功能管脚，可以根据需求配置不同的功能，也有一
+些使用限制，需要特别注意。
+
+本章节的表格中，部分管脚功能有 高亮 标记。推荐优先使用没有高亮的 GPIO 管脚。如需更多管脚，请谨慎选
+择高亮的 GPIO 管脚，避免与重要功能冲突。
+
+高亮的 IO 管脚有以下重要功能之一：
+
+    • Strapping 管脚 – 启动时逻辑电平需为特定值。详见章节 3 启动配置项。
+
+    • USB_D+/- – 默认情况下连接 USB 串口/JTAG 控制器。此类管脚需重新配置，方可用作 GPIO。
+
+    • JTAG 接口 – 通常用于调试功能。详见表 2-2 通过 IO MUX 连接的外设信号。要释放这类管脚，可用 USB
+     串口/JTAG 控制器的 USB_D+/- 功能代替。详见章节 3.3 JTAG 信号源控制。
+
+    • UART 接口 – 通常用于调试功能。详见表 2-2 通过 IO MUX 连接的外设信号。
+
+附录 A – ESP32-H2 管脚总览 也可参考。
+
+
+
+
+乐鑫信息科技                            18           ESP32-H2 系列芯片技术规格书 v1.3
+                               反馈文档意见
+2   管脚
+
+
+
+2.4    模拟管脚
+
+                                表 2-6. 模拟管脚
+
+      管脚   管脚        管脚    管脚
+      序号   名称        类型    功能
+                           高电平：芯片使能（上电）；
+      17   CHIP_EN   I
+                           低电平：芯片关闭（掉电）；
+                           注意不能让 CHIP_EN 管脚浮空
+      28   XTAL_N    —     连接芯片有源晶振或无源晶振的外部时钟输入/输出。
+      29   XTAL_P    —     P/N 指差分时钟正极/负极端。
+      32   ANT       I/O   射频输入和输出
+
+
+
+
+乐鑫信息科技                              19          ESP32-H2 系列芯片技术规格书 v1.3
+                                 反馈文档意见
+2   管脚
+
+
+
+2.5         电源
+2.5.1 电源管脚
+表 2-7 电源管脚 列举了为芯片供电的电源管脚。
+
+                                              表 2-7. 电源管脚
+
+        管脚       管脚                                           电源 1,2
+        序号       名称              方向   电源域 / 其他               IO 管脚
+        1        VDD3P3          输入   模拟电源域
+        2        VDD3P3          输入   模拟电源域
+        9        VDDPST1         输入   IO 电源域                 数字 IO，LP IO 3
+        18       VBAT            输入   模拟电源域或电池电源             GPIO12、XTAL_32K_P、XTAL_32K_N
+        19       VDDA_PMU        输入   模拟电源域                  GPIO12、XTAL_32K_P、XTAL_32K_N
+        20       VDDPST2         输入   IO 电源域                 数字 IO
+        27       VDD3P3          输入   模拟电源域
+        33       GND             –    外部接地
+        1 请结合章节 2.5.2 电源管理 阅读。
+        2 电压、电流的推荐值和最大值，详见章节 5.1 绝对最大额定值 和章节 5.2 建议工作条件。
+        3 数字 IO 和 LP IO 的分类见章节 2.2 管脚概述。
+
+
+
+
+2.5.2       电源管理
+电源管理如图 2-2 ESP32-H2 电源管理 所示。芯片上的元器件通过电压稳压器供电。
+
+                                              表 2-8. 电压稳压器
+
+                           电压稳压器      输出      电源
+                           数字         1.1 V   数字电源域
+                           低功耗        1.1 V   LP 电源域
+
+
+
+
+乐鑫信息科技                                             20                ESP32-H2 系列芯片技术规格书 v1.3
+                                                反馈文档意见
+2   管脚
+
+
+
+                                            VDDPST1/VDDPST2         VDD3P3 VBAT VDDA_PMU
+
+
+
+
+                                          LP           Digital
+                                        Voltage        Voltage
+                                       Regulator      Regulator
+
+                            Analog
+
+
+
+
+                                                                                        GPIO12
+                                                      Digital
+                    LP IO              LP System                  Digital IO          XTAL_32K_N
+                                                      System                          XTAL_32K_P
+
+
+
+
+                                             图 2-2. ESP32-H2 电源管理
+
+
+
+2.5.3 芯片上电和复位
+芯片上电后，其电源轨需要一点时间方可稳定。之后，用于上电和复位的管脚 CHIP_EN 拉高，激活芯片。更多
+关于 CHIP_EN 及上电和复位时序的信息，请见图 2-3 和表 2-9。
+
+                                          tST BL                               tRST
+
+                            2.8 V
+     VDDPST1/2,
+       VDD3P3,
+     VDDA_PMU,
+          VBAT
+
+                            VIL_nRST
+         CHIP_EN
+
+
+
+                                           图 2-3. 上电和复位时序参数图
+
+
+
+                                          表 2-9. 上电和复位时序参数说明
+
+         参数        说明                                                                       最小值 (µs)
+                   CHIP_EN 管脚拉高激活芯片前，VDDPST1、VDDPST2、VDD3P3、
+         tST BL                                                                                    50
+                   VDDA_PMU 和 VBAT 达到稳定所需的时间
+                   CHIP_EN 电平低于 VIL_nRST （具体数值参考表 5-3）从而复位芯
+         tRST                                                                                      50
+                   片的时间
+
+
+
+
+乐鑫信息科技                                                  21                 ESP32-H2 系列芯片技术规格书 v1.3
+                                                   反馈文档意见
+3 启动配置项
+
+
+
+3    启动配置项
+芯片在上电或硬件复位时，可以通过 strapping 管脚、eFuse 位及相关寄存器配置如下启动参数，无需微处理器
+的参与：
+
+    • 芯片启动模式
+
+       – Strapping 管脚：GPIO8 和 GPIO9
+
+    • ROM 日志打印
+
+       – Strapping 管脚：GPIO8
+
+       – eFuse 位：EFUSE_UART_PRINT_CONTROL 和 EFUSE_DIS_USB_SERIAL_JTAG_ROM_PRINT
+
+       – 寄存器：LP_AON_STORE4_REG[0]
+
+    • JTAG 信号源
+
+       – Strapping 管脚：GPIO25
+
+       – eFuse 位：EFUSE_DIS_PAD_JTAG、EFUSE_DIS_USB_JTAG 和 EFUSE_JTAG_SEL_ENABLE
+
+上述 eFuse 位的默认值均为 0，也就是说没有烧写过。eFuse 只能烧写一次，一旦烧写为 1，便不能恢复为 0。
+有关烧写 eFuse 的信息，请参考 《ESP32-H2 技术参考手册》 > 章节 eFuse 控制器。
+
+上述 strapping 管脚如果没有连接任何电路或连接的电路处于高阻抗状态，则其默认值（即逻辑电平值）取决于
+管脚内部弱上拉/下拉电阻在复位时的状态。
+
+                                表 3-1. Strapping 管脚的默认配置
+
+                                 Strapping 管脚    默认配置   值
+                                 GPIO8           浮空     —
+                                 GPIO9           弱上拉    1
+                                 GPIO25          浮空     —
+
+
+要改变 strapping 管脚的值，可以连接外部下拉/上拉电阻。如果 ESP32-H2 用作主机 MCU 的从设备，strapping
+管脚的电平也可通过主机 MCU 控制。
+
+所有 strapping 管脚都有锁存器。系统复位时，锁存器采样并存储相应 strapping 管脚的值，一直保持到芯片掉
+电或关闭。锁存器的状态无法用其他方式更改。因此，strapping 管脚的值在芯片工作时一直可读取，strapping
+管脚在芯片复位后作为普通 IO 管脚使用。
+
+Strapping 管脚的信号时序需遵循表 3-2 和图 3-1 所示的 建立时间和 保持时间。
+
+                               表 3-2. Strapping 管脚的时序参数说明
+
+         参数      说明                                                最小值 (ms)
+                 建立时间，即拉高 CHIP_EN 激活芯片前，电源轨达到稳定所需的
+         tSU                                                              0
+                 时间
+                 保持时间，即 CHIP_EN 已拉高、strapping 管脚变为普通 IO 管脚
+         tH                                                               3
+                 开始工作前，可读取 strapping 管脚值的时间
+
+
+
+
+乐鑫信息科技                                      22              ESP32-H2 系列芯片技术规格书 v1.3
+                                          反馈文档意见
+3 启动配置项
+
+
+                                               tSU          tH
+
+
+
+
+                        VIH_nRST
+
+
+              CHIP_EN
+
+
+
+
+                           VIH
+
+
+
+        Strapping pin
+
+
+
+                                     图 3-1. Strapping 管脚的时序参数图
+
+
+
+3.1   芯片启动模式控制
+复位释放后，GPIO8 和 GPIO9 共同决定启动模式。详见表 3-3 芯片启动模式控制。
+
+                                          表 3-3. 芯片启动模式控制
+
+                                   启动模式 1                        GPIO8    GPIO9
+                                   SPI Boot                      任意值        1
+                                   Joint Download Boot 2           1        0
+                                   1 加粗表示默认值和默认配置。
+                                   2 Joint Download Boot 模式下支持以下下
+
+                                    载方式：
+                                       • USB Download Boot：
+                                              – USB-Serial-JTAG          Download
+                                               Boot
+                                       • UART Download Boot
+
+
+
+3.2   ROM 日志打印控制
+系统启动过程中，如果 LP_AON_STORE4_REG[0] 为 0（默认值）则 ROM 日志打印使能，如果为 1 则 ROM 日
+志打印关闭。ROM 日志打印开启时，可打印至：
+
+  •（默认）UART0 和 USB 串口/JTAG 控制器
+
+  • USB 串口/JTAG 控制器
+
+  • UART0
+
+LP_AON_STORE4_REG[0]、EFUSE_UART_PRINT_CONTROL 和 GPIO8 控制 UART0 ROM 日志打印，如表 3-4
+UART0 ROM 日志打印控制 所示。
+
+
+
+
+乐鑫信息科技                                                 23                       ESP32-H2 系列芯片技术规格书 v1.3
+                                                     反馈文档意见
+3 启动配置项
+
+
+                                表 3-4. UART0 ROM 日志打印控制
+
+      UART0 ROM 日志打印 1   LP_AON_STORE4_REG[0]    EFUSE_UART_PRINT_CONTROL     GPIO8
+                                                             0                忽略
+      使能                            0                         1                0
+                                                             2                  1
+                                                              1                 1
+                                    0                        2                 0
+      关闭
+                                                             3                忽略
+                                    1                       忽略                忽略
+      1 加粗表示默认值和默认配置。
+
+
+
+EFUSE_DIS_USB_SERIAL_JTAG_ROM_PRINT 和 LP_AON_STORE4_REG[0] 控制 USB 串口/JTAG 控制器 ROM
+日志打印，如表 3-5 USB 串口/JTAG ROM 日志打印控制 所示。
+
+                          表 3-5. USB 串口/JTAG ROM 日志打印控制
+
+ USB 串口/JTAG ROM 日志打印控制 1         LP_AON_STORE4_REG[0]   EFUSE_DIS_USB_SERIAL_JTAG_ROM_PRINT
+ 使能                                        0                             0
+                                           0                              1
+ 关闭
+                                           1                            忽略
+ 1 加粗表示默认值和默认配置。
+
+
+
+
+3.3    JTAG 信号源控制
+在系统启动早期阶段，GPIO25 可用于控制 JTAG 信号源。该管脚没有内部上下拉电阻，strapping 的值必须由不
+处于高阻抗状态的外部电路控制。
+
+如表 3-6 所示，GPIO25 与 EFUSE_DIS_PAD_JTAG、EFUSE_DIS_USB_JTAG 和 EFUSE_JTAG_SEL_ENABLE 共
+同控制 JTAG 信号源。
+
+                                   表 3-6. JTAG 信号源控制
+
+JTAG 信号源 1         EFUSE_DIS_PAD_JTAG EFUSE_DIS_USB_JTAG EFUSE_STRAP_JTAG_SEL_ENABLE GPIO25
+USB 串口/JTAG 控制器                                                          0                忽略
+JTAG 管脚 2                   0                    0                                         0
+                                                                          1
+USB 串口/JTAG 控制器                                                                            1
+JTAG 管脚 2                   0                    1                      忽略                忽略
+USB 串口/JTAG 控制器             1                    0                      忽略                忽略
+JTAG 关闭                     1                    1                      忽略                忽略
+ 1 加粗表示默认值和默认配置。
+ 2 即 MTDI、MTCK、MTMS 和 MTDO。
+
+
+
+
+乐鑫信息科技                                     24               ESP32-H2 系列芯片技术规格书 v1.3
+                                        反馈文档意见
+4 功能描述
+
+
+
+4 功能描述
+
+4.1    系统
+本章节描述了芯片操作的核心部分，包括微处理器、存储器组织结构、系统组件和安全功能。
+
+
+4.1.1 微处理器和主控
+本章节描述了芯片内的核心处理单元及其功能。
+
+
+4.1.1.1 ESP-RISC-V CPU
+
+ESP-RISC-V CPU 是一款基于 RISC-V 指令集架构 (ISA) 的 32 位内核，包括基本整数 (I)、乘法/除法 (M)、原子
+(A) 和压缩 (C) 标准扩展。
+
+特性
+
+  • 四级流水线，时钟工作频率高达 96 MHz
+
+  • RV32IMAC ISA (指令集架构)
+
+  • 符合 RISC-V 指令集手册 v2.2 第一卷“非特权架构”(RISC-V Instruction Set Manual Volume I: Unprivileged
+      ISA, Version 2.2) 和 RISC-V 指令集手册 v1.10 第二卷“特权架构”(RISC-V Instruction Set Manual, Volume
+      II: Privileged Architecture, Version 1.10)
+
+  • 通过 IRAM/DRAM 接口零等待周期访问片上 SRAM 和 cache 中的程序和数据
+
+  • 具有静态分支预测功能的分支目标缓冲区 (BTB)
+
+  • 支持用户模式 (user mode) 以及中断委托
+
+  • 中断控制器 (INTC) 具有多达 28 个外部向量中断，适用于机器模式 (machine mode) 和用户模式，可配置
+      16 个优先级和阈值级别
+
+  • 专用于机器模式和用户模式的核心本地中断 (CLINT)
+
+  • 调试模块 (DM) 符合 RISC-V 外部调试支持规范 (RISC-V External Debug Support) v0.13，支持通过行业标
+      准的 JTAG/USB 端口连接外部调试器
+
+  • 支持指令追踪，详见章节 4.1.1.2 RISC-V 追踪编码器
+
+  • 调试器通过系统总线 (SBA) 直接访问存储器和外设
+
+  • 硬件触发器符合 RISC-V 调试规范 v0.13，具有多达 4 个断点/观察点
+
+  • 物理存储器保护 (PMP) 和物理存储器属性 (PMA)，最多可配置 16 个区域
+
+  • 32 位 AHB 系统总线，用于访问外设
+
+  • 可配置的核心性能指标事件
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 ESP-RISC-V CPU。
+
+
+
+
+乐鑫信息科技                                               25       ESP32-H2 系列芯片技术规格书 v1.3
+                                                   反馈文档意见
+4 功能描述
+
+
+
+4.1.1.2 RISC-V 追踪编码器
+
+ESP32-H2 芯片中的 RISC-V 追踪编码器提供了一种从 CPU 执行过程中捕获详细追踪信息的方法，以便对系统
+进行更深入的分析和优化。它连接到 CPU 的指令追踪接口，并将信息压缩成较小的数据包，然后存储在内部
+SRAM 中。
+
+特性
+
+  • 兼容 RISC-V 追踪规范 v1.0 (RISC-V Processor Trace 1.0)
+
+  • 支持任意地址范围用作追踪存储器
+
+  • 具有两种同步模式：
+
+      – 同步计数器按包计数
+
+      – 同步计数器按周期计数
+
+  • 支持丢包状态标识
+
+  • 支持丢包后自动重启
+
+  • 写追踪存储器时支持循环和非循环模式
+
+  • 具有 128 × 8 位 FIFO，用于缓存数据包
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 RISC-V 追踪编码器 (TRACE)。
+
+
+4.1.1.3 GDMA 控制器
+
+GDMA 控制器是通用的直接内存访问控制器，可以在无需 CPU 干预的情况下完成外设与存储器之间及存储器与
+存储器之间的数据传输。GDMA 具有六个独立通道，其中三个用于发送，三个用于接收。这些通道由具有 GDMA
+功能的外设共享，包括 SPI2、UHCI (UART0/UART1) 、I2S、AES、SHA、ADC 和 PARLIO。
+
+特性
+
+  • AHB 总线架构
+
+  • 可编程的数据传输长度（以字节为单位）
+
+  • 链表描述符，用于高效的数据传输管理
+
+  • 在访问内部 RAM 时进行 INCR burst 传输，以提高性能
+
+  • 访问高达 324 KB 的内部 RAM 地址空间
+
+  • 软件可选择请求服务的外设
+
+  • 用于管理带宽的固定优先级和轮询通道仲裁方案
+
+  • 支持事件任务矩阵
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 GDMA 控制器 (DMA)。
+
+
+4.1.2 存储器组织结构
+本章节描述了存储器布局，解释数据的存储、访问和管理方式，以实现高效的操作。
+
+ESP32-H2 的地址映射结构如图 4-1 所示。
+
+
+乐鑫信息科技                                       26        ESP32-H2 系列芯片技术规格书 v1.3
+                                         反馈文档意见
+4 功能描述
+
+
+
+
+                                  图 4-1. 地址映射结构
+
+
+
+4.1.2.1 内部存储器
+
+ESP32-H2 的内部存储器即集成于芯片晶圆上或封装内部的存储器，包括 ROM、SRAM、eFuse 和 flash。
+
+特性
+
+ • 128 KB 的 ROM，用于程序启动和内核功能调用
+
+ • 320 KB 的高性能 SRAM (HP SRAM)，用于数据和指令存储
+
+ • 4 KB 的低功耗 SRAM (LP SRAM)，可被 CPU 访问，在 Deep-sleep 模式下可以保存数据
+
+ • 4096 位 eFuse 存储器，其中 1792 位用户可用，更多信息详见章节 4.1.2.3 eFuse 控制器
+
+ • 封装内 flash
+
+     – flash 大小
+
+         * ESP32-H2FH2S 芯片：2 MB
+
+         * ESP32-H2FH4S 芯片：4 MB
+
+     – 至少 10 万次编程/擦除周期
+
+     – 至少 20 年数据保留时间
+
+     – 最大时钟频率
+
+
+乐鑫信息科技                                 27         ESP32-H2 系列芯片技术规格书 v1.3
+                                    反馈文档意见
+4 功能描述
+
+
+             * ESP32-H2FH2S 芯片：64 MHz
+
+             * ESP32-H2FH4S 芯片：64 MHz
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节系统和存储器。
+
+
+4.1.2.2    外部存储器
+
+ESP32-H2 支持通过 SPI、Dual SPI、Quad SPI、QPI 等接口在芯片封装外连接存储器。
+
+特性
+
+   • 支持连接最大 16 MB 的封装外 flash
+
+          – 支持基于 XTS-AES 的硬件加解密功能
+
+          – 最多 16 MB 的 CPU 指令空间以 64 KB 的块映射到 flash，支持 32 位取指
+
+          – 最多 16 MB 的 CPU 数据空间以 64 KB 的块映射到 flash，支持 8 位、16 位和 32 位读取
+
+   • 通过 16 KB 只读 cache 访问外部存储器
+
+          – 八路组相连
+
+          – 32 字节 cache 块 (block)
+
+          – 支持关键字优先 (critical word first) 和提前重启 (early restart)
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节系统和存储器。
+
+
+4.1.2.3 eFuse 控制器
+
+eFuse 存储器是只可编程一次的存储器，用于存储参数内容和用户数据。ESP32-H2 芯片的 eFuse 控制器用于
+烧写和读取 eFuse 存储器。
+
+特性
+
+   • 配置部分区域的写保护
+
+   • 配置部分区域的读保护
+
+   • 防止数据损坏的多种硬件编码方案
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节 eFuse 控制器。
+
+
+4.1.3 系统组件
+本章节描述了对系统的整体功能和控制起到重要作用的组件。
+
+
+4.1.3.1    IO MUX 和 GPIO 交换矩阵
+
+ESP32-H2 芯片中的 IO MUX 和 GPIO 交换矩阵可将外设输入和输出信号灵活连接到 GPIO 管脚。这些外设通过
+允许 I/O 配置、支持多路复用和外设输入信号的信号同步，增强了芯片的功能和性能。
+
+
+
+
+乐鑫信息科技                                          28                ESP32-H2 系列芯片技术规格书 v1.3
+                                            反馈文档意见
+4 功能描述
+
+
+特性
+
+  • 19 个 GPIO 管脚，用于通用 I/O 或连接到内部外设信号
+
+  • GPIO 交换矩阵：
+
+     – 将 78 个外设输入信号和 99 个输出信号连接到任意 GPIO 管脚
+
+     – 基于 IO MUX 运行时钟的外设输入信号同步
+
+     – 支持 GPIO 滤波器对输入信号进行滤波
+
+     – 支持毛刺滤波器对输入信号进行二次滤波
+
+     – 支持 Sigma delta 调制 (SDM) 输出
+
+     – 支持 GPIO 简单输入输出
+
+  • IO MUX 用于将某些数字信号 (SPI、JTAG、UART) 直接连接到管脚
+
+  • 支持事件任务矩阵
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交换矩阵。
+
+
+4.1.3.2 复位
+
+ESP32-H2 芯片提供四种级别的复位方式，分别是 CPU 复位、内核复位、系统复位和芯片复位。除芯片复位外，
+其他复位方式不影响片上内存存储的数据。
+
+特性
+
+  • 四种复位类型：
+
+     – CPU 复位 – 复位 CPU 核
+
+     – 内核复位 – 复位整个数字系统，但不包括 LP 系统
+
+     – 系统复位 – 复位整个数字系统，包括 LP 系统
+
+     – 芯片复位 – 复位整个芯片
+
+  • 复位触发方式：
+
+     – 直接由硬件触发
+
+     – 通过配置 CPU 的相应寄存器进行软件触发
+
+  • 支持读取复位源
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节复位和时钟。
+
+
+4.1.3.3 时钟
+
+ESP32-H2 芯片的时钟来自振荡器、RC 电路和 PLL 电路，然后经过分频器或时钟选择器进行处理。时钟根据频
+率可以分为高速时钟和低速时钟。
+
+
+
+
+乐鑫信息科技                                29       ESP32-H2 系列芯片技术规格书 v1.3
+                                    反馈文档意见
+4 功能描述
+
+
+特性
+
+   • 高速时钟（用于工作在较高频率下的设备）
+
+          – 32 MHz 外部晶振时钟
+
+             说明：
+             芯片无法在没有外部晶振时钟的情况下工作。
+
+
+
+          – 96 MHz 内部 PLL 时钟
+
+          – 64 MHz 内部 PLL 时钟
+
+   • 低速时钟（用于 LP 系统和某些低功耗模式外设）
+
+          – 32 kHz 外部晶振时钟
+
+          – 可调频率的内部快速 RC 振荡器（默认为 8 MHz）
+
+          – 130 kHz 内部慢速 RC 振荡器
+
+          – 内部 PLL 时钟
+
+          – 通过 XTAL_32K_P 输入的外部慢速时钟（默认为 32 kHz）
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节复位和时钟。
+
+
+4.1.3.4    中断矩阵
+
+ESP32-H2 芯片的中断矩阵用于将外设和事件生成的中断请求映射到 CPU 中断。
+
+特性
+
+   • 接收 65 个外部中断源作为输入
+
+   • 生成 28 个 CPU 的外部中断作为输出
+
+   • 支持查询外部中断源当前的中断状态
+
+   • 支持将多个中断源映射到单个 CPU 中断（即共享中断）
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节中断矩阵。
+
+
+4.1.3.5 事件任务矩阵
+
+事件任务矩阵 (ETM) 允许将来自任何指定外设的事件映射到任何指定外设的任务，使外设能够在没有 CPU 干
+预的情况下执行指定任务。能够产生事件、接收任务的外设有 GPIO、LED PWM、通用定时器、RTC 定时器、系
+统定时器、MCPWM、温度传感器、ADC、I2S、GDMA 和 PMU。
+
+特性
+
+   • 50 个可独立使能、配置的通道
+
+   • 支持从多个外设接收 122 种事件
+
+   • 支持为多个外设生成 129 种任务
+
+
+
+乐鑫信息科技                               30           ESP32-H2 系列芯片技术规格书 v1.3
+                                  反馈文档意见
+4 功能描述
+
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节事件任务矩阵。
+
+
+4.1.3.6 电源管理单元
+
+ESP32-H2 具有先进的电源管理单元 (PMU) ，可以灵活地为芯片的不同电源域供电，实现芯片性能、功耗和唤
+醒延迟之间的最佳平衡。
+
+配置 PMU 的程序较为复杂。为针对典型场景简化电源管理，ESP32-H2 具有以下预设功耗模式，可给不同电源
+域组合供电：
+
+   • Active 模式 – CPU、RF 电路和所有外设均上电。芯片可以处理数据、接收、发射和侦听信号。
+
+   • Modem-sleep 模式 – CPU 上电，可降低时钟频率。RF 电路在需要时间歇性开启，因此无线可保持连接。
+
+   • Light-sleep 模式 – CPU 停止工作，可选择上电。LP 外设可由定时器间歇性唤醒，芯片可由所有唤醒机制
+     唤醒，包括 Modem、RTC 定时器或外部中断。无线可保持连接。部分数字外设可选择关闭。
+
+   • Deep-sleep 模式 – 仅 LP 系统上电。无线连接数据存储在 LP 存储器中。
+
+设备在不同功耗模式下的功耗，请参见章节 5.5 功耗特性。
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 低功耗管理。
+
+
+4.1.3.7 系统定时器
+
+ESP32-H2 芯片中的系统定时器 (SYSTIMER) 是一个 52 位定时器，可用于为操作系统生成滴答中断，或作为通
+用定时器生成周期性或一次性中断。
+
+特性
+
+   • 两个 52 位计数器和三个 52 位比较器
+
+   • 52 位报警值和 26 位报警周期
+
+   • 两种报警模式：单次报警模式和周期报警模式
+
+   • 三个比较器根据配置的报警值或报警周期生成三个独立中断
+
+   • 在 Deep-sleep 或 Light-sleep 后，能够通过软件加载 RTC 定时器记录的睡眠时间
+
+   • 支持当 CPU 暂停或处于 OCD 模式时，时钟计数器也暂停
+
+   • 支持输出实时报警的事件 (event)
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节系统定时器。
+
+
+4.1.3.8   定时器组
+
+ESP32-H2 芯片中的定时器组 (TIMG) 可用于准确设定时间间隔、在一定间隔后触发（周期或非周期的）中断或充
+当硬件时钟。ESP32-H2 有两个定时器组，每个定时器组包含一个通用定时器和一个主系统看门狗定时器。
+
+特性
+
+   • 16 位预分频器
+
+   • 54 位自动重新加载计数器，可向上、向下计数
+
+   • 实时读取时基计数器的值
+
+
+乐鑫信息科技                             31            ESP32-H2 系列芯片技术规格书 v1.3
+                                反馈文档意见
+4 功能描述
+
+
+   • 暂停、恢复、禁用时间基准计数器
+
+   • 可配置的报警产生机制
+
+   • 定时器值重新加载（报警时自动重新加载或软件控制即时重新加载）
+
+   • RTC 慢速时钟频率计算
+
+   • 电平触发中断
+
+   • 支持多个 ETM 任务和事件
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 定时器组 (TIMG)。
+
+
+4.1.3.9    看门狗定时器
+
+ESP32-H2 中的看门狗定时器 (WDT) 可用于检测和处理系统故障。ESP32-H2 有三个数字看门狗定时器：两个
+在定时器组中 (MWDT) ，一个在 RTC 模块中 (RWDT) 。此外，还有一个称为超级看门狗 (SWD) 的模拟看门狗定
+时器，有助于防止系统在异常状态下运行。
+
+特性
+
+   • 数字看门狗定时器：
+
+          – 四个阶段，每个阶段都可配置超时时间和超时动作
+
+          – 超时动作：中断、CPU 复位、内核复位、系统复位（仅 RWDT）
+
+          – 阶段 0 flash 启动保护（SPI Boot 模式）
+
+          – 写保护，使能时寄存器仅可读取
+
+          – 32 位超时计数器
+
+   • 模拟看门狗定时器：
+
+          – 超时周期略小于 1 秒
+
+          – 超时动作：中断、系统复位
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节看门狗定时器。
+
+
+4.1.3.10 权限控制
+
+ESP32-H2 中的权限控制模块负责管理对内存和外设寄存器的访问权限。它由两部分组成：PMP（物理内存保
+护）和 APM（访问权限管理）。
+
+特性
+
+   • 支持对 ROM、HP 存储器、HP 外设、LP 存储器和 LP 外设地址空间的访问权限管理
+
+   • APM 支持每个主机（如 DMA）可配置四种安全模式
+
+   • APM 支持最多 16 个地址范围的访问权限配置
+
+   • 中断功能和异常信息记录
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节权限控制 (PMS)。
+
+
+
+
+乐鑫信息科技                                     32   ESP32-H2 系列芯片技术规格书 v1.3
+                                      反馈文档意见
+4 功能描述
+
+
+
+4.1.3.11    系统寄存器
+
+ESP32-H2 芯片中的系统寄存器用于配置一些芯片辅助功能。
+
+特性
+
+   • 控制外部存储器加密和解密
+
+   • 控制总线超时保护
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节系统寄存器。
+
+
+4.1.3.12 辅助调试
+
+辅助调试可以帮助在软件调试过程中定位错误和问题，提供各种监视能力和日志记录功能，以帮助高效地识别
+和解决软件错误。
+
+特性
+
+   • 读写监测：监测 CPU 是否在限定的存储器地址范围内进行读写操作
+
+   • 栈指针 (SP) 监测：监测栈指针是否超出限定的范围，若超出范围则产生中断
+
+   • 程序计数器 (PC) 记录：记录 PC，可以获得上一次 CPU 复位时的 PC 值
+
+   • 总线写操作记录：当 CPU 或 DMA 写了某个特定值时，会记录总线写操作信息
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节辅助调试 (ASSIST_DEBUG)。
+
+
+4.1.4      加密和安全组件
+本章节描述了集成在芯片中用于保护数据和操作的安全功能。
+
+
+4.1.4.1 AES 加速器
+
+ESP32-H2 内置 AES（高级加密标准）硬件加速器可使用 AES 算法，完成数据的加解密运算，具有 Typical AES
+和 DMA-AES 两种工作模式。相比基于纯软件的 AES 运算，AES 硬件加速器能够极大地提高运算速度。
+
+特性
+
+   • Typical AES 工作模式
+
+           – AES-128/AES-256 加解密运算
+
+   • DMA-AES 工作模式
+
+           – AES-128/AES-256 加解密运算
+
+           – 块（加密）模式
+
+              * ECB (Electronic Codebook)
+
+              * CBC (Cipher Block Chaining)
+
+              * OFB (Output Feedback)
+
+              * CTR (Counter)
+
+
+乐鑫信息科技                                          33     ESP32-H2 系列芯片技术规格书 v1.3
+                                              反馈文档意见
+4 功能描述
+
+
+            * CFB8 (8-bit Cipher Feedback)
+
+            * CFB128 (128-bit Cipher Feedback)
+
+          – 中断发生
+
+   • 抗攻击伪轮函数，可增强抗攻击性能
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 AES 加速器 (AES)。
+
+
+4.1.4.2    ECC 加速器
+
+ECC 加速器可以加速基于椭圆曲线密码学 (ECC) 算法和派生算法（如 ECDSA）的计算，这种算法相对于 RSA 算
+法的优势在于，使用较小长度的公钥就能够提供相当等级的加密安全性。
+
+特性
+
+   • 支持两种不同的椭圆曲线（P-192 和 P-256）
+
+   • 11 种工作模式，支持功能包括标准点验证、标准点乘、Jacobian 点验证、Jacobian 点乘、模计算，等
+
+   • 强抗攻击性能，ECC 加速器在每次进行点乘计算时：
+
+          – 均会消耗相同的时间
+
+          – 均会消耗相同的功耗
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 ECC 加速器 (ECC)。
+
+
+4.1.4.3 HMAC 加速器
+
+HMAC 加速器 (HMAC) 模块用于使用 SHA-256 哈希算法和 RFC 2104 中描述的密钥计算信息认证码 (MAC)。它
+提供了硬件支持的 HMAC 计算，显著降低了软件复杂性，提高了性能。
+
+特性
+
+   • 使用标准 HMAC-SHA-256 算法
+
+   • 兼容挑战-应答身份验证算法
+
+   • 下行模式下，支持生成 RSA 数字签名外设 (RSA_DS) 所需的密钥
+
+   • 下行模式下，支持重启软禁用的 JTAG
+
+   • 下行模式下，仅支持可配的硬件外设访问 HMAC 计算的 hash 结果
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 HMAC 加速器。
+
+
+4.1.4.4    RSA 加速器
+
+RSA 加速器可为多种运用于“RSA 非对称式加密演算法”的高精度计算提供硬件支持，能够极大地降低此类运
+算的运行时间和软件复杂度。与纯软件 RSA 算法相比，硬件 RSA 加速器的运算速度更快。
+
+特性
+
+   • 大数模幂运算（支持两个加速选项），运算子位宽最高支持 3072 位
+
+
+
+乐鑫信息科技                                           34   ESP32-H2 系列芯片技术规格书 v1.3
+                                             反馈文档意见
+4 功能描述
+
+
+  • 大数模乘运算，运算子位宽最高支持 3072 位
+
+  • 大数乘法，运算子位宽最高支持 1536 位
+
+  • 多种运算子位宽
+
+  • 计算完成时触发中断
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节 RSA 加速器。
+
+
+4.1.4.5 SHA 加速器
+
+SHA 加速器 (SHA) 是一种硬件加速器，与纯软件相比能够极大地提高 SHA 算法运算速度。
+
+特性
+
+  • 支持多种 SHA 算法：SHA-1、SHA-224 和 SHA-256
+
+  • 两种数据传输模式：基于 CPU 的 Typical SHA 和基于 DMA 的 DMA-SHA
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节 SHA 加速器 (SHA)。
+
+
+4.1.4.6 RSA 数字签名外设 (RSA_DS)
+
+ESP32-H2 芯片中的 RSA 数字签名外设 (RSA_DS) 模块可通过硬件加速高效生成基于 RSA 的数字签名。
+
+特性
+
+  • 支持长度最大为 3072 位的 RSA 数字签名密钥
+
+  • 支持仅限 RSA_DS 外设读取的加密私钥数据
+
+  • 支持 SHA-256 摘要，用于保护私钥数据免遭攻击者篡改
+
+更多信息，请参考《ESP32-H2 技术参考手册》 > 章节 RSA 数字签名外设 (RSA_DS)。
+
+
+4.1.4.7 ECDSA 数字签名外设 (ECDSA_DS)
+
+椭圆曲线数字签名算法 (ECDSA) 是数字签名算法 (DSA) 的一种变体，使用了椭圆曲线密码学。ESP32-H2 的
+ECDSA 数字签名外设 (ECDSA_DS) 可在一个安全高效的环境中计算 ECDSA 签名，不仅可保证签名过程的机密
+性，还实现了快速计算。
+
+特性
+
+  • 数字签名的生成和验证
+
+  • 两种椭圆曲线：P-192 和 P-256
+
+  • 不同工作状态下的动态访问权限，以确保信息安全
+
+  • 强抗攻击性能，ECDSA_DS 每次生成和验证签名时：
+
+     – 均会消耗相同的时间
+
+     – 均会消耗相同的功耗
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 ECDSA 数字签名外设 (ECDSA_DS)。
+
+
+
+乐鑫信息科技                               35          ESP32-H2 系列芯片技术规格书 v1.3
+                                 反馈文档意见
+4 功能描述
+
+
+
+4.1.4.8     片外存储器加密与解密
+
+ESP32-H2 芯片中的片外存储器加密与解密 (XTS_AES) 模块为用户在外部存储器 (flash) 中存储的应用程序代码
+和数据提供安全保障。
+
+特性
+
+   • 使用通用 XTS-AES 算法，符合 IEEE Std 1619-2007
+
+   • 支持手动加密，需要软件参与
+
+   • 支持高速自动解密，无需软件参与
+
+   • 由寄存器配置、eFuse 参数、启动 (boot) 模式共同决定开启/关闭加解密功能
+
+   • 支持可配置的抗 DPA 攻击功能
+
+   • 支持伪轮次抗 DPA 功能
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节片外存储器加密与解密 (XTS_AES)。
+
+
+4.1.4.9     随机数发生器
+
+ESP32-H2 中的随机数发生器 (RNG) 是一个真随机数生成器，从物理过程中生成用于加密操作的 32 位随机
+数。
+
+特性
+
+   • 随机数发生器的熵源
+
+           – SAR ADC、高速 ADC 两者的热噪声
+
+           – 异步时钟不匹配
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节随机数发生器 (RNG)。
+
+
+4.1.4.10 电源毛刺检测器
+
+ESP32-H2 芯片集成了一个电源毛刺检测器。该检测器实时监测 VDDPST1、VDDPST2 和 VDD3P3 (PIN 27) 电源
+管脚电压，可识别到管脚上发生的电压异常。例如，监测到管脚上发生电压突降或电源波动时，芯片会触发电
+源毛刺复位，确保系统能够安全恢复到可控的初始状态，从而避免因电源波动而引起的逻辑错误、数据丢失或
+硬件损坏。
+
+特性
+
+   • 实时监测特定电源管脚的电压
+
+   • 可触发电源毛刺复位，防止电源毛刺攻击
+
+   • 上电默认开启
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 电源检测器。
+
+
+4.1.4.11    安全启动
+
+ESP32-H2 中的安全启动功能可确保只有经过签名的固件才能启动。
+
+
+乐鑫信息科技                                  36    ESP32-H2 系列芯片技术规格书 v1.3
+                                     反馈文档意见
+4 功能描述
+
+
+特性
+
+  • 支持的签名类型
+
+     – RSA-RSS 签名
+
+     – ECDSA 签名
+
+推荐使用 RSA-RSS 签名。基于 ECDSA 的签名在某些特定场景下无法正常工作，因此不推荐使用。更多信息见
+《ESP32-H2 系列芯片勘误表》 和 ESP-IDF 编程指南 > 安全启动 (secure boot) v2。
+
+
+
+
+乐鑫信息科技                               37            ESP32-H2 系列芯片技术规格书 v1.3
+                                 反馈文档意见
+4 功能描述
+
+
+
+4.2       外设
+本章节介绍了芯片上的外设接口，包括扩展芯片功能的通信接口和片上传感器。
+
+
+4.2.1     通讯接口
+本章节介绍了芯片与外部设备和网络进行通信和交互的接口。
+
+
+4.2.1.1 UART 控制器
+
+ESP32-H2 芯片中的 UART 控制器用于芯片与外部 UART 设备之间的异步串行数据传输和接收。ESP32-H2 芯片
+中共有两个 UART 控制器。
+
+特性
+
+   • 可编程波特率，最高可达 5 MBaud
+
+   • 260 x 8 位 RAM，由 TX FIFO 和 RX FIFO 共用
+
+   • 支持多种数据位和停止位的长度
+
+   • 支持奇偶校验位
+
+   • 特殊字符 AT_CMD 检测
+
+   • 支持 RS485 协议
+
+   • 支持 IrDA 协议
+
+   • 使用 GDMA 进行高速数据通信
+
+   • 接收超时功能
+
+   • UART 作为唤醒源
+
+   • 软件和硬件流控
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 UART 控制器 (UART)。
+
+管脚分配
+
+UART0 接口连接接收和发送信号（U0RXD 和 U0TXD）的管脚通过 IO MUX 与 GPIO23 ~ GPIO24 和 FSPICS1 ~
+FSPICS2 复用。其他信号可以通过 GPIO 交换矩阵连接到任意 GPIO。
+
+更多关于管脚分配的信息，请参考 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交换矩
+阵。
+
+
+4.2.1.2   SPI 控制器
+
+ESP32-H2 具有以下 SPI 接口：
+
+   • SPI0/SPI1，预留给系统使用
+
+   • SPI2，通用 SPI 控制器 (GP-SPI)，可访问通用 DMA 通道
+
+
+
+
+乐鑫信息科技                                      38   ESP32-H2 系列芯片技术规格书 v1.3
+                                       反馈文档意见
+4 功能描述
+
+
+SPI2 的特性
+
+  • 支持主机或从机模式
+
+  • 支持 DMA
+
+  • 支持 Single SPI、Dual SPI、Quad SPI、QPI 模式
+
+  • 可配置时钟极性 (CPOL) 和相位 (CPHA)
+
+  • 可配置时钟频率
+
+  • 数据传输以字节为单位
+
+  • 可配置读写数据位顺序：最高有效位 (MSB) 优先或最低有效位 (LSB) 优先
+
+  • 主机模式
+
+      – 支持时钟频率高达 48 MHz 的 2 线全双工通信
+
+      – 支持时钟频率高达 48 MHz 的 1 线、2 线、4 线半双工通信
+
+      – 具有六个 FSPICS… 管脚，可与六个独立的 SPI 从机连接
+
+      – 可配置的 CS 设置时间和保持时间
+
+  • 从机模式
+
+      – 支持时钟频率高达 32 MHz 的 2 线全双工通信
+
+      – 支持时钟频率高达 32 MHz 的 1 线、2 线、4 线半双工通信
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 SPI 控制器 (SPI)。
+
+管脚分配
+
+  • 通过 IO MUX
+     SPI2 连接数据信号和时钟信号的管脚通过 IO MUX 与 GPIO0、GPIO2 ~ GPIO5 以及 JTAG 接口复用。SPI2
+     连接片选信号的管脚通过 IO MUX 与 GPIO1、GPIO23 ~ GPIO27、UART0 接口以及 USB 接口复用。
+
+  • 经 GPIO 交换矩阵
+     SPI2 的管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.1.3 I2C 控制器
+
+I2C 控制器支持主机和从机之间使用 I2C 总线进行通信。
+
+特性
+
+  • 两个 I2C 控制器
+
+  • 与多个外部设备通信
+
+  • 可以运行在主机和从机模式
+
+  • 标准模式 (100 Kbit/s) 和快速模式 (400 Kbit/s)
+
+
+
+乐鑫信息科技                                     39    ESP32-H2 系列芯片技术规格书 v1.3
+                                      反馈文档意见
+4 功能描述
+
+
+   • 从机模式下的 SCL 时钟拉伸
+
+   • 可编程数字噪声滤波
+
+   • 支持 7 位和 10 位寻址以及双地址寻址模式
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 I2C 控制器 (I2C)。
+
+管脚分配
+
+I2C 的管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.1.4    I2S 控制器
+
+ESP32-H2 芯片中的 I2S 控制器为多媒体应用程序提供了一种灵活的通信接口，特别适用于数字音频应用。
+
+特性
+
+   • 支持主机模式和从机模式
+
+   • 支持全双工和半双工通信
+
+   • 支持 TX 模块和 RX 模块独立工作或同时工作
+
+   • 支持多种音频标准：
+
+          – TDM Philips 标准
+
+          – TDM MSB 对齐标准
+
+          – TDM PCM 标准
+
+          – PDM 标准
+
+   • 支持 PCM 转 PDM TX 接口
+
+   • 可配置高精度 BCK 时钟，最高频率可达 40 MHz
+
+          – 采样频率支持 8 kHz、16 kHz、32 kHz、44.1 kHz、48 kHz、88.2 kHz、96 kHz、128 kHz。
+
+   • 支持 8/16/24/32 位数据通信
+
+   • 支持 DMA
+
+   • A-law 和 µ-law 压缩/解压缩算法，提高信号的量化信噪比
+
+   • 支持灵活的数据格式控制
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 I2S 控制器 (I2S)。
+
+管脚分配
+
+I2S 的管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+
+
+乐鑫信息科技                                      40             ESP32-H2 系列芯片技术规格书 v1.3
+                                        反馈文档意见
+4 功能描述
+
+
+
+4.2.1.5    脉冲计数控制器
+
+脉冲计数控制器 (PCNT) 通过跟踪输入脉冲信号的上升沿和下降沿来计数。
+
+特性
+
+   • 四个独立的脉冲计数器，每个计数器有两个通道
+
+   • 递增、递减或停止计数模式
+
+   • 输入脉冲信号和控制信号的毛刺滤波
+
+   • 选择在输入脉冲信号的上升沿或下降沿进行计数
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 脉冲计数控制器。
+
+管脚分配
+
+脉冲计数控制器的管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.1.6 USB 串口/JTAG 控制器
+
+ESP32-H2 芯片中的 USB 串口/JTAG 控制器集成了与芯片通讯的标准 USB CDC-ACM 串口，同时提供了一种
+JTAG 调试的便捷方案，无需外部芯片或 JTAG 适配器，节省空间并降低成本。
+
+特性
+
+   • 兼容 USB 2.0 全速标准，传输速度最高可达 12 Mbit/s（注意，该控制器不支持 480 Mbit/s 的高速传输模
+     式）
+
+   • 包含 CDC-ACM 虚拟串口及 JTAG 适配器功能
+
+   • CDC-ACM：
+
+          – 配置虚拟串行功能，在大多数现代操作系统上可实现即插即用
+
+          – 支持主机控制芯片复位和进入下载模式
+
+   • JTAG 适配器：
+
+          – 支持使用紧凑的 JTAG 指令实现与 CPU 调试内核的快速通信
+
+   • 集成内部 PHY
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 USB 串口/JTAG 控制器 (USB_SERIAL_JTAG)。
+
+管脚分配
+
+USB 串口/JTAG 控制器的管脚 USB_D+ 和 USB_D- 通过 IO MUX 与 GPIO26 ~ GPIO27，以及 FSPICS4 ~ FSPICS5
+复用。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+
+乐鑫信息科技                                  41             ESP32-H2 系列芯片技术规格书 v1.3
+                                    反馈文档意见
+4 功能描述
+
+
+
+4.2.1.7 双线汽车接口
+
+双线汽车接口 (TWAI® ) 是一种为车载应用设计的多主机、多播通信协议。TWAI 控制器用于芯片使用该协议的通
+信。
+
+特性
+
+  • 兼容 ISO 11898-1 协议（CAN 规范 2.0）
+
+  • 支持标准帧格式（11 位 ID）和扩展帧格式（29 位 ID）
+
+  • 支持 1 Kbit/s ~ 1 Mbit/s 位速率
+
+  • 多种操作模式：正常模式、只听模式和自测模式（传输无需应答）
+
+  • 特殊发送：单次发送和自发自收
+
+  • 数据接收过滤器（支持单过滤器和双过滤器模式）
+
+  • 错误检测与处理：错误计数器、可配置错误报警阈值、错误代码记录和仲裁丢失记录、收发器自动待机功
+     能
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 双线汽车接口。
+
+管脚分配
+
+TWAI 管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.1.8 LED PWM 控制器
+
+LED PWM 控制器 (LEDC) 用于生成用于 LED 控制的 PWM 信号。
+
+特性
+
+  • 六个独立的 PWM 生成器
+
+  • 最大 PWM 占空比精度为 20 位
+
+  • 四个独立的定时器，具有 20 位计数器、可配置的时钟小数分频器和计数器溢出值
+
+  • 可调节 PWM 信号输出的相位
+
+  • PWM 占空比微调
+
+  • 占空比自动渐变
+
+         – 占空比线性渐变 — 即一个占空比渐变区间
+
+         – 占空比伽马渐变 — 每个 PWM 生成器最多可生成 16 个占空比渐变区间，每个区间可独立配置的渐变
+          方向（增加或减少）、变化步长、变化次数和变化频率
+
+  • 在低功耗模式（Light-sleep 模式）下输出 PWM 信号
+
+  • 支持事件任务矩阵 (ETM) 的事件生成和任务响应
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 LED PWM 控制器。
+
+
+乐鑫信息科技                                42     ESP32-H2 系列芯片技术规格书 v1.3
+                                    反馈文档意见
+4 功能描述
+
+
+管脚分配
+
+LED PWM 管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.1.9 电机控制脉宽调制器
+
+电机控制脉宽调制器 (MCPWM) 可用于驱动数字电机和智能灯。MCPWM 分为五个主要模块：PWM 定时器、PWM
+操作器、捕获模块、故障检测模块和事件任务矩阵 (ETM) 模块。
+
+特性
+
+  • 三个 PWM 定时器，用于精确计时和频率控制
+
+     – 每个 PWM 定时器都有一个专用的 8 位时钟预分频器
+
+     – PWM 定时器中的 16 位计数器的工作模式包括：递增计数模式，递减计数模式，递增递减循环计数模
+       式
+
+     – 硬件/软件同步可以触发 PWM 定时器重载和预分频的重启，硬件同步源可选择
+
+  • 三个 PWM 操作器，用于生成波形对
+
+     – 六个 PWM 输出，可在几种拓扑结构中运行
+
+     – 可以通过异步方式更新对 PWM 信号的控制
+
+     – 死区时间在上升沿和下降沿可配置，并可分别设置
+
+     – 通过高频载波信号调制 PWM 输出，在使用变压器隔离栅极驱动器时可发挥巨大作用
+
+     – 周期、时间戳寄存器和其他主要的控制寄存器有影子寄存器，具有灵活的更新方式
+
+  • 捕获模块，用于基于硬件的信号处理
+
+     – 旋转电机的速度测量
+
+     – 位置传感器脉冲之间的间隔时间测量
+
+     – 脉冲序列信号的周期和占空比测量
+
+     – 从电流/电压传感器的占空比编码信号导出的解码电流或电压振幅
+
+     – 3 个独立的捕获通道，各具备一个 32 位的时间戳寄存器
+
+     – 输入捕获信号可以预分频，边沿极性可选
+
+     – 捕获定时器可以与 PWM 定时器或外部信号同步
+
+  • 故障检测模块
+
+     – 出现故障时，可选择在逐周期模式或一次性模式下处理
+
+     – 故障条件可强制 PWM 输出高或低电平
+
+  • 支持事件任务矩阵 (ETM) 的事件生成和任务响应
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 电机控制脉宽调制器 (MCPWM)。
+
+
+
+
+乐鑫信息科技                           43          ESP32-H2 系列芯片技术规格书 v1.3
+                              反馈文档意见
+4 功能描述
+
+
+管脚分配
+
+MCPWM 管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.1.10 红外遥控
+
+红外遥控 (RMT) 用于控制发送和接收红外遥控信号。
+
+特性
+
+  • 四个通道，用于发送或接收红外遥控信号
+
+  • 每个通道具有独立的发送或接收功能
+
+  • 支持普通发送/接收模式、乒乓发送/接收模式、持续发送模式
+
+  • 在发送脉冲上调制和在接收脉冲上解调
+
+  • 用于改善信号接收的接收滤波
+
+  • 能够同时在多个通道上发送数据
+
+  • 每个发送通道都有时钟分频器计数器、状态机和发射器
+
+  • 每个接收通道都有时钟分频器计数器、状态机和接收器
+
+  • 根据通道号默认分配 RAM block 给通道
+
+  • RAM 的 16 位脉冲编码由 level 和 period 组成
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 红外遥控 (RMT)。
+
+管脚分配
+
+RMT 管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.1.11 并行 IO 控制器
+
+ESP32-H2 芯片中的并行 IO 控制器 (PARLIO) 通过 GDMA 在并行总线上实现外部设备与内部存储器之间的数据
+传输。它由一个发送器（TX 模块）和一个接收器（RX 模块）组成，使其成为连接各种外设的通用接口。
+
+特性
+
+  • 支持传输数据总线位宽配置为 1/2/4/8 位
+
+  • 支持 8 位全双工传输
+
+  • 在 1/2/4 位模式下，支持在一个字节范围内对数据位重新排序
+
+  • RX 模块支持八种接收模式，可分为电平使能模式、脉冲使能模式和软件使能模式三大类
+
+  • TX 模块可以生成与 TXD 对齐的有效信号
+
+
+乐鑫信息科技                                  44    ESP32-H2 系列芯片技术规格书 v1.3
+                                   反馈文档意见
+4 功能描述
+
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 并行 IO 控制器。
+
+管脚分配
+
+PARLIO 管脚可以为任意 GPIO，通过 GPIO 交换矩阵配置。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.2     模拟信号处理
+本小节描述芯片上感知和处理现实世界数据的组件。
+
+
+4.2.2.1 SAR ADC
+
+ESP32-H2 有一个逐次逼近型模拟数字转换器 (SAR ADC)，将模拟信号转换为数字表示。
+
+特性
+
+  • 支持 12 位采样分辨率
+
+  • 支持采集最多五个管脚上的模拟电压
+
+  • 电压转换时配置输入信号的衰减
+
+  • 软件触发的单次采样
+
+  • 专用定时器触发的多通道扫描
+
+  • 连续 DMA 转换，实现无缝数据传输
+
+  • 两个滤波系数可配置的滤波器
+
+  • 可以触发中断的阈值监控
+
+  • 支持事件任务矩阵
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 SAR ADC 转换器与温度传感器。
+
+管脚分配
+
+SAR ADC 管脚与 GPIO1 ~ GPIO5、JTAG 接口管脚、SPI2 接口管脚复用。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+4.2.2.2   温度传感器
+
+ESP32-H2 芯片中的温度传感器可以实时监测芯片内部的温度变化。
+
+特性
+
+  • 测量范围：–40°C ~ 125°C
+
+  • 支持软件触发，且一旦触发后，可持续读取数据
+
+  • 支持硬件自动触发和温度监测
+
+
+乐鑫信息科技                             45              ESP32-H2 系列芯片技术规格书 v1.3
+                                反馈文档意见
+4 功能描述
+
+
+  • 支持根据使用环境配置温度偏移，提高测试精度
+
+  • 支持测量范围可调节
+
+  • 两种自动监测模式：绝对值模式和变化量模式
+
+  • 支持事件任务矩阵
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 SAR ADC 转换器与温度传感器。
+
+
+4.2.2.3 模拟电压比较器
+
+ESP32-H2 芯片集成了两个模拟电压比较器。模拟电压比较器依靠支持电压比较功能的特殊芯片焊盘 (PAD) 实
+现，用于监测 PAD 上的电压变化。每个模拟电压比较器都有外部两个电压接入点，分为主电压和参考电压。模
+拟电压比较器输出的电压比较结果可以作为 ETM 事件来驱动其他外设的 ETM 任务，也可以触发中断。
+
+特性
+
+  • 支持电压比较功能
+
+     – 电压比较模式可配置
+
+     – 内部参考电压值可配置
+
+  • 支持电压比较中断
+
+  • 支持 ETM 事件
+
+更多信息，请参考 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交换矩阵 > 模拟 PAD 电压比较功
+能。
+
+管脚分配
+
+模拟电压比较器管脚与 GPIO10 ~ GPIO11 管脚复用。
+
+更多关于管脚分配的信息，请参考章节 2.3 IO 管脚 和 《ESP32-H2 技术参考手册》 > 章节 IO MUX 和 GPIO 交
+换矩阵。
+
+
+
+
+乐鑫信息科技                             46        ESP32-H2 系列芯片技术规格书 v1.3
+                              反馈文档意见
+4 功能描述
+
+
+
+4.3   无线通信
+本节描述了芯片的无线通信能力，涵盖无线电模块、低功耗蓝牙和 802.15.4。
+
+
+4.3.1 无线电
+本小节描述了嵌入在芯片中的基本无线电模块，用于实现无线通信和数据交换。
+
+
+4.3.1.1 2.4 GHz 接收器
+
+2.4 GHz 接收器将 2.4 GHz 射频信号解调为基带信号，并用两个高精度 ADC 将基带信号转为数字信号。为了适
+应不同的信道情况，ESP32-H2 集成了 RF 滤波器、自动增益控制 (AGC)、DC 偏移补偿电路和基带滤波器。
+
+
+4.3.1.2 2.4 GHz 发射器
+
+2.4 GHz 发射器将基带信号调制为 2.4 GHz 射频信号，使用互补金属氧化物半导体 (CMOS) 功率放大器驱动天
+线。
+
+为了抵消射频接收器的瑕疵，ESP32-H2 还另增了校准措施，例如：
+
+  • 载波泄露消除
+
+  • I/Q 振幅/相位匹配
+
+这些内置校准措施缩短了产品的测试时间，并且不再需要测试设备。
+
+
+4.3.1.3 时钟生成器
+
+时钟生成器为接收器和发射器生成 2.4 GHz 时钟信号，所有部件均集成于芯片上，包括电感、变容二极管、环
+路滤波器、线性稳压器和分频器。
+
+时钟生成器带有内置校准电路和自测电路。运用自主知识产权的优化算法，对时钟的相位和相位噪声进行优化
+处理，使接收器和发射器都有最好的性能表现。
+
+
+4.3.2 低功耗蓝牙
+ESP32-H2 系列芯片包含了一个低功耗蓝牙 (Bluetooth Low Energy) 子系统，集成了硬件链路层控制器、射频/调
+制解调器模块和功能齐全的软件协议栈。低功耗蓝牙子系统支持 Bluetooth 5 和 Bluetooth mesh。
+
+
+4.3.2.1 低功耗蓝牙物理层
+
+ESP32-H2 低功耗蓝牙物理层支持以下特性：
+
+  • 1 Mbps PHY
+
+  • 2 Mbps PHY，用于提升传输速率
+
+  • Coded PHY（125 Kbps 和 500 Kbps），用于提升传输距离
+
+  • 支持 Listen Before Talk (LBT)
+
+
+4.3.2.2   低功耗蓝牙链路控制器
+
+ESP32-H2 低功耗蓝牙链路控制器支持以下特性：
+
+
+乐鑫信息科技                              47        ESP32-H2 系列芯片技术规格书 v1.3
+                                  反馈文档意见
+4 功能描述
+
+
+  • 广播扩展 (Advertising Extensions)，用于增强广播能力，可以广播更多的智能数据
+
+  • 多广播
+
+  • 支持同时广播和扫描
+
+  • 多连接，支持中心设备 (Central) 和外围设备 (Peripheral) 同时运行
+
+  • 自适应跳频和信道选择
+
+  • 信道选择算法 #2 (Channel Selection Algorithm #2)
+
+  • 功率控制 (LE Power Control)
+
+  • 连接参数更新
+
+  • 高速不可连接广播 (High Duty Cycle Non-Connectable Advertising)
+
+  • LE Privacy 1.2
+
+  • LE 数据包长度扩展 (LE Data Packet Length Extension)
+
+  • 链路层扩展扫描过滤策略 (Link Layer Extended Scanner Filter Policy)
+
+  • 低占空比可连接定向广播 (Low Duty Cycle Connectable Directed Advertising)
+
+  • 链路层加密
+
+  • LE Ping
+
+
+4.3.3 802.15.4
+ESP32-H2 拥有一个标准 802.15.4 子系统，集成了物理层和 MAC 层，可支持 Thread、Zigbee、Matter、HomeKit、
+MQTT 等多种协议。
+
+
+4.3.3.1 802.15.4 物理层
+
+ESP32-H2 802.15.4 物理层支持以下特性：
+
+  • 2.4 GHz 频段 O-QPSK PHY
+
+  • 250 Kbps 数据率
+
+  • 支持 RSSI 和 LQI
+
+
+4.3.3.2 802.15.4 MAC
+
+ESP32-H2 支持 IEEE 标准 802.15.4-2015 中定义的主要特性，包括：
+
+  • CSMA/CA
+
+  • 主动扫描和能量检测
+
+  • HW 帧滤波器
+
+  • HW 自动应答
+
+  • HW 自动帧等待
+
+  • 协调采样侦听（Coordinated sampled listening）
+
+
+
+
+乐鑫信息科技                                     48                 ESP32-H2 系列芯片技术规格书 v1.3
+                                       反馈文档意见
+5 电气特性
+
+
+
+5 电气特性
+
+5.1    绝对最大额定值
+超出表 5-1 的绝对最大额定值可能导致器件永久性损坏。这只是强调的额定值，不涉及器件在这些或其它条件
+下超出章节 5.2 建议工作条件 技术规格指标的功能性操作。长时间暴露在绝对最大额定条件下可能会影响设备
+的可靠性。
+
+                                        表 5-1. 绝对最大额定值
+
+                      参数                说明                最小值     最大值            单位
+                      输入电源管脚 1          允许输入电压             –0.3     3.6          V
+                      Ioutput   2       IO 输出总电流             —       1.3         A
+                      TST ORE           存储温度               –40      150          °C
+                       1 更多关于输入电源管脚的信息，见章节 2.5.1 电源管脚。
+                       2 在 25 °C 的环境温度下连续 24 小时保持所有 IO 管脚拉高并
+
+                        接地，设备工作完全正常。
+
+
+
+5.2        建议工作条件
+
+                                         表 5-2. 建议工作条件
+
+  参数 1                                                说明            最小值           典型值             最大值         单位
+  VDD3P3, VBAT, VDDA_PMU, VDDPST1, VDDPST2 2          建议输入电压               3.0            3.3         3.6     V
+  IV DD                                               输入总电流 3         0.35                 —           —      A
+  TA                                                  环境温度                –40              —         105      °C
+   1 请结合章节 2.5 电源 阅读。
+   2 写 eFuse 时，由于烧录 eFuse 的电路较敏感，eFuse 的电源管脚 (VDDPST2) 电压应不超过 3.3 V。
+   3 使用单电源供电时，输出电流需要达到 0.35 A 及以上。
+
+
+
+
+5.3        直流电气特性 (3.3 V, 25 °C)
+
+                                    表 5-3. 直流电气特性 (3.3 V, 25 °C)
+
+ 参数           说明                                              最小值           典型值                  最大值           单位
+ CIN          管脚电容                                                   —                2                  —         pF
+ VIH          高电平输入电压                                      0.75 × VDD 1              —      VDD 1 + 0.3            V
+ VIL          低电平输入电压                                             –0.3               —     0.25 × VDD 1            V
+ IIH          高电平输入电流                                                —               —                  50         nA
+ IIL          低电平输入电流                                                —               —                  50         nA
+ VOH   2      高电平输出电压                                       0.8 × VDD 1              —                   —         V
+ VOL   2      低电平输出电压                                                —               —          0.1 × VDD 1        V
+              高电平拉电流 (VDD 1 = 3.3 V, V    OH >= 2.64 V,
+ IOH                                                                 —            40                     —        mA
+              PAD_DRIVER = 3)
+
+
+
+乐鑫信息科技                                           49                  ESP32-H2 系列芯片技术规格书 v1.3
+                                             反馈文档意见
+5 电气特性
+
+
+
+           低电平灌电流 (VDD 1 = 3.3 V, VOL = 0.495 V,
+IOL                                                                —         28                   —        mA
+           PAD_DRIVER = 3)
+RP U       内部弱上拉电阻                                                 —         45                   —        kΩ
+RP D       内部弱下拉电阻                                                 —         45                   —        kΩ
+           芯片复位释放电压（CHIP_EN 应满足电压范
+VIH_nRST                                                0.75 × VDD 1          —        VDD 1 + 0.3         V
+           围）
+VIL_nRST   芯片复位电压（CHIP_EN 应满足电压范围）                             –0.3           —        0.25 × VDD 1        V
+ 1 VDD – 各个电源域电源管脚的电压。
+ 2V
+      OH 和 VOL 为负载是高阻条件下的测试值。
+
+
+
+
+5.4    ADC 特性
+本章节数据是在 ADC 外接 100 nF 电容、输入为 DC 信号、电压为 3.3 V、25 °C 环境温度、modem 关闭条件下
+的测量结果。
+
+                                     表 5-4. ADC 特性
+
+                       符号                   最小值          最大值        单位
+                       DNL（差分非线性）1                 –8         12       LSB
+                       INL（积分非线性）               –10          10        LSB
+                       采样速度                        —        100    kSPS 2
+                        1 使用滤波器多次采样或计算平均值可以获得更好的
+
+                          DNL 结果。
+                        2 kSPS (kilo samples-per-second) 表示每秒采样千次。
+
+
+
+ADC 经硬件校准和软件校准后的结果如表 5-5 所示。如需更高的精度，可选用其他方法自行校准。
+
+                                    表 5-5. ADC 校准结果
+
+  参数                 说明                                                      最小值         最大值          单位
+                     ATTEN0，有效测量范围 0 ~ 1000                                       –7          7       mV
+                     ATTEN1，有效测量范围 0 ~ 1300                                       -8          8       mV
+  总误差
+                     ATTEN2，有效测量范围 0 ~ 1900                                   –12            12       mV
+                     ATTEN3，有效测量范围 0 ~ 3300                                   –23            23       mV
+
+
+
+ 说明：
+ 上述 ADC 量程和精度适用于丝印 Date Code（日期代码）为 342023 及之后的芯片，或产品标签 D/C 1 和 D/C 2（装
+ 配日期代码）为 2334 及之后的芯片。若早于以上代码，请联系乐鑫商务根据批次提供实际量程和精度。
+
+ 有关芯片丝印 Date Code 和产品标签 D/C 的描述，请参考《乐鑫芯片包装信息》。
+
+
+
+
+5.5 功耗特性
+
+
+
+乐鑫信息科技                                     50                      ESP32-H2 系列芯片技术规格书 v1.3
+                                       反馈文档意见
+5 电气特性
+
+
+
+5.5.1   Active 模式下的 RF 功耗
+下列功耗数据是基于 3.3 V 电源、25 °C 环境温度，在 RF 接口处完成的测试结果。所有发射数据均基于 100%
+的占空比测得。
+
+                           表 5-6. Active 模式下的低功耗蓝牙功耗
+
+                  工作模式               说明                            峰值 (mA)
+                                           低功耗蓝牙 @ 20.0 dBm                140
+                                           低功耗蓝牙 @ 9.0 dBm                 60
+                                     TX
+                                           低功耗蓝牙 @ 0 dBm                   36
+                  Active（RF 工作）
+                                           低功耗蓝牙 @ -24.0 dBm                24
+                                     RX    低功耗蓝牙                            24
+
+
+                          表 5-7. Active 模式下 802.15.4 功耗特性
+
+                   工作模式               说明                           峰值 (mA)
+                                           802.15.4 @ 20.0 dBm            140
+                                      TX   802.15.4 @ 9.0 dBm             60
+                   Active（RF 工作）           802.15.4 @ 0 dBm               36
+                                           802.15.4 @ –24.0 dBm           24
+                                      RX   802.15.4                       25
+
+
+
+5.5.2 其他功耗模式下的功耗
+以下功耗数据适用于 ESP32-H2FH2S 和 ESP32-H2FH4S 芯片。
+
+                                 表 5-8. Modem-sleep 下的功耗
+
+                         频率                             典型值 1 (mA)          典型值 1 (mA)
+        工作模式            (MHz)        描述                  外设时钟全关             外设时钟全开
+                                     CPU 工作                          10              17
+                                96
+                                     CPU 空闲                          6               13
+                                     CPU 工作                          8               13
+                                64
+                                     CPU 空闲                          5               10
+        Modem-sleep 2
+                                     CPU 工作                          7               11
+                                48
+                                     CPU 空闲                          5               9
+                                     CPU 工作                          4               8
+                                32
+                                     CPU 空闲                          3               7
+         1 实际情况下，外设在不同工作状态下电流会有所差异。
+         2 Modem-sleep 模式下，访问 flash 时功耗会增加。
+
+
+
+
+乐鑫信息科技                                        51                  ESP32-H2 系列芯片技术规格书 v1.3
+                                           反馈文档意见
+5 电气特性
+
+
+                                  表 5-9. 低功耗模式下的功耗
+
+         工作模式           说明                                         典型值 (µA)
+                        CPU、无线通讯模块电源关闭，外设时钟关闭，所有 GPIO
+                                                                         85
+         Light-sleep    设置为高阻抗状态
+                        CPU、无线通讯模块、外设电源关闭，所有 GPIO 设置为高
+                                                                         25
+                        阻抗状态
+         Deep-sleep     LP 定时器和 LP 存储器上电                                  7
+         关闭             CHIP_EN 管脚拉低，芯片关闭                                 1
+
+
+
+5.6    可靠性
+
+                                     表 5-10. 可靠性认证
+
+      测试项目                   测试条件                         测试标准
+      HTOL（高温工作寿命）           125 °C，1000 小时               JESD22-A108
+                             HBM（人体放电模式）1 ± 2000 V        JS-001
+      ESD（静电放电敏感度)
+                             CDM（充电器件模式）2 ± 1000 V        JS-002
+                             过电流 ± 200 mA
+      闩锁测试 (Latch-up)                                     JESD78
+                             过电压 1.5 × VDDmax
+                             烘烤：125 °C，24 小时
+                                                          J-STD-020、JESD47、
+      预处理测试                  浸泡：三级（30 °C，60% RH，192 小时）
+                                                          JESD22-A113
+                             回流焊：260 + 0 °C，20 秒，三次
+      TCT（温度循环测试）            –65 °C / 150 °C，500 次循环      JESD22-A104
+      uHAST（无偏压高加速温
+                             130 °C，85% RH，96 小时          JESD22-A118
+      湿度应力试验）
+      HTSL（高温贮存寿命）           150 °C，1000 小时               JESD22-A103
+      LTSL（低温存储寿命）           –40 °C，1000 小时               JESD22-A119
+      1 JEDEC 文档 JEP155 规定：500 V HBM 能够在标准 ESD 控制流程下安全生产。
+      2 JEDEC 文档 JEP157 规定：250 V CDM 能够在标准 ESD 控制流程下安全生产。
+
+
+
+
+乐鑫信息科技                                        52       ESP32-H2 系列芯片技术规格书 v1.3
+                                        反馈文档意见
+6   射频特性
+
+
+
+6 射频特性
+本章提供产品的射频特性表。
+
+射频数据是在天线端口处连接射频线后测试所得，包含了射频前端电路带来的损耗。射频前端电路为 0 Ω 电
+阻。
+
+工作信道中心频率范围应符合国家或地区的规范标准。软件可以配置工作信道中心频率范围，具体请参考
+《ESP 射频测试指南》。
+
+除非特别说明，射频测试均是在 3.3 V (±5%) 供电电源、25 °C 环境温度的条件下完成。
+
+
+6.1   低功耗蓝牙射频
+
+                               表 6-1. 低功耗蓝牙射频规格
+
+             名称                                   描述
+             工作信道中心频率范围                           2402 ~ 2480 MHz
+             射频发射功率范围                             –24.0 ~ 20.0 dBm
+
+
+
+6.1.1 低功耗蓝牙射频发射器 (TX) 特性
+
+                   表 6-2. 低功耗蓝牙 - 发射器特性 - 1 Mbps
+
+      参数          描述                                    最小值          典型值      最大值   单位
+                  Max. |fn |n=0, 1, 2, 3, ...k               —          1.5     —   kHz
+                  Max. |f0 − fn |n=2, 3, 4, ...k             —         2.8      —   kHz
+      载波频率偏移和漂移
+                  Max. |fn − fn−5 |n=6, 7, 8, ...k           —          1.3     —   kHz
+                  |f1 − f0 |                                 —         2.3      —   kHz
+                  ∆ F 1avg                                   —        251.8     —   kHz
+      调制特性        Min. ∆ F 2max (至少 99.9% 的
+                                                             —        217.0     —   kHz
+                  ∆ F 2max )
+                  ∆ F 2avg /∆ F 1avg                         —        0.87      —    —
+                  ± 2 MHz 偏移                                 —         –28      —   dBm
+      带内发射        ± 3 MHz 偏移                                 —         –32      —   dBm
+                  > ± 3 MHz 偏移                               —         –34      —   dBm
+
+
+
+                   表 6-3. 低功耗蓝牙 - 发射器特性 - 2 Mbps
+
+      参数          描述                                    最小值          典型值      最大值   单位
+                  Max. |fn |n=0, 1, 2, 3, ...k               —         3.3      —   kHz
+                  Max. |f0 − fn |n=2, 3, 4, ...k             —         3.3      —   kHz
+      载波频率偏移和漂移
+                  Max. |fn − fn−5 |n=6, 7, 8, ...k           —          1.6     —   kHz
+                  |f1 − f0 |                                 —         2.3      —   kHz
+                  ∆ F 1avg                                   —       499.9      —   kHz
+      调制特性                                                                          见下页
+
+
+
+乐鑫信息科技                                       53                  ESP32-H2 系列芯片技术规格书 v1.3
+                                       反馈文档意见
+6   射频特性
+
+
+                                      表 6-3 – 接上页
+        参数          描述                                 最小值   典型值       最大值   单位
+                    Min. ∆ F 2max (至少 99.9% 的
+                                                         —    492.0      —   kHz
+                    ∆ F 2max )
+                    ∆ F 2avg /∆ F 1avg                   —     0.90      —   —
+                    ± 4 MHz 偏移                           —      –31      —   dBm
+        带内发射        ± 5 MHz 偏移                           —     –34       —   dBm
+                    > ± 5 MHz 偏移                         —     –36       —   dBm
+
+
+
+                    表 6-4. 低功耗蓝牙 - 发射器特性 - 125 Kbps
+
+        参数          描述                                 最小值   典型值       最大值   单位
+                    Max. |fn |n=0, 1, 2, 3, ...k         —      1.0      —   kHz
+                    Max. |f0 − fn |n=1, 2, 3, ...k       —      0.5      —   kHz
+        载波频率偏移和漂移
+                    |f0 − f3 |                           —      0.4      —   kHz
+                    Max. |fn − fn−3 |n=7, 8, 9, ...k     —      0.9      —   kHz
+                    ∆ F 1avg                             —    250.5      —   kHz
+        调制特性
+                    Min. ∆ F 1max (至少 99.9% 的
+                                                         —    234.0      —   kHz
+                    ∆ F 1max )
+                    ± 2 MHz 偏移                           —     –23       —   dBm
+        带内发射        ± 3 MHz 偏移                           —     –34       —   dBm
+                    > ± 3 MHz 偏移                         —     –42       —   dBm
+
+
+                    表 6-5. 低功耗蓝牙 - 发射器特性 - 500 Kbps
+
+        参数          描述                                 最小值   典型值       最大值   单位
+                    Max. |fn |n=0, 1, 2, 3, ...k         —      2.3      —   kHz
+                    Max. |f0 − fn |n=1, 2, 3, ...k       —      0.7      —   kHz
+        载波频率偏移和漂移
+                    |f0 − f3 |                           —      0.3      —   kHz
+                    Max. |fn − fn−3 |n=7, 8, 9, ...k     —       1.1     —   kHz
+                    ∆ F 2avg                             —    230.6      —   kHz
+        调制特性
+                    Min. ∆ F 2max (至少 99.9% 的
+                                                         —    221.8      —   kHz
+                    ∆ F 2max )
+                    ± 2 MHz 偏移                           —     –28       —   dBm
+        带内发射        ± 3 MHz 偏移                           —     –33       —   dBm
+                    > ± 3 MHz 偏移                         —     –35       —   dBm
+
+
+注意，上方表 6-2 和表 6-5 中带内发射数据是在发射功率为 15 dBm 时测得。不过，即使测试条件提升至最大发
+射功率 20 dBm，测试结果也仍满足蓝牙联盟的标准要求。
+
+
+6.1.2   低功耗蓝牙射频接收器 (RX) 特性
+
+
+
+
+乐鑫信息科技                                         54            ESP32-H2 系列芯片技术规格书 v1.3
+                                         反馈文档意见
+6   射频特性
+
+
+                        表 6-6. 低功耗蓝牙 - 接收器特性 - 1 Mbps
+
+    参数                        描述                     最小值   典型值     最大值   单位
+    灵敏度 @30.8% PER            —                        —   –99.0     —   dBm
+    最大接收信号 @30.8% PER         —                        —      8      —   dBm
+                共信道           F = F0 MHz               —      4      —   dB
+                              F = F0 + 1 MHz           —      2      —   dB
+                              F = F0 – 1 MHz           —      0      —   dB
+                              F = F0 + 2 MHz           —    –29      —   dB
+                              F = F0 – 2 MHz           —    –29      —   dB
+                相邻信道
+                              F = F0 + 3 MHz           —    –35      —   dB
+    接收选择性 C/I
+                              F = F0 – 3 MHz           —    –36      —   dB
+                              F ≥ F0 + 4 MHz           —    –30      —   dB
+                              F ≤ F0 – 4 MHz           —    –36      —   dB
+                镜像频率          —                        —    –35      —   dB
+                              F = Fimage + 1 MHz       —    –30      —   dB
+                邻道镜像频率干扰
+                              F = Fimage – 1 MHz       —    –29      —   dB
+                              30 MHz ~ 2000 MHz        —     –16     —   dBm
+    带外阻塞                      2003 MHz ~ 2399 MHz      —     –12     —   dBm
+                              2484 MHz ~ 2997 MHz      —     –16     —   dBm
+                              3000 MHz ~ 12.75 GHz     —      0      —   dBm
+    互调                        —                        —    –35      —   dBm
+
+
+
+                        表 6-7. 低功耗蓝牙 - 接收器特性 - 2 Mbps
+
+    参数                        描述                     最小值   典型值     最大值   单位
+    灵敏度 @30.8% PER            —                        —   –96.0     —   dBm
+    最大接收信号 @30.8% PER         —                        —      8      —   dBm
+                共信道           F = F0 MHz               —      5      —   dB
+                              F = F0 + 2 MHz           —       1     —   dB
+                              F = F0 – 2 MHz           —      -2     —   dB
+                              F = F0 + 4 MHz           —    –27      —   dB
+                              F = F0 – 4 MHz           —    –32      —   dB
+                相邻信道
+                              F = F0 + 6 MHz           —    –33      —   dB
+    接收选择性 C/I
+                              F = F0 – 6 MHz           —    –36      —   dB
+                              F ≥ F0 + 8 MHz           —    –36      —   dB
+                              F ≤ F0 – 8 MHz           —    –36      —   dB
+                镜像频率          —                        —    –26      —   dB
+                              F = Fimage + 2 MHz       —    –30      —   dB
+                邻道镜像频率干扰
+                              F = Fimage – 2 MHz       —      3      —   dB
+                              30 MHz ~ 2000 MHz        —     –17     —   dBm
+    带外阻塞                      2003 MHz ~ 2399 MHz      —    –27      —   dBm
+                              2484 MHz ~ 2997 MHz      —     –17     —   dBm
+                              3000 MHz ~ 12.75 GHz     —      0      —   dBm
+    互调                        —                        —    –27      —   dBm
+
+
+
+乐鑫信息科技                                 55              ESP32-H2 系列芯片技术规格书 v1.3
+                                   反馈文档意见
+6   射频特性
+
+
+
+
+                        表 6-8. 低功耗蓝牙 - 接收器特性 - 125 Kbps
+
+    参数                         描述                   最小值   典型值      最大值   单位
+    灵敏度 @30.8% PER             —                      —   –106.5     —   dBm
+    最大接收信号 @30.8% PER          —                      —       8      —   dBm
+                共信道            F = F0 MHz             —       0      —   dB
+                               F = F0 + 1 MHz         —      –4      —   dB
+                               F = F0 – 1 MHz         —      –6      —   dB
+                               F = F0 + 2 MHz         —      –31     —   dB
+                               F = F0 – 2 MHz         —     –34      —   dB
+                相邻信道
+                               F = F0 + 3 MHz         —     –39      —   dB
+    接收选择性 C/I
+                               F = F0 – 3 MHz         —     –48      —   dB
+                               F ≥ F0 + 4 MHz         —     –35      —   dB
+                               F ≤ F0 – 4 MHz         —     –48      —   dB
+                镜像频率           —                      —     –39      —   dB
+                               F = Fimage + 1 MHz     —     –35      —   dB
+                邻道镜像频率干扰
+                               F = Fimage – 1 MHz     —      –31     —   dB
+
+
+                        表 6-9. 低功耗蓝牙 - 接收器特性 - 500 Kbps
+
+    参数                         描述                   最小值   典型值      最大值   单位
+    灵敏度 @30.8% PER             —                      —   –102.5     —   dBm
+    最大接收信号 @30.8% PER          —                      —       8      —   dBm
+                共信道            F = F0 MHz             —       2      —   dB
+                               F = F0 + 1 MHz         —       –1     —   dB
+                               F = F0 – 1 MHz         —      –4      —   dB
+                               F = F0 + 2 MHz         —     –28      —   dB
+                               F = F0 – 2 MHz         —     –29      —   dB
+                相邻信道
+                               F = F0 + 3 MHz         —     –38      —   dB
+    接收选择性 C/I
+                               F = F0 – 3 MHz         —      –41     —   dB
+                               F ≥ F0 + 4 MHz         —     –33      —   dB
+                               F ≤ F0 – 4 MHz         —      –41     —   dB
+                镜像频率           —                      —     –38      —   dB
+                               F = Fimage + 1 MHz     —     –33      —   dB
+                邻道镜像频率干扰
+                               F = Fimage – 1 MHz     —     –28      —   dB
+
+
+
+6.2   802.15.4 射频
+
+
+
+
+乐鑫信息科技                                  56            ESP32-H2 系列芯片技术规格书 v1.3
+                                    反馈文档意见
+6   射频特性
+
+
+                                表 6-10. 802.15.4 射频规格
+
+                  名称                           描述 1
+                  工作信道中心频率范围                   2405 ~ 2480 MHz
+                  1 Zigbee 在 2.4 GHz 的频段上具有从信道 11 到信道 26 共 16 个信道，
+
+                   信道间隔为 5 MHz。
+
+
+6.2.1 802.15.4 射频发射器 (TX) 特性
+
+                           表 6-11. 802.15.4 发射器特性 - 250 Kbps
+
+            参数                                  最小值       典型值        最大值          单位
+            射频发射功率                               –24.0      —         20.0        dBm
+            EVM                                       —   3.5%          —          —
+
+
+
+6.2.2 802.15.4 射频接收器 (RX) 特性
+
+                          表 6-12. 802.15.4 接收器特性 - 250 Kbps
+
+    参数                               描述                   最小值         典型值          最大值      单位
+    灵敏度 @1% PER                      —                           —     –102.5           —   dBm
+    最大接收信号 @1% PER                   —                           —            8         —   dBm
+                                     F = F0 + 5 MHz              —           31         —   dB
+                    相邻信道
+                                     F = F0 – 5 MHz              —           43         —   dB
+    相对干扰电平
+                                     F = F0 + 10 MHz             —           49         —   dB
+                    相间信道
+                                     F = F0 – 10 MHz             —           54         —   dB
+
+
+
+
+乐鑫信息科技                                    57                 ESP32-H2 系列芯片技术规格书 v1.3
+                                      反馈文档意见
+7   封装
+
+
+
+7 封装
+    • 有关卷带、载盘和产品标签的信息，请参阅 《乐鑫芯片包装信息》。
+
+    • 俯视图中，芯片管脚从 Pin 1 位置开始按逆时针方向编号。关于管脚序号和名称的详细信息，请参考图 2-1
+     ESP32-H2 管脚布局（俯视图）。
+
+    • 推荐 PCB 封装图 源文件 (asc) 供您下载，可使用 PADS 或 Altium Designer 等软件导入。
+
+
+
+
+                            图 7-1. QFN32 (4×4 mm) 封装
+
+
+
+
+乐鑫信息科技                                58               ESP32-H2 系列芯片技术规格书 v1.3
+                                   反馈文档意见
+相关文档和资源
+
+
+
+相关文档和资源
+相关文档
+ • 《ESP32-H2 技术参考手册》 – 提供 ESP32-H2 芯片的存储器和外设的详细使用说明。
+ • 《ESP32-H2 硬件设计指南》 – 提供基于 ESP32-H2 芯片的产品设计规范。
+ • 《ESP32-H2 系列芯片勘误表》 – 描述 ESP32-H2 系列芯片的已知错误。
+ • 证书
+  https://espressif.com/zh-hans/support/documents/certificates
+ • ESP32-H2 产品/工艺变更通知 (PCN)
+  https://espressif.com/zh-hans/support/documents/pcns?keys=ESP32-H2
+ • ESP32-H2 公告 – 提供有关安全、bug、兼容性、器件可靠性的信息
+  https://espressif.com/zh-hans/support/documents/advisories?keys=ESP32-H2
+ • 文档更新和订阅通知
+  https://espressif.com/zh-hans/support/download/documents
+
+开发者社区
+ • 《ESP32-H2 ESP-IDF 编程指南》 – ESP-IDF 开发框架的文档中心。
+ • ESP-IDF 及 GitHub 上的其它开发框架
+  https://github.com/espressif
+ • ESP32 论坛 – 工程师对工程师 (E2E) 的社区，您可以在这里提出问题、解决问题、分享知识、探索观点。
+  https://esp32.com/
+ • The ESP Journal – 分享乐鑫工程师的最佳实践、技术文章和工作随笔。
+  https://blog.espressif.com/
+ • SDK 和演示、App、工具、AT 等下载资源
+  https://espressif.com/zh-hans/support/download/sdks-demos
+
+产品
+ • ESP32-H2 系列芯片 – ESP32-H2 全系列芯片。
+  https://espressif.com/zh-hans/products/socs?id=ESP32-H2
+ • ESP32-H2 系列模组 – ESP32-H2 全系列模组。
+  https://espressif.com/zh-hans/products/modules?id=ESP32-H2
+ • ESP32-H2 系列开发板 – ESP32-H2 全系列开发板。
+  https://espressif.com/zh-hans/products/devkits?id=ESP32-H2
+ • ESP Product Selector（乐鑫产品选型工具）– 通过筛选性能参数、进行产品对比快速定位您所需要的产品。
+  https://products.espressif.com/#/product-selector?language=zh
+
+联系我们
+ • 商务问题、技术支持、电路原理图 & PCB 设计审阅、购买样品（线上商店）、成为供应商、意见与建议
+  https://espressif.com/zh-hans/contact-us/sales-questions
+
+
+
+
+乐鑫信息科技                                          59                ESP32-H2 系列芯片技术规格书 v1.3
+                                           反馈文档意见
+         乐鑫信息科技
+
+
+
+                                                                                                                                                                                                     附录 A – ESP32-H2 管脚总览
+                                   附录 A – ESP32-H2 管脚总览
+                                     管脚    管脚           管脚    供电                    管脚配置                       模拟功能                                       IO MUX 功能
+                                     序号    名称           类型    管脚              复位时     复位后             0           1           0        类型      1        类型    2           类型       3   类型   4   类型
+                                       1   VDD3P3       电源
+                                       2   VDD3P3       电源
+                                       3   GPIO0         IO   VDDPST1                                                         GPIO0    I/O/T   GPIO0    I/O/T   FSPIQ     I1/O/T
+                                       4   GPIO1         IO   VDDPST1                                              ADC1_CH0   GPIO1    I/O/T   GPIO1    I/O/T   FSPICS0   I1/O/T
+                                       5   MTMS          IO   VDDPST1         IE        IE                         ADC1_CH1   MTMS     I1      GPIO2    I/O/T   FSPIWP    I1/O/T
+                                       6   MTDO          IO   VDDPST1         IE        IE                         ADC1_CH2   MTDO     O/T     GPIO3    I/O/T   FSPIHD    I1/O/T
+                                       7   MTCK          IO   VDDPST1                   IE*                        ADC1_CH3   MTCK     I1      GPIO4    I/O/T   FSPICLK   I1/O/T
+                                       8   MTDI          IO   VDDPST1                   IE                         ADC1_CH4   MTDI     I1      GPIO5    I/O/T   FSPID     I1/O/T
+                                       9   VDDPST1      电源
+                                      10   GPIO8         IO   VDDPST1         IE        IE                                    GPIO8    I/O/T   GPIO8    I/O/T
+                                      11   GPIO9         IO   VDDPST1         IE, WPU   IE, WPU                               GPIO9    I/O/T   GPIO9    I/O/T
+                                      12   GPIO10        IO   VDDPST1                                 ZCD0                    GPIO10   I/O/T   GPIO10   I/O/T
+                                      13   GPIO11        IO   VDDPST1                                 ZCD1                    GPIO11   I/O/T   GPIO11   I/O/T
+                                      14   GPIO12        IO   VDDA_PMU/VBAT                                                   GPIO12   I/O/T   GPIO12   I/O/T
+
+
+
+
+反馈文档意见
+                                      15   XTAL_32K_P    IO   VDDA_PMU/VBAT                           XTAL_32K_P              GPIO13   I/O/T   GPIO13   I/O/T
+                                      16   XTAL_32K_N    IO   VDDA_PMU/VBAT                           XTAL_32K_N              GPIO14   I/O/T   GPIO14   I/O/T
+         60                           17   CHIP_EN      模拟    VBAT
+                                      18   VBAT         电源
+                                      19   VDDA_PMU     电源
+                                     20    VDDPST2      电源
+                                      21   GPIO22        IO   VDDPST2                                                         GPIO22   I/O/T   GPIO22   I/O/T
+                                     22    U0RXD         IO   VDDPST2                   IE, WPU                               U0RXD    I1      GPIO23   I/O/T   FSPICS1   O/T
+                                     23    U0TXD         IO   VDDPST2                   IE, WPU                               U0TXD    O       GPIO24   I/O/T   FSPICS2   O/T
+                                     24    GPIO25        IO   VDDPST2         IE        IE                                    GPIO25   I/O/T   GPIO25   I/O/T   FSPICS3   O/T
+
+
+
+
+         ESP32-H2 系列芯片技术规格书 v1.3
+                                     25    GPIO26        IO   VDDPST2                   IE            USB_D-                  GPIO26   I/O/T   GPIO26   I/O/T   FSPICS4   O/T
+                                     26    GPIO27        IO   VDDPST2                   IE, USB_PU*   USB_D+                  GPIO27   I/O/T   GPIO27   I/O/T   FSPICS5   O/T
+                                     27    VDD3P3       电源
+                                     28    XTAL_N       模拟
+                                     29    XTAL_P       模拟
+                                     30    VDD3P3       电源
+                                      31   VDD3P3       电源
+                                     32    ANT          模拟
+                                     33    GND          电源
+                                     * 更多信息，详见章节 2 管脚。 高亮 的单元格，请参考章节 2.3.3 GPIO 限制。
+技术规格书版本号管理
+
+
+
+技术规格书版本号管理
+
+技术规格书版本         状态   水印                    定义
+v0.1 ~ v0.5（不                              该技术规格书正在完善。对应产品处于设计阶段，
+                草稿   Confidential
+包括 v0.5）                                   产品规格如有变更，恕不另行通知。
+                                           该技术规格书正在积极更新。对应产品处于验证
+v0.5 ~ v1.0（不   初步
+                     Preliminary           阶段，产品规格可能会在量产前变更，并记录在
+包括 v1.0）        发布
+                                           技术规格书的修订历史中。
+                                           该技术规格书已公开发布。对应产品已量产，产
+                正式
+v1.0 及更高版本           —                     品规格已最终确定，重大变更将通过
+                发布
+                                           产品变更通知 (PCN) 进行通知。
+                                           该技术规格书更新频率较低，对应产品不推荐用
+任意版本            —    不推荐用于新设计 (NRND)1
+                                           于新设计。
+任意版本            —    停产 (EOL)2             该技术规格书不再维护，对应产品已停产。
+1 技术规格书涵盖的所有产品型号均不推荐用于新设计时，封面才会添加水印。
+2 技术规格书涵盖的所有产品型号均停产时，封面才会添加水印。
+
+
+
+
+乐鑫信息科技                                61           ESP32-H2 系列芯片技术规格书 v1.3
+                                    反馈文档意见
+修订历史
+
+
+
+修订历史
+
+日期           版本     发布说明
+                     • 在章节 产品概述、章节 4.1.4.6 RSA 数字签名外设 (RSA_DS) 及 HMAC 相
+                      关表述中，将数字签名更名为并明确为 RSA 数字签名外设 (RSA_DS)
+2026-07-03   v1.3    • 更新表 1-1 ESP32-H2 系列芯片对比
+                     • 在章节 4.1.4.11 安全启动 中新增一条说明
+
+
+                     • 更新图 3-1 Strapping 管脚的时序参数图
+                     • 更新小节 4.1.3.6 电源管理单元
+                     • 更新小节 4.2.2.1 SAR ADC
+2025-10-13   v1.2
+                     • 更新表 5-2 建议工作条件
+                     • 新增章节 7 技术规格书版本号管理
+
+
+                     • 提高 CPU 和存储章节中的 CoreMark 得分
+                     • 更新章节 4.1.3.3 时钟 中对内部慢速 RC 振荡器的描述
+                     • 在表 5-2 建议工作条件 下方新增一条说明
+                     • 更新表 1-1 ESP32-H2 系列芯片对比 中的订购代码
+2025-02-28   v1.1    • 根据芯片版本 v1.2
+                          – 更 新 小 节 4.1.4.1 AES 加 速 器、4.1.4.7 ECDSA 数 字 签 名 外 设
+                           (ECDSA_DS)、4.1.4.8 片外存储器加密与解密
+                          – 新增小节 4.1.4.10 电源毛刺检测器
+
+
+                     • 正式发布
+2024-09-27   v1.0    • 优化整个文档的内容、格式、结构和表述
+
+
+                     • 增加章节 4.5
+                     • 更新章节 3.5.1 中的描述
+2023-10-17   v0.7
+                     • 更新表 4-9 中的测量数据
+
+
+                     • 更新章节 2.4.1 中的描述
+                     • 更新表 3-1 下方有关 USB 的说明
+                     • 更新章节 3.5.10 中支持 ETM 功能的外设列表
+                     • 更新章节 3.2 的描述
+2023-08-02   v0.6
+                     • 更新表 4-9 的顺序，从最高 CPU 频率至最低 CPU 频率
+                     • 更新表 4-9 和表 4-10 中的测量数据为整数
+                     • 章节 6 中增加两条说明
+
+
+2023-05-24   v0.5   预发布
+
+
+
+
+乐鑫信息科技                               62              ESP32-H2 系列芯片技术规格书 v1.3
+                                  反馈文档意见
+免责声明和版权公告
+本文档中的信息，包括供参考的 URL 地址，如有变更，恕不另行通知。
+本文档可能引用了第三方的信息，所有引用的信息均为“按现状”提供，乐鑫不对信息的准确性、真实性做任何保证。
+乐鑫不对本文档的内容做任何保证，包括内容的适销性、是否适用于特定用途，也不提供任何其他乐鑫提案、规格书或样
+品在他处提到的任何保证。
+乐鑫不对本文档是否侵犯第三方权利做任何保证，也不对使用本文档内信息导致的任何侵犯知识产权的行为负责。本文档
+在此未以禁止反言或其他方式授予任何知识产权许可，不管是明示许可还是暗示许可。
+Wi-Fi 联盟成员标志归 Wi-Fi 联盟所有。蓝牙标志是 Bluetooth SIG 的注册商标。
+文档中提到的所有商标名称、商标和注册商标均属其各自所有者的财产，特此声明。
+版权归 © 2026 乐鑫信息科技（上海）股份有限公司。保留所有权利。
+www.espressif.com
+

@@ -1,0 +1,9187 @@
+LA9310
+
+Layerscape Access LA9310 Data Sheet
+Rev. 0 — 03/2022
+
+• The Layerscape® Access LA9310 signal
+processor contains one Arm® Cortex®-M4
+processor with the following capabilities:
+— Core speed of 307.2 MHz
+— 128 KB tightly coupled instruction memory
+— 64 KB tightly coupled data memory
+• The LA9310 signal processor utilizes
+VSPA-16SP the NXP vector signal processing
+acceleration platform running at 614.4 MHz
+— Forward error correction unit
+— 34 KB program memory
+— 32 KB data memory
+
+Data Sheet: Technical Data
+
+• eDMA controller
+• LLCP controller
+• One SerDes lane for high-speed peripheral
+interfaces
+— One PCI Express 3.0 controller (one
+supporting x1 operation)
+• Additional peripheral interfaces include:
+— One I2C controller, standard multi-drop
+multimaster 2-pin interface to external
+peripherals and EEPROMs. The second
+I2C module is completely internal to the
+device to interface with the ADC/DAC IP
+
+• AXI i/q bridge (AXIQ)
+
+— One general purpose single-lane serial
+peripheral interface (SPI) controller
+
+• PHY Timer
+
+— General purpose IO (GPIO)
+
+• NIC 301 Interconnect running at 307.2 MHz
+(subpartitions at 614.4 MHz)
+
+— One UART controller, 62550 compatible 2­
+pin UART for debug console interface
+
+• ADC/DAC subsystem
+
+— JTAG
+
+— Four ADC with differential input for
+complex baseband i/q paths – eight
+differential pairs
+— One DAC with differential output for
+complex baseband i/q paths – two
+differential pairs
+
+— Debug support with run control
+• 157 FC-PBGA package, 8.0 mm x 8.0 mm, 0.5
+mm pitch
+
+— One ADC with single input for Tx
+detection: single input signal
+
+NXP reserves the right to change the detail specifications as may be required to
+permit improvements in the design of its products.
+
+Contents
+1
+2
+2.1
+2.2
+3
+3.1
+3.1.1
+3.1.2
+3.1.3
+3.2
+3.3
+3.4
+3.5
+3.5.1
+3.5.2
+3.6
+3.7
+3.7.1
+3.7.2
+3.8
+3.8.1
+3.8.2
+3.9
+3.9.1
+3.10
+3.10.1
+3.10.2
+3.11
+3.11.1
+3.11.2
+3.12
+3.12.1
+3.12.2
+3.12.2.1
+
+Overview............................................................ 3
+Pin assignments................................................. 3
+157 BGA ball layout diagrams........................ 3
+Pinout list........................................................ 9
+Electrical characteristics................................... 16
+Overall DC electrical characteristics............. 16
+Absolute maximum ratings............................16
+Recommended operating conditions............ 17
+Output driver characteristics......................... 19
+Power sequencing........................................ 19
+Power-on ramp rate...................................... 20
+Power characteristics....................................20
+Input clocks................................................... 21
+System clock.................................................21
+DCS_CLK_P and DCS_CLK_N input clock
+electrical characteristics................................ 21
+RESET AC timing specifications................... 24
+Lightweight LVDS communication protocol
+(LLCP) interface............................................25
+LLCP DC electrical characteristics................25
+LLCP AC timing specifications...................... 25
+PHY Timer interface......................................27
+PHY Timer DC electrical characteristics....... 27
+PHY Timer AC timing specifications............. 28
+Analog input and output interface (ADC-DAC)
+...................................................................... 28
+Analog input and output specifications......... 29
+Universal asynchronous receiver/transmitter
+(UART)..........................................................31
+UART DC electrical characteristics............... 31
+UART AC timing specifications..................... 32
+General purpose input/output (GPIO) interface
+...................................................................... 32
+GPIO DC electrical characteristics................32
+GPIO AC timing specifications...................... 33
+High-speed serial interfaces (HSSI)..............33
+Signal terms definitions.................................34
+SerDes reference clocks...............................35
+SerDes reference clock receiver
+characteristics............................................... 35
+
+3.12.2.2
+
+SerDes reference clocks DC electrical
+characteristics............................................... 36
+3.12.2.3
+AC requirements for SerDes reference clocks
+...................................................................... 37
+3.12.3
+SerDes transmitter and receiver reference
+circuits...........................................................39
+3.12.4
+PCI Express.................................................. 39
+3.12.4.1
+Clocking dependencies.................................39
+3.12.4.2
+PCI Express DC physical layer specifications
+...................................................................... 39
+3.12.4.3
+PCI Express AC physical layer specifications
+...................................................................... 44
+3.12.4.4
+Test and measurement load......................... 49
+3.13
+I2C interface.................................................. 49
+3.13.1
+I2C DC electrical characteristics....................50
+3.13.2
+I2C AC timing specifications..........................50
+3.14
+Serial peripheral interface (SPI) interface..... 52
+3.14.1
+SPI DC electrical characteristics................... 52
+3.14.2
+SPI AC timing specifications......................... 52
+4
+Hardware design considerations...................... 54
+4.1
+Clock ranges................................................. 54
+4.2
+Power supply design.....................................55
+4.2.1
+Core and platform supply voltage filtering.....55
+5
+Thermal............................................................ 55
+5.1
+Recommended thermal model......................56
+5.2
+Temperature diode........................................56
+5.3
+Thermal management information................ 56
+6
+Package information.........................................57
+6.1
+Package parameters for the FC-PBGA.........57
+6.2
+Mechanical dimensions of the FC-PBGA......57
+7
+Ordering information.........................................59
+7.1
+Part numbering nomenclature.......................59
+7.2
+Orderable part numbers addressed by this
+document...................................................... 59
+7.3
+Part marking .................................................59
+8
+Revision history................................................ 60
+Legal information............................................................... 61
+
+NXP Semiconductors
+Overview
+
+1 Overview
+The Layerscape LA9310 is an analog to/from PCIe converter suitable for a wide range of signal processing applications.
+With an integrated high-speed data converters and Arm Cortex-M4 processor, the LA9310 is ideal for 5G baseband
+communication formats.
+The LA9310 device is built for ultra- low power consumption and is offered in a small package for compact form-factor applications.
+LA9310 features of Arm M4 cores operating at 307.2 MHz along with an innovative programmable signal processing accelerator,
+and integrated high-speed analog/digital data converters. LA9310 includes on-chip RAM for packet buffering and operates without
+any external DRAM. The device can boot from host processor via PCIe.
+Arm®
+Cortex® M4
+64 KB
+D Mem
+eDMA
+
+FECU
+
+VSPA-16
+
+128 KB
+I Mem
+
+32 KB
+D Mem
+
+64 KB
+
+34 KB
+I Mem
+
+Watchdog
+Interconnect (non-coherent)
+PHY Timer
+UART
+
+ADC/DAC
+
+I2C, SPI, GPIO
+TMU
+LLCP
+
+PCIe
+Gen3
+x1 Lane
+
+1-Lane
+8 GHz
+SerDes
+
+ADC
+
+ADC
+
+ADC
+
+ADC
+
+DAC
+
+Aux
+ADC
+
+Rx 1
+Pair
+
+Rx 2
+Pair
+
+Rx01
+Pair
+
+Rx02
+Pair
+
+Tx
+Pair
+
+Tx
+Detection
+
+Figure 1. LA9310 signal processor block diagram
+
+2 Pin assignments
+2.1 157 BGA ball layout diagrams
+This figure shows the complete view of the LA9310 BGA ball map diagram. Figure 3, Figure 4, Figure 5, and Figure 6 show
+quadrant views.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+3 / 63
+
+NXP Semiconductors
+Pin assignments
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+A
+
+A
+
+B
+
+B
+
+C
+
+C
+SEE DETAIL A
+
+D
+
+SEE DETAIL B
+
+D
+
+E
+
+E
+
+F
+
+F
+
+G
+
+G
+
+H
+
+H
+
+J
+
+J
+
+K
+
+K
+
+L
+
+SEE DETAIL C
+
+L
+
+SEE DETAIL D
+
+M
+
+M
+
+N
+
+N
+
+P
+
+P
+
+R
+
+R
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+RFCTL
+
+GPIO
+
+PPS
+
+LLCP
+
+DSPI
+
+I2C
+
+SerDes 1
+
+System Control
+
+Clocking
+
+DFT
+
+JTAG
+
+ADC DAC
+
+Analog Signals
+
+Power
+
+Ground
+
+13
+
+14
+
+15
+
+Figure 2. Complete BGA Map for the LA9310
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+4 / 63
+
+NXP Semiconductors
+Pin assignments
+
+1
+
+2
+RO0_
+Q_
+P
+
+A
+
+B
+
+AFE_
+GND01
+
+RO0_
+Q_
+N
+
+C
+
+RO0_
+I_
+N
+
+AFE_
+GND07
+
+D
+
+RO0_
+I_
+P
+
+AFE_
+GND15
+
+E
+
+AFE_
+GND19
+
+F
+
+DCS_
+CLK_
+P
+
+4
+
+5
+
+6
+
+7
+
+RX0_
+Q_
+P
+
+TX_
+I_
+P
+
+A
+
+RX0_
+Q_
+N
+
+TX_
+I_
+N
+
+B
+
+AFE_
+GND09
+
+AFE_
+GND10
+
+RX0_
+I_
+N
+
+AFE_
+GND02
+
+RX0_
+I_
+P
+
+AFE_
+GND03
+
+AFE_
+GND08
+
+VREF_
+RX_
+P
+
+VREF_
+RX_
+N
+
+AFE_
+GND25
+
+AFE_
+GND28
+
+GND02
+
+GND03
+
+TD1_
+ANODE
+
+TD1_
+CATHODE
+
+AVDD_
+PLAT
+
+VDD3
+
+1
+
+2
+
+3
+
+AFE_
+GND26
+
+AFE_
+CVDD1
+
+4
+
+8
+
+AFE_
+OTVDD
+
+AFE_
+GND16
+
+AFE_
+SVDD1
+
+AFE_
+GND20
+
+DCS_
+CLK_
+N
+
+G
+
+H
+
+3
+
+VDD1
+
+5
+
+6
+
+C
+
+D
+
+AFE_
+GND21
+
+IREF_
+TX
+
+E
+
+AFE_
+SVDD3
+
+AFE_
+GND27
+
+F
+
+G
+
+GND04
+
+VDD4
+
+GND07
+
+7
+
+8
+
+RFCTL
+
+GPIO
+
+PPS
+
+LLCP
+
+DSPI
+
+I2C
+
+SerDes 1
+
+System Control
+
+Clocking
+
+DFT
+
+JTAG
+
+ADC DAC
+
+Analog Signals
+
+Power
+
+Ground
+
+H
+
+Figure 3. Detail A
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+5 / 63
+
+NXP Semiconductors
+Pin assignments
+
+8
+
+9
+
+10
+
+A
+
+TX_
+Q_
+P
+
+RX1_
+I_
+P
+
+B
+
+TX_
+Q_
+N
+
+RX1_
+I_
+N
+
+AFE_
+GND11
+
+AFE_
+GND12
+
+C
+
+AFE_
+OTVDD
+
+AFE_
+GND17
+
+D
+
+E
+
+IREF_
+TX
+
+AFE_
+GND22
+
+F
+
+AFE_
+GND27
+
+AFE_
+SVDD4
+
+G
+
+H
+
+GND05
+
+GND07
+
+VDD5
+
+8
+
+9
+
+11
+
+14
+
+15
+
+RO1_
+I_
+P
+
+RX1_
+Q_
+P
+
+AFE_
+GND04
+
+AFE_
+GND05
+
+AFE_
+GND13
+
+TX_
+DET
+
+AFE_
+OMVDD
+
+LLCP_
+DOUT_
+P
+
+GND01
+
+A
+
+RO1_
+I_
+N
+
+AFE_
+GND06
+
+B
+
+AFE_
+GND14
+
+RO1_
+Q_
+N
+
+C
+
+AFE_
+GND18
+
+RO1_
+Q_
+P
+
+D
+
+AFE_
+GND24
+
+E
+
+LLCP_
+STOUT_
+P
+
+F
+
+AFE_
+GND23
+
+AFE_
+CVDD2
+
+10
+
+13
+
+RX1_
+Q_
+N
+
+AFE_
+SVDD2
+
+VDD2
+
+12
+
+LLCP_
+STOUT_
+N
+
+LLCP_
+DOUT_
+N
+
+GND06
+
+G
+
+VDD6
+
+GND08
+
+LLCP_
+STIN_
+P
+
+LLCP_
+DIN_
+N
+
+LLCP_
+DIN_
+P
+
+11
+
+12
+
+13
+
+14
+
+15
+
+RFCTL
+
+GPIO
+
+PPS
+
+LLCP
+
+DSPI
+
+I2C
+
+SerDes 1
+
+System Control
+
+Clocking
+
+DFT
+
+JTAG
+
+ADC DAC
+
+Analog Signals
+
+Power
+
+Ground
+
+H
+
+Figure 4. Detail B
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+6 / 63
+
+NXP Semiconductors
+Pin assignments
+
+H
+
+1
+
+2
+
+3
+
+TD1_
+ANODE
+
+TD1_
+CATHODE
+
+AVDD_
+PLAT
+
+VDD3
+
+GND09
+
+GND10
+
+GND11
+
+J
+
+4
+
+SD1_
+IMP_
+CAL_RX
+
+K
+
+TH_
+VDD
+
+L
+
+SD_
+GND1
+
+M
+
+PCI_
+CLK_
+P
+
+SD_
+GND4
+
+SD1_
+IMP_
+CAL_TX
+
+N
+
+PCI_
+CLK_
+N
+
+SD_
+GND5
+
+SD_
+GND6
+
+P
+
+SD_
+GND8
+
+SD1_
+RX_
+P
+
+PROG_
+VDD
+
+1
+
+6
+
+VDD7
+
+SD_
+SVDD1
+
+SD_
+GND9
+
+SD_
+GND2
+
+SD1_
+TX_
+P
+
+SD_
+XVDD1
+
+3
+
+VDD4
+
+GND07
+
+H
+
+J
+
+GND12
+
+GND15
+
+SD_
+GND3
+
+K
+
+L
+
+PPS_
+OUT
+
+M
+
+SD_
+GND7
+
+TRST_B
+
+N
+
+SPI_
+CLK
+
+P
+
+SPI_
+MISO
+
+R
+
+SD_
+GND10
+
+4
+
+8
+
+SD_
+XVDD2
+
+IIC1_
+SCL
+
+SD1_
+TX_
+N
+
+2
+
+7
+
+SD_
+SVDD2
+
+AVDD_
+SD_
+PLL
+
+SD1_
+RX_
+N
+
+R
+
+5
+
+SPI_
+CS0_B
+
+IIC1_
+SDA
+
+5
+
+6
+
+7
+
+RFCTL
+
+GPIO
+
+PPS
+
+LLCP
+
+DSPI
+
+I2C
+
+SerDes 1
+
+System Control
+
+Clocking
+
+DFT
+
+JTAG
+
+ADC DAC
+
+Analog Signals
+
+Power
+
+Ground
+
+8
+
+Figure 5. Detail C
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+7 / 63
+
+NXP Semiconductors
+Pin assignments
+
+H
+
+8
+
+9
+
+GND07
+
+VDD5
+
+J
+
+K
+
+GND13
+
+GND15
+
+L
+
+10
+
+VDD8
+
+12
+
+13
+
+14
+
+15
+
+VDD6
+
+GND08
+
+LLCP_
+STIN_
+P
+
+LLCP_
+DIN_
+N
+
+LLCP_
+DIN_
+P
+
+OVDD3
+
+LLCP_
+STIN_
+N
+
+GND14
+
+OVDD2
+
+OVDD1
+
+GND17
+
+11
+
+GND16
+
+GND18
+
+HRESET_
+B
+
+PPS_
+OUT
+
+TDI
+
+TMS
+
+SCAN_
+MODE_B
+
+N
+
+TRST_B
+
+TCK
+
+TDO
+
+CLKOUT
+
+P
+
+SPI_
+CLK
+
+SPI_
+CS1_B
+
+SPI_
+CS3_B
+
+GPIO_
+18
+
+LNA2_
+EN
+
+R
+
+SPI_
+MISO
+
+SPI_
+MOSI
+
+GPIO_
+17
+
+GPIO_
+19
+
+8
+
+9
+
+11
+
+12
+
+SPI_
+CS2_B
+
+10
+
+J
+
+PPS_
+IN
+
+TXRX0
+
+LNA1_
+EN
+
+M
+
+N
+
+PA_
+EN
+
+TXRX1
+
+LNA3_
+EN
+
+13
+
+K
+
+L
+
+14
+
+RFCTL
+
+GPIO
+
+PPS
+
+LLCP
+
+DSPI
+
+I2C
+
+SerDes 1
+
+System Control
+
+Clocking
+
+DFT
+
+ADC DAC
+
+Analog Signals
+
+Power
+
+Ground
+
+JTAG
+
+GPIO_6
+
+GPIO_5
+
+M
+
+H
+
+P
+
+R
+15
+
+Figure 6. Detail D
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+8 / 63
+
+NXP Semiconductors
+Pin assignments
+
+2.2 Pinout list
+This table provides the pinout listing for the LA9310 by bus. Primary functions are bolded in the table.
+Table 1. Pinout list by bus
+Signal
+
+Signal description
+
+Package
+pin
+number
+
+Pin
+type
+
+Power supply
+
+Notes
+
+RFCTL
+LNA1_EN /GPIO_11 /
+cfg_test_port_dis
+
+Used as PHY Timer Triggers
+
+M15
+
+O
+
+OVDD
+
+1, 4
+
+LNA2_EN /GPIO_10 /
+cfg_pcie_gen
+
+Used as PHY Timer Triggers
+
+P13
+
+O
+
+OVDD
+
+1, 4
+
+LNA3_EN /GPIO_09 /
+cfg_boot_ho
+
+Used as PHY Timer Triggers
+
+R14
+
+O
+
+OVDD
+
+1, 4
+
+PA_EN /GPIO_12 /
+cfg_rst_hndshk
+
+Used as PHY Timer Triggers
+
+P14
+
+O
+
+OVDD
+
+1, 4
+
+TXRX0 /GPIO_07 /
+cfg_boot_src0
+
+Used as PHY Timer Triggers
+
+M14
+
+O
+
+OVDD
+
+1, 4
+
+TXRX1 /GPIO_08 /
+cfg_boot_src1
+
+Used as PHY Timer Triggers
+
+P15
+
+O
+
+OVDD
+
+1, 4
+
+PHY Timer
+PPS_IN /GPIO_04
+
+Pulse Per Second In
+
+K14
+
+IO
+
+OVDD
+
+1
+
+PPS_OUT /GPIO_03 /
+cfg_wrm_rstb
+
+Pulse Per Second Out
+
+M8
+
+IO
+
+OVDD
+
+1, 4
+
+LLCP
+LLCP_DIN_N
+
+Data In -
+
+H14
+
+I
+
+OVDD
+
+---
+
+LLCP_DIN_P
+
+Data In +
+
+H15
+
+I
+
+OVDD
+
+---
+
+LLCP_DOUT_N
+
+Data Out -
+
+G13
+
+O
+
+OVDD
+
+2
+
+LLCP_DOUT_P
+
+Data Out +
+
+F13
+
+O
+
+OVDD
+
+2
+
+LLCP_STIN_N
+
+Strobe In -
+
+J13
+
+I
+
+OVDD
+
+---
+
+LLCP_STIN_P
+
+Strobe In +
+
+H13
+
+I
+
+OVDD
+
+---
+
+LLCP_STOUT_N
+
+Strobe Out -
+
+F14
+
+O
+
+OVDD
+
+2
+
+LLCP_STOUT_P
+
+Strobe Out +
+
+F15
+
+O
+
+OVDD
+
+2
+
+DSPI
+SPI_CLK
+
+SPI Clock
+
+P8
+
+O
+
+OVDD
+
+1
+
+SPI_CS0_B
+
+Chip Select0
+
+P7
+
+O
+
+OVDD
+
+1
+
+SPI_CS1_B /UART1_SIN
+
+Chip Select 1
+
+P9
+
+O
+
+OVDD
+
+1
+
+SPI_CS2_B /UART1_SOUT
+
+Chip Select 2
+
+P10
+
+O
+
+OVDD
+
+1
+
+SPI_CS3_B /GPIO_16
+
+Chip Select 3
+
+P11
+
+O
+
+OVDD
+
+1
+
+Table continues on the next page...
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+9 / 63
+
+NXP Semiconductors
+Pin assignments
+
+Table 1. Pinout list by bus (continued)
+Signal
+
+Signal description
+
+Package
+pin
+number
+
+Pin
+type
+
+Power supply
+
+Notes
+
+SPI_MISO
+
+Master In / Slave Out
+
+R8
+
+I
+
+OVDD
+
+---
+
+SPI_MOSI
+
+Master Out / Slave In
+
+R9
+
+O
+
+OVDD
+
+1, 4
+
+I2C
+IIC1_SCL /GPIO_02
+
+Serial Clock
+
+P6
+
+IO
+
+OVDD
+
+8
+
+IIC1_SDA /GPIO_01
+
+Serial Data
+
+R6
+
+IO
+
+OVDD
+
+8
+
+GPIO
+GPIO_01/ IIC1_SDA
+
+General Purpose Input/Output
+
+R6
+
+IO
+
+OVDD
+
+---
+
+GPIO_02/ IIC1_SCL
+
+General Purpose Input/Output
+
+P6
+
+IO
+
+OVDD
+
+---
+
+GPIO_03/ PPS_OUT /
+cfg_wrm_rstb
+
+General Purpose Input/Output
+
+M8
+
+IO
+
+OVDD
+
+4
+
+GPIO_04/ PPS_IN
+
+General Purpose Input/Output
+
+K14
+
+IO
+
+OVDD
+
+---
+
+GPIO_05
+
+General Purpose Input/Output
+
+L13
+
+IO
+
+OVDD
+
+21
+
+GPIO_06
+
+General Purpose Input/Output
+
+K15
+
+IO
+
+OVDD
+
+21
+
+GPIO_07/ TXRX0 /
+cfg_boot_src0
+
+General Purpose Input/Output
+
+M14
+
+IO
+
+OVDD
+
+4
+
+GPIO_08/ TXRX1 /
+cfg_boot_src1
+
+General Purpose Input/Output
+
+P15
+
+IO
+
+OVDD
+
+4
+
+GPIO_09/ LNA3_EN /
+cfg_boot_ho
+
+General Purpose Input/Output
+
+R14
+
+IO
+
+OVDD
+
+4
+
+GPIO_10/ LNA2_EN /
+cfg_pcie_gen
+
+General Purpose Input/Output
+
+P13
+
+IO
+
+OVDD
+
+4
+
+GPIO_11/ LNA1_EN /
+cfg_test_port_dis
+
+General Purpose Input/Output
+
+M15
+
+IO
+
+OVDD
+
+4
+
+GPIO_12/ PA_EN /
+cfg_rst_hndshk
+
+General Purpose Input/Output
+
+P14
+
+IO
+
+OVDD
+
+4
+
+GPIO_16/ SPI_CS3_B
+
+General Purpose Input/Output
+
+P11
+
+IO
+
+OVDD
+
+---
+
+GPIO_17
+
+General Purpose Input/Output
+
+R11
+
+IO
+
+OVDD
+
+---
+
+GPIO_18
+
+General Purpose Input/Output
+
+P12
+
+IO
+
+OVDD
+
+---
+
+GPIO_19 /ASLEEP
+
+General Purpose Input/Output
+
+R12
+
+IO
+
+OVDD
+
+---
+
+System Control
+ASLEEP/ GPIO_19
+
+ASLEEP
+
+R12
+
+O
+
+OVDD
+
+1
+
+HRESET_B
+
+Power On Reset
+
+K13
+
+I
+
+OVDD
+
+---
+
+N13
+
+O
+
+OVDD
+
+2
+
+Clocking
+CLKOUT
+
+Clock Out
+
+Table continues on the next page...
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+10 / 63
+
+NXP Semiconductors
+Pin assignments
+
+Table 1. Pinout list by bus (continued)
+Signal
+
+Signal description
+
+Package
+pin
+number
+
+Pin
+type
+
+Power supply
+
+Notes
+
+DCS_CLK_N
+
+DCS & System CLK -
+
+F2
+
+I
+
+AFE_CVDD
+
+---
+
+DCS_CLK_P
+
+DCS & System CLK +
+
+F1
+
+I
+
+AFE_CVDD
+
+---
+
+PCI_CLK_N
+
+Boot & PCI Ref Clock -
+
+N1
+
+I
+
+SD_SVDD
+
+---
+
+PCI_CLK_P
+
+Boot & PCI Ref Clock +
+
+M1
+
+I
+
+SD_SVDD
+
+---
+
+M13
+
+I
+
+OVDD
+
+10
+
+DFT
+SCAN_MODE_B
+
+Reserved
+JTAG
+
+TCK
+
+Test Clock
+
+N10
+
+I
+
+OVDD
+
+---
+
+TDI
+
+Test Data In
+
+M10
+
+I
+
+OVDD
+
+9
+
+TDO
+
+Test Data Out
+
+N12
+
+O
+
+OVDD
+
+2
+
+TMS
+
+Test Mode Select
+
+M12
+
+I
+
+OVDD
+
+9
+
+TRST_B
+
+Test Reset
+
+N8
+
+I
+
+OVDD
+
+9
+
+SerDes 1
+SD1_IMP_CAL_RX
+
+SerDes Receive Impedence
+Calibration
+
+K4
+
+I
+
+SD_SVDD
+
+11
+
+SD1_IMP_CAL_TX
+
+SerDes Transmit Impedence
+Calibration
+
+M4
+
+I
+
+SD_XVDD
+
+16
+
+SD1_RX_N
+
+SerDes Receive Data -
+
+R2
+
+I
+
+SD_SVDD
+
+---
+
+SD1_RX_P
+
+SerDes Receive Data +
+
+P2
+
+I
+
+SD_SVDD
+
+---
+
+SD1_TX_N
+
+SerDes Transmit Data -
+
+R4
+
+O
+
+SD_XVDD
+
+---
+
+SD1_TX_P
+
+SerDes Transmit Data +
+
+P4
+
+O
+
+SD_XVDD
+
+---
+
+ADC/DAC
+IREF_TX
+
+Analog Transmit Current
+Reference
+
+E8
+
+I
+
+AFE_OTVDD
+
+20
+
+RO0_I_N
+
+Analog Observation (I-) Vin 0
+
+C1
+
+I
+
+AFE_SVDD
+
+---
+
+RO0_I_P
+
+Analog Observation (I+) Vin 0
+
+D1
+
+I
+
+AFE_SVDD
+
+---
+
+RO0_Q_N
+
+Analog Observation (Q-) Vin 0
+
+B2
+
+I
+
+AFE_SVDD
+
+---
+
+RO0_Q_P
+
+Analog Observation (Q+) Vin 0
+
+A2
+
+I
+
+AFE_SVDD
+
+---
+
+RO1_I_N
+
+Analog Observation (I-) Vin 1
+
+B14
+
+I
+
+AFE_SVDD
+
+---
+
+RO1_I_P
+
+Analog Observation (I+) Vin 1
+
+A14
+
+I
+
+AFE_SVDD
+
+---
+
+RO1_Q_N
+
+Analog Observation (Q-) Vin 1
+
+C15
+
+I
+
+AFE_SVDD
+
+---
+
+RO1_Q_P
+
+Analog Observation (Q+) Vin 1
+
+D15
+
+I
+
+AFE_SVDD
+
+---
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+11 / 63
+
+NXP Semiconductors
+Pin assignments
+
+Table 1. Pinout list by bus (continued)
+Signal
+
+Signal description
+
+Package
+pin
+number
+
+Pin
+type
+
+Power supply
+
+Notes
+
+RX0_I_N
+
+Analog Receive (I-) Vin 0
+
+A4
+
+I
+
+AFE_SVDD
+
+---
+
+RX0_I_P
+
+Analog Receive (I+) Vin 0
+
+B4
+
+I
+
+AFE_SVDD
+
+---
+
+RX0_Q_N
+
+Analog Receive (Q-) Vin 0
+
+B6
+
+I
+
+AFE_SVDD
+
+---
+
+RX0_Q_P
+
+Analog Receive (Q+) Vin 0
+
+A6
+
+I
+
+AFE_SVDD
+
+---
+
+RX1_I_N
+
+Analog Receive (I-) Vin 1
+
+B10
+
+I
+
+AFE_SVDD
+
+---
+
+RX1_I_P
+
+Analog Receive (I+) Vin 1
+
+A10
+
+I
+
+AFE_SVDD
+
+---
+
+RX1_Q_N
+
+Analog Receive (Q-) Vin 1
+
+A12
+
+I
+
+AFE_SVDD
+
+---
+
+RX1_Q_P
+
+Analog Receive (Q+) Vin 1
+
+B12
+
+I
+
+AFE_SVDD
+
+---
+
+TX_DET
+
+Analog Auxiliary input (Tx
+Power Detect)
+
+D13
+
+I
+
+AFE_OMVDD
+
+---
+
+TX_I_N
+
+Analog Transmit (I-) Iout
+
+B7
+
+O
+
+AFE_OTVDD
+
+---
+
+TX_I_P
+
+Analog Transmit (I+) Iout
+
+A7
+
+O
+
+AFE_OTVDD
+
+---
+
+TX_Q_N
+
+Analog Transmit (Q-) Iout
+
+B9
+
+O
+
+AFE_OTVDD
+
+---
+
+TX_Q_P
+
+Analog Transmit (Q+) Iout
+
+A9
+
+O
+
+AFE_OTVDD
+
+---
+
+VREF_RX_N
+
+Analog Rx Voltage Ref -
+
+D5
+
+I
+
+AFE_SVDD
+
+---
+
+VREF_RX_P
+
+Analog Rx Voltage Ref +
+
+D3
+
+I
+
+AFE_SVDD
+
+---
+
+Analog Signals
+TD1_ANODE
+
+Thermal diode anode
+
+H1
+
+IO
+
+-
+
+17
+
+TD1_CATHODE
+
+Thermal diode cathode
+
+H2
+
+IO
+
+-
+
+17
+
+Power-On-Reset Configuration
+cfg_boot_ho/ LNA3_EN /
+GPIO_09
+
+Boot hold-Off
+
+R14
+
+I
+
+OVDD
+
+1, 4
+
+cfg_boot_src0/ TXRX0 /
+GPIO_07
+
+Boot source
+
+M14
+
+I
+
+OVDD
+
+1, 4
+
+cfg_boot_src1/ TXRX1 /
+GPIO_08
+
+Boot source
+
+P15
+
+I
+
+OVDD
+
+1, 4
+
+cfg_pcie_gen/ LNA2_EN /
+GPIO_10
+
+PCIe generation
+
+P13
+
+I
+
+OVDD
+
+1, 4
+
+cfg_rst_hndshk/ PA_EN /
+GPIO_12
+
+Reset HW/SW handshake
+
+P14
+
+I
+
+OVDD
+
+1, 4
+
+cfg_test_port_dis/ LNA1_EN /
+GPIO_11
+
+Test port enable
+
+M15
+
+I
+
+OVDD
+
+1, 4
+
+cfg_wrm_rstb/ PPS_OUT /
+GPIO_03
+
+Warm reset
+
+M8
+
+I
+
+OVDD
+
+1, 4
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+12 / 63
+
+NXP Semiconductors
+Pin assignments
+
+Table 1. Pinout list by bus (continued)
+Signal
+
+Signal description
+
+Package
+pin
+number
+
+Pin
+type
+
+Power supply
+
+Notes
+
+UART
+UART1_SIN/ SPI_CS1_B
+
+SIN
+
+P9
+
+I
+
+OVDD
+
+1
+
+UART1_SOUT/ SPI_CS2_B
+
+SOUT
+
+P10
+
+O
+
+OVDD
+
+---
+
+Power and Ground Signals
+GND01
+
+GND - SoC Common ground
+
+F12
+
+---
+
+---
+
+---
+
+GND02
+
+GND - SoC Common ground
+
+G3
+
+---
+
+---
+
+---
+
+GND03
+
+GND - SoC Common ground
+
+G5
+
+---
+
+---
+
+---
+
+GND04
+
+GND - SoC Common ground
+
+G7
+
+---
+
+---
+
+---
+
+GND05
+
+GND - SoC Common ground
+
+G9
+
+---
+
+---
+
+---
+
+GND06
+
+GND - SoC Common ground
+
+G11
+
+---
+
+---
+
+---
+
+GND07
+
+GND - SoC Common ground
+
+H8
+
+---
+
+---
+
+---
+
+GND08
+
+GND - SoC Common ground
+
+H12
+
+---
+
+---
+
+---
+
+GND09
+
+GND - SoC Common ground
+
+J2
+
+---
+
+---
+
+---
+
+GND10
+
+GND - SoC Common ground
+
+J3
+
+---
+
+---
+
+---
+
+GND11
+
+GND - SoC Common ground
+
+J5
+
+---
+
+---
+
+---
+
+GND12
+
+GND - SoC Common ground
+
+J7
+
+---
+
+---
+
+---
+
+GND13
+
+GND - SoC Common ground
+
+J9
+
+---
+
+---
+
+---
+
+GND14
+
+GND - SoC Common ground
+
+J11
+
+---
+
+---
+
+---
+
+GND15
+
+GND - SoC Common ground
+
+K8
+
+---
+
+---
+
+---
+
+GND16
+
+GND - SoC Common ground
+
+K12
+
+---
+
+---
+
+---
+
+GND17
+
+GND - SoC Common ground
+
+L9
+
+---
+
+---
+
+---
+
+GND18
+
+GND - SoC Common ground
+
+L11
+
+---
+
+---
+
+---
+
+SD_GND1
+
+SerDes Transceiver GND
+
+L1
+
+---
+
+---
+
+19
+
+SD_GND10
+
+SerDes Transceiver GND
+
+P5
+
+---
+
+---
+
+19
+
+SD_GND2
+
+SerDes Transceiver GND
+
+L6
+
+---
+
+---
+
+19
+
+SD_GND3
+
+SerDes Transceiver GND
+
+L7
+
+---
+
+---
+
+19
+
+SD_GND4
+
+SerDes Transceiver GND
+
+M2
+
+---
+
+---
+
+19
+
+SD_GND5
+
+SerDes Transceiver GND
+
+N2
+
+---
+
+---
+
+19
+
+SD_GND6
+
+SerDes Transceiver GND
+
+N4
+
+---
+
+---
+
+19
+
+SD_GND7
+
+SerDes Transceiver GND
+
+N6
+
+---
+
+---
+
+19
+
+SD_GND8
+
+SerDes Transceiver GND
+
+P1
+
+---
+
+---
+
+19
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+13 / 63
+
+NXP Semiconductors
+Pin assignments
+
+Table 1. Pinout list by bus (continued)
+Signal
+
+Signal description
+
+Package
+pin
+number
+
+Pin
+type
+
+Power supply
+
+Notes
+
+SD_GND9
+
+SerDes Transceiver GND
+
+P3
+
+---
+
+---
+
+19
+
+AFE_GND01
+
+AFE Analog GND
+
+B1
+
+---
+
+---
+
+19
+
+AFE_GND02
+
+AFE Analog GND
+
+B3
+
+---
+
+---
+
+19
+
+AFE_GND03
+
+AFE Analog GND
+
+B5
+
+---
+
+---
+
+19
+
+AFE_GND04
+
+AFE Analog GND
+
+B11
+
+---
+
+---
+
+19
+
+AFE_GND05
+
+AFE Analog GND
+
+B13
+
+---
+
+---
+
+19
+
+AFE_GND06
+
+AFE Analog GND
+
+B15
+
+---
+
+---
+
+19
+
+AFE_GND07
+
+AFE Analog GND
+
+C2
+
+---
+
+---
+
+19
+
+AFE_GND08
+
+AFE Analog GND
+
+C4
+
+---
+
+---
+
+19
+
+AFE_GND09
+
+AFE Analog GND
+
+C6
+
+---
+
+---
+
+19
+
+AFE_GND10
+
+AFE Analog GND
+
+C7
+
+---
+
+---
+
+19
+
+AFE_GND11
+
+AFE Analog GND
+
+C9
+
+---
+
+---
+
+19
+
+AFE_GND12
+
+AFE Analog GND
+
+C10
+
+---
+
+---
+
+19
+
+AFE_GND13
+
+AFE Analog GND
+
+C12
+
+---
+
+---
+
+19
+
+AFE_GND14
+
+AFE Analog GND
+
+C14
+
+---
+
+---
+
+19
+
+AFE_GND15
+
+AFE Analog GND
+
+D2
+
+---
+
+---
+
+19
+
+AFE_GND16
+
+AFE Analog GND
+
+D6
+
+---
+
+---
+
+19
+
+AFE_GND17
+
+AFE Analog GND
+
+D10
+
+---
+
+---
+
+19
+
+AFE_GND18
+
+AFE Analog GND
+
+D14
+
+---
+
+---
+
+19
+
+AFE_GND19
+
+AFE Analog GND
+
+E1
+
+---
+
+---
+
+19
+
+AFE_GND20
+
+AFE Analog GND
+
+E4
+
+---
+
+---
+
+19
+
+AFE_GND21
+
+AFE Analog GND
+
+E7
+
+---
+
+---
+
+19
+
+AFE_GND22
+
+AFE Analog GND
+
+E9
+
+---
+
+---
+
+19
+
+AFE_GND23
+
+AFE Analog GND
+
+E12
+
+---
+
+---
+
+19
+
+AFE_GND24
+
+AFE Analog GND
+
+E15
+
+---
+
+---
+
+19
+
+AFE_GND25
+
+AFE Analog GND
+
+F3
+
+---
+
+---
+
+19
+
+AFE_GND26
+
+AFE Analog GND
+
+F4
+
+---
+
+---
+
+19
+
+AFE_GND27
+
+AFE Analog GND
+
+F8
+
+---
+
+---
+
+19
+
+AFE_GND28
+
+AFE Analog GND
+
+G2
+
+---
+
+---
+
+19
+
+OVDD1
+
+General OVDD I/O supply
+
+K9
+
+---
+
+OVDD
+
+---
+
+OVDD2
+
+General OVDD I/O supply
+
+K11
+
+---
+
+OVDD
+
+---
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+14 / 63
+
+NXP Semiconductors
+Pin assignments
+
+Table 1. Pinout list by bus (continued)
+Signal
+
+Signal description
+
+Package
+pin
+number
+
+Pin
+type
+
+Power supply
+
+Notes
+
+OVDD3
+
+General OVDD I/O supply
+
+L10
+
+---
+
+OVDD
+
+---
+
+PROG_VDD
+
+Reserved
+
+K2
+
+---
+
+PROG_VDD
+
+---
+
+TH_VDD
+
+Thermal Monitor Unit supply
+
+K1
+
+---
+
+TH_VDD
+
+---
+
+VDD1
+
+Supply for cores and platform
+
+G6
+
+---
+
+VDD
+
+---
+
+VDD2
+
+Supply for cores and platform
+
+G10
+
+---
+
+VDD
+
+---
+
+VDD3
+
+Supply for cores and platform
+
+H5
+
+---
+
+VDD
+
+---
+
+VDD4
+
+Supply for cores and platform
+
+H7
+
+---
+
+VDD
+
+---
+
+VDD5
+
+Supply for cores and platform
+
+H9
+
+---
+
+VDD
+
+---
+
+VDD6
+
+Supply for cores and platform
+
+H11
+
+---
+
+VDD
+
+---
+
+VDD7
+
+Supply for cores and platform
+
+J6
+
+---
+
+VDD
+
+---
+
+VDD8
+
+Supply for cores and platform
+
+J10
+
+---
+
+VDD
+
+---
+
+SD_XVDD1
+
+Serdes Transceiver Supply
+
+M5
+
+---
+
+SD_XVDD
+
+---
+
+SD_XVDD2
+
+Serdes Transceiver Supply
+
+M6
+
+---
+
+SD_XVDD
+
+---
+
+SD_SVDD1
+
+Serdes Core Logic Supply
+
+K5
+
+---
+
+SD_SVDD
+
+---
+
+SD_SVDD2
+
+Serdes Core Logic Supply
+
+K7
+
+---
+
+SD_SVDD
+
+---
+
+AVDD_PLAT
+
+Platform PLL supply
+
+H3
+
+---
+
+AVDD_PLAT
+
+---
+
+AVDD_SD_PLL
+
+Serdes PLL Supply
+
+L3
+
+---
+
+AVDD_SD_PLL
+
+---
+
+AFE_OTVDD
+
+IQ_DAC High Voltage Supply
+
+C8
+
+---
+
+AFE_OTVDD
+
+---
+
+AFE_OMVDD
+
+Aux ADC High Voltage Supply
+
+D11
+
+---
+
+AFE_OMVDD
+
+---
+
+AFE_SVDD1
+
+ADC Analog Supply
+
+E6
+
+---
+
+AFE_SVDD
+
+---
+
+AFE_SVDD2
+
+ADC Analog Supply
+
+E10
+
+---
+
+AFE_SVDD
+
+---
+
+AFE_SVDD3
+
+ADC Analog Supply
+
+F7
+
+---
+
+AFE_SVDD
+
+---
+
+AFE_SVDD4
+
+ADC Analog Supply
+
+F9
+
+---
+
+AFE_SVDD
+
+---
+
+AFE_CVDD1
+
+AFE Clock Supply
+
+F5
+
+---
+
+AFE_CVDD
+
+---
+
+AFE_CVDD2
+
+AFE Clock Supply
+
+F11
+
+---
+
+AFE_CVDD
+
+---
+
+1. Functionally, this pin is an output or an input, but structurally it is an I/O because it either sample configuration input during reset,
+is a muxed pin, or has other manufacturing test functions. This pin will therefore be described as an I/O for boundary scan.
+2. This output is actively driven during reset rather than being tri-stated during reset.
+4. This pin is a reset configuration pin. It has a weak (~20 kΩ) internal pull-up P-FET that is enabled only when the processor is
+in its reset state. This pull-up is designed such that it can be overpowered by an external 4.7 kΩ resistor. However, if the signal
+is intended to be high after reset, and if there is any device on the net that might pull down the value of the net at reset, a pull-up
+or active driver is needed.
+8. Recommend that a weak pull-up resistor (1 kΩ) be placed on this pin to the respective power supply.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+15 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+9. This pin has a weak (~20 kΩ) internal pull-up P-FET that is always enabled.
+10. This signal is for factory use only and must be pulled up (100 Ω to 1-kΩ) to the respective power supply for normal operation.
+11. This pin requires a 200 Ω precision 1% resistor pull-up to respective power-supply.
+16. This pin requires a 698 Ω precision 1% resistor pull-up to respective power-supply.
+17. These pins should be tied to ground if the diode is not utilized for temperature monitoring.
+19. SD_GND and AFE_GND must be directly connected to GND.
+20. This pin requires a 2.67 kΩ precision 1% resistor Pull down to GND.
+21. The primary signal function is reserved for use. The GPIO functionality should be configured via Software after reset.
+Warning
+See "Connection Recommendations" for additional details on properly connecting these pins for
+specific applications.
+
+3 Electrical characteristics
+This section describes the DC and AC electrical specifications for the chip. The chip is currently targeted to these specifications,
+some of which are independent of the I/O cell but are included for a more complete reference. These are not purely I/O buffer
+design specifications.
+
+3.1 Overall DC electrical characteristics
+This section describes the ratings, conditions, and other characteristics.
+
+3.1.1 Absolute maximum ratings
+This table provides the absolute maximum ratings.
+Table 2. Absolute maximum ratings1
+Characteristic
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Core and platform supply voltage
+
+VDD
+
+-0.3
+
+0.97
+
+V
+
+--
+
+PLL supply voltage (core PLL
+and platform)
+
+AVDD_PLAT
+
+-0.3
+
+1.98
+
+V
+
+--
+
+PLL supply voltage (SerDes,
+filtered from XVDD)
+
+AVDD_SD_PLL
+
+-0.3
+
+1.48
+
+V
+
+--
+
+Single Source Clock Buffer AFE
+
+AFE_SVDD
+
+-0.3
+
+0.97
+
+V
+
+--
+
+Thermal Monitor Unit supply
+
+TH_VDD
+
+-0.3
+
+1.98
+
+V
+
+--
+
+Main power supply for internal
+SD_SVDD
+circuitry of SerDes and pad power
+supply for SerDes receivers
+
+-0.3
+
+0.97
+
+V
+
+--
+
+Pad power supply for
+SerDes transmitter
+
+SD_XVDD
+
+-0.3
+
+1.48
+
+V
+
+--
+
+RFCTL, PPS, LLCP, DSPI, I2C,
+DFT, JTAG, GPIO
+
+OVDD
+
+-0.3
+
+1.98
+
+V
+
+--
+
+ADC/DAC
+
+AFE_OTVDD
+
+-0.3
+
+1.98
+
+V
+
+IQ_DAC High
+Voltage Supply
+
+Table continues on the next page...
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+16 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 2. Absolute maximum ratings1 (continued)
+Characteristic
+
+Input voltage
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Aux ADC High
+Voltage Supply
+
+AFE_OMVDD
+
+-0.3
+
+1.98
+
+V
+
+ADC Analog
+Supply
+
+AFE_SVDD
+
+-0.3
+
+0.97
+
+V
+
+AFE Clock
+Supply
+
+AFE_CVDD
+
+-0.3
+
+0.97
+
+V
+
+RFCTL, PPS,
+LLCP, DSPI,
+I2C, DFT,
+JTAG, GPIO
+
+OVIN
+
+-0.3
+
+OVDD + 0.3
+
+V
+
+2, 3
+
+TSTG
+
+-55
+
+150
+
+°C
+
+--
+
+Storage temperature range
+
+Notes
+
+Notes:
+1. Functional operating conditions are given in Table 3. Absolute maximum ratings are stress ratings only, and functional
+operation at the maximums is not guaranteed. Stresses beyond those listed may affect device reliability or cause permanent
+damage to the device.
+2. Caution: OVIN must not exceed OVDD by more than 0.3 V. This limit may be exceeded for a maximum of 20 ms during
+power-on reset and power-down sequences.
+3. OVIN may overshoot/undershoot to a voltage and for a maximum duration as shown in Figure 7.
+
+3.1.2 Recommended operating conditions
+This table provides the recommended operating conditions for this chip.
+NOTE
+The values shown are the recommended operating conditions and proper device operation outside these
+conditions is not guaranteed.
+
+Table 3. Recommended operating conditions
+Characteristic
+
+Symbol
+
+Recommended
+Value
+
+Unit
+
+Notes
+
+Core and platform supply voltage
+
+VDD
+
+0.9 V + 30 mV / 30 mV
+
+V
+
+1
+
+PLL supply voltage (core PLL
+and platform)
+
+AVDD_PLAT
+
+1.8 V ± 90 mV
+
+V
+
+1
+
+PLL supply voltage (SerDes, filtered
+from XVDD)
+
+AVDD_SD_PLL
+
+1.35 V ± 67 mV
+
+V
+
+1
+
+ADC analog supply
+
+AFE_SVDD
+
+0.9 V + 30 mV / 30 mV
+
+V
+
+1
+
+Thermal Monitor Unit supply
+
+TH_VDD
+
+1.8 V ± 90 mV
+
+V
+
+1
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+17 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 3. Recommended operating conditions (continued)
+Characteristic
+
+Symbol
+
+Recommended
+Value
+
+Unit
+
+Notes
+
+Main power supply for internal circuitry
+of SerDes and pad power supply for
+SerDes receivers
+
+SD_SVDD
+
+0.9 V + 30 mV / 30 mV
+
+V
+
+1
+
+Pad power supply for SerDes transmitter SD_XVDD
+
+1.35 V ± 67 mV
+
+V
+
+1
+
+RFCTL, PPS, LLCP, DSPI, I2C, DFT,
+JTAG, GPIO
+
+OVDD
+
+1.8 V ± 90 mV
+
+V
+
+1
+
+ADC/DAC
+
+IQ_DAC High
+Voltage Supply
+
+AFE_OTVDD
+
+1.8 V ± 90 mV
+
+V
+
+1
+
+Aux ADC High
+Voltage Supply
+
+AFE_OMVDD
+
+1.8 V ± 90 mV
+
+V
+
+1
+
+ADC
+Analog Supply
+
+AFE_SVDD
+
+0.9 V ± 30 mV
+
+V
+
+1
+
+AFE Clock Supply
+
+AFE_CVDD
+
+0.9 V ± 30 mV
+
+V
+
+1
+
+RFCTL, PPS,
+LLCP, DSPI, I2C,
+DFT, JTAG, GPIO
+
+OVIN
+
+GND to OVDD
+
+V
+
+--
+
+TA, TJ
+
+TA = -40 (min) to TJ °C
+= 105 (max)
+
+--
+
+Input voltage
+
+Operating
+temperature range
+Notes:
+
+1. Refer to Core and platform supply voltage filtering for additional information.
+This figure shows the undershoot and overshoot voltages at the interfaces of the chip.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+18 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Nominal OVDD + 20%
+OVDD + 5%
+OVDD
+
+VIH
+
+GND
+GND - 0.3 V
+VIL
+GND - 0.7 V
+
+Not to exceed 10%
+of tCLOCK1
+
+Note: GND - 0.6 V
+for SerDes
+receiver inputs
+
+Notes:
+tCLOCK refers to the clock period associated with the respective interface:
+For JTAG OVDD, tCLOCK refers to TCK.
+Figure 7. Overshoot/undershoot voltage for OVDD
+
+See Table 3 for actual recommended core voltage. Voltage to the processor interface I/Os are provided through separate
+sets of supply pins and must be provided at the voltages shown in Table 3. The input voltage threshold scales with respect
+to the associated I/O supply voltage. OVDD-based receivers are simple CMOS I/O circuits and satisfy appropriate LVCMOS
+type specifications.
+
+3.1.3 Output driver characteristics
+This chip provides information on the characteristics of the output driver strengths.
+Table 4. Output drive impedance
+Driver type
+
+Output impedance (Ω)
+
+RFCTL, PPS, LLCP, DSPI, I2C, DFT, JTAG,
+GPIO
+
+Minimum1
+
+Typical
+
+Maximum2
+
+30
+
+45
+
+60
+
+Supply Voltage Note
+s
+
+OVDD = 1.8 V
+
+-
+
+1. Estimated number based on best case processed device.
+2. Estimated number based on worst case processed device.
+
+3.2 Power sequencing
+The chip requires that its power rails be applied in a specific sequence in order to ensure proper device operation.
+• Power Rails can ramp simultaneously for all voltages on LA9310 Signal Processor.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+19 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+• Digital logic power supplies (0.9 V VDD) should not begin to ramp before other supplies, and should reach 90% of nominal
+voltage no more than 5 ms after I/O rails ramp.
+• SerDes 1.35 V supply and I/O 1.8 V supply are expected to begin ramp simultaneously.
+See Figure 8 below.
+NOTE
+• Ensure that system clock (SerDes 100 MHz PCIe reference clock) is available as soon as power ramps up.
+• Ramp rate requirements should be met per Table 5.
+
+This figure shows the supplies ramp-up diagram for all voltage rails.
+
+Figure 8. Supplies ramp-up diagram
+
+3.3 Power-on ramp rate
+This section describes the AC electrical specifications for the power-on ramp rate requirements. Controlling the maximum
+power-on ramp rate is required to avoid excess in-rush current.
+This table provides the power supply ramp rate specifications.
+Table 5. Power supply ramp rate
+Parameter
+
+Min
+
+Required ramp rate for all voltage supplies (including OVDD/SD_SVDD/SD_XVDD all —
+core and platform VDD supplies, and all AVDD supplies.)
+
+Max
+
+Unit
+
+Notes
+
+25
+
+V/ms
+
+1, 2
+
+Notes:
+1. Ramp rate is specified as a linear ramp from 10% to 90%. If non-linear (for example, exponential), the maximum rate of change
+from 200 mV to 500 mV is the most critical as this range might falsely trigger the ESD circuitry.
+2. Over full recommended operating temperature range. See Table 3.
+
+3.4 Power characteristics
+The following tables provide the power dissipation of all supply rails at 105 °C junction temperature.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+20 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 6. Power dissipation estimated
+Supply group
+
+Supply pin
+
+Thermal at 105 °C
+junction temperature
+
+Maximum at 105 °C
+junction temperature
+
+Unit
+
+1.8 V Digital
+
+OVDD, TH_VDD,
+AVDD_PLAT
+
+80
+
+88
+
+mW
+
+1.8 V Analog
+
+AFE_OTVDD,
+AFE_OMVDD
+
+12
+
+12
+
+mW
+
+1.35 V SerDes
+
+SD_XVDD,
+AVDD_SD_PLL
+
+105
+
+126
+
+mW
+
+0.9 V SerDes
+
+SD_SVDD
+
+104
+
+123
+
+mW
+
+0.9 V Analog
+
+AFE_SVDD,
+AFE_CVDD
+
+84
+
+99
+
+mW
+
+0.9 V Digital
+
+VDD
+
+976
+
+1071
+
+mW
+
+1360
+
+1518
+
+mW
+
+Combined supplies total
+Notes:
+1. Thermal power mode is based on RF_Loopback
+
+2. Maximum power scales dynamic power from the thermal power mode by 1.2x.
+
+3.5 Input clocks
+3.5.1 System clock
+This section describes the system clock electrical characteristics.
+The system clock for this device is provided by using the combination of two clock sources.
+• 100 MHz PCIe reference clock PCI_CLK_P / PCI_CLK_N.
+• 122.88 MHz or 153.6 MHz differential clock DCS_CLK_P / DCS_CLK_N.
+For details on the clock source, see the device reference manual.
+
+3.5.2 DCS_CLK_P and DCS_CLK_N input clock electrical characteristics
+Table 7. DCS_CLK_P and DCS_CLK_N input clock DC electrical characteristics
+Parameter
+
+Symbol
+
+Min
+
+Single ended
+input voltage
+swing
+
+VIN_CLK_SING 200
+LE
+
+Typ
+
+Max
+
+Unit
+
+-
+
+800
+
+mV
+
+Input differential VIN_CLK_DIFF
+peak to peak
+
+400
+
+-
+
+1600
+
+mV
+
+Common Mode
+Voltage Range
+( external DC –
+Coupled
+connection)
+
+100
+
+-
+
+400
+
+mV
+
+Vcm
+
+Note
+
+2
+
+Table continues on the next page...
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+21 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 7. DCS_CLK_P and DCS_CLK_N input clock DC electrical characteristics (continued)
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Note
+
+Minimum Input
+Voltage
+( external DC –
+Coupled
+connection)
+
+Vmin
+
+0
+
+-
+
+-
+
+mV
+
+3
+
+Maximum Input
+Voltage
+( external DC –
+Coupled
+connection)
+
+Vmax
+
+-
+
+-
+
+800
+
+mV
+
+120
+
+Ω
+
+60
+
+Ω
+
+Input differential RDIFF
+termination
+
+80
+
+Single-ended
+termination
+impedance
+
+40
+
+ZTERM
+
+-
+
+Notes:
+1. The Input differential termination is internal to the device (see figure Figure 9).
+2. In AC coupled connection scheme the Vcm will be 0 V.
+3. In AC coupled connection scheme the Vmin should not go below -0.3 V.
+
+50 Ω
+DCS_CLK_P
+Input
+amp
+DCS_CLK_N
+50 Ω
+
+Figure 9. DCS reference clocks
+For external DC-coupled connection, the maximum average current requirement sets the requirement for average voltage
+(common mode voltage) to be between 100 mV and 400 mV.
+The figure below shows the reference clock input requirement for DC-coupled connection scheme.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+22 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Figure 10. Differential reference clock input DC requirements (external DC-coupled)
+For external AC-coupled connection, there is no common mode voltage requirement for DCS_CLK_P and DCS_CLK_N.
+The figure below shows the reference clock input requirement for AC-coupled connection scheme.
+
+Figure 11. Differential reference clock input DC requirements (external AC-coupled)
+Table 8. DCS_CLK_P and DCS_CLK_N input clock AC electrical characteristics
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+DCS_CLK_P
+tCLK_REF
+and
+DCS_CLK_N
+frequency range
+DCS_CLK_P
+and
+DCS_CLK_N
+Duty cycle
+
+tCLK_DUTY
+
+DCS_CLK_P
+tCLK_TOL
+and
+DCS_CLK_Nclo
+ck frequency
+tolerance
+
+Max
+
+122.88, 153.6
+
+40
+
+-50
+
+-
+
+Unit
+
+Note
+
+MHz
+
+3
+
+60
+
+%
+
++50
+
+ppm
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+23 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 8. DCS_CLK_P and DCS_CLK_N input clock AC electrical characteristics (continued)
+Parameter
+
+Symbol
+
+Min
+
+DCS_CLK_P
+and
+DCS_CLK_N
+RMS jitter
+integrated from
+10 kHz to
+DCS_CLK / 2
+
+tCLK_RMS_J
+
+-
+
+Slew rate
+
+Vcm
+
+0.5
+
+Typ
+
+-
+
+Max
+
+Unit
+
+1.0
+
+ps
+
+4
+
+v/ns
+
+Note
+
+2
+
+Notes:
+1. At recommended operating conditions. (see Table 3).
+2. Slew rate is measured at 0.35 x V swing to 0.65 x V swing.
+3. Only 122.88 MHz and 153.6 MHz are suported frequencies.
+
+3.6 RESET AC timing specifications
+This table provides the RESET initialization timing specifications.
+Table 9. RESET initialization timing specifications
+Parameter
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Required assertion time of HRESET_B
+
+1.0
+
+-
+
+ms
+
+1, 2, 3
+
+Required input assertion time of HRESET_B 1.0
+after stable SYSCLK
+
+-
+
+μs
+
+1, 2, 3
+
+Input setup time for POR configs with respect 4.0
+to negation of HRESET_B
+
+-
+
+SYSCLKs
+
+1, 2, 3
+
+Input hold time for all POR configs with
+respect to negation of HRESET_B
+
+2.0
+
+-
+
+SYSCLKs
+
+1, 2, 3
+
+Maximum valid-to-high impedance time for
+actively driven POR configs with respect to
+negation of HRESET_B
+
+-
+
+5.0
+
+SYSCLKs
+
+1, 2, 3
+
+1. HRESET_B must be driven asserted before the core and platform power supplies are powered up.
+2. The system clock (SYSCLKs) for this device is provided by using the combination of two clock sources. During reset the
+device uses the 100 MHz PCIe reference clock PCI_CLK_P / PCI_CLK_N until the RFIC drives the 122.88 MHz or 153.6 MHz
+differential input clock DCS_CLK_P and DCS_CLK_P for the PLL to lock.
+2. Design to ensure the input requirement to the device is achieved. Proper device operation is guaranteed for inputs meeting
+this requirement by design, simulation, characterization, or functional testing.
+This table provides the phase-locked loop (PLL) lock times.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+24 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 10. PLL lock times
+Parameter
+
+Min
+
+Max
+
+Unit
+
+PLL lock times (core and platform)
+
+-
+
+100.0
+
+μs
+
+3.7 Lightweight LVDS communication protocol (LLCP) interface
+This section describes the DC and AC electrical characteristics for the LLCP interface.
+
+3.7.1 LLCP DC electrical characteristics
+This table provides the DC electrical characteristics for the LLCP interface.
+Table 11. LLCP DC electrical characteristics (OVDD = 1.8 V) 1
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Notes
+
+Output differential voltage
+
+Vod
+
+250.0
+
+350.0
+
+450.0
+
+mV
+
+2, 3
+
+High-level output voltage
+
+Voh
+
+1.25
+
+1.375
+
+1.6
+
+V
+
+3
+
+Low-level output voltage
+
+Vol
+
+0.9
+
+1.025
+
+1.25
+
+V
+
+3
+
+Output common mode voltage
+
+Vocm
+
+1.125
+
+1.2
+
+1.375
+
+V
+
+3
+
+Input differential voltage
+
+Vid
+
+100.0
+
+-
+
+600.0
+
+mV
+
+2, 5
+
+Input common mode voltage
+
+Vicm
+
+0.05
+
+-
+
+1.57
+
+V
+
+5
+
+1. For recommended operating conditions, seeTable 3 .
+2. |Vpadp-Vpadn|
+3. Test condition: Rload=100 Ohm between padp and padn
+4. Test condition: Vin = ovdd or 0.
+5. See figure "LLCP Input Waveform".
+
+3.7.2 LLCP AC timing specifications
+This table provides the LLCP AC electrical characteristics for LLCP interface.
+Table 12. LLCP AC electrical characteristics
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Output transition time low to high
+
+Ttlh
+
+0.12
+
+0.58
+
+ns
+
+1, 2, 4
+
+Output transition time high to low
+
+Tthl
+
+0.1
+
+0.73
+
+ns
+
+1, 2, 4
+
+Receive rate
+
+-
+
+-
+
+307.2
+
+Mbps
+
+Transmit rate
+Offset voltage imbalance pk-pk
+
+614.4
+VOS
+
+150
+
+mV
+
+3
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+25 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 12. LLCP AC electrical characteristics (continued)
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+1. Test condition: Rload=100 Ohm between padp and padn.
+2. Measurement levels are 20-80% from output voltage
+4. See figure "LLCP LVDS output waveform" below.
+NOTE
+Skew between data and strobe
+LLCP data and strobe pairs should be routed as 100 Ohm differential pairs with matched routing length to ensure
+equivalent propagation time for each differential signal. Propagation time mismatch should be checked at receiver;
+mismatched propagation delay beyond 80 ps between data and strobe signals might exceed the capabilities of
+on-die timing compensation circuits and prevent correct operation of interface.
+
+Figure 12. LLCP LVDS output waveform
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+26 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Figure 13. LLCP input waveform
+
+Figure 14. Output offset voltage imbalance waveform
+
+3.8 PHY Timer interface
+This section describes the DC electrical characterstics and AC timing specifications for the PHY TImer interface at OVDD = 1.8 V.
+
+3.8.1 PHY Timer DC electrical characteristics
+This table provides the DC electrical characteristics for the PHY Timer interface at OVDD = 1.8 V.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+27 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 13. PHY Timer DC electrical characteristics (OVDD = 1.8 V) 1
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Input high voltage
+
+VIH
+
+0.7 x OVDD
+
+-
+
+V
+
+2
+
+Input low voltage
+
+VIL
+
+-
+
+0.2 x OVDD
+
+V
+
+2
+
+Input current (VIN = 0 V or VIN = OVDD)
+
+IIN
+
+-
+
+±50
+
+μA
+
+3
+
+Output high voltage(OVDD = min, IOH
+= -0.5mA
+
+VOH
+
+1.35
+
+-
+
+V
+
+-
+
+Output low voltage(OVDD = min, IOL
+= 0.5mA)
+
+VOL
+
+-
+
+0.4
+
+V
+
+-
+
+1. For recommended operating conditions, see Recommended Operating Conditions.
+2. The min VIL and max VIH values are based on the respective min and max OVIN values found in Recommended
+Operating Conditions.
+3. The symbol OVDD, in this case, represents the input voltage of the supply referenced in Recommended Operating Conditions
+
+3.8.2 PHY Timer AC timing specifications
+This table provides the AC electrical characteristics for the PHY TImer interface.
+Table 14. PHY Timer AC electrical characteristics 2
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+PHY Timer inputs—minimum
+pulse width
+
+tPIWID
+
+25.0
+
+-
+
+ns
+
+1
+
+1. PHY Timer inputs and outputs are asynchronous to any visible clock. PHY Timer outputs should be synchronized before use
+by any external synchronous logic. PHY Timer inputs are required to be valid for at least tPIWID to ensure proper operation.
+2. See Figure 15.
+This figure shows the AC test load for the PHY Timer.
+
+Figure 15. PHY Timer AC test load
+
+3.9 Analog input and output interface (ADC-DAC)
+This section describes the analog input and output ADC-DAC electrical characteristics specifications.
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+28 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+3.9.1 Analog input and output specifications
+This table provides the ADC input specification.
+Table 15. ADC electrical characteristics
+Parameter
+
+Symbol
+
+Minimum
+
+Typical
+
+Maximum
+
+Resolution
+
+ADCNOB
+
+12
+
+Diiferential full-scale input
+range VFSR
+
+1.2 x (vrefp vrefn) / 0.9
+
+Input common mode voltage Vcmin
+
+(vrefp + vrefn) /
+2 +/- 0.05
+
+Input capacitance
+
+CVIN
+
+2
+
+pF
+
+Switched capacitance
+
+CINSW
+
+0.6
+
+pF
+
+Input resistor
+
+Rcm2
+
+4.5
+
+kΩ
+
+Input resistor
+
+Rcm3
+
+1
+
+kΩ
+
+Input resistor
+
+RESD
+
+12
+
+Ω
+
+Input resistor
+
+Rin_on
+
+15
+
+Ω
+
+Input resistor
+
+Ron
+
+0.5
+
+Ω
+
+Maximum sampling rate
+
+Fsmax
+
+122.88 or 153.6
+
+MSPS
+
+Signal-to-noise ratio + distortion
+
+SINAD
+
+56.5
+
+dBFS
+
+Notes
+
+bits
+V
+
+1.2
+0.4
+
+Unit
+
+0.45
+
+0.5
+
+V
+
+1
+
+Notes:
+1. fs =122.88 MSPS or 153.6 MSPS.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+29 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+AFE_SVDDn
+
+RXn_[IQ]_P
+
+Sampling Sampling
+Switch Capacitor
+
+RESD
+
+Rin_on
+Rcm2
+
+enaccoupling
+
+RINFIX
+
+Rcm3
+
+CINSW
+
+Ron
+Ron_cm
+
+enaccoupling
+
+Ron
+envcmout
+
+RXn_[IQ]_N
+
+Rcm3
+
+Rcm2
+
+RESD
+
+Rin_on
+
+RINSW
+
+Sampling Sampling
+Switch Capacitor
+AFE_AGNDn AFE_AGNDn
+Figure 16.
+inputmodel
+circuit model
+ADC
+inputADC
+circuit
+This table provides the DAC output specification.
+Table 16. DAC electrical output characteristics
+Parameter
+
+Symbol
+
+Minimum
+
+Resolution
+
+DACNOB
+
+Output full scale current IFs
+
+each output 0.5
+
+Typical
+
+Maximum
+
+12
+2.5
+
+Unit
+
+Notes
+
+bits
+5
+
+ma
+
+Table continues on the next page...
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+30 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 16. DAC electrical output characteristics (continued)
+Parameter
+
+Symbol
+
+Minimum
+
+Output DC current
+
+each output
+
+Output compliance range
+
+each output
+
+Update rate
+
+Fs
+
+Signal to noise ratio + distortion
+
+SINAD
+
+Typical
+
+Maximum
+
+6.3
+
+Unit
+
+Notes
+
+%IFs
+0.85
+
+V
+
+122.88 or 153.6
+
+MSPS
+
+56
+
+dB
+
+This table provides AUX ADC input specification.
+Table 17. AUX ADC electrical characteristics
+Parameter
+
+Symbol
+
+Minimum
+
+Typical
+
+Maximum
+
+Unit
+
+6
+
+12
+
+Bits
+
+1.1
+
+1.8
+
+Volt
+
+Notes
+
+Resolution
+
+ADCNOB
+
+Vref range
+
+V REF
+
+Full scale input range
+
+VINFS
+
+V REF
+
+Volt
+
+Input signal bandwidth
+
+BW
+
+50
+
+KHz
+
+Input sampling capacitance
+
+CI
+
+2.6
+
+Sampling rate
+
+Fs
+
+0.05
+
+Conversion cycles
+
+CC
+
+ADCNOB + 2
+
+ADC
+Clock
+Cycles
+
+Power-up time
+
+PUT
+
+1
+
+Convers
+ion
+Clock
+cycles
+
+Signal-to-noise-and-distortion ratio
+
+SINAD
+
+56.5
+
+dB
+
+2
+
+pF
+8.75
+
+MSPS
+
+1
+
+Notes:
+1. Input signal frequency Fin = 50 KHz.
+2. Assuming 50 Ohms source output impedance.
+
+3.10 Universal asynchronous receiver/transmitter (UART)
+This section describes the DC and AC electrical characteristics for the UART interface.
+
+3.10.1 UART DC electrical characteristics
+This table provides the DC electrical characteristics for the UART interface at OVDD = 1.8 V.
+Table 18. UART DC electrical characteristics (1.8 V)3
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Input high voltage
+
+VIH
+
+0.7 x OVDD —
+
+Unit
+
+Notes
+
+V
+
+1
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+31 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 18. UART DC electrical characteristics (1.8 V)3 (continued)
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Input low voltage
+
+VIL
+
+—
+
+0.3 x OVDD V
+
+1
+
+Input current (VIN = 0 V or VIN = OVDD)
+
+IIN
+
+-50
+
+50
+
+µA
+
+2
+
+Output high voltage (IOH = -0.5 mA)
+
+VOH
+
+1.35
+
+—
+
+V
+
+—
+
+Output low voltage (IOL = 0.5 mA)
+
+VOL
+
+—
+
+0.4
+
+V
+
+—
+
+Notes:
+1. The min VIL and max VIH values are based on the min and max OVIN respective values found in Table 3.
+2. The symbol OVIN represents the input voltage of the supply referenced in Table 3.
+3. For recommended operating conditions, see Table 3.
+
+3.10.2 UART AC timing specifications
+This table provides the AC timing specifications for the UART interface.
+Table 19. UART AC timing specifications
+Parameter
+
+Value
+
+Unit
+
+Notes
+
+Minimum baud rate
+
+fPLAT/(2 x 1,048,576)
+
+baud
+
+1, 3
+
+Maximum baud rate
+
+fPLAT/(2 x 16)
+
+baud
+
+1, 2
+
+Notes:
+1. fPLAT refers to the internal platform clock.
+2. The actual attainable baud rate is limited by the latency of interrupt processing.
+3. The middle of a start bit is detected as the eighth sampled 0 after the 1-to-0 transition of the start bit. Subsequent bit values
+are sampled each 16th sample.
+
+3.11 General purpose input/output (GPIO) interface
+This section describes the DC and AC electrical characteristics for the GPIO interface.
+
+3.11.1 GPIO DC electrical characteristics
+This table provides the DC electrical characteristics for GPIO pins operating at OVDD = 1.8 V.
+Table 20. GPIO DC electrical characteristics (OVDD = 1.8 V)1
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Input high voltage
+
+VIH
+
+0.7 x OVDD
+
+—
+
+V
+
+2
+
+Input low voltage
+
+VIL
+
+—
+
+0.3 x OVDD
+
+V
+
+2
+
+Input current (VIN = 0 V or VIN = OVDD)
+
+IIN
+
+—
+
+±50
+
+μA
+
+-
+
+Table continues on the next page...
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+32 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 20. GPIO DC electrical characteristics (OVDD = 1.8 V)1 (continued)
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Output high voltage
+
+VOH
+
+1.35
+
+—
+
+V
+
+—
+
+VOL
+
+—
+
+0.4
+
+V
+
+—
+
+(ODD = min, IOH = -0.5 mA)
+Output low voltage
+(OVDD = min, IOL = 0.5 mA)
+Notes:
+1. For recommended operating conditions, see Table 3.
+2. The min VIL and max VIH values are based on the respective min and max OVIN values found in Table 3.
+
+3.11.2 GPIO AC timing specifications
+The table below provides the GPIO input and output AC timing specifications.
+Table 21. GPIO Input AC timing specifications
+Parameter
+
+Symbol
+
+Min
+
+Unit
+
+Notes
+
+GPIO inputs-minimum pulse width
+
+tPIWID
+
+20
+
+ns
+
+1
+
+Notes:
+1. GPIO inputs and outputs are asynchronous to any visible clock. GPIO outputs should be synchronized before use by any
+external synchronous logic. GPIO inputs are required to be valid for at least tPIWID to ensure proper operation.
+The figure below provides the AC test load for the GPIO.
+
+Output
+
+OVDD/2
+
+Z0= 50 Ω
+RL = 50 Ω
+
+Figure 17. GPIO AC test load
+
+3.12 High-speed serial interfaces (HSSI)
+The chip features a Serializer/Deserializer (SerDes) interface to be used for high-speed serial interconnect applications. The
+SerDes interface can be used for PCI Express.
+This section describes the most common portion of the SerDes DC electrical specifications: the DC requirement for SerDes
+reference clocks. The SerDes data lane's transmitter (Tx) and receiver (Rx) reference circuits are also described.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+33 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+3.12.1 Signal terms definitions
+The SerDes utilizes differential signaling to transfer data across the serial link. This section defines the terms that are used in the
+description and specification of differential signals.
+This figure shows how the signals are defined. For illustration purposes only, one SerDes lane is used in the description. This figure
+shows the waveform for either a transmitter output (SD_TXn_P and SD_TXn_N) or a receiver input (SD_RXn_P and SD_RXn_N).
+Each signal swings between A volts and B volts where A > B.
+SD_TXn_P
+SD_RXn_P
+
+A Volts
+
+or
+
+Vcm= (A + B)/2
+SD_TXn_N or
+SD_RXn_N
+
+B Volts
+
+Differential swing, VID orVOD = A - B
+Differential peak voltage, VDIFFp = |A - B|
+Differential peak-to-peak voltage, VDIFFpp =2 x VDIFFp (not shown)
+
+Figure 18. Differential voltage definitions for transmitter or receiver
+Using this waveform, the definitions are as described in the following list. To simplify the illustration, the definitions assume that
+the SerDes transmitter and receiver operate in a fully symmetrical differential signaling environment:
+Single-Ended Swing The transmitter output signals and the receiver input signals SD_TXn_P, SD_TXn_N, SD_RXn_P and
+SD_RXn_N each have a peak-to-peak swing of A - B volts. This is also referred to as each signal
+wire's single-ended swing.
+Differential Output
+Voltage, VOD (or
+Differential Output
+Swing)
+
+The differential output voltage (or swing) of the transmitter, VOD, is defined as the difference of the
+two complementary output voltages: VSD_TXn_P - VSD_TXn_N. The VOD value can be either positive or
+negative.
+
+Differential Input
+Voltage, V ID (or
+Differential Input
+Swing)
+
+The differential input voltage (or swing) of the receiver, VID, is defined as the difference of the two
+complementary input voltages: VSD_RXn_P- VSD_RXn_N. The VID value can be either positive or negative.
+
+Differential Peak
+Voltage, V DIFFp
+
+The peak value of the differential transmitter output signal or the differential receiver input signal is
+defined as the differential peak voltage, VDIFFp = |A - B| volts.
+
+Differential Peak-to­
+Peak, V DIFFp-p
+
+Because the differential output signal of the transmitter and the differential input signal of the receiver
+each range from A - B to -(A - B) volts, the peak-to-peak value of the differential transmitter output
+signal or the differential receiver input signal is defined as differential peak-to-peak voltage, VDIFFp-p =
+2 x VDIFFp = 2 x |(A - B)| volts, which is twice the differential swing in amplitude, or twice the differential
+peak. For example, the output differential peak-to-peak voltage can also be calculated as VTX-DIFFp-p =
+2 x |VOD|.
+
+Differential
+Waveform
+
+The differential waveform is constructed by subtracting the inverting signal (SD_TXn_N, for example)
+from the non-inverting signal (SD_TXn_P, for example) within a differential pair. There is only one
+signal trace curve in a differential waveform. The voltage represented in the differential waveform is
+not referenced to ground. See Figure 23 as an example for differential waveform.
+
+Common Mode
+Voltage, V cm
+
+The common mode voltage is equal to half of the sum of the voltages between each conductor of
+a balanced interchange circuit and ground. In this example, for SerDes output, Vcm_out = (VSD_TXn_P
++ VSD_TXn_N) ÷ 2 = (A + B) ÷ 2, which is the arithmetic mean of the two complementary output
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+
+Data Sheet: Technical Data
+
+34 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+voltages within a differential pair. In a system, the common mode voltage may often differ from one
+component's output to the other's input. It may be different between the receiver input and driver
+output circuits within the same component. It is also referred to as the DC offset on some occasions.
+To illustrate these definitions using real values, consider the example of a current mode logic (CML) transmitter that has a common
+mode voltage of 2.25 V and outputs, TD and TD_B. If these outputs have a swing from 2.0 V to 2.5 V, the peak-to-peak voltage
+swing of each signal (TD or TD_B) is 500 mV p-p, which is referred to as the single-ended swing for each signal. Because the
+differential signaling environment is fully symmetrical in this example, the transmitter output's differential swing (VOD) has the
+same amplitude as each signal's single-ended swing. The differential output signal ranges between 500 mV and -500 mV. In
+other words, VOD is 500 mV in one phase and -500 mV in the other phase. The peak differential voltage (VDIFFp) is 500 mV. The
+peak-to-peak differential voltage (VDIFFp-p) is 1000 mV p-p.
+
+3.12.2 SerDes reference clocks
+The SerDes reference clock input applied to an internal phase-locked loop (PLL) whose output creates the clock used by the
+corresponding SerDes lanes. The SerDes reference clock input is PCI_CLK_P and PCI_CLK_N.
+• PCIe 2.5 GT/s, 5 GT/s, and 8 GT/s.
+The following sections describe the SerDes reference clock requirements and provide application information.
+
+3.12.2.1 SerDes reference clock receiver characteristics
+This figure shows a receiver reference diagram of the SerDes reference clocks.
+
+50 Ω
+SDn_REF_CLKn_P
+Input
+amp
+SDn_REF_CLKn_N
+50 Ω
+
+Figure 19. Receiver of SerDes reference clocks
+The characteristics of the clock signals are as follows:
+• The SerDes transceiver's core power supply voltage requirements (SD_SVDD) are as specified in Table 3.
+• The SerDes reference clock receiver reference circuit structure is as follows:
+— The PCI_CLK_P and PCI_CLK_N are internally AC-coupled differential inputs as shown in Figure 19. Each
+differential clock input (PCI_CLK_P and PCI_CLK_N) has on-chip 50 Ω termination to SGNDn followed by on-chip
+AC-coupling.
+— The external reference clock driver must be able to drive this termination.
+— The SerDes reference clock input can be either differential or single-ended. See the differential mode and single­
+ended mode descriptions in Signal terms definitions for detailed requirements.
+• The maximum average current requirement also determines the common mode voltage range.
+— When the SerDes reference clock differential inputs are DC coupled externally with the clock driver chip, the
+maximum average current allowed for each input pin is 8 mA. In this case, the exact common mode input voltage is
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+35 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+not critical as long as it is within the range allowed by the maximum average current of 8 mA because the input is
+AC-coupled on-chip.
+— This current limitation sets the maximum common mode input voltage to be less than 0.4 V (0.4 V ÷ 50 = 8 mA)
+while the minimum common mode input level is 0.1 V above SGNDn. For example, a clock with a 50/50 duty cycle
+can be produced by a clock driver with output driven by its current source from 0 mA to 16 mA (0-0.8 V), such that
+each phase of the differential input has a single-ended swing from 0 V to 800 mV with the common mode voltage at
+400 mV.
+— If the device driving the PCI_CLK_P and PCI_CLK_N inputs cannot drive 50 Ω to SGNDn DC or the drive strength of
+the clock driver chip exceeds the maximum input current limitations, it must be AC-coupled off-chip.
+• The input amplitude requirement is described in detail in the following sections.
+
+3.12.2.2 SerDes reference clocks DC electrical characteristics
+The DC-level requirements for the SerDes reference clock inputs are different depending on the signaling mode used to connect
+the clock driver chip and SerDes reference clock inputs, as described below:
+• Differential Mode
+— The input amplitude of the differential clock must be between 400 mV and 1600 mV differential peak-to-peak (or between
+200 mV and 800 mV differential peak). In other words, each signal wire of the differential pair must have a single-ended
+swing of less than 800 mV and greater than 200 mV. This requirement is the same for both external DC-coupled or
+AC-coupled connection.
+— For an external DC-coupled connection, as described in Figure 19, the maximum average current requirements set the
+requirement for average voltage (common mode voltage) as between 100 mV and 400 mV.
+— This figure shows the SerDes reference clock input requirement for a DC-coupled connection scheme.
+200 mV < Input amplitude or differential peak < 800 mV
+PCI_CLK_P
+
+Vmax < 800 mV
+
+100 mV < Vcm < 400 mV
+
+Vmin > 0 V
+
+PCI_CLK_N
+
+Figure 20. Differential reference clock input DC requirements (external DC-coupled)
+— For an external AC-coupled connection, there is no common mode voltage requirement for the clock driver. Because the
+external AC-coupling capacitor blocks the DC level, the clock driver and the SerDes reference clock receiver operate
+in different common mode voltages. The SerDes reference clock receiver in this connection scheme has its common
+mode voltage set to SGNDn. Each signal wire of the differential inputs is allowed to swing below and above the common
+mode voltage (SGNDn).
+— This figure shows the SerDes reference clock input requirement for an AC-coupled connection scheme.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+36 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+200 mV < Input amplitude or differential peak < 800 mV
+PCI_CLK_P
+
+Vmax < Vcm + 400 mV
+
+Vcm
+
+Vmin > Vcm - 400 mV
+
+PCI_CLK_N
+
+Figure 21. Differential reference clock input DC requirements (external AC-coupled)
+
+3.12.2.3 AC requirements for SerDes reference clocks
+This table provides the AC requirements for SerDes reference clocks for PCI Express protocols running at data rates up to 8 GT/s.
+This includes PCI Express (2.55 and 8 GT/s). SerDes reference clocks need to be verified by the customer's application design.
+Table 22. PCI_CLK_P and PCI_CLK_N input clock requirements (SVDD) 1
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Notes
+
+PCI_CLK_P and PCI_CLK_N frequency range
+
+tCLK_REF
+
+—
+
+100
+
+—
+
+MHz
+
+2
+
+SDn_REF_CLKn_P/ SDn_REF_CLKn_N clock
+frequency tolerance
+
+tCLK_TOL
+
+-300
+
+—
+
+300
+
+ppm
+
+3
+
+PCI_CLK_P and PCI_CLK_N reference clock
+duty cycle
+
+tCLK_DUTY
+
+40
+
+50
+
+60
+
+%
+
+5
+
+PCI_CLK_P and PCI_CLK_N max deterministic peak­ tCLK_DJ
+to-peak jitter at 10-6 BER
+
+—
+
+—
+
+42
+
+ps
+
+—
+
+PCI_CLK_P and PCI_CLK_N total reference clock
+jitter at 10-6 BER (peak-to-peak jitter at refClk input)
+
+tCLK_TJ
+
+—
+
+—
+
+86
+
+ps
+
+6
+
+PCI_CLK_P and PCI_CLK_N 10 kHz to 1.5 MHz
+RMS jitter
+
+tREFCLK-LF-RMS
+
+—
+
+—
+
+3
+
+ps
+RMS
+
+7
+
+PCI_CLK_P and PCI_CLK_N > 1.5 MHz to Nyquist
+RMS jitter
+
+tREFCLK-HF-RMS
+
+—
+
+—
+
+3.1
+
+ps
+RMS
+
+7
+
+RMS reference clock jitter
+
+tREFCLK-RMS-DC —
+
+—
+
+1
+
+ps
+RMS
+
+8
+
+PCI_CLK_P and PCI_CLK_N rising/falling edge rate
+
+tCLKRR/tCLKFR
+
+1
+
+—
+
+4
+
+V/ns
+
+9
+
+Differential input high voltage
+
+VIH
+
+200
+
+—
+
+—
+
+mV
+
+5
+
+Differential input low voltage
+
+VIL
+
+—
+
+—
+
+-200
+
+mV
+
+5
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+37 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 22. PCI_CLK_P and PCI_CLK_N input clock requirements (SVDD) 1 (continued)
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Notes
+
+Rising edge rate (PCI_CLK_P) to falling edge rate
+(PCI_CLK_N) matching
+
+Rise-Fall
+Matching
+
+—
+
+—
+
+20
+
+%
+
+10, 11
+
+Notes:
+1. For recommended operating conditions, see #unique_38.
+2. Caution: Only 100 MHz has been tested.
+3. For PCI Express (2.55 and 8 GT/s).
+4. Measurement taken from differential waveform.
+6. Limits from PCI Express CEM Rev 2.0.
+7. For PCI Express 5 GT/s, per PCI Express base specification Rev 3.0.
+8. For PCI Express 8 GT/s, per PCI Express base specification Rev. 3.0.
+9. Measured from -200 mV to +200 mV on the differential waveform (derived from PCI_CLK_P minus PCI_CLK_N). The signal
+must be monotonic through the measurement region for rise and fall time. The 400 mV measurement window is centered on the
+differential zero crossing. See Figure 22.
+10. Measurement taken from single-ended waveform.
+11. Matching applies to rising edge for PCI_CLK_P and falling edge rate for PCI_CLK_N. It is measured using a 200 mV window
+centered on the median cross point where PCI_CLK_P rising meets PCI_CLK_N falling. The median cross point is used to
+calculate the voltage thresholds that the oscilloscope uses for the edge rate calculations. The rise edge rate of PCI_CLK_P must
+be compared to the fall edge rate of PCI_CLK_N, the maximum allowed difference should not exceed 20% of the slowest edge
+rate. See Figure 23.
+This figure shows the differential measurement points for rise and fall time.
+Rise-edge rate
+
+Fall-edge rate
+
+VIH = + 200 mV
+0.0 V
+VIL = - 200 mV
+PCI_CLK_P
+PCI_CLK_N
+
+Figure 22. Differential measurement points for rise and fall time
+This figure shows the single-ended measurement points for rise and fall time matching.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+38 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+PCI_CLK_N
+
+PCI_CLK_N
+
+TFALL
+
+TRISE
+
+VCROSS MEDIAN + 100 mV
+VCROSS MEDIAN
+
+VCROSS MEDIAN
+VCROSS MEDIAN - 100 mV
+
+PCI_CLK_P
+
+PCI_CLK_P
+
+Figure 23. Single-ended measurement points for rise and fall time matching
+
+3.12.3 SerDes transmitter and receiver reference circuits
+This figure shows the reference circuits for SerDes data lane's transmitter and receiver.
+SDn_TXn_P
+
+Transmitter
+
+SDn_RXn_P
+50 Ω
+
+100 Ω
+
+SDn_TXn_N
+
+SDn_RXn_N
+
+Receiver
+
+50 Ω
+
+Figure 24. SerDes transmitter and receiver reference circuits
+The DC and AC specifications of the SerDes data lanes are defined in each interface protocol section below based on the
+application usage:
+• PCI Express interface
+Note that an external AC-coupling capacitor is required for the above serial transmission protocols with the capacitor value defined
+in the specification of each protocol section.
+
+3.12.4 PCI Express
+This section describes the clocking dependencies, as well as the DC and AC electrical specifications for the PCI Express bus.
+
+3.12.4.1 Clocking dependencies
+The ports on the two ends of a link must transmit data at a rate that is within 600 ppm of each other at all times. This is specified
+to allow bit rate clock sources with a ±300 ppm tolerance.
+
+3.12.4.2 PCI Express DC physical layer specifications
+This section contains the DC specifications for the physical layer of PCI Express on this chip.
+
+3.12.4.2.1 PCI Express DC physical layer transmitter specifications
+This section discusses the PCI Express DC physical layer transmitter specifications for 2.5 GT/s, 5 GT/s, and 8 GT/s.
+This table defines the PCI Express 2.0 (2.5 GT/s) DC specifications for the differential output at all transmitters. The parameters
+are specified at the component pins.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+39 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 23. PCI Express 2.0 (2.5 GT/s) differential transmitter output DC specifications (SD_XVDD = 1.35 V)1
+Parameter
+
+Symbol
+
+Min
+
+Typical
+
+Max
+
+Units
+
+Notes
+
+Differential peak-to-peak
+output voltage
+
+VTX-DIFFp-p
+
+800
+
+1000
+
+1200
+
+mV
+
+VTX-DIFFp-p = 2 x │ VTX-D+ - VTX-D- │
+
+De-emphasized differential VTX-DE-RATIO 3.0
+output voltage (ratio)
+
+3.5
+
+4.0
+
+dB
+
+Ratio of the VTX-DIFFp-p of the second and following
+bits after a transition divided by the VTX-DIFFp-p of
+the first bit after a transition.
+
+DC differential
+transmitter impedance
+
+80
+
+100
+
+120
+
+Ω
+
+Transmitter DC differential mode low Impedance
+
+40
+
+50
+
+60
+
+Ω
+
+Required transmitter D+ as well as D- DC
+Impedance during all states
+
+ZTX-DIFF-DC
+
+Transmitter DC impedance ZTX-DC
+Notes:
+
+1. For recommended operating conditions, see Table 3.
+This table defines the PCI Express 2.0 (5 GT/s) DC specifications for the differential output at all transmitters. The parameters are
+specified at the component pins.
+Table 24. PCI Express 2.0 (5 GT/s) differential transmitter output DC specifications (SD_XVDD = 1.35 V)1
+Parameter
+
+Symbol
+
+Min
+
+Typical
+
+Max
+
+Units
+
+Notes
+
+Differential peak-to-peak
+output voltage
+
+VTX-DIFFp-p
+
+800
+
+1000
+
+1200
+
+mV
+
+VTX-DIFFp-p = 2 x │ VTX-D+ - VTX-D- │
+
+Low power
+differential peak-to-peak
+output voltage
+
+VTX-DIFFp-p_low
+
+400
+
+500
+
+1200
+
+mV
+
+VTX-DIFFp-p = 2 x │ VTX-D+ - VTX-D- │
+
+De-emphasized
+differential output
+voltage (ratio)
+
+VTX-DE-RATIO-3.5dB 3.0
+
+3.5
+
+4.0
+
+dB
+
+Ratio of the VTX-DIFFp-p of the second and
+following bits after a transition divided by the
+VTX-DIFFp-p of the first bit after a transition.
+
+De-emphasized
+differential output
+voltage (ratio)
+
+VTX-DE-RATIO-6.0dB 5.5
+
+6.0
+
+6.5
+
+dB
+
+Ratio of the VTX-DIFFp-p of the second and
+following bits after a transition divided by the
+VTX-DIFFp-p of the first bit after a transition.
+
+DC differential
+transmitter impedance
+
+ZTX-DIFF-DC
+
+80
+
+100
+
+120
+
+Ω
+
+Transmitter DC differential mode
+low impedance
+
+Transmitter
+DC Impedance
+
+ZTX-DC
+
+40
+
+50
+
+60
+
+Ω
+
+Required transmitter D+ as well as D- DC
+impedance during all states
+
+Notes:
+1. For recommended operating conditions, see Table 3.
+This table defines the PCI Express 3.0 (8 GT/s) DC characteristics for the differential output at all transmitters. The parameters
+are specified at the component pins.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+40 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 25. PCI Express 3.0 (8 GT/s) differential transmitter output DC characteristics (SD_XVDD = 1.35 V)3
+Parameter
+
+Symbol
+
+Min
+
+Typical
+
+Max
+
+Units
+
+Notes
+
+Full swing transmitter
+voltage with no TX Eq
+
+VTX-FS-NO-EQ
+
+800
+
+—
+
+1300
+
+mVp-p
+
+See Note 1.
+
+Reduced swing
+VTX-RS-NO-EQ
+transmitter voltage with no
+TX Eq
+
+400
+
+—
+
+1300
+
+mV
+
+See Note 1.
+
+De-emphasized
+differential output
+voltage (ratio)
+
+VTX-DE-RATIO-3.5dB 3.0
+
+3.5
+
+4.0
+
+dB
+
+—
+
+De-emphasized
+differential output
+voltage (ratio)
+
+VTX-DE-RATIO-6.0dB 5.5
+
+6.0
+
+6.5
+
+dB
+
+—
+
+Minimum swing during
+EIEOS for full swing
+
+VTX-EIEOS-FS
+
+250
+
+—
+
+—
+
+mVp-p
+
+See Note 2
+
+Minimum swing during
+VTX-EIEOS-RS
+EIEOS for reduced swing
+
+232
+
+—
+
+—
+
+mVp-p
+
+See Note 2
+
+DC differential
+transmitter impedance
+
+ZTX-DIFF-DC
+
+80
+
+100
+
+120
+
+Ω
+
+Transmitter DC differential mode
+low impedance
+
+Transmitter
+DC Impedance
+
+ZTX-DC
+
+40
+
+50
+
+60
+
+Ω
+
+Required transmitter D+ as well as D- DC
+impedance during all states
+
+Notes:
+1. Voltage measurements for VTX-FS-NO-EQ and VTX-RS-NO-EQ are made using the 64-zeroes/64-ones pattern in the
+compliance pattern.
+2. Voltage limits comprehend both full swing and reduced swing modes. The transmitter must reject any changes that would
+violate this specification. The maximum level is covered in the VTX-FS-NO-EQ measurement which represents the maximum
+peak voltage the transmitter can drive. The VTX-EIEOS-FS and VTX-EIEOS-RS voltage limits are imposed to guarantee the EIEOS
+threshold of 175 mVP-P at the receiver pin. This parameter is measured using the actual EIEOS pattern that is part of the
+compliance pattern and then removing the ISI contribution of the breakout channel.
+3. For recommended operating conditions, see Table 3.
+
+3.12.4.2.2 PCI Express DC physical layer receiver specifications
+This section discusses the PCI Express DC physical layer receiver specifications for 2.5 GT/s, 5 GT/s, and 8 GT/s.
+This table defines the DC specifications for the PCI Express 2.0 (2.5 GT/s) differential input at all receivers. The parameters are
+specified at the component pins.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+41 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 26. PCI Express 2.0 (2.5 GT/s) differential receiver input DC specifications (SD_SVDD = 0.9 V)4
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Differential input peak-to­
+peak voltage
+
+VRX-DIFFp-p
+
+175
+
+1000
+
+1200 mV
+
+VRX-DIFFp-p = 2 x |VRX-D+ - VRX-D-| See
+Note 1.
+
+DC differential input impedance
+
+ZRX-DIFF-DC
+
+80
+
+100
+
+120
+
+Ω
+
+Receiver DC differential mode
+impedance. See Note 2
+
+DC input impedance
+
+ZRX-DC
+
+40
+
+50
+
+60
+
+Ω
+
+Required receiver D+ as well as D- DC
+Impedance (50 ± 20% tolerance). See
+Notes 1 and 2.
+
+Powered down DC input impedance ZRX-HIGH-IMP-DC
+
+50
+
+-
+
+-
+
+kΩ
+
+Required receiver D+ as well as DDC Impedance when the receiver
+terminations do not have power. See
+Note 3.
+
+Electrical idle detect threshold
+
+65
+
+-
+
+175
+
+mV
+
+VRX-IDLE-DET-DIFFp-p = 2 x |VRX-D+ -VRX­
+D-|
+
+VRX-IDLE-DET-
+
+Units
+
+DIFFp-p
+
+Notes
+
+Measured at the package pins of
+the receiver
+Notes:
+1. Measured at the package pins with a test load of 50Ω to GND on each pin.
+2. Impedance during all LTSSM states. When transitioning from a fundamental reset to detect (the initial state of the LTSSM)
+there is a 5 ms transition time before receiver termination values must be met on all unconfigured lanes of a port.
+3. The receiver DC common mode impedance that exists when no power is present or fundamental reset is asserted. This
+helps ensure that the receiver detect circuit does not falsely assume a receiver is powered on when it is not. This term must be
+measured at 300 mV above the receiver ground.
+4. For recommended operating conditions, see Table 3.
+This table defines the DC specifications for the PCI Express 2.0 (5 GT/s) differential input at all receivers. The parameters are
+specified at the component pins.
+Table 27. PCI Express 2.0 (5 GT/s) differential receiver input DC specifications (SD_SVDD = 0.9 V)4
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Differential input peak-to-peak voltage VRX-DIFFp-p
+
+120
+
+1000
+
+1200 mV
+
+VRX-DIFFp-p = 2 x |VRX-D+ - VRX-D-|
+See Note 1.
+
+DC differential input impedance
+
+ZRX-DIFF-DC
+
+80
+
+100
+
+120
+
+Ω
+
+Receiver DC differential mode
+impedance. See Note 2
+
+DC input impedance
+
+ZRX-DC
+
+40
+
+50
+
+60
+
+Ω
+
+Required receiver D+ as well
+as D- DC Impedance (50 ± 20%
+tolerance). See Notes 1 and 2.
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+42 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 27. PCI Express 2.0 (5 GT/s) differential receiver input DC specifications (SD_SVDD = 0.9 V)4 (continued)
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Powered down DC input impedance
+
+ZRX-HIGH-IMP-DC
+
+50
+
+-
+
+-
+
+kΩ
+
+Required receiver D+ as well as DDC Impedance when the receiver
+terminations do not have power. See
+Note 3.
+
+Electrical idle detect threshold
+
+VRX-IDLE-DET-
+
+65
+
+-
+
+175
+
+mV
+
+VRX-IDLE-DET-DIFFp-p = 2 x |VRX-D+
+- VRX-D-|
+
+DIFFp-p
+
+Measured at the package pins of
+the receiver
+Notes:
+1. Measured at the package pins with a test load of 50 Ω to GND on each pin.
+2. Impedance during all LTSSM states. When transitioning from a fundamental reset to detect (the initial state of the LTSSM)
+there is a 5 ms transition time before receiver termination values must be met on all unconfigured lanes of a port.
+3. The receiver DC common mode impedance that exists when no power is present or fundamental reset is asserted. This
+helps ensure that the receiver detect circuit does not falsely assume a receiver is powered on when it is not. This term must be
+measured at 300 mV above the receiver ground.
+4. For recommended operating conditions, see Table 3.
+This table defines the DC characteristics for the PCI Express 3.0 (8 GT/s) differential input at all receivers. The parameters are
+specified at the component pins.
+Table 28. PCI Express 3.0 (8 GT/s) differential receiver input DC characteristics (SD_SVDD = 0.9 V)6
+Characteristic
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+DC differential input impedance
+
+ZRX-DIFF-DC
+
+80
+
+100
+
+120
+
+Ω
+
+Receiver DC differential mode
+impedance. See Note 2
+
+DC input impedance
+
+ZRX-DC
+
+40
+
+50
+
+60
+
+Ω
+
+Required receiver D+ as well
+as D- DC Impedance (50 ± 20%
+tolerance). See Notes 1 and 2.
+
+Powered down DC input impedance
+
+ZRX-HIGH-IMP-DC
+
+50
+
+—
+
+—
+
+kΩ
+
+Required receiver D+ as well as DDC Impedance when the receiver
+terminations do not have power. See
+Note 3.
+
+Generator launch voltage
+
+VRX-LAUNCH-8G
+
+—
+
+800
+
+—
+
+mV
+
+Measured at TP1 per PCI Express
+base spec. rev 3.0
+
+Eye height (-20dB Channel)
+
+VRX-SV-8G
+
+25
+
+—
+
+—
+
+mV
+
+Measured at TP2P per PCI Express
+base spec. rev 3.0. See Notes 4, 5
+
+Eye height (-12dB Channel)
+
+VRX-SV-8G
+
+50
+
+—
+
+—
+
+mV
+
+Measured at TP2P per PCI Express
+base spec. rev 3.0. See Notes 4, 5
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+43 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 28. PCI Express 3.0 (8 GT/s) differential receiver input DC characteristics (SD_SVDD = 0.9 V)6 (continued)
+Characteristic
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Eye height (-3dB Channel)
+
+VRX-SV-8G
+
+200
+
+—
+
+—
+
+mV
+
+Measured at TP2P per PCI Express
+base spec. rev 3.0. See Notes 4, 5
+
+Electrical idle detect threshold
+
+VRX-IDLE-DET-
+
+65
+
+—
+
+175
+
+mV
+
+VRX-IDLE-DET-DIFFp-p = 2 x |VRX-D+
+- VRX-D-|
+
+DIFFp-p
+
+Measured at the package pins of
+the receiver
+Notes:
+1. Measured at the package pins with a test load of 50 Ω to GND on each pin.
+2. Impedance during all LTSSM states. When transitioning from a fundamental reset to detect (the initial state of the LTSSM)
+there is a 5 ms transition time before receiver termination values must be met on all unconfigured lanes of a port.
+3. The receiver DC common mode impedance that exists when no power is present or fundamental reset is asserted. This
+helps ensure that the receiver detect circuit does not falsely assume a receiver is powered on when it is not. This term must be
+measured at 300 mV above the receiver ground.
+4. VRX-SV-8G is tested at three different voltages to ensure the receiver device under test is capable of equalizing over a range
+of channel loss profiles. The "SV" in the parameter names refers to stressed voltage.
+5. VRX-SV-8G is referenced to TP2P and is obtained after post processing data captured at TP2.
+6. For recommended operating conditions, see Table 3.
+
+3.12.4.3 PCI Express AC physical layer specifications
+This section describes the AC specifications for the physical layer of PCI Express on this device.
+
+3.12.4.3.1 PCI Express AC physical layer transmitter specifications
+This section describes the PCI Express AC physical layer transmitter specifications for 2.5 GT/s, 5 GT/s, and 8 GT/s.
+This table defines the PCI Express 2.0 (2.5 GT/s) AC specifications for the differential output at all transmitters. The parameters
+are specified at the component pins. The AC timing specifications do not include RefClk jitter.
+Table 29. PCI Express 2.0 (2.5 GT/s) differential transmitter output AC specifications4
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Unit interval
+
+UI
+
+399.88 400
+
+400.12 ps
+
+Each UI is 400 ps ± 300 ppm. UI does
+not account for spread-spectrum clock
+dictated variations.
+
+Minimum transmitter
+eye width
+
+TTX-EYE
+
+0.75
+
+-
+
+The maximum transmitter jitter can be
+derived as TTX-MAX-JITTER = 1 - TTX-EYE =
+0.25 UI. Does not include spread-spectrum
+or RefCLK jitter. Includes device random
+jitter at 10-12.
+
+-
+
+Max
+
+Units
+
+UI
+
+Notes
+
+See Notes 1 and 2.
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+44 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 29. PCI Express 2.0 (2.5 GT/s) differential transmitter output AC specifications4 (continued)
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Maximum time between the TTX-EYE-MEDIANjitter median and maximum to- MAX-JITTER
+deviation from the median
+
+-
+
+-
+
+0.125
+
+UI
+
+Jitter is defined as the measurement
+variation of the crossing points (VTX-DIFFp-p =
+0 V) in relation to a recovered transmitter UI.
+A recovered transmitter UI is calculated over
+3500 consecutive unit intervals of sample
+data. Jitter is measured using all edges of
+the 250 consecutive UI in the center of the
+3500 UI used for calculating the transmitter
+UI. See Notes 1 and 2.
+
+AC coupling capacitor
+
+75
+
+-
+
+200
+
+nF
+
+All transmitters must be AC coupled. The AC
+coupling is required either within the media
+or within the transmitting component itself.
+See Note 3.
+
+CTX
+
+Notes:
+1. Specified at the measurement point into a timing and voltage test load as shown in Figure 26 and measured over any 250
+consecutive transmitter UIs.
+2. A TTX-EYE = 0.75 UI provides for a total sum of deterministic and random jitter budget of TTX-JITTER-MAX = 0.25 UI for the
+transmitter collected over any 250 consecutive transmitter UIs. The TTX-EYE-MEDIAN-to-MAX-JITTER median is less than half of the
+total transmitter jitter budget collected over any 250 consecutive transmitter UIs. It must be noted that the median is not the same
+as the mean. The jitter median describes the point in time where the number of jitter points on either side is approximately equal
+as opposed to the averaged time value.
+3. The chip's SerDes transmitter does not have CTX built-in. An external AC coupling capacitor is required.
+4. For recommended operating conditions, see Table 3.
+This table defines the PCI Express 2.0 (5 GT/s) AC specifications for the differential output at all transmitters. The parameters are
+specified at the component pins. The AC timing specifications do not include RefClk jitter.
+Table 30. PCI Express 2.0 (5 GT/s) differential transmitter output AC specifications3
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Unit Interval
+
+UI
+
+199.9
+4
+
+200.0
+0
+
+200.0
+6
+
+ps
+
+Each UI is 200 ps ± 300 ppm. UI does
+not account for spread-spectrum clock
+dictated variations.
+
+0.75
+
+-
+
+-
+
+UI
+
+The maximum transmitter jitter can be
+derived as: TTX-MAX-JITTER = 1 - TTX-EYE =
+0.25 UI.
+
+Minimum transmitter eye width TTX-EYE
+
+See Note 1.
+Transmitter RMS deterministic TTX-HF-DJ-DD
+jitter > 1.5 MHz
+
+-
+
+-
+
+0.15
+
+ps
+
+-
+
+Transmitter RMS deterministic TTX-LF-RMS
+jitter < 1.5 MHz
+
+-
+
+3.0
+
+-
+
+ps
+
+Reference input clock RMS jitter (< 1.5 MHz)
+at pin < 1 ps
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+45 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 30. PCI Express 2.0 (5 GT/s) differential transmitter output AC specifications3 (continued)
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+AC coupling capacitor
+
+CTX
+
+75
+
+-
+
+200
+
+nF
+
+All transmitters must be AC coupled. The AC
+coupling is required either within the media
+or within the transmitting component itself.
+See Note 2.
+
+Notes:
+1. Specified at the measurement point into a timing and voltage test load as shown in Figure 26 and measured over any 250
+consecutive transmitter UIs.
+2. The chip's SerDes transmitter does not have CTX built-in. An external AC coupling capacitor is required.
+3. For recommended operating conditions, see Table 3.
+This table defines the PCI Express 3.0 (8 GT/s) AC specifications for the differential output at all transmitters. The parameters are
+specified at the component pins. The AC timing specifications do not include RefClk jitter.
+Table 31. PCI Express 3.0 (8 GT/s) differential transmitter output AC specifications4
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Unit Interval
+
+UI
+
+124.962
+5
+
+125.0
+0
+
+125.037
+5
+
+ps
+
+Each UI is 125 ps ± 300 ppm. UI does
+not account for spread-spectrum clock
+dictated variations.
+
+Transmitter uncorrelated
+total jitter
+
+TTX-UTJ
+
+—
+
+—
+
+31.25
+
+ps p-p —
+
+Transmitter uncorrelated
+deterministic jitter
+
+TTX-UDJ-DD
+
+—
+
+—
+
+12
+
+ps p-p —
+
+Total uncorrelated pulse width TTX-UPW-TJ
+jitter (PWJ)
+
+—
+
+—
+
+24
+
+ps p-p See Note 1, 2
+
+Deterministic data dependent
+jitter (DjDD) uncorrelated
+pulse width jitter (PWJ)
+
+TTX-UPW-DJDD
+
+—
+
+—
+
+10
+
+ps p-p See Note 1, 2
+
+Data dependent jitter
+
+TTX-DDJ
+
+—
+
+—
+
+18
+
+ps p-p See Note 2
+
+AC coupling capacitor
+
+CTX
+
+176
+
+—
+
+265
+
+nF
+
+All transmitters must be AC coupled.
+The AC coupling is required either
+within the media or within the
+transmitting component itself. See
+Note 3.
+
+Notes:
+1. PWJ parameters shall be measured after data dependent jitter (DDJ) separation.
+2. Measured with optimized preset value after de-embedding to transmitter pin.
+3. The chip's SerDes transmitter does not have CTX built-in. An external AC coupling capacitor is required.
+4. For recommended operating conditions, see Table 3.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+46 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+3.12.4.3.2 PCI Express AC physical layer receiver specifications
+This section discusses the PCI Express AC physical layer receiver specifications for 2.5 GT/s, 5 GT/s, and 8 GT/s.
+This table defines the AC specifications for the PCI Express 2.0 (2.5 GT/s) differential input at all receivers. The parameters are
+specified at the component pins. The AC timing specifications do not include RefClk jitter.
+Table 32. PCI Express 2.0 (2.5 GT/s) differential receiver input AC specifications4
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Unit Interval
+
+UI
+
+399.88
+
+400.00
+
+400.12
+
+ps
+
+Each UI is 400 ps ± 300 ppm. UI does
+not account for spread-spectrum clock
+dictated variations.
+
+0.4
+
+-
+
+-
+
+UI
+
+The maximum interconnect media and
+transmitter jitter that can be tolerated by the
+receiver can be derived as TRX-MAX-JITTER =
+1 - TRX-EYE= 0.6 UI.
+
+Minimum receiver eye width TRX-EYE
+
+See Notes 1 and 2.
+Maximum time between the TRX-EYE-MEDIAN- jitter median and maximum to-MAX-JITTER
+deviation from the median.
+
+-
+
+0.3
+
+UI
+
+Jitter is defined as the measurement
+variation of the crossing points (VRX-DIFFp-p
+= 0 V) in relation to a recovered transmitter
+UI. A recovered transmitter UI is calculated
+over 3500 consecutive unit intervals of
+sample data. Jitter is measured using all
+edges of the 250 consecutive UI in the
+center of the 3500 UI used for calculating
+the transmitter UI. See Notes 1, 2 and 3.
+
+Notes:
+1. Specified at the measurement point and measured over any 250 consecutive UIs. The test load in Figure 26 must be used
+as the receiver device when taking measurements. If the clocks to the receiver and transmitter are not derived from the same
+reference clock, the transmitter UI recovered from 3500 consecutive UI must be used as a reference for the eye diagram.
+2. A TRX-EYE = 0.40 UI provides for a total sum of 0.60 UI deterministic and random jitter budget for the transmitter
+and interconnect collected any 250 consecutive UIs. The TRX-EYE-MEDIAN-to-MAX-JITTER specification ensures a jitter
+distribution in which the median and the maximum deviation from the median is less than half of the total. UI jitter budget
+collected over any 250 consecutive transmitter UIs. It must be noted that the median is not the same as the mean. The jitter
+median describes the point in time where the number of jitter points on either side is approximately equal as opposed to the
+averaged time value. If the clocks to the receiver and transmitter are not derived from the same reference clock, the transmitter
+UI recovered from 3500 consecutive UI must be used as the reference for the eye diagram.
+3. It is recommended that the recovered transmitter UI is calculated using all edges in the 3500 consecutive UI interval with a fit
+algorithm using a minimization merit function. Least squares and median deviation fits have worked well with experimental and
+simulated data.
+4. For recommended operating conditions, see Table 3.
+This table defines the AC specifications for the PCI Express 2.0 (5 GT/s) differential input at all receivers. The parameters are
+specified at the component pins. The AC timing specifications do not include RefClk jitter.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+47 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 33. PCI Express 2.0 (5 GT/s) differential receiver input AC specifications1
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Unit Interval
+
+UI
+
+199.40
+
+200.00
+
+200.06
+
+ps
+
+Each UI is 200 ps ± 300 ppm. UI does
+not account for spread-spectrum clock
+dictated variations.
+
+Max receiver inherent
+timing error
+
+TRX-TJ-CC
+
+-
+
+-
+
+0.4
+
+UI
+
+The maximum inherent total timing error
+for common RefClk receiver architecture
+
+Max receiver inherent
+deterministic timing error
+
+TRX-DJ-DD-CC
+
+-
+
+-
+
+0.30
+
+UI
+
+The maximum inherent deterministic
+timing error for common RefClk
+receiver architecture
+
+Note:
+1. For recommended operating conditions, see Table 3.
+This table defines the AC specifications for the PCI Express 3.0 (8 GT/s) differential input at all receivers. The parameters are
+specified at the component pins. The AC timing specifications do not include RefClk jitter.
+Table 34. PCI Express 3.0 (8 GT/s) differential receiver input AC specifications5
+Parameter
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Units
+
+Notes
+
+Unit Interval
+
+UI
+
+124.962
+5
+
+125.00
+
+125.037
+5
+
+ps
+
+Each UI is 125 ps ± 300 ppm. UI does
+not account for spread-spectrum
+clock dictated variations. See Note 1.
+
+Eye Width at TP2P
+
+TRX-SV-8G
+
+0.3
+
+—
+
+0.35
+
+UI
+
+See Note 1
+
+Differential mode interference VRX-SV-DIFF-8G
+
+14
+
+—
+
+—
+
+mV
+
+Frequency = 2.1GHz. See Note 2.
+
+Sinusoidal Jitter at 100 MHz
+
+TRX-SV-SJ-8G
+
+—
+
+—
+
+0.1
+
+UI p-p Fixed at 100 MHz. See Note 3.
+
+Random Jitter
+
+TRX-SV-RJ-8G
+
+—
+
+—
+
+2.0
+
+ps
+RMS
+
+Random jitter spectrally flat before
+filtering. See Note 4.
+
+Note:
+1. TRX-SV-8G is referenced to TP2P and obtained after post processing data captured at TP2. TRX-SV-8G includes the effects of
+applying the behavioral receiver model and receiver behavioral equalization.
+2. VRX-SV-DIFF-8G voltage may need to be adjusted over a wide range for the different loss calibration channels.
+3. The sinusoidal jitter in the total jitter tolerance may have any amplitude and frequency as shown in Figure 25.
+4. Random jitter (Rj) is applied over the following range: The low frequency limit may be between 1.5 and 10 MHz, and the upper
+limit is 1.0 GHz. See Figure 25 for details. Rj may be adjusted to meet the 0.3 UI value for TRX-SV-8G.
+5. For recommended operating conditions, see Table 3.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+48 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+0.03 MHz
+
+100 MHz
+Sj sweep range
+
+1.0 UI
+Rj (ps RMS)
+Sj (UI PP)
+
+20 dB
+decade
+
+Sj
+
+0.1 UI
+
+Rj
+
+~ 3.0 ps RMS
+
+0.01 MHz
+
+0.1 MHz
+
+1.0 MHz
+
+10 MHz
+
+100 MHz
+
+1000 MHz
+
+Figure 25. Swept sinusoidal jitter mask
+
+3.12.4.4 Test and measurement load
+NOTE
+The allowance of the measurement point to be within 0.2 inches of the package pins is meant to acknowledge
+that package/board routing may benefit from D+ and D- not being exactly matched in length at the package pin
+boundary. If the vendor does not explicitly state where the measurement point is located, the measurement point
+is assumed to be the D+ and D- package pins.
+
+D + package pin
+
+C = CTX
+Transmitter
+silicon
++ package
+C = CTX
+
+D - package pin
+
+R = 50 Ω
+
+R = 50 Ω
+
+Figure 26. Test and measurement load
+
+3.13 I2C interface
+This section describes the DC and AC electrical characteristics for the I2C interface.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+49 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+3.13.1 I2C DC electrical characteristics
+This table provides the DC electrical characteristics for the I2C interfaces operating at OVDD = 1.8 V.
+Table 35. I2C DC electrical characteristics (OVDD = 1.8 V)5
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Input high voltage
+
+VIH
+
+0.7 x
+OVDD
+
+—
+
+V
+
+2
+
+Input low voltage
+
+VIL
+
+—
+
+0.3 x
+OVDD
+
+V
+
+2
+
+Output low voltage (OVDD = min, IOL = 2 mA)
+
+VOL
+
+0
+
+0.36
+
+V
+
+3
+
+Pulse width of spikes which must be suppressed by the input filter
+
+tI2KHKL
+
+0
+
+50
+
+ns
+
+4
+
+Input current each I/O pin (input voltage is between 0.1 x OVDD and 0.9 II
+x OVDD(max)
+
+-50
+
+50
+
+µA
+
+5
+
+Capacitance for each I/O pin
+
+—
+
+10
+
+pF
+
+—
+
+Unit
+
+Notes
+
+CI
+
+Notes:
+1. For recommended operating conditions, see Table 3.
+2. The min VIL and max VIH values are based on the respective min and max OVIN values found in Table 3.
+3. The output voltage (open drain or open collector) condition = 3 mA sink current.
+4. See the chip reference manual for information about the digital filter used.
+5. I/O pins obstruct the SDA and SCL lines if OVDD is switched off.
+
+3.13.2 I2C AC timing specifications
+This table provides the AC timing specifications for the I2C interfaces.
+Table 36. I2C AC timing specifications5, 6, 7
+Parameter
+
+Symbol
+
+Standard Mode
+
+Fast Mode
+
+Min
+
+Max
+
+Min
+
+Max
+
+100
+
+-
+
+400.0
+
+kHz
+
+-
+
+Max. Frequency
+
+fI2C
+
+Low period of the SCL clock
+
+tI2CL
+
+4.7
+
+1.3
+
+-
+
+μs
+
+-
+
+High period of the SCL clock
+
+tI2CH
+
+4
+
+0.6
+
+-
+
+μs
+
+-
+
+Setup time for a repeated
+START condition
+
+tI2SVKH
+
+4.7
+
+0.6
+
+-
+
+μs
+
+-
+
+Hold time (repeated) START
+condition
+
+tI2SXKL
+
+4
+
+0.6
+
+-
+
+μs
+
+-
+
+Setup time
+
+tI2DVKH
+
+250
+
+100.0
+
+-
+
+ns
+
+1
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+50 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 36. I2C AC timing specifications5, 6, 7 (continued)
+Parameter
+
+Symbol
+
+Standard Mode
+
+Fast Mode
+
+Min
+
+Min
+
+Max
+
+0.0
+
+Max
+
+0.0
+
+Input hold time
+
+tI2DXKL
+
+Master output delay time
+
+tI2OVKL
+
+Input setup time for STOP
+condition
+
+tI2PVKH
+
+4
+
+Bus free time between a
+STOP and START condition
+
+tI2KHDX
+
+4.7
+
+Capacitive load for each bus
+line
+
+Cb
+
+Unit
+
+Notes
+
+-
+
+μs
+
+2
+
+0.9
+
+μs
+
+3
+
+0.6
+
+-
+
+μs
+
+-
+
+1.3
+
+-
+
+μs
+
+-
+
+-
+
+400.0
+
+pF
+
+4
+
+3.45
+-
+
+400.0
+
+1. A Fast-mode I2C-bus device can be used in a Standard-modeI2C-bus system, but the requirement of Setup time of 250 ns
+must then be met. This will automatically be the case if the device does not stretch the LOW period of the SCL signal. If such
+a device does stretch the LOW period of the SCL signal, it must output the next data bit to the SDA line max rise time + data
+Setup Time = 1250 ns (according to the Standard-mode I2C-bus specification) before the SCL line is released.
+2. A device must internally provide a hold time of at least 300 ns for I2Cx_SDA signal to bridge the undefined region of the falling
+edge of I2Cx_SCL.
+3. The maximum tI2OVKL has to be met only if the device does not stretch the LOW period (tI2CL) of the SCL signal.
+4. Cb = Total capacitance of one bus line in pF
+5. The symbols used for timing specifications herein follow these patterns: t(first two letters of functional block)(signal)(state)(reference)(state)
+for inputs and t(first two letters of functional block)(reference)(state)(signal)(state) for outputs. For example, tI2DVKH symbolizes I2C timing (I2)
+with respect to the time data input signals (D) reaching the valid state (V) relative to the tI2C clock reference (K) going to the high
+(H) state or setup time. Also, tI2SXKL symbolizes I2C timing (I2) for the time that the data with respect to the START condition
+(S) went invalid (X) relative to the tI2C clock reference (K) going to the low (L) state or hold time. Also, tI2PVKH symbolizes I2C
+timing (I2) for the time that the data with respect to the STOP condition (P) reaches the valid state (V) relative to the tI2C clock
+reference (K) going to the high (H) state or setup time.
+6. See Figure 27.
+7. See Figure 28.
+This figure shows the AC test load for the I2C.
+
+Output
+
+OVDD/2
+
+Z0= 50 Ω
+RL = 50 Ω
+
+Figure 27. I2C AC test load
+This figure shows the AC timing diagram for the I2C bus.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+51 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+SDA
+tI2DVKH
+
+tI2CL
+
+SCL
+
+tI2KHKL
+
+tI2SXKL
+
+tI2CH
+
+tI2SXKL
+
+tI2SVKH
+
+tI2DXKL, tI2OVKL
+
+S
+
+tI2KHDX
+
+tI2PVKH
+S
+
+P
+
+Sr
+
+Figure 28. I2C bus AC timing diagram
+
+3.14 Serial peripheral interface (SPI) interface
+This section describes the DC and AC electrical characteristics for the SPI interface.
+
+3.14.1 SPI DC electrical characteristics
+This table provides the DC electrical characteristics for the SPI interface operating at OVDD = 1.8 V.
+Table 37. SPI DC electrical characteristics (1.8 V)3
+Parameter
+
+Symbol
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Input high voltage
+
+VIH
+
+0.7 * OVDD
+
+—
+
+V
+
+1
+
+Input low voltage
+
+VIL
+
+—
+
+0.3 * OVDD
+
+V
+
+1
+
+Input current (VIN = 0 V or VIN = OVDD)
+
+IIN
+
+—
+
+±50
+
+μA
+
+2
+
+Output high voltage
+
+VOH
+
+1.35
+
+—
+
+V
+
+—
+
+VOL
+
+—
+
+0.4
+
+V
+
+—
+
+(OVDD = min, IOH = -0.5 mA)
+Output low voltage
+(OVDD = min, IOL = 0.5 mA)
+Notes:
+1. The min VIL and max VIH values are based on the respective min and max OVIN values found in Table 3.
+2. The symbol VIN, in this case, represents the OVIN symbol referenced in Table 3.
+3. For recommended operating conditions, see Table 3.
+
+3.14.2 SPI AC timing specifications
+This table provides the SPI timing specifications.
+Table 38. SPI AC timing specifications
+Parameter
+
+Symbol
+
+Condition
+
+SCK clock pulse width
+
+tSDC
+
+—
+
+Min
+40
+
+Max
+60
+
+Unit
+
+Notes
+
+%
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+52 / 63
+
+NXP Semiconductors
+Electrical characteristics
+
+Table 38. SPI AC timing specifications (continued)
+Parameter
+
+Symbol
+
+Condition
+
+CS to SCK delay
+
+tCSC
+
+Master
+
+tp*2 - 2.5
+
+—
+
+ns
+
+1
+
+After SCK delay
+
+tASC
+
+Master
+
+tp*2 - 0
+
+—
+
+ns
+
+1
+
+Data setup time for inputs
+
+tNIIVKH
+
+Master
+
+9
+
+—
+
+ns
+
+Data hold time for inputs
+
+tNIIXKH
+
+Master
+
+0
+
+—
+
+ns
+
+Data valid (after SCK edge) for Outputs tNIKHOV
+
+Master
+
+—
+
+5
+
+ns
+
+Data hold time for outputs
+
+Master
+
+0
+
+—
+
+ns
+
+tNIKHOX
+
+Min
+
+Max
+
+Unit
+
+Notes
+
+Note:
+1. tp = 2 * platform Clk period. See register SPI_CTARn in the device reference manual for details.
+This figure shows the SPI timing master when CPHA = 0.
+tCSC
+
+tASC
+
+CSx
+
+t SDC
+
+SCK Output
+(CPOL = 0)
+
+t SCK
+
+t SDC
+
+SCK Output
+(CPOL = 1)
+
+t NIIVKH
+
+SIN
+
+t NIIXKH
+
+First Data
+
+Data
+
+t NIKHOX
+
+Last Data
+
+t NIKHOV
+
+SOUT
+First Data
+
+Data
+
+Last Data
+
+Figure 29. SPI timing master, CPHA = 0
+This figure shows the SPI timing master when CPHA = 1.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+53 / 63
+
+NXP Semiconductors
+Hardware design considerations
+
+CSx
+
+SCK Output
+(CPOL = 0)
+tNIIXKH
+SCK Output
+(CPOL = 1)
+
+tNIIVKH
+
+SIN
+
+First Data
+
+Data
+
+t NIKHOX
+
+Last Data
+
+t NIKHOV
+
+SOUT
+First Data
+
+Data
+
+Last Data
+
+Figure 30. SPI timing master, CPHA = 1
+
+4 Hardware design considerations
+4.1 Clock ranges
+This table provides the clocking specifications for the processor core, VSPA, LLCP, SerDes, PHY TImer, SPI, DCS and I2C.
+Table 39. Processor and platform clocking specifications
+Characteristic
+
+Maximum
+frequency
+
+Unit
+
+Notes
+
+Cortex-M4 processor
+
+307.2
+
+MHz
+
+-
+
+Vector signal processing acceleration - VSPA
+
+614.4
+
+MHz
+
+-
+
+Lightweight LVDS communication protocol - LLCP
+
+614.4
+
+MHz
+
+-
+
+SerDes reference clock
+
+100
+
+MHz
+
+-
+
+SPI
+
+38.4
+
+MHz
+
+-
+
+PHY Timer
+
+61.44, 76.8
+
+MHz
+
+-
+
+DCS
+
+122.88, 156.3
+
+MHz
+
+-
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+54 / 63
+
+NXP Semiconductors
+Thermal
+
+Table 39. Processor and platform clocking specifications (continued)
+Characteristic
+
+Maximum
+frequency
+
+I2C
+
+• Up to 100
+kbps in
+standard
+mode
+
+Unit
+
+Notes
+
+kbps
+
+-
+
+• Up to 400
+kbps in fast
+mode
+
+4.2 Power supply design
+For additional details on the power supply design, Refer the AN12426 LA9310 Design Check List application aote.
+
+4.2.1 Core and platform supply voltage filtering
+The VDD supply is normally derived from a linear regulator or switching power supply that can regulate its output voltage
+very accurately despite changes in current demand from the chip within the regulator's relatively low bandwidth. Several bulk
+decoupling capacitors must be distributed around the PCB to supply transient current demand above the bandwidth of the
+voltage regulator.
+These bulk capacitors should have a low equivalent series resistance (ESR) rating to ensure a quick response time. They should
+also be connected to the power and ground planes through two vias to minimize inductance. Customers should work directly with
+their power regulator vendor for best values and types of bulk capacitors.
+As a guideline for customers and their power regulator vendors, NXP recommends that these bulk capacitors be chosen to
+maintain the positive transient power surges to less than + 30 mV (negative transient undershoot should comply with specification
+of -30 mV) for current steps of up to 2A with a slew rate of 1.5 A/μs.
+For additional details on the power supply design, Refer the AN12426 LA9310 Design Check List application aote.
+
+5 Thermal
+This table shows the thermal characteristics for the chip and is for reference. Package model can be provided upon request.
+Table 40. Package thermal characteristics
+Rating
+
+Board
+
+Symbol
+
+Value
+
+Unit
+
+Notes
+
+Junction to Ambient Four-layer
+Thermal
+board (2s2p)
+Resistance
+
+RΘJA
+
+57.2
+
+°C/W
+
+1,4
+
+Junction to
+Package Top
+Thermal
+Resistance
+
+ΨJT
+
+0.17
+
+°C/W
+
+1,4
+
+RΘJMA
+
+48.7
+
+°C/W
+
+1,4
+
+Four-layer
+board (2s2p)
+
+Junction to Moving Four-layer
+Air Thermal
+board (2s2p)
+Resistance
+
+Table continues on the next page...
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+55 / 63
+
+NXP Semiconductors
+Thermal
+
+Table 40. Package thermal characteristics (continued)
+Junction to Case
+Thermal
+Resistance
+
+Single-layer
+board (1s)
+
+RΘJC
+
+8.7
+
+°C/W
+
+2,4
+
+Junction to Board
+Thermal
+Resistance
+
+Four-layer
+board (2s2p)
+
+RΘJB
+
+40.4
+
+°C/W
+
+3,4
+
+Notes:
+1. Determined in accordance to JEDEC JESD51-2A (natural convection) environment JESD51-6 (Moving Air). Thermal
+resistance data in this report is solely for a thermal performance comparison of one package to another in a standardized
+specified environment. It is not meant to predict the performance of a package in an application-specific environment.
+2. Junction-to-Case thermal resistance determined using an isothermal cold plate. Case temperature refers to the mold surface
+temperature at the package top side dead center.
+3. Junction-to-board thermal resistance determined per JEDEC JESD51-8.
+4. Thermal test board meets JEDEC specification for this package (JESD51-9).
+5. See Thermal management information for additional details.
+
+5.1 Recommended thermal model
+Information about Flotherm models of the package or thermal data not available in this document can be obtained from your local
+NXP sales office.
+
+5.2 Temperature diode
+The chip has a temperature diode on the microprocessor that can be used in conjunction with other system temperature
+monitoring devices (such as Analog Devices, ADT7461A). These devices feature series resistance cancellation using 3 current
+measurements, where up to 1.5kΩ of resistance can be automatically cancelled from the temperature result, allowing noise
+filtering and a more accurate reading.
+The following are the specifications of the chip's on-board temperature diode:
+Operating range: 10 - 230 μA
+Ideality factor over temperature range 80°C - 105°C: n = 1.006 ± 0.003, with approximate error ± 1 °C and error under ± 3 °C for
+temperature range 0°C - 85°C.
+
+5.3 Thermal management information
+This section provides thermal management information for the flip-chip, plastic-ball, grid array (FC-PBGA) package for air-cooled
+applications. Proper thermal control design is primarily dependent on the system-level design-the heat sink, airflow, and thermal
+interface material.
+The recommended attachment method to the heat sink is illustrated in Figure 31. The heat sink should be attached to the
+printed-circuit board with the spring force centered over the die. This spring force should not exceed 10 pounds force.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+56 / 63
+
+NXP Semiconductors
+Package information
+
+Molded FC-PBGA package
+Heat sink
+Heat sink clip
+
+Thermal interface material
+Mold cap
+
+Die
+
+Package substrate
+
+Printed circuit board
+
+Figure 31. Package exploded, cross-sectional view molded FC-PBGA
+The system board designer can choose between several types of heat sinks to place on the device. There are several
+commercially-available thermal interfaces to choose from in the industry. Ultimately, the final selection of an appropriate heat
+sink depends on many factors, such as thermal performance at a given air velocity, spatial volume, mass, attachment method,
+assembly, and cost.
+
+6 Package information
+6.1 Package parameters for the FC-PBGA
+The package parameters are as provided in the following list. The package type is 8.0 mm x 8.0 mm, 157 flip-chip, FC-PBGA,
+molded array package.
+• Package outline - 8.0 mm x 8.0 mm
+• Interconnects - 157
+• Ball Pitch - 0.5 mm
+• Ball Diameter - 0.3 mm +/-0.05
+• Ball Height - 0.23 mm +/-0.03
+• Solder Balls Composition - 96.5% Sn, 3% Ag, 0.5% Cu
+• Module Height - 1.25 mm +/-0.1
+
+6.2 Mechanical dimensions of the FC-PBGA
+This figure shows the mechanical dimensions and bottom surface nomenclature of the chip.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+57 / 63
+
+NXP Semiconductors
+Package information
+
+Figure 32. Mechanical dimensions of the FC-PBGA
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+58 / 63
+
+NXP Semiconductors
+Ordering information
+
+NOTES:
+1. All dimensions are in millimeters.
+2. Dimensions and tolerances per ASME Y14.5M-1994.
+3. All dimensions are symmetric across the package center lines, unless dimensioned otherwise.
+
+7 Ordering information
+Contact your local NXP sales office or regional marketing team for order information.
+
+7.1 Part numbering nomenclature
+This table provides the NXP platform part numbering nomenclature.
+
+Qual status
+
+Product name
+
+Temperature range
+
+Package type
+
+Speed
+
+VSPA cores
+
+Table 41. Part numbering nomenclature
+PCIe
+controllers
+
+P=
+Prototype
+
+LA9310
+
+S=
+Standard
+
+7= 8x8 mm
+FCPBGA
+pb-free
+C4/C5
+
+S=
+Standard
+speed
+
+1 = 1 VSPA
+core
+
+1 = 1 PCIe
+controller
+
+Blank =
+Production
+
+X=
+Extended
+
+Firmware
+type
+
+Revision
+
+A=
+Standard
+
+A = Rev A0
+
+7.2 Orderable part numbers addressed by this document
+This table provides the NXP orderable part numbers addressed by this document for the chip.
+Table 42. Orderable part numbers addressed by this document
+Part number
+
+Type
+
+Description
+
+LA9310S7S11AA
+
+Production
+
+Layerscape Access, 0 °C to 105 °C, standard speed, 1
+VSPA, x1 PCIe, standard firmware, Rev A0, production
+
+LA9310X7S11AA
+
+Production
+
+Layerscape Access, -40 °C to 105 °C, standard speed, 1
+VSPA, x1 PCIe, standard firmware, Rev A0, production
+
+7.3 Part marking
+Parts are marked as in the example shown in this figure.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+59 / 63
+
+NXP Semiconductors
+Revision history
+
+LA9310XXXXXXXXXX
+AWLYYWW
+
+MMMMM CCCCC
+YWWLAZ
+FC-PBGA
+Legend:
+Marking format place holder for LA9310XXXXXXXX - Product ID
+AWLYYWW -Test Traceability
+MMMMM - Die Build Series
+CCCCC - Country of Origin
+YWWLAZ - Assembly Traceability
+Figure 33. LA9310 Part marking
+
+8 Revision history
+This table summarizes revisions to this document.
+Table 43. Revision history
+Revision
+
+Date
+
+Description
+
+0
+
+03/2022
+
+Initial release
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+60 / 63
+
+NXP Semiconductors
+Legal information
+
+Legal information
+Data sheet status
+Document status[1][2]
+
+Product status[3]
+
+Definition
+
+Objective [short] data sheet
+
+Development
+
+This document contains data from the objective specification for product
+development.
+
+Preliminary [short] data sheet
+
+Qualification
+
+This document contains data from the preliminary specification.
+
+Product [short] data sheet
+
+Production
+
+This document contains the product specification.
+
+[1]
+[2]
+[3]
+
+Please consult the most recently issued document before initiating or completing a design.
+The term 'short data sheet' is explained in section "Definitions".
+The product status of device(s) described in this document may have changed since this document was published and may differ in case of multiple devices.
+The latest product status information is available on the Internet at URL http://www.nxp.com.
+
+Definitions
+
+Disclaimers
+
+Draft — A draft status on a document indicates that the content is still
+
+Limited warranty and liability — Information in this document is believed
+
+under internal review and subject to formal approval, which may result
+
+to be accurate and reliable. However, NXP Semiconductors does not give
+
+in modifications or additions. NXP Semiconductors does not give any
+
+any representations or warranties, expressed or implied, as to the accuracy
+
+representations or warranties as to the accuracy or completeness of
+
+or completeness of such information and shall have no liability for the
+
+information included in a draft version of a document and shall have no
+
+consequences of use of such information. NXP Semiconductors takes no
+
+liability for the consequences of use of such information.
+
+responsibility for the content in this document if provided by an information
+
+Short data sheet — A short data sheet is an extract from a full data sheet with
+the same product type number(s) and title. A short data sheet is intended for
+quick reference only and should not be relied upon to contain detailed and full
+information. For detailed and full information see the relevant full data sheet,
+which is available on request via the local NXP Semiconductors sales office.
+In case of any inconsistency or conflict with the short data sheet, the full data
+sheet shall prevail.
+
+source outside of NXP Semiconductors.
+In no event shall NXP Semiconductors be liable for any indirect, incidental,
+punitive, special or consequential damages (including - without limitation lost profits, lost savings, business interruption, costs related to the removal or
+replacement of any products or rework charges) whether or not such damages
+are based on tort (including negligence), warranty, breach of contract or any
+other legal theory.
+Notwithstanding any damages that customer might incur for any reason
+
+Product specification — The information and data provided in a Product data
+
+whatsoever, NXP Semiconductors’ aggregate and cumulative liability towards
+
+sheet shall define the specification of the product as agreed between NXP
+
+customer for the products described herein shall be limited in accordance with
+
+Semiconductors and its customer, unless NXP Semiconductors and customer
+
+the Terms and conditions of commercial sale of NXP Semiconductors.
+
+have explicitly agreed otherwise in writing. In no event however, shall an
+agreement be valid in which the NXP Semiconductors product is deemed to
+
+Right to make changes — NXP Semiconductors reserves the right to make
+
+offer functions and qualities beyond those described in the Product data sheet.
+
+changes to information published in this document, including without limitation
+specifications and product descriptions, at any time and without notice. This
+document supersedes and replaces all information supplied prior to the
+publication hereof.
+Suitability for use — NXP Semiconductors products are not designed,
+authorized or warranted to be suitable for use in life support, life-critical
+or safety-critical systems or equipment, nor in applications where failure or
+malfunction of an NXP Semiconductors product can reasonably be expected
+to result in personal injury, death or severe property or environmental damage.
+NXP Semiconductors and its suppliers accept no liability for inclusion and/or
+use of NXP Semiconductors products in such equipment or applications and
+therefore such inclusion and/or use is at the customer’s own risk.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+61 / 63
+
+NXP Semiconductors
+Legal information
+Applications — Applications that are described herein for any of these
+
+AMBA, Arm, Arm7, Arm7TDMI, Arm9, Arm11, Artisan, big.LITTLE, Cordio,
+
+products are for illustrative purposes only. NXP Semiconductors makes no
+
+CoreLink, CoreSight, Cortex, DesignStart, DynamIQ, Jazelle, Keil, Mali,
+
+representation or warranty that such applications will be suitable for the
+
+Mbed, Mbed Enabled, NEON, POP, RealView, SecurCore, Socrates, Thumb,
+
+specified use without further testing or modification.
+
+TrustZone, ULINK, ULINK2, ULINK-ME, ULINK-PLUS, ULINKpro, μVision,
+
+Customers are responsible for the design and operation of their applications
+and products using NXP Semiconductors products, and NXP Semiconductors
+accepts no liability for any assistance with applications or customer product
+design. It is customer’s sole responsibility to determine whether the NXP
+Semiconductors product is suitable and fit for the customer’s applications and
+products planned, as well as for the planned application and use of customer’s
+third party customer(s). Customers should provide appropriate design and
+operating safeguards to minimize the risks associated with their applications
+and products.
+
+Versatile — are trademarks or registered trademarks of Arm Limited (or its
+subsidiaries) in the US and/or elsewhere. The related technology may be
+protected by any or all of patents, copyrights, designs and trade secrets. All
+rights reserved.
+CodeWarrior — is a trademark of NXP B.V.
+Freescale — is a trademark of NXP B.V.
+Layerscape — is a trademark of NXP B.V.
+QorIQ — is a trademark of NXP B.V.
+
+NXP Semiconductors does not accept any liability related to any default,
+damage, costs or problem which is based on any weakness or default in the
+customer’s applications or products, or the application or use by customer’s
+third party customer(s). Customer is responsible for doing all necessary testing
+for the customer’s applications and products using NXP Semiconductors
+products in order to avoid a default of the applications and the products or of the
+application or use by customer’s third party customer(s). NXP does not accept
+any liability in this respect.
+Limiting values — Stress above one or more limiting values (as defined in
+the Absolute Maximum Ratings System of IEC 60134) will cause permanent
+damage to the device. Limiting values are stress ratings only and (proper)
+operation of the device at these or any other conditions above those
+given in the Recommended operating conditions section (if present) or the
+Characteristics sections of this document is not warranted. Constant or
+repeated exposure to limiting values will permanently and irreversibly affect the
+quality and reliability of the device.
+Terms and conditions of commercial sale — NXP Semiconductors products
+are sold subject to the general terms and conditions of commercial sale,
+as published at http://www.nxp.com/profile/terms, unless otherwise agreed
+in a valid written individual agreement. In case an individual agreement
+is concluded only the terms and conditions of the respective agreement
+shall apply. NXP Semiconductors hereby expressly objects to applying the
+customer’s general terms and conditions with regard to the purchase of NXP
+Semiconductors products by customer.
+No offer to sell or license — Nothing in this document may be interpreted or
+construed as an offer to sell products that is open for acceptance or the grant,
+conveyance or implication of any license under any copyrights, patents or other
+industrial or intellectual property rights.
+Export control — This document as well as the item(s) described herein may be
+subject to export control regulations. Export might require a prior authorization
+from competent authorities.
+
+Trademarks
+Notice: All referenced brands, product names, service names, and
+trademarks are the property of their respective owners.
+NXP — wordmark and logo are trademarks of NXP B.V.
+
+Layerscape Access LA9310 Data Sheet, Rev. 0, 03/2022
+Data Sheet: Technical Data
+
+62 / 63
+
+Please be aware that important notices concerning this document and the product(s) described
+herein, have been included in section 'Legal information'.
+
+© NXP B.V. 2020-2021.
+
+All rights reserved.
+
+For more information, please visit: http://www.nxp.com
+For sales office addresses, please send an email to: salesaddresses@nxp.com
+Date of release: 03/2022
+Document identifier: LA9310
+
+

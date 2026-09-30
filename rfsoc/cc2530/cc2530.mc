@@ -1,0 +1,392 @@
+# CC2530 worked specimen — FULL datasheet transcription.
+# Source: cc2530.pdf (SWRS081B, April 2009, revised February 2011). Every
+# value cites its PDF page; tables were re-extracted with pdftotext -layout
+# (cache: cc2530.txt, page dumps /tmp/cc2530_p*.txt) and column positions
+# cross-checked against the bbox word coordinates for the one ambiguous row
+# (nominal output power, p.7 — see the flag there).
+#
+# This revision completes the previous face-borne rewrite: EVERY parameter
+# table in the datasheet now lands somewhere. The rule set it pins:
+#
+#   parameters live on FACES (pin faces, interface faces); judgment happens
+#   at JUNCTIONS (nets); the FACE TYPE is the pairing key (ruling 19);
+#   one application form, a plain call (ruling 28, 2026-09-30: the
+#   two-paren `(axis)(value)` spelling is retired — named call args already
+#   exist, so the axes and the judged value share one paren: the value is
+#   the member NOT listed in params, canonically spelled `value`; with no
+#   axes the bare form `MetaName(literal)` stands)
+#   one value literal shape: range, kvalue dict, or envelope points.
+#   NARROW ruling (2026-09-30): dict keys are NAMES only — trust levels
+#   (typ/max) and quantity slots; axis points and test conditions ride the
+#   value as `value@condition` (envelope canon, rulings 14/18); the wide
+#   axis-keyed dict reading is retired;
+#   provenance rides the instance (@ds(p, trust, cond), ruling 21 — page
+#   numbers are load-bearing here, not comments);
+#   `# → Pass N` is ruling 23's consumption-derivation table in action; a
+#   row marked `doc` has NO consuming walk yet — ruling R10 files it as
+#   data, and the admission gate refuses to fake a landing (R9).
+#
+# The `meta` production does not parse yet (meta grammar batch 1a, claimed
+# b4259); the relative-window and axis-binding debts are noted inline.
+# Standalone specimen, never on a library load path.
+
+# -- §1 metas --------------------------------------------------------------
+# The schema lives in mcode/meta/ (ruling 13: one authority face per
+# domain) -- this file only REFERENCES it (one value one source):
+#   core.mc   receiver / output / absmax / temp_range / rc_osc /
+#             temp_sense / spi_timing
+#   power.mc  supply_range / current_draw / current_capacity / wake_time /
+#             peri_current
+#   level.mc  drive_level (kind = ma(N mA), ruling 29) / io_pull / io_leak
+#             / t_int
+#   radio.mc  radio_band / radio_rate / rf_sens / rf_pout / rf_maxin /
+#             rf_tol / rf_reject / rf_block / rf_spur / rf_evm / rf_load /
+#             rf_phase
+#   xtal.mc   xtal_freq / xtal_acc / xtal_esr / xtal_c0 / xtal_cl /
+#             xtal_start / xtal_guard
+# File-specific facts that stay with this transcription: the peri_current
+# unit words t1/t2/t3/t4/slt/adc/fler/flwr are the p.4 datasheet row
+# names; the current_draw mode axis carries pm(1)/pm(2)/pm(3) as
+# arguments (ruling 25); the RX input-level collapse stays the 1a2
+# partial-axis-binding debt.
+# ── §2 the pairing counterpart, spelled out so the story has a concrete
+#    other side. Values illustrative (a 3.3-V LDO), not a transcription;
+#    under the authoring design this file moves to mclibs/regulator/. ──────
+
+component LDO_3V3 {
+    pins = [
+        psrc [3] = OUT::DC(
+            vout = output(3.135V ~ 3.465V)     # regulated output window (supply)
+            icap = current_capacity(250mA)     # axis-free capacity face
+        )
+    ]
+}
+
+# ── §3 the component (SWRS081B, full transcription) ─────────────────────
+
+component CC2530 {
+    pins = [
+
+        # ── power: ONE face instance per RAIL spanning its parallel pins
+        # (ruling 19: per-rail, not per-pin — a spanning face is ONE consumer,
+        # so leq never sums six parallel AVDD pins into a false violation).
+        # Hot and return group in ONE face: the corpus pair form [RAIL, GND]
+        # with nested pin lists (user ruling 2026-09-30) — the return member
+        # makes the current loop explicit at the face, and the shared GND
+        # pins join each rail face the way mcu.mc reuses its return pin.
+        # TI gives no per-rail draw split; each rail face carries the whole
+        # chip budget — conservative, and the gap is a datasheet fact. ──
+        psnk [[39, 10], [1, 2, 3, 4]] = [DVDD, GND]::DC(
+            # 39 = DVDD1, 10 = DVDD2, 1-4 = GND (Fig. 7, p.17; rail-name
+            # order — pin numbers are deliberately NOT ascending)
+            vin   = supply_range(2V ~ 3.6V)          # p.4 rec. operating
+                @ds(p=4, trust=max)
+            vmax  = absmax(-0.3V ~ 3.9V)             # p.4 absmax supply
+                @ds(p=4, trust=max)
+            idraw = [                                # p.4 EC; keys = trust level (typ = typical row, max = full range)
+                current_draw(mode = rx, value = [typ: 24.3mA, max: 29.6mA])
+                    @ds(p=4, trust=max, cond="RX -100dBm in; boldface = full range")
+                current_draw(mode = tx(1dBm), value = 28.7mA)
+                    @ds(p=4, trust=max, cond="TX at 1-dBm output")
+                current_draw(mode = tx(4.5dBm), value = [typ: 33.5mA, max: 39.6mA])
+                    @ds(p=4, trust=max, cond="TX at 4.5-dBm output")
+                current_draw(mode = pm(1), value = [typ: 0.2mA, max: 0.3mA])
+                    @ds(p=4, trust=max)
+                current_draw(mode = pm(2), value = [typ: 1uA, max: 2uA])
+                    @ds(p=4, trust=max)
+                current_draw(mode = pm(3), value = [typ: 0.4uA, max: 1uA])
+                    @ds(p=4, trust=max)
+            ]
+            iperi = [                                # p.4 peripheral adds
+                peri_current(unit = t1, value = 90uA)    @ds(p=4)
+                peri_current(unit = t2, value = 90uA)    @ds(p=4)
+                peri_current(unit = t3, value = 60uA)    @ds(p=4)
+                peri_current(unit = t4, value = 70uA)    @ds(p=4)
+                peri_current(unit = slt, value = 0.6uA)  @ds(p=4, cond="32.753-kHz RCOSC incl")
+                peri_current(unit = adc, value = 1.2mA)  @ds(p=4, cond="when converting")
+                peri_current(unit = fler, value = 1mA)   @ds(p=4, cond="flash erase")
+                peri_current(unit = flwr, value = 6mA)   @ds(p=4, cond="burst write peak")
+            ]                                        # → Pass D (budget addend)
+            # p.4 absmax lists supply voltage and storage temperature only —
+            # no current-limit rows exist to transcribe (honest gap, noted in
+            # the efr32mg21 comparison; the storage range lives in spec ta)
+        )
+        psnk [[28, 27, 24, 29, 21, 31], [1, 2, 3, 4]] = [AVDD, GND]::DC(
+            # 28 = AVDD1, 27 = AVDD2, 24 = AVDD3, 29 = AVDD4, 21 = AVDD5,
+            # 31 = AVDD6, 1-4 = GND (Fig. 7, p.17; rail-name order). Rows
+            # mirror DVDD block for block — TI splits no per-rail draw, and
+            # the repetition is the §8-1 adopt-form debt already on record.
+            vin   = supply_range(2V ~ 3.6V)          # p.4 rec. operating
+                @ds(p=4, trust=max)
+            vmax  = absmax(-0.3V ~ 3.9V)             # p.4 absmax supply
+                @ds(p=4, trust=max)
+            idraw = [                                # p.4 EC; keys = trust level
+                current_draw(mode = rx, value = [typ: 24.3mA, max: 29.6mA])
+                    @ds(p=4, trust=max, cond="RX -100dBm in; boldface = full range")
+                current_draw(mode = tx(1dBm), value = 28.7mA)
+                    @ds(p=4, trust=max, cond="TX at 1-dBm output")
+                current_draw(mode = tx(4.5dBm), value = [typ: 33.5mA, max: 39.6mA])
+                    @ds(p=4, trust=max, cond="TX at 4.5-dBm output")
+                current_draw(mode = pm(1), value = [typ: 0.2mA, max: 0.3mA])
+                    @ds(p=4, trust=max)
+                current_draw(mode = pm(2), value = [typ: 1uA, max: 2uA])
+                    @ds(p=4, trust=max)
+                current_draw(mode = pm(3), value = [typ: 0.4uA, max: 1uA])
+                    @ds(p=4, trust=max)
+            ]
+            iperi = [                                # p.4 peripheral adds
+                peri_current(unit = t1, value = 90uA)    @ds(p=4)
+                peri_current(unit = t2, value = 90uA)    @ds(p=4)
+                peri_current(unit = t3, value = 60uA)    @ds(p=4)
+                peri_current(unit = t4, value = 70uA)    @ds(p=4)
+                peri_current(unit = slt, value = 0.6uA)  @ds(p=4, cond="32.753-kHz RCOSC incl")
+                peri_current(unit = adc, value = 1.2mA)  @ds(p=4, cond="when converting")
+                peri_current(unit = fler, value = 1mA)   @ds(p=4, cond="flash erase")
+                peri_current(unit = flwr, value = 6mA)   @ds(p=4, cond="burst write peak")
+            ]                                        # → Pass D (budget addend)
+            # p.4 absmax lists supply voltage and storage temperature only —
+            # no current-limit rows exist to transcribe (honest gap, noted in
+            # the efr32mg21 comparison; the storage range lives in spec ta)
+        )
+        psnk [40] = DCOUPL   # 1.8-V regulator decoupling — a cap demand face
+                             # (G12); the value lives in the design guide, not
+                             # in this datasheet, so no instance is forced
+        # GND has no standalone group: pins 1-4 (+ the exposed pad, Fig. 7
+        # note) ride each power face above as the return member (hot/return
+        # grouping, user ruling 2026-09-30); Table 1: "unused pins — connect
+        # to GND". The pad joins the same net.
+
+        # ── GPIO: TTL-style electrical pairing, both directions on the face.
+        # Drive class is a PER-PIN fact (Table 1: P1_0/P1_1 are the 20-mA
+        # members); it rides the drive_level instance, the only place it
+        # judges. DC windows per p.17 (VDD = 3 V condition); ceilings are
+        # VDD-relative — spelled flat, relative-window literal is the eval
+        # batch's debt (74lvc already carries the shape). ──
+        io [5, 6, 7, 8, 12, 13, 14, 15, 16, 17, 18, 19, 34, 35, 36, 37, 38] =
+                GPIO::GPIO(
+                    vin   = receiver([low: 0V ~ 0.5V, high: 2.5V ~ 3.6V])
+                        @ds(p=17, trust=max, cond="VDD=3V")      # → Pass C
+                    vout  = drive_level(kind = ma(4mA),
+                               value = [low: 0V ~ 0.5V, high: 2.4V ~ 3.6V])
+                        @ds(p=17, trust=max, cond="4-mA load")   # → Pass C
+                    ileak = io_leak(-50nA ~ 50nA)
+                        @ds(p=17, cond="input at 0 V / at VDD")  # → doc
+                    rpu   = io_pull([typ: 20kΩ])
+                        @ds(p=17)                                # → doc
+                    tint  = t_int(20ns)
+                        @ds(p=12, trust=max)                     # → doc
+                )
+        io [9, 11] = GPIO::GPIO(     # P1_1, P1_0 — the 20-mA members
+                    vin  = receiver([low: 0V ~ 0.5V, high: 2.5V ~ 3.6V])
+                        @ds(p=17, trust=max, cond="VDD=3V")
+                    vout = drive_level(kind = ma(20mA),
+                               value = [low: 0V ~ 0.5V, high: 2.4V ~ 3.6V])
+                        @ds(p=17, trust=max, cond="20-mA load")
+                    …ileak/rpu/tint same as the ma(4mA) group…
+                )
+        [20] = RESET_N::CTRL(
+            tlow = t_reset(1us)              # p.12: shortest recognized reset
+                @ds(p=12, trust=max)         # → doc (debugger pairing; R10)
+        )
+        [30] = RBIAS                 # external precision bias resistor — a BOM
+                                     # demand face (G12); value in the design guide
+        rf [25, 26] = RF{RF_P, RF_N}::RF_DIFF(
+            # ── service faces (p.5) ──
+            band  = radio_band(2394MHz ~ 2507MHz)   @ds(p=5)      # → Pass C
+            rate  = radio_rate(250kbps)             @ds(p=5)      # → Pass C
+            chip  = radio_rate(2MChip/s)            @ds(p=5)      # → doc
+            # ── receive section (p.6); conditions: TA 25C, VDD 3V, fc 2440MHz,
+            #    boldface over full range ──
+            sens  = rf_sens([typ: -97dBm, max: -92dBm])             # → Pass C-2
+                @ds(p=6, cond="PER 1%; [1] requires -85, chip gives -88")
+            maxin = rf_maxin(10dBm)                               # → Pass C-2
+                @ds(p=6, cond="PER 1%; [1] requires -20")
+            rej   = rf_reject([49dB@adj+5M, 49dB@adj-5M,          # → doc
+                               57dB@alt+10M, 57dB@alt-10M,
+                               57dB@chan>=20M, 57dB@chan<=-20M,
+                               -3dB@cochan])
+                @ds(p=6, cond="[1] floors: 0 / 0 / 30 / 30 dB")
+            blk   = rf_block([-33dBm@+5M, -33dBm@+10M, -32dBm@+20M,
+                              -31dBm@+50M, -35dBm@-5M, -35dBm@-10M,
+                              -34dBm@-20M, -34dBm@-50M])          # → doc
+                @ds(p=6, cond="CW jammer, EN 300 440 class 2")
+            rxtol = rf_tol([freq: 150ppm, sym: 1000ppm])          # → Pass C-2
+                @ds(p=6, cond="[1] floors: 80 / 80 ppm")
+            rspur = rf_spur([-80dBm@30M-1G, -57dBm@1G-12.75G])    # → doc
+                @ds(p=6, cond="conducted, 50-Ω single-ended")
+            # ── transmit section (p.7) ──
+            pout  = rf_pout([min: 0dBm, typ: 4.5dBm, max: 8dBm])     # → Pass C-2
+                @ds(p=7, cond="max-recommended setting, balun, 50-Ω")
+                    # FLAG (取数自检闸): p.7 prints MIN 0 / TYP 4.5 / MAX 8
+                    # while p.1 feature says "programmable output power up to
+                    # 4.5 dBm". Both printed values are transcribed as-is;
+                    # which column the judged slot reads (4.5) and what the 8
+                    # is an envelope OF is exactly what the machine gate must
+                    # decide — resolved by transcription, not by guessing here.
+                    # Compliance row as printed: MIN -8 / MAX 10 dBm against
+                    # "[1] requires minimum -3 dBm" (p.7).
+            cpout = rf_pout([min: -8dBm, max: 10dBm])
+                @ds(p=7, cond="[1]-compliance setting")
+            prange = rf_pout(32dB)      @ds(p=7)                  # → doc
+            tspur = rf_spur([-60dBm@out-25M-1G, -60dBm@fcc-25M-2400M,  # → doc
+                             -60dBm@etsi-25M-1G, -57dBm@etsi-1800-1900M,
+                             -55dBm@etsi-5150-5300M, -42dBm@fcc-2f3f,
+                             -31dBm@etsi-2f3f, -53dBm@out-1G-12.75G,
+                             -42dBm@fcc>=2483.5M])
+                @ds(p=7, cond="max-recommended setting")
+            evm   = rf_evm(2%)          @ds(p=7, cond="[1] caps 35%")   # → doc
+            zload = rf_load(69Ω + j29Ω) @ds(p=7)                  # → Pass A
+        )
+        # 32-MHz crystal demands (p.8) — these pair with the crystal library
+        # part when it is transcribed; until then they are demand faces with
+        # no peer (R9: demand side lands, supply side pending = honest gap).
+        [22, 23] = XOSC{Q1, Q2}::XTAL32M(
+            freq  = xtal_freq(32MHz)             @ds(p=8)          # → Pass C
+            acc   = xtal_acc(-40ppm ~ 40ppm)     @ds(p=8)          # → Pass C
+                @ds(p=8, cond="incl aging and temperature")
+            esr   = xtal_esr(6Ω ~ 60Ω)           @ds(p=8)          # → Pass C
+            c0    = xtal_c0(1pF ~ 7pF)           @ds(p=8)          # → Pass C
+            cl    = xtal_cl(10pF ~ 16pF)         @ds(p=8)          # → Pass C
+            tstart= xtal_start([typ: 0.3ms])        @ds(p=8)          # → doc
+            tguard= xtal_guard(3ms)              @ds(p=8)          # → doc
+        )
+        # 32.768-kHz crystal demands (p.8) ride the P2_3/P2_4 alias pins —
+        # the alias-grade face (pin-profile draft ②) is not spelled here, so
+        # the rows wait in the body dict (§4) with the open point pinned.
+        # [32, 33] = P2_4/P2_3 dual-face (digital I/O + 32.768-kHz XOSC)
+    ]
+
+    # ── §4 body spec: what NO single pin owns ─────────────────────────────
+    spec = [
+        ta   = temp_range(-40C ~ 125C)   # p.4 operating ambient (= storage here)
+            @ds(p=4)                     # → Pass E? (derating walk absent —
+                                         #  first semantic ruling candidate
+                                         #  after working point ⑳)
+        wake = wake_time([4us@pm(1), 100us@pm(2), 100us@pm(3)])
+            @ds(p=5, cond="0.1 ms spelled 100 us so the axis shares one unit")
+            # → Pass C-2 (require-paired; pm(2)/pm(3) rows already violate a
+            #  50-us boot-latency require in the specimen story)
+
+        # wake/timing table completed (p.5):
+        twake_rc = wake_time(0.5ms@active)         # → doc
+            @ds(p=5, cond="active→TX/RX, 16-MHz RCOSC on, 32-MHz XOSC off")
+        txswitch = wake_time(192us@active)         # → doc
+            @ds(p=5, cond="active→TX/RX with XOSC on; RX/TX turnaround 192 us")
+
+        # internal clocks (p.8–9) — R9 open: no pin to land on; the analog-
+        # intent face (U112, suspended) is the missing landing. Kept as data.
+        clk32m  = rc_osc([nom: 32MHz, acc: 40ppm, start: 0.3ms])         # → doc
+            @ds(p=8, cond="XOSC rows: acc ±40 ppm incl aging")
+        clk32kx = rc_osc([nom: 32.768kHz, acc: 40ppm, start: 0.4s,
+                          esr: 130kΩ, c0: 2pF, cl: 16pF])                # → doc
+            @ds(p=8, cond="32.768-kHz XOSC; ESR 40–130 kΩ, C0 0.9–2 pF,
+                           CL 12–16 pF")
+        clk32kr = rc_osc([nom: 32.753kHz, acc: 0.2%, tempco: 0.4%C/°C,
+                          voltco: 3%C/V, cal-time: 2ms])               # → doc
+            @ds(p=8, cond="32-kHz RC, calibrated = 32 MHz / 977")
+        clk16m  = rc_osc([nom: 16MHz, uncal: 18%, cal-acc: 0.6%,
+                          start: 10us, cal-time: 50us])                # → doc
+            @ds(p=9, cond="16-MHz RC; calibrated accuracy ±0.6% typ / ±1% max")
+
+        # register-level radio data (p.9) — measurement faces, doc layer:
+        rssi    = rf_phase([range: 100dB, acc: 4dB, offset: 73dB, lsb: 1dB])
+            @ds(p=9)                                                  # → doc
+        freqest = rf_phase([range: 250kHz, acc: 40kHz, offset: 20kHz,
+                            lsb: 7.8kHz])                              # → doc
+            @ds(p=9)
+        phn     = rf_phase([110dBc@1MHz, 117dBc@2MHz, 122dBc@5MHz])
+            @ds(p=9, cond="phase noise, unmodulated carrier")          # → doc
+
+        # analog temperature sensor (p.9) — internal, doc layer:
+        tsens = temp_sense([nom: 1480code@25C,
+                            tempco: 4.5code/C, voltco: 1code/0.1V,
+                            uncal: 10C, cal: 5C, en: 0.5mA])
+            @ds(p=9, cond="12-bit ADC codes; 1-pt calibration")        # → doc
+
+        # SPI timing (p.13) — the pins are muxed across GPIO (PERCFG), so the
+        # instance waits for the alias-grade pin face; rows kept whole here.
+        # → doc (interface-timing walk absent; R10), R9 open on pin anchor.
+        spi = spi_timing([sck: 250ns, duty: 50%, ssn-setup: 63ns, ssn-hold: 63ns,
+                      mosi-early: 7ns, mosi-late: 10ns, miso-setup: 90ns,
+                      miso-hold: 10ns, mosi-setup-slave: 35ns,
+                      mosi-hold-slave: 10ns, miso-late-slave: 95ns,
+                      master-tx: 8MHz, master-rxtx: 4MHz,
+                      slave-rx: 8MHz, slave-rxtx: 4MHz])
+            @ds(p=13)
+
+        # debug interface (p.15) — anchored at P2_1/P2_2 in the real face
+        # world; alias face pending, rows kept here:
+        # → doc (debugger pairing; R10)
+        dbg = rc_osc([clk: 12MHz, t1: 35ns, t2: 35ns, t3: 167ns, t4: 83ns,
+                      t5: 83ns, t6: 2ns, t7: 4ns, t8: 30ns])
+            @ds(p=15, cond="t8 at 10-pF load")
+
+        # timer capture (p.16): 1.5 system clocks —
+        # → doc; tSYSCLK window rides clk16m/clk32m above
+        tcap = rc_osc([sysclk: 1.5t])   @ds(p=16)                       # → doc
+
+        # flash (p.5): endurance and page size —
+        # → doc (BOM/lifetime walk absent; R10)
+        flash = rc_osc([endurance: 20kcyc, page: 2KB]) @ds(p=5)
+
+        # ESD (p.4) — whole-device survival facts:
+        # → doc (ESD budget walk absent; R10)
+        esd = rc_osc([hbm: 2kV, cdm: 500V])  @ds(p=4, cond="JEDEC STD 22,
+                            method A114 / C101")
+
+        # absmax on any digital pin (p.4) — VDD-relative; the relative-window
+        # literal is the eval batch's debt, so it waits here instead of on
+        # the GPIO faces:
+        # → Pass B once the literal lands (vmax rows on GPIO faces then move
+        #  up from this dict to the pins)
+        vpin_absmax = absmax(-0.3V ~ VDD+0.3V)   @ds(p=4, cond="≤ 3.9 V")
+
+        # op-amp / comparator / ADC (p.10–11) — internal analog peripherals
+        # with no external endpoint: the admission gate REFUSES to fake a
+        # landing (R9). Full rows kept as data; they gain faces only through
+        # the analog-intent work (U112, suspended) or ADC-capable pin faces.
+        # → doc
+        opamp = rc_osc([out-max: VDD-0.07V, out-min: 0.07V, gain: 108dB,
+                        gbw: 2MHz, slew: 107V/us, offset-chop: 40uV,
+                        offset-nonchop: 0.8mV, cmrr: 90dB, supply: 0.4mA,
+                        noise-chop-0.01-1Hz: 1.1nV, noise-nonchop: 60nV])
+            @ds(p=10, cond="APCFG=0x07, OPAMPC=0x01; chopper on/off")
+        cmp = rc_osc([cm-max: VDD, cm-min: -0.3V, offset: 1mV, offset-t: 16uV/C,
+                      offset-v: 4mV/V, supply: 230nA, hyst: 0.15mV])
+            @ds(p=10)
+        adc = rc_osc([in-range: VDD, rin-4MHz: 197kΩ, fs: 2.97V,
+                      enob-se-12: 10.8bit, enob-diff-12: 11.5bit,
+                      bw-7bit: 20kHz, conv-12bit: 132us, supply: 1.2mA,
+                      vref: 1.15V, vref-v: 4mV/V, vref-t: 0.4mV/10C,
+                      dnl-12: 0.9lsb, inl-12: 13.3lsb, sinad-se-12: 66.6dB,
+                      sinad-diff-12: 70.8dB, offset: -3mV, gain: 0.68%])
+            @ds(p=11, cond="full ENOB/SINAD ladder in the PDF table")
+    ]
+}
+
+# ── §5 the pairing story (what the engine actually walks) ────────────────
+#
+# 1. Power net (LDO OUT --- DVDD/AVDD):
+#      covers: vout(3.135~3.465V) ⊆ vin(2~3.6V)                    → Pass C
+#      leq: every idraw slot + iperi addend <= icap(250mA)         → Pass D
+#      vmax rows judge against the rail envelope, not the peer.    → Pass B
+# 2. TTL net (CC2530 P1_0 --- peer input):
+#      slotwise containment, low and high, both directions.        → Pass C
+# 3. RF link (peer radio or antenna):
+#      band covers channel demand; rate floors throughput demand.  → Pass C
+#      link budget: peer rf_pout - path loss >= rf_sens here, and  → Pass C-2
+#      pout <= peer rf_maxin; peer clock accuracy ⊆ rxtol window.
+# 4. Crystal pairing (XTAL32M faces --- crystal library part): freq/acc/esr/
+#    c0/cl windows pair with the part's spec sheet.                → Pass C
+#
+# ── open points this full transcription files ──
+# - repetition: idraw/iperi ×2, receiver/drive_level dicts ×2 — the adopt/
+#   reference form (§8-1) is the grammar batch's call (1a2).
+# - relative windows (VDD+0.3, 0.3*VCC) still lack a meta-era literal.
+# - partial axis binding (mode + pout/input-level on RX/TX rows).
+# - alias-grade pin faces (P2_3/P2_4 32-kHz XOSC; SPI/debug muxing) — rows
+#   wait in the body dict until pin-profile ② lands.
+# - internal analog blocks have no landing: R9 refuses fake endpoints;
+#   analog-intent (U112, suspended) is the missing face family.
+# - nominal output power 0/4.5/8 vs p.1 "up to 4.5" — flagged at the row;
+#   the pins/page machine gate (roadmap §4) owns the verdict.
