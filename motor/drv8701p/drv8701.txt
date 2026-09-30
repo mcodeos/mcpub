@@ -1,0 +1,5856 @@
+Sample &
+Buy
+
+Product
+Folder
+
+Support &
+Community
+
+Tools &
+Software
+
+Technical
+Documents
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+DRV8701 有刷直流电机全桥栅极驱动器
+1 特性
+•
+
+1
+
+•
+•
+
+•
+
+•
+•
+•
+•
+•
+
+•
+
+•
+
+2 应用
+
+单路 H 桥栅极驱动器
+– 驱动 4 个外部 N 通道金属氧化物半导体场效应
+晶体管 (MOSFET)
+– 支持 100% 脉宽调制 (PWM) 占空比
+5.9V 至 45V 工作电源电压范围
+两个控制接口选项
+– PH/EN (DRV8701E)
+– PWM (DRV8701P)
+可调节栅极驱动（5 级）
+– 6mA 至 150mA 拉电流
+– 12.5mA 至 300mA 灌点流
+支持 1.8V、3.3V 和 5V 逻辑输入
+分流放大器 (20V/V)
+集成 PWM 电流调节功能
+– 限制电机浪涌电流
+低功耗睡眠模式 (9μA)
+两个低压降 (LDO) 稳压器，用于为外部元件供电
+– AVDD：4.8V，最高支持 30mA 输出负载
+– DVDD：3.3V，最高支持 30mA 输出负载
+小型封装尺寸
+– 24 引脚超薄型四方扁平无引线 (VQFN)
+(PowerPAD™)
+– 4.0mm × 4.0mm × 0.9mm
+保护特性：
+– VM 欠压闭锁 (UVLO)
+– 电荷泵电压 (CPUV)
+– 过流保护 (OCP)
+– 前置驱动器故障 (PDF)
+– 热关断 (TSD)
+– 故障状态输出 (nFAULT)
+
+•
+•
+•
+•
+•
+•
+
+工业有刷直流电机
+机器人
+家庭自动化
+工业泵和阀
+电动工具
+手持式真空吸尘器
+
+3 说明
+DRV8701 是一款采用 4 个外部 N 通道 MOSFET 的单
+路 H 桥栅极驱动器，主要用于驱动 12V 至 24V 双向
+有刷直流电机。
+该器件可通过 PH/EN (DRV8701E) 或 PWM
+(DRV8701P) 接口轻松连接控制器电路。 内置的感测
+放大器能够实现可调节的电流控制。 这款栅极驱动器
+内置有相应的电路，以便能够采用固定关断时间的
+PWM 电流斩波来调节绕组电流。
+DRV8701 采用 9.5V VGS 栅极驱动电压来驱动高侧和
+低侧 FET。 所有外部 FET 的栅极驱动电流均可通过
+IDRIVE 引脚上的单个外部电阻进行配置。
+低功耗睡眠模式可将内部电路关断，从而实现极低的静
+态电流消耗。 这种睡眠模式可通过将 nSLEEP 引脚置
+为低电平来设定。
+该器件内置以下保护功能：欠压锁定、电荷泵故障、过
+流关断、短路保护、前置驱动器故障以及过热保护。
+故障情况通过 nFAULT 引脚指示。
+器件信息(1)
+器件型号
+
+封装
+
+DRV8701
+
+封装尺寸（标称值）
+4.00mm × 4.00mm ×
+0.90mm
+
+VQFN (24)
+
+(1) 要了解所有可用封装，请见数据表末尾的可订购产品附录。
+
+栅极驱动电流
+
+空白
+
+tDRIVE
+
+PH/EN or PWM
+nSLEEP
+VREF
+
+sense
+
+Protection
+LDO
+
+3.3 & 4.8 V
+30 mA
+
+M
+
+tDRIVE
+Low-side
+gate drive
+current
+
+IHOLD
+
+IHOLD
+
+IDRIVE,SRC
+
+nFAULT
+
+Shunt Amp
+
+FETs
+
+ISTRONG
+
+sense output
+
+Gate
+drive
+
+IHOLD
+
+High-side
+VGS
+
+IDRIVE,SNK
+
+Controller
+
+H-Bridge Gate
+Driver
+
+IHOLD
+
+IHOLD
+
+ISTRONG
+
+DRV8701
+
+IDRIVE,SRC
+
+High-side
+gate drive
+current
+
+5.9V to 45 V
+
+IDRIVE,SNK
+
+简化的系统框图
+
+IHOLD
+
+Low-side
+VGS
+
+1
+
+An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+intellectual property matters and other important disclaimers. PRODUCTION DATA.
+
+English Data Sheet: SLVSCX5
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+目录
+1
+2
+3
+4
+5
+6
+
+特性 .......................................................................... 1
+应用 .......................................................................... 1
+说明 .......................................................................... 1
+修订历史记录 ........................................................... 2
+Pin Configuration and Functions ......................... 3
+Specifications......................................................... 5
+6.1
+6.2
+6.3
+6.4
+6.5
+6.6
+
+7
+
+Absolute Maximum Ratings ...................................... 5
+ESD Ratings.............................................................. 5
+Recommended Operating Conditions....................... 5
+Thermal Information .................................................. 6
+Electrical Characteristics........................................... 7
+Typical Characteristics .............................................. 9
+
+Detailed Description ............................................ 12
+7.1 Overview ................................................................. 12
+7.2 Functional Block Diagram ....................................... 13
+7.3 Feature Description................................................. 14
+
+7.4 Device Functional Modes........................................ 26
+
+8
+
+Application and Implementation ........................ 28
+8.1 Application Information............................................ 28
+8.2 Typical Applications ............................................... 28
+
+9
+
+Power Supply Recommendations...................... 32
+9.1 Bulk Capacitance Sizing ......................................... 32
+
+10 Layout................................................................... 33
+10.1 Layout Guidelines ................................................. 33
+10.2 Layout Example .................................................... 33
+
+11 器件和文档支持 ..................................................... 34
+11.1
+11.2
+11.3
+11.4
+11.5
+
+文档支持................................................................ 34
+社区资源................................................................ 34
+商标 ....................................................................... 34
+静电放电警告......................................................... 34
+术语表 ................................................................... 34
+
+12 机械、封装和可订购信息 ....................................... 34
+
+4 修订历史记录
+Changes from Original (March 2015) to Revision A
+
+Page
+
+•
+
+已将器件状态更新为量产数据 ................................................................................................................................................. 1
+
+2
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+5 Pin Configuration and Functions
+
+24
+
+23
+
+SH1
+17 GH1
+16 GND
+15 PH
+14 EN
+13 nSLEEP
+
+1
+
+VM
+VCP
+CPH
+CPL
+GND
+VREF
+
+18
+
+2
+
+GND
+(PPAD)
+
+4
+5
+
+DVDD 8
+nFAULT 9
+SNSOUT 10
+SO 11
+IDRIVE 12
+
+AVDD 7
+
+6
+
+18
+
+2
+
+17
+
+GND
+(PPAD)
+
+3
+4
+5
+6
+
+AVDD 7
+
+3
+
+SH1
+GH1
+16 GND
+15 IN1
+14 IN2
+13 nSLEEP
+
+1
+
+DVDD 8
+nFAULT 9
+SNSOUT 10
+SO 11
+IDRIVE 12
+
+24
+
+VM
+VCP
+CPH
+CPL
+GND
+VREF
+
+GH2
+23 SH2
+22 GL2
+21 SP
+20 SN
+19 GL1
+
+RGE Package
+24-Pin VQFN
+DRV8701P Top View
+
+GH2
+SH2
+22 GL2
+21 SP
+20 SN
+19 GL1
+
+RGE Package
+24-Pin VQFN
+DRV8701E Top View
+
+DRV8701E (PH/EN)
+PIN
+NAME
+
+NO.
+
+TYPE
+
+DESCRIPTION
+
+EN
+
+14
+
+Input
+
+Bridge enable input
+
+Logic low places the bridge in brake mode; see Table 1
+
+PH
+
+15
+
+Input
+
+Bridge phase input
+
+Controls the direction of the H-bridge; see Table 1
+
+DRV8701P (PWM)
+PIN
+NAME
+
+NO.
+
+TYPE
+
+IN1
+
+15
+
+Input
+
+IN2
+
+14
+
+Input
+
+DESCRIPTION
+Bridge PWM input
+
+Logic controls the state of H-bridge; see Table 2
+
+Common Pins
+PIN
+NAME
+VM
+
+NO.
+1
+
+TYPE
+
+DESCRIPTION
+
+Power
+
+Power supply
+
+Connect to motor supply voltage; bypass to GND with a 0.1-µF
+ceramic plus a 10-µF minimum capacitor rated for VM; additional
+capacitance may be required based on drive current
+
+Power
+
+Device ground
+
+Must be connected to ground
+
+Power
+
+Charge pump output
+
+Connect a 16-V, 1-µF ceramic capacitor to VM
+
+Power
+
+Charge pump switching nodes
+
+Connect a 0.1-µF X7R capacitor rated for VM between CPH and
+CPL
+
+5
+GND
+
+16
+PPAD
+
+VCP
+
+2
+
+CPH
+
+3
+
+CPL
+
+4
+
+DVDD
+
+8
+
+Power
+
+Logic regulator
+
+3.3-V logic supply regulator; bypass to GND with a 6.3-V, 1-µF
+ceramic capacitor
+
+AVDD
+
+7
+
+Power
+
+Analog regulator
+
+4.8-V analog supply regulator; bypass to GND with a 6.3-V, 1-µF
+ceramic capacitor
+
+nSLEEP
+
+13
+
+Input
+
+Device sleep mode
+
+Pull logic low to put device into a low-power sleep mode with FETs
+High-Z; internal pulldown
+
+IDRIVE
+
+12
+
+Input
+
+Gate drive current setting pin
+
+Resistor value or voltage forced on this pin sets the gate drive
+current; see applications section for more details
+
+Copyright © 2015, Texas Instruments Incorporated
+
+3
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+Common Pins (continued)
+PIN
+NAME
+
+NO.
+
+TYPE
+
+DESCRIPTION
+
+VREF
+
+6
+
+Input
+
+Analog reference input
+
+Controls the current regulation; apply a voltage between 0.3 V and
+AVDD
+
+nFAULT
+
+9
+
+Open
+Drain
+
+Fault indication pin
+
+Pulled logic low with fault condition; open-drain output requires an
+external pullup
+
+SNSOUT
+
+10
+
+Open
+Drain
+
+Sense comparator output
+
+Pulled logic low when the drive current hits the current chopping
+threshold; open-drain output requires an external pullup
+
+SO
+
+11
+
+Output
+
+Shunt amplifier output
+
+Voltage on this pin is equal to the SP voltage times AV plus an
+offset; place no more than 1 nF of capacitance on this pin
+
+SN
+
+20
+
+Input
+
+Shunt amplifier negative input
+
+Connect to SP through current sense resistor and to GND
+
+SP
+
+21
+
+Input
+
+Shunt amplifier positive input
+
+Connect to low-side FET source and to SN through current sense
+resistor
+
+GH1
+
+17
+
+GH2
+
+24
+
+Output
+
+High-side gate
+
+Connect to high-side FET gate
+
+GL1
+
+19
+
+GL2
+
+22
+
+Output
+
+Low-side gate
+
+Connect to low-side FET gate
+
+SH1
+
+18
+
+SH2
+
+23
+
+Input
+
+Phase node
+
+Connect to high-side FET source and low-side FET drain
+
+External Passive Components
+COMPONENT
+
+PIN 1
+
+PIN 2
+
+RECOMMENDED
+
+CVM1
+
+VM
+
+GND
+
+0.1-µF ceramic capacitor rated for VM
+
+CVM2
+
+VM
+
+GND
+
+≥10-µF capacitor rated for VM
+
+CVCP
+
+VCP
+
+VM
+
+16-V, 1-µF ceramic capacitor
+
+CSW
+
+CPH
+
+CPL
+
+0.1-µF X7R capacitor rated for VM
+
+CDVDD
+
+DVDD
+
+GND
+
+6.3-V, 1-µF ceramic capacitor
+
+CAVDD
+
+AVDD
+
+GND
+
+6.3-V, 1-µF ceramic capacitor
+
+RIDRIVE
+
+IDRIVE
+
+GND
+
+See Typical Applications for resistor sizing
+
+RnFAULT
+
+VCC (1)
+
+nFAULT
+
+≥10-kΩ pullup
+
+RSNSOUT
+
+VCC
+
+(1)
+
+SNSOUT
+
+≥10-kΩ pullup
+
+RSENSE
+
+SP
+
+SN/GND
+
+Optional low-side sense resistor
+
+(1)
+
+VCC is not a pin on the DRV8701, but a VCC supply voltage pullup is required for open-drain outputs nFAULT and SNSOUT. The
+system controller supply can be used for this pullup voltage, or these pins can be pulled up to either AVDD or DVDD.
+
+External FETs
+
+4
+
+Component
+
+Gate
+
+Drain
+
+Source
+
+QHS1
+
+GH1
+
+VM
+
+SH1
+
+QLS1
+
+GL1
+
+SH1
+
+SP or GND
+
+QHS2
+
+GH2
+
+VM
+
+SH2
+
+QLS2
+
+GL2
+
+SH2
+
+SP or GND
+
+Recommended
+
+Supports up to 200-nC FETs at 40-kHz PWM; see
+Detailed Design Procedure for more details
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+over operating free-air temperature range referenced with respect to GND (unless otherwise noted) (1)
+Power supply voltage (VM)
+
+MIN
+
+MAX
+
+UNIT
+
+–0.3
+
+47
+
+V
+
+Power supply voltage ramp rate (VM)
+
+0
+
+2
+
+V/µs
+
+Charge pump voltage (VCP, CPH)
+
+–0.3
+
+VM + 12
+
+V
+
+Charge pump negative switching pin (CPL)
+
+–0.3
+
+VM
+
+V
+
+Internal logic regulator voltage (DVDD)
+
+–0.3
+
+3.8
+
+V
+
+Internal analog regulator voltage (AVDD)
+
+–0.3
+
+5.75
+
+V
+
+Control pin voltage (PH, EN, IN1, IN2, nSLEEP, nFAULT, VREF, IDRIVE, SNSOUT)
+
+–0.3
+
+5.75
+
+V
+
+High-side gate pin voltage (GH1, GH2)
+
+–0.3
+
+VM + 12
+
+V
+
+Continuous phase node pin voltage (SH1, SH2)
+
+–1.2
+
+VM + 1.2
+
+V
+
+Pulsed 10 µs phase node pin voltage (SH1, SH2)
+
+–2.0
+
+VM + 2
+
+V
+
+Low-side gate pin voltage (GL1, GL2)
+
+–0.3
+
+12
+
+V
+
+Continuous shunt amplifier input pin voltage (SP, SN)
+
+–0.5
+
+1
+
+V
+
+Pulsed 10-µs shunt amplifier input pin voltage (SP, SN)
+
+–1
+
+1
+
+V
+
+Shunt amplifier output pin voltage (SO)
+
+–0.3
+
+5.75
+
+V
+
+Open-drain output current (nFAULT, SNSOUT)
+
+0
+
+10
+
+mA
+
+Gate pin source current (GH1, GL1, GH2, GL2)
+
+0
+
+250
+
+mA
+
+Gate pin sink current (GH1, GL1, GH2, GL2)
+
+0
+
+500
+
+mA
+
+Shunt amplifier output pin current (SO)
+
+0
+
+5
+
+mA
+
+Operating junction temperature, TJ
+
+–40
+
+150
+
+°C
+
+Storage temperature, Tstg
+
+–65
+
+150
+
+°C
+
+(1)
+
+Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress ratings
+only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under Recommended
+Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device reliability.
+
+6.2 ESD Ratings
+VALUE
+V(ESD)
+(1)
+(2)
+
+Electrostatic discharge
+
+Human body model (HBM) ESD stress voltage (1)
+
+±2000
+
+Charged device model (CDM) ESD stress voltage (2)
+
+±500
+
+UNIT
+V
+
+JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+6.3 Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)
+MIN
+
+MAX
+
+UNIT
+
+5.9
+
+45
+
+V
+
+0
+
+5.5
+
+V
+
+0.3 (1)
+
+AVDD
+
+V
+
+Applied PWM signal (PH/EN or IN1/IN2)
+
+100
+
+kHz
+
+AVDD external load current
+
+30 (2)
+
+mA
+
+IDVDD
+
+DVDD external load current
+
+30 (2)
+
+mA
+
+ISO
+
+Shunt amplifier output current loading (SO)
+
+5
+
+mA
+
+TA
+
+Operating ambient temperature
+
+125
+
+°C
+
+VM
+
+Power supply voltage range
+
+VCC
+
+Logic level input voltage
+
+VREF
+
+Reference RMS voltage range (VREF)
+
+ƒPWM
+IAVDD
+
+(1)
+(2)
+
+–40
+
+Operational at VREF = 0 to 0.3 V, but accuracy is degraded
+Power dissipation and thermal limits must be observed
+
+Copyright © 2015, Texas Instruments Incorporated
+
+5
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+6.4 Thermal Information
+DRV8701
+THERMAL METRIC (1)
+
+RGE (VQFN)
+
+UNIT
+
+24 PINS
+RθJA
+
+Junction-to-ambient thermal resistance
+
+34.8
+
+°C/W
+
+RθJC(top)
+
+Junction-to-case (top) thermal resistance
+
+37.1
+
+°C/W
+
+RθJB
+
+Junction-to-board thermal resistance
+
+12.2
+
+°C/W
+
+ψJT
+
+Junction-to-top characterization parameter
+
+0.6
+
+°C/W
+
+ψJB
+
+Junction-to-board characterization parameter
+
+12.2
+
+°C/W
+
+RθJC(bot)
+
+Junction-to-case (bottom) thermal resistance
+
+3.7
+
+°C/W
+
+(1)
+
+6
+
+For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+report, SPRA953.
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+6.5 Electrical Characteristics
+over operating free-air temperature range (unless otherwise noted)
+PARAMETER
+
+TEST CONDITIONS
+
+MIN
+
+TYP
+
+MAX
+
+UNIT
+
+45
+
+V
+
+6
+
+9.5
+
+mA
+
+9
+
+15
+
+14
+
+25
+
+POWER SUPPLIES (VM, AVDD, DVDD)
+VM
+
+VM operating voltage
+
+IVM
+
+VM operating supply current
+
+VM = 24 V; nSLEEP high
+
+5.9
+
+IVMQ
+
+VM sleep mode supply current
+
+nSLEEP = 0
+VM = 24 V
+
+tSLEEP
+
+Sleep time
+
+nSLEEP low to sleep mode
+
+tWAKE
+
+Wake-up time
+
+nSLEEP high to output change
+
+tON
+
+Turn-on time
+
+VM > UVLO to output transition
+
+DVDD
+
+Internal logic regulator voltage
+
+External load 0 to 30 mA
+
+3.0
+
+3.3
+
+AVDD
+
+Internal logic regulator voltage
+
+External load 0 to 30 mA
+
+4.4
+
+4.8
+
+5.2
+
+V
+
+VM = 12 V; IVCP = 0 to 12 mA
+
+20.5
+
+21.5
+
+22.5
+
+VM = 8 V; IVCP = 0 to 10 mA
+
+13.5
+
+14.4
+
+15
+
+VM = 5.9 V; IVCP = 0 to 8 mA
+
+9.4
+
+9.9
+
+10.4
+
+VM > 12 V
+
+12
+
+8 V < VM < 12 V
+
+10
+
+5.9 V < VM < 8 V
+
+8
+
+TA = 25°C
+TA = 125°C
+
+(1)
+
+μA
+
+100
+
+μs
+
+1
+
+ms
+
+1
+
+ms
+
+3.5
+
+V
+
+CHARGE PUMP (VCP, CPH, CPL)
+VCP
+
+IVCP
+
+VCP operating voltage
+
+Charge pump current capacity
+
+fVCP (1)
+
+Charge pump switching frequency
+
+VM > UVLO
+
+200
+
+V
+
+mA
+400
+
+700
+
+kHz
+
+0.8
+
+V
+
+CONTROL INPUTS (PH, EN, IN1, IN2, nSLEEP)
+VIL
+
+Input logic low voltage
+
+VIH
+
+Input logic high voltage
+
+1.5
+
+V
+
+VHYS
+
+Input logic hysteresis
+
+100
+
+mV
+
+IIL
+
+Input logic low current
+
+VIN = 0 V
+
+IIH
+
+Input logic high current
+
+VIN = 5 V
+
+RPD
+
+Pulldown resistance
+
+tPD
+
+Propagation delay
+
+–5
+64
+
+PH/EN, IN1/IN2 to GHx/GLx
+
+115
+
+5
+
+μA
+
+78
+
+μA
+
+173
+
+kΩ
+
+500
+
+ns
+
+CONTROL OUTPUTS (nFAULT, SNSOUT)
+VOL
+
+Output logic low voltage
+
+IO = 2 mA
+
+IOZ
+
+Output high impedance leakage
+
+VIN = 5 V
+
+–2
+
+0.1
+
+V
+
+2
+
+μA
+
+FET GATE DRIVERS (GH1, GH2, SH1, SH2, GL1, GL2)
+VGHS
+
+VM > 12 V; VGHS with respect to SHx
+High-side VGS gate drive (gate-toVM = 8 V; VGHS with respect to SHx
+source)
+VM = 5.9 V; VGHS with respect to SHx
+
+VGLS
+
+Low-side VGS gate drive (gate-tosource)
+
+tDEAD
+
+Output dead time
+
+tDRIVE
+
+Gate drive time
+
+8.5
+
+9.5
+
+5.5
+
+6.4
+
+7
+
+3.5
+
+4.0
+
+4.5
+
+VM > 12 V
+
+8.5
+
+9.3
+
+10.5
+
+VM = 5.9 V
+
+3.9
+
+4.3
+
+4.9
+
+Observed tDEAD depends on IDRIVE
+setting
+RIDRIVE < 1 kΩ to GND
+RIDRIVE = 33 kΩ ±5% to GND
+
+IDRIVE,SRC
+
+(1)
+
+Peak source current
+
+10.5
+V
+
+V
+
+380
+
+ns
+
+2.5
+
+μs
+
+6
+12.5
+
+RIDRIVE = 200 kΩ ±5% to GND, or
+RIDRIVE < 1 kΩ to AVDD
+
+25
+
+RIDRIVE > 500 kΩ ±5% to GND
+
+100
+
+RIDRIVE = 68 kΩ ±5% to AVDD
+
+150
+
+mA
+
+Specified by design and characterization data
+
+Copyright © 2015, Texas Instruments Incorporated
+
+7
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+Electrical Characteristics (continued)
+over operating free-air temperature range (unless otherwise noted)
+PARAMETER
+
+TEST CONDITIONS
+
+MIN
+
+RIDRIVE < 1 kΩ to GND
+
+IDRIVE,SNK
+
+Peak sink current
+
+IHOLD
+
+FET holding current
+
+ISTRONG
+
+FET hold-off strong pulldown
+
+ROFF
+
+FET gate hold-off resistor
+
+TYP
+
+MAX
+
+UNIT
+
+12.5
+
+RIDRIVE = 33 kΩ ±5% to GND
+
+25
+
+RIDRIVE = 200 kΩ ±5% to GND
+
+50
+
+RIDRIVE < 1 kΩ to AVDD
+
+200
+
+RIDRIVE > 500 ±5% kΩ to GND
+
+300
+
+RIDRIVE = 68 kΩ ±5% to AVDD
+
+50
+
+Source current after tDRIVE
+
+6
+
+Sink current after tDRIVE
+
+25
+
+GHx
+
+490
+
+GLx
+
+690
+
+Pulldown GHx to SHx
+
+200
+
+Pulldown GLx to GND
+
+150
+
+mA
+
+mA
+mA
+kΩ
+
+CURRENT SHUNT AMPLIFIER AND PWM CURRENT CONTROL (SP, SN, SO, VREF)
+VVREF
+
+VREF input voltage
+
+For current internal chopping
+
+0.3 (2)
+
+AVDD
+
+50 < VSP < 200 mV; VSN = GND
+
+18
+
+20
+
+22
+
+10 < VSP < 50 mV; VSN = GND
+
+16
+
+20
+
+24
+250
+
+AV
+
+Amplifier gain
+
+VOFF
+
+SO offset
+
+VSP = VSN = GND
+
+50
+
+ISP
+
+SP input current
+
+VSP = 100 mV; VSN = GND
+
+-40
+
+Settling time to ±1%
+
+VSP = VSN = GND to
+VSP = 100 mV, VSN = GND
+
+(3)
+
+tSET
+
+V
+V/V
+mV
+μA
+
+1.5
+
+µs
+
+1
+
+nF
+
+CSO (3)
+
+Allowable SO pin capacitance
+
+tOFF
+
+PWM current regulation off-time
+
+25
+
+µs
+
+tBLANK
+
+PWM blanking time
+
+2
+
+µs
+
+PROTECTION CIRCUITS
+VM falling; UVLO report
+
+5.4
+
+5.8
+
+VM rising; UVLO recovery
+
+5.6
+
+5.9
+
+VUVLO
+
+VM undervoltage lockout
+
+VUVLO,HYS
+
+VM undervoltage hysteresis
+
+Rising to falling threshold
+
+tUVLO
+
+VM UVLO falling deglitch time
+
+VM falling; UVLO report
+
+VCPUV
+
+Charge pump undervoltage
+
+CPUV report
+
+VDS OCP
+
+Overcurrent protection trip level,
+VDS of each external FET
+
+High-side FETs: VM – SHx
+Low-side FETs: SHx – SP
+
+VSP OCP
+
+Overcurrent protection trip level,
+measured by sense amplifier
+
+VSP voltage with respect to GND
+
+tOCP
+
+Overcurrent deglitch time
+
+tRETRY
+
+Overcurrent retry time
+
+TTSD (3)
+
+Thermal shutdown temperature
+
+Die temperature, TJ
+
+THYS (3)
+
+Thermal shutdown hysteresis
+
+Die temperature, TJ
+
+VGS CLAMP
+
+Gate drive clamping voltage
+
+(2)
+(3)
+
+8
+
+100
+
+V
+mV
+
+10
+
+μs
+
+VM + 2.8
+
+V
+
+0.8
+
+1
+
+V
+
+0.8
+
+1
+
+V
+
+4.5
+
+µs
+
+3
+
+ms
+
+150
+
+°C
+20
+
+Positive clamping voltage
+
+10.5
+
+Negative clamping voltage
+
+–1
+
+°C
+13
+
+–0.7
+
+–0.5
+
+V
+
+Operational at VREF = 0 to 0.3 V, but accuracy is degraded
+Specified by design and characterization data
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+6.6 Typical Characteristics
+6.5
+6.4
+
+S u p p ly C u rre n t (m A )
+
+6.3
+
+Supply Current (mA)
+
+T A = 125°C
+T A = 85°C
+T A = 25°C
+T A  ±&
+
+6.2
+6.1
+6
+5.9
+5.8
+5.7
+5.6
+5.5
+5
+
+10
+
+15
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+45
+
+6.15
+6.1
+6.05
+6
+5.95
+5.9
+5.85
+5.8
+5.75
+5.7
+5.65
+5.6
+5.55
+5.5
+-50
+
+VM = 24 V
+VM = 12 V
+
+-25
+
+Figure 1. Supply Current over VM
+
+100
+
+125
+D002
+
+Figure 2. Supply Current over Temperature
+
+20
+
+16
+T A = 125°C
+T A = 85°C
+T A = 25°C
+T A  ±&
+
+18
+
+VM = 24 V
+VM = 12 V
+
+15
+14
+13
+Sleep Current (µA)
+
+16
+S le e p C u rre n t (µ A )
+
+0
+25
+50
+75
+Ambient Temperature (°C)
+
+D001
+
+14
+12
+10
+8
+
+12
+11
+10
+9
+8
+7
+
+6
+
+6
+4
+
+5
+4
+-50
+
+2
+5
+
+10
+
+15
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+45
+
+-25
+
+0
+25
+50
+75
+Ambient Temperature (°C)
+
+D003
+
+Figure 3. Sleep Current over VM
+
+125
+D004
+
+Figure 4. Sleep Current over Temperature
+
+12
+
+4.6
+
+VM = 12 V
+VM = 10 V
+
+11
+
+VM = 8 V
+VM = 5.9 V
+
+T A = 125°C
+T A = 85°C
+T A = 25°C
+T A  ±&
+
+4.5
+4.4
+
+10
+
+4.3
+
+9
+
+4.2
+
+V C P -V M (V )
+
+V C P -V M (V )
+
+100
+
+8
+7
+6
+
+4.1
+4
+3.9
+3.8
+3.7
+
+5
+
+3.6
+
+4
+
+3.5
+
+3
+
+3.4
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+7
+8
+9 10
+Load Current (mA)
+
+11
+
+12
+
+13
+
+Figure 5. VCP over Load (TA = 25°C)
+
+Copyright © 2015, Texas Instruments Incorporated
+
+14
+
+15
+D005
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+7
+8
+9 10
+Load Current (mA)
+
+11
+
+12
+
+13
+
+14
+
+15
+D006
+
+Figure 6. VCP over Load (VM = 5.9 V)
+
+9
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+Typical Characteristics (continued)
+4.875
+
+3.295
+3.29
+
+4.85
+
+3.285
+
+4.825
+
+3.28
+3.275
+
+4.8
+
+AVDD (V)
+
+D V D D (V )
+
+3.27
+3.265
+3.26
+3.255
+
+4.775
+4.75
+4.725
+
+3.25
+3.245
+
+T A = 125°C
+T A = 85°C
+
+3.24
+
+4.7
+
+T A = 25°C
+T A  ±&
+
+3.235
+
+4.65
+
+3.23
+
+4.625
+
+3.225
+0
+
+3
+
+6
+
+9
+
+12
+15
+18
+Load Current (mA)
+
+21
+
+24
+
+27
+
+0
+
+30
+
+12
+15
+18
+21
+Load Current (mA)
+
+24
+
+27
+
+30
+D008
+
+19.9
+19.7
+19.5
+19.3
+19.1
+18.9
+SP = 225 mV
+SP = 100 mV
+SP = 50 mV
+SP = 10 mV
+
+18.7
+VM = 24 V
+VM = 12 V
+-25
+
+0
+
+25
+50
+75
+Ambient Temperature (°C)
+
+100
+
+18.5
+18.3
+-50
+
+125
+
+-25
+
+0
+
+D009
+
+25
+50
+75
+Ambient Temperature (°C)
+
+100
+
+125
+D010
+
+Figure 10. Amplifier Gain over Temperature
+20
+
+20
+19.96
+19.92
+19.88
+19.84
+19.8
+19.76
+19.72
+19.68
+19.64
+19.6
+19.56
+19.52
+19.48
+19.44
+19.4
+19.36
+
+T A = 125°C
+T A = 85°C
+
+T A = 25°C
+T A  ±&
+
+19.8
+19.6
+19.4
+
+A v (V /V )
+
+A v (V /V )
+
+9
+
+Figure 8. AVDD Regulator over Load (VM = 12 V)
+
+Figure 9. SO Offset over Temperature
+
+19.2
+19
+18.8
+18.6
+18.4
+MAX
+MIN
+
+18.2
+
+5
+
+10
+
+15
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+Figure 11. Amplifier Gain over VM (SP = 50 mV)
+
+10
+
+6
+
+20.1
+
+A v (V /V )
+
+55
+52.5
+50
+47.5
+45
+42.5
+40
+37.5
+35
+32.5
+30
+27.5
+25
+22.5
+20
+17.5
+15
+-50
+
+3
+
+D007
+
+Figure 7. DVDD Regulator over Load (VM = 12 V)
+
+S O O ffs e t (m V )
+
+TA = -40°C
+TA = +25°C
+TA = +85°C
+TA = +125°C
+
+4.675
+
+45
+D011
+
+18
+10
+
+30
+
+50
+
+70
+
+90
+
+110 130
+SP (mV)
+
+150
+
+170
+
+190
+
+210 225
+D012
+
+Figure 12. Amplifier Gain over VM and Temperature Range
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+Typical Characteristics (continued)
+6.2
+
+180
+
+6
+
+140
+
+H ig h -S id e ID R IV E P (m A )
+
+H ig h -S id e ID R IV E P (m A )
+
+160
+
+120
+100
+80
+
+150/300 mA
+100/200 mA
+25/50 mA
+
+60
+
+12.5/25 mA
+6/12.5 mA
+
+40
+
+5.8
+5.6
+5.4
+5.2
+5
+
+20
+0
+-50
+
+T A  ±&
+T A = 25°C
+
+4.8
+-25
+
+0
+
+25
+50
+75
+Ambient Temperature (°C)
+
+100
+
+5
+
+125
+
+15
+
+15.5
+
+32
+H ig h -S id e ID R IV E P (m A )
+
+33
+
+15
+14.5
+14
+13.5
+13
+T A  ±&
+T A = 25°C
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+45
+D014
+
+Figure 14. 6-/12.5-mA High-Side IDRIVEP over VM
+
+16
+
+12.5
+
+10
+
+D013
+
+Figure 13. High-Side IDRIVEP over Temperature (VM = 12 V)
+
+H ig h -S id e ID R IV E P (m A )
+
+T A = 85°C
+T A = 125°C
+
+T A = 85°C
+T A = 125°C
+
+31
+30
+29
+28
+27
+26
+T A  ±&
+T A = 25°C
+
+25
+
+12
+
+T A = 85°C
+T A = 125°C
+
+24
+
+5
+
+10
+
+15
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+45
+
+5
+
+10
+
+15
+
+D015
+
+Figure 15. 12.5-/25-mA High-Side IDRIVEP over VM
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+45
+D016
+
+Figure 16. 25-/50-mA High-Side IDRIVEP over VM
+
+130
+
+185
+180
+
+125
+H ig h -S id e ID R IV E P (m A )
+
+H ig h -S id e ID R IV E P (m A )
+
+175
+120
+115
+110
+105
+100
+
+T A  ±&
+T A = 25°C
+T A = 85°C
+T A = 125°C
+
+95
+
+170
+165
+160
+155
+150
+145
+
+T A  ±&
+T A = 25°C
+T A = 85°C
+T A = 125°C
+
+140
+135
+
+90
+
+130
+5
+
+10
+
+15
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+45
+D017
+
+Figure 17. 100-/200-mA High-Side IDRIVEP over VM
+
+Copyright © 2015, Texas Instruments Incorporated
+
+5
+
+10
+
+15
+
+20
+25
+30
+Supply Voltage VM (V)
+
+35
+
+40
+
+45
+D018
+
+Figure 18. 150-/300-mA High-Side IDRIVEP over VM
+
+11
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7 Detailed Description
+7.1 Overview
+The DRV8701 is an H-bridge gate driver (also called a pre-driver or controller). The device integrates FET gate
+drivers in order to control four external NMOS FETs. The device can be powered with a supply voltage between
+5.9 and 45 V.
+A simple PH/EN (DRV8701E) or PWM (DRV8701P) interface allows interfacing to the controller circuit.
+A low-power sleep mode is included, which can be enabled using the nSLEEP pin.
+The gate drive strength can be adjusted to optimize a system for a given FET without adding external resistors in
+series with the FET gates. The IDRIVE pin allows for selection of the peak current driven into the external FET
+gate. Both the high-side and low-side FETs are driven with a VGS of 9.5 V nominally when VM > 12 V. At lower
+VM voltages, the VGS is reduced. The high-side gate drive voltage is generated using a doubler-architecture
+charge pump that regulates to VM + 9.5 V.
+This device greatly reduces the component count of discrete motor driver systems by integrating the necessary
+FET drive circuitry into a single device. In addition, the DRV8701 adds protection features above traditional
+discrete implementations: UVLO, OCP, pre-driver faults, and thermal shutdown.
+A start-up (inrush) or running current limitation is built in using a fixed time-off current chopping scheme. The
+chopping current level is set by choosing the sense resistor value and by setting a voltage on the VREF pin.
+A shunt amplifier output is provided for accurate current measurements by the system controller. The SO pin
+outputs a voltage that is 20 times the voltage seen across the sense resistor.
+
+12
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+7.2 Functional Block Diagram
+VM
+
+VM
+
+0.1 µF
+
+10 µF minimum
+VM
+
+VM
+1 µF
+
+30 mA
+
+Gate Driver
+Charge
+Pump
+
+VGLS
+
+SH1
+GL1
+
+LS
+
+CPL
+DVDD
+
+VM
+
+Logic
+
+AVDD
+
+BDC
+
+3.3-V LDO
+
+1 µF
+30 mA
+
+GH1
+
+HS
+
+VCP
+CPH
+
+0.1 µF
+
+VCP
+
+Power
+
+VCP
+
+4.8-V LDO
+
+GH2
+
+HS
+
+1 µF
+VGLS LDO
+
+Gate Driver
+VGLS
+
+SH2
+GL2
+
+LS
+
+PH/IN1
+EN/IN2
+nSLEEP
+
+Control
+Inputs
+
+Current Regulation
+
+SP
+
+IDRIVE
++
+
+RIDRIVE
+
+RSENSE
+
+AV
+
+SN
+
+SNSOUT
+
+Outputs
+
+SO
+VREF
+
+nFAULT
+
+PPAD GND
+
+Copyright © 2015, Texas Instruments Incorporated
+
+GND
+
+13
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7.3 Feature Description
+7.3.1 Bridge Control
+The DRV8701E is controlled using a PH/EN interface. The following logic table (Table 1) gives the full H-bridge
+state when driving a single brushed DC motor. Note that Table 1 does not take into account the current control
+built into the DRV8701E. Positive current is defined in the direction of xOUT1 → xOUT2.
+Table 1. DRV8701E (PH/EN) Control Interface
+nSLEEP
+
+EN
+
+PH
+
+SH1
+
+SH2
+
+AVDD/DVDD
+
+0
+
+X
+
+X
+
+High-Z
+
+High-Z
+
+Disabled
+
+Sleep mode; H-bridge disabled High-Z
+
+Description
+
+1
+
+0
+
+X
+
+L
+
+L
+
+Enabled
+
+Brake, low-side slow decay
+
+1
+
+1
+
+0
+
+L
+
+H
+
+Enabled
+
+Reverse drive (current SH2 → SH1)
+
+1
+
+1
+
+1
+
+H
+
+L
+
+Enabled
+
+Forward drive (current SH1 → SH2)
+
+The DRV8701P is controlled using a PWM interface (IN1/IN2). The following logic table (Table 2) gives the full Hbridge state when driving a single brushed DC motor. Note that Table 2 does not take into account the current
+control built into the DRV8701P. Positive current is defined in the direction of xOUT1 → xOUT2.
+Table 2. DRV8701P (PWM) Control Interface
+nSLEEP
+
+IN1
+
+IN2
+
+SH1
+
+SH2
+
+AVDD/DVDD
+
+0
+
+X
+
+X
+
+High-Z
+
+High-Z
+
+Disabled
+
+Sleep mode; H-bridge disabled High-Z
+
+1
+
+0
+
+0
+
+High-Z
+
+High-Z
+
+Enabled
+
+Coast; H-bridge disabled High-Z
+
+1
+
+0
+
+1
+
+L
+
+H
+
+Enabled
+
+Reverse (current SH2 → SH1)
+
+1
+
+1
+
+0
+
+H
+
+L
+
+Enabled
+
+Forward (current SH1 → SH2)
+
+1
+
+1
+
+1
+
+L
+
+L
+
+Enabled
+
+Brake; low-side slow decay
+
+VM
+
+VM
+
+1 Forward drive
+
+1
+SH1
+
+SH2
+2
+3
+
+Description
+
+2 Slow decay (brake)
+3 High-Z (coast)
+
+1 Reverse drive
+
+1
+SH1
+
+SH2
+2
+
+2 Slow decay (brake)
+3 High-Z (coast)
+
+3
+
+Figure 19. H-Bridge Operational States
+
+14
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+7.3.2 Half-Bridge Operation
+The DRV8701 can be used to drive only a single half-bridge instead of a full H-bridge. To operate in this mode,
+leave GH1 and GL1 disconnected. Also, connect a 1/10 W, 330-Ω 5% resistor from SH1 to GND.
+GH1
+PH/IN1
+
+EN/IN2
+
+SH1
+
+Gate
+Drive
+
+Control
+Inputs
+
+330
+
+GL1
+
+nSLEEP
+VM
+GH2
+
+Logic
+
+SH2
+
+Gate
+Drive
+
+GL2
+
+nFAULT
+
+BDC
+
+SP
++
+
+Outputs
+
+SNSOUT
+
+RSENSE
+
+AV
+
+SN
+
+-
+
+SO
+VREF
+
+Figure 20. Half-H Bridge Operation Mode
+For the DRV8701E, this mode is controlled by tying the PH pin low. Table 3 gives the control scheme. EN = 1
+enables the high-side FET, and EN = 0 enables the low-side FET. EN = 1 and PH = 1 is an invalid state.
+Table 3. DRV8701E (PH/EN) Control Interface for Half-H Bridge Mode
+nSLEEP
+
+EN
+
+PH
+
+SH2
+
+AVDD/DVDD
+
+0
+
+X
+
+X
+
+High-Z
+
+Disabled
+
+Sleep mode; disabled High-Z
+
+Description
+
+1
+
+0
+
+X
+
+L
+
+Enabled
+
+Brake, low-side slow decay
+
+1
+
+1
+
+0
+
+H
+
+Enabled
+
+Drive (Current SH2 → GND)
+
+1
+
+1
+
+1
+
+Invalid state
+
+For the DRV8701P, Table 4 gives the control scheme. IN1 = 1 and IN2 = 0 is an invalid state.
+Table 4. DRV8701P (PWM) Control Interface for Half-H Bridge Mode
+nSLEEP
+
+IN1
+
+IN2
+
+SH2
+
+AVDD/DVDD
+
+0
+
+X
+
+X
+
+High-Z
+
+Disabled
+
+Sleep mode; disabled High-Z
+
+1
+
+0
+
+0
+
+High-Z
+
+Enabled
+
+Coast; disabled High-Z
+
+1
+
+0
+
+1
+
+H
+
+Enabled
+
+Drive (current SH2 → GND)
+
+1
+
+1
+
+0
+
+1
+
+1
+
+1
+
+L
+
+Enabled
+
+Brake; low-side slow decay
+
+Copyright © 2015, Texas Instruments Incorporated
+
+Description
+
+Invalid state
+
+15
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7.3.3 Current Regulation
+The maximum current through the motor winding is regulated by a fixed off-time PWM current regulation, or
+current chopping. When an H-bridge is enabled in forward or reverse drive, current rises through the winding at a
+rate dependent on the DC voltage and inductance of the winding. After the current hits the current chopping
+threshold, the bridge enters a brake (low-side slow decay) mode until tOFF has expired.
+Note that immediately after the current is enabled, the voltage on the SP pin is ignored for a period of time
+(tBLANK) before enabling the current sense circuitry.
+The PWM chopping current is set by a comparator which compares the voltage across a current sense resistor
+connected to the SP pin, multiplied by a factor of AV, with a reference voltage from the VREF pin. The factor AV
+is the shunt amplifier gain, which is 20 V/V in the DRV8701.
+The chopping current is calculated as follows:
+9REF ± 9OFF
+ICHOP
+A V u RSENSE
+
+(1)
+
+Example: If a 50 mΩ sense resistor is used and VREF = 3.3 V, the full-scale chopping current will be 3.25 A. AV
+is 20 V/V and VOFF is assumed to be 50 mV in this example.
+For DC motors, current regulation is generally used to limit the start-up and stall current of the motor. If the
+current regulation feature is not needed, it can be disabled by tying VREF directly to AVDD and tying SP and SN
+to GND.
+
+Drive Current (A)
+
+ICHOP
+
+Drive
+
+Brake / Slow Decay
+
+Drive
+
+Brake / Slow Decay
+
+WWBLANK
+
+tOFF
+
+WWBLANK
+
+tOFF
+
+SNSOUT
+
+SO (V)
+
+VREF
+
+Figure 21. Sense Amplifier and Current Chopping Operation
+During brake mode (slow decay), current is recirculated through the low-side FETs. Because current is not
+flowing through the sense resistor, SO does not represent the motor current.
+
+16
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+7.3.4 Amplifier Output SO
+The SO pin on the DRV8701 outputs an analog voltage equal to the voltage seen across the SP and SN pins
+multiplied by AV. The factor AV is the shunt amplifier gain, which is 20 V/V in the DRV8701. SO is only valid
+during forward or reverse drive. The H-bridge current is approximately equal to:
+62 ± 9OFF
+I
+A V u RSENSE
+(2)
+When SP and SN are 0 V, SO outputs the amplifier offset voltage VOFF. No capacitor is required on the SO pin.
+I
+R
+
+Logic
+
++
+-
+
++
+
+VCC
+
+-
+
+SP
+SN
+RSENSE
+
+AV/(AV-1) x R
+
+SNSOUT
+AV x R
+
+SO
+
+VREF
+
+Figure 22. Sense Amplifier Diagram
+If the voltage across SP and SN exceeds 1 V, then the DRV8701 flags an overcurrent condition.
+The SO pin can source up to 5 mA of current. If the pin is shorted to GND, or if a higher-current load is driven by
+this pin, the output acts as a constant-current source. The output voltage is not representative of the H-bridge
+current in this state.
+This shunt amplifier feature can be disabled by tying the SP and SN pins to GND. When the amplifier is disabled,
+current regulation is also disabled.
+
+SO (V)
+
+AVDD
+
+Slope = Av
+
+VOFF
+SP - SN (V)
+
+Figure 23. Sense Amplifier Output
+7.3.4.1 SNSOUT
+The SNSOUT pin of the DRV8701 indicates when the device is in current chopping mode. When the driver is in
+a slow decay mode caused by internal PWM current chopping (ICHOP threshold hit), the open-drain SNSOUT
+output is pulled low. If the current regulation is disabled, then the SNSOUT pin will be high-Z.
+Note that if the H-bridge is put into a slow decay mode using the inputs (PH/EN or IN1/IN2), then SNSOUT is not
+pulled low.
+During forward or reverse drive mode, SNSOUT is high until the DRV8701 is internally forced into current
+chopping. If the drive current rises above ICHOP, the driver enters a brake mode (low-side slow decay). The
+SNSOUT pin will be pulled low during this current chopping brake mode. After the driver is re-enabled, the
+SNSOUT pin is released high-Z and the drive mode is restarted.
+Copyright © 2015, Texas Instruments Incorporated
+
+17
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7.3.5 PWM Motor Gate Drivers
+The DRV8701 contains gate drivers for a single H-bridge with external NMOS FETs. Figure 24 shows a block
+diagram of the gate driver circuitry.
+VM
+
+VGHS
+
+PH or IN1
+
+GH1
+EN or IN2
+ROFF
+
+SH1
+
+Pre-Drive
+
+nSLEEP
+
+VGLS
+
+GL1
+ROFF
+
+Logic
+
+VM
+
+VGHS
+
+BDC
+
+GH2
+ROFF
+
+SH2
+
+Pre-Drive
+VGLS
+
+GL2
+ROFF
+
+SP
+RSENSE
+SN
+
+Figure 24. PWM Motor Gate Drivers
+Gate drivers inside the DRV8701 directly drive N-channel MOSFETs, which drive the motor current. The highside gate drive is supplied by the charge pump, while the low-side gate drive voltage is generated by an internal
+regulator.
+The peak drive current of the gate drivers is adjustable through the IDRIVE pin. Peak source currents may be set
+to 6, 12.5, 25, 100, or 150 mA. The peak sink current is approximately 2× the peak source current. Adjusting the
+peak current changes the output slew rate, which also depends on the FET input capacitance and gate charge.
+The peak drive current is selected by setting the value of the RIDRIVE resistor on the IDRIVE pin or by forcing a
+voltage onto the IDRIVE pin (see Table 6 for details).
+Fast switching times can cause extra voltage noise on VM and GND. This can be especially due to a relatively
+slow reverse-recovery time of the low-side body diode, where it conducts reverse-bias momentarily, being similar
+to shoot-through. Slow switching times can cause excessive power dissipation since the external FETs take a
+longer time to turn on and turn off.
+
+18
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+When changing the state of the output, the peak current (IDRIVE) is applied for a short drive period (tDRIVE) to
+charge the gate capacitance. After this time, a weaker current source (IHOLD) is used to keep the gate at the
+desired state. When selecting the gate drive strength for a given external FET, the selected current must be high
+enough to fully charge and discharge the gate during tDRIVE, or excessive power will be dissipated in the FET.
+During high-side turn-on, the low-side gate is pulled low with a strong pull-down (ISTRONG). This prevents the lowside FET QGS from charging and keeps the FET off, even when there is fast switching at the outputs.
+The pre-driver circuits include enforcement of a dead time in analog circuitry, which prevents the high-side and
+low-side FETs from conducting at the same time. When switching FETs on, this handshaking prevents the highor low-side FET from turning on until the opposite FET has been turned off.
+tDRIVE
+ISTRONG
+
+IHOLD
+
+IDRIVE,SNK
+
+IHOLD
+
+IDRIVE,SRC
+
+High-side
+gate drive
+current
+
+IHOLD
+
+High-side
+VGS
+tDRIVE
+
+IHOLD
+
+IDRIVE,SRC
+
+IHOLD
+
+ISTRONG
+
+IDRIVE,SNK
+
+Low-side
+gate drive
+current
+
+IHOLD
+
+Low-side
+VGS
+
+Figure 25. Gate Driver Output to Control External FETs
+QGD Miller charge
+When a FET gate is turned on, three different capacitances must be charged.
+• QGS – Gate-to-source charge
+• QGD – Gate-to-drain charge (miller charge)
+• Remaining QG
+The FET output is slewing primarily during the QGD charge.
+10
+
+25
+
+8
+
+20
+
+6
+
+15
+
+4
+
+10
+
+2
+
+5
+
+Pre-Drive
+
+GHx
+
+G
+
+CGD
+
+CGS
+SHx
+S
+
+10
+QGS
+
+30
+40
+20
+Remaining QG
+QGD
+QG gate charge (nC)
+
+VDS (drain-to-source) (V)
+
+D
+VGHS
+
+VGS (gate-to-source) (V)
+
+VM
+
+50
+
+Figure 26. Example FET Gate Charging Profile
+
+Copyright © 2015, Texas Instruments Incorporated
+
+19
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7.3.6 IDRIVE Pin
+The rise and fall times of the H-bridge output (SHx pins) can be adjusted by setting the IDRIVE resistor value or
+forcing a voltage onto the IDRIVE pin. The FET gate voltage ramps faster if a higher IDRIVE setting is chosen.
+The FET gate ramp directly affects the H-bridge output rise and fall time.
+Tying IDRIVE to GND selects the lowest drive setting of 6-mA source and 12.5-mA sink. If this pin is left
+unconnected, then the 100-mA source and 200-mA sink setting are selected.
+If IDRIVE is shorted to AVDD, then the VDS OCP monitor on the high-side FETs is disabled. In this setting, the
+gate driver is configured as 25-mA source and 50-mA sink.
++
+4.3V
+AVDD
+
++
+3.7V
+
+IDRIVE
+
+-
+
+190k
+
+Digital
+Core
+
++
+2.5V
+
+310k
+
++
+
+1.3V
+
++
+
+0.1V
+
+-
+
+Figure 27. IDRIVE Pin Internal Circuitry
+Table 5. IDRIVE Pin Configuration Settings
+IDRIVE Resistance
+
+IDRIVE Voltage
+
+Source Current
+(IDRIVE,SRC)
+
+Sink Current (IDRIVE,SNK)
+
+HS OCP Monitor
+
+<1 kΩ to GND
+
+GND
+
+6 mA
+
+12.5 mA
+
+ON
+
+33 kΩ ±5% to GND
+
+0.7 V ±5%
+
+12.5 mA
+
+25 mA
+
+ON
+
+200 kΩ ±5% to GND
+
+2 V ±5%
+
+25 mA
+
+50 mA
+
+ON
+
+>500 kΩ to GND, High-Z
+
+3 V ±5%
+
+100 mA
+
+200 mA
+
+ON
+
+68 kΩ ±5% to AVDD
+
+4 V ±5%
+
+150 mA
+
+300 mA
+
+ON
+
+<1 kΩ to AVDD
+
+AVDD
+
+25 mA
+
+50 mA
+
+OFF
+
+Table 6. IDRIVE Pin Resistor Settings
+<1 kΩ to GND
+
+33 kΩ ±5% to GND
+200 kΩ ±5% to GND
+
+>500 kΩ to GND, High-Z
+
+68 kΩ ±5% to AVDD
+
+<1 kΩ to AVDD
+
+AVDD
+
+AVDD
+
+IDRIVE
+
+IDRIVE
+
+RIDRIVE
+IDRIVE
+
+IDRIVE
+
+RIDRIVE
+
+«««
+
+20
+
+IDRIVE
+«««
+
+IDRIVE
+
+IDRIVE
+
+6 / 12.5 mA
+
+12.5 / 25 mA (33 kΩ)
+25 / 50 mA (200 kΩ)
+
+«««
+
+IDRIVE
+100 / 200 mA
+
+IDRIVE
+
+IDRIVE
+
+150 / 300 mA
+
+25 / 50 mA
+HS OCP monitor off
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+7.3.7 Dead Time
+Dead time (tDEAD) is measured as the time when SHx is High-Z between turning off one of the H-bridge FETs
+and turning on the other. For example, the output is High-Z between turning off the high-side FET and turning on
+the low-side FET.
+The DRV8701 inserts a digital dead time of approximately 150 ns. The total dead time also includes the FET
+gate turn-on time.
+The total dead time is dependent on the IDRIVE resistor setting because a portion of the FET gate ramp (GHx
+and GLx pins) includes the observable dead time.
+7.3.8 Propagation Delay
+The propagation delay time (tDELAY) is measured as the time between an input edge to an output change. This
+time is composed of two parts: an input deglitch time and output slewing delay. The input deglitcher prevents
+noise on the input pins from affecting the output state.
+The gate drive slew rate also contributes to the delay time. For the output to change state during normal
+operation, first, one FET must be turned off. The FET gate is ramped down according to the IDRIVE setting, and
+the observed propagation delay ends when the FET gate has fallen below the threshold voltage.
+7.3.9 Overcurrent VDS Monitor
+The gate driver circuit monitors the VDS voltage of each external FET when it is driving current. When the voltage
+monitored is greater than the OCP threshold voltage (VDS OCP), after the OCP deglitch time (tOCP) has expired, an
+OCP condition will be detected.
+VM
+
+VM
+
++
+High-side
+VDS OCP
+Monitor
+
+GH1
+
+SH1
+
++
+Low-side
+VDS OCP
+Monitor
+-
+
+VM
+
++
+BDC
+
+High-side
+VDS OCP
+Monitor
++
+Low-side
+VDS OCP
+Monitor
+-
+
+GL1
+
+GH2
+
+SH2
+
+GL2
+
+SP
+
+RSENSE
+SN
+
+Figure 28. Overcurrent VDS Monitors
+When IDRIVE is shorted to AVDD, the VDS OCP monitor on the high-side FETs is disabled. In cases where the
+VM supplied to the DRV8701 can be different from the external H-bridge supply, this setting must be used in
+order to prevent false overcurrent detection. In this mode, the IDRIVE current is set to 25-mA source and 50-mA
+sink.
+
+Copyright © 2015, Texas Instruments Incorporated
+
+21
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7.3.10 Charge Pump
+A charge pump is integrated to supply a high-side NMOS gate drive voltage of VHGS. The charge pump requires
+a capacitor between the VM and VCP pins. Additionally a low-ESR ceramic capacitor is required between pins
+CPH and CPL. When VM is below 12 V, this charge pump behaves as a doubler and generates VCP = 2 × VM –
+1.5 V if unloaded. Above VM = 12 V, the charge pump regulates VCP such that VCP = VM + 9.5 V.
+VM
+1 µF
+VCP
+
+CPH
+VM
+
+0.1 µF
+CPL
+
+Charge
+Pump
+
+Figure 29. Charge Pump Diagram
+7.3.11 LDO Voltage Regulators
+Two LDO regulators are integrated into the DRV8701. They can be used to provide the supply voltage for a lowpower microcontroller or other low-current devices. For proper operation, bypass the AVDD and DVDD pins to
+GND using ceramic capacitors.
+The AVDD output voltage is nominally 4.8 V, and the DVDD output is nominally 3.3 V. When the AVDD or DVDD
+current load exceeds 30 mA, the LDO behaves like a constant current source. The output voltage drops
+significantly with currents greater than this limit.
+Note that AVDD and DVDD are disabled when the device is in sleep mode (nSLEEP = 0). In addition, when an
+overtemperature (TSD) or undervoltage (UVLO) fault is encountered, the AVDD regulator is shut off.
+VM
++
+
+4.8 V
+
+AVDD
+
+-
+
+1 µF
+
+30 mA
+max
+
+VM
++
+
+3.3 V
+
+DVDD
+
+-
+
+1 µF
+
+30 mA
+max
+
+Figure 30. AVDD and DVDD LDOs
+The power dissipated in the DRV8701 due to these LDOs may be approximated by:
+Power = (VM – AVDD) × IAVDD + (VM – DVDD) × IDVDD
+
+(3)
+
+For example at VM = 24 V, drawing 10 mA out of both AVDD and DVDD results in a power dissipation of:
+Power = (24 V – 4.8 V) × 10 mA + (24 V – 3.3 V) × 10 mA = 192 mW + 207 mW = 399 mW
+
+22
+
+(4)
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+7.3.12 Gate Drive Clamp
+A clamping structure limits the gate drive output voltage to VGS CLAMP to protect the power FETs from damage.
+The positive voltage clamp is realized using a series of diodes. The negative voltage clamp uses the body diodes
+of the internal gate driver FET.
+VGHS
+
+VM
+IREVERSE
+
+GHx
+
+VGS > VCLAMP
+ICLAMP
+
+SHx
+
+Pre-Drive
+VGLS
+
+VGS negative
+
+GLx
+
+RSENSE
+GND
+
+Figure 31. Gate Drive Clamp Diagram
+
+Copyright © 2015, Texas Instruments Incorporated
+
+23
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7.3.13 Protection Circuits
+The DRV8701 is fully protected against VM undervoltage, charge pump undervoltage, overcurrent, gate driver
+shorts, and overtemperature events.
+7.3.13.1 VM Undervoltage Lockout (UVLO)
+If at any time the voltage on the VM pin falls below the UVLO threshold voltage, all FETs in the H-bridge are
+disabled, the charge pump is disabled, AVDD is disabled, and the nFAULT pin is driven low. Operation resumes
+when VM rises above the UVLO threshold. The nFAULT pin is released after operation has resumed.
+7.3.13.2 VCP Undervoltage Lockout (CPUV)
+If at any time the voltage on the VCP pin falls below the charge pump undervoltage threshold voltage (VCPUV), all
+FETs in the H-bridge are disabled and the nFAULT pin is driven low. Operation resumes when VCP rises above
+the CPUV threshold. The nFAULT pin is released after operation has resumed.
+7.3.13.3 Overcurrent Protection (OCP)
+Overcurrent is sensed by monitoring the VDS voltage drop across the external FETs (see Figure 28). If the
+voltage across a driven FET exceeds the overcurrent trip threshold (VDS OCP) for longer than the OCP deglitch
+time (tOCP), an OCP event is recognized. As a result, all FETs in the H-bridge are disabled and the nFAULT pin is
+driven low; the driver is re-enabled after the OCP retry period (tRETRY) has passed. nFAULT releases high-Z
+again at after the retry time. If the fault condition is still present, the cycle repeats. If the fault is no longer present,
+normal operation resumes and nFAULT remains released high-Z.
+This VDS overcurrent monitor on the high-side FETs can be disabled by using a specific IDRIVE setting. This
+allows the system to have a higher DRV8701 VM supply than the H-bridge supply.
+In addition to this FET VDS monitor, an overcurrent condition is also detected if the voltage at SP exceeds
+VSP OCP.
+7.3.13.4 Pre-Driver Fault (PDF)
+The GHx and GLx pins are monitored such that if the voltage on the external FET gate does not increase above
+1 V (when sourcing current) or decrease below 1 V (when sinking current) after tDRIVE, a pre-driver fault is
+detected. The device encounters this fault if GHx or GLx are shorted to GND, SHx, or VM. Additionally, the
+device encounters the pre-driver fault if the IDRIVE setting selected is not sufficient to turn on the external FET.
+As a result, all FETs in the H-bridge are disabled and the nFAULT pin is driven low. The driver is re-enabled after
+the retry period (tRETRY) has passed. The nFAULT pin is released after operation has resumed.
+7.3.13.5 Thermal Shutdown (TSD)
+If the die temperature exceeds TTSD, all FETs in the H-bridge are disabled, the charge pump is shut down, AVDD
+is disabled, and the nFAULT pin is driven low. After the die temperature has fallen below TTSD – THYS, operation
+automatically resumes. The nFAULT pin is released after operation has resumed.
+Table 7. Fault Response
+Condition
+
+H-Bridge
+
+Charge Pump
+
+AVDD
+
+DVDD
+
+Recovery
+
+VM undervoltage
+(UVLO)
+
+Fault
+
+VM ≤ VUVLO
+
+Disabled
+
+Disabled
+
+Disabled
+
+Operating
+
+VM ≥ VUVLO
+
+VCP undervoltage
+(CPUV)
+
+VCP < VCPUV
+
+Disabled
+
+Operating
+
+Operating
+
+Operating
+
+VCP > VCPUV
+
+External FET overload
+(OCP)
+
+VDS ≥ 1.0 V or
+VSP – VSN > 1.0 V
+
+Disabled
+
+Operating
+
+Operating
+
+Operating
+
+tRETRY
+
+Pre-driver fault (PDF)
+
+Gate voltage
+unchanged after tDRIVE
+
+Disabled
+
+Operating
+
+Operating
+
+Operating
+
+tRETRY
+
+Thermal shutdown
+(TSD)
+
+TJ ≥ 150°C
+
+Disabled
+
+Disabled
+
+Disabled
+
+Operating
+
+TJ ≤ 130°C
+
+24
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+7.3.14 Reverse Supply Protection
+The following circuit may be implemented to protect the system from reverse supply conditions. This circuit
+requires the following additional components:
+• NMOS FET
+• npn BJT
+• Diode
+• 10-kΩ resistor
+• 43-kΩ resistor
+
+VM
+
+43 k
+10 k
+0.1 µF
+
+1 µF
+Bulk
+10 µF min
+
+0.1 µF
+CP1
+
+CP2
+
+VCP
+
+VM
+
++
+
+GH1
+
+SH1
+
+GL1
+BDC
+
+GH2
+
+SH2
+
+GL2
+
+SP
+RSENSE
+SN
+
+Figure 32. Reverse Supply Protection External Circuitry
+
+Copyright © 2015, Texas Instruments Incorporated
+
+25
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+7.4 Device Functional Modes
+The DRV8701 is active unless the nSLEEP pin is brought low. In sleep mode, the charge pump is disabled, the
+H-bridge FETs are High-Z, and the AVDD and DVDD regulators are disabled. Note that tSLEEP must elapse after
+a falling edge on the nSLEEP pin before the device is in sleep mode. The DRV8701 is brought out of sleep mode
+if nSLEEP is brought high. Note that tWAKE must elapse before the outputs change state after wake-up.
+While nSLEEP is brought low, all external H-bridge FETs are disabled. The high-side gate pins GHx are pulled to
+the output node SHx by an internal resistor, and the low-side gate pins GLx are pulled to GND.
+When VM is not applied, and during the power-on time (tON), the outputs are disabled using weak pulldown
+resistors between the GHx and SHx pins and between GLx and GND.
+Table 8. Functional Modes
+Charge Pump
+
+GHx
+
+GLx
+
+AVDD and DVDD
+
+Unpowered
+
+Condition
+VM < VUVLO
+
+Disabled
+
+Weak pulldown to SHx
+
+Weak pulldown to GND
+
+Disabled
+
+Sleep mode
+
+VUVLO < VM
+nSLEEP low
+
+Disabled
+
+Strong pulldown to GND
+
+Strong pulldown to GND
+
+Disabled
+
+Operating
+
+VUVLO < VM
+nSLEEP high
+
+Enabled
+
+Depends on inputs
+
+Depends on inputs
+
+Operating
+
+26
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+7.4.1 Operating DRV8701 and H-Bridge on Separate Supplies
+The DRV8701 can operate with a different supply voltage (VM) than the system H-bridge supply (VBAT). Case 1
+describes normal operation when VM and VBAT are roughly the same. Special considerations must be taken into
+account for Cases 2, 3, and 4.
+• Case 1: VM ≈ VBAT. Recommended operation
+• Case 2: VM > VBAT. IDRIVE must be shorted to AVDD to disable the high-side OCP. The IDRIVE current is
+fixed at 25-mA source and 50-mA sink. This case can allow the driver to better enhance the external FETs for
+VBAT < 11.5 V, or operate down to a lower supply voltage below 5.9 V.
+• Case 3: VM > VBAT (higher than Case 2). IDRIVE must be shorted to AVDD to disable the high-side OCP.
+This case can also allow the driver to better enhance the external FETs, or operate down to a lower supply
+voltage below 5.9 V. The IDRIVE current is fixed at 25-mA source and 50-mA sink. Excess gate drive current
+may be driven through the DRV8701 gate clamps causing additional power dissipation in the DRV8701.
+• Case 4: VM < VBAT. The high-side FETs may not be in saturation. There may be a significant voltage drop
+across the high-side FET when driving current. This causes high power dissipation in the external FET. When
+operating in Case 4, the external FET threshold voltage must be greater than 2 V. Otherwise the DRV8701
+will report a pre-driver fault whenever the FET is out of saturation.
+Table 9. VM Operational Range based on VBAT
+VBAT Range
+
+Case 3
+
+1 V ≤ VBAT < 5.9 V
+5.9 V ≤ VBAT < 6.4 V
+
+VM ≥ 0.5 × VBAT + 5.75 V
+VM ≤ 45 V
+
+6.4 V ≤ VBAT < 11.5 V
+11.5 V ≤ VBAT < 14 V
+14 V ≤ VBAT ≤ 45 V
+
+VM > VBAT
+VM ≤ 45 V
+
+Case 2
+
+Case 1
+
+Case 4
+
+VM ≥ 5.9 V
+VM < 0.5 × VBAT + 5.75 V
+
+N/A
+
+N/A
+
+VM = VBAT
+
+VM ≥ 5.9 V
+VM < VBAT
+
+VM > 0.6 × VBAT + 2.5 V
+VM ≤ VBAT
+
+VM ≥ 5.9 V
+VM ≤ 0.6 × VBAT + 2.5 V
+
+VM > VBAT – 4 V
+VM ≤ VBAT
+
+VM ≥ 5.9 V
+VM ≤ VBAT – 4 V
+
+VM > VBAT
+VM < 0.5 × VBAT + 5.75 V
+
+N/A
+
+Figure 33. VM Operating Range Based on Motor Supply Voltage
+When nSLEEP is low, VM may be reduced down to 0 V with up to 45 V present at VBAT. However, nSLEEP
+should not be brought high until VM is supplied with a voltage aligning with one of the cases outlined above.
+
+Copyright © 2015, Texas Instruments Incorporated
+
+27
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+8 Application and Implementation
+NOTE
+Information in the following applications sections is not part of the TI component
+specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+responsible for determining suitability of components for their purposes. Customers should
+validate and test their design implementation to confirm system functionality.
+
+8.1 Application Information
+The DRV8701 is used in brushed-DC, solenoid, or relay control.
+
+8.2 Typical Applications
+8.2.1 Brushed-DC Motor Control
+The following design procedure can be used to configure the DRV8701.
+
+0.1 µF
+R1
+
+VM
+
+1 µF
+
+R2
+
+VM
+
++
+0.1 µF
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+VM
+
+VCP
+
+CPH
+
+CPL
+
+GND
+
+VREF
+
+7
+
+24
+
+AVDD
+
+GH2
+
+DVDD
+
+SH2
+
+8
+
+1 µF
+1 µF
+
+10 k
+
+10 k
+
+Bulk
+
+23
+
+9
+
+22
+nFAULT
+
+GL2
+
+GND
+(PPAD)
+
+10
+SNSOUT
+
+21
+SP
+
+11
+
+50 m
+
+20
+SO
+
+SN
+
+IDRIVE
+
+GL1
+
+12
+
+BDC
+
+19
+SH1
+
+GH1
+
+GND
+
+PH
+
+EN
+
+nSLEEP
+
+33 k
+
+18
+
+17
+
+16
+
+15
+
+14
+
+13
+
+VM
+
+Figure 34. Typical Application Schematic
+8.2.1.1 Design Requirements
+Table 10 gives design input parameters for system design.
+Table 10. Design Parameters
+Design Parameter
+
+Example Value
+
+VM
+
+18 V
+
+Supply voltage range
+
+VMMIN, VMMAX
+
+12 to 24 V
+
+QG
+
+14 nC (typically)
+
+FET total gate charge (1)
+FET gate-to-drain charge
+
+(1)
+
+QGD
+
+2.3 nC (typically)
+
+Target FET gate rise time
+
+RT
+
+100 to 300 ns
+
+Motor current chopping level
+
+ICHOP
+
+3A
+
+(1)
+
+28
+
+Reference
+
+Nominal supply voltage
+
+FET part number is CSD88537ND.
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+8.2.1.2 Detailed Design Procedure
+8.2.1.2.1 External FET Selection
+
+The DRV8701 FET support is based on the charge pump capacity and output PWM frequency. For a quick
+calculation of FET driving capacity, use the following equations when drive and brake (slow decay) are the
+primary modes of operation:
+I
+QG  VCP
+¦PWM
+where
+•
+•
+
+fPWM is the maximum desired PWM frequency to be applied to the DRV8701 inputs or the current chopping
+frequency, whichever is larger.
+IVCP is the charge pump capacity, which depends on VM.
+(5)
+
+The internal current chopping frequency is at most:
+1
+¦PWM 
+|  N+]
+tOFF  tBLANK
+
+(6)
+
+Example: If a system at VM = 7 V (IVCP = 8 mA) uses a maximum PWM frequency of 40 kHz, then the DRV8701
+will support QG < 200 nC FETs.
+If the application will require a forced fast decay (or alternating between drive and reverse drive), the maximum
+FET driving capacity is given by:
+IVCP
+QG 
+ u ¦PWM
+(7)
+8.2.1.2.2 IDRIVE Configuration
+
+Select IDRIVE based on the gate charge of the FETs. Configure this pin so that the FET gates are charged
+completely during tDRIVE. If the designer chooses an IDRIVE that is too low for a given FET, then the FET may
+not turn on completely. TI suggests to adjust these values in-system with the required external FETs and motor
+to determine the best possible setting for any application.
+For FETs with a known gate-to-drain charge (QGD) and desired rise time (RT), select IDRIVE based on:
+Q
+IDRIVE ! GD
+RT
+
+(8)
+
+Example: If the gate-to-drain charge is 2.3 nC, and the desired rise time is around 100 to 300 ns,
+IDRIVE1 = 2.3 nC / 100 ns = 23 mA
+IDRIVE2 = 2.3 nC / 300 ns = 7.7 mA
+Select IDRIVE between 7.7 and 23 mA
+Select IDRIVE as 12.5-mA source (25-mA sink)
+Requires a 33-kΩ resistor from the IDRIVE pin to GND
+8.2.1.2.3 Current Chopping Configuration
+
+The chopping current is set based on the sense resistor value and the analog voltage at VREF. Calculate the
+current using Equation 9. The amplifier gain AV is 20 V/V and VOFF is typically 50 mV.
+Example: If the desired chopping current is 3 A,
+Set RSENSE = 50 mΩ
+IC H O P
+
+9 5 ( ) ± 9O F F
+A V u R SENSE
+
+(9)
+
+VREF would have to be 3.05 V.
+Create a resistor divider from AVDD (4.8 V) to set VREF ≈ 3 V
+Set R2 = 3.3 kΩ; set R1 = 2 kΩ.
+
+Copyright © 2015, Texas Instruments Incorporated
+
+29
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+8.2.1.3 Application Curves
+
+Figure 35. SH1 Rise Time (12.5-mA Source, 25-mA Sink)
+
+Figure 36. SH1 Fall Time (12.5-mA Source, 25-mA Sink)
+
+Figure 37. Current Regulating at 3 A on Motor Startup
+
+Figure 38. Current Profile on Motor Startup With
+Regulation
+
+Figure 39. Current Profile on Motor Startup Without Regulation
+
+30
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+8.2.2 Alternate Application
+In this example, the DRV8701 is powered from a supply that is boosted above VBAT. This allows the system to
+work at lower VBAT voltages, but requires the user to disable OCP monitoring.
+VBAT
+
+Boost
+
++
+
+0.1 µF
+
+10 µF
+0.1 µF 1 µF
+R1
+
+R2
+0.01 µF
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+C1
+
+VM
+
+VCP
+
+CPH
+
+CPL
+
+GND
+
+VREF
+
+7
+
++
+
+24
+
+AVDD
+
+GH2
+
+DVDD
+
+SH2
+
+8
+
+1 µF
+1 µF
+
+10 k
+
+10 k
+
+23
+
+9
+
+22
+nFAULT
+
+GL2
+
+GND
+(PPAD)
+
+10
+SNSOUT
+
+21
+SP
+
+11
+
+AVDD
+
+SN
+
+IDRIVE
+
+GL1
+
+12
+
+BDC
+
+19
+SH1
+
+GH1
+
+GND
+
+PH
+
+EN
+
+nSLEEP
+
+68 k
+
+50 m
+
+20
+SO
+
+18
+
+17
+
+16
+
+15
+
+14
+
+13
+
+VBAT
+
+Figure 40. DRV8701 on Boosted Supply
+8.2.2.1 Design Requirements
+Table 11 gives design input parameters for system design.
+Table 11. Design Parameters
+Design Parameter
+
+Reference
+
+Example Value
+
+Battery voltage
+
+VBAT
+
+12 V nominal
+Minimum operation: 4.0 V
+
+DRV8701 supply voltage
+
+VM
+
+VM = 7 V when VBAT < 7 V
+VM = VBAT when VBAT ≥ 7 V
+
+FET total gate charge
+
+QG
+
+42 nC
+
+FET gate-to-drain charge
+
+QGD
+
+11 nC
+
+Motor current chopping level
+
+ICHOP
+
+3A
+
+8.2.3 Detailed Design Procedure
+8.2.3.1 IDRIVE Configuration
+Because the VM supply to the DRV8701 is different from the external H-bridge supply VBAT, the designer must
+disable the overcurrent monitor to prevent false overcurrent detection. The designer must place a 68-kΩ resistor
+between the IDRIVE pin and AVDD.
+IDRIVE is fixed at 25-mA source and 50-mA sink in this mode.
+So, the rise time is 11 nC / 25 mA = 440 ns.
+
+Copyright © 2015, Texas Instruments Incorporated
+
+31
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+8.2.3.2
+
+www.ti.com.cn
+
+VM Boost Voltage
+
+To determine an effective voltage to boost VM, first determine the minimum VBAT at which the system must
+operate. Select VM such that the gate driver clamps do not turn on during normal operation.
+VM <
+
+V B A T + 1 1 .5 V
+
+(10)
+
+2
+
+Example: If VBAT minimum is 4.0 V,
+VM < 7.75 V
+So VM = 7 V is selected to allow for adequate margin.
+
+9 Power Supply Recommendations
+The DRV8701 is designed to operate from an input voltage supply (VM) range between 5.9 and 45 V. A 0.1-µF
+ceramic capacitor rated for VM must be placed as close to the DRV8701 as possible. In addition, the designer
+must include a bulk capacitor with a valued of at least 10 µF on VM.
+Bypassing the external H-bridge FETs requires additional bulk capacitance.
+
+9.1 Bulk Capacitance Sizing
+Having appropriate local bulk capacitance is an important factor in motor drive system design. It is generally
+beneficial to have more bulk capacitance, while the disadvantages are increased cost and physical size.
+The amount of local capacitance needed depends on a variety of factors, including:
+• The highest current required by the motor system
+• The power supply’s capacitance and ability to source current
+• The amount of parasitic inductance between the power supply and motor system
+• The acceptable voltage ripple
+• The type of motor used (brushed DC, brushless DC, stepper)
+• The motor braking method
+The inductance between the power supply and motor drive system will limit the rate current can change from the
+power supply. If the local bulk capacitance is too small, the system will respond to excessive current demands or
+dumps from the motor with a change in voltage. When adequate bulk capacitance is used, the motor voltage
+remains stable and high current can be quickly supplied.
+The datasheet generally provides a recommended value, but system-level testing is required to determine the
+appropriate sized bulk capacitor.
+
+Power Supply
+
+Parasitic Wire
+Inductance
+
+Motor Drive System
+VM
+
++
+±
+
++
+
+Motor
+Driver
+GND
+
+Local
+Bulk Capacitor
+
+IC Bypass
+Capacitor
+
+Figure 41. Example Setup of Motor Drive System With External Power Supply
+The voltage rating for bulk capacitors should be higher than the operating voltage, to provide margin for cases
+when the motor transfers energy to the supply.
+
+32
+
+Copyright © 2015, Texas Instruments Incorporated
+
+DRV8701
+www.ti.com.cn
+
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+10 Layout
+10.1 Layout Guidelines
+Bypass the VM pin to GND using a low-ESR ceramic bypass capacitor with a recommended value of 0.1 µF
+rated for VM. Place this capacitor as close to the VM pin as possible with a thick trace or ground plane
+connection to the device GND pin.
+Bypass the VM pin to ground using a bulk capacitor rated for VM. This component may be an electrolytic. This
+capacitance must be at least 10 µF. The bulk capacitor should be placed to minimize the distance of the highcurrent path through the external FETs. The connecting metal trace widths should be as wide as possible, and
+numerous vias should be used when connecting PCB layers. These practices minimize inductance and allow the
+bulk capacitor to deliver high current.
+Place a low-ESR ceramic capacitor in between the CPL and CPH pins. The value for this component is 0.1 µF
+rated for VM. Place this component as close to the pins as possible.
+Place a low-ESR ceramic capacitor in between the VM and VCP pins. The value for this component is 1 µF rated
+for 16 V. Place this component as close to the pins as possible.
+Bypass AVDD and DVDD to ground with ceramic capacitors rated at 6.3 V. Place these bypassing capacitors as
+close to the pins as possible.
+If desired, align the external NMOS FETs as shown in Figure 42 to facilitate layout. Route the SH2 and SH1 nets
+to the motor.
+Use separate traces to connect the SP and SN pins to the RSENSE terminals.
+
+10.2 Layout Example
++
+GND
+
+10 µF
+minimum
+
+0.1 µF
+
+D
+
+G
+
+D
+
+S
+
+D
+
+S
+
+D
+
+S
+
+3
+
+VM 1
+VCP 2
+GH2
+23 SH2
+24
+
+GL2
+21 SP
+20 SN
+19 GL1
+22
+
+GND
+
+GND
+(PPAD)
+
+S
+
+D
+
+S
+
+D
+
+S
+
+D
+
+G
+
+D
+
+RSENSE
+S
+
+D
+
+S
+
+D
+
+S
+
+D
+
+G
+
+D
+
+VM
+
+SH1
+
+18 SH1
+17 GH1
+16 GND
+15 PH
+EN
+nSLEEP
+
+14
+
+13
+
+RIDRIVE
+
+4
+
+AVDD 7
+DVDD 8
+nFAULT 9
+SNSOUT 10
+SO 11
+IDRIVE 12
+
+CPH
+CPL
+
+1 µF
+
+GND 5
+VREF 6
+
+1 µF
+
+1 µF
+
+SH2
+
+0.1 µF
+
+VM
+
+GND
+
+GND
+
+D
+
+G
+
+D
+
+S
+
+D
+
+S
+
+D
+
+S
+
+Figure 42. Layout Recommendation
+
+版权 © 2015, Texas Instruments Incorporated
+
+33
+
+DRV8701
+ZHCSDO0A – MARCH 2015 – REVISED MAY 2015
+
+www.ti.com.cn
+
+11 器件和文档支持
+11.1 文档支持
+11.1.1 相关文档
+• 《PowerPAD™ 耐热增强型封装》(，SLMA002
+• 《PowerPAD™ 速成》，SLMA004
+• 《电流再循环和衰减模式》，SLVA321
+
+11.2 社区资源
+The following links connect to TI community resources. Linked contents are provided "AS IS" by the respective
+contributors. They do not constitute TI specifications and do not necessarily reflect TI's views; see TI's Terms of
+Use.
+TI E2E™ Online Community TI's Engineer-to-Engineer (E2E) Community. Created to foster collaboration
+among engineers. At e2e.ti.com, you can ask questions, share knowledge, explore ideas and help
+solve problems with fellow engineers.
+Design Support TI's Design Support Quickly find helpful E2E forums along with design support tools and
+contact information for technical support.
+
+11.3 商标
+PowerPAD, E2E are trademarks of Texas Instruments.
+All other trademarks are the property of their respective owners.
+
+11.4 静电放电警告
+这些装置包含有限的内置 ESD 保护。 存储或装卸时，应将导线一起截短或将装置放置于导电泡棉中，以防止 MOS 门极遭受静电损
+伤。
+
+11.5 术语表
+SLYZ022 — TI 术语表。
+这份术语表列出并解释术语、首字母缩略词和定义。
+
+12 机械、封装和可订购信息
+以下页中包括机械、封装和可订购信息。 这些信息是针对指定器件可提供的最新数据。 这些数据会在无通知且不
+对本文档进行修订的情况下发生改变。 欲获得该数据表的浏览器版本，请查阅左侧的导航栏。
+
+34
+
+版权 © 2015, Texas Instruments Incorporated
+
+重要声明
+德州仪器(TI) 及其下属子公司有权根据 JESD46 最新标准, 对所提供的产品和服务进行更正、修改、增强、改进或其它更改， 并有权根据
+JESD48 最新标准中止提供任何产品和服务。客户在下订单前应获取最新的相关信息, 并验证这些信息是否完整且是最新的。所有产品的销售
+都遵循在订单确认时所提供的TI 销售条款与条件。
+TI 保证其所销售的组件的性能符合产品销售时 TI 半导体产品销售条件与条款的适用规范。仅在 TI 保证的范围内，且 TI 认为 有必要时才会使
+用测试或其它质量控制技术。除非适用法律做出了硬性规定，否则没有必要对每种组件的所有参数进行测试。
+TI 对应用帮助或客户产品设计不承担任何义务。客户应对其使用 TI 组件的产品和应用自行负责。为尽量减小与客户产品和应 用相关的风险，
+客户应提供充分的设计与操作安全措施。
+TI 不对任何 TI 专利权、版权、屏蔽作品权或其它与使用了 TI 组件或服务的组合设备、机器或流程相关的 TI 知识产权中授予 的直接或隐含权
+限作出任何保证或解释。TI 所发布的与第三方产品或服务有关的信息，不能构成从 TI 获得使用这些产品或服 务的许可、授权、或认可。使用
+此类信息可能需要获得第三方的专利权或其它知识产权方面的许可，或是 TI 的专利权或其它 知识产权方面的许可。
+对于 TI 的产品手册或数据表中 TI 信息的重要部分，仅在没有对内容进行任何篡改且带有相关授权、条件、限制和声明的情况 下才允许进行
+复制。TI 对此类篡改过的文件不承担任何责任或义务。复制第三方的信息可能需要服从额外的限制条件。
+在转售 TI 组件或服务时，如果对该组件或服务参数的陈述与 TI 标明的参数相比存在差异或虚假成分，则会失去相关 TI 组件 或服务的所有明
+示或暗示授权，且这是不正当的、欺诈性商业行为。TI 对任何此类虚假陈述均不承担任何责任或义务。
+客户认可并同意，尽管任何应用相关信息或支持仍可能由 TI 提供，但他们将独力负责满足与其产品及在其应用中使用 TI 产品 相关的所有法
+律、法规和安全相关要求。客户声明并同意，他们具备制定与实施安全措施所需的全部专业技术和知识，可预见 故障的危险后果、监测故障
+及其后果、降低有可能造成人身伤害的故障的发生机率并采取适当的补救措施。客户将全额赔偿因 在此类安全关键应用中使用任何 TI 组件而
+对 TI 及其代理造成的任何损失。
+在某些场合中，为了推进安全相关应用有可能对 TI 组件进行特别的促销。TI 的目标是利用此类组件帮助客户设计和创立其特 有的可满足适用
+的功能安全性标准和要求的终端产品解决方案。尽管如此，此类组件仍然服从这些条款。
+TI 组件未获得用于 FDA Class III（或类似的生命攸关医疗设备）的授权许可，除非各方授权官员已经达成了专门管控此类使 用的特别协议。
+只有那些 TI 特别注明属于军用等级或“增强型塑料”的 TI 组件才是设计或专门用于军事/航空应用或环境的。购买者认可并同 意，对并非指定面
+向军事或航空航天用途的 TI 组件进行军事或航空航天方面的应用，其风险由客户单独承担，并且由客户独 力负责满足与此类使用相关的所有
+法律和法规要求。
+TI 已明确指定符合 ISO/TS16949 要求的产品，这些产品主要用于汽车。在任何情况下，因使用非指定产品而无法达到 ISO/TS16949 要
+求，TI不承担任何责任。
+产品
+
+应用
+
+数字音频
+
+www.ti.com.cn/audio
+
+通信与电信
+
+www.ti.com.cn/telecom
+
+放大器和线性器件
+
+www.ti.com.cn/amplifiers
+
+计算机及周边
+
+www.ti.com.cn/computer
+
+数据转换器
+
+www.ti.com.cn/dataconverters
+
+消费电子
+
+www.ti.com/consumer-apps
+
+DLP® 产品
+
+www.dlp.com
+
+能源
+
+www.ti.com/energy
+
+DSP - 数字信号处理器
+
+www.ti.com.cn/dsp
+
+工业应用
+
+www.ti.com.cn/industrial
+
+时钟和计时器
+
+www.ti.com.cn/clockandtimers
+
+医疗电子
+
+www.ti.com.cn/medical
+
+接口
+
+www.ti.com.cn/interface
+
+安防应用
+
+www.ti.com.cn/security
+
+逻辑
+
+www.ti.com.cn/logic
+
+汽车电子
+
+www.ti.com.cn/automotive
+
+电源管理
+
+www.ti.com.cn/power
+
+视频和影像
+
+www.ti.com.cn/video
+
+微控制器 (MCU)
+
+www.ti.com.cn/microcontrollers
+
+RFID 系统
+
+www.ti.com.cn/rfidsys
+
+OMAP应用处理器
+
+www.ti.com/omap
+
+无线连通性
+
+www.ti.com.cn/wirelessconnectivity
+
+德州仪器在线技术支持社区
+
+www.deyisupport.com
+IMPORTANT NOTICE
+
+邮寄地址： 上海市浦东新区世纪大道1568 号，中建大厦32 楼邮政编码： 200122
+Copyright © 2015, 德州仪器半导体技术（上海）有限公司
+
+PACKAGE OPTION ADDENDUM
+
+www.ti.com
+
+10-Dec-2020
+
+PACKAGING INFORMATION
+Orderable Device
+
+Status
+(1)
+
+Package Type Package Pins Package
+Drawing
+Qty
+
+Eco Plan
+(2)
+
+Lead finish/
+Ball material
+
+MSL Peak Temp
+
+Op Temp (°C)
+
+Device Marking
+
+(3)
+
+(4/5)
+
+(6)
+
+DRV8701ERGER
+
+ACTIVE
+
+VQFN
+
+RGE
+
+24
+
+3000
+
+RoHS & Green
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 125
+
+8701E
+
+DRV8701ERGET
+
+ACTIVE
+
+VQFN
+
+RGE
+
+24
+
+250
+
+RoHS & Green
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 125
+
+8701E
+
+DRV8701PRGER
+
+ACTIVE
+
+VQFN
+
+RGE
+
+24
+
+3000
+
+RoHS & Green
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 125
+
+8701P
+
+DRV8701PRGET
+
+ACTIVE
+
+VQFN
+
+RGE
+
+24
+
+250
+
+RoHS & Green
+
+NIPDAU
+
+Level-2-260C-1 YEAR
+
+-40 to 125
+
+8701P
+
+(1)
+
+The marketing status values are defined as follows:
+ACTIVE: Product device recommended for new designs.
+LIFEBUY: TI has announced that the device will be discontinued, and a lifetime-buy period is in effect.
+NRND: Not recommended for new designs. Device is in production to support existing customers, but TI does not recommend using this part in a new design.
+PREVIEW: Device has been announced but is not in production. Samples may or may not be available.
+OBSOLETE: TI has discontinued the production of the device.
+(2)
+
+RoHS: TI defines "RoHS" to mean semiconductor products that are compliant with the current EU RoHS requirements for all 10 RoHS substances, including the requirement that RoHS substance
+do not exceed 0.1% by weight in homogeneous materials. Where designed to be soldered at high temperatures, "RoHS" products are suitable for use in specified lead-free processes. TI may
+reference these types of products as "Pb-Free".
+RoHS Exempt: TI defines "RoHS Exempt" to mean products that contain lead but are compliant with EU RoHS pursuant to a specific EU RoHS exemption.
+Green: TI defines "Green" to mean the content of Chlorine (Cl) and Bromine (Br) based flame retardants meet JS709B low halogen requirements of <=1000ppm threshold. Antimony trioxide based
+flame retardants must also meet the <=1000ppm threshold requirement.
+(3)
+
+MSL, Peak Temp. - The Moisture Sensitivity Level rating according to the JEDEC industry standard classifications, and peak solder temperature.
+
+(4)
+
+There may be additional marking, which relates to the logo, the lot trace code information, or the environmental category on the device.
+
+(5)
+
+Multiple Device Markings will be inside parentheses. Only one Device Marking contained in parentheses and separated by a "~" will appear on a device. If a line is indented then it is a continuation
+of the previous line and the two combined represent the entire Device Marking for that device.
+(6)
+
+Lead finish/Ball material - Orderable Devices may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two
+lines if the finish value exceeds the maximum column width.
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information
+provided by third parties, and makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and
+
+Addendum-Page 1
+
+Samples
+
+PACKAGE OPTION ADDENDUM
+
+www.ti.com
+
+10-Dec-2020
+
+continues to take reasonable steps to provide representative and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals.
+TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers and other limited information may not be available for release.
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+Addendum-Page 2
+
+PACKAGE MATERIALS INFORMATION
+www.ti.com
+
+19-May-2015
+
+TAPE AND REEL INFORMATION
+
+*All dimensions are nominal
+
+Device
+
+Package Package Pins
+Type Drawing
+
+SPQ
+
+Reel
+Reel
+A0
+Diameter Width (mm)
+(mm) W1 (mm)
+
+DRV8701ERGER
+
+VQFN
+
+RGE
+
+24
+
+3000
+
+330.0
+
+12.4
+
+B0
+(mm)
+
+K0
+(mm)
+
+P1
+(mm)
+
+W
+Pin1
+(mm) Quadrant
+
+4.25
+
+4.25
+
+1.15
+
+8.0
+
+12.0
+
+Q2
+
+DRV8701ERGET
+
+VQFN
+
+RGE
+
+24
+
+250
+
+180.0
+
+12.4
+
+4.25
+
+4.25
+
+1.15
+
+8.0
+
+12.0
+
+Q2
+
+DRV8701PRGER
+
+VQFN
+
+RGE
+
+24
+
+3000
+
+330.0
+
+12.4
+
+4.25
+
+4.25
+
+1.15
+
+8.0
+
+12.0
+
+Q2
+
+DRV8701PRGET
+
+VQFN
+
+RGE
+
+24
+
+250
+
+180.0
+
+12.4
+
+4.25
+
+4.25
+
+1.15
+
+8.0
+
+12.0
+
+Q2
+
+Pack Materials-Page 1
+
+PACKAGE MATERIALS INFORMATION
+www.ti.com
+
+19-May-2015
+
+*All dimensions are nominal
+
+Device
+
+Package Type
+
+Package Drawing
+
+Pins
+
+SPQ
+
+Length (mm)
+
+Width (mm)
+
+Height (mm)
+
+DRV8701ERGER
+
+VQFN
+
+RGE
+
+24
+
+3000
+
+367.0
+
+367.0
+
+35.0
+
+DRV8701ERGET
+
+VQFN
+
+RGE
+
+24
+
+250
+
+210.0
+
+185.0
+
+35.0
+
+DRV8701PRGER
+
+VQFN
+
+RGE
+
+24
+
+3000
+
+367.0
+
+367.0
+
+35.0
+
+DRV8701PRGET
+
+VQFN
+
+RGE
+
+24
+
+250
+
+210.0
+
+185.0
+
+35.0
+
+Pack Materials-Page 2
+
+GENERIC PACKAGE VIEW
+
+RGE 24
+
+VQFN - 1 mm max height
+PLASTIC QUAD FLATPACK - NO LEAD
+
+Images above are just a representation of the package family, actual package may vary.
+Refer to the product data sheet for package details.
+4204104/H
+
+PACKAGE OUTLINE
+
+RGE0024F
+
+VQFN - 1 mm max height
+SCALE 3.300
+
+PLASTIC QUAD FLATPACK - NO LEAD
+
+4.1
+3.9
+
+A
+
+B
+
+PIN 1 INDEX AREA
+
+0.5
+0.3
+
+4.1
+3.9
+
+0.30
+0.18
+
+DETAIL
+
+OPTIONAL TERMINAL
+TYPICAL
+
+C
+
+1 MAX
+
+SEATING PLANE
+0.05
+0.00
+
+0.08
+
+2.8 0.1
+2X 2.5
+
+(0.2) TYP
+12
+
+7
+
+EXPOSED
+THERMAL PAD
+
+20X 0.5
+6
+
+13
+
+2X
+2.5
+
+SEE TERMINAL
+DETAIL
+PIN 1 ID
+(OPTIONAL)
+
+25
+
+1
+
+18
+24
+
+19
+0.5
+24X
+0.3
+
+24X
+
+0.30
+0.18
+0.1
+0.05
+
+C A
+
+B
+
+4222437/A 12/2015
+
+NOTES:
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. The package thermal pad must be soldered to the printed circuit board for thermal and mechanical performance.
+4. Reference JEDEC registration MO-220.
+
+www.ti.com
+
+EXAMPLE BOARD LAYOUT
+
+RGE0024F
+
+VQFN - 1 mm max height
+PLASTIC QUAD FLATPACK - NO LEAD
+
+( 2.8)
+SYMM
+24
+
+19
+
+24X (0.6)
+1
+18
+24X (0.24)
+
+(1.15)
+TYP
+25
+
+20X (0.5)
+
+SYMM
+(3.8)
+
+13
+
+6
+
+( 0.2) TYP
+VIA
+(R0.05)
+ALL PAD CORNERS
+
+7
+
+12
+(3.8)
+
+LAND PATTERN EXAMPLE
+SCALE:18X
+
+0.05 MIN
+ALL AROUND
+
+0.05 MAX
+ALL AROUND
+
+SOLDER MASK
+OPENING
+
+METAL
+
+SOLDER MASK
+OPENING
+
+METAL UNDER
+SOLDER MASK
+
+NON SOLDER MASK
+DEFINED
+(PREFERRED)
+
+SOLDER MASK
+DEFINED
+
+SOLDER MASK DETAILS
+4222437/A 12/2015
+
+NOTES: (continued)
+5. This package is designed to be soldered to a thermal pad on the board. For more information, see Texas Instruments literature
+number SLUA271 (www.ti.com/lit/slua271).
+6. Vias are optional depending on application, refer to device data sheet. If some or all are implemented, recommended via locations
+are shown.
+
+www.ti.com
+
+EXAMPLE STENCIL DESIGN
+
+RGE0024F
+
+VQFN - 1 mm max height
+PLASTIC QUAD FLATPACK - NO LEAD
+
+(R0.05) TYP
+
+4X ( 1.23)
+
+(0.715) TYP
+19
+
+24
+
+24X (0.6)
+25
+
+1
+
+18
+24X (0.24)
+
+(0.715) TYP
+SYMM
+
+20X (0.5)
+
+(3.8)
+
+13
+
+6
+METAL
+TYP
+
+7
+
+SYMM
+
+12
+
+(3.8)
+
+SOLDER PASTE EXAMPLE
+
+BASED ON 0.125 mm THICK STENCIL
+EXPOSED PAD 25:
+77% PRINTED SOLDER COVERAGE BY AREA
+SCALE:25X
+
+4222437/A 12/2015
+
+NOTES: (continued)
+7. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+design recommendations.
+
+www.ti.com
+
+重要声明和免责声明
+TI 均以“原样”提供技术性及可靠性数据（包括数据表）、设计资源（包括参考设计）、应用或其他设计建议、网络工具、安全信息和其他资
+源，不保证其中不含任何瑕疵，且不做任何明示或暗示的担保，包括但不限于对适销性、适合某特定用途或不侵犯任何第三方知识产权的暗示
+担保。
+所述资源可供专业开发人员应用TI 产品进行设计使用。您将对以下行为独自承担全部责任：(1) 针对您的应用选择合适的TI 产品；(2) 设计、
+验证并测试您的应用；(3) 确保您的应用满足相应标准以及任何其他安全、安保或其他要求。所述资源如有变更，恕不另行通知。TI 对您使用
+所述资源的授权仅限于开发资源所涉及TI 产品的相关应用。除此之外不得复制或展示所述资源，也不提供其它TI或任何第三方的知识产权授权
+许可。如因使用所述资源而产生任何索赔、赔偿、成本、损失及债务等，TI对此概不负责，并且您须赔偿由此对TI 及其代表造成的损害。
+TI 所提供产品均受TI 的销售条款 (http://www.ti.com.cn/zh-cn/legal/termsofsale.html) 以及ti.com.cn上或随附TI产品提供的其他可适用条款的约
+束。TI提供所述资源并不扩展或以其他方式更改TI 针对TI 产品所发布的可适用的担保范围或担保免责声明。IMPORTANT NOTICE
+邮寄地址：上海市浦东新区世纪大道 1568 号中建大厦 32 楼，邮政编码：200122
+Copyright © 2020 德州仪器半导体技术（上海）有限公司
+
+
