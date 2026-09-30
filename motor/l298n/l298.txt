@@ -1,0 +1,1608 @@
+L298
+
+®
+
+DUAL FULL-BRIDGE DRIVER
+
+..
+..
+.
+
+OPERATING SUPPLY VOLTAGE UP TO 46 V
+TOTAL DC CURRENT UP TO 4 A
+LOW SATURATION VOLTAGE
+OVERTEMPERATURE PROTECTION
+LOGICAL "0" INPUT VOLTAGE UP TO 1.5 V
+(HIGH NOISE IMMUNITY)
+
+DESCRIPTION
+The L298 is an integrated monolithic circuit in a 15lead Multiwatt and PowerSO20 packages. It is a
+high voltage, high current dual full-bridge driver designed to accept standard TTL logic levels and drive
+inductive loads such as relays, solenoids, DC and
+stepping motors. Two enable inputs are provided to
+enable or disable the device independently of the input signals. The emitters of the lower transistors of
+each bridge are connected together and the corresponding external terminal can be used for the con-
+
+Multiwatt15
+
+PowerSO20
+
+ORDERING NUMBERS : L298N (Multiwatt Vert.)
+L298HN (Multiwatt Horiz.)
+L298P (PowerSO20)
+
+nection of an external sensing resistor. An additional
+supply input is provided so that the logic works at a
+lower voltage.
+
+BLOCK DIAGRAM
+
+Jenuary 2000
+
+1/13
+
+L298
+ABSOLUTE MAXIMUM RATINGS
+Symbol
+
+Value
+
+Unit
+
+VS
+VSS
+
+Power Supply
+
+Parameter
+
+50
+
+V
+
+Logic Supply Voltage
+
+7
+
+V
+
+VI,Ven
+IO
+
+–0.3 to 7
+
+V
+
+3
+2.5
+2
+
+A
+A
+A
+
+Vsens
+
+Input and Enable Voltage
+Peak Output Current (each Channel)
+– Non Repetitive (t = 100µs)
+–Repetitive (80% on –20% off; ton = 10ms)
+–DC Operation
+Sensing Voltage
+
+Ptot
+
+Total Power Dissipation (Tcase = 75°C)
+
+Top
+Tstg, Tj
+
+–1 to 2.3
+
+V
+
+25
+
+W
+
+Junction Operating Temperature
+
+–25 to 130
+
+°C
+
+Storage and Junction Temperature
+
+–40 to 150
+
+°C
+
+PIN CONNECTIONS (top view)
+
+Multiwatt15
+
+15
+
+CURRENT SENSING B
+
+14
+
+OUTPUT 4
+
+13
+
+OUTPUT 3
+
+12
+
+INPUT 4
+
+11
+
+ENABLE B
+
+10
+
+INPUT 3
+
+9
+
+LOGIC SUPPLY VOLTAGE VSS
+
+8
+
+GND
+
+7
+
+INPUT 2
+
+6
+
+ENABLE A
+
+5
+
+INPUT 1
+
+4
+
+SUPPLY VOLTAGE VS
+
+3
+
+OUTPUT 2
+
+2
+
+OUTPUT 1
+
+1
+
+CURRENT SENSING A
+
+TAB CONNECTED TO PIN 8
+
+D95IN240A
+
+GND
+
+1
+
+20
+
+GND
+
+Sense A
+
+2
+
+19
+
+Sense B
+
+N.C.
+
+3
+
+18
+
+N.C.
+
+Out 1
+
+4
+
+Out 2
+
+5
+
+PowerSO20
+
+17
+
+Out 4
+
+16
+
+Out 3
+
+VS
+
+6
+
+15
+
+Input 4
+
+Input 1
+
+7
+
+14
+
+Enable B
+
+Enable A
+
+8
+
+13
+
+Input 3
+
+Input 2
+
+9
+
+12
+
+VSS
+
+GND
+
+10
+
+11
+
+GND
+
+D95IN239
+
+THERMAL DATA
+Symbol
+
+Parameter
+
+Rth j-case
+
+Thermal Resistance Junction-case
+
+Max.
+
+Rth j-amb
+
+Thermal Resistance Junction-ambient
+
+Max.
+
+(*) Mounted on aluminum substrate
+
+2/13
+
+PowerSO20
+
+Multiwatt15
+
+Unit
+
+–
+
+3
+
+°C/W
+
+13 (*)
+
+35
+
+°C/W
+
+L298
+PIN FUNCTIONS (refer to the block diagram)
+MW.15
+
+PowerSO
+
+Name
+
+1;15
+
+2;19
+
+Sense A; Sense B
+
+Function
+
+2;3
+
+4;5
+
+Out 1; Out 2
+
+4
+
+6
+
+VS
+
+Between this pin and ground is connected the sense resistor to
+control the current of the load.
+Outputs of the Bridge A; the current that flows through the load
+connected between these two pins is monitored at pin 1.
+Supply Voltage for the Power Output Stages.
+A non-inductive 100nF capacitor must be connected between this
+pin and ground.
+TTL Compatible Inputs of the Bridge A.
+
+5;7
+
+7;9
+
+Input 1; Input 2
+
+6;11
+
+8;14
+
+Enable A; Enable B
+
+8
+
+1,10,11,20
+
+GND
+
+9
+
+12
+
+VSS
+
+10; 12
+
+13;15
+
+Input 3; Input 4
+
+TTL Compatible Inputs of the Bridge B.
+
+13; 14
+
+16;17
+
+Out 3; Out 4
+
+Outputs of the Bridge B. The current that flows through the load
+connected between these two pins is monitored at pin 15.
+
+–
+
+3;18
+
+N.C.
+
+TTL Compatible Enable Input: the L state disables the bridge A
+(enable A) and/or the bridge B (enable B).
+Ground.
+Supply Voltage for the Logic Blocks. A100nF capacitor must be
+connected between this pin and ground.
+
+Not Connected
+
+ELECTRICAL CHARACTERISTICS (VS = 42V; VSS = 5V, Tj = 25°C; unless otherwise specified)
+Symbol
+
+Parameter
+
+Test Conditions
+
+Supply Voltage (pin 4)
+
+Operative Condition
+
+IS
+
+Logic Supply Voltage (pin 9)
+Quiescent Supply Current (pin 4)
+
+Ven = H; IL = 0
+
+ISS
+
+Ven = L
+Quiescent Current from VSS (pin 9) Ven = H; IL = 0
+
+VS
+VSS
+
+ViH
+IiL
+IiH
+Ven = L
+
+Input Low Voltage
+(pins 5, 7, 10, 12)
+Input High Voltage
+(pins 5, 7, 10, 12)
+Low Voltage Input Current
+(pins 5, 7, 10, 12)
+High Voltage Input Current
+(pins 5, 7, 10, 12)
+Enable Low Voltage (pins 6, 11)
+
+Ven = H
+Ien = L
+
+Enable High Voltage (pins 6, 11)
+Low Voltage Enable Current
+(pins 6, 11)
+
+Ien = H
+
+High Voltage Enable Current
+(pins 6, 11)
+Source Saturation Voltage
+
+VCEsat (H)
+
+VCEsat (L) Sink Saturation Voltage
+VCEsat
+
+Total Drop
+
+Vsens
+
+Sensing Voltage (pins 1, 15)
+
+Max.
+
+Unit
+
+46
+
+V
+
+5
+13
+50
+
+7
+22
+70
+
+V
+mA
+mA
+
+24
+7
+
+4
+36
+12
+
+mA
+mA
+mA
+
+–0.3
+
+6
+1.5
+
+mA
+V
+
+2.3
+
+VSS
+
+V
+
+–10
+
+µA
+
+100
+
+µA
+
+4.5
+
+Ven = L
+ViL
+
+Min.
+
+Typ.
+
+VIH +2.5
+Vi = L
+Vi = H
+Vi = X
+Vi = L
+Vi = H
+Vi = X
+
+Vi = L
+Vi = H ≤ VSS –0.6V
+
+30
+–0.3
+
+1.5
+
+V
+
+2.3
+
+VSS
+–10
+
+V
+µA
+
+30
+
+100
+
+µA
+
+1.35
+2
+1.2
+1.7
+
+1.7
+2.7
+1.6
+2.3
+3.2
+4.9
+
+V
+V
+V
+V
+V
+V
+
+2
+
+V
+
+Ven = L
+Ven = H ≤ VSS –0.6V
+IL = 1A
+IL = 2A
+IL = 1A
+IL = 2A
+IL = 1A
+IL = 2A
+
+0.95
+(5)
+(5)
+(5)
+(5)
+
+0.85
+1.80
+–1 (1)
+
+3/13
+
+L298
+ELECTRICAL CHARACTERISTICS (continued)
+Symbol
+
+Parameter
+
+Test Conditions
+
+Min.
+
+Typ.
+
+Max.
+
+Unit
+
+(2); (4)
+
+1.5
+
+µs
+
+0.9 IL to 0.1 IL
+
+(2); (4)
+
+0.2
+
+µs
+
+0.5 Vi to 0.1 IL
+
+(2); (4)
+
+2
+
+µs
+
+Source Current Rise Time
+
+0.1 IL to 0.9 IL
+
+(2); (4)
+
+0.7
+
+µs
+
+T5 (Vi)
+
+Sink Current Turn-off Delay
+
+0.5 Vi to 0.9 IL
+
+(3); (4)
+
+0.7
+
+µs
+
+T6 (Vi)
+
+Sink Current Fall Time
+
+0.9 IL to 0.1 IL
+
+(3); (4)
+
+0.25
+
+µs
+
+T7 (Vi)
+
+Sink Current Turn-on Delay
+
+0.5 Vi to 0.9 IL
+
+(3); (4)
+
+1.6
+
+µs
+
+T8 (Vi)
+
+Sink Current Rise Time
+
+0.1 IL to 0.9 IL
+
+(3); (4)
+
+0.2
+
+µs
+
+T1 (Vi)
+
+Source Current Turn-off Delay
+
+0.5 Vi to 0.9 IL
+
+T2 (Vi)
+
+Source Current Fall Time
+
+T3 (Vi)
+
+Source Current Turn-on Delay
+
+T4 (Vi)
+
+fc (Vi)
+
+Commutation Frequency
+
+IL = 2A
+
+T1 (Ven)
+
+Source Current Turn-off Delay
+
+0.5 Ven to 0.9 IL
+
+(2); (4)
+
+25
+3
+
+40
+
+µs
+
+T2 (Ven)
+
+Source Current Fall Time
+
+0.9 IL to 0.1 IL
+
+(2); (4)
+
+1
+
+µs
+
+T3 (Ven)
+
+Source Current Turn-on Delay
+
+0.5 Ven to 0.1 IL
+
+(2); (4)
+
+0.3
+
+µs
+
+T4 (Ven)
+
+Source Current Rise Time
+
+0.1 IL to 0.9 IL
+
+(2); (4)
+
+0.4
+
+µs
+
+T5 (Ven)
+
+Sink Current Turn-off Delay
+
+0.5 Ven to 0.9 IL
+
+(3); (4)
+
+2.2
+
+µs
+
+T6 (Ven)
+
+Sink Current Fall Time
+
+0.9 IL to 0.1 IL
+
+(3); (4)
+
+0.35
+
+µs
+
+T7 (Ven)
+
+Sink Current Turn-on Delay
+
+0.5 Ven to 0.9 IL
+
+(3); (4)
+
+0.25
+
+µs
+
+T8 (Ven)
+
+Sink Current Rise Time
+
+0.1 IL to 0.9 IL
+
+(3); (4)
+
+0.1
+
+µs
+
+1) 1)Sensing voltage can be –1 V for t ≤ 50 µsec; in steady state Vsens min ≥ – 0.5 V.
+2) See fig. 2.
+3) See fig. 4.
+4) The load must be a pure resistor.
+
+Figure 1 : Typical Saturation Voltage vs. Output
+Current.
+
+Figure 2 : Switching Times Test Circuits.
+
+Note : For INPUT Switching, set EN = H
+For ENABLE Switching, set IN = H
+
+4/13
+
+KHz
+
+L298
+Figure 3 : Source Current Delay Times vs. Input or Enable Switching.
+
+Figure 4 : Switching Times Test Circuits.
+
+Note : For INPUT Switching, set EN = H
+For ENABLE Switching, set IN = L
+
+5/13
+
+L298
+Figure 5 : Sink Current Delay Times vs. Input 0 V Enable Switching.
+
+Figure 6 : Bidirectional DC Motor Control.
+
+Inputs
+Ven = H
+
+Ven = L
+L = Low
+
+6/13
+
+C=H;D=L
+C=L;D=H
+C=D
+C=X;D=X
+H = High
+
+Function
+Forward
+Reverse
+Fast Motor Stop
+Free Running
+Motor Stop
+X = Don’t care
+
+L298
+Figure 7 : For higher currents, outputs can be paralleled. Take care to parallel channel 1 with channel 4
+and channel 2 with channel 3.
+
+APPLICATION INFORMATION (Refer to the block diagram)
+Each input must be connected to the source of the
+1.1. POWER OUTPUT STAGE
+driving signals by means of a very short path.
+The L298 integrates two power output stages (A ; B).
+Turn-On and Turn-Off : Before to Turn-ON the SupThe power output stage is a bridge configuration
+ply Voltage and before to Turn it OFF, the Enable inand its outputs can drive an inductive load in comput must be driven to the Low state.
+mon or differenzial mode, depending on the state of
+the inputs. The current that flows through the load
+3. APPLICATIONS
+comes out from the bridge at the sense output : an
+Fig 6 shows a bidirectional DC motor control Scheexternal resistor (RSA ; RSB.) allows to detect the inmatic Diagram for which only one bridge is needed.
+tensity of this current.
+The external bridge of diodes D1 to D4 is made by
+1.2. INPUT STAGE
+four fast recovery elements (trr ≤ 200 nsec) that
+Each bridge is driven by means of four gates the inmust be chosen of a VF as low as possible at the
+put of which are In1 ; In2 ; EnA and In3 ; In4 ; EnB.
+worst case of the load current.
+The In inputs set the bridge state when The En input
+The sense output voltage can be used to control the
+is high ; a low state of the En input inhibits the bridge.
+current amplitude by chopping the inputs, or to proAll the inputs are TTL compatible.
+vide overcurrent protection by switching low the enable input.
+2. SUGGESTIONS
+The brake function (Fast motor stop) requires that
+A non inductive capacitor, usually of 100 nF, must
+the Absolute Maximum Rating of 2 Amps must
+be foreseen between both Vs and Vss, to ground,
+never be overcome.
+as near as possible to GND pin. When the large capacitor of the power supply is too far from the IC, a
+When the repetitive peak current needed from the
+second smaller one must be foreseen near the
+load is higher than 2 Amps, a paralleled configuraL298.
+tion can be chosen (See Fig.7).
+The sense resistor, not of a wire wound type, must
+An external bridge of diodes are required when inbe grounded near the negative pole of Vs that must
+ductive loads are driven and when the inputs of the
+be near the GND pin of the I.C.
+IC are chopped ; Shottky diodes would be preferred.
+7/13
+
+L298
+This solution can drive until 3 Amps In DC operation
+and until 3.5 Amps of a repetitive peak current.
+On Fig 8 it is shown the driving of a two phase bipolar
+stepper motor ; the needed signals to drive the inputs of the L298 are generated, in this example,
+from the IC L297.
+Fig 9 shows an example of P.C.B. designed for the
+application of Fig 8.
+
+Fig 10 shows a second two phase bipolar stepper
+motor control circuit where the current is controlled
+by the I.C. L6506.
+
+Figure 8 : Two Phase Bipolar Stepper Motor Circuit.
+This circuit drives bipolar stepper motors with winding currents up to 2 A. The diodes are fast 2 A types.
+
+RS1 = RS2 = 0.5 Ω
+D1 to D8 = 2 A Fast diodes
+
+8/13
+
+1.2 V @ I = 2 A
+{ Vtrr ≤≤ 200
+ns
+F
+
+L298
+Figure 9 : Suggested Printed Circuit Board Layout for the Circuit of fig. 8 (1:1 scale).
+
+Figure 10 : Two Phase Bipolar Stepper Motor Control Circuit by Using the Current Controller L6506.
+
+RR and Rsense depend from the load current
+
+9/13
+
+L298
+mm
+
+DIM.
+MIN.
+
+TYP.
+
+inch
+MAX.
+
+MIN.
+
+TYP.
+
+MAX.
+
+A
+
+5
+
+0.197
+
+B
+
+2.65
+
+0.104
+
+C
+
+1.6
+
+D
+
+0.063
+
+1
+
+0.039
+
+E
+
+0.49
+
+0.55
+
+0.019
+
+0.022
+
+F
+
+0.66
+
+0.75
+
+0.026
+
+0.030
+
+G
+
+1.02
+
+1.27
+
+1.52
+
+0.040
+
+0.050
+
+0.060
+
+G1
+
+17.53
+
+17.78
+
+18.03
+
+0.690
+
+0.700
+
+0.710
+
+H1
+
+19.6
+
+0.772
+
+H2
+
+20.2
+
+0.795
+
+L
+
+21.9
+
+22.2
+
+22.5
+
+0.862
+
+0.874
+
+0.886
+
+L1
+
+21.7
+
+22.1
+
+22.5
+
+0.854
+
+0.870
+
+0.886
+
+L2
+
+17.65
+
+18.1
+
+0.695
+
+L3
+
+17.25
+
+17.5
+
+17.75
+
+0.679
+
+0.689
+
+0.699
+
+L4
+
+10.3
+
+10.7
+
+10.9
+
+0.406
+
+0.421
+
+0.429
+
+L7
+
+2.65
+
+2.9
+
+0.104
+
+0.713
+
+0.114
+
+M
+
+4.25
+
+4.55
+
+4.85
+
+0.167
+
+0.179
+
+0.191
+
+M1
+
+4.63
+
+5.08
+
+5.53
+
+0.182
+
+0.200
+
+0.218
+
+S
+
+1.9
+
+2.6
+
+0.075
+
+S1
+
+1.9
+
+2.6
+
+0.075
+
+0.102
+
+Dia1
+
+3.65
+
+3.85
+
+0.144
+
+0.152
+
+10/13
+
+OUTLINE AND
+MECHANICAL DATA
+
+0.102
+
+Multiwatt15 V
+
+L298
+mm
+
+DIM.
+MIN.
+
+TYP.
+
+inch
+MAX.
+
+MIN.
+
+TYP.
+
+MAX.
+
+A
+
+5
+
+0.197
+
+B
+
+2.65
+
+0.104
+
+C
+
+1.6
+
+0.063
+
+E
+
+0.49
+
+0.55
+
+0.019
+
+0.022
+
+F
+
+0.66
+
+0.75
+
+0.026
+
+0.030
+
+G
+
+1.14
+
+1.27
+
+1.4
+
+0.045
+
+0.050
+
+0.055
+
+G1
+
+17.57
+
+17.78
+
+17.91
+
+0.692
+
+0.700
+
+0.705
+
+H1
+
+19.6
+
+0.772
+
+H2
+
+20.2
+
+0.795
+
+L
+
+20.57
+
+0.810
+
+L1
+
+18.03
+
+0.710
+
+L2
+
+2.54
+
+L3
+
+17.25
+
+L4
+
+10.3
+
+L5
+
+0.100
+
+17.5
+
+17.75
+
+0.679
+
+0.689
+
+0.699
+
+10.7
+
+10.9
+
+0.406
+
+0.421
+
+0.429
+
+5.28
+
+L6
+
+OUTLINE AND
+MECHANICAL DATA
+
+0.208
+
+2.38
+
+0.094
+
+L7
+
+2.65
+
+2.9
+
+0.104
+
+0.114
+
+S
+
+1.9
+
+2.6
+
+0.075
+
+0.102
+
+S1
+
+1.9
+
+2.6
+
+0.075
+
+0.102
+
+Dia1
+
+3.65
+
+3.85
+
+0.144
+
+0.152
+
+Multiwatt15 H
+
+11/13
+
+L298
+
+DIM.
+A
+a1
+a2
+a3
+b
+c
+D (1)
+D1
+E
+e
+e3
+E1 (1)
+E2
+E3
+G
+H
+h
+L
+N
+S
+T
+
+MIN.
+
+mm
+TYP.
+
+0.1
+0
+0.4
+0.23
+15.8
+9.4
+13.9
+
+MAX.
+3.6
+0.3
+3.3
+0.1
+0.53
+0.32
+16
+9.8
+14.5
+
+MIN.
+0.004
+0.000
+0.016
+0.009
+0.622
+0.370
+0.547
+
+1.27
+11.43
+10.9
+
+inch
+TYP.
+
+0.050
+0.450
+11.1 0.429
+2.9
+6.2
+0.228
+0.1
+0.000
+15.9 0.610
+1.1
+1.1
+0.031
+10˚ (max.)
+8˚ (max.)
+
+5.8
+0
+15.5
+0.8
+
+OUTLINE AND
+MECHANICAL DATA
+
+MAX.
+0.142
+0.012
+0.130
+0.004
+0.021
+0.013
+0.630
+0.386
+0.570
+
+10
+
+0.437
+0.114
+0.244
+0.004
+0.626
+0.043
+0.043
+
+JEDEC MO-166
+
+0.394
+
+PowerSO20
+
+(1) "D and F" do not include mold flash or protrusions.
+- Mold flash or protrusions shall not exceed 0.15 mm (0.006").
+- Critical dimensions: "E", "G" and "a3"
+
+N
+
+R
+
+N
+a2
+b
+
+A
+
+e
+
+DETAIL A
+
+c
+a1
+
+DETAIL B
+
+E
+
+e3
+H
+
+DETAIL A
+
+lead
+
+D
+
+slug
+
+a3
+DETAIL B
+20
+
+11
+
+0.35
+Gage Plane
+
+-C-
+
+S
+
+SEATING PLANE
+
+L
+
+G
+
+E2
+
+E1
+
+BOTTOM VIEW
+
+T
+E3
+1
+
+h x 45
+
+12/13
+
+10
+
+PSO20MEC
+
+C
+
+(COPLANARITY)
+
+D1
+
+L298
+
+Information furnished is believed to be accurate and reliable. However, STMicroelectronics assumes no responsibility for the consequences of use of such information nor for any infringement of patents or other rights of third parties which may result from its use. No
+license is granted by implication or otherwise under any patent or patent rights of STMicroelectronics. Specification mentioned in this
+publication are subject to change without notice. This publication supersedes and replaces all information previously supplied. STMicroelectronics products are not authorized for use as critical components in life support devices or systems without express written
+approval of STMicroelectronics.
+The ST logo is a registered trademark of STMicroelectronics
+© 2000 STMicroelectronics – Printed in Italy – All Rights Reserved
+STMicroelectronics GROUP OF COMPANIES
+Australia - Brazil - China - Finland - France - Germany - Hong Kong - India - Italy - Japan - Malaysia - Malta - Morocco Singapore - Spain - Sweden - Switzerland - United Kingdom - U.S.A.
+http://www.st.com
+
+13/13
+
+
