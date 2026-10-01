@@ -88,10 +88,10 @@ component TC275
 
     layout = [ // direction:"anti-clockwise"
         left = [1:44]
-        down = [45:88]
+        bottom = [45:88]
         right = [89:132]
-        up = [133:176]
-    ]  
+        top = [133:176]
+    ]
 
     func TC275_3E(v3v3, v1v3, vext, gnd, va1, va2, vddm)
     {
