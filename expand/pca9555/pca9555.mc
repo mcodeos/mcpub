@@ -16,7 +16,7 @@
 
 component PCA9555(partno)
 {
-    desc = "I2C GPIO Expansion"
+    description = "I2C GPIO Expansion"
 
     if (partno == "PCA9555N")
         package = "DIP24"

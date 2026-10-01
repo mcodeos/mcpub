@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# TC275 32-Bit Single-Chip Micocontroller
+# TC275 32-Bit Single-Chip Microcontroller
 
 component TC275
 {
-    vender = "Infinieon"
-    desc = "TC275 32-Bit Single-Chip TriCore Micocontroller"
+    manufacturer = "Infineon"
+    description = "TC275 32-Bit Single-Chip TriCore Microcontroller"
     
     partno = "TC275"
     package = "PG-LQFP-176-22" // LF-BGA-292-6 / LF-BGA-292-10

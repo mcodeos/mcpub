@@ -19,7 +19,7 @@ use mclibs.isolation/digitalio.mc
 
 component ISO.NSI8140(partno)
 {
-    desc = "Quad-Channel Digital Isolators"
+    description = "Quad-Channel Digital Isolators"
 
     if (partno == "NSI8140N0")
     {    package = "SOIC16 NB"; spec.Isolation_Rating = 3.75kV; spec.Default_Ouput = low }

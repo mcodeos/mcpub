@@ -19,7 +19,7 @@ use mclibs.comm/uart2rs485.mc
 component PL3085A : UARTtoRS485
 {
     name = "PL3085A"
-    desc = "UART/RS485 Tranciever"
+    description = "UART/RS485 Tranciever"
 
     partno = "PL3085A"
     package = PKG.SOIC8

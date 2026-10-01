@@ -14,7 +14,7 @@
 
 component TLE7368 (partno)
 {
-    desc = "TLE7368 multifunctional power supply"
+    description = "TLE7368 multifunctional power supply"
 
     if (partno == "TLE7368E")
     {    package = "PG-DSO-36"; FB_EXT = 1.5V }

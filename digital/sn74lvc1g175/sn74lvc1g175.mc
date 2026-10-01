@@ -22,8 +22,8 @@ use mclibs.digital/ttl.mc
 // binding target.
 abstract component TTL.D.SN74LVC1G175
 {
-    vender = "TI"
-    desc = "Single D-Type Flip-Flop With Asynchronous Clear"
+    manufacturer = "TI"
+    description = "Single D-Type Flip-Flop With Asynchronous Clear"
 
     standard_signal_level = volt: [low: 0V ~ 0.7V, high:0.7V ~ 5.5V]
 

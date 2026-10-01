@@ -29,7 +29,7 @@ use $::mcode.ifs
 
 component SYS.Clock.MCP7940M(partno)
 {
-    desc = "Low-Cost I2C Real-Time Clock/Calendar with 64-byte SRAM.
+    description = "Low-Cost I2C Real-Time Clock/Calendar with 64-byte SRAM.
             Tracks hours, minutes, seconds, day of week, day, month and year,
             leap year compensated to 2399, 12/24 hour modes, dual programmable
             alarms, on-chip digital trimming (±1 PPM resolution, ±129 PPM
