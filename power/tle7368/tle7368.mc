@@ -62,10 +62,10 @@ component TLE7368 (partno)
 
         // Status
         in 2 = RT, "Reset and watchdog timing pin"
-        out 3 = RO_1, "Reset output Q_LDO1"
-        out 4 = RO_2, "Reset output Q_LDO2 and FB_EXT"
+        out 3 = RO_1 @drive(od), "Reset output Q_LDO1"
+        out 4 = RO_2 @drive(od), "Reset output Q_LDO2 and FB_EXT"
         in 24 = WDI, volt: -0.3V ~ 5.5V, "Window Watchdog input, Apply a watchdog trigger signal to this pin"
-        out 25 = _WDO, volt: -0.3V ~ 5.5V, "Window Watchdog output, open drain (datasheet WDO)"
+        out 25 = _WDO @drive(od), volt: -0.3V ~ 5.5V, "Window Watchdog output, open drain (datasheet WDO)"
     ]
 
     layout = [
