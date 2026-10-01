@@ -1,0 +1,4214 @@
+NSi8140/NSi8141/NSi8142: High Reliabilit
+y Quad-Channel Digital Isolators
+NOVOSENSE
+
+Datasheet (EN) 1.4
+
+Product Overview
+The NSi814x devices are high reliability quad-channel
+digital isolators. The NSi814x device is safety certified by
+UL1577 support several insulation withstand voltages
+(3.75kVrms, 5kVrms), while providing high electromagnetic
+immunity and low emissions at low power consumption.
+The data rate of the NSi814x is up to 150Mbps, and the
+common-mode transient immunity (CMTI) is up to
+150kV/us. The NSi814x device provides digital channel
+direction configuration and the default output level
+configuration when the input power is lost. Wide supply
+voltage of the NSi814x device support to connect with
+most digital interface directly, easy to do the level shift.
+High system level EMC performance enhance reliability
+and stability of use. AEC-Q100 (Grade 1) option is provided
+for all devices.
+
+Key Features
+ Up to 5000Vrms Insulation voltage
+ Date rate: DC to 150Mbps
+ Power supply voltage: 2.5V to 5.5V
+ AEC-Q100 Grade 1 available for all devices
+ High CMTI: 150kV/us
+ Chip level ESD: HBM: ±6kV
+
+Safety Regulatory Approvals
+ UL recognition: up to 5000Vrms for 1 minute per UL1577
+ CQC certification per GB4943.1-2011
+ CSA component notice 5A
+ DIN VDE V 0884-11:2017-01
+
+Applications
+ Industrial automation system
+ Isolated SPI, RS232, RS485
+ General-purpose multichannel isolation
+ Motor control
+
+Functional Block Diagrams
+
+ High system level EMC performance:
+Enhanced system level ESD, EFT, Surge immunity
+ Default output high level or low level option
+ Isolation barrier life: >60 years
+ Low power consumption: 1.5mA/ch (1 Mbps)
+ Low propagation delay: <15ns
+
+VDD1 1
+
+16 VDD2
+
+VDD 1 1
+
+16 VDD 2
+
+VDD1 1
+
+16 VDD 2
+
+GND1 2
+
+15 GND2
+
+GND 1 2
+
+15 GND2
+
+GND1 2
+
+15 GND2
+
+INA 3
+
+14 OUTA
+
+INA 3
+
+14 OUTA
+
+INA 3
+
+14 OUTA
+
+INB 4
+
+13 OUTB
+
+INB 4
+
+13 OUTB
+
+INB 4
+
+13 OUTB
+
+INC 5
+
+12 OUTC
+
+INC 5
+
+12 OUTC
+
+OUTC 5
+
+12 INC
+
+IND 6
+
+11 OUTD
+
+OUTD 6
+
+11 IND
+
+OUTD 6
+
+11 IND
+
+NC 7
+
+10 EN2
+
+EN1 7
+
+10 EN2
+
+EN1 7
+
+10 EN2
+
+9 GND2
+
+GND 1 8
+
+GND1 8
+
+NSi8140
+
+NSi8141 9
+
+GND2
+
+GND1 8
+
+NSi8142 9
+
+GND2
+
+ Operation temperature: -40℃~125℃
+ RoHS-compliant packages:
+
+Figure 1. NSi814x Block Diagram
+
+SOIC-16 narrow body
+SOIC-16 wide body
+Copyright © 2019, NOVOSENSE
+
+Page 1
+
+NSi8140/NSi8141/NSi8142
+
+Index
+1.0
+
+ABSOLUTE MAXIMUM RATINGS .............................................................................................................................. 3
+
+2.0
+
+SPECIFICATIONS ........................................................................................................................................................... 3
+
+2.1.
+2.2.
+2.3.
+2.4.
+2.5.
+3.0
+3.1.
+3.2.
+3.3.
+
+RECOMMENDED OPERATING CONDITIONS ................................................................................................................................... 4
+
+THERMAL CHARACTERISTICS .................................................................................................................................................... 4
+ELECTRICAL CHARACTERISTICS .................................................................................................................................................. 4
+TYPICAL PERFORMANCE CHARACTERISTICS ........................................................................................................................... 9
+PARAMETER MEASUREMENT INFORMATION ............................................................................................................................. 11
+HIGH VOLTAGE FEATURE DESCRIPTION ............................................................................................................ 12
+INSULATION AND SAFETY RELATED SPECIFICATIONS ...................................................................................................................... 12
+
+DIN VDE V 0884-11（VDE V 0884-11）:2017-01 INSULATION CHARATERISTICS ..................................................................... 12
+REGULATORY INFORMATION................................................................................................................................................... 14
+
+4.0
+
+FUNCTION DESCRIPTION ......................................................................................................................................... 15
+
+5.0
+
+APPLICATION NOTE ................................................................................................................................................... 16
+
+5.1.
+5.2.
+5.3.
+
+PCB LAYOUT ...................................................................................................................................................................... 16
+HIGH SPEED PERFORMANCE................................................................................................................................................... 16
+TYPICAL SUPPLY CURRENT EQUATIONS..................................................................................................................................... 17
+
+6.0
+
+PACKAGE INFORMATION ......................................................................................................................................... 18
+
+7.0
+
+ORDER INFORMATION .............................................................................................................................................. 21
+
+8.0
+
+TAPE AND REEL INFORMATION ............................................................................................................................. 22
+
+9.0
+
+REVISION HISTORY .................................................................................................................................................... 24
+
+Copyright © 2019, NOVOSENSE
+
+Page 2
+
+NSi8140/NSi8141/NSi8142
+1.0
+
+ABSOLUTE MAXIMUM RATINGS
+Parameters
+
+Symbol
+
+Min
+
+Power Supply Voltage
+
+VDD1, VDD2
+
+Maximum Input Voltage
+
+Typ
+
+Max
+
+Unit
+
+-0.5
+
+6.5
+
+V
+
+VINA,VINB, VINC,
+VIND
+
+-0.4
+
+VDD+0.4
+
+V
+
+Maximum Output Voltage
+
+VOUTA,VOUTB,
+VOUTC
+
+-0.4
+
+VDD+0.4
+
+V
+
+Maximum Input/Output Pulse
+Voltage
+
+VINA, VINB,
+
+-0.8
+
+VDD+0.8
+
+V
+
+VINC,VOUTA,
+VOUTB,VOUTC
+
+Common-Mode Transients
+
+CMTI
+
+±150
+
+kV/us
+
+Output current
+
+Io
+
+15
+
+mA
+
+Maximum Surge Isolation
+Voltage
+
+VIOSM
+
+5.3
+
+kV
+
+Operating Temperature
+
+Topr
+
+-40
+
+125
+
+℃
+
+Storage Temperature
+
+Tstg
+
+-40
+
+150
+
+℃
+
+HBM
+
+±6000
+
+V
+
+CDM
+
+±2000
+
+V
+
+-15
+
+Comments
+
+Pulse width should be
+less than 100ns, and
+the duty cycle should
+be less than 10%
+
+Electrostatic discharge
+
+2.0
+
+SPECIFICATIONS
+Parameters
+
+Symbol
+
+Power on Reset
+
+VDDPOR
+
+Input Threshold
+
+Min
+
+Typ
+
+Unit
+
+Comments
+
+2.2
+
+V
+
+POR threshold as during powerup
+
+VDD HYS
+
+0.1
+
+V
+
+POR threshold Hysteresis
+
+VIT
+
+1.6
+
+V
+
+Input Threshold at rising edge
+
+VIT_HYS
+
+0.4
+
+V
+
+Input Threshold Hysteresis
+
+High Level Input Voltage
+
+VIH
+
+Low Level Input Voltage
+
+VIL
+
+High Level Output Voltage
+
+VOH
+
+Low Level Output Voltage
+
+VOL
+
+Output Impedance
+
+Rout
+
+50
+
+Input Pull high or low Current
+
+Ipull
+
+8
+
+Start Up Time after POR
+
+trbs
+
+40
+
+Copyright © 2019, NOVOSENSE
+
+Max
+
+2
+
+V
+0.8
+
+VDD0.3
+0.3
+
+V
+V
+
+IOH =- 4mA
+
+V
+
+IOL = 4mA
+
+ohm
+15
+
+uA
+usec
+Page 3
+
+NSi8140/NSi8141/NSi8142
+Common Mode Transient
+Immunity
+
+CMTI
+
+100
+
+150
+
+kV/us
+
+2.1. RECOMMENDED OPERATING CONDITIONS
+Parameters
+
+Symbol
+
+min
+
+Power Supply Voltage
+
+VDD1, VDD2
+
+Operating Temperature
+
+typ
+
+max
+
+unit
+
+2.5
+
+5.5
+
+V
+
+Topr
+
+-40
+
+125
+
+℃
+
+High Level Input Voltage
+
+VIH
+
+2
+
+Low Level Input Voltage
+
+VIL
+
+0.8
+
+V
+
+Data rate
+
+DR
+
+150
+
+Mbps
+
+V
+
+2.2. THERMAL CHARACTERISTICS
+Parameters
+
+Symbol
+
+WB SOIC-16
+
+NB-SOIC-16
+
+Unit
+
+IC Junction-to-Air Thermal Resistance
+
+θJA
+
+78.9
+
+78.9
+
+°C/W
+
+θJC（top）
+
+41.6
+
+41.1
+
+°C/W
+
+θJB
+
+43.6
+
+49.5
+
+°C/W
+
+Junction-to-case (top) thermal resistance
+Junction-to-board thermal resistance
+
+2.3. ELECTRICAL CHARACTERISTICS
+(VDD1=2.5V~5.5V, VDD2=2.5V~5.5V, Ta=-40℃ to 125℃. Unless otherwise noted, Typical values are at VDD1 = 5V, VDD2 = 5V, Ta =
+25℃)
+Parameters
+
+Symbol
+
+Power on Reset
+
+VDDPOR
+
+Input Threshold
+
+Min
+
+Typ
+
+Unit
+
+Comments
+
+2.2
+
+V
+
+POR threshold as during powerup
+
+VDD HYS
+
+0.1
+
+V
+
+POR threshold Hysteresis
+
+VIT
+
+1.6
+
+V
+
+Input Threshold at rising edge
+
+VIT_HYS
+
+0.4
+
+V
+
+Input Threshold Hysteresis
+
+High Level Input Voltage
+
+VIH
+
+Low Level Input Voltage
+
+VIL
+
+High Level Output Voltage
+
+VOH
+
+Low Level Output Voltage
+
+VOL
+
+Output Impedance
+
+Rout
+
+50
+
+Input Pull high or low Current
+
+Ipull
+
+8
+
+Start Up Time after POR
+
+trbs
+
+40
+
+Copyright © 2019, NOVOSENSE
+
+Max
+
+2
+
+V
+0.8
+
+VDD0.3
+0.3
+
+V
+V
+
+IOH =- 4mA
+
+V
+
+IOL = 4mA
+
+ohm
+15
+
+uA
+usec
+
+Page 4
+
+NSi8140/NSi8141/NSi8142
+Common Mode Transient
+Immunity
+
+CMTI
+
+100
+
+150
+
+kV/us
+
+(VDD1=5V± 10%, VDD2=5V± 10%, Ta=-40℃ to 125℃. Unless otherwise noted, Typical values are at VDD1 = 5V, VDD2 = 5V, Ta = 25℃)
+Parameters
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Comments
+
+IDD1(Q0)
+
+0.894
+
+1.50
+
+mA
+
+IDD2(Q0)
+
+2.326
+
+3.5
+
+mA
+
+All Input 0V for NSi8140x0 Or All
+Input at supply for NSi8140x1
+
+IDD1(Q1)
+
+5.316
+
+7.8
+
+mA
+
+All Input at supply for NSi8140x0
+
+IDD2(Q1)
+
+2.432
+
+3.65
+
+mA
+
+Or All Input 0V for NSi8140x1
+
+IDD1(1M)
+
+3.087
+
+4.63
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+2.728
+
+4.09
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+3.182
+
+4.77
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+5.834
+
+8.75
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+3.918
+
+5.88
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+37.06
+
+55.6
+
+mA
+
+CL=15pF
+
+IDD1(Q0)
+
+1.244
+
+1.87
+
+mA
+
+IDD2(Q0)
+
+2.164
+
+3.25
+
+mA
+
+All Input 0V for NSi8141x0 Or All
+Input at supply for NSi8141x1
+
+IDD1(Q1)
+
+4.658
+
+7
+
+mA
+
+All Input at supply for NSi8141x0
+
+IDD2(Q1)
+
+3.416
+
+5
+
+mA
+
+Or All Input 0V for NSi8141x1
+
+IDD1(1M)
+
+3.07
+
+4.6
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+3.064
+
+4. 6
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+3.82
+
+5.7
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+5.496
+
+8.2
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+10.708
+
+16.06
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+29.336
+
+44
+
+mA
+
+CL = 15pF
+
+IDD1(Q0)
+
+1.688
+
+2.5
+
+mA
+
+IDD2(Q0)
+
+1.704
+
+2.56
+
+mA
+
+All Input 0V for NSi8142x0 Or All
+Input at supply for NSi8142x1
+
+IDD1(Q1)
+
+4.038
+
+6.06
+
+mA
+
+All Input at supply for NSi8142x0
+
+IDD2(Q1)
+
+4.1
+
+6.15
+
+mA
+
+Or All Input 0V for NSi8142x1
+
+NSi8140
+
+NSi8141
+
+Supply current
+
+NSi8142
+
+Copyright © 2019, NOVOSENSE
+
+Page 5
+
+NSi8140/NSi8141/NSi8142
+IDD1(1M)
+
+3.06
+
+4.6
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+3.108
+
+4.7
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+4.578
+
+6.9
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+4.694
+
+7
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+19
+
+28.5
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+20.868
+
+31
+
+mA
+
+CL = 15pF
+
+150
+
+Mbps
+
+5.0
+
+ns
+
+Data Rate
+
+DR
+
+Minimum Pulse Width
+
+PW
+
+Propagation Delay
+
+t PLH
+
+5
+
+8.20
+
+15
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+t PHL
+
+5
+
+10.56
+
+15
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+PWD
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Rising Time
+
+tr
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Falling Time
+
+tf
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Pulse Width Distortion
+
+0
+
+|t PHL – t PLH |
+
+Peak Eye Diagram Jitter
+
+tJIT(PK)
+
+350
+
+ps
+
+Channel-to-Channel Delay
+Skew
+
+tSK(c2c)
+
+2.5
+
+ns
+
+Part-to-Part Delay Skew
+
+tSK(p2p)
+
+5.0
+
+ns
+
+Disable high to Tri-State
+
+tPHZ
+
+14.88
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Enable to Data high Valid
+
+tPZH
+
+10.00
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Disable low to Tri-State
+
+tPLZ
+
+17.25
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Enable to Data high Valid
+
+tPZL
+
+10.85
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+(VDD1=3.3V± 10%, VDD2=3.3V± 10%, Ta=-40℃ to 125℃. Unless otherwise noted, Typical values are at VDD1 = 3.3V, VDD2 = 3.3V, Ta =
+25℃)
+Parameters
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Comments
+
+IDD1(Q0)
+
+0.832
+
+1.25
+
+mA
+
+IDD2(Q0)
+
+2.214
+
+3.3
+
+mA
+
+All Input 0V for NSi8140x0 Or All
+Input at supply for NSi8140x1
+
+IDD1(Q1)
+
+5.23
+
+7.9
+
+mA
+
+All Input at supply for NSi8140x0
+
+IDD2(Q1)
+
+2.32
+
+3.48
+
+mA
+
+Or All Input 0V for NSi8140x1
+
+IDD1(1M)
+
+3.01
+
+4.5
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+2.486
+
+3.73
+
+mA
+
+CL=15pF
+
+NSi8140
+
+Supply current
+
+Copyright © 2019, NOVOSENSE
+
+Page 6
+
+NSi8140/NSi8141/NSi8142
+IDD1(10M)
+
+3.106
+
+4.66
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+4.476
+
+6.7
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+3.826
+
+5.74
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+25.5
+
+38
+
+mA
+
+CL=15pF
+
+IDD1(Q0)
+
+1.165
+
+1.75
+
+mA
+
+IDD2(Q0)
+
+2.062
+
+3.1
+
+mA
+
+All Input 0V for NSi8141x0 Or All
+Input at supply for NSi8141x1
+
+IDD1(Q1)
+
+4.566
+
+6.85
+
+mA
+
+All Input at supply for NSi8141x0
+
+IDD2(Q1)
+
+3.306
+
+5
+
+mA
+
+Or All Input 0V for NSi8141x1
+
+IDD1(1M)
+
+2.954
+
+4.4
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+2.862
+
+4.3
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+3.452
+
+5.2
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+4.368
+
+6.5
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+8.084
+
+12
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+19.96
+
+30
+
+mA
+
+CL = 15pF
+
+IDD1(Q0)
+
+1.598
+
+2.4
+
+mA
+
+IDD2(Q0)
+
+1.618
+
+2.43
+
+mA
+
+All Input 0V for NSi8142x0 Or All
+Input at supply for NSi8142x1
+
+IDD1(Q1)
+
+3.942
+
+5.9
+
+mA
+
+All Input at supply for NSi8142x0
+
+IDD2(Q1)
+
+4.004
+
+6
+
+mA
+
+Or All Input 0V for NSi8142x1
+
+IDD1(1M)
+
+2.901
+
+4.3
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+2.9452
+
+4.4
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+3.898
+
+5.85
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+3.976
+
+6
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+12.9
+
+19
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+14.868
+
+22
+
+mA
+
+CL = 15pF
+
+150
+
+Mbps
+
+5.0
+
+ns
+
+NSi8141
+
+NSi8142
+
+Data Rate
+
+DR
+
+Minimum Pulse Width
+
+PW
+
+Propagation Delay
+
+t PLH
+
+5
+
+9.20
+
+15
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+t PHL
+
+5
+
+10.40
+
+15
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Pulse Width Distortion
+
+PWD
+
+0
+
+|t PHL – t PLH |
+
+Copyright © 2019, NOVOSENSE
+
+Page 7
+
+NSi8140/NSi8141/NSi8142
+Rising Time
+
+tr
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Falling Time
+
+tf
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Peak Eye Diagram Jitter
+
+tJIT(PK)
+
+350
+
+ps
+
+Channel-to-Channel Delay
+Skew
+
+tSK(c2c)
+
+2.5
+
+ns
+
+Part-to-Part Delay Skew
+
+tSK(p2p)
+
+5.0
+
+ns
+
+Disable high to Tri-State
+
+tPHZ
+
+17.85
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Enable to Data high Valid
+
+tPZH
+
+13.37
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Disable low to Tri-State
+
+tPLZ
+
+20.6
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Enable to Data high Valid
+
+tPZL
+
+13.67
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+(VDD1=2.5V± 10%, VDD2=2.5V± 10%, Ta=-40℃ to 125℃. Unless otherwise noted, Typical values are at VDD1 = 2.5V, VDD2 = 2.5V, Ta =
+25℃)
+Parameters
+
+Symbol
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Comments
+
+IDD1(Q0)
+
+0.802
+
+1.2
+
+mA
+
+IDD2(Q0)
+
+2.161
+
+3.24
+
+mA
+
+All Input 0V for NSi8140x0 Or All
+Input at supply for NSi8140x1
+
+IDD1(Q1)
+
+5.17
+
+7.8
+
+mA
+
+All Input at supply for NSi8140x0
+
+IDD2(Q1)
+
+2.282
+
+3.4
+
+mA
+
+Or All Input 0V for NSi8140x1
+
+IDD1(1M)
+
+2.968
+
+4.45
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+2.384
+
+3.58
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+3.056
+
+4.58
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+3.862
+
+5.8
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+3.772
+
+5.67
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+19.54
+
+29.3
+
+mA
+
+CL=15pF
+
+IDD1(Q0)
+
+1.128
+
+1.7
+
+mA
+
+IDD2(Q0)
+
+2.012
+
+3
+
+mA
+
+All Input 0V for NSi8141x0 Or All
+Input at supply for NSi8141x1
+
+IDD1(Q1)
+
+4.51
+
+6.8
+
+mA
+
+All Input at supply for NSi8141x0
+
+IDD2(Q1)
+
+3.248
+
+4.9
+
+mA
+
+Or All Input 0V for NSi8141x1
+
+IDD1(1M)
+
+2.894
+
+4.3
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+2.766
+
+4.15
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+3.272
+
+4.9
+
+mA
+
+All Input with 10Mbps,
+
+NSi8140
+
+Supply current
+
+NSi8141
+
+Copyright © 2019, NOVOSENSE
+
+Page 8
+
+NSi8140/NSi8141/NSi8142
+IDD2(10M)
+
+3.892
+
+5.8
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+6.95
+
+10.4
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+15.706
+
+23.56
+
+mA
+
+CL = 15pF
+
+IDD1(Q0)
+
+1.556
+
+2.3
+
+mA
+
+IDD2(Q0)
+
+1.574
+
+2.4
+
+mA
+
+All Input 0V for NSi8142x0 Or All
+Input at supply for NSi8142x1
+
+IDD1(Q1)
+
+3.884
+
+5.8
+
+mA
+
+All Input at supply for NSi8142x0
+
+IDD2(Q1)
+
+3.942
+
+5.9
+
+mA
+
+Or All Input 0V for NSi8142x1
+
+IDD1(1M)
+
+2.824
+
+4.3
+
+mA
+
+All Input with 1Mbps,
+
+IDD2(1M)
+
+2.866
+
+4.3
+
+mA
+
+CL=15pF
+
+IDD1(10M)
+
+3.574
+
+5.36
+
+mA
+
+All Input with 10Mbps,
+
+IDD2(10M)
+
+3.642
+
+5.46
+
+mA
+
+CL=15pF
+
+IDD1(100M)
+
+10.678
+
+16
+
+mA
+
+All Input with 100Mbps,
+
+IDD2(100M)
+
+11.618
+
+17
+
+mA
+
+CL = 15pF
+
+150
+
+Mbps
+
+5.0
+
+ns
+
+NSi8142
+
+Data Rate
+
+DR
+
+Minimum Pulse Width
+
+PW
+
+Propagation Delay
+
+t PLH
+
+5
+
+10.0
+
+15
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+t PHL
+
+5
+
+10.0
+
+15
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+PWD
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Rising Time
+
+tr
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Falling Time
+
+tf
+
+5.0
+
+ns
+
+See Figure 2.9 , CL = 15pF
+
+Pulse Width Distortion
+
+0
+
+|t PHL – t PLH |
+
+Peak Eye Diagram Jitter
+
+tJIT(PK)
+
+350
+
+ps
+
+Channel-to-Channel Delay
+Skew
+
+tSK(c2c)
+
+2.5
+
+ns
+
+Part-to-Part Delay Skew
+
+tSK(p2p)
+
+5.0
+
+ns
+
+Disable high to Tri-State
+
+tPHZ
+
+20.6
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Enable to Data high Valid
+
+tPZH
+
+18.12
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Disable low to Tri-State
+
+tPLZ
+
+21.85
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+Enable to Data high Valid
+
+tPZL
+
+20.02
+
+ns
+
+See Figure 2.10 , CL = 15pF, RL=1k
+
+2.4. TYPICAL PERFORMANCE CHARACTERISTICS
+
+Copyright © 2019, NOVOSENSE
+
+Page 9
+
+NSi8140/NSi8141/NSi8142
+
+5
+
+80
+
+Crurrent(mA)
+
+3
+2
+
+2.5
+3.3
+5
+5.5
+
+1
+
+0
+0
+
+10
+
+50
+
+100
+
+150
+
+40
+
+2.5
+3.3
+5
+5.5
+
+20
+0
+
+200
+
+Data Rate(Mbps)
+Figure 2.1 NSi8140 VDD1 Supply Current vs Data Rate
+20
+
+0
+
+10
+
+50
+
+100
+
+150
+
+200
+
+Data Rate(Mbps)
+Figure 2.2 NSi8140 VDD2 Supply Current vs Data Rate
+60
+
+15
+
+Crurrent(mA)
+
+60
+
+40
+
+10
+2.5
+3.3
+5
+5.5
+
+5
+0
+0
+
+10
+
+50
+
+100
+
+Data Rate(Mbps)
+
+150
+
+Crurrent(mA)
+
+Crurrent(mA)
+
+4
+
+2.5
+3.3
+5
+5.5
+
+20
+0
+0
+
+200
+
+10
+
+50
+
+100
+
+150
+
+200
+
+Data Rate(Mbps)
+
+40
+
+40
+
+30
+
+30
+
+20
+2.5
+3.3
+5
+5.5
+
+10
+0
+0
+
+10
+
+50
+
+100
+
+Data Rate(Mbps)
+
+150
+
+Crurrent(mA)
+
+Figure 2.4 NSi8141 VDD2 Supply Current vs Data Rate
+
+Crurrent(mA)
+
+Figure 2.3 NSi8141 VDD1 Supply Current vs Data Rate
+
+20
+2.5
+3.3
+5
+5.5
+
+10
+0
+0
+
+200
+
+10
+
+50
+
+100
+
+150
+
+200
+
+Data Rate(Mbps)
+
+14
+
+12
+
+Propagation Delay(ns)
+
+Figure 2.6 NSi8142 VDD2 Supply Current vs Data Rate
+
+Propagation Delay(ns)
+
+Figure 2.5 NSi8142 VDD1 Supply Current vs Data Rate
+
+12
+10
+8
+6
+2.5
+3.3
+5
+
+4
+
+2 © 2019, NOVOSENSE
+Copyright
+0
+-40
+25
+
+125
+
+Temperature(℃)
+
+150
+
+10
+8
+6
+4
+
+2.5
+3.3
+5
+
+2
+0
+-40
+
+25
+
+125
+
+Temperature(℃)
+
+Page 10
+150
+
+NSi8140/NSi8141/NSi8142
+
+Figure 2.7 Rising Edge Propagation Delay Vs Temp
+
+Figure 2.8 Falling Edge Propagation Delay Vs Temp
+
+2.5. PARAMETER MEASUREMENT INFORMATION
+
+Input Generator
+
+VI
+
+VO
+
+50Ω
+
+CL
+
+Figure 2.9 Switching Characteristics Test Circuit and Waveform
+
+Figure 2.10 Enable/Disable Propagation Delay Time Test Circuit and Waveform
+
+Copyright © 2019, NOVOSENSE
+
+Page 11
+
+NSi8140/NSi8141/NSi8142
+VDD1
+
+VDD2
+
+IN
+
+OUT
+VO
+
+Battery
+
+DC
+
+CL
+GND2
+
+GND1
+VCM
+
+Figure 2.11 Common-Mode Transient Immunity Test Circuit
+Note A :The input pulse is supplied by a generator having the following characteristics: PRR ≤ 50 kHz, 50% duty cycle, tr ≤ 3 ns, tf ≤ 3 ns, ZO = 50 Ω. At the
+input, a 50-Ω resistor is required to terminate the Input Generator signal. It is not needed in actual application.
+NoteB : CL = 15 pF and includes instrumentation and fixture capacitance within ±20%.
+
+3.0
+
+HIGH VOLTAGE FEATURE DESCRIPTION
+
+3.1. INSULATION AND SAFETY RELATED SPECIFICATIONS
+Value
+Parameters
+
+Symbol
+
+NBSOIC-16
+
+WBSOIC-16
+
+Unit
+
+Comments
+
+Minimum External Air Gap
+(Clearance)
+
+L(I01)
+
+4.0
+
+8.0
+
+mm
+
+Shortest terminal-to-terminal
+distance through air
+
+Minimum External Tracking
+(Creepage)
+
+L(I02)
+
+4.0
+
+8.0
+
+mm
+
+Shortest terminal-to-terminal
+distance across the package
+surface
+
+Minimum internal gap
+
+DTI
+
+20
+
+um
+
+Distance through insulation
+
+Tracking
+Resistance(Comparative
+Tracking Index)
+
+CTI
+
+>400
+
+V
+
+DIN EN 60112 (VDE 0303-11);
+IEC 60112
+
+Ⅱ
+
+Material Group
+
+3.2. DIN VDE V 0884-11（VDE V 0884-11）:2017-01 INSULATION CHARATERISTICS
+Description
+
+Test Condition
+
+Symbol
+
+Value
+NB-SOIC16
+
+WB-SOIC16
+
+For Rated Mains Voltage ≤ 150Vrms
+
+Ⅰto Ⅳ
+
+Ⅰto Ⅳ
+
+For Rated Mains Voltage ≤ 300Vrms
+
+Ⅰto Ⅲ
+
+Ⅰto Ⅳ
+
+Unit
+
+Installation Classification per DIN VDE
+0110
+
+Copyright © 2019, NOVOSENSE
+
+Page 12
+
+NSi8140/NSi8141/NSi8142
+For Rated Mains Voltage ≤ 400Vrms
+
+Ⅰto Ⅲ
+
+Ⅰto Ⅳ
+
+Climatic Classification
+
+10/105/2
+1
+
+10/105/2
+1
+
+Pollution Degree per DIN VDE 0110,
+
+2
+
+2
+
+Table 1
+Maximum repetitive peak isolation
+voltage
+Maximum working isolation voltage
+
+AC voltage
+
+VIORM
+
+565
+
+1166
+
+Vpeak
+
+VIOWM
+
+400
+
+824
+
+VRMS
+
+565
+
+1166
+
+Vpeak
+
+V pd (m)
+
+847
+
+1749
+
+Vpeak
+
+DC voltage
+Input to Output Test Voltage, Method
+B1
+
+V IORM × 1. 5 = V pd (m) , 100%
+production test,
+t ini = t m = 1 sec, partial
+discharge < 5 pC
+
+Input to Output Test Voltage, Method
+A
+After Environmental Tests Subgroup 1
+
+V IORM × 1.2 = V pd (m) , t ini = 60
+sec, t m = 10 sec, partial
+discharge < 5 pC
+
+V pd (m)
+
+678
+
+1399
+
+Vpeak
+
+After Input and /or Safety Test
+Subgroup 2 and Subgroup 3
+
+V IORM × 1.2= V pd (m) , t ini = 60
+sec, t m = 10 sec, partial
+discharge < 5 pC
+
+V pd (m)
+
+678
+
+1399
+
+Vpeak
+
+Maximum transient isolation voltage
+
+t = 60 sec
+
+VIOTM
+
+5300
+
+7000
+
+Vpeak
+
+Maximum Surge Isolation Voltage
+
+Test method per
+IEC60065,1.2/50us
+waveform,
+VTEST=VIOSM×1.3
+
+VIOSM
+
+5384
+
+5384
+
+Vpeak
+
+Isolation resistance
+
+VIO =500V
+
+RIO
+
+>109
+
+>109
+
+Ω
+
+Isolation capacitance
+
+f = 1MHz
+
+CIO
+
+0.6
+
+0.6
+
+pF
+
+Input capacitance
+
+CI
+
+2
+
+2
+
+pF
+
+Total Power Dissipation at 25℃
+
+Ps
+
+1499
+
+W
+
+θJA = 140 °C/W, V I = 5.5 V, T
+J = 150 °C, T A = 25 °C
+Safety input, output, or supply current
+
+160
+Is
+
+θJA = 84 °C/W, V I = 5.5 V, T J
+= 150 °C, T A = 25 °C
+Case Temperature
+
+Copyright © 2019, NOVOSENSE
+
+mA
+
+Ts
+
+150
+
+237
+
+mA
+
+150
+
+℃
+
+Page 13
+
+Saftey Limiting Current
+(mA)
+
+NSi8140/NSi8141/NSi8142
+180
+160
+140
+120
+100
+80
+60
+40
+20
+0
+0
+
+50
+
+100
+
+150
+
+200
+
+Case Temperature (℃)
+
+Saftey Limiting Current
+(mA)
+
+Figure 3.1 NSi8140N/NSi8141N/NSi8142N Thermal Derating Curve, Dependence of Safety Limiting Values with Case Temperature per DIN VDE V 0884-11
+
+250
+200
+150
+100
+50
+0
+
+0
+
+50
+
+100
+
+150
+
+200
+
+Case Temperature (℃)
+Figure 3.2 NSi8140W/NSi8141W/NSi8142W Thermal Derating Curve, Dependence of Safety Limiting Values with Case Temperature per DIN VDE V 0884-11
+
+3.3. REGULATORY INFORMATION
+The NSi8140N/NSi8141N/NSi8142N are approved or pending approval by the organizations listed in table.
+CUL
+UL 1577 Component
+Recognition Program1
+
+Single Protection, 3750Vrms
+Isolation voltage
+
+VDE
+
+Approved under CSA Component
+Acceptance Notice 5A
+
+CQC
+
+DIN VDE V 088411(VDE V 088411):2017-012
+
+Certified by CQC11471543-2012
+
+Single Protection, 3750Vrms Isolation
+voltage
+
+Basic Insulation
+565Vpeak,
+VIOSM=5384Vpeak
+
+Basic insulation at
+400Vrms (565Vpeak)
+
+File (E500602)
+
+File (5024579-48800001)
+
+File (pending)
+
+File (E500602)
+
+GB4943.1-2011
+
+1 In accordance with UL 1577, each NSi8140N/NSi8141N/NSi8142N is proof tested by applying an insulation test voltage ≥ 4500 V
+
+rms for 1 sec.
+
+2 In accordance with DIN VDE V 0884-11, each NSi8140N/NSi8141N/NSi8142N is proof tested by applying an insulation test voltage ≥ 847 V peak for 1 sec
+
+(partial discharge detection limit = 5 pC). The * marking branded on the component designates DIN VDE V 0884-11 approval.
+
+The NSi8140W/NSi8141W/NSi8142W are approved or pending approval by the organizations listed in table.
+CUL
+UL 1577 Component Recognition
+Program1
+
+Copyright © 2019, NOVOSENSE
+
+VDE
+Approved under CSA
+Component Acceptance Notice
+5A
+
+DIN VDE V 088411(VDE V 088411):2017-012
+
+CQC
+Certified by CQC11471543-2012
+GB4943.1-2011
+
+Page 14
+
+NSi8140/NSi8141/NSi8142
+Single Protection, 5000Vrms Isolation
+voltage
+
+Single Protection, 5000Vrms
+Isolation voltage
+
+File (E500602)
+
+File (E500602)
+
+Basic Insulation
+1166Vpeak,
+VIOSM=5384Vpeak
+
+Basic insulation at
+824VRMS (1166Vpeak)
+
+File (5024579-48800001)
+
+File (pending)
+
+Reinforced insulation at
+400VRMS (565Vpeak)
+
+1 In accordance with UL 1577, each NSi8140W/NSi8141W/NSi8142W is proof tested by applying an insulation test voltage ≥ 6000 V rms for 1 sec.
+2 In accordance with DIN VDE V 0884-11, each NSi8140W/NSi8141W/NSi8142W is proof tested by applying an insulation test voltage ≥ 1749 V peak for 1 sec
+
+(partial discharge detection limit = 5 pC). The * marking branded on the component designates DIN VDE V 0884-11 approval.
+
+4.0
+
+FUNCTION DESCRIPTION
+
+The NSi814x is a Quad-channel digital isolator based on a capacitive isolation barrier technique. The digital signal is modulated with RF
+carrier generated by the internal oscillator at the Transmitter side. Then it is transferred through the capacitive isolation barrier and
+demodulated at the Receiver side.
+The NSi814x devices are high reliability quad-channel digital isolator with AEC-Q100 qualified. The NSi814x device is safety certified by
+UL1577 support several insulation withstand voltages (3.75kVrms, 5kVrms), while providing high electromagnetic immunity and low
+emissions at low power consumption. The data rate of the NSi814x is up to 150Mbps, and the common-mode transient immunity (CMTI)
+is up to 150kV/us. The NSi814x device provides digital channel direction configuration and the default output level configuration when
+the input power is lost. Wide supply voltage of the NSi814x device support to connect with most digital interface directly, easy to do the
+level shift. High system level EMC performance enhance reliability and stability of use.
+The NSi814x has a default output status when VDDIN is unready and VDDOUT is ready as shown in Table 4.1, which helps for diagnosis
+when power is missing at the transmitter side. The output B follows the same status with the input A within 60us after powering up.
+Isolation
+barrier
+VIN
+
+TX signal
+cinditioning
+
+PWM
+
+RX signal
+cinditioning
+
+envelope
+detection
+
+VOUT
+
+EN
+
+OSC
+
+Figure 4.1 Simplified Channel Diagram
+
+Table 4.1 Output status vs. power status
+Input
+
+ENX
+
+VDD1
+status
+
+VDD2
+status
+
+Output
+
+Comment
+
+H
+
+H or NC
+
+Ready
+
+Ready
+
+H
+
+Normal operation.
+
+L
+
+H or NC
+
+Ready
+
+Ready
+
+L
+
+X
+
+L
+
+Ready
+
+Ready
+
+Z
+
+Output Disabled, the output is high impedance
+
+X
+
+H or NC
+
+Unready
+
+Ready
+
+L
+H
+
+The output follows the same status with the input within
+60us after input side VDD1 is powered on.
+
+X
+
+L
+
+Unready
+
+Ready
+
+Z
+
+Output Disabled, the output is high impedance
+
+X
+
+X
+
+Ready
+
+Unready
+
+X
+
+The output follows the same status with the input within
+60us after output side VDD2 is powered on.
+
+Copyright © 2019, NOVOSENSE
+
+Page 15
+
+NSi8140/NSi8141/NSi8142
+
+5.0
+
+APPLICATION NOTE
+
+5.1. PCB LAYOUT
+The NSi814x requires a 0.1 µF bypass capacitor between VDD1 and GND1, VDD2 and GND2. The capacitor should be placed as close as
+possible to the package. Figure 5.1 show the recommended schematic diagram , Figure 5.2 to Figure 5.3 show the recommended PCB
+layout, make sure the space under the chip should keep free from planes, traces, pads and via. To enhance the robustness of a design,
+the user may also include resistors (50–300 Ω ) in series with the inputs and outputs if the system is excessively noisy. The series resistors
+also improve the system reliability such as latch-up immunity.
+The typical output impedance of an isolator driver channel is approximately 50 Ω, ±40%. When driving loads where transmission line
+effects will be a factor, output pins should be appropriately terminated with controlled impedance PCB traces.
+VDD1
+
+VDD2
+1 VDD1
+
+VDD2 16
+
+2 GND1
+
+GND2 15
+
+3
+
+A1
+
+A2
+
+14
+
+4
+
+B1
+
+B2
+
+13
+
+5
+
+C1
+
+C2
+
+12
+
+6
+
+D1
+
+D2
+
+11
+
+100nF
+
+100nF
+
+50R
+
+50R
+7 EN1
+
+EN2 10
+
+8 GND1
+
+GND2 9
+
+Figure5.1 Recommended schematic diagram
+
+Figure5.2 Recommended PCB Layout — Top Layer
+
+Figure5.3 Recommended PCB Layout — Bottom Layer
+
+5.2. HIGH SPEED PERFORMANCE
+Figure 5.4 shows the eye diagram of NSi814x at 200Mbps data rate output. The result shows a typical measurement on the NSi814x
+with 350ps p-p jitter.
+
+Copyright © 2019, NOVOSENSE
+
+Page 16
+
+NSi8140/NSi8141/NSi8142
+
+Figure5.4 NSi814x Eye Diagram
+
+5.3. TYPICAL SUPPLY CURRENT EQUATIONS
+The typical supply current of NSi814x can be calculated using below equations. IDD1 and IDD2 are typical supply currents measured in mA,
+f is data rate measured in Mbps, CL is the capacitive load measured in pF
+NSi8140:
+IDD1 = 0.19 *a1+1.45*b1+0.82*c1.
+IDD2 = 1.36+ VDD1*f* CL *c1*10-9
+When a1 is the channel number of low input at side 1, b1 is the channel number of high input at side 1, c1 is the channel number of
+switch signal input at side 1.
+NSi8141:
+IDD1 = 0.87 +1.26*b1+0.63*c1+ VDD1*f* CL *c2*10-9
+IDD2 = 0.87 +1.26*b2+0.63*c2+ VDD1*f* CL *c1*10-9
+When b1 is the channel number of high input at side 1, c1 is the channel number of switch signal input at side 1, b2 is the channel
+number of high input at side 2, c2 is the channel number of switch signal input at side 2.
+NSi8142:
+IDD1 = 0.87 +1.26*b1+0.63*c1+ VDD1*f* CL *c2*10-9
+IDD2 = 0.87 +1.26*b2+0.63*c2+ VDD1*f* CL *c1*10-9
+When b1 is the channel number of high input at side 1, c1 is the channel number of switch signal input at side 1, b2 is the channel
+number of high input at side 2, c2 is the channel number of switch signal input at side 2.
+
+Copyright © 2019, NOVOSENSE
+
+Page 17
+
+NSi8140/NSi8141/NSi8142
+6.0
+
+PACKAGE INFORMATION
+
+VDD1 1
+
+16 VDD2
+
+VDD1 1
+
+16 VDD2
+
+VDD1 1
+
+16 VDD2
+
+GND1 2
+
+15 GND2
+
+GND1 2
+
+15 GND2
+
+GND1 2
+
+15 GND2
+
+INA 3
+
+14 OUTA
+
+INA 3
+
+14 OUTA
+
+INA 3
+
+14 OUTA
+
+INB 4
+
+13 OUTB
+
+INB 4
+
+13 OUTB
+
+INB 4
+
+13 OUTB
+
+INC 5
+
+12 OUTC
+
+INC 5
+
+12 OUTC
+
+OUTC 5
+
+12 INC
+
+IND 6
+
+11 OUTD
+
+OUTD 6
+
+11 IND
+
+OUTD 6
+
+11 IND
+
+NC 7
+
+10 EN2
+
+EN1 7
+
+10 EN2
+
+EN1 7
+
+10 EN2
+
+GND1 8
+
+NSi8140 9 GND2
+
+GND1 8
+
+Figure 6.1 NSi8140N Package
+
+NSi8141 9 GND2
+
+Figure 6.2 NSi8141N Package
+
+GND1 8
+
+NSi8142 9 GND2
+
+Figure 6.3 NSi8142N Package
+
+Figure 6.4 NB SOIC16 Package Shape and Dimension in millimeters (inches)
+Table6.1 NSi8140N/ NSi8141N/ NSi8142N Pin Configuration and Description
+NSi8140N
+PIN NO.
+
+NSi8141N
+PIN NO.
+
+NSi8142N
+PIN NO.
+
+SYMBOL
+
+FUNCTION
+
+1
+
+1
+
+1
+
+VDD1
+
+Power Supply for Isolator Side 1
+
+2
+
+2
+
+2
+
+GND1
+
+Ground 1, the ground reference for Isolator Side 1
+
+Copyright © 2019, NOVOSENSE
+
+Page 18
+
+NSi8140/NSi8141/NSi8142
+3
+
+3
+
+3
+
+INA
+
+Logic Input A
+
+4
+
+4
+
+4
+
+INB
+
+Logic Input B
+
+5
+
+5
+
+12
+
+INC
+
+Logic Input C
+
+6
+
+11
+
+11
+
+IND
+
+Logic Input D
+
+7
+
+7
+
+7
+
+NC/ EN1
+
+No Connection. or
+Output Enable 1. Active high logic input. When EN1 is high or NC,
+the output of Side 1 are enabled. When EN1 is low, the output of
+Side 1 are disabled to high impedance state.
+
+8
+
+8
+
+8
+
+GND1
+
+Ground 1, the ground reference for Isolator Side 1
+
+9
+
+9
+
+9
+
+GND2
+
+Ground 2, the ground reference for Isolator Side 2
+
+10
+
+10
+
+10
+
+EN2
+
+Output Enable 2. Active high logic input. When EN2 is high or NC,
+the output of Side 2 are enabled. When EN2 is low, the output of
+Side 2 are disabled to high impedance state.
+
+11
+
+6
+
+6
+
+OUTD
+
+Logic Output D
+
+12
+
+12
+
+5
+
+OUTC
+
+Logic Output C
+
+13
+
+13
+
+13
+
+OUTB
+
+Logic Output B
+
+14
+
+14
+
+14
+
+OUTA
+
+Logic Output A
+
+15
+
+15
+
+15
+
+GND2
+
+Ground 2, the ground reference for Isolator Side 2
+
+16
+
+16
+
+16
+
+VDD2
+
+Power Supply for Isolator Side 2
+
+VDD1 1
+
+16 VDD 2
+
+GND 1 2
+
+15 GND 2
+
+VDD1 1
+GND1 2
+
+16 VDD2
+
+VDD1 1
+
+16 VDD 2
+
+15 GND2
+
+GND 1 2
+
+15 GND 2
+14 OUTA
+
+INA 3
+
+14 OUTA
+
+INA 3
+
+14 OUTA
+
+INA 3
+
+INB 4
+
+13 OUTB
+
+INB 4
+
+13 OUTB
+
+INB 4
+
+13 OUTB
+
+INC 5
+
+12 OUTC
+
+INC 5
+
+12 OUTC
+
+OUTC 5
+
+12 INC
+
+IND 6
+
+11 OUTD
+
+OUTD 6
+
+11 IND
+
+OUTD 6
+
+11 IND
+
+NC 7
+
+10 EN2
+
+EN1 7
+
+10 EN2
+
+EN 1 7
+
+10 EN 2
+
+9 GND2
+
+GND1 8
+
+9 GND 2
+
+GND1 8
+
+GND 1 8
+
+NSi8140
+
+Figure 6.5 NSi8140W Package
+
+Copyright © 2019, NOVOSENSE
+
+NSi8141
+
+Figure 6.6 NSi8141W Package
+
+NSi8142
+
+9 GND2
+
+Figure 6.7 NSi8142W Package
+
+Page 19
+
+NSi8140/NSi8141/NSi8142
+
+Figure 6.8 WB SOIC16 Package Shape and Dimension in millimeters and (inches)
+Table 6.2 NSi8140W/ NSi8141W/ NSi8142W Pin Configuration and Description
+NSi8140W
+PIN NO.
+
+NSi8141W
+PIN NO.
+
+NSi8142W
+PIN NO.
+
+SYMBOL
+
+FUNCTION
+
+1
+
+1
+
+1
+
+VDD1
+
+Power Supply for Isolator Side 1
+
+2
+
+2
+
+2
+
+GND1
+
+Ground 1, the ground reference for Isolator Side 1
+
+3
+
+3
+
+3
+
+INA
+
+Logic Input A
+
+4
+
+4
+
+4
+
+INB
+
+Logic Input B
+
+5
+
+5
+
+12
+
+INC
+
+Logic Input C
+
+6
+
+11
+
+11
+
+IND
+
+Logic Input D
+
+7
+
+7
+
+7
+
+NC/ EN1
+
+No Connection. or
+Output Enable 1. Active high logic input. When EN1 is high or NC,
+the output of Side 1 are enabled. When EN1 is low, the output of
+Side 1 are disabled to high impedance state.
+
+8
+
+8
+
+8
+
+GND1
+
+Ground 1, the ground reference for Isolator Side 1
+
+9
+
+9
+
+9
+
+GND2
+
+Ground 2, the ground reference for Isolator Side 2
+
+10
+
+10
+
+10
+
+EN2
+
+Output Enable 2. Active high logic input. When EN2 is high or NC,
+the output of Side 2 are enabled. When EN2 is low, the output of
+Side 2 are disabled to high impedance state.
+
+11
+
+6
+
+6
+
+OUTD
+
+Logic Output D
+
+Copyright © 2019, NOVOSENSE
+
+Page 20
+
+NSi8140/NSi8141/NSi8142
+
+7.0
+
+12
+
+12
+
+5
+
+OUTC
+
+Logic Output C
+
+13
+
+13
+
+13
+
+OUTB
+
+Logic Output B
+
+14
+
+14
+
+14
+
+OUTA
+
+Logic Output A
+
+15
+
+15
+
+15
+
+GND2
+
+Ground 2, the ground reference for Isolator Side 2
+
+16
+
+16
+
+16
+
+VDD2
+
+Power Supply for Isolator Side 2
+
+ORDER INFORMATION
+
+Part No.
+
+Isolati
+on
+Rating
+(kV)
+
+Numb
+er of
+side 1
+inputs
+
+Numb
+er of
+side 2
+inputs
+
+Max Data
+Rate
+(Mbps)
+
+Default
+Output
+State
+
+MSL
+level
+
+Temperature
+
+Auto
+moti
+ve
+
+Package
+Qty
+
+Package
+
+NSi8140N0
+
+3.75
+
+4
+
+0
+
+150
+
+Low
+
+1
+
+-40 to 125℃
+
+NO
+
+2500
+
+NB SOIC16
+
+NSi8140N1
+
+3.75
+
+4
+
+0
+
+150
+
+High
+
+1
+
+-40 to 125℃
+
+NO
+
+2500
+
+NB SOIC16
+
+NSi8141N0
+
+3.75
+
+3
+
+1
+
+150
+
+Low
+
+1
+
+-40 to 125℃
+
+NO
+
+2500
+
+NB SOIC16
+
+NSi8141N1
+
+3.75
+
+3
+
+1
+
+150
+
+High
+
+1
+
+-40 to 125℃
+
+NO
+
+2500
+
+NB SOIC16
+
+NSi8142N0
+
+3.75
+
+2
+
+2
+
+150
+
+Low
+
+1
+
+-40 to 125℃
+
+NO
+
+2500
+
+NB SOIC16
+
+NSi8142N1
+
+3.75
+
+2
+
+2
+
+150
+
+High
+
+1
+
+-40 to 125℃
+
+NO
+
+2500
+
+NB SOIC16
+
+NSi8140W0
+
+5
+
+4
+
+0
+
+150
+
+Low
+
+2
+
+-40 to 125℃
+
+NO
+
+1000
+
+WB SOIC16
+
+NSi8140W1
+
+5
+
+4
+
+0
+
+150
+
+High
+
+2
+
+-40 to 125℃
+
+NO
+
+1000
+
+WB SOIC16
+
+NSi8141W0
+
+5
+
+3
+
+1
+
+150
+
+Low
+
+2
+
+-40 to 125℃
+
+NO
+
+1000
+
+WB SOIC16
+
+NSi8141W1
+
+5
+
+3
+
+1
+
+150
+
+High
+
+2
+
+-40 to 125℃
+
+NO
+
+1000
+
+WB SOIC16
+
+NSi8142W0
+
+5
+
+2
+
+2
+
+150
+
+Low
+
+2
+
+-40 to 125℃
+
+NO
+
+1000
+
+WB SOIC16
+
+NSi8142W1
+
+5
+
+2
+
+2
+
+150
+
+High
+
+2
+
+-40 to 125℃
+
+NO
+
+1000
+
+WB SOIC16
+
+NSi8140W0Q
+
+5
+
+4
+
+0
+
+150
+
+Low
+
+2
+
+-40 to 125℃
+
+YES
+
+1000
+
+WB SOIC16
+
+NSi8140W1Q
+
+5
+
+4
+
+0
+
+150
+
+High
+
+1
+
+-40 to 125℃
+
+YES
+
+1000
+
+WB SOIC16
+
+NSi8141W0Q
+
+5
+
+3
+
+1
+
+150
+
+Low
+
+1
+
+-40 to 125℃
+
+YES
+
+1000
+
+WB SOIC16
+
+NSi8141W1Q
+
+5
+
+3
+
+1
+
+150
+
+High
+
+1
+
+-40 to 125℃
+
+YES
+
+1000
+
+WB SOIC16
+
+NSi8142W0Q
+
+5
+
+2
+
+2
+
+150
+
+Low
+
+1
+
+-40 to 125℃
+
+YES
+
+1000
+
+WB SOIC16
+
+NSi8142W1Q
+
+5
+
+2
+
+2
+
+150
+
+High
+
+1
+
+YES
+1000
+WB SOIC16
+-40 to 125℃
+NOTE: All packages are RoHS-compliant with peak reflow temperatures of 260 °C according to the JEDEC industry standard
+classifications and peak solder temperatures.
+All devices are AEC-Q100 qualified.
+
+Part Number Rule:
+
+Copyright © 2019, NOVOSENSE
+
+Page 21
+
+NSi8140/NSi8141/NSi8142
+NSi(81)(4)(1)(N)(1)(Q)
+Series Number
+Total Channel Amount:
+N=N Channels N=1,2,4…
+N=0: I2C Part
+Reverse Channel Amount:
+N=N Channels N=0,1,2…
+
+8.0
+
+Q = Automotive version
+Fail-Safe Output State:
+0 = Logic Low
+1 = Logic High
+Package Type:
+N= NB SOIC16
+W= WB SOIC16
+
+TAPE AND REEL INFORMATION
+
+Copyright © 2019, NOVOSENSE
+
+Page 22
+
+NSi8140/NSi8141/NSi8142
+
+Figure 8.1 Tape and Reel Information of WB SOIC16
+
+Copyright © 2019, NOVOSENSE
+
+Page 23
+
+NSi8140/NSi8141/NSi8142
+
+Figure 8.2 Tape and Reel Information of NB SOIC16
+
+9.0
+
+REVISION HISTORY
+
+Revision
+1.0
+1.1
+1.2
+1.3
+1.4
+
+Description
+
+1.5
+
+Change NSi8140 IDD1(Q0) MAX value
+
+Add maximum operation current spec.
+Change to ordering information
+Change Certification Information
+Add Thermal characteristics, MSL level，Recommended schematic
+diagram，Simplified Channel Diagram;
+change Package Shape and Dimension in millimeters and (inches)
+add recommended operation recommEnded operating conditions
+
+Copyright © 2019, NOVOSENSE
+
+Date
+2017/11/15
+2018/10/12
+2018/12/20
+2019/06/17
+2020/2/11
+
+2020/4/17
+
+Page 24
+
+

@@ -1,0 +1,258 @@
+CUI Devices is now Same Sky!
+Additional Resources: Product Page
+
+Learn More
+|
+
+date
+
+3D Model
+
+09/11/2024
+
+page 1 of 4
+
+MODEL: CMC-6027-32T | DESCRIPTION: ELECTRET CONDENSER MICROPHONE
+FEATURES
+• omnidirectional
+• high signal to noise ratio
+• -32 dB sensitivity rating
+
+SPECIFICATIONS
+parameter
+
+conditions/description
+
+directivity
+
+omnidirectional
+
+sensitivity (S)
+
+f = 1 kHz, 1 Pa, 0 dB = 1 V/Pa
+
+min
+
+typ
+
+max
+
+-35
+
+-32
+
+-29
+
+standard operating voltage (Vs)
+
+2
+
+max operating voltage
+f = 1 kHz, 1 Pa
+
+sensitivity reduction (∆S-Vs)
+
+2.0
+
+f = 1 kHz, 1 Pa, Vs = 2.0 ~ 1.5 Vdc
+
+frequency (f)
+current consumption (IDSS)
+
+Vs = 2.0 Vdc, RL = 2.2 kΩ
+
+signal to noise ratio (S/N)
+
+f = 1 kHz, 1 Pa, A-weighted
+
+dimensions
+
+Ø6.0 x 2.7
+
+material
+
+Al
+
+terminal
+
+solder pads
+
+Vdc
+kΩ
+
+-3
+100
+
+dB
+Vdc
+
+10
+
+output impedance (Zout)
+
+units
+
+dB
+20,000
+0.5
+
+70
+
+Hz
+mA
+dBA
+mm
+
+weight
+
+0.2
+
+g
+
+operating temperature
+
+-40
+
+85
+
+°C
+
+storage temperature
+
+-40
+
+85
+
+°C
+
+RoHS
+Notes:
+
+yes
+1. We use the “Pascal (Pa)” indication of sensitivity as per the recomendation of I.E.C. (International Electrotechnical Commission). The sensitivity of “Pa” will increase
+20 dB compared to the “ubar” indication. Example: -60 dB (0 dB = 1 V/ubar) = -40 dB ( 1V/Pa)
+2. All specifications measured at 5~35°C, humidity at 45~85%, under 86~106 kPa pressure, unless otherwise noted.
+
+SOLDERABILITY
+parameter
+
+conditions/description
+
+min
+
+typ
+
+max
+
+units
+
+hand soldering
+
+for maximum 2 seconds
+
+310
+
+320
+
+330
+
+°C
+
+sameskydevices.com
+
+Additional Resources: Product Page
+
+|
+
+3D Model
+
+SAME SKY | MODEL: CMC-6027-32T | DESCRIPTION: ELECTRET CONDENSER MICROPHONE
+
+MECHANICAL DRAWING
+units: mm
+
+FREQUENCY RESPONSE CURVE
+
+MEASUREMENT CIRCUIT
+
+RL = 2.2 kΩ
+C = 1 µF
+sameskydevices.com
+
+date 09/11/2024 | page 2 of 4
+
+Additional Resources: Product Page
+
+|
+
+3D Model
+
+SAME SKY | MODEL: CMC-6027-32T | DESCRIPTION: ELECTRET CONDENSER MICROPHONE
+
+PACKAGING
+units: mm
+Inner Box Size: 62 x 62 x 3 mm
+Middle Box Size: 125 x 65 x 28 mm
+Outer Box Size: 210 x 210 x 280 mm
+Inner Box QTY: 100 pcs per box
+Middle Box QTY: 1,000 pcs per box
+Outer Box QTY: 40,000 pcs per box
+
+sameskydevices.com
+
+date 09/11/2024 | page 3 of 4
+
+Additional Resources: Product Page
+
+|
+
+3D Model
+
+SAME SKY | MODEL: CMC-6027-32T | DESCRIPTION: ELECTRET CONDENSER MICROPHONE
+
+date 09/11/2024 | page 4 of 4
+
+REVISION HISTORY
+rev.
+
+description
+
+date
+
+1.0
+
+initial release
+
+11/04/2016
+
+1.01
+
+brand update
+
+01/09/2020
+
+1.02
+
+logo, datasheet style update
+
+08/05/2022
+
+CUI Devices rebranded to Same Sky
+
+09/11/2024
+
+1.03
+
+The revision history provided is for informational purposes only and is believed to be accurate.
+
+Same Sky offers a one (1) year limited warranty. Complete warranty information is listed on our website.
+Same Sky reserves the right to make changes to the product at any time without notice. Information provided by Same Sky is believed to be accurate and
+reliable. However, no responsibility is assumed by Same Sky for its use, nor for any infringements of patents or other rights of third parties which may result
+from its use.
+Same Sky products are not authorized or warranted for use as critical components in equipment that requires an extremely high level of reliability. A critical
+component is any component of a life support device or system whose failure to perform can be reasonably expected to cause the failure of the life support
+device or system, or to affect its safety or effectiveness.
+
+sameskydevices.com
+
+

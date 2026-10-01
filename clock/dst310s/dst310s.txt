@@ -1,0 +1,825 @@
+Serial No. : 2014-1290
+DATE : 2014/11/04
+
+
+
+
+
+ITEM :
+
+CRYSTAL RESONATOR
+DST310S
+
+TYPE :
+
+---------------------- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - -
+
+32.768kHz
+
+NOMINAL FREQUENCY :
+
+---------------------- - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - -
+
+1TJF125DP1AI115
+
+SPEC No. :
+
+---------------------- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- -- -
+
+---------------------- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- - - - - - - -- -- -
+
+RECEIPT
+DATE
+
+RECEIVED
+
+(signature)
+(name)
+
+General Manufacture of Quartz Devices
+1389 Shinzaike, Hiraoka-cho, Kakogawa, Hyogo
+675-0194 Japan
+Phone (81)79-425-3141 Fax (81)79-425-1134
+http://www.kds.info/index_en.htm
+
+C.ENG.
+ENG.
+
+Serial No.2014-1290
+
+1. ELECTRICAL CHARACTERISTICS
+(This test shall be performed under the conditions of temp.at +25±3°C,Relative humidity 60%max.)
+1.1. NOMINAL FREQUENCY
+
+32.768 kHz
+
+1.2. OVERTONE ORDER
+
+Fundamental
+
+1.3. LOADING CAPACITANCE(CL)
+
+12.5 pF
+
+1.4. FREQUENCY TOLERANCE
+
+±20 ×10-6 max. (at +25±3°C)
+
+1.5. DRIVE LEVEL
+
+0.2 μW ± 20% (1μW max.)
+
+1.6. SERIES RESISTANCE
+
+80 kΩ max. (at Series)
+
+1.7. TURNOVER TEMPERATURE
+
++25 ±5°C
+
+1.8. PARABOLIC COEFFICIENT
+
+-0.04×10-6 / °C2 max.
+
+1.9. SHUNT CAPACITANCE
+
+1.3 pF typ.
+
+1.10. OPERATING TEMPERATURE RANGE
+
+-40
+
+~
+
++85 °C
+
+1.11. STORAGE TEMPERATURE RANGE
+
+-40
+
+~
+
++85 °C
+
+1.12. INSULATION RESISTANCE
+
+500 MΩ min. (at DC100±15V)
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+1 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+2. DIMENSIONS AND MARKING
+2.1. DIMENSIONS
+
+unit : mm
+Tolerance ± 0.1
+Fig.-1
+2.2. MARKING
+Marking should be printed as follows:
+Logo(*1),Nominal Frequency(*2),Lot No.(*3),Plants(*4)
+*1 Manufacturer's trademark shall be marked 'D' as Logo.
+*2 In case of 32.768kHz, nominal frequency shall be marked 'A'.
+*3 Lot No. shall be marked three figures.
+(1) Year:The last digit of the year.
+Week:We gave the sequence of week numbers 01(first week) for production date.
+There are starting from 1st of Jan.
+However,add '0' figure to the first week during the 9th weeks.
+The week means are from Sunday to Saturday.
+ex.
+
+Manufactured day:
+
+2014.11.04
+
+4 45
+Year Week
+
+*4 Manufactured in TIANJIN KDS CORP. shall be marked 'C' as Plants.
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+2 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+3. PACKING
+3.1. EMBOSS CARRIER TAPE & REEL
+(1)Dimensions of Emboss carrier tape
+
+DA445C
+
+Fig.-2
+(2)Dimensions of tape reel
+
+Pulling direction
+
+The direction of drawing out
+of the tape is made the inside and
+outside of the reel as shown in figure.
+
+Fig.-3
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+3 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+Table-1
+Item
+Diameter
+Inside width
+Outside width
+Out Line diameter
+
+Flange
+
+Center
+core slit
+Center Core
+
+Width
+
+Length
+Position
+Spindle diameter
+Width
+key Seats
+Length
+Position
+Indication of type
+
+unit:mm
+Mark
+Dimensions / Angle
+A
+Φ180 +0 -3.0
+W1
+13.0 ± 0.3
+W2
+15.5 ± 1.0
+B
+Φ60 +1.0 -0
+F1
+3.0 ± 0.2
+F2
+4.0 ± 0.2
+F3
+5.0 ± 0.2
+V
+11.9
+q
+120 °
+C
+Φ13 ± 0.2
+E
+2.0 ± 0.5
+U
+10.5 ± 0.4
+q
+120 °
+Sticker label on one side of flange
+
+(3)Storage Condition
+Temperature;+40°C max.,Relative Humidity;80% max.
+Storage Period:6months max.
+
+(4)Standard packing quantity
+3,000pcs./reel for Φ180
+
+(5)Material of the tape
+tape
+Carrier tape
+Cover tape
+
+Material
+Polystyrene,Carbon
+Polyester
+
+(6)Label Contents
+HOLDER
+SPEC No.
+USER PARTS No.
+
+TYPE
+SPEC
+NO.
+PARTS
+NO.
+LOT
+NO.
+FREQ.
+Q'TY
+
+LOT No.
+FREQUENCY
+QUANTITY
+COUNTRY OF ORIGIN
+
+MADE IN
+
+Stick a label on the each reel.
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+4 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+
+(7)Taping Dimension
+Leader
+
+Cover tape
+Carrier tape
+
+Terminal
+
+Cover tape
+Carrier tape
+
+Terminal
+
+The length of cover tape in the leader is more than 400mm
+including empty embossed area.
+After all products were packaged,must remain more than
+twenty pieces or 400mm empty embossed area,which should be sealed
+by cover tape.
+The tip of cover tape shall be fixed temporary by paper
+tape and roll around the core of reel one round.
+The empty embossed area which are sealed by cover tape
+must remain more than 40mm.
+
+Leader
+
+Component
+
+Empty Components Unreeling direction
+
+Empty Components
+
+Cover tape
+Carrier tape
+
+Fig.-4
+(8)Joint of tape
+The carrier tape and cover tape should not be jointed.
+
+(9)Release strength cover tape
+It has between 0.1~0.7N under following condition.
+Pulling direction
+165~180 °
+Speed
+300mm/min
+Otherwise unless specifiied
+165~180 °
+
+Pulling direction
+
+Fig.-5
+
+The component must be free fall,when tear away the cover tape with upside-down the emboss carrier tape.
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+5 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+3.2. PACKING
+(1)The way of packing and label
+
+LABEL
+
+Label contents
+The type of product
+Lot No.
+Specification
+Quantity
+Shipment Day
+Remark
+
+Fig.-6
+
+(2)The size of packing carton
+There may be different size of packing carton used depending on the lot size.
+Also,the product packed inside shall be protected by air cushion.
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+6 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+4. REFLOW CONDITIONS (REFERENCE)
+During the solder reflow process,please complete within following temperature period.
+Reflow soldering shall be allowed only 2 times.
++260±5°C
+
++220±5°C
+
++170±10°C
+
+10s
+
+60s
+
+120s
+
+Fig.-7
+
+HANDSOLDERING METHOD
+HANDSOLDERING METHOD : +350±10°C,3+1/-0s Each terminal once
+(Please take care so that a soldering iron should not touch a lid directly.)
+
+5. LAND PATTERN (REFERENCE)
+
+1.8
+
+2.5
+
+unit:mm
+1.0
+
+Fig.-8
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+7 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+6. MECHANICAL ENDURANCE
+6.1. SHOCK
+After the following test,parts shall conform specification table-2-B.
+3times free drop from 75cm heights to hard wood board of minimum thickness 30mm.
+
+6.2. VIBRATION
+After the following test,parts shall conform specification table-2-A,
+and no abnormal appearance shall be observed.
+(1)Frequency of Vibration : 10~55Hz 1~2min
+(2)Amplitude total
+: 1.5mm
+(3)Vibration axis
+: X,Y,Z
+(4)Vibration period
+: 2h for X,Y,Z axis
+
+6.3. SUBSTRATE BENDING
+After the following test,parts shall conform specification table-2-A,
+and no abnormality shall be observed in external appearance and sealing
+tightnen and others shall be based on ET-7403 of EIAJ.
+
+20
+
+pressure jig
+
+R230
+
+Mount the specimen on substrate.
+Apply the following pressure
+Direction
+: see Fig.-9
+Speed
+: 0.5mm/s
+Hours
+: 5±1s
+Amount of substrate: 3mm max.
+
+P.C.B.
+
+45+/-2
+
+45+/-2
+
+Fig.-9
+6.4. SHEAR
+After the following test,parts shall conform specification table-2-A,
+and no abnormality shall be observed in external appearance and sealing
+pressure jig
+tightness and others shall be based on ET-7403 of EIAJ.
+Mount the specimen on substrate.
+Apply the following pressure
+R0.5
+specimen
+Weight : 10N
+Hours
+: 10±1s
+Direction : see Fig.-10
+
+P.C.B.
+
+Fig.-10
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+8 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+6.5. BODY STRENGTH
+After the following test,parts shall conform specification table-2-A,
+and no abnormality shall be observed in external appearance and sealing
+tightnen and others shall be based on ET-7403 of EIAJ.
+Mount the specimen on substrate.
+Apply the following pressure
+Pressure jig : R0.5
+Weight
+: 10N
+Hours
+: 10±1s
+Direction : see Fig.-11
+
+Fig.-11
+6.6. SEAL
+Less than 2.0×10-9 Pa*m3/s by Helium leak detector.
+Also,no bubble is observed by Fluorinert tests.
+
+6.7. SOLDERABILITY
+After the following test. More than 90% of lead shall be covered by new solder.
+3±1s dip in +235±5°C solder.
+(Use rosin type flux for solder.)
+
+6.8. RESISTANCE TO SOLDERING HEAT (REFLOW)
+48h past at room temperature from following test,parts
+shall conform specification table-2-C.
+perform the attached reflow conditions to reference.
+
+6.9. RESISTANCE TO SOLDERING HEAT (HAND SOLDERING METHOD)
+48h past at room temperature from following test,parts
+shall conform specification table-2-C.
++350±10°C,3+1/-0s Each terminal once
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+9 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+7. ENVIRONMENTAL ENDURANCE
+7.1. HUMIDITY
+2h past at room temperature after following test,parts
+shall conform specification table-2-C.
+240h +85±2°C,relative humidity 85±5%.
+
+7.2. LOW TEMPERATURE
+2h past at room temperature after following test,parts
+shall conform specification table-2-C.
+240h -40±3°C
+
+7.3. HIGH TEMPERATURE
+2h past at room temperature after following test,parts
+shall conform specification table-2-C.
+240h +85±2°C
+
+7.4. TERMAL SHOCK TEST
+2h past at room temperature after 25cycles of following
+test,parts shall conform specification table-2-C.
+30min
+
++85°C
++25°C
+
+Transport
+Time
+2~3min
+
+-40°C
+30min
+
+1cycle
+Fig.-12
+
+8. SPECIFICATION
+
+Table-2
+
+A
+B
+C
+
+Frequency Variation
+-6
+±5×10
+±8×10-6
+±10×10-6
+
+Equivalent Resistance
+±25 % or ±10kΩ max. (Use larger specification)
+±25 % or ±10kΩ max. (Use larger specification)
+±25 % or ±10kΩ max. (Use larger specification)
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+10 / 12
+DM-Z0002:Style-010Ver.1
+
+Serial No.2014-1290
+9. THE CAUTIONS ON USE FOR DST310S
+9.1. SOLDERING
+Please perform reflow conditions within 2 times.
+
+9.2. MOUNT
+Crystal products are designed to be compatible with automatic mounting.
+Be sure to have a mounting test in advance by using the actual mounting machine
+and check that the characteristics of the products are not damaged
+by the automatic mounting.
+In the process where the boad is warped,such as board separation process,
+be careful that the warping does not influence the characteristics
+and soldering of crystal products.
+Since mounting by Ultrasonic welding and processing have a possibility of an excessive
+vibration spreading inside a tuning fork crystal resonator and becoming the cause of characteristic
+deterioration and not oscillating,it does not recommend.
+
+9.3. WASHING
+About use of the washing liquid of a basin system,
+an alcoholic system,and a chlorofluorocarbon-replacing
+material system,it is checking that it is satisfactory.
+However please consult in advance about other washing liquid.
+Tuning fork crystal resonators should not have ultrasonic washing
+because their frequency band is close to the washing frequency band
+of ultrasonic washing machines,very probably causing resonance destruction.
+To use ultrasonic washing to clean these resonators,
+tests must be performed in advance under actual application conditions.
+
+9.4. DRIVE LEVEL
+The piece of crystal it is processed very smaller than the conventional thing
+inside DST310S series crystal unit may be damaged,
+if crystal resonators are exposed to an excessively high drive level.
+Please use the products within the limits specified in the catalogs and specifications.
+
+9.5. HANDLING OF A PRODUCT
+DST310S series has sufficient intensity to fall and vibration.
+Crystal resonators should not have pattern
+to avoid causing base crack.
+
+9.6. STORAGE
+Since the solderability of pins may deteriorate,
+please avoid storage in high-temperature,high-humidity place.
+Please store crystal products in a place free from direct sunlight and condensation.
+
+Title
+
+Remark
+
+DST310S TYPE QUARTZ CRYSTAL SPECIFICATION
+
+Date
+2014/11/04
+
+Spec No.
+1TJF125DP1AI115
+
+DAISHINKU CORP.
+
+Rev.
+
+Page
+-
+
+11 / 12
+DM-Z0002:Style-010Ver.1
+
+2014-1290 REVISION RECORD
+Rev.No
+
+Date
+
+Reason
+
+-
+
+2014/11/04
+
+-
+
+Contents
+The first edition.
+
+Approved
+
+Checked
+
+Drawn
+
+T.Kusai
+
+T.Fujii
+
+H.Nasu
+
+DM-Z0002:Style-008Ver.1
+- 12/12 -
+
+

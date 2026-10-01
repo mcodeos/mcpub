@@ -26,4 +26,13 @@ component BUZZER.PS1240P02BT : BUZZER.PIEZO
 {
     partno = "PS1240P02BT"
     package = PKG.PIEZO_SOUNDER_D12_2
+
+    // Catalog p.3, PS1240P02BT spec table (page-verified); dBA and Vo-p have
+    // no unit entry in the mcc table, so the value rides bare and the unit
+    // rides the description (LSb precedent, mcp4921)
+    spec = [
+        spl  = 70, "min sound pressure, dBA at 10cm, at 4kHz and 3 Vo-p rectangular wave (25°C pm 5, 60 pm 10 percent RH)"
+        vin  = 30, "max input voltage, Vo-p rectangular, without DC bias"
+        temp = -10°C ~ +70°C, "operating temperature range"
+    ]
 }

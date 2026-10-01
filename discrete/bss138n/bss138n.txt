@@ -1,0 +1,1069 @@
+BSS138N
+
+SIPMOS® Small-Signal-Transistor
+
+Product Summary
+
+Features
+• N-channel
+• Enhancement mode
+
+VDS
+
+60
+
+V
+
+RDS(on),max
+
+3.5
+
+Ω
+
+ID
+
+0.23
+
+A
+
+• Logic level
+• dv /dt rated
+• Pb-free lead-plating; RoHS compliant
+PG-SOT-23
+
+• Qualified according to AEC Q101
+• Halogen free according to IEC61249-2-21
+
+Type
+
+Package
+
+Tape and Reel
+
+Marking
+
+BSS138N
+
+PG-SOT-23
+
+H6327: 3000
+
+SKs
+
+BSS138N
+
+PG-SOT-23
+
+H6433: 10000
+
+SKs
+Value
+
+Unit
+
+T A=25 °C
+
+0.23
+
+A
+
+T A=70 °C
+
+0.18
+
+Parameter
+
+Symbol Conditions
+
+Continuous drain current
+
+ID
+
+Pulsed drain current
+
+I D,pulse
+
+T A=25 °C
+
+0.92
+
+Reverse diode dv /dt
+
+dv /dt
+
+I D=0.23 A, V DS=48 V,
+di /dt =200 A/µs,
+T j,max=150 °C
+
+6
+
+kV/µs
+
+Gate source voltage
+
+V GS
+
+±20
+
+V
+
+ESD sensitivity
+
+JESD22-A114 (HBM)
+
+Power dissipation
+
+P tot
+
+Operating and storage temperature
+
+T j, T stg
+
+T A=25 °C
+
+IEC climatic category; DIN IEC 68-1
+
+Rev. 2.86
+
+Class 0 (<250V)
+0.36
+
+W
+
+-55 ... 150
+
+°C
+
+55/150/56
+
+page 1
+
+2012-04-17
+
+BSS138N
+Parameter
+
+Values
+
+Symbol Conditions
+
+Unit
+
+min.
+
+typ.
+
+max.
+
+-
+
+-
+
+350
+
+K/W
+
+V
+
+Thermal characteristics
+Thermal resistance,
+junction - minimal footprint
+
+R thJA
+
+Electrical characteristics, at T j=25 °C, unless otherwise specified
+Static characteristics
+
+Drain-source breakdown voltage
+
+V (BR)DSS V GS= 0 V, I D=250 µA
+
+60
+
+-
+
+-
+
+Gate threshold voltage
+
+V GS(th)
+
+V GS=V DS, I D=26 µA
+
+0.6
+
+1.0
+
+1.4
+
+Drain-source leakage current
+
+I D (off)
+
+V DS=60 V,
+V GS=0 V, T j=25 °C
+
+-
+
+-
+
+0.1
+
+V DS=60 V,
+V GS=0 V, T j=150 °C
+
+-
+
+-
+
+5
+
+µA
+
+Gate-source leakage current
+
+I GSS
+
+V GS=20 V, V DS=0 V
+
+-
+
+1
+
+10
+
+nA
+
+Drain-source on-state resistance
+
+R DS(on)
+
+V GS=4.5 V, I D=0.03 A
+
+-
+
+3.3
+
+4.0
+
+Ω
+
+V GS=4.5 V, I D=0.19 A
+
+-
+
+3.5
+
+6.0
+
+V GS=10 V, I D=0.23 A
+
+-
+
+2.2
+
+3.5
+
+|V DS|>2|I D|R DS(on)max,
+I D=0.18 A
+
+0.1
+
+0.2
+
+-
+
+Transconductance
+
+Rev. 2.86
+
+g fs
+
+page 2
+
+S
+
+2012-04-17
+
+BSS138N
+Parameter
+
+Values
+
+Symbol Conditions
+
+Unit
+
+min.
+
+typ.
+
+max.
+
+-
+
+32
+
+41
+
+-
+
+7.2
+
+9.5
+
+Dynamic characteristics
+pF
+
+Input capacitance
+
+C iss
+
+Output capacitance
+
+C oss
+
+Reverse transfer capacitance
+
+Crss
+
+-
+
+2.8
+
+3.8
+
+Turn-on delay time
+
+t d(on)
+
+-
+
+2.3
+
+3.5
+
+Rise time
+
+tr
+
+-
+
+3.0
+
+4.5
+
+Turn-off delay time
+
+t d(off)
+
+-
+
+6.7
+
+10
+
+Fall time
+
+tf
+
+-
+
+8.2
+
+12.3
+
+Gate to source charge
+
+Q gs
+
+-
+
+0.10
+
+0.14
+
+Gate to drain charge
+
+Q gd
+
+-
+
+0.3
+
+0.4
+
+Gate charge total
+
+Qg
+
+-
+
+1.0
+
+1.4
+
+Gate plateau voltage
+
+V plateau
+
+-
+
+3.3
+
+-
+
+V
+
+-
+
+-
+
+0.23
+
+A
+
+-
+
+-
+
+0.92
+
+-
+
+0.83
+
+1.2
+
+V
+
+-
+
+9.1
+
+14.5
+
+ns
+
+-
+
+3.3
+
+5
+
+nC
+
+V GS=0 V, V DS=25 V,
+f =1 MHz
+
+V DD=30 V, V GS=10 V,
+I D=0.23 A, R G=6 Ω
+
+ns
+
+Gate Charge Characteristics
+
+V DD=48 V, I D=0.23 A,
+V GS=0 to 10 V
+
+nC
+
+Reverse Diode
+Diode continous forward current
+
+IS
+
+Diode pulse current
+
+I S,pulse
+
+Diode forward voltage
+
+V SD
+
+Reverse recovery time
+
+t rr
+
+Reverse recovery charge
+
+Q rr
+
+Rev. 2.86
+
+T A=25 °C
+V GS=0 V, I F=0.23 A,
+T j=25 °C
+V R=30 V, I F=0.23 A,
+di F/dt =100 A/µs
+
+page 3
+
+2012-04-17
+
+BSS138N
+1 Power dissipation
+
+2 Drain current
+
+P tot=f(T A)
+
+I D=f(T A); V GS≥10 V
+
+0.25
+
+0.4
+
+0.2
+0.3
+
+ID [A]
+
+Ptot [W]
+
+0.15
+0.2
+
+0.1
+
+0.1
+0.05
+
+0
+
+0
+0
+
+40
+
+80
+
+120
+
+0
+
+160
+
+40
+
+80
+
+TA [°C]
+
+120
+
+160
+
+TA [°C]
+
+3 Safe operating area
+
+4 Max. transient thermal impedance
+
+I D=f(V DS); T A=25 °C; D =0
+
+Z thJA=f(t p)
+
+parameter: t p
+
+parameter: D =t p/T
+
+101
+
+103
+
+limited by on-state
+resistance
+10 µs
+
+0.5
+
+100
+102
+
+100 µs
+
+ZthJA [K/W]
+
+ID [A]
+
+0.2
+1 ms
+
+10-1
+10 ms
+
+0.1
+0.05
+
+101
+
+100 ms
+
+0.02
+0.01
+
+10-2
+DC
+
+single pulse
+
+10-3
+
+100
+1
+
+10
+
+100
+
+VDS [V]
+
+Rev. 2.86
+
+10-5
+
+10-4
+
+10-3
+
+10-2
+
+10-1
+
+100
+
+101
+
+tp [s]
+
+page 4
+
+2012-04-17
+
+BSS138N
+5 Typ. output characteristics
+
+6 Typ. drain-source on resistance
+
+I D=f(V DS); T j=25 °C
+
+R DS(on)=f(I D); T j=25 °C
+
+parameter: V GS
+
+parameter: V GS
+10
+
+0.6
+10 V
+
+7V
+
+5V
+
+2.9 V
+
+4.5 V
+
+3.2 V
+
+4V
+
+3.5 V
+
+0.5
+8
+4V
+
+RDS(on) [Ω]
+
+ID [A]
+
+0.4
+
+3.5 V
+
+0.3
+
+3.2 V
+
+6
+
+4.5 V
+
+4
+
+5V
+
+0.2
+2.9 V
+
+7V
+10 V
+
+2
+0.1
+
+0
+
+0
+0
+
+1
+
+2
+
+3
+
+4
+
+0
+
+5
+
+0.1
+
+VDS [V]
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+ID [A]
+
+7 Typ. transfer characteristics
+
+8 Typ. forward transconductance
+
+I D=f(V GS); |V DS|>2|I D|R DS(on)max
+
+g fs=f(I D); T j=25 °C
+
+0.6
+
+0.4
+
+0.35
+0.5
+0.3
+0.4
+
+gfs [S]
+
+ID [A]
+
+0.25
+0.3
+
+0.2
+
+0.15
+0.2
+0.1
+0.1
+0.05
+0
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+VGS [V]
+
+Rev. 2.86
+
+0
+0.00
+
+0.10
+
+0.20
+
+0.30
+
+0.40
+
+ID [A]
+
+page 5
+
+2012-04-17
+
+BSS138N
+9 Drain-source on-state resistance
+
+10 Typ. gate threshold voltage
+
+R DS(on)=f(T j); I D=0.23 A; V GS=10 V
+
+V GS(th)=f(T j); V DS=VGS; I D=26 µA
+parameter: I D
+
+8
+
+2
+
+1.6
+6
+
+1.2
+
+VGS(th) [V]
+
+RDS(on) [Ω]
+
+98 %
+
+98 %
+
+4
+
+typ
+
+0.8
+
+typ
+
+2%
+
+2
+0.4
+
+0
+
+0
+-60
+
+-20
+
+20
+
+60
+
+100
+
+140
+
+-60
+
+-20
+
+20
+
+Tj [°C]
+
+60
+
+100
+
+140
+
+Tj [°C]
+
+11 Typ. capacitances
+
+12 Forward characteristics of reverse diode
+
+C =f(V DS); V GS=0 V; f =1 MHz; Tj=25°C
+
+I F=f(V SD)
+parameter: T j
+
+102
+
+100
+150 °C, 98%
+25 °C
+
+25 °C, 98%
+
+150 °C
+Ciss
+
+IF [A]
+
+C [pF]
+
+10-1
+
+101
+Coss
+
+10-2
+Crss
+
+100
+
+10-3
+0
+
+10
+
+20
+
+30
+
+0.4
+
+0.8
+
+1.2
+
+1.6
+
+2
+
+2.4
+
+VSD [V]
+
+VDS [V]
+
+Rev. 2.86
+
+0
+
+page 6
+
+2012-04-17
+
+BSS138N
+13 Typ. gate charge
+
+14 Drain-source breakdown voltage
+
+V GS=f(Q gate); I D=0.23 A pulsed
+
+V BR(DSS)=f(T j); I D=250 µA
+
+parameter: V DD
+70
+
+12
+
+30 V
+
+10
+65
+
+VBR(DSS) [V]
+
+VGS [V]
+
+8
+48 V
+
+12 V
+
+6
+
+60
+
+4
+55
+2
+
+50
+
+0
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+Qgate [nC]
+
+Rev. 2.86
+
+-60
+
+-20
+
+20
+
+60
+
+100
+
+140
+
+180
+
+Tj [°C]
+
+page 7
+
+2012-04-17
+
+BSS138N
+Package Outline:
+
+Footprint:
+
+Packaging:
+
+Dimensions in mm
+
+Rev. 2.86
+
+page 8
+
+2012-04-17
+
+BSS138N
+Published by
+Infineon Technologies AG
+Bereich Kommunikation
+St.-Martin-Straße 53
+D-81541 München
+© Infineon Technologies AG 1999
+All Rights Reserved.
+Attention please!
+The information herein is given to describe certain components and shall not be considered as
+warranted characteristics.
+Terms of delivery and rights to technical change reserved.
+We hereby disclaim any and all warranties, including but not limited to warranties of non-infringement,
+regarding circuits, descriptions and charts stated herein.
+Infineon Technologies is an approved CECC manufacturer.
+Information
+For further information on technology, delivery terms and conditions and prices, please contact your
+nearest Infineon Technologies office in Germany or our Infineon Technologies representatives worldwide
+(see address list).
+Warnings
+g
+Due to technical requirements, components may contain
+dangerous substances.
+For information on the types in question, please contact your nearest Infineon Technologies office.
+Infineon Technologies' components may only be used in life-support devices or systems with the
+expressed written approval of Infineon Technologies if a failure of such components can reasonably
+be expected to cause the failure of that life-support device or system, or to affect the safety or
+effectiveness of that device or system. Life support devices or systems are intended to be implanted
+in the human body, or to support and/or maintain and sustain and/or protect human life. If they fail,
+it is reasonable to assume that the health of the user or other persons may be endangered.
+
+Rev. 2.86
+
+page 9
+
+2012-04-17
+
+

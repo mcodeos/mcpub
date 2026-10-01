@@ -1,0 +1,779 @@
+WM7121PE
+Top Port Analog Silicon Microphone
+DESCRIPTION
+
+FEATURES
+
+The WM7121P is a low-profile silicon analog microphone. It
+offers high Signal to Noise Ratio (SNR) and low power
+consumption and is suited to a wide variety of consumer
+applications.
+
+
+
+High SNR (65dB)
+
+
+
+Low variation in sensitivity (±1dB tolerance)
+
+
+
+Matched pair with Bottom Port microphone WM7132P
+
+The WM7121P incorporates Cirrus Logic® proprietary
+CMOS/MEMS membrane technology, offering high reliability
+and high performance in a miniature, low-profile package.
+The WM7121P is designed to withstand the high
+temperatures associated with automated flow solder
+assembly processes. (Note that conventional microphones
+can be damaged by this process.)
+
+
+
+Low current consumption (190µA)
+
+
+
+Analog output
+
+
+
+Top Port LGA Package
+
+
+
+1.5V to 3.7V supply
+
+The WM7121P Top Port microphone offers matched
+performance to the WM7132P Bottom Port microphone. The
+matched characteristics enable highly accurate sound pickup in opposite directions, suitable for noise cancellation and
+other DSP algorithms.
+The WM7121P offers tight tolerance on the microphone
+sensitivity, giving reduced variation between parts. This
+removes the need for in-line production calibration of partto-part microphone variations.
+
+BLOCK DIAGRAM
+
+-
+
+Matched sensitivity, roll-off, and phase response
+
+APPLICATIONS
+
+
+Mobile phone handsets
+
+
+
+Portable media players
+
+
+
+Digital still cameras
+
+
+
+Digital video cameras
+
+
+
+Bluetooth™ headsets
+
+
+
+Portable navigation devices
+
+
+
+Portable games consoles
+
+3D VIEW
+VDD
+
+WM7121P
+CHARGE
+PUMP
+
+AMP
+
+OUTPUT
+
+CMOS MEMS
+Transducer
+
+3.76mm x 2.95mm x 1.10mm LGA package
+GND
+
+http://www.cirrus.com
+
+Copyright  Cirrus Logic, Inc., 2014–2016
+(All Rights Reserved)
+
+Rev 4.1
+
+MAR ‘16
+
+WM7121PE
+TABLE OF CONTENTS
+
+DESCRIPTION ................................................................................................................ 1
+FEATURES ..................................................................................................................... 1
+APPLICATIONS ............................................................................................................. 1
+BLOCK DIAGRAM ......................................................................................................... 1
+3D VIEW ......................................................................................................................... 1
+TABLE OF CONTENTS.................................................................................................. 2
+PIN CONFIGURATION ................................................................................................... 3
+PIN DESCRIPTION ......................................................................................................... 3
+ORDERING INFORMATION ........................................................................................... 3
+ABSOLUTE MAXIMUM RATINGS ................................................................................. 4
+IMPORTANT ASSEMBLY GUIDELINES ....................................................................... 4
+RECOMMENDED OPERATING CONDITIONS .............................................................. 4
+ACOUSTIC AND ELECTRICAL CHARACTERISTICS .................................................. 5
+TERMINOLOGY ......................................................................................................................... 5
+
+TYPICAL PERFORMANCE ............................................................................................ 6
+APPLICATIONS INFORMATION ................................................................................... 7
+RECOMMENDED EXTERNAL COMPONENTS ........................................................................ 7
+OPTIMISED SYSTEM RF DESIGN ........................................................................................... 7
+CONNECTION TO A CIRRUS CODEC ..................................................................................... 8
+MATCHED MICROPHONE PAIRS ............................................................................................ 8
+PCB LAND PATTERN AND PASTE STENCIL .......................................................................... 9
+
+PACKAGE DIMENSIONS ............................................................................................. 10
+IMPORTANT NOTICE .................................................................................................. 11
+REVISION HISTORY .................................................................................................... 12
+
+2
+
+Rev 4.1
+
+WM7121PE
+PIN CONFIGURATION
+4
+
+1
+
+3
+
+2
+Top View
+
+PIN DESCRIPTION
+PIN
+
+NAME
+
+TYPE
+
+1
+
+VDD
+
+Supply
+
+Analog Supply
+
+DESCRIPTION
+
+2
+
+GND
+
+Supply
+
+Analog ground
+
+3
+
+GND
+
+Supply
+
+Analog ground
+
+4
+
+OUTPUT
+
+Analogue Output
+
+Microphone analog output signal
+
+ORDERING INFORMATION
+ORDER CODE
+
+TEMPERATURE
+RANGE
+
+PACKAGE
+
+MOISTURE
+SENSITIVITY LEVEL
+
+PEAK SOLDERING
+TEMPERATURE
+
+WM7121PIMSE/RV
+
+-40 to +100°C
+
+LGA
+(tape and reel)
+
+MSL2A
+
++260°C
+
+Note:
+Reel quantity = 5000
+All devices are Pb-free and Halogen free.
+
+Rev 4.1
+
+3
+
+WM7121PE
+ABSOLUTE MAXIMUM RATINGS
+Absolute Maximum Ratings are stress ratings only. Permanent damage to the device may be caused by continuously operating at
+or beyond these limits. Device functional operating limits and guaranteed performance specifications are given under Electrical
+Characteristics at the test conditions specified.
+ESD Sensitive Device. This device is manufactured on a CMOS process. It is therefore generically susceptible
+to damage from excessive static voltages. Proper ESD precautions must be taken during handling and storage
+of this device.
+Cirrus Logic tests its package types according to IPC/JEDEC J-STD-020 for Moisture Sensitivity to determine acceptable storage
+conditions prior to surface mount assembly. These levels are:
+MSL1 = unlimited floor life at <30°C / 85% Relative Humidity. Not normally stored in moisture barrier bag.
+MSL2 = out of bag storage for 1 year at <30°C / 60% Relative Humidity. Supplied in moisture barrier bag.
+MSL2A = out of bag storage for 4 weeks at <30°C / 60% Relative Humidity. Supplied in moisture barrier bag.
+MSL3 = out of bag storage for 168 hours at <30°C / 60% Relative Humidity. Supplied in moisture barrier bag.
+The Moisture Sensitivity Level for each package type is specified in Ordering Information.
+
+CONDITION
+
+MIN
+
+MAX
+
+Supply Voltage (VDD)
+
+-0.3V
+
++4.2V
+
+Operating temperature range, TA
+
+-40°C
+
++100°C
+
+Storage temperature prior to soldering
+
+30°C max / 60% RH max
+
+Storage temperature after soldering
+
+-40°C
+
++100°C
+
+IMPORTANT ASSEMBLY GUIDELINES
+Do not put a vacuum over the port hole of the microphone. Placing a vacuum over the port hole can damage the device.
+Do not board wash the microphone after a re-flow process. Board washing and the associated cleaning agents can damage the
+device. Do not expose to ultrasonic cleaning methods.
+Do not use a vapour phase re-flow process. The vapour can damage the device.
+Please refer to application note WAN0273 (MEMS MIC Assembly and Handling Guidelines) for further assembly and handling
+guidelines.
+
+RECOMMENDED OPERATING CONDITIONS
+PARAMETER
+
+4
+
+SYMBOL
+
+MIN
+
+Analog Supply Range
+
+VDD
+
+1.5
+
+Ground
+
+GND
+
+TYP
+0
+
+MAX
+
+UNIT
+
+3.7
+
+V
+V
+
+Rev 4.1
+
+WM7121PE
+ACOUSTIC AND ELECTRICAL CHARACTERISTICS
+Test Conditions: VDD=2.1V, 1kHz test signal, TA = 25°C, unless otherwise stated.
+
+PARAMETER
+
+SYMBOL
+
+TEST CONDITIONS
+
+MIN
+
+Directivity
+Polarity
+Sensitivity
+
+Positive sound pressure
+S
+
+Acoustic Overload
+Total Harmonic Distortion
+
+TYP
+
+MAX
+
+UNIT
+
+Omni-directional
+
+THD
+
+94dB SPL
+
+Positive output voltage
+-39
+
+-38
+
+No Load, THD < 10%
+
+126
+
+100dB SPL
+
+0.1
+
+114dB SPL
+
+0.2
+
+-37
+
+dBV
+dB SPL
+
+1
+
+%
+
+122dB SPL
+
+1
+
+Signal to Noise Ratio
+
+SNR
+
+A-weighted
+
+65
+
+dB
+
+Dynamic Range
+
+DR
+
+A-weighted
+
+93
+
+dB
+
+-3dB low frequency
+
+62
+
+Hz
+
+Frequency Response
+
++3dB high frequency
+Frequency Response Flatness
+
+200Hz to 6kHz
+
+Acoustic Noise Floor
+Electrical Noise Floor
+
+13000
+-1
+
++1
+
+dB
+
+A-weighted
+
+29
+
+dB SPL
+
+A-weighted
+
+-103
+
+dBV
+
+Power Supply Rejection Ratio
+
+PSRR
+
+217Hz sine wave,
+100mV (peak-peak)
+
+46
+
+dB
+
+Power Supply Rejection
+
+PSR
+
+217Hz square wave,
+100mV (peak-peak)
+
+-72
+
+dBV
+
+Current Consumption
+
+IVDD
+
+190
+
+240
+
+µA
+
+Output DC Impedance
+
+ZOUT
+
+55
+
+150
+
+Ω
+
+TERMINOLOGY
+1.
+2.
+3.
+4.
+5.
+
+Sensitivity (dBV) – Sensitivity is a measure of the microphone output response to the acoustic pressure of a 1kHz 94dB SPL
+(1Pa RMS) sine wave.
+Total Harmonic Distortion (%) – THD is the ratio of the RMS sum of the harmonic distortion products in the specified bandwidth
+(see note below) relative to the amplitude of the fundamental (ie. test frequency) output.
+Signal-to-Noise Ratio (dB) – SNR is a measure of the difference in level between the output response of a 1kHz 94dB SPL
+sine wave and the idle noise output.
+Dynamic Range (dB) – DR is the ratio of the 1% THD microphone output level (in response to a sine wave input) and the idle
+noise output level.
+All performance measurements are carried out within a 20Hz to 20kHz bandwidth and, where noted, an A-weighted filter.
+Failure to use these filters will result in higher THD and lower SNR values than are found in the Acoustic and Electrical
+Characteristics. The low pass filter removes out of band noise.
+
+Rev 4.1
+
+5
+
+WM7121PE
+TYPICAL PERFORMANCE
+
+Sensitivity vs. Frequency
+
+PSRR vs. Frequency
+
+Sensitivity vs. Supply Voltage
+
+Current Consumption vs. Supply Voltage
+
+THD vs. Sound Pressure Level
+
+6
+
+Rev 4.1
+
+WM7121PE
+APPLICATIONS INFORMATION
+RECOMMENDED EXTERNAL COMPONENTS
+WM7121P
+
+VDD
+
+C
+
++
+
+OUTPUT
+
+1F
+
+R
+
+GND
+
+Figure 1 WM7121P Recommended External Components
+
+A DC-blocking output capacitor is required on the OUTPUT pin, as illustrated in Figure 1. A single
+capacitor is required for a single-ended connection. The capacitor must be correctly selected as it
+affects the cut-off frequency of the output path. A low cut-off frequency is desirable as it means there
+is no significant filtering of the audio bandwidth.
+The 3dB cut-off frequency of the output path is given by the equation below, where C is the output
+capacitance and R is the input resistance of the other circuit.
+
+3dB filter roll-off frequency =
+
+1
+2 p RC
+
+A typical recommended configuration, with 1uF DC-blocking capacitor and 20kΩ minimum input circuit
+impedance, gives a 3dB cut-off frequency of 10Hz or less. Tantalum electrolytic capacitors are
+particularly suitable for the DC-blocking components as they offer high stability in a small package
+size.
+
+OPTIMISED SYSTEM RF DESIGN
+For optimised RF design please refer to document WAN0278 (Recommended PCB Layout for
+Microphone RF Immunity in Mobile Cell Phone Applications) for further information.
+
+Rev 4.1
+
+7
+
+WM7121PE
+CONNECTION TO A CIRRUS LOGIC CODEC
+Cirrus Logic provides a range of audio CODECs incorporating an analog microphone input interface;
+these support connection to silicon microphones such as the WM7121P.
+The recommended connection of a WM7121P silicon microphone is illustrated in Figure 2 (for singleended mode) and Figure 3 (for pseudo-differential mode).
+A DC blocking capacitor is required, as described in the previous section. A 2.2µF decoupling
+capacitor is also recommended; this should be positioned close to the VDD pin of the WM7121P.
+Further information on Cirrus Logic audio CODECs is provided in the respective product datasheet,
+which is available from the Cirrus Logic website.
+2.2F
+
+WM7121P
+
+VDD
+
+Audio CODEC
+MICBIAS
+OUTPUT
+
+1F
+
+Analogue Input pin
+(eg. IN1xP)
+
+GND
+
+Figure 2 WM7121P Silicon Microphone Single-ended Connection
+
+2.2F
+
+WM7121P
+
+VDD
+
+Audio CODEC
+MICBIAS
+OUTPUT
+
+GND
+
+1F
+
+Non-Inverting Input pin
+(eg. IN1xP)
+
+1F
+
+Inverting Input pin
+(eg. IN1xN)
+
+Figure 3 WM7121P Silicon Microphone Pseudo-differential Connection
+
+MATCHED MICROPHONE PAIRS
+The WM7121P Top Port microphone offers matched performance to the WM7132P Bottom Port
+microphone.
+Matched microphone pairs are ideal for accurate sound pick-up from opposite directions in slim, lowprofile applications. For best acoustic matching, the Top Port and Bottom Port microphones should be
+positioned close together, on the same side of the PCB.
+The WM7121P and WM7132P microphones offer matched sensitivity, low-frequency roll-off, and
+phase response characteristics, enabling simplified system design when using these complementary
+devices.
+
+8
+
+Rev 4.1
+
+WM7121PE
+PCB LAND PATTERN AND PASTE STENCIL
+The recommended PCB Land Pattern and Paste Stencil Pattern for the WM7121P microphone are
+shown in Figure 4 and Figure 5.
+See also Application Note WAN0284 (General Design Considerations for MEMS Microphones) for
+further details of PCB footprint design.
+Full definition of the package dimensions is provided in the “Package Dimensions” section.
+
+Figure 4 DM124 - PCB Land Pattern, Top View
+
+Figure 5 DM124 - Paste Stenctil Pattern, Top View
+
+Rev 4.1
+
+9
+
+WM7121PE
+PACKAGE DIMENSIONS
+
+10
+
+Rev 4.1
+
+WM7121PE
+IMPORTANT NOTICE
+
+Contacting Cirrus Logic Support
+For all product questions and inquiries, contact a Cirrus Logic Sales Representative.
+To find one nearest you, go to www.cirrus.com.
+The products and services of Cirrus Logic International (UK) Limited; Cirrus Logic, Inc.; and other companies in the Cirrus Logic
+group (collectively either “Cirrus Logic” or “Cirrus”) are sold subject to Cirrus Logic’s terms and conditions of sale supplied at the
+time of order acknowledgment, including those pertaining to warranty, indemnification, and limitation of liability. Software is provided
+pursuant to applicable license terms. Cirrus Logic reserves the right to make changes to its products and specifications or to
+discontinue any product or service without notice. Customers should therefore obtain the latest version of relevant information from
+Cirrus Logic to verify that the information is current and complete. Testing and other quality control techniques are utilized to the
+extent Cirrus Logic deems necessary. Specific testing of all parameters of each device is not necessarily performed. In order to
+minimize risks associated with customer applications, the customer must use adequate design and operating safeguards to
+minimize inherent or procedural hazards. Cirrus Logic is not liable for applications assistance or customer product design. The
+customer is solely responsible for its selection and use of Cirrus Logic products. Use of Cirrus Logic products may entail a choice
+between many different modes of operation, some or all of which may require action by the user, and some or all of which may be
+optional. Nothing in these materials should be interpreted as instructions or suggestions to choose one mode over another.
+Likewise, description of a single mode should not be interpreted as a suggestion that other modes should not be used or that they
+would not be suitable for operation. Features and operations described herein are for illustrative purposes only.
+CERTAIN APPLICATIONS USING SEMICONDUCTOR PRODUCTS MAY INVOLVE POTENTIAL RISKS OF DEATH, PERSONAL
+INJURY, OR SEVERE PROPERTY OR ENVIRONMENTAL DAMAGE (“CRITICAL APPLICATIONS”). CIRRUS LOGIC PRODUCTS
+ARE NOT DESIGNED, AUTHORIZED OR WARRANTED FOR USE IN PRODUCTS SURGICALLY IMPLANTED INTO THE BODY,
+AUTOMOTIVE SAFETY OR SECURITY DEVICES, NUCLEAR SYSTEMS, LIFE SUPPORT PRODUCTS OR OTHER CRITICAL
+APPLICATIONS. INCLUSION OF CIRRUS LOGIC PRODUCTS IN SUCH APPLICATIONS IS UNDERSTOOD TO BE FULLY AT
+THE CUSTOMER’S RISK AND CIRRUS LOGIC DISCLAIMS AND MAKES NO WARRANTY, EXPRESS, STATUTORY OR
+IMPLIED, INCLUDING THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR PARTICULAR PURPOSE,
+WITH REGARD TO ANY CIRRUS LOGIC PRODUCT THAT IS USED IN SUCH A MANNER. IF THE CUSTOMER OR
+CUSTOMER’S CUSTOMER USES OR PERMITS THE USE OF CIRRUS LOGIC PRODUCTS IN CRITICAL APPLICATIONS,
+CUSTOMER AGREES, BY SUCH USE, TO FULLY INDEMNIFY CIRRUS LOGIC, ITS OFFICERS, DIRECTORS, EMPLOYEES,
+DISTRIBUTORS AND OTHER AGENTS FROM ANY AND ALL LIABILITY, INCLUDING ATTORNEYS’ FEES AND COSTS, THAT
+MAY RESULT FROM OR ARISE IN CONNECTION WITH THESE USES.
+This document is the property of Cirrus Logic and by furnishing this information, Cirrus Logic grants no license, express or implied,
+under any patents, mask work rights, copyrights, trademarks, trade secrets or other intellectual property rights. Any provision or
+publication of any third party’s products or services does not constitute Cirrus Logic’s approval, license, warranty or endorsement
+thereof. Cirrus Logic gives consent for copies to be made of the information contained herein only for use within your organization
+with respect to Cirrus Logic integrated circuits or other products of Cirrus Logic, and only if the reproduction is without alteration and
+is accompanied by all associated copyright, proprietary and other notices and conditions (including this notice). This consent does
+not extend to other copying such as copying for general distribution, advertising or promotional purposes, or for creating any work
+for resale. This document and its information is provided “AS IS” without warranty of any kind (express or implied). All statutory
+warranties and conditions are excluded to the fullest extent possible. No responsibility is assumed by Cirrus Logic for the use of
+information herein, including use of this information as the basis for manufacture or sale of any items, or for infringement of patents
+or other rights of third parties. Cirrus Logic, Cirrus, the Cirrus Logic logo design, and SoundClear are among the trademarks of
+Cirrus Logic. Other brand and product names may be trademarks or service marks of their respective owners.
+Copyright © 2014–2016 Cirrus Logic, Inc. All rights reserved.
+Bluetooth is a trademark of Bluetooth SIG, Inc.
+
+Rev 4.1
+
+11
+
+WM7121PE
+REVISION HISTORY
+DATE
+
+REV
+
+26/02/14
+
+1.0
+
+First Release
+
+25/03/14
+
+2.0
+
+Formatting and miscellaneous updates throughout document
+Electrical Characteristics updated
+Package Outline Drawing updated
+
+1-9
+5
+10
+
+PH
+
+13/06/14
+
+3.0
+
+Electrical Characteristics updated
+Typical Performance graphs added
+PCB Stencil drawings updated
+Package Outline Drawing updated
+
+5
+6
+9
+10
+
+PH
+
+05/01/15
+
+4.0
+
+Updated to Rev 4.0 (Production) status
+
+19/10/15
+
+4.1
+
+Frequency response updated
+Package Outline Drawing updated
+
+12
+
+DESCRIPTION OF CHANGES
+
+PAGE
+
+CHANGED BY
+IS
+
+PH
+5, 6
+10
+
+PH
+
+Rev 4.1
+
+
