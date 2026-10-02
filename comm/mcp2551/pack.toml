@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "mcp2551"
+version = "0.1.0"
+category = "comm"
+entry = "mcp2551.mc"
+
+[[attachments]]
+path = "mcp2551.pdf"
+kind = "datasheet"
+checksum = "sha256:e6615d28e956ddfecd65392e893f62f7545303ebca91b6aa0086661e57ba9cd7"
+
+[[attachments]]
+path = "mcp2551.txt"
+kind = "doc"
+checksum = "sha256:94897c2b58a904c2cfb8abc207c7ae073668410fb7982ffdad4eef9a90bf8b5e"
+

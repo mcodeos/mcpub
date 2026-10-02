@@ -1,0 +1,8 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "us513_20_f"
+version = "0.1.0"
+category = "mcu"
+entry = "us513_20_f.mc"
+

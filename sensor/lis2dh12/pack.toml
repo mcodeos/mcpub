@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "lis2dh12"
+version = "0.1.0"
+category = "sensor"
+entry = "lis2dh12.mc"
+
+[[attachments]]
+path = "lis2dh12.pdf"
+kind = "datasheet"
+checksum = "sha256:eb79e6ee9ca70ef91f17c695fd5d2c6c6b24525b87b9ae41537bcb348f6cad56"
+
+[[attachments]]
+path = "lis2dh12.txt"
+kind = "doc"
+checksum = "sha256:1b36ffb22cee2b833cef7e4e58ad198f3481030bfb75b731c1d0113a3aca5263"
+

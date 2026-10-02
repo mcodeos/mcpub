@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "pca9555"
+version = "0.1.0"
+category = "expand"
+entry = "pca9555.mc"
+
+[[attachments]]
+path = "pca9555.pdf"
+kind = "datasheet"
+checksum = "sha256:9f4f9c0ce4c461d71e0a46858394f830c74daba72bb6616f368af78a39f44b1f"
+
+[[attachments]]
+path = "pca9555.txt"
+kind = "doc"
+checksum = "sha256:7351b821801fa99f9f06331cf5a0feea2e2ed8b88872059e7b89d11ce331f2d1"
+

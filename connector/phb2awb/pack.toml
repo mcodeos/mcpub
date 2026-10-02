@@ -1,0 +1,28 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "phb2awb"
+version = "0.1.0"
+category = "connector"
+entry = "phb2awb.mc"
+
+[[attachments]]
+path = "PHB.pdf"
+kind = "datasheet"
+checksum = "sha256:63a848a256e069196f0b5c372d5163d133ff825832adbf53341460e4428e6410"
+
+[[attachments]]
+path = "PHB.txt"
+kind = "doc"
+checksum = "sha256:7b165a06c65f6653baf21bf6b04e781e445c3e99b630f1eb8a2e57108baec87d"
+
+[[attachments]]
+path = "PHB2.pdf"
+kind = "datasheet"
+checksum = "sha256:9491110a1536df5f6345dab7a8144c99d6f2847f9f5fce919875c2866c4317cc"
+
+[[attachments]]
+path = "PHB2.txt"
+kind = "doc"
+checksum = "sha256:5737411a386bfa3407ee167b5063a9fee56d9d3ba04480e9800a1ea69e1fba0b"
+

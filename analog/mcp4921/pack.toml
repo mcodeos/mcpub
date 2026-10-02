@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "mcp4921"
+version = "0.1.0"
+category = "analog"
+entry = "mcp4921.mc"
+
+[[attachments]]
+path = "mcp4921.pdf"
+kind = "datasheet"
+checksum = "sha256:a52733deb49e0ae49c7f535e0f3591491d5e81c72f18e6c9f3846ce4ce2dcc5e"
+
+[[attachments]]
+path = "mcp4921.txt"
+kind = "doc"
+checksum = "sha256:5c746d9fce8ec4b0da6dd9eb547bb968265d2e94d6877e1b3d79ac4660b11972"
+

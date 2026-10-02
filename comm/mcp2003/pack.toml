@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "mcp2003"
+version = "0.1.0"
+category = "comm"
+entry = "mcp2003.mc"
+
+[[attachments]]
+path = "mcp2003.pdf"
+kind = "datasheet"
+checksum = "sha256:4dcf0681dbeb0a76b7d29efdad5ee8243aaef1d540b3ba688009b7f34d394740"
+
+[[attachments]]
+path = "mcp2003.txt"
+kind = "doc"
+checksum = "sha256:ac6edc743e523053fba4e020512a27f8f77ce406513dac0c96483c7a01bdf7b7"
+

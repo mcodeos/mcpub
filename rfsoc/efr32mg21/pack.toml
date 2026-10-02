@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "efr32mg21"
+version = "0.1.0"
+category = "rfsoc"
+entry = "efr32mg21.mc"
+
+[[attachments]]
+path = "efr32mg21.pdf"
+kind = "datasheet"
+checksum = "sha256:2074da4659c4e225a0676e9f895f3e63a19b54d32258aa140551f7da058c9daf"
+
+[[attachments]]
+path = "efr32mg21.txt"
+kind = "doc"
+checksum = "sha256:63d05286cc198da603e7eb322948a70cbcbe9b5f5cf4db82f33fa58e8b724d4d"
+

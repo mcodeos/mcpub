@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "drv8889"
+version = "0.1.0"
+category = "motor"
+entry = "drv8889.mc"
+
+[[attachments]]
+path = "drv8889.pdf"
+kind = "datasheet"
+checksum = "sha256:ca7eec5291c80d8aa8e281606288eb0de3569cbfd9c785326d5865604421f034"
+
+[[attachments]]
+path = "drv8889.txt"
+kind = "doc"
+checksum = "sha256:61eb49ef58105bfe6c4ca4734fb14a488dfaafe30cead863c01b9c662c822d98"
+

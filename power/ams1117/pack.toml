@@ -1,0 +1,42 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "ams1117"
+version = "0.1.0"
+category = "power"
+entry = "ams1117.mc"
+
+# 变体表：variant 名 = 订购面标识，base = entry 源面在位的 component 名。
+[variants."AMS1117_1_2"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_1_5"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_1_8"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_2_5"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_2_85"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_3_0"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_3_3"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_5_0"]
+base = "AMS1117"
+since = "0.1.0"
+[variants."AMS1117_ADJ"]
+base = "AMS1117_ADJ"
+since = "0.1.0"
+
+[[attachments]]
+path = "ams1117.pdf"
+kind = "datasheet"
+checksum = "sha256:d8aeceda60e85c6ca458770936a49c07821ec7af5aed97c5d55f4224e1cf526b"
+

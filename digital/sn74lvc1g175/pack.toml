@@ -1,0 +1,32 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "sn74lvc1g175"
+version = "0.1.0"
+category = "digital"
+entry = "sn74lvc1g175.mc"
+
+# 变体表：variant 名 = 订购面标识，base = entry 源面在位的 component 名。
+[variants."TTL.D.SN74LVC1G175_DBV"]
+base = "TTL.D.SN74LVC1G175"
+since = "0.1.0"
+[variants."TTL.D.SN74LVC1G175_DCK"]
+base = "TTL.D.SN74LVC1G175"
+since = "0.1.0"
+[variants."TTL.D.SN74LVC1G175_DRY"]
+base = "TTL.D.SN74LVC1G175"
+since = "0.1.0"
+[variants."TTL.D.SN74LVC1G175_YZP"]
+base = "TTL.D.SN74LVC1G175"
+since = "0.1.0"
+
+[[attachments]]
+path = "sn74lvc1g175.pdf"
+kind = "datasheet"
+checksum = "sha256:6f19e0a69062e117c53102666ad904537010044b2bd980c6515483db8c83b887"
+
+[[attachments]]
+path = "sn74lvc1g175.txt"
+kind = "doc"
+checksum = "sha256:0a80e1cd44898082c45d8e7f2d6c0e8689bd4ba64bf8ef4204f02fe6a96912af"
+

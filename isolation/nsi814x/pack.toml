@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "nsi814x"
+version = "0.1.0"
+category = "isolation"
+entry = "nsi814x.mc"
+
+[[attachments]]
+path = "nsi814x.pdf"
+kind = "datasheet"
+checksum = "sha256:2b3812b6e5a434fb9e04693d3d665ae8d971b0fddaaba73113d19537076a2a6d"
+
+[[attachments]]
+path = "nsi814x.txt"
+kind = "doc"
+checksum = "sha256:074d29b9900c886f716edfeee5e807af1dce7f2cc1c80cd3dab023b6f4442dac"
+

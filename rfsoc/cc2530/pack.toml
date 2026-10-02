@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "cc2530"
+version = "0.1.0"
+category = "rfsoc"
+entry = "cc2530.mc"
+
+[[attachments]]
+path = "cc2530.pdf"
+kind = "datasheet"
+checksum = "sha256:f5e318b56f5bf041d9b508dcd294861ceb7805ca493a09e49f824a1b7bcfdc9f"
+
+[[attachments]]
+path = "cc2530.txt"
+kind = "doc"
+checksum = "sha256:407dba6dc6c71a1f0c6bc6cce8f42f526e662ea6174d8518e8a976d9811c83c7"
+

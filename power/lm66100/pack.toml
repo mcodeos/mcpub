@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "lm66100"
+version = "0.1.0"
+category = "power"
+entry = "lm66100.mc"
+
+[[attachments]]
+path = "lm66100.pdf"
+kind = "datasheet"
+checksum = "sha256:83c17370a97b85ecebe20605da0b955d4ff6f9a474e9692b611a6685d7ad0f00"
+
+[[attachments]]
+path = "lm66100.txt"
+kind = "doc"
+checksum = "sha256:674b3bdb7ba15aca4365f77e0871076c816c0e884b7bc5e54445282c947dc40b"
+

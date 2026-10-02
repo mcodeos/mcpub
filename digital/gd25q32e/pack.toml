@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "gd25q32e"
+version = "0.1.0"
+category = "digital"
+entry = "gd25q32e.mc"
+
+[[attachments]]
+path = "gd25q32e.pdf"
+kind = "datasheet"
+checksum = "sha256:8619d0fa7b3d7aeb0dce7d9d8f92eae4e33fe530953c7b2fa36f992893e36213"
+
+[[attachments]]
+path = "gd25q32e.txt"
+kind = "doc"
+checksum = "sha256:1d0488f39915e254cda3bcb724ad594f05b4687f37bad886094962102fb2a30f"
+

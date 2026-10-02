@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "stm32f205ret6"
+version = "0.1.0"
+category = "mcu"
+entry = "stm32f205ret6.mc"
+
+[[attachments]]
+path = "stm32f205ret6.pdf"
+kind = "datasheet"
+checksum = "sha256:774f5ff3acf8fdf57aaed4543da017f03576473abffe24b205a70d748752add5"
+
+[[attachments]]
+path = "stm32f205ret6.txt"
+kind = "doc"
+checksum = "sha256:1cfd1c48d55c1998cf0199ce96879136ddbec578d62b4e1a2070953bb0280b67"
+

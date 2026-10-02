@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "cst92f32"
+version = "0.1.0"
+category = "rfsoc"
+entry = "cst92f32.mc"
+
+[[attachments]]
+path = "cst92f32.pdf"
+kind = "datasheet"
+checksum = "sha256:4cdb045bd72759d22e7b9b8494cc9a8533580eedb4e99c8ee5bac6a172fa1d17"
+
+[[attachments]]
+path = "cst92f32.txt"
+kind = "doc"
+checksum = "sha256:cc5410ce38eafaf70d7614b9c64cfe76c5b9205d0b19f235ba55d6503422b1ee"
+

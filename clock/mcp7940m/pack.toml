@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "mcp7940m"
+version = "0.1.0"
+category = "clock"
+entry = "mcp7940m.mc"
+
+[[attachments]]
+path = "mcp7940m.pdf"
+kind = "datasheet"
+checksum = "sha256:618ec2c897719bef709130b98ba2dceaf03a613c717d7e6150b2070f14c9ee1d"
+
+[[attachments]]
+path = "mcp7940m.txt"
+kind = "doc"
+checksum = "sha256:e39aae135f70319b9dca9527fca619ad47f03b342513cd9c986da3b0644b87ee"
+

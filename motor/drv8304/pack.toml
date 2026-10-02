@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "drv8304"
+version = "0.1.0"
+category = "motor"
+entry = "drv8304.mc"
+
+[[attachments]]
+path = "drv8304.pdf"
+kind = "datasheet"
+checksum = "sha256:6798b79eb8558bd5c99ad590ed1a8da1a743ac474e2da1b42c01ec97af98bcee"
+
+[[attachments]]
+path = "drv8304.txt"
+kind = "doc"
+checksum = "sha256:0d3eb98fd8bd6585f77b4b8a12b21c2ca3d73e9a9688a6070f48cf05da5f41bc"
+

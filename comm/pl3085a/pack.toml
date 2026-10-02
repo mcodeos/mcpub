@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "pl3085a"
+version = "0.1.0"
+category = "comm"
+entry = "pl3085a.mc"
+
+[[attachments]]
+path = "BL3085(I47).pdf"
+kind = "datasheet"
+checksum = "sha256:dd8c6957846470835aaa855fd630451d3c873d8070ffeb4bc243d2a4363cdf20"
+
+[[attachments]]
+path = "BL3085A.pdf"
+kind = "datasheet"
+checksum = "sha256:e51b2c8b1da37845898a5a9ad28c8817d27809a5a942e9257edd3cab939e0825"
+

@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "bss138n"
+version = "0.1.0"
+category = "discrete"
+entry = "bss138n.mc"
+
+[[attachments]]
+path = "bss138n.pdf"
+kind = "datasheet"
+checksum = "sha256:7bfa04fa9f7d97fd9f1f4d1fd2c5dfcb808a98eb9cd9564dd6350c9de2d0e785"
+
+[[attachments]]
+path = "bss138n.txt"
+kind = "doc"
+checksum = "sha256:e97b780c7b0d5c0a42e4c45c569a90f76161d2e839c4e4f1be1459a1991ced8a"
+

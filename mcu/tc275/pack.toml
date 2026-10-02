@@ -1,0 +1,13 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "tc275"
+version = "0.1.0"
+category = "mcu"
+entry = "tc275.mc"
+
+[[attachments]]
+path = "tc275.pdf"
+kind = "datasheet"
+checksum = "sha256:2dcd71583b1cc5b202dbb55744e43c3d92981984c244e9a5222c31f9b76ceed8"
+

@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "lpa4871"
+version = "0.1.0"
+category = "audio"
+entry = "lpa4871.mc"
+
+[[attachments]]
+path = "LPA4871.pdf"
+kind = "datasheet"
+checksum = "sha256:c9edebd115240714a33aabd08360d07af576fe132ca03154b45742a28ab90507"
+
+[[attachments]]
+path = "lm4871.pdf"
+kind = "datasheet"
+checksum = "sha256:53dd6f523163b7affdfcd85013b8f88637b308b669b4ee10c93630dcc2f3f77b"
+

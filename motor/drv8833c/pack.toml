@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "drv8833c"
+version = "0.1.0"
+category = "motor"
+entry = "drv8833c.mc"
+
+[[attachments]]
+path = "drv8833c.pdf"
+kind = "datasheet"
+checksum = "sha256:ef94bc03dc6e6cfdf287c546e83f62dbe5090a5c904d4a1b12ce0e10a4e9355f"
+
+[[attachments]]
+path = "drv8833c.txt"
+kind = "doc"
+checksum = "sha256:ed7db871856fe79ed72207d0a4238769af95b21398669852c0c351c73f541acb"
+

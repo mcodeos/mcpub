@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "max3232"
+version = "0.1.0"
+category = "comm"
+entry = "max3232.mc"
+
+[[attachments]]
+path = "max3232.pdf"
+kind = "datasheet"
+checksum = "sha256:13b1834e8de7c6289b1a62d439d34eb8ebbb58bf06227dae1d69e4dbc15f0b02"
+
+[[attachments]]
+path = "max3232.txt"
+kind = "doc"
+checksum = "sha256:c2a22afe6485e5c8daaa5791c416bcc98821cc5159eebd545a0de253f480c5b7"
+

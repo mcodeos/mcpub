@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "a4950"
+version = "0.1.0"
+category = "motor"
+entry = "a4950.mc"
+
+[[attachments]]
+path = "a4950.pdf"
+kind = "datasheet"
+checksum = "sha256:e275ab7947797b7b5bf25ca1e8ee2cefa3efa5ed49c7cf06de593e9343e55232"
+
+[[attachments]]
+path = "a4950.txt"
+kind = "doc"
+checksum = "sha256:530dc5d76d4e08ecac1a5c0bd0819895d33d06b6f28469befb66bdce9c1960ff"
+

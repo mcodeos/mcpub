@@ -1,0 +1,23 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "esp32h2"
+version = "0.1.0"
+category = "rfsoc"
+entry = "esp32h2.mc"
+
+[[attachments]]
+path = "esp32h2.pdf"
+kind = "datasheet"
+checksum = "sha256:f0ea221728114e124b72115485c34719a50370314556b6bbea6b7d5e9c913fdb"
+
+[[attachments]]
+path = "esp32h2.txt"
+kind = "doc"
+checksum = "sha256:43d4f772a2e97eb060f6eba0491764c1279fcbc263fd7b8c6c1706364c59274e"
+
+[[attachments]]
+path = "esp32h2_paged.txt"
+kind = "doc"
+checksum = "sha256:183a4c45d63f05dcc5f34da7fa100619177eb15e6bc0fb38552e77401908e99d"
+

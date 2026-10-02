@@ -1,0 +1,13 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "tle7368"
+version = "0.1.0"
+category = "power"
+entry = "tle7368.mc"
+
+[[attachments]]
+path = "tle7368-3E.pdf"
+kind = "datasheet"
+checksum = "sha256:0f3fe2a822697d145809c87ba8660da27db5e0c74f32db4f42ac8893caadf29e"
+

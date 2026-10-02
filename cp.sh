@@ -38,10 +38,16 @@ fi
 # Create mcpub subdirectory in target
 mkdir -p "$LIBS_DIR"
 
-# Copy only the contents of the source directory to target
-# This ensures we only copy mcpub files, not other project files
+# Copy the source directory contents to target, excluding repo plumbing:
+# cp.sh itself, git metadata, and macOS cruft never belong in the installed lib.
 echo "Copying mcpub files from $SOURCE_DIR to $LIBS_DIR..."
-cp -r "$SOURCE_DIR"/* "$LIBS_DIR"
+rsync -a \
+    --exclude 'cp.sh' \
+    --exclude '.git' \
+    --exclude '.gitignore' \
+    --exclude '.gitattributes' \
+    --exclude '.DS_Store' \
+    "$SOURCE_DIR"/ "$LIBS_DIR"/
 if [ $? -ne 0 ]; then
     echo "Error: Cannot copy mcpub files"
     exit 1

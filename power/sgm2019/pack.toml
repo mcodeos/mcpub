@@ -1,0 +1,13 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "sgm2019"
+version = "0.1.0"
+category = "power"
+entry = "sgm2019.mc"
+
+[[attachments]]
+path = "sgm2019_33yn5g.pdf"
+kind = "datasheet"
+checksum = "sha256:76412693dc3f9952bf55b535a032ec43bcb81db34f15be573b9d032624a81317"
+

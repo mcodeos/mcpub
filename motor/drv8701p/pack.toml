@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "drv8701p"
+version = "0.1.0"
+category = "motor"
+entry = "drv8701p.mc"
+
+[[attachments]]
+path = "drv8701.pdf"
+kind = "datasheet"
+checksum = "sha256:7197e331e1f296a9cec7cc3b663ae377609b8cbf9c613ff5c2d5cfab1bb2df21"
+
+[[attachments]]
+path = "drv8701.txt"
+kind = "doc"
+checksum = "sha256:0a53403546cdbde0e3c0a7086aebfedb99d99dd6a618ed5902bb7ab832e5c90b"
+

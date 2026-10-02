@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "amc1200"
+version = "0.1.0"
+category = "isolation"
+entry = "amc1200.mc"
+
+[[attachments]]
+path = "amc1200.pdf"
+kind = "datasheet"
+checksum = "sha256:13185dbf97ad1336d863d33aa1232040d01f790d70c9724d171814990f40adb3"
+
+[[attachments]]
+path = "amc1200.txt"
+kind = "doc"
+checksum = "sha256:4a0884f5c11aa4bf1e3f0c4c95fa910384befe4b2f6c24acce2bef4a06b3c46b"
+

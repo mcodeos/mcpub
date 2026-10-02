@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "dst310s"
+version = "0.1.0"
+category = "clock"
+entry = "dst310s.mc"
+
+[[attachments]]
+path = "dst310s.pdf"
+kind = "datasheet"
+checksum = "sha256:d6affd69035dce421b1745df690518ae6fc1c7c6f776967394abc3100e1fc7ae"
+
+[[attachments]]
+path = "dst310s.txt"
+kind = "doc"
+checksum = "sha256:e41bcd45cd87c71fb7bf86a55dea97600308415fc58ba585886cdd46b7b02512"
+

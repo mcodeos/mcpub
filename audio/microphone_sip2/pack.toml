@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "microphone_sip2"
+version = "0.1.0"
+category = "audio"
+entry = "microphone_sip2.mc"
+
+[[attachments]]
+path = "cmc6027-32t.pdf"
+kind = "datasheet"
+checksum = "sha256:b9468a4f5987f28444538576044a017382b7c446fd4b954b0793d56dbf56b8de"
+
+[[attachments]]
+path = "cmc6027-32t.txt"
+kind = "doc"
+checksum = "sha256:a7d394d8f6f7b132a1497f3ec5c3527a37cd8196b23145b7b0ba298608406cca"
+

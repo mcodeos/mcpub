@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "microphone_wm7121p"
+version = "0.1.0"
+category = "audio"
+entry = "microphone_wm7121p.mc"
+
+[[attachments]]
+path = "wm7121p.pdf"
+kind = "datasheet"
+checksum = "sha256:8da6c81137c563f327a0d518e2c090829078f6db48d563151e463efd1bd753a7"
+
+[[attachments]]
+path = "wm7121p.txt"
+kind = "doc"
+checksum = "sha256:e9edc80e073727514e389e753d51a553db1ed8890750258e810b32cde73ace10"
+

@@ -7,3 +7,6 @@
 # Generated audit artifacts written by mcc with cwd = repo root
 # (render_projection.md / known_missing.md) - never commit
 baseline/
+
+# .mcl 打包产物默认落在包目录（mcc lib pack 默认 --out = 包自身），不入库
+*.mcl

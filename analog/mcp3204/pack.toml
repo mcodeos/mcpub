@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "mcp3204"
+version = "0.1.0"
+category = "analog"
+entry = "mcp3204.mc"
+
+[[attachments]]
+path = "mcp3204.pdf"
+kind = "datasheet"
+checksum = "sha256:89bc1e17c35e2bb1c7b8fbf0b775b3729ce9fe4d27f7e9c052a774757afc0c20"
+
+[[attachments]]
+path = "mcp3204.txt"
+kind = "doc"
+checksum = "sha256:9d1586eb975efe6218e5e74a82e03f016706b8ac8d6ba66d9f246996598b449d"
+

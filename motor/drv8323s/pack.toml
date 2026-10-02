@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "drv8323s"
+version = "0.1.0"
+category = "motor"
+entry = "drv8323s.mc"
+
+[[attachments]]
+path = "drv8323s.pdf"
+kind = "datasheet"
+checksum = "sha256:b355da32d9496c18095851511197c05655c4316d5f7902d8a97e758f393676a7"
+
+[[attachments]]
+path = "drv8323s.txt"
+kind = "doc"
+checksum = "sha256:e2248994571d775c94344a9881de2f86bc8cac9d8b22ffcbd781232f683f69c6"
+

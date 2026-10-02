@@ -1,0 +1,23 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "cc2652r"
+version = "0.1.0"
+category = "rfsoc"
+entry = "cc2652r.mc"
+
+[[attachments]]
+path = "cc2652r.cn.pdf"
+kind = "datasheet"
+checksum = "sha256:97833005a01f16c31bfdb352d55fba644274dbf1140e057333abac237b5db86f"
+
+[[attachments]]
+path = "cc2652r.pdf"
+kind = "datasheet"
+checksum = "sha256:e3da9fa4b34c36cb5c5d07e4fbc07c38742e4f688ddf876509879e9387995505"
+
+[[attachments]]
+path = "cc2652r.txt"
+kind = "doc"
+checksum = "sha256:be7e3204eaa2d0fba6f8cb54285cb378136e39f503837b87693a807a72a601d0"
+

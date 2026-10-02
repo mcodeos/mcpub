@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "stm32f103c8t6"
+version = "0.1.0"
+category = "mcu"
+entry = "stm32f103c8t6.mc"
+
+[[attachments]]
+path = "stm32f103c8t6.pdf"
+kind = "datasheet"
+checksum = "sha256:4741c03c5793745c1709ab48237ea23d204c4fc2ca735ceafa03367f32960917"
+
+[[attachments]]
+path = "stm32f103c8t6.txt"
+kind = "doc"
+checksum = "sha256:78c7ab83e07bf36a1a67655af1c8bc6e97222051f8159c921dd9692262ba0f0a"
+

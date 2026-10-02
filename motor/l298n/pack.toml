@@ -1,0 +1,18 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "l298n"
+version = "0.1.0"
+category = "motor"
+entry = "l298n.mc"
+
+[[attachments]]
+path = "l298.pdf"
+kind = "datasheet"
+checksum = "sha256:8219c191b157f443e2c297cfd4c48b09bb4cde0603a0ff0a21f283d65857943e"
+
+[[attachments]]
+path = "l298.txt"
+kind = "doc"
+checksum = "sha256:a2dafb94f61ec07446949a4189ce93ccbff00dfc41b253cd7218b487f060583c"
+

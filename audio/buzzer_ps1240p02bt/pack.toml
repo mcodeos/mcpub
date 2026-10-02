@@ -1,0 +1,13 @@
+# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+[package]
+format = "1"
+name = "buzzer_ps1240p02bt"
+version = "0.1.0"
+category = "audio"
+entry = "buzzer_ps1240p02bt.mc"
+
+[[attachments]]
+path = "ps1240.pdf"
+kind = "datasheet"
+checksum = "sha256:2ef43c3a18a969173529e0622c2c9dda7281c679b27c21b2203cb8930eb98795"
+
