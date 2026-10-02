@@ -10,3 +10,6 @@ baseline/
 
 # .mcl 打包产物默认落在包目录（mcc lib pack 默认 --out = 包自身），不入库
 *.mcl
+
+# build.sh sweep output (mcc lib pack artifacts per pack) - never commit
+/build/
