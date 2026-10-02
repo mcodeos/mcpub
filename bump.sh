@@ -30,9 +30,9 @@ fi
 DIRS="$(printf '%s\n' "$NAMES" | while read -r f; do
     [ -n "$f" ] || continue
     d="$(dirname "$f")"
-    case "$d" in
-        */*) [ -f "$d/pack.toml" ] && git cat-file -e "HEAD:$d/pack.toml" 2>/dev/null && echo "$d" ;;
-    esac
+    if [[ "$d" == */* ]] && [ -f "$d/pack.toml" ] && git cat-file -e "HEAD:$d/pack.toml" 2>/dev/null; then
+        echo "$d"
+    fi
 done | sort -u)"
 
 [ -n "$DIRS" ] || exit 0
