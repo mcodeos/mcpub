@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "mcp3204"
-version = "0.1.0"
+version = "0.1"
 category = "analog"
 entry = "mcp3204.mc"
 vendor = "Microchip"

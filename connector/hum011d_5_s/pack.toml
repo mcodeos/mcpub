@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "hum011d_5_s"
-version = "0.1.0"
+version = "0.1"
 category = "connector"
 entry = "hum011d_5_s.mc"
 vendor = "unknown"

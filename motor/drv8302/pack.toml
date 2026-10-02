@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "drv8302"
-version = "0.1.0"
+version = "0.1"
 category = "motor"
 entry = "drv8302.mc"
 vendor = "TI"

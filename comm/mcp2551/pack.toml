@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "mcp2551"
-version = "0.1.0"
+version = "0.1"
 category = "comm"
 entry = "mcp2551.mc"
 vendor = "Microchip"

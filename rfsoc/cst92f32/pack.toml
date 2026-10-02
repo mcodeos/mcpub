@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "cst92f32"
-version = "0.1.0"
+version = "0.1"
 category = "rfsoc"
 entry = "cst92f32.mc"
 vendor = "ChipSea"

@@ -44,8 +44,14 @@ Directory contents: `pack.toml`, `<part>.mc`, `README.md`, datasheet pdf/txt.
 
 `pack.toml` rules (full schema: registry-design.md §2):
 
-- `[package]`: `format = "1"`, `name` == entry basename, semver `version`
-  (entry-driven: only interface changes bump it), `category`, `entry`.
+- `[package]`: `format = "1"`, `name` == entry basename, `category`, `entry`.
+- `version` is two-segment `MAJOR.MINOR` (three-segment legacy values still
+  read; new writes are canonical two). **Every committed content change to a
+  pack bumps its MINOR segment automatically** — the repo's pre-commit hook
+  (`.githooks/pre-commit` → `bump.sh --staged`) does the bump and refreshes
+  the bundled attachments' sha256, so a version always answers "which content
+  is this?". A breaking interface-face change (pins/variants removed or
+  reshaped) is a MAJOR bump and stays a human call. New packs start at `0.1`.
 - `vendor` from evidence (`.mc` header / datasheet first page / txt cache);
   undocumented provenance is honestly `vendor = "unknown"`. `publisher = "mcode"`.
 - `readme = "README.md"`. **README.md is English by default; a Chinese edition
@@ -105,7 +111,7 @@ Verify in a project:
 # the manifest load fail silently and dependencies go missing → E2051)
 [project]
 name = "try"
-version = "0.1.0"
+version = "0.1"
 entry = "src/main.mc"
 
 [dependencies]

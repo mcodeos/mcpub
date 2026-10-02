@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "efr32mg21"
-version = "0.1.0"
+version = "0.1"
 category = "rfsoc"
 entry = "efr32mg21.mc"
 vendor = "Silicon Labs"

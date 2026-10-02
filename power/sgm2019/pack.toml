@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "sgm2019"
-version = "0.1.0"
+version = "0.1"
 category = "power"
 entry = "sgm2019.mc"
 vendor = "SGMICRO"

@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "cmc6027_32t"
-version = "0.1.0"
+version = "0.1"
 category = "audio"
 entry = "cmc6027_32t.mc"
 vendor = "CUI Devices"

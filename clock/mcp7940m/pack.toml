@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "mcp7940m"
-version = "0.1.0"
+version = "0.1"
 category = "clock"
 entry = "mcp7940m.mc"
 vendor = "Microchip"

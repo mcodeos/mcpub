@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "cc2530"
-version = "0.1.0"
+version = "0.1"
 category = "rfsoc"
 entry = "cc2530.mc"
 vendor = "TI"

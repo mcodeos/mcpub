@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "ps1240p02bt"
-version = "0.1.0"
+version = "0.1"
 category = "audio"
 entry = "ps1240p02bt.mc"
 vendor = "TDK"

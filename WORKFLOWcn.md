@@ -37,8 +37,12 @@ datasheet ──▶ 转写 entry .mc ──▶ 组包（pack.toml/README）─�
 
 `pack.toml` 规则（全 schema 见 registry-design.md §2）：
 
-- `[package]`：`format = "1"`，`name` == entry basename，semver `version`
-  （entry 驱动：只有接口面变更才动它）、`category`、`entry`。
+- `[package]`：`format = "1"`，`name` == entry basename，`category`、`entry`。
+- `version` 为两段 `MAJOR.MINOR`（旧三段读取兼容，新写入归一化为两段）。
+  **包的每次内容变更，MINOR 段自动加一**——仓内 pre-commit 钩子
+  （`.githooks/pre-commit` → `bump.sh --staged`）负责递增并刷新 bundled
+  附件的 sha256，版本号始终回答"这是哪份内容"。破坏接口面的变更
+  （引脚/变体删除或改形）是 MAJOR 位，由人裁。新包从 `0.1` 起步。
 - `vendor` 从证据来（`.mc` 头 / datasheet 首页 / txt 缓存）；无实证的如实
   `vendor = "unknown"`。`publisher = "mcode"`。
 - `readme = "README.md"`。**README.md 缺省英文；中文版另立 `<name>cn.md`**——
@@ -93,7 +97,7 @@ mcc lib install --from <part>-<ver>.mcl      # → ~/.mcode/<part>@<ver>/，inde
 # 静默加载失败、依赖丢失 → 误报 E2051）
 [project]
 name = "try"
-version = "0.1.0"
+version = "0.1"
 entry = "src/main.mc"
 
 [dependencies]

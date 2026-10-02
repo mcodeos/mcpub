@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "nsi814x"
-version = "0.1.0"
+version = "0.1"
 category = "isolation"
 entry = "nsi814x.mc"
 vendor = "NOVOSENSE"

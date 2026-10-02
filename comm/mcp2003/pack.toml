@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "mcp2003"
-version = "0.1.0"
+version = "0.1"
 category = "comm"
 entry = "mcp2003.mc"
 vendor = "Microchip"

@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "gd25q32e"
-version = "0.1.0"
+version = "0.1"
 category = "digital"
 entry = "gd25q32e.mc"
 vendor = "GigaDevice"

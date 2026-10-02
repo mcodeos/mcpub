@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "stm32f103c8t6"
-version = "0.1.0"
+version = "0.1"
 category = "mcu"
 entry = "stm32f103c8t6.mc"
 vendor = "STMicroelectronics"

@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "bss138n"
-version = "0.1.0"
+version = "0.1"
 category = "discrete"
 entry = "bss138n.mc"
 vendor = "onsemi"

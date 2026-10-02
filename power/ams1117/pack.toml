@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "ams1117"
-version = "0.1.0"
+version = "0.1"
 category = "power"
 entry = "ams1117.mc"
 vendor = "Advanced Monolithic Systems"
@@ -13,31 +13,31 @@ keywords = ["ldo", "linear-regulator", "sot-223", "adj", "1a"]
 # Variants: name = the orderable face, base = a component present in the entry source.
 [variants."AMS1117_1_2"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_1_5"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_1_8"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_2_5"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_2_85"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_3_0"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_3_3"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_5_0"]
 base = "AMS1117"
-since = "0.1.0"
+since = "0.1"
 [variants."AMS1117_ADJ"]
 base = "AMS1117_ADJ"
-since = "0.1.0"
+since = "0.1"
 
 [[attachments]]
 path = "ams1117.pdf"

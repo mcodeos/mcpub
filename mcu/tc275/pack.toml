@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "tc275"
-version = "0.1.0"
+version = "0.1"
 category = "mcu"
 entry = "tc275.mc"
 vendor = "Infineon"

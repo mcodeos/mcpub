@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "sn74lvc1g175"
-version = "0.1.0"
+version = "0.1"
 category = "digital"
 entry = "sn74lvc1g175.mc"
 vendor = "TI"
@@ -13,16 +13,16 @@ keywords = ["logic", "flip-flop", "d-type", "sot-23", "single-gate"]
 # Variants: name = the orderable face, base = a component present in the entry source.
 [variants."TTL.D.SN74LVC1G175_DBV"]
 base = "TTL.D.SN74LVC1G175"
-since = "0.1.0"
+since = "0.1"
 [variants."TTL.D.SN74LVC1G175_DCK"]
 base = "TTL.D.SN74LVC1G175"
-since = "0.1.0"
+since = "0.1"
 [variants."TTL.D.SN74LVC1G175_DRY"]
 base = "TTL.D.SN74LVC1G175"
-since = "0.1.0"
+since = "0.1"
 [variants."TTL.D.SN74LVC1G175_YZP"]
 base = "TTL.D.SN74LVC1G175"
-since = "0.1.0"
+since = "0.1"
 
 [[attachments]]
 path = "sn74lvc1g175.pdf"

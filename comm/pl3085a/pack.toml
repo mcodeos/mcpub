@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "pl3085a"
-version = "0.1.0"
+version = "0.1"
 category = "comm"
 entry = "pl3085a.mc"
 vendor = "Belling"

@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "lpa4871"
-version = "0.1.0"
+version = "0.1"
 category = "audio"
 entry = "lpa4871.mc"
 vendor = "unknown"
