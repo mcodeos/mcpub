@@ -1,0 +1,60 @@
+# Copyright (c) 2026 MCode
+#
+# Licensed under the Apache License, Version 2.0.
+
+// =============================================================================
+//  HC32L110 — HDSC (Xiaohua) ultra-low-power Cortex-M0+ MCU, up to 32MHz
+//  Datasheet: DS_HC32L110SeriesDatasheet Rev2.70 (same directory)
+//
+//  QFN20 (HC32L110C6UA/C4UA) pin shape, verified pin-by-pin against Rev2.70 §3:
+//    1  = P00/RESETB   reset input, low active
+//    2  = P01/XTHI     (also AIN7/VCIN7)
+//    3  = P02/XTHO     (also AIN8)
+//    4  = VSS          AVSS/DVSS
+//    5  = VCAP         core LDO output decoupling — datasheet: 4.7uF to GND,
+//                      no external load
+//    6  = VDD          AVCC/DVCC, 1.8V-5.5V
+//    7  = P03/LVDIN1
+//    8  = P15/XTLO     9 = P14/XTLI   10 = P23   11 = P24   12 = P25
+//    13 = P26          14 = P27/SWDIO 15 = P31/SWCLK
+//    16-20 = P32 P33 P34 P35 P36
+//  NOTE: exposed thermal pad must be tied to DVSS on the PCB (datasheet §3
+//  note); schematic symbols usually omit it.
+//  CAUTION: TSSOP20/TSSOP16/CSP16 pin numbers differ entirely — re-verify
+//  against §3 before reusing this shape for another package.
+//
+//  Other grades (U180 binding-base pattern): the QFN20 shape here is the
+//  verified base; other packages get their own base when a project needs them.
+// =============================================================================
+
+component HC32L110
+{
+    partno = "HC32L110"       // QFN20 grade: HC32L110C6UA / HC32L110C4UA
+    package = PKG.QFN20       // EP -> VSS, implicit
+    voltage = 3.3V            // VDD range 1.8V-5.5V (datasheet §5)
+
+    name = "HC32L110 Cortex-M0+ MCU"
+    description = "Ultra-low-power low-pin-count MCU (QFN20 shape)"
+
+    pins = [
+        psnk [[6], [4]] = [VDD, VSS]::DC(3.3V), "AVCC/DVCC; AVSS/DVSS"
+        psnk [5] = VCAP, "Core LDO decoupling, 4.7uF per datasheet"
+        io 1 = RST, "P00/RESETB, low-active reset"
+        io 2 = P01, "P01/XTHI/AIN7/VCIN7"
+        io 3 = P02, "P02/XTHO/AIN8"
+        io 7 = P03, "P03/LVDIN1"
+        io 8 = P15, "P15/XTLO"
+        io 9 = P14, "P14/XTLI"
+        io 10 = P23, "P23/LVDIN2/VCIN0"
+        io 11 = P24, "P24/AIN0"
+        io 12 = P25, "P25/LVDIN3/VC1"
+        io 13 = P26, "P26/AIN1"
+        io 14 = SWDIO, "P27/SWDIO serial-wire data"
+        io 15 = SWCLK, "P31/SWCLK serial-wire clock"
+        io 16 = P32, "P32/AIN2/VCIN2"
+        io 17 = P33, "P33/AIN3/VCIN3"
+        io 18 = P34, "P34/AIN4/VCIN4"
+        io 19 = P35, "P35/AIN5/VCIN5"
+        io 20 = P36, "P36/AIN6/VCIN6/AVREF"
+    ]
+}
