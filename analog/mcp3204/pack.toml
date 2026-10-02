@@ -1,10 +1,14 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
 name = "mcp3204"
 version = "0.1.0"
 category = "analog"
 entry = "mcp3204.mc"
+vendor = "Microchip"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["adc", "spi", "12-bit", "4ch"]
 
 [[attachments]]
 path = "mcp3204.pdf"

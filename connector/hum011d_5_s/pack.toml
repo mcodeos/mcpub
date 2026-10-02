@@ -1,8 +1,12 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
 name = "hum011d_5_s"
 version = "0.1.0"
 category = "connector"
 entry = "hum011d_5_s.mc"
+vendor = "unknown"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["connector", "usb", "mini-b", "receptacle"]
 

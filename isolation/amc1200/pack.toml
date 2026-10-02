@@ -1,10 +1,14 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
 name = "amc1200"
 version = "0.1.0"
 category = "isolation"
 entry = "amc1200.mc"
+vendor = "TI"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["isolation", "isolated-amplifier", "current-sense", "motor"]
 
 [[attachments]]
 path = "amc1200.pdf"

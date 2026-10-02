@@ -1,10 +1,14 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
-name = "microphone_wm7121p"
+name = "wm7121p"
 version = "0.1.0"
 category = "audio"
-entry = "microphone_wm7121p.mc"
+entry = "wm7121p.mc"
+vendor = "Cirrus Logic"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["microphone", "mems", "digital", "pdm"]
 
 [[attachments]]
 path = "wm7121p.pdf"

@@ -1,10 +1,14 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
 name = "efr32mg21"
 version = "0.1.0"
 category = "rfsoc"
 entry = "efr32mg21.mc"
+vendor = "Silicon Labs"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["soc", "ble", "mesh", "2.4ghz", "rf", "cortex-m33"]
 
 [[attachments]]
 path = "efr32mg21.pdf"

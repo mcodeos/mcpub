@@ -1,10 +1,14 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
 name = "max3232"
 version = "0.1.0"
 category = "comm"
 entry = "max3232.mc"
+vendor = "Maxim Integrated"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["rs232", "transceiver", "uart", "level-shift"]
 
 [[attachments]]
 path = "max3232.pdf"

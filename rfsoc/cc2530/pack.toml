@@ -1,10 +1,14 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
 name = "cc2530"
 version = "0.1.0"
 category = "rfsoc"
 entry = "cc2530.mc"
+vendor = "TI"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["soc", "8051", "zigbee", "2.4ghz", "rf"]
 
 [[attachments]]
 path = "cc2530.pdf"

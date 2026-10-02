@@ -1,10 +1,14 @@
-# 器件包清单（registry-design.md §2 形；一包一件，名随件走）
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
 [package]
 format = "1"
 name = "pl3085a"
 version = "0.1.0"
 category = "comm"
 entry = "pl3085a.mc"
+vendor = "Belling"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["rs485", "transceiver", "uart"]
 
 [[attachments]]
 path = "BL3085(I47).pdf"

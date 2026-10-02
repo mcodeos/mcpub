@@ -1,0 +1,17 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
+[package]
+format = "1"
+name = "ps1240p02bt"
+version = "0.1.0"
+category = "audio"
+entry = "ps1240p02bt.mc"
+vendor = "TDK"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["buzzer", "piezo", "magnetic", "smd"]
+
+[[attachments]]
+path = "ps1240.pdf"
+kind = "datasheet"
+checksum = "sha256:2ef43c3a18a969173529e0622c2c9dda7281c679b27c21b2203cb8930eb98795"
+
