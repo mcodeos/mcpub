@@ -19,19 +19,19 @@ component PCA9555(partno)
     description = "I2C GPIO Expansion"
 
     if (partno == "PCA9555N")
-        package = "DIP24"
+        package = PKG.DIP24
     else if(partno == "PCA9555D")
-        package = "SO24"
+        package = PKG.SOIC24
     else if(partno == "PCA9555DB")
-        package = "SSOP24"
+        package = PKG.SSOP24
     else if(partno == "PCA9555PW")
-        package = "TSSOP24"
+        package = PKG.TSSOP24
     else if(partno == "PCA9555BS")
-        package = "HVQFN24"
+        package = PKG.HVQFN24
     else if(partno == "PCA9555HF")
-        package = "HWQFN24"
+        package = PKG.HWQFN24
     else
-        package = "DIP24"
+        package = PKG.DIP24
 
     pins = [
         psnk [24,12] = DC{VCC,GND}::DC() | [VDD, VSS]

@@ -18,7 +18,7 @@
 component TRANS.NMOS.BSS138N
 {
     partno = "BSS138N"      // model NO. BSS138N
-    package = "SOT23-3"     // package is SOT23-3
+    package = PKG.SOT_23_3     // package is SOT23-3
 
     pins = [
         1 = G, "Gate"

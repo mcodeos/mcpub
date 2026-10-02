@@ -19,8 +19,8 @@ component TC275
     manufacturer = "Infineon"
     description = "TC275 32-Bit Single-Chip TriCore Microcontroller"
     
-    partno = "TC275"
-    package = "PG-LQFP-176-22" // LF-BGA-292-6 / LF-BGA-292-10
+    partno = "SAK-TC275TP-64F200N-DC"
+    package = PKG.LQFP176_24X24 // PG-LQFP-176-22; LF-BGA-292-6 / LF-BGA-292-10
 
     pins = [
         // supply

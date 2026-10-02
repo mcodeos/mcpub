@@ -12,14 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-// Real MCU (US513_20_F, QFN20), extracted verbatim from the verified hbl
+// Real MCU (Unisound US513U61 voice SoC, QFN20; board marking US513_20_F),
+// extracted verbatim from the verified hbl
 // board (U192 mcu batch). Ruling U192-3: the MCU stays a standalone real
 // part for now - no abstract base until an industry-naming abstract cluster
 // is summarized later (mux branch pins are the part's private face).
 
 component MCU.US513_20_F                                                  // MCU controller, QFN20
 {
-    partno = "US513_20_F"                                                 // 型号是US513_20_F
+    partno = "US513U61"                                                   // Unisound Hummingbird-L voice SoC (board marking US513_20_F)
     package = PKG.QFN20                                                   // 封装是QFN20
 
     pins = [                                                              // 管脚定义

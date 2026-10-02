@@ -94,21 +94,21 @@ abstract component TTL.D.SN74LVC1G175
 component TTL.D.SN74LVC1G175_DBV : TTL.D.SN74LVC1G175
 {
     partno = "SN74LVC1G175DBV"
-    package = "SOT23-6"
+    package = PKG.SOT_23_6
 }
 component TTL.D.SN74LVC1G175_DCK : TTL.D.SN74LVC1G175
 {
     partno = "SN74LVC1G175DCK"
-    package = "SC70-6"
+    package = PKG.SC_70_6
 }
 component TTL.D.SN74LVC1G175_DRY : TTL.D.SN74LVC1G175
 {
     partno = "SN74LVC1G175DRY"
-    package = "SON-6"
+    package = PKG.USON6
 }
 component TTL.D.SN74LVC1G175_YZP : TTL.D.SN74LVC1G175
 {
     partno = "SN74LVC1G175YZP"
-    package = "DSBGA-6"
+    package = PKG.DSBGA6
 }
 

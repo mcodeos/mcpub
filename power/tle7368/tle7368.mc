@@ -17,11 +17,11 @@ component TLE7368 (partno)
     description = "TLE7368 multifunctional power supply"
 
     if (partno == "TLE7368E")
-    {    package = "PG-DSO-36"; FB_EXT = 1.5V }
+    {    package = PKG.PG_DSO_36; FB_EXT = 1.5V }
     else if (partno == "TLE7368-2E")
-    {    package = "PG-DSO-36"; FB_EXT = 1.2V }
+    {    package = PKG.PG_DSO_36; FB_EXT = 1.2V }
     else if (partno == "TLE7368-3E")
-    {    package = "PG-DSO-36"; FB_EXT = 1.3V }
+    {    package = PKG.PG_DSO_36; FB_EXT = 1.3V }
 
     pins = [
         in [[20:22], 17] = [VCC,GND]::DC(-0.3V ~ 45V), ["Buck regulator input", "Power ground, Exclusive GND connection of charge pump"]

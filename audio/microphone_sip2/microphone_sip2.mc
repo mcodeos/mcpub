@@ -19,6 +19,6 @@ use mclibs.audio/microphone.mc
 
 component MICROPHONE.SIP2_1_25MM_WA : MICROPHONE.ELECTRET
 {
-    partno = "SIP2-1.25MM-WA"     // electret mic capsule
+    partno = "CMC-6027-32T"       // CUI Devices / Same Sky electret capsule
     package = PKG.MIC_SIP2
 }

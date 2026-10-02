@@ -22,17 +22,17 @@ component ISO.NSI8140(partno)
     description = "Quad-Channel Digital Isolators"
 
     if (partno == "NSI8140N0")
-    {    package = "SOIC16 NB"; spec.Isolation_Rating = 3.75kV; spec.Default_Ouput = low }
+    {    package = PKG.SOIC16_NB; spec.Isolation_Rating = 3.75kV; spec.Default_Ouput = low }
     else if (partno == "NSI8140N1")
-    {    package = "SOIC16 NB"; spec.Isolation_Rating = 3.75kV; spec.Default_Ouput = high }
+    {    package = PKG.SOIC16_NB; spec.Isolation_Rating = 3.75kV; spec.Default_Ouput = high }
     else if (partno == "NSI8140W0")
-    {    package = "SOIC16 WB"; spec.Isolation_Rating = 5kV; spec.Default_Ouput = low }
+    {    package = PKG.SOIC16_WB; spec.Isolation_Rating = 5kV; spec.Default_Ouput = low }
     else if (partno == "NSI8140W1")
-    {    package = "SOIC16 WB"; spec.Isolation_Rating = 5kV; spec.Default_Ouput = high }
+    {    package = PKG.SOIC16_WB; spec.Isolation_Rating = 5kV; spec.Default_Ouput = high }
     else if (partno == "NSI8140W0Q")
-    {    package = "SOIC16 WB"; spec.Isolation_Rating = 5kV; spec.Default_Ouput = low; spec.Automotive = "YES" }
+    {    package = PKG.SOIC16_WB; spec.Isolation_Rating = 5kV; spec.Default_Ouput = low; spec.Automotive = "YES" }
     else if (partno == "NSI8140W1Q")
-    {    package = "SOIC16 WB"; spec.Isolation_Rating = 5kV; spec.Default_Ouput = high; spec.Automotive = "YES" }
+    {    package = PKG.SOIC16_WB; spec.Isolation_Rating = 5kV; spec.Default_Ouput = high; spec.Automotive = "YES" }
 
     pins = [
         in [1,[2,8]] = DC1[VDD1,GND1]::DC(3V~5V)
