@@ -38,11 +38,12 @@ done | sort -u)"
 [ -n "$DIRS" ] || exit 0
 
 export BUMP_STAGED="$MODE"
-printf '%s\n' "$DIRS" | python3 - <<'EOF'
+export BUMP_DIRS="$DIRS"
+python3 - <<'EOF'
 import os, re, hashlib, subprocess, sys
 
 staged = os.environ.get("BUMP_STAGED") == "--staged"
-for d in sys.stdin.read().split():
+for d in os.environ["BUMP_DIRS"].split():
     pt = os.path.join(d, "pack.toml")
     s = open(pt, encoding="utf-8").read()
 
