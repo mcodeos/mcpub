@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "nsi814x"
-version = "0.1"
+version = "0.2"
 category = "isolation"
+description = "Digital UART isolator (NSI8140)"
 entry = "nsi814x.mc"
 vendor = "NOVOSENSE"
 publisher = "mcode"

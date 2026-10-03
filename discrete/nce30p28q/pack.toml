@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "nce30p28q"
-version = "0.1"
+version = "0.2"
 category = "discrete"
+description = "30V P-channel power MOSFET (NCE30P28Q, DFN3x3)"
 entry = "nce30p28q.mc"
 vendor = "NCE Power"
 publisher = "mcode"

@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "fs116d"
-version = "0.2"
+version = "0.3"
 category = "power"
+description = "USB QC Type-A fast-charge protocol IC (FS116D, SSOP10)"
 entry = "fs116d.mc"
 vendor = "FastSOC"
 publisher = "mcode"

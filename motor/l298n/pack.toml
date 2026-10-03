@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "l298n"
-version = "0.1"
+version = "0.2"
 category = "motor"
+description = "Dual full-bridge motor driver (L298N, Multiwatt15)"
 entry = "l298n.mc"
 vendor = "STMicroelectronics"
 publisher = "mcode"

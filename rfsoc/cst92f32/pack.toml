@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "cst92f32"
-version = "0.1"
+version = "0.2"
 category = "rfsoc"
+description = "BLE 2.4GHz SoC, Cortex-M0 (CST92F32)"
 entry = "cst92f32.mc"
 vendor = "ChipSea"
 publisher = "mcode"

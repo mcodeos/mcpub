@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "typec16p"
-version = "0.2"
+version = "0.3"
 category = "connector"
+description = "USB Type-C 16-pin receptacle connector"
 entry = "typec16p.mc"
 vendor = "unknown"
 publisher = "mcode"

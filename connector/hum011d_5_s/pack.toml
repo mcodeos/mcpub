@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "hum011d_5_s"
-version = "0.1"
+version = "0.2"
 category = "connector"
+description = "Mini USB B receptacle (HUM011D-5-S)"
 entry = "hum011d_5_s.mc"
 vendor = "unknown"
 publisher = "mcode"

@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "tea1995t"
-version = "0.2"
+version = "0.3"
 category = "power"
+description = "LLC synchronous rectifier controller (TEA1995T, SOIC8, NXP)"
 entry = "tea1995t.mc"
 vendor = "NXP"
 publisher = "mcode"

@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "cms8s5880"
-version = "0.1"
+version = "0.2"
 category = "mcu"
+description = "8051 1T-core MCU (CMS8S5880, SSOP20, Cmsemicon)"
 entry = "cms8s5880.mc"
 vendor = "Cmsemicon"
 publisher = "mcode"

@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "mmbt4403"
-version = "0.1"
+version = "0.2"
 category = "discrete"
+description = "PNP small-signal bipolar transistor (MMBT4403, SOT-23)"
 entry = "mmbt4403.mc"
 vendor = "unknown"
 publisher = "mcode"

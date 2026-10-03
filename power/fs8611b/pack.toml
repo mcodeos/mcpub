@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "fs8611b"
-version = "0.3"
+version = "0.4"
 category = "power"
+description = "USB PD Type-C fast-charge protocol IC (FS8611B, SSOP10)"
 entry = "fs8611b.mc"
 vendor = "FastSOC"
 publisher = "mcode"

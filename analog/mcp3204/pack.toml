@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "mcp3204"
-version = "0.1"
+version = "0.2"
 category = "analog"
+description = "4-channel 12-bit SPI ADC (MCP3204)"
 entry = "mcp3204.mc"
 vendor = "Microchip"
 publisher = "mcode"

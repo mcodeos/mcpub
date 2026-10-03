@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "tp181"
-version = "0.1"
+version = "0.2"
 category = "analog"
+description = "Zero-drift current-sense amplifier (TP181, SC70-6)"
 entry = "tp181.mc"
 vendor = "3PEAK"
 publisher = "mcode"

@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "tl431"
-version = "0.2"
+version = "0.3"
 category = "power"
+description = "Adjustable shunt voltage reference (TL431, SOT-23)"
 entry = "tl431.mc"
 vendor = "unknown"
 publisher = "mcode"

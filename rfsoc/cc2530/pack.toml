@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "cc2530"
-version = "0.1"
+version = "0.2"
 category = "rfsoc"
+description = "8051 ZigBee 2.4GHz SoC (CC2530, TI)"
 entry = "cc2530.mc"
 vendor = "TI"
 publisher = "mcode"

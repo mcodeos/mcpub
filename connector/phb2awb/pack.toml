@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "phb2awb"
-version = "0.1"
+version = "0.2"
 category = "connector"
+description = "2-pole PH2.0 wire-to-board terminal, horizontal (LHE PHB-2AWB)"
 entry = "phb2awb.mc"
 vendor = "LHE"
 publisher = "mcode"

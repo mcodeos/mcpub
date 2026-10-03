@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "gc11n65"
-version = "0.1"
+version = "0.2"
 category = "discrete"
+description = "650V power NMOS (GC11N65D5, DFN5x6)"
 entry = "gc11n65.mc"
 vendor = "unknown"
 publisher = "mcode"

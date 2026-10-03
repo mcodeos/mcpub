@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "lpa4871"
-version = "0.1"
+version = "0.2"
 category = "audio"
+description = "Class-D audio power amplifier (LPA4871)"
 entry = "lpa4871.mc"
 vendor = "unknown"
 publisher = "mcode"

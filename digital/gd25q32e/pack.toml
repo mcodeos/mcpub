@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "gd25q32e"
-version = "0.1"
+version = "0.2"
 category = "digital"
+description = "32Mbit SPI NOR flash (GD25Q32ESIG, SOP8)"
 entry = "gd25q32e.mc"
 vendor = "GigaDevice"
 publisher = "mcode"

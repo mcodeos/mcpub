@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "ams1117"
-version = "0.1"
+version = "0.2"
 category = "power"
+description = "1A adjustable LDO regulator (AMS1117, SOT-223)"
 entry = "ams1117.mc"
 vendor = "Advanced Monolithic Systems"
 publisher = "mcode"

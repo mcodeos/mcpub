@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "lm66100"
-version = "0.1"
+version = "0.2"
 category = "power"
+description = "Ideal-diode load switch with reverse-polarity protection (LM66100, SC-70)"
 entry = "lm66100.mc"
 vendor = "TI"
 publisher = "mcode"

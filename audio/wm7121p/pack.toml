@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "wm7121p"
-version = "0.1"
+version = "0.2"
 category = "audio"
+description = "Analog MEMS silicon microphone (WM7121P)"
 entry = "wm7121p.mc"
 vendor = "Cirrus Logic"
 publisher = "mcode"

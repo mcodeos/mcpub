@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "ps1240p02bt"
-version = "0.1"
+version = "0.2"
 category = "audio"
+description = "Externally-driven piezo sounder (PS1240P02BT, TDK)"
 entry = "ps1240p02bt.mc"
 vendor = "TDK"
 publisher = "mcode"

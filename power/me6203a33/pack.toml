@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "me6203a33"
-version = "0.1"
+version = "0.2"
 category = "power"
+description = "3.3V LDO regulator (ME6203A33M3G, SOT-89)"
 entry = "me6203a33.mc"
 vendor = "unknown"
 publisher = "mcode"

@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "drv8701p"
-version = "0.1"
+version = "0.2"
 category = "motor"
+description = "Brushed-DC H-bridge gate driver (DRV8701P, VQFN)"
 entry = "drv8701p.mc"
 vendor = "TI"
 publisher = "mcode"

@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "tea2016t"
-version = "0.2"
+version = "0.3"
 category = "power"
+description = "LLC + PFC combo controller (TEA2016AAT, SOIC16, NXP)"
 entry = "tea2016t.mc"
 vendor = "NXP"
 publisher = "mcode"

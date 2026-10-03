@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "bzt52c"
-version = "0.1"
+version = "0.2"
 category = "discrete"
+description = "Zener diode voltage regulator (BZT52C, SOD-323)"
 entry = "bzt52c.mc"
 vendor = "unknown"
 publisher = "mcode"

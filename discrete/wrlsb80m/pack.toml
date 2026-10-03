@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "wrlsb80m"
-version = "0.1"
+version = "0.2"
 category = "discrete"
+description = "SMD bridge rectifier (WRLSB80M)"
 entry = "wrlsb80m.mc"
 vendor = "unknown"
 publisher = "mcode"

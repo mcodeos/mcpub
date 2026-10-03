@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "jmup_0_6mm"
-version = "0.1"
+version = "0.2"
 category = "connector"
+description = "2-pin 0.6mm jumper header"
 entry = "jmup_0_6mm.mc"
 vendor = "unknown"
 publisher = "mcode"

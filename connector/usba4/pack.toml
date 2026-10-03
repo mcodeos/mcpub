@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "usba4"
-version = "0.1"
+version = "0.2"
 category = "connector"
+description = "USB-A 4-pin receptacle, QC-capable footprint"
 entry = "usba4.mc"
 vendor = "unknown"
 publisher = "mcode"

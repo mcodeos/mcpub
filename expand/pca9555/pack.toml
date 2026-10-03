@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "pca9555"
-version = "0.1"
+version = "0.2"
 category = "expand"
+description = "16-bit I2C GPIO expander (PCA9555)"
 entry = "pca9555.mc"
 vendor = "NXP"
 publisher = "mcode"

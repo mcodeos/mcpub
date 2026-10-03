@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "lis2dh12"
-version = "0.1"
+version = "0.2"
 category = "sensor"
+description = "3-axis MEMS accelerometer, I2C/SPI (LIS2DH12, ST)"
 entry = "lis2dh12.mc"
 vendor = "STMicroelectronics"
 publisher = "mcode"

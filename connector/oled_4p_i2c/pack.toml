@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "oled_4p_i2c"
-version = "0.1"
+version = "0.2"
 category = "connector"
+description = "4-pin I2C OLED module header"
 entry = "oled_4p_i2c.mc"
 vendor = "unknown"
 publisher = "mcode"

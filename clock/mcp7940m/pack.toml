@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "mcp7940m"
-version = "0.1"
+version = "0.2"
 category = "clock"
+description = "Low-cost I2C RTCC with SRAM and timestamp (MCP7940M, Microchip)"
 entry = "mcp7940m.mc"
 vendor = "Microchip"
 publisher = "mcode"

@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "sgm2019"
-version = "0.1"
+version = "0.2"
 category = "power"
+description = "3.3V LDO regulator (SGM2019-3.3YN5G/TR, SOT23-5)"
 entry = "sgm2019.mc"
 vendor = "SGMICRO"
 publisher = "mcode"

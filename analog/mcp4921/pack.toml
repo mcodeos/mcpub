@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "mcp4921"
-version = "0.1"
+version = "0.2"
 category = "analog"
+description = "Single-channel 12-bit SPI DAC (MCP4921)"
 entry = "mcp4921.mc"
 vendor = "Microchip"
 publisher = "mcode"

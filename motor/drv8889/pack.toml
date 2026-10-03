@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "drv8889"
-version = "0.1"
+version = "0.2"
 category = "motor"
+description = "Automotive stepper driver with microstepping (DRV8889QPWPRQ1, HTSSOP-24)"
 entry = "drv8889.mc"
 vendor = "TI"
 publisher = "mcode"

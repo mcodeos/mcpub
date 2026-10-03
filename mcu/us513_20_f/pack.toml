@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "us513_20_f"
-version = "0.1"
+version = "0.2"
 category = "mcu"
+description = "AI voice SoC (US513U61, QFN20, Unisound)"
 entry = "us513_20_f.mc"
 vendor = "Unisound"
 publisher = "mcode"

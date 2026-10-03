@@ -2,8 +2,9 @@
 [package]
 format = "1"
 name = "mcp2551"
-version = "0.1"
+version = "0.2"
 category = "comm"
+description = "High-speed CAN 2.0B transceiver (MCP2551)"
 entry = "mcp2551.mc"
 vendor = "Microchip"
 publisher = "mcode"

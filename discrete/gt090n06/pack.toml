@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "gt090n06"
-version = "0.1"
+version = "0.2"
 category = "discrete"
+description = "Dual 60V NMOS sync-rectifier FET (GT090N06D52, DFN5x6)"
 entry = "gt090n06.mc"
 vendor = "unknown"
 publisher = "mcode"

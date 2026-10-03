@@ -3,8 +3,9 @@
 [package]
 format = "1"
 name = "td1212"
-version = "0.1"
+version = "0.2"
 category = "passive"
+description = "Dual-winding common-mode choke 15mH (TD1212)"
 entry = "td1212.mc"
 vendor = "unknown"
 publisher = "mcode"
