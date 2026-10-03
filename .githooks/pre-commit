@@ -10,4 +10,4 @@
 # that pack's patch version and refreshes its attachment checksums, so a
 # pack's version always answers "which content is this?" (see WORKFLOW.md,
 # "Versioning"). New packs keep their initial 0.1.0.
-exec "$(dirname "$0")/../check.sh" && exec "$(dirname "$0")/../bump.sh" --staged
+"$(dirname "$0")/../check.sh" && "$(dirname "$0")/../bump.sh" --staged
