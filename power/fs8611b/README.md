@@ -16,6 +16,9 @@ namespaced component name after `use fs8611b.fs8611b`.
 - `fs8611b.txt` (doc)
 
 
+- `FS8611A.pdf`/`FS8611A.txt` (doc) — family order-code FS8611A, same die as FS8611B
+- `FS8611G.pdf`/`FS8611G.txt` (doc) — family order-code FS8611G
+
 ## Use
 
 ```toml

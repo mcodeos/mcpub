@@ -14,6 +14,9 @@ datasheet ──▶ 转写 entry .mc ──▶ 组包（pack.toml/README）─�
 ## 1. 资料
 
 - datasheet PDF 直接放进包目录（会成为 bundled 附件）。
+- **律（2026-10-03）：工程内 datasheet 目录只是临时转写工作区。** 转写期间
+  收集的每一份手册落地时严格归入各自的 lib 包——工程里不留散本；包齐即删
+  临时目录（120w 先例）。
 - 先抽一次文本层做证据工作：`pdftotext <part>.pdf <part>.txt`
   （`.txt` 留在包里，`kind = "doc"`——它是可检索面）。
 - 目录页没有文本层的，用渲染页图逐页核对，并在 entry 头注释里如实注明

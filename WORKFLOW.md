@@ -16,6 +16,10 @@ datasheet ──▶ transcribe entry .mc ──▶ scaffold pack (pack.toml/READ
 ## 1. Materials
 
 - Datasheet PDF goes into the pack directory (it will be a bundled attachment).
+- **LAW (2026-10-03): a project-local datasheet folder is temporary staging
+  only.** Every manual gathered during transcription lands strictly in its own
+  lib pack — no loose copies stay behind in the project. When the packs are
+  done, the staging folder is deleted (120w precedent).
 - Extract a text layer once for evidence work: `pdftotext <part>.pdf <part>.txt`
   (keep the `.txt` in the pack as `kind = "doc"` — it is the searchable face).
 - If the catalog page has no text layer, verify from rendered page images and say

@@ -3,7 +3,7 @@
 [package]
 format = "1"
 name = "fs8611b"
-version = "0.1"
+version = "0.2"
 category = "power"
 entry = "fs8611b.mc"
 vendor = "FastSOC"
@@ -20,3 +20,23 @@ checksum = "sha256:cd56b0092d8c95353745a8bc861667b7979c3cbeb24e52600e1e4cfe1278a
 path = "fs8611b.txt"
 kind = "doc"
 checksum = "sha256:5ed43e3f0ab515186db371dcd395cac43fda7de712da4f2556fac9dd4dc1b7a0"
+
+[[attachments]]
+path = "FS8611A.pdf"
+kind = "doc"
+checksum = "sha256:4a2762a4ef361dfa9941460f2fa2254e0f7619a6def7c714b3909719392a2a68"
+
+[[attachments]]
+path = "FS8611A.txt"
+kind = "doc"
+checksum = "sha256:205f73affcc28ea3214a5a06eb41b78497490dab3223981a1715528382420a5c"
+
+[[attachments]]
+path = "FS8611G.pdf"
+kind = "doc"
+checksum = "sha256:d57044d8d09e182b743dae5a3674bc7da65c1ab56c65d7357c2f33cbd6d17031"
+
+[[attachments]]
+path = "FS8611G.txt"
+kind = "doc"
+checksum = "sha256:886b6449f4f0c9b4d3648e41beada4331565633df0392e1b3e25da949eef2930"
