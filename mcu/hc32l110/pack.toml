@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "hc32l110"
-version = "0.2"
+version = "0.3"
 category = "mcu"
 description = "Ultra-low-power Cortex-M0+ MCU (HC32L110, QFN20, HDSC)"
 entry = "hc32l110.mc"

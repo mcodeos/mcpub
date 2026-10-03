@@ -39,7 +39,7 @@ component HC32L110
     pins = [
         psnk [[6], [4]] = [VDD, VSS]::DC(3.3V), "AVCC/DVCC; AVSS/DVSS"
         psnk [5] = VCAP, "Core LDO decoupling, 4.7uF per datasheet"
-        io 1 = RST, "P00/RESETB, low-active reset"
+        io 1 = RST{RESETB}::RST(RECEIVER)   // P00/RESETB, low-active reset
         io 2 = P01, "P01/XTHI/AIN7/VCIN7"
         io 3 = P02, "P02/XTHO/AIN8"
         io 7 = P03, "P03/LVDIN1"

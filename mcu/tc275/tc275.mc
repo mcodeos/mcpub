@@ -63,7 +63,7 @@ component TC275
         // system I/O
         [102:103] = XTAL{X1,X2}
 
-        121 = _PORST
+        121 = RST{_PORST}::RST(RECEIVER)
         122 = _ESR0
         120 = _ESR1
 

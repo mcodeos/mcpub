@@ -6,6 +6,17 @@ submitted, installed, and tested locally. The canonical design is
 document is the operator's walk-through. Every gate below is enforced by
 tooling — nothing here relies on reviewer diligence.
 
+Rule sources under `mcd/doc` that govern the transcription steps (global canon,
+this file only summarizes):
+
+- `mcd/doc/library/mcode-authoring-checklist.md` — the library rule table
+  (§2 file rules incl. English-only; §4 pin-face rules, incl. 4.14 "pins adopt
+  interfaces wherever one fits; supplement `mcode/ifs` first when missing").
+- `mcd/doc/library/library-ecosystem-design.md` — the four-layer ecosystem and
+  the home-library test (what belongs in mcpub vs mclibs vs mcode).
+- `mcd/doc/library/interface-inventory-design.md` — the `ifs/` interface
+  inventory and gap plan; consult before inventing or supplementing interfaces.
+
 ```
 datasheet ──▶ transcribe entry .mc ──▶ scaffold pack (pack.toml/README) ──▶ mcc lib pack
                                                                               │ gate: compiles clean
@@ -16,9 +27,16 @@ datasheet ──▶ transcribe entry .mc ──▶ scaffold pack (pack.toml/READ
 ## 1. Materials
 
 - Datasheet PDF goes into the pack directory (it will be a bundled attachment).
-- Materials are ruled by the mcd canon: **mcode-authoring-checklist §2.5** — a
-  project-local datasheet folder is temporary staging only; every manual lands
-  strictly in its own lib pack, and the staging folder is deleted when done.
+- **LAW (2026-10-03): a project-local datasheet folder is temporary staging
+  only.** Every manual gathered during transcription lands strictly in its own
+  lib pack — no loose copies stay behind in the project. When the packs are
+  done, the staging folder is deleted (120w precedent).
+- **Collect the materials as completely as you can**: beyond the datasheet, pull
+  application notes, typical application circuits, test data (measurements /
+  CSVs / reports) and supporting docs (user / reference manuals, errata sheets)
+  into the pack directory; each becomes a `[[attachments]]` row with its sha256,
+  and whatever genuinely cannot be obtained is recorded honestly — no placeholder
+  material, an honest gap beats a fake (rule table §6.8).
 - Extract a text layer once for evidence work: `pdftotext <part>.pdf <part>.txt`
   (keep the `.txt` in the pack as `kind = "doc"` — it is the searchable face).
 - If the catalog page has no text layer, verify from rendered page images and say
@@ -35,11 +53,44 @@ datasheet ──▶ transcribe entry .mc ──▶ scaffold pack (pack.toml/READ
   separate bases.
 - Pins ride the `mclibs` abstraction shapes where one exists (adoption, not
   derivation — a library file cannot inherit an mcode base).
+- **Pins adopt interfaces wherever one fits — this is a baseline requirement,
+  not a nice-to-have.** A chip pin with a defined function (crystal, UART, SPI,
+  I2C, SWD, power pair, …) adopts the corresponding `ifs` interface
+  (`XTAL::XTAL(OSCILLATOR)`, `UART.TTL(DCE)`, `DBG.SWD(TARGET)`, `psnk…::DC`).
+  Leave bare `io N = NAME` only for genuinely role-less pins (GPIO mux banks
+  whose interface use is board-chosen; keep the datasheet alternate names as
+  aliases). Pin addressing then goes through the interface member
+  (`uC.XTAL.X1`); the brace form renames the members to the datasheet names
+  (`RST{NRST}::RST(RECEIVER)` is addressed as `uC.RST.NRST`) — the trailing
+  name list is display labels only, it does not rename.
+  If the interface a pin needs does not exist in `mcode/ifs` yet, add it to the
+  library first — do not silently transcribe the pin bare. Beyond adoption,
+  pin rows carry pin-row attributes wherever the datasheet gives evidence
+  (`@class`, `@pair`, `@exposed`, `@barrier`, `volt`); no evidence, no key
+  — the rule table is `mcd/doc/library/mcode-authoring-checklist.md`
+  §4.14–4.15 and the canon anchor is ee design-axioms **B7** (pin identity
+  rides the interface family).
 - Header comments are evidence lines: datasheet doc ID/rev, the tables/pages
   cross-checked, package, absolute maximums that shaped the pin book. The pack
   README is generated from these lines — write them for that purpose.
 - Entry must compile standalone against `mclibs`/`mcode` — no references to
   files outside the pack.
+- **Before adding a new part, ask whether a common abstract shape can be
+  merged out — if yes, abstract it into `mclibs`; abstract wherever possible**
+  (rule table §6.7; precedent: the RST source-side vacuum produced
+  `mclibs/power/sup.mc`, the voltage-supervisor family, in the same batch as
+  the first pack that needed it).
+- **When typical-application-circuit material exists, additionally ship
+  wrappers in the entry — both levels**: ① **circuit-block level**, the common
+  peripheral blocks every project would otherwise re-type (decoupling groups,
+  reset RC, crystal + load caps, BOOT strap, pull-up groups) as parameterized
+  `func` wiring macros (precedent: us513_20_f `func Power` / `func I2C`);
+  ② **module level**, typical-application `module` wrappers (minimal system,
+  power tree, debug-port group) declaring the component and its surrounding
+  wiring as one unit (precedent: the `module TLE7368E(psnk pwr…)` in the
+  tle7368 entry). They ship with the pack so consumers call them in one line.
+  Test = "appears in the typical application circuit + common"; wrappers come
+  from the material, never invented (rule table §6.9).
 
 ## 3. Scaffold the pack
 

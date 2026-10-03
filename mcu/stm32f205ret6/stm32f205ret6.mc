@@ -42,10 +42,10 @@ component STM32F205RET6                                                  // MCU 
         in 31 = VCAP_1                                                  // 内核 LDO 电容脚 1（外接 2.2uF）
         in 47 = VCAP_2                                                  // 内核 LDO 电容脚 2（外接 2.2uF）
 
-        // -- 时钟：主振荡器端子（振荡器侧，承载维持放大器）
-        in 5 = PH0_OSC_IN                                               // 主晶振输入（部分板标注 PD0-OSC_IN）
-        in 6 = PH1_OSC_OUT                                              // 主晶振输出（部分板标注 PD1-OSC_OUT）
-        io 7 = NRST                                                     // 双向系统复位（低有效）
+        // -- 时钟：主振荡器端子（振荡器侧，承载维持放大器）；采纳 XTAL 接口
+        //    供配对面 ERC（RESONATOR 恰接一个 OSCILLATOR），引脚名仍循数据手册
+        in [5, 6] = XTAL::XTAL(OSCILLATOR), ["PH0_OSC_IN", "PH1_OSC_OUT"]  // 主晶振输入/输出（部分板标注 PD0/PD1-OSC，F103 沿袭）
+        io 7 = RST{NRST}::RST(RECEIVER)                                 // 双向系统复位（低有效；采纳 RST 接口，复位体侧）
         in 60 = BOOT0                                                   // 启动选择（弱上拉/下拉决定启动区）
 
         // -- GPIOA（脚号依 Figure 10）
@@ -105,4 +105,38 @@ component STM32F205RET6                                                  // MCU 
         // -- GPIOD（LQFP64 上仅 PD2 引出）
         io 54 = PD2                                                     // UART5_RX/SDIO_CMD
     ]
+
+    // ── 典型应用封装（mcd checklist §6.9；提取自 DS6329 typical application）──
+
+    // 电路块级：电源/去耦组。数字与模拟两域分开传（VDDA 分轨滤波的板子传不同域）；
+    // VBAT 按同轨接法（DS6329：不用备份电池时接 VDD），电池备份板改接电池。
+    func Power([VDD_3V3, GND]::DC(3.3V), [VDDA_3V3, GND]::DC(3.3V)) {
+        VDD_3V3 - VDD                                                   // 数字电源汇 19/32/48/64
+        GND - VSS                                                       // 数字回流汇 18/63
+        VDDA_3V3 - VDDA                                                 // 模拟电源 13（VDDA >= VDD）
+        GND - VSSA                                                      // 模拟回流 12
+        VDD_3V3 - VBAT                                                  // VBAT 同轨（脚 1）
+        VCAP_1 - CAP(2.2uF, ±10%, CAP.X5R, 6.3V) - GND                  // 内核 LDO 电容 1（DS6329：各 2.2uF 陶瓷）
+        VCAP_2 - CAP(2.2uF, ±10%, CAP.X5R, 6.3V) - GND                  // 内核 LDO 电容 2
+    }
+
+    // 电路块级：复位 RC。DS6329 typical：NRST 对地 0.1uF（片内自带上拉，
+    // 外部上拉/复位按键是板级选择，不进本宏）。
+    func Reset(gnd) {
+        RST.NRST - CAP(100nF, ±10%, CAP.X5R, 25V) - gnd                 // 复位噪声滤波
+    }
+}
+
+// 模块级封装（§6.9）：最小系统 = MCU + 主晶振（含负载电容）+ 复位 RC + BOOT0 strap。
+// 模拟域按同轨传（VDDA 分轨滤波的板子跳过本模块、自行调 uC.Power 双域）。
+// BOOT0 按 10k 上拉＝主闪存启动（DS6329 BOOT 值表；串口 bootloader 板改接地）。
+module STM32F205_MINI(psnk pwr{V3V3, GND}::DC(3.3V), freq::UV.HZ, cl::UV.CAP)
+{
+    STM32F205RET6 uC
+    .Power(pwr, pwr)                                                    // 两域同轨
+    .Reset(pwr.GND)
+
+    XTAL2(freq, cl) y1                                                  // 主晶振（mcode comp/xtal.mc）
+    y1.Setup(pwr.GND) -> uC.XTAL{X1, X2}                                // 负载电容落在晶振脚，归属判 U200
+    uC.BOOT0 - RES(10kΩ, ±1%) - pwr.V3V3                                // 主闪存启动 strap
 }

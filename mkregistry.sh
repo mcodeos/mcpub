@@ -69,8 +69,14 @@ for toml in */*/pack.toml; do
         deps_json=", \"deps\": {$deps_json}"
     fi
     variants_json=$(echo "$partnos" | sed 's/.*/"&"/' | paste -sd, -)
-    printf '{"name": "%s", "category": "%s", "versions": {"%s": {"checksum": "%s", "thin_checksum": "%s", "size": %s%s, "variants": [%s]}}}\n' \
-        "$name" "$category" "$ver" "$full_sum" "$thin_sum" \
+
+    # free-text blurb for the catalog face (/search.json, P3); JSON-escaped
+    desc="$(get_toml description "$toml" | sed 's/\\/\\\\/g; s/"/\\"/g')"
+    desc_json=""
+    [ -n "$desc" ] && desc_json=", \"description\": \"$desc\""
+
+    printf '{"name": "%s", "category": "%s"%s, "versions": {"%s": {"checksum": "%s", "thin_checksum": "%s", "size": %s%s, "variants": [%s]}}}\n' \
+        "$name" "$category" "$desc_json" "$ver" "$full_sum" "$thin_sum" \
         "$(stat -f%z "$dl/$name-$ver.thin.mcl")" "$deps_json" "$variants_json" \
         > "$REG/lib/$name.json"
 
