@@ -1,19 +1,20 @@
 # cst92f32
 
-本包无头注释面；说明以 entry `.mc` 与附件 datasheet 为准。
+This pack has no header-comment face; the entry `.mc` and the attached
+datasheet are authoritative.
 
-- 厂商: ChipSea
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: soc, ble, 2.4ghz, rf, cortex-m0
-- 附件: cst92f32.pdf, cst92f32.txt
+- Vendor: ChipSea
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: soc, ble, 2.4ghz, rf, cortex-m0
+- Attachments: cst92f32.pdf, cst92f32.txt
 
-## 使用
+## Usage
 
 ```text
-use cst92f32.cst92f32    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use cst92f32.cst92f32    # after installing the pack, use by the entry part name (see pack.toml [variants] for the variant face)
 ```
 
 ```bash
-mcc lib pack cst92f32          # 出 .mcl + .thin.mcl
-mcc lib install --from cst92f32-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack cst92f32          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

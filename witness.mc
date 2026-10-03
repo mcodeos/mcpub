@@ -1,7 +1,3 @@
-# Copyright (c) 2026 MCode
-#
-# Licensed under the Apache License, Version 2.0.
-
 // U357 grammar-witness file: part-identity faces that had zero corpus
 // witness -- a power spec typed by the composite multiply unit
 // UV.VOLT*UV.AMP (the divide form is witnessed by mcode res.tc), the

@@ -7,18 +7,18 @@ connected to pin 8 (GND). Vs abs max 46V (42V in characteristics),
 Vss 5V logic supply.
 Pins ride the mclibs classic dual full-bridge shape.
 
-- 厂商: STMicroelectronics
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: motor-driver, h-bridge, dual, multiwatt
-- 附件: l298.pdf, l298.txt
+- Vendor: STMicroelectronics
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: motor-driver, h-bridge, dual, multiwatt
+- Attachments: l298.pdf, l298.txt
 
-## 使用
+## Usage
 
 ```text
-use l298n.l298n    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use l298n.l298n    # use by entry part name after installing (variant face in pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack l298n          # 出 .mcl + .thin.mcl
-mcc lib install --from l298n-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack l298n          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

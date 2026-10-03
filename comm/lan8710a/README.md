@@ -33,5 +33,5 @@ use lan8710a.lan8710a    # after install; orderable faces in pack.toml [variants
 
 ```bash
 mcc lib pack lan8710a                        # emit .mcl + .thin.mcl
-mcc lib install --from lan8710a-0.1.mcl      # install inside a consumer project
+mcc lib install --from <name>-<version>.mcl       # vendors into <project>/libs/
 ```

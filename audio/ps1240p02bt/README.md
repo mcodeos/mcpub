@@ -8,18 +8,18 @@ rectangular wave, 70dBA/10cm min, max input 30 Vo-p (without DC bias).
 The catalog documents no polarity for the pin-terminal parts.
 Pins ride the mclibs passive piezo sounder shape.
 
-- 厂商: TDK
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: buzzer, piezo, magnetic, smd
-- 附件: ps1240.pdf
+- Vendor: TDK
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: buzzer, piezo, magnetic, smd
+- Attachments: ps1240.pdf
 
-## 使用
+## Usage
 
 ```text
-use ps1240p02bt.ps1240p02bt    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use ps1240p02bt.ps1240p02bt    # use by the entry part name after installing the pack (variant surface: see pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack ps1240p02bt          # 出 .mcl + .thin.mcl
-mcc lib install --from ps1240p02bt-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack ps1240p02bt          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

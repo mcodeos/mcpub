@@ -84,7 +84,7 @@ datasheet ──▶ transcribe entry .mc ──▶ scaffold pack (pack.toml/READ
   wrappers in the entry — both levels**: ① **circuit-block level**, the common
   peripheral blocks every project would otherwise re-type (decoupling groups,
   reset RC, crystal + load caps, BOOT strap, pull-up groups) as parameterized
-  `func` wiring macros (precedent: us513_20_f `func Power` / `func I2C`);
+  `func` wiring macros (precedent: us513u6 `func Power` / `func I2C`);
   ② **module level**, typical-application `module` wrappers (minimal system,
   power tree, debug-port group) declaring the component and its surrounding
   wiring as one unit (precedent: the `module TLE7368E(psnk pwr…)` in the
@@ -128,10 +128,10 @@ mcc lib pack mcpub/<category>/<part>        # emits <part>-<ver>.mcl + .thin.mcl
 
 Refuses to emit unless **all** hold:
 
-1. entry compiles clean (in-process check gate — 编译不过不出包);
+1. entry compiles clean (in-process check gate — no compile, no pack);
 2. every `[variants]` base name is present on the entry source face;
 3. every bundled attachment exists and its sha256 matches the manifest;
-4. manifest structure is valid (format gate, 包名律, semver, …).
+4. manifest structure is valid (format gate, pack-name law, semver, …).
 
 `mcc lib inspect <part>-<ver>.mcl` dumps the manifest from the archive
 without touching disk — use it to eyeball coordinates/attachments before
@@ -198,7 +198,7 @@ instantiated per new `[variants]` row — is the acceptance bar for a pack.
 
 | # | item | gate |
 |---|------|------|
-| 1 | dir/entry/pack name == part number | 包名律 (manifest validation) |
+| 1 | dir/entry/pack name == part number | pack-name law (manifest validation) |
 | 2 | vendor evidence-based or `unknown` | corpus rule |
 | 3 | README.md English default, `pack.toml` comments English | corpus rule |
 | 4 | entry compiles clean | pack gate |

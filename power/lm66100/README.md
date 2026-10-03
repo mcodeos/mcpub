@@ -15,20 +15,20 @@ The VOUT row states the datasheet operating window as a range nominal
 (nsi814x precedent): the part is a pass-through switch and guarantees no
 single output voltage. A nominal-less psrc is blocked by the source
 decode law; moving the nominal to the variant is applied-nominal ruling 2
-(案 A), another batch.
+(case A), another batch.
 
-- 厂商: TI
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: ideal-diode, power-mux, protection, sc-70
-- 附件: lm66100.pdf, lm66100.txt
+- Vendor: TI
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: ideal-diode, power-mux, protection, sc-70
+- Attachments: lm66100.pdf, lm66100.txt
 
-## 使用
+## Usage
 
 ```text
-use lm66100.lm66100    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use lm66100.lm66100    # after installing the pack, use by the entry part name (see pack.toml [variants] for the variant face)
 ```
 
 ```bash
-mcc lib pack lm66100          # 出 .mcl + .thin.mcl
-mcc lib install --from lm66100-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack lm66100          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

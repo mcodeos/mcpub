@@ -23,18 +23,18 @@ against §3 before reusing this shape for another package.
 Other grades (U180 binding-base pattern): the QFN20 shape here is the
 verified base; other packages get their own base when a project needs them.
 
-- 厂商: HDSC
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: mcu, cortex-m0, low-power, hdsc
-- 附件: hc32l110.pdf, hc32l110.txt
+- Vendor: HDSC
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: mcu, cortex-m0, low-power, hdsc
+- Attachments: hc32l110.pdf, hc32l110.txt
 
-## 使用
+## Usage
 
 ```text
-use hc32l110.hc32l110    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use hc32l110.hc32l110    # use by the entry part name after installing the pack (variant surface: see pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack hc32l110          # 出 .mcl + .thin.mcl
-mcc lib install --from hc32l110-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack hc32l110          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

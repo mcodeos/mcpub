@@ -7,18 +7,18 @@ Pin 11 is NC in the PWP; the unnumbered PowerPAD is grounded per the GND
 row description. VM operating range 2.7-11.8V.
 Pins ride the mclibs dual H-bridge shape.
 
-- 厂商: TI
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: motor-driver, h-bridge, dual, pwm
-- 附件: drv8833c.pdf, drv8833c.txt
+- Vendor: TI
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: motor-driver, h-bridge, dual, pwm
+- Attachments: drv8833c.pdf, drv8833c.txt
 
-## 使用
+## Usage
 
 ```text
-use drv8833c.drv8833c    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use drv8833c.drv8833c    # use by entry part name after installing (variant face in pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack drv8833c          # 出 .mcl + .thin.mcl
-mcc lib install --from drv8833c-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack drv8833c          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

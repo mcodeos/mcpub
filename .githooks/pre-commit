@@ -1,6 +1,13 @@
 #!/bin/bash
-# The mcpub auto-versioning law: a commit that touches a pack bumps that
-# pack's patch version and refreshes its attachment checksums, so a pack's
-# version always answers "which content is this?" (see WORKFLOW.md,
+# Two gates, in order:
+#
+# Gate 1 — public-corpus face (check.sh): English-only, entry-.mc provenance
+# header, pack.toml datasheet source link, no stale versioned artifact names.
+# These are mcpub-local conventions (mcpub/CLAUDE.md), deliberately NOT
+# canonized in mcd.
+#
+# Gate 2 — the mcpub auto-versioning law: a commit that touches a pack bumps
+# that pack's patch version and refreshes its attachment checksums, so a
+# pack's version always answers "which content is this?" (see WORKFLOW.md,
 # "Versioning"). New packs keep their initial 0.1.0.
-exec "$(dirname "$0")/../bump.sh" --staged
+exec "$(dirname "$0")/../check.sh" && exec "$(dirname "$0")/../bump.sh" --staged

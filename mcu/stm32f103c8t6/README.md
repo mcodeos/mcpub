@@ -8,18 +8,18 @@ the ordering scheme (Table 63: C = 48 pins, 8 = 64KB flash, T = LQFP,
 6 = -40 to 85C). Operating VDD 2.0-3.6V; Run-mode max 50.3mA at 72MHz.
 Pins ride the mclibs LQFP48 motor-control shape.
 
-- 厂商: STMicroelectronics
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: mcu, cortex-m3, stm32f1, lqfp48, 72mhz
-- 附件: stm32f103c8t6.pdf, stm32f103c8t6.txt
+- Vendor: STMicroelectronics
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: mcu, cortex-m3, stm32f1, lqfp48, 72mhz
+- Attachments: stm32f103c8t6.pdf, stm32f103c8t6.txt
 
-## 使用
+## Usage
 
 ```text
-use stm32f103c8t6.stm32f103c8t6    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use stm32f103c8t6.stm32f103c8t6    # use by the entry part name after installing the pack (variant surface: see pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack stm32f103c8t6          # 出 .mcl + .thin.mcl
-mcc lib install --from stm32f103c8t6-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack stm32f103c8t6          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

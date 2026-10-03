@@ -1,5 +1,5 @@
 #!/bin/bash
-# Generate the static registry tree (registry-design.md §3) from build/:
+# Generate the static registry tree (registry-design.md §3) from build/mcl/:
 #
 #   <reg>/lib/<name>.json                      package metadata (one per pack)
 #   <reg>/lib/<PARTNO>.json                    partno alias entries (package face,
@@ -14,12 +14,12 @@
 # into the same entries; this first cut regenerates per batch (one version
 # per pack). Packs on the known-red list are skipped, same law as build.sh.
 #
-# Usage: ./mkregistry.sh [reg-dir]   (default: registry/)
+# Usage: ./mkregistry.sh [reg-dir]   (default: build/registry/)
 set -eu
 cd "$(dirname "$0")"
 
-REG="${1:-registry}"
-BUILD="${BUILD:-build}"
+REG="${1:-build/registry}"
+BUILD="${BUILD:-build/mcl}"
 KNOWN_RED="${KNOWN_RED:-rfsoc/cc2530 rfsoc/cc2652r rfsoc/cst92f32 rfsoc/efr32mg21 rfsoc/esp32h2}"
 
 sha() { shasum -a 256 "$1" | cut -d' ' -f1; }
@@ -83,6 +83,11 @@ for toml in */*/pack.toml; do
     # partno alias entries: the package face is authoritative, the version
     # table restricted to where the partno exists (this batch = this version).
     for p in $partnos; do
+        # a `/` partno cannot be a flat lib/<PARTNO>.json file (nor a URL
+        # path segment) — skip loudly until the protocol defines an encoding
+        case "$p" in
+            */*) echo "WARN: partno contains '/': $p ($dir) — alias entry skipped" >&2; continue ;;
+        esac
         printf '{"name": "%s", "category": "%s", "package": "%s", "versions": {"%s": {"checksum": "%s", "thin_checksum": "%s", "size": %s, "variants": ["%s"]}}}\n' \
             "$p" "$category" "$name" "$ver" "$full_sum" "$thin_sum" \
             "$(stat -f%z "$dl/$name-$ver.thin.mcl")" "$p" \

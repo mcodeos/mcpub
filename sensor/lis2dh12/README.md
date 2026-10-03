@@ -17,18 +17,18 @@ tied GND -> 7-bit address 0x18 (SAD = 001100xb)
 12 = INT1    interrupt output 1
 NOTE: pin 11 is INT2 and pin 12 is INT1 — easy to swap from memory.
 
-- 厂商: STMicroelectronics
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: accelerometer, 3-axis, imu, i2c, spi, mems
-- 附件: lis2dh12.pdf, lis2dh12.txt
+- Vendor: STMicroelectronics
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: accelerometer, 3-axis, imu, i2c, spi, mems
+- Attachments: lis2dh12.pdf, lis2dh12.txt
 
-## 使用
+## Usage
 
 ```text
-use lis2dh12.lis2dh12    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use lis2dh12.lis2dh12    # after installing the pack, use by the entry part name (see pack.toml [variants] for the variant face)
 ```
 
 ```bash
-mcc lib pack lis2dh12          # 出 .mcl + .thin.mcl
-mcc lib install --from lis2dh12-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack lis2dh12          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

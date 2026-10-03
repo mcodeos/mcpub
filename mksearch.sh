@@ -10,11 +10,11 @@
 # `latest` is the greatest non-yanked version by numeric ordering. Run after
 # mkregistry.sh (or after every publish that lands in the tree).
 #
-# Usage: ./mksearch.sh [reg-dir]   (default: registry/)
+# Usage: ./mksearch.sh [reg-dir]   (default: build/registry/)
 set -eu
 cd "$(dirname "$0")"
 
-REG="${1:-registry}"
+REG="${1:-build/registry}"
 
 python3 - "$REG" <<'PY'
 import json, re, sys

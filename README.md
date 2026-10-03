@@ -4,10 +4,9 @@ some public components libs.
 ## Pack conventions (public corpus rules)
 
 - One pack per part, one directory each: `pack.toml` + entry `.mc` + datasheet attachments.
-  The pack name equals the entry file basename (包名律).
-- `pack.toml` comments are **English only** — this is a public corpus; no bilingual comments.
-- In-pack `README.md` is **English by default**; a Chinese edition lives in a separate
-  `<name>cn.md` file. The `readme` field points at the single entry document.
+  The pack name equals the entry file basename (pack-name law).
+- **English only, everywhere** — pack.toml comments, in-pack `README.md`, `.mc` comments
+  and string text included. No Chinese editions (`<name>cn.md`); this is a public corpus.
 - `keywords` are lowercase short tokens (device family / package / function) feeding
   registry-side search ranking (P3).
 - Vendors are evidence-based (`.mc` headers / datasheets / txt caches); parts without

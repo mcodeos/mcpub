@@ -9,18 +9,18 @@ PowerPAD carries pin number 57 and the name GND.
 PVDD operating range 8-60V.
 Pins ride the mclibs three-phase gate driver with buck shape.
 
-- 厂商: TI
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: gate-driver, 3-phase, buck, current-sense, motor
-- 附件: drv8302.pdf, drv8302.txt
+- Vendor: TI
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: gate-driver, 3-phase, buck, current-sense, motor
+- Attachments: drv8302.pdf, drv8302.txt
 
-## 使用
+## Usage
 
 ```text
-use drv8302.drv8302    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use drv8302.drv8302    # use by entry part name after installing (variant face in pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack drv8302          # 出 .mcl + .thin.mcl
-mcc lib install --from drv8302-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack drv8302          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

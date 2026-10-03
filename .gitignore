@@ -8,8 +8,9 @@
 # (render_projection.md / known_missing.md) - never commit
 baseline/
 
-# .mcl 打包产物默认落在包目录（mcc lib pack 默认 --out = 包自身），不入库
+# .mcl pack artifacts default to the pack directory (mcc lib pack defaults --out to the pack itself); not committed
 *.mcl
 
-# build.sh sweep output (mcc lib pack artifacts per pack) - never commit
+# build.sh sweep output (mcc lib pack artifacts per pack, build/mcl/)
+# plus the mkregistry.sh static tree (build/registry/) - never commit
 /build/

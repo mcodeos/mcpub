@@ -13,18 +13,18 @@ The MFP row keeps a plain `out`: @drive is witnessed on interface pin rows
 only, and the open-drain note stays in the row description (lm66100 ST
 precedent).
 
-- 厂商: Microchip
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: rtc, i2c, sram, timestamp
-- 附件: mcp7940m.pdf, mcp7940m.txt
+- Vendor: Microchip
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: rtc, i2c, sram, timestamp
+- Attachments: mcp7940m.pdf, mcp7940m.txt
 
-## 使用
+## Usage
 
 ```text
-use mcp7940m.mcp7940m    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use mcp7940m.mcp7940m    # use by the entry part name after installing the pack (variant surface: see pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack mcp7940m          # 出 .mcl + .thin.mcl
-mcc lib install --from mcp7940m-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack mcp7940m          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```

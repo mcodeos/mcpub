@@ -9,18 +9,18 @@ ground group is pins 5 / 16 plus the unnumbered exposed pad (PPAD).
 VM operating range 5.9-45V.
 Pins ride the mclibs brushed-DC full-bridge gate driver shape.
 
-- 厂商: TI
-- 类目/入口: 见 pack.toml（`mcc lib inspect <name>-*.mcl`）
-- 检索标签: gate-driver, h-bridge, spi, motor
-- 附件: drv8701.pdf, drv8701.txt
+- Vendor: TI
+- Category/entry: see pack.toml (`mcc lib inspect <name>-*.mcl`)
+- Search tags: gate-driver, h-bridge, spi, motor
+- Attachments: drv8701.pdf, drv8701.txt
 
-## 使用
+## Usage
 
 ```text
-use drv8701p.drv8701p    # 装包后按入口件名 use（变体面见 pack.toml [variants]）
+use drv8701p.drv8701p    # use by entry part name after installing (variant face in pack.toml [variants])
 ```
 
 ```bash
-mcc lib pack drv8701p          # 出 .mcl + .thin.mcl
-mcc lib install --from drv8701p-0.1.0.mcl   # 装入 ~/.mcode/
+mcc lib pack drv8701p          # produces .mcl + .thin.mcl
+mcc lib install --from <name>-<version>.mcl    # vendors into <project>/libs/
 ```
