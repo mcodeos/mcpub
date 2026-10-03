@@ -3,7 +3,7 @@
 [package]
 format = "1"
 name = "tea2016t"
-version = "0.1"
+version = "0.2"
 category = "power"
 entry = "tea2016t.mc"
 vendor = "NXP"

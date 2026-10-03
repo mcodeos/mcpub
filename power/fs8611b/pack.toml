@@ -3,7 +3,7 @@
 [package]
 format = "1"
 name = "fs8611b"
-version = "0.2"
+version = "0.3"
 category = "power"
 entry = "fs8611b.mc"
 vendor = "FastSOC"

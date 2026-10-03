@@ -12,13 +12,13 @@ component SR.TEA1995T
     package = PKG.SOIC8
 
     pins = [
-        psnk [2] = GND
         out 1 = GDA                     // channel A gate drive (T1 winding A, 16-17)
         io 3 = DSB                      // channel B drain sense (R31 <- Q8.DB)
         io 4 = SSB                      // channel B source sense (grounded)
         io 5 = SSA                      // channel A source sense (grounded)
         io 6 = DSA                      // channel A drain sense (R19 <- Q8.DA)
-        in 7 = VCC                      // supply (VBUS domain, C20 decoupling)
+        psnk [7, 2] = [VCC, GND]::DC(12V)   // supply pair: 7 = VCC (VBUS domain,
+                                        //   C20 decoupling), 2 = GND return
         out 8 = GDB                     // channel B gate drive (T1 winding B, 11-12)
     ]
 }

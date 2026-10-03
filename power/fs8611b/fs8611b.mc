@@ -12,7 +12,9 @@ component PDCTL.FS8611B
     partno = "FS8611B"
 
     pins = [
-        in 1 = VIN                      // supply: PDISxN domain via R28 1K + C23 + Z4 clamp
+        psnk [1, 10] = [VIN, VSS]::DC(5V~20V)   // supply pair: 1 = VIN (PDISxN
+                                        //   domain via R28 1K + C23 + Z4 clamp),
+                                        //   10 = VSS return
         out 2 = CGATE                   // drives the external PMOS gate
         io 3 = FUNC1                    // repurposed as I2C SCL on this board (R44 pull-up to V3V3)
         io 4 = DP                       // Type-C D+ (A6/B6)
@@ -21,6 +23,5 @@ component PDCTL.FS8611B
         io 7 = CC2
         io 8 = FUNC2                    // repurposed as I2C SDA on this board (R43 pull-up to V3V3)
         io 9 = FB                       // regulation feedback (into the buck FB divider node)
-        psnk [10] = VSS
     ]
 }

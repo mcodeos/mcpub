@@ -3,16 +3,19 @@
 // Licensed under the Apache License, Version 2.0.
 
 // =============================================================================
-//  TYPE-C-20-V receptacle (16P, horizontal; A1/A12 + 15-18 = shell ground,
-//  A8/B8 = SBU unused on this board).
+//  TYPE-C-20-V receptacle (16P, horizontal; A1/A12 = power return, 15-18 =
+//  shell shield, A8/B8 = SBU unused on this board).
 // =============================================================================
 component CONN.TYPEC16P
 {
     partno = "TYPE-C-20-V"
 
     pins = [
-        psnk [[A1, A12], [15, 16, 17, 18]] = [GND_A, SHELL]::DC(0V)
-        psrc [A4, A9] = VBUS           // power pins (two pins, same potential)
+        psnk [[A4, A9], [A1, A12]] = [VBUS, GND_A]::DC(5V~20V)   // power pair
+                                        //   (A4/A9 same-potential hot, A1/A12
+                                        //   return)
+        io [15, 16, 17, 18] = SHELL    // shell shield pins — no electrical face
+                                        //   declared (board ties them to ground)
         io A5 = CC1
         io B5 = CC2
         io A6 = DP1                    // shorted to B6 on the board (N$4)

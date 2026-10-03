@@ -3,7 +3,7 @@
 [package]
 format = "1"
 name = "typec16p"
-version = "0.1"
+version = "0.2"
 category = "connector"
 entry = "typec16p.mc"
 vendor = "unknown"
