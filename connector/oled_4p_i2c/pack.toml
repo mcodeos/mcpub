@@ -1,0 +1,12 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "oled_4p_i2c"
+version = "0.1"
+category = "connector"
+entry = "oled_4p_i2c.mc"
+vendor = "unknown"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["oled", "header", "i2c", "4pin", "generic"]

@@ -1,0 +1,12 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "wrlsb80m"
+version = "0.1"
+category = "discrete"
+entry = "wrlsb80m.mc"
+vendor = "unknown"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["bridge-rectifier", "smd", "wrlsb"]

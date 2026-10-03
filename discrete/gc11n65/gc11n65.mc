@@ -1,0 +1,19 @@
+// Copyright (c) 2026 MCode
+//
+// Licensed under the Apache License, Version 2.0.
+
+// =============================================================================
+//  GC11N65D5 — 650V NMOS, DFN 5x6
+//  No DFN5x6 member exists in the PKG enum, so `package` is left unset rather
+//  than forced to a wrong value.
+// =============================================================================
+component NMOS.GC11N65
+{
+    partno = "GC11N65D5"
+
+    pins = [
+        io 1 = G
+        io 2 = D
+        io 3 = S
+    ]
+}

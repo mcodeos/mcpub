@@ -1,0 +1,22 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "tea2016t"
+version = "0.1"
+category = "power"
+entry = "tea2016t.mc"
+vendor = "NXP"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["llc", "pfc", "combo-controller", "soic16", "nxp"]
+
+[[attachments]]
+path = "tea2016aat.pdf"
+kind = "datasheet"
+checksum = "sha256:714029211e890b22ece04ff9a6064267eef1b2ad1b88930a8e8b7c8377895dcd"
+
+[[attachments]]
+path = "tea2016aat.txt"
+kind = "doc"
+checksum = "sha256:890307dcad69a588e709eebbfc446804a9d1276273e3aba74efe031726aeb431"

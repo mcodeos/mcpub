@@ -1,0 +1,605 @@
+                                                                                                          NDP1460QB
+     6A,40V High Efficiency Synchronous Step-Down DC/DC Converter
+
+
+ Description                                                         Features
+    Z
+        NDP1460QB              is a high           efficiency,              Wide VIN Range : 7V to 38V
+ monolithic synchronous step-down DC/DC                                     6A Continuous Output Current
+
+ converter        utilizing      a       Jitter    frequency,               Up to 95% Efficiency @ 24V Input
+
+ average current mode control architecture.                                 Dual-Channel CC/CV Mode Control
+
+ Capable of delivering up to 6A continuous                                  Brick Wall Current Limit
+                                                                            Built in Adjustable Line-Compensation
+ load with excellent line and load regulation.
+                                                                            Adjustable Output Voltages
+ The device operates from an input voltage
+                                                                            +/-1.5% Output Voltage Accuracy
+ range of 7V to 38V and provides an
+                                                                            +- 5% Current Limit Accuracy.
+ adjustable output voltage from 3.3V to 25V.
+                                                                            Integrated 14mΩ High Side Switch
+        The NDP1460QB features short circuit
+                                                                            Integrated 14mΩ Low Side Switch
+ and thermal protection circuits to increase
+                                                                            Programable Frequency(130KHz~300KHz)
+ system reliability. The internal soft-start
+                                                                            Burst Mode Operation at Light Load
+ avoids input inrush current during startup.
+                                                                            Internal loop Compensation
+        The NDP1460QB require a minimum                                     Internal Soft Start
+ number of external components. and a wide                                  Thermally Enhanced QFN5*5 Package
+ array of protection features to enhance
+                                                                     Applications
+ reliability
+                                                                              Car Charger
+                                                                              Rechargeable Portable Devices
+                                                                              Networking Systems
+                                                                              Distributed Power Systems
+Typical Application
+                                                                                                               20mR        5V/2.4A
+                                                                    22uH                                                             VOUT1
+ VIN
+                                     100nF
+
+                                                                                                       2.2uF
+                                                                                                               20mR
+                                                                                         470uF
+                                                                                                                           5V/2.4A
+                               20R                                                100K                                               VOUT2
+                                             SW    SW     SW
+                               BST                                   FB
+                                                   SW
+                                                                     CSP
+                                                                     CSN1
+                               VIN                                   CSN2
+                               VIN           VIN          GND
+                               VIN                                   FS
+                                                                                  25K            OPT
+                                                        GND   GND
+               100uF   2.2uF
+
+  GND                                                                                                                                GND
+                                                        Dual Channel Application
+                                                                                                                      Rev2.0    Page1-11
+TEL:0755-82863877 13242913995 E-MAIL:panxia168@126.com http://www.szczkjgs.com
+                                                                                                    NDP1460QB
+                                                                                                         10mR    5V/4.8
+                                                                22uH                                                      VOUT
+ VIN
+                                 100nF
+
+                               20R                                          100K   470uF         2.2uF
+                                         SW    SW     SW
+                              BST                               FB
+                                               SW
+                                                                CSP
+                                                                CSN1
+                              VIN                               CSN2
+                              VIN        VIN          GND
+                              VIN                                FS
+                                                                            25K            OPT
+                                                    GND   GND
+             100uF    2.2uF
+
+ GND                                                                                                                      GND
+                                         Single Channel Application
+Absolute Maximum Ratings (at TA = 25°C)
+  Characteristics                                                     Symbol          Rating                          Unit
+  VIN to GND                                                                          -0.3 to 42                      V
+  SW to GND                                                                           -0.3 to VIN+0.3                 V
+  BST to GND                                                                          -0.3 to VIN+7
+  FB, FS to GND                                                                       -0.3 to +6                      V
+  CSP, CSN1, CSN2 to GND                                                              -0.3 to 25                      V
+  Junction to Ambient Thermal Resistance                                              105                             °C/W
+  Operating Junction Temperature                                                      -40 to 150                      °C
+  Storage Junction Temperature                                                        -55 to 150                      °C
+  Thermal Resistance from Junction to case                            θJC             15                              °C/W
+  Thermal Resistance from Junction to ambient                         θJA             40                              °C/W
+
+Pin Function And Descriptions
+       PIN           NAME                Description
+  1,2,3,
+                     GND         Ground
+  PAD1
+  4,5                 NC         Not Connected
+  6,7,8,
+                     VIN         Power Input Positive Pole
+  PAD2
+  9                  NC          Not Connected
+  10                 BST         Boot Strap
+  11                 NC          Not Connected
+  12,13,14                       Switching,
+                      SW
+  , PAD3                         Connected With a Inductor
+  15                  NC         Not Connected
+                                 Feedback Of Output
+  16                 VFB
+                                 Voltage
+                                 Positive Pole of Current
+  17                 CSP
+                                 Sense
+                                 Negative Pole1 of Current
+  18                 CSN1
+                                 Sense
+                                 Negative Pole2 of Current
+  19                 CSN2
+                                 Sense
+                                 Connect a Resistor to GND
+  20                  FS
+                                 for Frequency Config
+
+                                                                                                            Rev2.0    Page2-11
+                                                                NDP1460QB
+Order information
+  Order Information                             Top Marking
+
+   NDP1460 Q B
+
+                         Pin NO.
+                         B:20
+                         Package
+                         Q: QFN5*5                    DY: Year (D8=2018,D9=2019,…)
+                                                      WW: Weekly (01-53)
+                         Product Number
+                                                      X : Internal ID Code
+
+
+
+Electrical Characteristics
+TJ = 25°C. VIN = 12V, unless otherwise noted
+
+  Characteristics         Symbol      Conditions              Min     Typ       Max           Units
+
+  Input Voltage           VIN                                   7       -             38        V
+  UVLO Voltage            VUVLO                                        6.2            7         V
+  UVLO Hysteresis                                                      0.8                      V
+  Input over voltage
+                          Vovp                                         38                       V
+  protect
+  Quiescent Current       ICCQ        VFB = 1.2V, no switch     -     1300            -        uA
+  Standby Current         ISB         No Load                   -      1.7        2.2          mA
+  FB Reference Voltage    VFB                                 0.985    1         1.015          V
+  VFB bias Current        IFB                                                     0.2          uA
+
+                          VCS1        CSP-CSN1                 57      60             63       mV
+  Current Sense AMP
+                          VCS2        CSP-CSN2                 57      60             63       mV
+                                      FS Floating                     130                      KHz
+  Switching Frequency     FSW
+                                      connect 75K resister            300                      KHz
+  FS Shut down            VFSEN                                        0.6                      V
+  Maximum Duty Cycle                                                   98             -         %
+  Minimum On-Time                                               -     250             -         ns
+  Current Limit           ILIM                                 7.5                              A
+  VOUT short protect      VOUTSCP                                      3.0                      V
+  Hicup Interval          Thicup      FS Floating                     400                      mS
+  Soft start Time         Tss                                          2                       mS
+                          High side   Temp=25℃                         14                      mΩ
+
+
+                                                                             Rev2.0        Page3-11
+                                                                                                        NDP1460QB
+                 RDSON Of Power
+                                               Low side      Temp=25℃                                            14                      mΩ
+                 MOS
+                 Thermal Regulation            TTR                                                              145                      °C
+                 Thermal shutdown
+                                               TSD                                                      -       165            -         °C
+                 Temp
+                 Thermal Shutdown
+                                               TSH                                                      -        30            -         °C
+                 Hysteresis
+
+
+
+Block Diagram
+
+
+
+
+Typical Performance Characteristics (TJ = 25°C, unless otherwise noted)
+                                  Efficiency&Iout(%)                                      Line Regulation(Rupfb=100K)
+                 100                                                               5.40
+                                                                                   5.35
+                  90
+                                                                                   5.30
+                  80                                                               5.25
+
+
+                                                                         Vout（V）
+Effiiciency(%)
+                                                                                   5.20
+                  70
+                                                                                   5.15
+                  60
+                                                                                   5.10
+
+                  50                                                               5.05
+                                                                                                                                   Vin=12V
+                                                            Vin=12V                5.00
+                  40                                        Vin=24V                                                                Vin=24V
+                                                                                   4.95
+                                                            Vin=31V                                                                Vin=31V
+                  30                                                               4.90
+                       0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5                    0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5
+                                            Iout(A)                                                            Iout(A)
+                                                                                                                      Rev2.0       Page4-11
+                                                                                                                                      NDP1460QB
+                                  ΔVout VS Iout(Rupfb=100K)                                                                        ΔVout VS Rup(FB)
+                 120                                                                                     2,500
+
+                 100
+                                                                                                         2,000
+
+                   80
+
+     ΔVout(mV)                                                                     ΔVout(mV)
+                                                                                                         1,500
+                   60
+                                                                                                         1,000
+                   40
+
+
+                   20                                              Vin=12V                                500
+                                                                   Vin=24V
+                                                                   Vin=31V
+                    0                                                                                          0
+                        0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 6.0                                            0     200     400      600   800   1,000 1,200 1,400
+                                               Iout(A)                                                                                         RupFB(K)
+
+                                        Temp vs. Iin                                                                       Supply Current vs. Input Voltage
+             3.0
+                                                                                                         1.8
+
+
+
+             2.5
+
+
+
+
+                                                                                    Supply Current(mA)
+                                                                                                         1.7
+
+
+Iin (mA)
+             2.0
+
+
+                                                                                                         1.6
+             1.5
+
+
+
+             1.0                                                                                         1.5
+                   -40     -20   0     20    40   60    80   100     120     140                                   0         5       10       15     20    25    30    35
+                                             Temp (℃)                                                                                         Vin(V)
+
+                                        Short Circuit                                                                                     Short Circuit
+                                       Vin=12V, Freq=2Hz                                                                           Vin=12V, Freq=34kHz
+                                         (CH3=SW)                                                                                        (CH3=SW)
+
+
+
+
+                                            400ms
+
+
+
+
+                                                                                                                                                      Rev2.0    Page5-11
+                                                       NDP1460QB
+             Power On                                 Power Off
+    Vin=12V, Vout=5.05V, Iout=5.5A             Vin=12V, Vout=5.05V, Iout=5.5A
+(CH1=Vin, CH2= SW, CH3= Vout, CH4=Isw)    ( CH1=Vin, CH2= SW, CH3= Vout, CH4=Isw)
+
+
+
+
+             Power On                                 Power Off
+     Vin=24V, Vout=5.05V, Iout=5.5A            Vin=24V, Vout=5.05V, Iout=5.5A
+( CH1=Vin, CH2= SW, CH3= Vout, CH4=Isw)   ( CH1=Vin, CH2= SW, CH3= Vout, CH4=Isw)
+
+
+
+
+    Output Voltage Ripple                        Output Voltage Ripple
+     Vin=12V, Vout=5.05V, Iout=5.5A              Vin=24V, Vout=5.05V, Iout=5.5A
+( CH1=Vin, CH2= SW, CH3= Vout, CH4=Isw)   ( CH1=Vin, CH2= SW, CH3= Vout, CH4=Isw)
+
+
+
+
+                                                                     Rev2.0    Page6-11
+                                                                         NDP1460QB
+Operation                                             amplifier adjusts the ITH voltage by comparing
+                                                      the divided-down output voltage (VFB) with a
+   The NDP1460QB is a high efficiency,
+                                                      1.0V reference voltage. If the load current
+monolithic,    synchronous   step-down     DC/DC
+                                                      changes, the error amplifier adjusts the average
+converter utilizing a Jitter frequency, average
+                                                      inductor current as needed to keep the output
+current mode control architecture. Average
+                                                      voltage in regulation.
+current mode control enables fast and precise
+                                                      Low Current operation
+control of the output current. It operates through
+                                                         The discontinuous-conduction modes (DCMs)
+a wide VIN range and regulates with low
+                                                      are available to control the operation of the
+quiescent current. An error amplifier compares
+                                                      NDP1460QB at low currents. Burst Mode
+the output voltage with a internal reference
+                                                      operation automatically switch from continuous
+voltage of 1.0V and adjusts the peak inductor
+                                                      operation to the Burst Mode operation when the
+current       accordingly.   overvoltage       and
+                                                      load current is low
+undervoltage comparators will turn off the
+regulator.
+                                                      VIN Overvoltage Protections
+                                                         In order to protect the internal power
+Main Control Loop
+                                                      MOSFET devices against transient voltage
+   During normal operation, the internal top
+                                                      spikes, the NDP1460QB constantly monitors the
+power switch (N-channel MOSFET) is turned on
+                                                      VIN pin for an overvoltage condition. When VIN
+at the beginning of each clock cycle, causing the
+                                                      rises above 38V, the regulator suspends
+inductor current to increase. The sensed
+                                                      operation by shutting off both power MOSFETs.
+inductor current is then delivered to the average
+                                                      Once VIN drops below 37V, the regulator
+current amplifier, whose output is compared with
+                                                      immediately resumes normal operation. The
+a saw-tooth ramp. When the voltage exceeds the
+                                                      regulator executes its soft-start function when
+vduty voltage, the PWM comparator trips and
+                                                      exiting an overvoltage condition.
+turns off the top power MOSFET. After the top
+power MOSFET turns off, the synchronous
+                                                      Cable Drop Compensation
+
+power switch (N-channel MOSFET) turns on,                Due to the resistive of charger’s output Cable,
+
+causing the inductor current to decrease. The         The    NDP1460QB         built   in   a   simple   user
+
+bottom switch stays on until the beginning of the     programmable cable voltage drop compensation
+                                                      using the impedance at the FB pin. Choose the
+next clock cycle, unless the reverse current limit
+                                                      proper resistance values for charger’s output cable
+is reached and the reverse current comparator
+                                                      as show in table 1:
+trips. In closed-loop operation, the average
+                                                      Rup is the upper resistor the resistors divider net
+current amplifier creates an average current loop
+                                                      Rlow is the lower resistor the resistors divider net
+that forces the average sensed current signal to
+be equal to the internal ITH voltage. Note that the
+DC gain and compensation of this average
+current loop is automatically adjusted to maintain
+an optimum current-loop response. The error
+                                                                                       Rev2.0    Page7-11
+                                                                        NDP1460QB
+    RFB(UPER)                       Cable Drop      This formula has a maximum at VIN = 2VOUT,
+                    Rlow（K）        compensation
+     （K）                              (mV)          where: IRMS ≅ IOUT/2
+       100              25              75          This simple worst-case condition is commonly
+       160              39             250
+                                                    used for design because even significant
+       360              91             570
+       470             120             750          deviations do not offer much relief. Note that
+       820             200            1400          ripple    current   ratings      from     capacitor
+      1200             300            2000
+                                                    manufacturers are often based on only 2000
+                    table 1
+                                                    hours of life which makes it advisable to further
+Frequency Selection and Shutdown
+                                                    derate the capacitor, or choose a capacitor rated
+   The switching frequency of the NDP1460QB
+                                                    at a higher temperature than required. Several
+can be programmed through an external resistor
+                                                    capacitors may also be paralleled to meet size or
+between 130kHz and 300 kHz，Floating this pin
+                                                    height requirements in the design. For low input
+set the switching frequency to 130K, an external
+                                                    voltage   applications,   sufficient    bulk   input
+resistor can set the frequency up to 300KHz。the
+                                                    capacitance is needed to minimize transient
+switching frequency is set using the FS pins as     effects during output load changes.
+shown in Table 2:
+                                                        Output Capacitor (COUT) Selection
+   FS Resistor(KΩ)      Frequency(KHz)                 The selection of COUT is determined by the
+       Floating              130K
+         1000                150K                   effective series resistance (ESR) that is required
+          750                160K                   to minimize voltage ripple and load step
+          510                170K                   transients as well as the amount of bulk
+          300                190K
+                                                    capacitance that is necessary to ensure that the
+          200                210K
+          150                240K                   control loop is stable. Loop stability can be
+           75                300K                   checked by viewing the load transient response.
+                Table 2
+                                                    The output ripple, △VOUT, is determined by:
+  When the FS pin is below 0.6V, the
+DP1460QB enters a low current shutdown state,
+reducing the DC supply current to 1.3mA.
+                                                       The output ripple is highest at maximum input
+Applications Information                            voltage since △IL increases with input voltage.
+   Input Capacitor (CIN) Selection                  Multiple capacitors placed in parallel may be
+The input capacitance CIN is needed to filter the   needed to meet the ESR and RMS current
+square wave current at the drain of the top power   handling requirements. Dry tantalum, special
+MOSFET. To prevent large voltage transients         polymer, aluminum electrolytic, and ceramic
+from occurring, a low ESR input capacitor sized     capacitors are all available in surface mount
+for the maximum RMS current should be used.         packages. Special polymer capacitors are very
+The maximum RMS current is given by:                low ESR but have lower capacitance density
+                                                    than other types. Tantalum capacitors have the
+                                                    highest capacitance density but it is important to
+                                                                                  Rev2.0    Page8-11
+                                                                                 NDP1460QB
+only use types that have been surge tested for                 losses and are preferred at high switching
+use in switching power supplies. Aluminum                      frequencies, so design goals can concentrate on
+electrolytic capacitors have significantly higher              copper loss and preventing saturation. Ferrite
+ESR, but can be used in cost-sensitive                         core material saturates “hard”, which means that
+applications provided that consideration is given              inductance collapses abruptly when the peak
+to ripple current ratings and long-term reliability.           design current is exceeded. This results in an
+Ceramic capacitors have excellent low ESR                      abrupt increase in inductor ripple current and
+characteristics and small footprints.                          consequent output voltage ripple. Do not allow
+    Inductor Selection                                         the core to saturate!
+   Given the desired input and output voltages,                Different core materials and shapes will change
+the inductor value and operating frequency                     the size/current and price/current relationship of
+determine the ripple current:                                  an inductor. Toroid or shielded pot cores in ferrite
+                                                               or permalloy materials are small and don’t
+            ∆I =              1−
+                      ∗                (       )               radiate much energy, but generally cost more
+   Lower ripple current reduces power losses in                than powdered iron core inductors with similar
+the inductor, ESR losses in the output capacitors              characteristics. The choice of which style
+and output voltage ripple. Highest efficiency                  inductor to use mainly depends on the price
+operation is obtained at low frequency with small              versus size requirements and any radiated
+ripple current. However, achieving this requires               field/EMI requirements. New designs for surface
+a large inductor. There is a trade-off between                 mount inductors are available from Coilcraft,
+component     size,       efficiency       and     operating   Toko, Vishay, NEC/Tokin, TDK and Würth
+frequency. A reasonable starting point is to                   Electronik.
+choose a ripple current that is about 40% of                   Efficiency Considerations
+IOUT(MAX). To guarantee that ripple current                    The percent efficiency of a switching regulator is
+does not exceed a specified maximum, the                       equal to the output power divided by the input
+inductance should be chosen according to:                      power times 100%. It is often useful to analyze
+              L=
+                   ∗∆
+                                  1−                           individual losses to determine what is limiting the
+                          (   )        (   )
+
+  Once the value for L is known, the type of                   efficiency and which change would produce the
+
+inductor must be selected. Actual core loss is                 most improvement. Percent efficiency can be
+
+independent of core size for a fixed inductor                  expressed as: % Efficiency = 100% – (Loss1 +
+
+value, but is very dependent on the inductance                 Loss2 + …) where Loss1, Loss2, etc. are the
+
+selected. As the inductance or frequency                       individual losses as a percentage of input power.
+
+increases, core losses decrease. Unfortunately,                Although all dissipative elements in the circuit
+
+increased inductance requires more turns of wire               produce losses, three main sources usually
+
+and therefore copper losses will increase.                     account for most of the losses in NDP1460QB
+
+Copper losses also increase as frequency                       circuits: 1) I2R losses, 2) switching and biasing
+
+increases Ferrite designs have very low core                   losses, 3) other losses.
+
+                                                                                             Rev2.0   Page9-11
+                                                                                      NDP1460QB
+Thermal Conditions                                       EMI/EMC
+In a majority of applications, the NDP1460QB
+                                                             In order to solve EMI electromagnetic
+does not dissipate much heat due to its high             interference, SW pin should add a circuit of RC
+efficiency and low thermal resistance. However,          filter, a 20Ωresistor and a 1nF capacitor, BST
+                                                         pin reserved 20Ωstring 100nF.If the application
+in applications where the NDP1460QB is running           version enough volume,can be reserved at input
+at high ambient temperature, high VIN, and               end type Π circuit.
+maximum        output   current    load,    the   heat
+                                                         LAYOUT GUIDE
+dissipated may exceed the maximum junction
+                                                                                    Keep
+                                                                                    Keep the
+                                                                                          the path
+                                                                                               path below
+                                                                                                     below C3,C5
+                                                                                                              C3,C5 as
+                                                                                                                    as close
+                                                                                                                       close as
+                                                                                                                             as
+temperature of the part.                                                           short
+                                                                                   short and
+                                                                                         and wide
+                                                                                               wide for
+                                                                                                     for low
+                                                                                                          low possible
+                                                                                                               possible to
+                                                                                                                        to VIN
+                                                                                                                           VIN
+                                                                                         resistance
+                                                                                          resistance             and
+                                                                                                                  and GND
+                                                                                                                       GND
+
+    If   the     junction     temperature    reaches
+approximately 150°C, both power switches will
+                                                           CSP &CSN
+                                                          CSP  &CSN connect
+                                                                       connect
+be turned off until the temperature drops about
+                                                          to RISEN
+                                                         to  RISEN directly
+                                                                     directly as
+                                                                              as
+30°C cooler To avoid the NDP1460QB from                     short as
+                                                           short  as possible
+                                                                      possible
+
+exceeding the maximum junction temperature,
+the user will need to do some thermal analysis.                                                                   Make
+                                                                                                                   Make GND
+                                                                                                                         GND loop
+                                                                                                                              loop
+                                                                                                                   Resistance
+                                                                                                                    Resistance as
+                                                                                                                               as
+                                                                                                                  small
+                                                                                                                  small as
+                                                                                                                        as possible
+                                                                                                                           possible
+The goal of the thermal analysis is to determine
+whether the power dissipated exceeds the                                                 Make
+                                                                                          Make GND
+                                                                                                GND loop
+                                                                                          Resistance
+                                                                                                     loop
+                                                                                           Resistance as
+                                                                                                      as
+                                                                                         small
+                                                                                         small as
+                                                                                               as possible
+                                                                                                  possible
+maximum junction temperature of the part. If the
+application     calls   for    a   higher    ambient
+temperature and/or higher switching frequency,
+care should be taken to reduce the temperature
+rise of the part by using a heat sink or forced air
+flow.
+
+
+
+
+                                                                                                             Rev2.0           Page10-11
+                                                     NDP1460QB
+Package Description
+QFN5*5-20 Outline Package
+
+
+
+
+            Dimensional References                       Unit: mm
+     Ref     MIN            NOR     MAX    Ref   MIN         NOR         MAX
+     A        0.7            0.75    0.8   D1    1.475       1.525       1.575
+     A1      0.00              -    0.05   E1    3.700       3.750       3.800
+     D       4.90            5.00   5.10   D2    1.900       1.950       2.000
+     E       4.90            5.00   5.10   E2    1.575       1.625       1.675
+     A2                     0.203          D3    1.975       2.025       2.075
+     Ne                      3.20          E3    1.825       1.875       1.925
+     Nd                     3.20            b    0.250       0.300       0.350
+     B1                      0.20           L    0.300       0.350       0.400
+     e                       0.80           h    0.250       0.300       0.350
+     aaa                     0.05           k    0.225       0.275       0.325
+     bbb                     0.10          k1    0.150       0.200       0.250
+
+
+                                                              Rev2.0   Page11-11
+

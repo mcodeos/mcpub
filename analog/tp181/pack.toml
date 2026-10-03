@@ -1,0 +1,22 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "tp181"
+version = "0.1"
+category = "analog"
+entry = "tp181.mc"
+vendor = "3PEAK"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["current-sense-amplifier", "zero-drift", "sc70-6", "3peak"]
+
+[[attachments]]
+path = "tp181.pdf"
+kind = "datasheet"
+checksum = "sha256:0f60c4e0854456b38bfddcc6e4edeb6ea52de488af7a009e44c6e994bc9ff46f"
+
+[[attachments]]
+path = "tp181.txt"
+kind = "doc"
+checksum = "sha256:d6921e9fcb412bdd377c27d18d73174654803036429642454b0880ef47e88322"

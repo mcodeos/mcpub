@@ -1,0 +1,693 @@
+                                                                                                                 TP181
+                                            Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Features                                                          Description
+•   Voltage Offset: ±100 μV (Max)                                 The TP181 is a series of zero-drift, bi-directional current
+                                                                  sense amplifiers that can sense voltage drops across
+•   Wide Common-Mode Voltage: −0.3 V to +36 V
+                                                                  shunts at common-mode voltages from −0.3 V to 36 V,
+•   Supply Voltage: 2.7 V to +30 V                                independent of the supply voltage. Three fixed gains are
+•   Accuracy and Zero-Drift Performance                           available: 50 V/V, 100 V/V, and 200 V/V. The low offset
+                                                                  of the zero-drift architecture enables the current sensing
+    – ±1% Gain Error (Max over Temperature)
+                                                                  with maximum drops across the shunt as low as 10 mV
+    – 0.5-μV/°C Offset Drift (Max)                                full-scale.
+    – 10-ppm/°C Gain Drift (Max)
+                                                                  The TP181 series operates from a single +2.7-V to 30-V
+•   Three Gain Options for Voltage Output
+                                                                  power supply, drawing a supply current of 120 μA typical.
+    – TP181A1: 50 V/V                                             The series is specified from –40°C +125°C, and offered in
+    – TP181A2: 100 V/V                                            the SOT363 (SC70-6) package.
+    – TP181A3: 200 V/V
+                                                                                   Table 1. Gain Options
+•   Low Supply Current: 120 μA (Typ)
+•   Rail-to-Rail Output                                              Product         Gain        R3 and R4      R1 and R2
+•   Package: SOT363 (SC70-6)                                      TP181A1             50           20 kΩ          1 MΩ
+•   Industrial Operation Range: −40°C to 125°C                    TP181A2             100          10 kΩ          1 MΩ
+•   ESD Rating: Robust 2-kV HBM, 2-kV CDM                         TP181A3             200           5 kΩ          1 MΩ
+•   Higher Performance Drop-in Compatible with INA213,
+                                                                  VOUT = ILOAD × RSHUNT GAIN + VREF
+    INA214, INA199, NCS199 Products
+
+Applications
+•   Current Sensing (High-Side/Low-Side)
+•   Battery Chargers
+•   Power Management
+•   Cell Phone Charger
+•   Electrical Cigarette
+•   Wireless Charger
+•   Telecom Equipment
+
+
+                                       Typical Application Circuit
+
+
+
+
+www.3peak.com                                            1 / 18                                              AA20260409A4
+                                                                                                                                                         TP181
+                                                         Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+                                                                Table of Contents
+
+ Features................................................................................................................................................................1
+ Applications......................................................................................................................................................... 1
+ Description........................................................................................................................................................... 1
+ Typical Application Circuit..................................................................................................................................1
+ Revision History...................................................................................................................................................3
+ Pin Configuration and Functions....................................................................................................................... 4
+ Specifications.......................................................................................................................................................5
+       Absolute Maximum Ratings (1)........................................................................................................................5
+       ESD, Electrostatic Discharge Protection........................................................................................................ 5
+       Thermal Information........................................................................................................................................5
+       Electrical Characteristics................................................................................................................................ 6
+       Typical Performance Characteristics.............................................................................................................. 8
+ Detailed Description.......................................................................................................................................... 11
+       Overview....................................................................................................................................................... 11
+ Application and Implementation...................................................................................................................... 12
+       Application Information ................................................................................................................................ 12
+       Typical Application........................................................................................................................................13
+ Tape and Reel Information................................................................................................................................ 14
+ Package Outline Dimensions........................................................................................................................... 15
+       SOT363........................................................................................................................................................ 15
+ Order Information.............................................................................................................................................. 16
+ IMPORTANT NOTICE AND DISCLAIMER......................................................................................................... 17
+
+
+
+
+www.3peak.com                                                                   2 / 18                                                             AA20260409A4
+                                                                                                    TP181
+                               Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Revision History
+    Date        Revision                                           Notes
+                           The following updates are all about the new datasheet formats or typos, and the
+                           actual product remains unchanged.
+                           •   Updated to a new datasheet format.
+ 2026-04-20     Rev.A.4
+                           •   Updated the test conditions in the EC table.
+                           •   Updated the Tape and Reel Information
+                           •   Updated the POD.
+
+
+
+
+www.3peak.com                                  3 / 18                                          AA20260409A4
+                                                                                                     TP181
+                               Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Pin Configuration and Functions
+                                               TP181
+                                           SOT363 (SC70-6)
+                                              Top View
+
+
+                                REF            1            6       OUT
+
+
+                               GND             2            5        IN-
+
+
+                                  V+           3            4       IN+
+
+
+                                   Table 2. Pin Functions: TP181
+
+ Pin No.    Name      I/O                                           Description
+    1       REF             Reference voltage.
+    2       GND             Negative power supply.
+                            Positive power supply. Typically, the voltage is from 2.7 V to 30 V. A bypass
+    3           V+          capacitor of 0.1 μF as close to the part as possible should be used between the
+                            power supply pin and GND.
+    4           IN+    I    Non-inverting input of the amplifier.
+    5           IN−    I    Inverting input of the amplifier.
+    6       OUT       O     Output of the amplifier.
+
+
+
+
+www.3peak.com                                      4 / 18                                        AA20260409A4
+                                                                                                            TP181
+                                             Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Specifications
+
+Absolute Maximum Ratings (1)
+
+                                          Parameter                                      Min        Max      Unit
+            Supply Voltage                                                                          42           V
+            Input Voltage                                                              GND − 0.3    42           V
+            Input Current: +IN, −IN (2)                                                  −10        10        mA
+            Output Current: OUT                                                          −35        35        mA
+            Current at Supply Pins                                                       −60        60        mA
+TJ          Maximum Junction Temperature                                                            150          °C
+TA          Operating Temperature Range                                                  −40        125          °C
+TSTG        Storage Temperature Range                                                    −65        150          °C
+TL          Lead Temperature (Soldering, 10 sec)                                                    260          °C
+
+(1) Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. Exposure
+    to any Absolute Maximum Rating condition for extended periods may affect device reliability and lifetime.
+(2) The input current should be limited to less than 10 mA if the input voltage exceeds the absolute maximum ratings.
+
+
+
+ESD, Electrostatic Discharge Protection
+
+  Symbol                    Parameter                                Condition           Minimum Level       Unit
+HBM         Human Body Model ESD                      ANSI/ESDA/JEDEC JS-001 (1)               ±2            kV
+CDM         Charged Device Model ESD                  ANSI/ESDA/JEDEC JS-002 (2)               ±2            kV
+
+(1) JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2) JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+
+
+Thermal Information
+
+       Package Type                            θJA                               θJC                 Unit
+SOT363 (SC70-6)                               227                                80                 °C/W
+
+
+
+
+www.3peak.com                                               5 / 18                                    AA20260409A4
+                                                                                                                       TP181
+                                             Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+
+Electrical Characteristics
+All test conditions: TA = 25°C, VSENSE = VIN+ − VIN−, VS = 5 V, VIN+ = 12 V, VREF = VS / 2, unless otherwise noted.
+
+ Symbol                   Parameter                                Conditions              Min        Typ       Max      Unit
+Input
+                                                      VSENSE = 0 mV
+VOS         Input Offset Voltage                                                                      ±10       ±100     μV
+                                                      VIN+ = 0 V
+                                                      VSENSE = 0 mV, −40°C to 125°C
+VOS TC      Input Offset Voltage Drift                                                                0.1        0.5    μV/°C
+                                                      VIN+ = 0 V
+VCM         Common-Mode Input Range                   −40°C to 125°C                       −0.3                  36       V
+                                                      VIN+ = 5 V to 26 V,
+CMRR        Common-Mode Rejection Ratio               VSENSE = 0 mV,                        95        120                dB
+                                                      −40°C to 125°C
+IB          Input Bias Current                        VSENSE = 0 mV                                   35                 μA
+IOS         Input Offset Current                      VSENSE = 0 mV                                   0.4                μA
+                                                      VS = 2.7 V to 18 V,
+PSRR        Power Supply Rejection Ratio                                                              ±1                μV/V
+                                                      VIN+ = +18 V, VSENSE = 0 mV
+Noise Rti (1)
+en          Input Voltage Noise Density               f = 1 kHz                                       30                nV/√Hz
+Output
+                                                      TP181A1                                         50                 V/V
+G           Gain                                      TP181A2                                         100                V/V
+                                                      TP181A3                                         200                V/V
+                                                      VSENSE = −5 to 5 mV,
+GE          Gain Error                                                                                ±0.1       ±1       %
+                                                      −40°C to 125°C
+GE TC       Gain Error vs. Temperature                −40°C to 125°C                                   3         10      ppm
+CLOAD       Maximum Capacitive Load                   No oscillation                                   1                 nF
+                                                      RLOAD = 10 kΩ to REF,
+VOH         Output Swing from Supply Rail                                                             0.02      0.05      V
+                                                      −40°C to 125°C
+                                                      RLOAD = 10 kΩ to REF,
+VOL         Output Swing from Supply Rail                                                             0.01      0.05      V
+                                                      −40°C to 125°C
+Frequency Response
+                                                      CLOAD = 10 pF,
+                                                                                                      48                 kHz
+                                                      TP181A1
+                                                      CLOAD = 10 pF,
+BW          Bandwidth                                                                                 30                 kHz
+                                                      TP181A2
+                                                      CLOAD = 10 pF,
+                                                                                                      20                 kHz
+                                                      TP181A3
+SR          Slew Rate                                                                                 0.6                V/μs
+Power Supply
+
+
+www.3peak.com                                                 6 / 18                                             AA20260409A4
+                                                                                    TP181
+                                       Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+ Symbol                    Parameter                 Conditions   Min   Typ   Max    Unit
+V+          Supply Voltage                                        2.7          30     V
+IQ          Quiescent Current               VSENSE = 0 mV               120   150     μA
+Temperature Range
+Specified Range                                                   −40         125     °C
+Operating Range                                                   −55         150     °C
+
+(1) RTI = referred to input.
+
+
+
+
+www.3peak.com                                     7 / 18                       AA20260409A4
+                                                                                                                                                                       TP181
+                                                                        Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+
+Typical Performance Characteristics
+All test conditions: TA = 25℃, VS = 5 V, VIN+ = 12 V, VREF = VS / 2, unless otherwise noted.
+
+
+                           140                                                                                         1
+
+                                                                                                                       -1
+                           120
+                                                                                                                       -3
+                           100
+
+
+
+
+     Voltage offset (uV)
+                                                                                                                       -5
+
+
+
+                                                                                                         CMRR (uV/V)
+                            80
+                                                                                                                       -7
+                            60
+                                                                                                                       -9
+                            40
+                                                                                                                 -11
+                            20                                                                                   -13
+
+                                0                                                                                -15
+                                    -50   -20     10       40      70       100     130                                     -50     0            50              100
+                                                  Temperature(℃)                                                                        Temperature(℃)
+                                                       Figure 1                                                                           Figure 2
+
+
+
+                           40                                                                                  100
+
+
+
+                           30                                                                                          80
+
+
+
+
+     Gain(dB)                                                                                       CMRR(dB)
+                           20                                                                                          60
+
+
+
+                           10                                                                                          40
+
+
+
+                           0                                                                                           20
+                                20          200        2000         20000         200000                                    20    200        2000        20000         200000
+                                                   Frequency(Hz)                                                                         Frequency(Hz)
+                                                       Figure 3                                                                            Figure 4
+
+
+
+
+www.3peak.com                                                                              8 / 18                                                            AA20260409A4
+                                                                                                                                                                 TP181
+                                                                   Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+              120
+
+
+              100
+
+
+                   80
+
+
+
+ PSRR (dB)
+                   60
+
+
+                   40
+
+
+                   20
+
+
+                        0
+                                20        200         2000         20000   200000
+                                                  Frequency(Hz)
+                                                   Figure 5
+
+
+
+
+                                                PSRR vs. Frequency                                                                    PSRR vs. Frequency
+              120                                                                                    120
+
+              100                                                                                    100
+
+
+               PSRR (dB)
+                   80                                                                                      80
+
+
+
+                                                                                     Output Voltage PSRRVCM
+                                                                                                          (dB)
+ Input Voltage Output Voltage
+                   60                                                                                      60
+
+                   40                                                                                      40
+
+
+
+
+                                                                                     (200mV/div)       (2V/div)
+                   20
+
+
+   (10mV/       (200mV/div)
+                                                                                                           20
+                        0                                                                                         0
+                                20        200          2000        20000   200000                                     20        200          2000        20000    200000
+                                                  Frequency(Hz)                                                                         Frequency(Hz)
+                                                 Time(100us/div)
+                                                    Figure  5                                                                             Figure 5
+                                                                                                                                        Time(50us/div)
+                                                   Figure 7                                                                              Figure 8
+
+
+                                                PSRR vs. Frequency                                                                    PSRR vs. Frequency
+              120                                                                                   120
+
+              100                                 Input Voltage                                     100                                 Input Voltage
+
+                   80                                                                                    80
+
+
+ PSRR (dB)                                                                           PSRR (dB)
+                   60                                                                                    60
+                   2V/div                                                                                2V/div
+                   40                0V                                                                  40                0V
+                                                 Output Voltage
+                   20                                                                                    20                0V
+                                     0V                                                                           0
+                        0                                                                                                              Output Voltage
+                                20        200          2000        20000   200000                                     20        200          2000        20000    200000
+                                                  Frequency(Hz)                                                                         Frequency(Hz)
+                                                    Figure  5
+                                                 Time(100us/div)                                                                          Figure   5
+                                                                                                                                       Time(100us/div)
+                                                   Figure 9                                                                             Figure 10
+
+
+
+
+www.3peak.com                                                                   9 / 18                                                                      AA20260409A4
+                                                                                                                                                                                                                                  TP181
+                                                                                                            Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+
+                                                             PSRR vs. Frequency                                                                                                                   PSRR vs. Frequency
+             120                                                                                                                                 120
+
+             100                                                                                                                                 100
+                                                             Supply Voltage                                                                                                                        Supply Voltage
+                       80                                                                                                                            80
+
+
+ PSRR (dB)                                                                                                                           PSRR (dB)
+                       60                                                                                                                            60
+                  1V/div                                     Output Voltage                                                                      1V/div                                           Output Voltage
+                       40                                                                                                                            40                          0V
+
+                       20                                                                                                                            20
+                                            0V
+                                  0                                                                                                                              0
+                                      20               200          2000                                    20000          200000                                          20               200           2000          20000       200000
+                                                               Frequency(Hz)                                                                                                                         Frequency(Hz)
+                                                                 Figure  5
+                                                              Time(100us/div)                                                                                                                          Figure 5
+                                                                                                                                                                                                    Time(100us/div)
+                                                                Figure 11                                                                                                                            Figure 12
+
+                                  150                                                                                                                                      50
+
+
+                                  140
+                                                                                                                                                                           45
+
+
+
+
+                                                                                                                                                 Input Bias Current (uA)
+             Quiescent Current (uA)
+                                  130
+                                                                                                                                                                           40
+
+                                  120
+
+                                                                                                                                                                           35
+                                  110
+
+                                                                                                                                                                           30
+                                  100
+
+
+                                      90                                                                                                                                   25
+                                           -40   -20    0      20   40     60   80                              100    120                                                      -40   -20    0      20     40   60     80   100   120
+                                                                Temperature(°C)                                                                                                                      Temperature(°C)
+                                                                 Figure 13                                                                                                                               Figure 14
+
+
+
+
+                                                                                                  80
+
+
+
+
+                                                                        Input Bias Current (uA)
+                                                                                                  60
+
+
+                                                                                                  40
+
+
+                                                                                                  20
+
+
+                                                                                                   0
+
+
+                                                                                                  -20
+                                                                                                        0             10            20                                           30           40
+
+                                                                                                                           Common-Mode Voltage
+                                                                                                                               Figure 15
+
+
+
+
+www.3peak.com                                                                                                                  10 / 18                                                                                      AA20260409A4
+                                                                                                              TP181
+                                          Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Detailed Description
+
+Overview
+The TP181 is a series of 36-V common-mode, zero-drift topology, current-sensing amplifiers that can be used in both
+low-side and high-side configurations. The specially-designed, current-sensing amplifiers are able to accurately measure
+voltages developed across current-sensing resistors on common-mode voltages that far exceed the supply voltage powering
+the device. The current can be measured on input voltage rails as high as 36 V while the device can be powered from supply
+voltages as low as 2.7 V.
+The zero-drift topology enables high-precision measurements with maximum input offset voltages as low as 100 μV with a
+maximum temperature contribution of 0.5 μV/°C over the full temperature range from −40°C to 125°C.
+
+
+
+
+www.3peak.com                                            11 / 18                                          AA20260409A4
+                                                                                                                  TP181
+                                           Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Application and Implementation
+
+                                                            Note
+  Information in the following application sections is not part of the 3PEAK's component specification and 3PEAK does not
+  warrant its accuracy or completeness. 3PEAK's customers are responsible for determining suitability of components for
+  their purposes. Customers should validate and test their design implementation to confirm system functionality.
+
+
+
+
+Application Information
+
+Application Schematic
+Figure 16 shows the basic connections of the TP181. The input pins, IN+ and IN−, should be connected as close as possible
+to the shunt resistor to minimize any resistance in series with the shunt resistor.
+Power-supply bypass capacitors are required for stability. Applications with noisy or high-impedance power supplies may
+require additional decoupling capacitors to reject power-supply noise. Connect bypass capacitors close to the pins of the
+device.
+
+Selecting RSHUNT
+The zero-drift offset performance of the TP181 offers several benefits. Most often, the primary advantage of the low offset
+characteristic enables lower full-scale drops across the shunt. For example, non-zero-drift current shunt monitors typically
+require a full-scale range of 100 mV.
+The TP181 series gives equivalent accuracy at a full-scale range on the order of 10 mV. This accuracy reduces shunt
+dissipation by an order of magnitude with many additional benefits.
+Alternatively, there are applications that must measure current over a wide dynamic range that can use the low offset on the
+low end of the measurement. Most often, these applications can use the lower gains of the TP181 to accommodate larger
+shunt drops on the upper end of the scale. For instance, the TP181A1 operating on a 3.3-V supply can easily handle a
+full-scale shunt drop of 60 mV, with only 100-μV of offset.
+
+REF Input Impedance Effects
+As with any difference amplifier, the TP181 series common-mode rejection ratio is affected by any impedance present at
+the REF input. This concern is not a problem when the REF pin is connected directly to most references or power supplies.
+When using resistive dividers from the power supply or a reference voltage, the REF pin should be buffered by an op-amp.
+
+Power Supply Recommendation
+The input circuitry of the TP181 can accurately measure beyond its power-supply voltage, V+. For example, the V+ power
+supply can be 5 V, whereas the load power-supply voltage can be as high as 30 V. However, the output voltage range of the
+OUT pin is limited by the voltages on the power-supply pin. Note also that the TP181 can withstand the full input signal range
+up to 36 V at the input pins, regardless of whether the device has power applied or not.
+
+Proper Board Layout
+To ensure optimum performance at the PCB level, care must be taken in the design of the board layout. To avoid leakage
+currents, the surface of the board should be kept clean and free of moisture. The coating of the surface creates a barrier to
+the moisture accumulation and helps reduce the parasitic resistance on the board.
+Keeping supply traces short and properly bypassing the power supplies can minimize power supply disturbances due to the
+output current variation, for example when driving an AC signal into a heavy load. Bypass capacitors should be connected
+
+
+
+
+www.3peak.com                                              12 / 18                                           AA20260409A4
+                                                                                                                  TP181
+                                           Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+as closely as possible to the supply pins of the device. The stray capacitance is a concern at the inputs and outputs of the
+amplifier. It is recommended that signal traces should be kept at least 5 mm from supply lines to minimize the coupling.
+A variation in temperature across the PCB can cause a mismatch in the Seebeck voltages at solder joints and other points
+where dissimilar metals are in contact, resulting in thermal voltage errors. To minimize these thermocouple effects, orient the
+resistors, so heat sources can warm both ends equally. Input signal paths should contain matching numbers and types of
+components, where possible to match the numbers and types of thermocouple junctions. For example, dummy components
+such as zero-value resistors can be used to match real resistors in the opposite input path. Matching components should be
+in close proximity and oriented in the same manner. Ensure the leads are of equal length so that the thermal conduction is in
+equilibrium. Keep heat sources on the PCB as far away from the amplifier input circuitry as is practical.
+The use of a ground plane is highly recommended. A ground plane reduces the EMI noise and helps to maintain a constant
+temperature across the circuit board.
+
+
+
+Typical Application
+Figure 16 shows the typical application schematic.
+
+
+
+
+                                           Figure 16. Typical Application Circuit
+
+
+
+
+www.3peak.com                                              13 / 18                                            AA20260409A4
+                                                                                      TP181
+                                   Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Tape and Reel Information
+
+
+
+
+                                                                                        Pin1
+Order Number    Package   D1 (mm) W1 (mm) A0 (mm) B0 (mm) K0 (mm)   P0 (mm) W0 (mm)
+                                                                                      Quadrant
+TP181x-CR       SOT-363    178.0      12.1    2.4      2.5   1.2      4.0     8.0       Q3
+
+
+
+
+www.3peak.com                                14 / 18                            AA20260409A4
+                                                                  TP181
+                       Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Package Outline Dimensions
+
+SOT363
+
+
+
+
+www.3peak.com                   15 / 18                        AA20260409A4
+                                                                                                                                                   TP181
+                                                                                                 Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+Order Information
+      Order Number                    Gain                     Package                 Marking Information   MSL    Transport Media, Quantity    Eco Plan
+TP181A1-CR                           50 V/V                SOT363 (SC70-6)                    9A1             1       Tape and Reel, 3,000        Green
+TP181A2-CR                           100 V/V               SOT363 (SC70-6)                    9A2             1       Tape and Reel, 3,000        Green
+TP181A3-CR                           200 V/V               SOT363 (SC70-6)                    9A3             1       Tape and Reel, 3,000        Green
+
+Green: 3PEAK defines "Green" to mean RoHS compatible and free of halogen substances.
+
+
+
+
+www.3peak.com                                                                     16 / 18                                                       AA20260409A4
+                                                                                                                    TP181
+                                            Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+
+                              IMPORTANT NOTICE AND DISCLAIMER
+Copyright© 3PEAK 2012-2026. All rights reserved.
+Trademarks. Any of the 思瑞浦 or 3PEAK trade names, trademarks, graphic marks, and domain names contained in
+this document /material are the property of 3PEAK. You may NOT reproduce, modify, publish, transmit or distribute any
+Trademark without the prior written consent of 3PEAK.
+Performance Information. Performance tests or performance range contained in this document/material are either results
+of design simulation or actual tests conducted under designated testing environment. Any variation in testing environment or
+simulation environment, including but not limited to testing method, testing process or testing temperature, may affect actual
+performance of the product.
+Disclaimer. 3PEAK provides technical and reliability data (including data sheets), design resources (including reference
+designs), application or other design recommendations, networking tools, security information and other resources "As Is".
+3PEAK makes no warranty as to the absence of defects, and makes no warranties of any kind, express or implied, including
+without limitation, implied warranties as to merchantability, fitness for a particular purpose or non-infringement of any third-
+party’s intellectual property rights. Unless otherwise specified in writing, products supplied by 3PEAK are not designed to
+be used in any life-threatening scenarios, including critical medical applications, automotive safety-critical systems, aviation,
+aerospace, or any situations where failure could result in bodily harm, loss of life, or significant property damage. 3PEAK
+disclaims all liability for any such unauthorized use.
+
+
+
+
+www.3peak.com                                               17 / 18                                             AA20260409A4
+                                                            TP181
+                 Zero-Drift, Bi-Directional Current Sense Amplifier
+
+
+
+
+                This page intentionally left blank
+
+
+
+
+www.3peak.com                 18 / 18                    AA20260409A4
+

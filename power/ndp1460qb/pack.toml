@@ -1,0 +1,22 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "ndp1460qb"
+version = "0.1"
+category = "power"
+entry = "ndp1460qb.mc"
+vendor = "unknown"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["buck", "sync-step-down", "40v", "qfn20", "6a"]
+
+[[attachments]]
+path = "ndp1460.pdf"
+kind = "datasheet"
+checksum = "sha256:731292d6e3ae2039104e7ceeb0e5f8ac51fca9a8035c404c9483328b7ad63ccd"
+
+[[attachments]]
+path = "ndp1460.txt"
+kind = "doc"
+checksum = "sha256:a983a1b4eabb7c6036ef22eb9d8aea76c75175e04e51ac1d06733c8865f19cf5"

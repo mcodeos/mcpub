@@ -1,0 +1,904 @@
+                 TEA1995T
+                 GreenChip dual synchronous rectifier controller
+                 Rev. 3 — 5 December 2017                                         Product data sheet
+
+
+
+
+1   General description
+               The TEA1995T is the first product of a new generation of Synchronous Rectifier (SR)
+               controller ICs for switched mode power supplies. It incorporates an adaptive gate drive
+               method for maximum efficiency at any load.
+               The TEA1995T is a dedicated controller IC for synchronous rectification on the
+               secondary side of resonant converters. It has two driver stages for driving the SR
+               MOSFETs, which rectify the outputs of the central tap secondary transformer windings.
+               The two gate driver stages have their own sensing inputs and operate independently.
+               The TEA1995T can also be used in multi-output flyback converters with the SR MOSFET
+               placed at the low side.
+               The TEA1995T is fabricated in a Silicon-On-Insulator (SOI) process.
+
+2   Features and benefits
+
+           2.1 Efficiency features
+               • Adaptive gate drive for maximum efficiency at any load
+               • Supply current in energy save operation below 200 μA
+
+
+           2.2 Application features
+               • Wide supply voltage range from 4.5 V to 38 V
+               • Dual synchronous rectification for LLC resonant in SO8 package
+               • Synchronous rectification for multi-output flyback converters
+               • Supports 5 V operation with logic level SR MOSFETs
+               • Differential inputs for sensing the drain and source voltages of each SR MOSFET
+
+
+           2.3 Control features
+               • SR control without minimum on-time
+               • Adaptive gate drive for fast turn-off at the end of conduction
+               • UnderVoltage LockOut (UVLO) protection with active gate pull-down
+NXP Semiconductors
+                                                                                                                   TEA1995T
+                                                                                    GreenChip dual synchronous rectifier controller
+
+
+3          Applications
+                       The TEA1995T is intended for resonant power supplies. In such applications, it can drive
+                       two external synchronous rectifier MOSFETs for the rectification of the voltages on the
+                       two secondary windings of the transformer. These MOSFETs replace diodes. It can be
+                       used in all power supplies requiring high efficiency:
+                       • Adapters
+                       • Power supplies for desktop PC and all-in-one PC
+                       • Power supplies for television
+                       • Power supplies for servers
+
+4          Ordering information
+Table 1. Ordering information
+Type number          Package
+                     Name       Description                                                                                        Version
+TEA1995T/1           SO8        plastic small outline package; 8 leads; body width 3.9 mm                                          SOT96-1
+
+
+5          Marking
+                       Table 2. Marking
+                       Type number                                                                 Marking code
+                       TEA1995T/1                                                                  TEA1995
+
+
+
+
+TEA1995T                              All information provided in this document is subject to legal disclaimers.    © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                 Rev. 3 — 5 December 2017
+                                                                                                                                                2 / 18
+NXP Semiconductors
+                                                                                                                                   TEA1995T
+                                                                                GreenChip dual synchronous rectifier controller
+
+
+6          Block diagram
+
+
+                                                                                                                                                            VCC
+
+
+                                                                                            UNDER
+                                V AND I                    5V                                                                      DRIVER
+                                                                                           VOLTAGE
+                              REFERENCE                 REGULATOR                                                                  SUPPLY
+                                                                                           LOCKOUT
+                                                                                                                                      11 V
+
+
+                                                       ENERGY SAVE                                                        enable
+                                 IC                                                                  LOGIC
+                                                         CONTROL
+
+
+                                        turn-on
+                                                                                                                TURN ON
+
+                                                           on regulation
+                                                                              off regulation                                                                 GDA
+                      DSA
+
+                                                                                                               SWITCH OFF
+
+
+                                 -400 mV          -55 mV             -50 mV            +150 mV
+
+                      SSA
+                                        turn-on
+                                                                                                                TURN ON
+
+                                                           on regulation
+                                                                              off regulation                                                                 GDB
+                      DSB
+
+                                                                                                               SWITCH OFF
+
+
+                                 -400 mV          -55 mV             -50 mV            +150 mV
+
+                      SSB
+
+
+                                                                                                                                                             GND
+
+                                                                                                                                          aaa-016986
+
+                     Figure 1. TEA1995T block diagram
+
+
+
+
+TEA1995T                          All information provided in this document is subject to legal disclaimers.                          © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                             Rev. 3 — 5 December 2017
+                                                                                                                                                                  3 / 18
+NXP Semiconductors
+                                                                                                                               TEA1995T
+                                                                                      GreenChip dual synchronous rectifier controller
+
+
+7          Pinning information
+
+                     7.1 Pinning
+
+                                                                        GDB       1                                  8   GDA
+
+                                                                       GND        2                                  7   VCC
+                                                                                                   IC
+                                                                        DSB       3                                  6   DSA
+
+                                                                        SSB       4                                  5   SSA
+
+                                                                                                 aaa-016990
+
+                          Figure 2. TEA1995T pin configuration
+
+
+
+                     7.2 Pin description
+                         Table 3. Pin description
+                         Symbol            Pin                     Description
+                         GDB               1                       gate drive output MOSFET B
+                         GND               2                       ground
+                         DSB               3                       drain sense input for synchronous timing MOSFET B
+                         SSB               4                       source sense input MOSFET B
+                         SSA               5                       source sense input MOSFET A
+                         DSA               6                       drain sense input for synchronous timing MOSFET A
+                         VCC               7                       supply voltage
+                         GDA               8                       gate drive output MOSFET A
+
+
+
+
+TEA1995T                                All information provided in this document is subject to legal disclaimers.              © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                   Rev. 3 — 5 December 2017
+                                                                                                                                                            4 / 18
+NXP Semiconductors
+                                                                                                                                          TEA1995T
+                                                                                        GreenChip dual synchronous rectifier controller
+
+
+8          Functional description
+
+                     8.1 Introduction
+                         The TEA1995T is a controller IC for synchronous rectification. It is perfectly suited to
+                         be used in resonant applications. It can drive two synchronous rectifier MOSFETs on
+                         the secondary side of the central tap transformer winding. Figure 3 shows a typical
+                         configuration.
+
+                           Vin
+                                                       Qprim1
+
+
+
+
+                                   PRIMARY                      CHB
+                                                                             TR
+                                     SIDE
+                                                       Qprim2
+                                 CONTROLLER
+
+
+                                                                                                                                                                  Vout
+
+
+
+                                                                                                                                                                   Cout
+
+
+                                                                                         Qsec1                         IC1    VCC                     Qsec2
+                                                                                                            DSA                     DSB
+                                                                                                            GDA                     GDB
+                                                                                                                             IC
+                                                                                                            SSA                     SSB
+
+                                                                                                                              GND
+                                                                                                                                                          aaa-016991
+
+                          Figure 3. TEA1995T typical configuration
+
+
+
+                     8.2 Start-up and undervoltage lockout (VCC pin)
+                         When the voltage on the VCC pin exceeds Vstart, the IC leaves the UVLO state and
+                         activates the SR circuitry. When the voltage drops to below Vstop, the IC reenters the
+                         UVLO state. The SR MOSFET gate driver outputs are actively kept low. For proper
+                         operation, the VCC pin must be decoupled with an extra capacitor (not only with Cout)
+                         between the VCC pin and the GND pin. To reduce inductance effects because of high
+                         gate driver currents, the extra capacitor must be connected as close as possible to the
+                         IC.
+
+
+                     8.3 Drain sense (DSA and DSB pins)
+                         The drain sense pins are input pins capable of handling input voltages up to 100 V.
+                         At positive drain sense voltages, the gate driver is in off-mode with pulled-down gate
+                         driver pins (pins GDA or GDB). At negative drain sense voltages, the IC enables the SR
+                         through sensing the drain source differential voltage.
+
+
+
+
+TEA1995T                                  All information provided in this document is subject to legal disclaimers.                       © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                     Rev. 3 — 5 December 2017
+                                                                                                                                                                       5 / 18
+NXP Semiconductors
+                                                                                                                     TEA1995T
+                                                                                      GreenChip dual synchronous rectifier controller
+
+
+
+                     8.4 Synchronous Rectification (SR; DSA, SSA, DSB, and SSB pins)
+                         The IC senses the voltage difference between the drain sense (pins DSA and DSB) and
+                         the source sense (pins SSA and SSB) connections. The drain source differential voltage
+                         of the SR MOSFET is used to drive the gate of the SR MOSFET.
+                         When this absolute voltage difference is higher than Vact(drv), the corresponding gate
+                         driver output turns on the external SR MOSFET. When the external SR MOSFET is
+                         switched on, the absolute voltage difference between the drain and the source sense
+                         connections drops to below Vact(drv). The regulation phase follows the turn-on phase.
+                         In the regulation phase, the IC regulates the difference between the drain and the source
+                         sense inputs to an absolute level (Vreg(drv)). When the absolute difference is higher than
+                         Vreg(drv), the gate driver output increases the gate voltage of the external SR MOSFET
+                         until the Vreg(drv) level is reached. The SR MOSFET does not switch off at low currents.
+                         The IC operates without minimum on-time.
+                         When the absolute difference is lower than Vdeact(drv), the gate driver output decreases
+                         the gate voltage of the external SR MOSFET. The voltage waveform on the gate of the
+                         SR MOSFET follows the waveform of the current through the SR MOSFET. When the
+                         current through the external SR MOSFET reaches zero, the SR MOSFET is quickly
+                         switched off.
+                         After the SR MOSFET switch-off, the drain voltage increases. For a drain voltage above
+                         Vswoff, a low ohmic gate pull-down of Rpd(G) keeps the gate of the SR MOSFET switched
+                         off.
+
+
+
+
+TEA1995T                                All information provided in this document is subject to legal disclaimers.    © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                   Rev. 3 — 5 December 2017
+                                                                                                                                                  6 / 18
+NXP Semiconductors
+                                                                                                                        TEA1995T
+                                                                                         GreenChip dual synchronous rectifier controller
+
+
+
+
+                                                                                                                        high
+                                                                                                                        current
+
+
+
+
+                                                                                                                        low
+                                                                                                                        current
+
+
+                                    secondary
+                                                                                                                                        0A
+                                       current
+
+
+
+
+                                  drain sense-
+                                 source sense                                                                                           0V
+                                       voltage
+                                                                                                                        Vreg(drv)
+
+
+
+
+                                                                                                                        Vact(drv)
+
+
+                                                  td(act)(drv)
+
+
+
+
+                                                                                                                        Vthreshold
+                                                                                                                        SR switch
+
+                                         gate
+                                        driver                                                                                          0V
+                                                                                                                         aaa-018615
+
+                          Figure 4. Synchronous rectification signals
+
+
+
+                     8.5 Gate driver (GDA and GDB pins)
+                         The gate driver circuit charges the gate of the external SR MOSFET during the rising part
+                         of the current. The driver circuit discharges the gate during the falling part of the current.
+                         The gate driver has a source capability of typically Isource and a sink capability of typically
+                         Isink. The source and sink capability allow a fast turn-on and a fast turn-off of the external
+                         SR MOSFET.
+                         The maximum driver output voltage is limited to VG(max). This high output voltage drives
+                         all MOSFET brands to the minimum on-state resistance.
+                         In applications where the IC is supplied with 5 V, the maximum output voltage of the
+                         driver is limited to 5 V. Logic level SR MOSFETs can be used.
+                         During start-up conditions (VCC < Vstart) and UVLO, the driver output voltage is actively
+                         pulled low.
+
+
+
+TEA1995T                                   All information provided in this document is subject to legal disclaimers.     © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                      Rev. 3 — 5 December 2017
+                                                                                                                                                      7 / 18
+NXP Semiconductors
+                                                                                                                     TEA1995T
+                                                                                      GreenChip dual synchronous rectifier controller
+
+
+
+                     8.6 Source sense connection (SSA and SSB pins)
+                         The IC is equipped with additional source sense pins (SSA and SSB). These pins are
+                         used for the measurement of the SR MOSFET drain-to-source voltage. The source
+                         sense input must be connected as close as possible to the source pin of the external SR
+                         MOSFET. It minimizes errors caused by voltage difference on PCB tracks because of
+                         parasitic inductance in combination with large dI/dt values.
+
+
+
+
+TEA1995T                                All information provided in this document is subject to legal disclaimers.    © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                   Rev. 3 — 5 December 2017
+                                                                                                                                                  8 / 18
+NXP Semiconductors
+                                                                                                                          TEA1995T
+                                                                                           GreenChip dual synchronous rectifier controller
+
+
+9          Limiting values
+                      Table 4. Limiting values
+                      In accordance with the Absolute Maximum Rating System (IEC 60134).
+                      Symbol                Parameter                                            Conditions                     Min         Max           Unit
+                      Voltages
+                      VCC                   supply voltage                                                                      −0.4        +38           V
+                      Vsense(D)A            drain sense voltage A                                DC                             −0.8        +100          V
+                      Vsense(D)B            drain sense voltage B                                DC                             −0.8        +100          V
+                      Vsense(S)A            source sense voltage A                               DC                             −0.4        +0.4          V
+                      Vsense(S)B            source sense voltage B                               DC                             −0.4        +0.4          V
+                                                                                                                          [1]
+                      VGDA                  voltage on pin GDA                                   DC                             −0.4        +13.0 V
+                                                                                                                          [1]
+                      VGDB                  voltage on pin GDB                                   DC                             −0.4        +13.0 V
+                      General
+                      Ptot                  total power dissipation                                                             -           0.5           W
+                      fmax                  maximum frequency                                    if not limited by Ptot         -           500           kHz
+                      Tstg                  storage temperature                                                                 −55         +150          °C
+                      Tj                    junction temperature                                                                −40         +150          °C
+                      ElectroStatic Discharge (ESD)
+                                                                                                                          [2]
+                      VESD                  electrostatic discharge                              Human Body Model (HBM)         -           2000          V
+                                            voltage
+                                                                                                                          [3]
+                                                                                                 Charged Device Model           -           500           V
+                                                                                                 (CDM)
+
+                      [1]    [1] These pins are output pins that are forced by the IC (see Table 6)
+                      [2]    [2] Human body model: Equivalent to discharging a 100 pF capacitor through a 1.5 kΩ series resistor.
+                      [3]    [3] Charged device model: Equivalent to charging the IC and discharging each pin over a 1 Ω resistor.
+
+
+
+10 Thermal characteristics
+                      Table 5. Thermal characteristics
+                      Symbol           Parameter                                                  Conditions                    Typ                   Unit
+                      Rth(j-a)         thermal resistance from                                    JEDEC test board              140                   K/W
+                                       junction to ambient
+                      Rth(j-c)         thermal resistance from                                    JEDEC test board              90                    K/W
+                                       junction to case
+
+
+
+
+TEA1995T                                     All information provided in this document is subject to legal disclaimers.         © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                        Rev. 3 — 5 December 2017
+                                                                                                                                                            9 / 18
+NXP Semiconductors
+                                                                                                                                    TEA1995T
+                                                                                              GreenChip dual synchronous rectifier controller
+
+
+11 Characteristics
+Table 6. Characteristics
+Tamb = 25 °C; VCC = 12 V; CGDA/CGDB = 10 nF (capacitors between GDA and GND and between GDB and GND). All
+voltages are measured with respect to ground (pin 2). Currents are positive when flowing into the IC, unless otherwise
+specified.
+Symbol           Parameter                                          Conditions                                               Min    Typ           Max            Unit
+Supply voltage management (pin VCC)
+Vstart           start voltage                                                                                               4.35   4.55          4.75           V
+Vstop            stop voltage                                                                                                4.0    4.2           4.4            V
+ICC(oper)        operating supply current                           energy-save                                              140    160           180            μA
+                                                                    normal operation (without gate                           0.9    1.1           1.3            mA
+                                                                    charge)
+tact(es)         energy save mode activation time                                                                            85     110           135            μs
+Synchronous rectification sense input (pins DSA, SSA, DSB, and SSB)
+Vact(drv)        driver activation voltage                          Vsense(S)A/Vsense(S)B = 0 V                              −450   −400          −350           mV
+Vreg(drv)        driver regulation voltage                          Vsense(S)A/Vsense(S)B = 0 V                              −60    −55           −50            mV
+Vswoff           switch-off voltage                                 Vsense(S)A/Vsense(S)B = 0 V                              90     150           200            mV
+td(act)(drv)     driver activation delay time                       Vsense(S)A/Vsense(S)B = 0 V;           -                        80            -              ns
+                                                                    normal operation;
+                                                                    time from step on VDSA/VDSB (2 V to
+                                                                    −0.5 V) to rising of VGDA/VGDB at 10 %
+                                                                    of end value
+td(deact)(drv)   driver deactivation delay time                     Vsense(S)A/Vsense(S)B = 0 V;            -                       40            -              ns
+                                                                    normal operation;
+                                                                    time from step on VDSA/VDSB (−0.5 V
+                                                                    to 2 V) to falling of VGDA/VGDB at 90 %
+                                                                    of begin value
+Gate driver (pins GDA and GDB)
+Isource          source current                                     peak current at                                          -      −0.4          -              A
+                                                                    VCC = 5 V;VDS = −0.5 V; VG = 0 V
+                                                                    peak current at                                          -      −1.0          -              A
+                                                                    VCC = 12 V;VDS = −0.5 V; VG = 0 V
+Isink            sink current                                       regulation current at                                    -      90            -              mA
+                                                                    VCC = 5 V;VDS = 0 V; VG = 5 V
+                                                                    regulation current at                                    -      100           -              mA
+                                                                    VCC = 12 V;VDS = 0 V; VG = 10 V
+                                                                    peak current at VCC = 5 V;                               -      0.6           -              A
+                                                                    VDS = 4 V;VG = 4 V
+                                                                    peak current at VCC = 12 V;VDS = 4 V; -                         1.0           -              A
+                                                                    VG = 4 V
+Rpd(G)           gate pull-down resistance                          in off-state; VDSA/VDSB = 4 V; IGDA/                     3.2    4             5              Ω
+                                                                    IGDB = 30 mA; VCC = 12 V
+
+
+
+
+TEA1995T                                        All information provided in this document is subject to legal disclaimers.              © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                           Rev. 3 — 5 December 2017
+                                                                                                                                                                  10 / 18
+NXP Semiconductors
+                                                                                                                                           TEA1995T
+                                                                                        GreenChip dual synchronous rectifier controller
+
+
+Symbol       Parameter                                        Conditions                                                            Min    Typ         Max            Unit
+VG(max)      maximum gate voltage                             VGDA/VGDB at VCC = 5 V                                                4.9    4.95        5.0            V
+                                                              VGDA/VGDB at VCC = 12 V                                               10.5   10.75       11.0           V
+                                                              VGDA/VGDB at VCC = 15 V to 38 V                                       11     12          13             V
+
+
+12 Application information
+                         A resonant switched mode power supply with the TEA1995T consists of a primary side
+                         half-bridge, a transformer, a resonant capacitor, and an output stage. To obtain low
+                         conduction loss rectification, SR MOSFETs are used in the output stage. The TEA1995T
+                         controls these SR MOSFETs.
+                         The gate drive voltage for the SR switch is derived from the voltage difference between
+                         the corresponding drain sense and source sense pins.
+                         Special attention must be paid to the connection of the drain sense and source sense
+                         pins. The voltages measured on these pins are used for gate drive voltage. Wrong
+                         measurement results in a less efficient gate drive because the gate voltage is either
+                         too low or too high. The connections to these pins must not interfere with the power
+                         wiring. The power wiring conducts currents with high dI/dt values. It can easily cause
+                         measurement errors resulting from induced voltages due to parasitic inductances.
+                         The separate source-sense pins enable the direct sensing of the source voltage of the
+                         external MOSFETs. Using the current carrying power ground tracks is not allowed.
+
+
+                12.1 Application diagram resonant application
+                           Vin
+                                                       Qprim1
+
+
+
+
+                                   PRIMARY                      CHB
+                                                                             TR
+                                     SIDE
+                                                       Qprim2
+                                 CONTROLLER
+
+
+                                                                                                                                                                    Vout
+
+
+
+                                                                                                                                                                     Cout
+
+
+                                                                                         Qsec1                         IC1    VCC                       Qsec2
+                                                                                                            DSA                      DSB
+                                                                                                            GDA                      GDB
+                                                                                                                             IC
+                                                                                                            SSA                      SSB
+
+                                                                                                                              GND
+                                                                                                                                                            aaa-016991
+
+                         Figure 5. Typical resonant application with TEA1995T
+
+
+
+
+TEA1995T                                  All information provided in this document is subject to legal disclaimers.                         © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                     Rev. 3 — 5 December 2017
+                                                                                                                                                                       11 / 18
+NXP Semiconductors
+                                                                                                                               TEA1995T
+                                                                                    GreenChip dual synchronous rectifier controller
+
+
+
+                12.2 Application diagram multi-output flyback application
+
+                                                               TR                                                                                Vout2
+
+                         Vin
+                                                                                                                                             Cout2
+                                                                                                                                                 Vout1
+
+
+
+                                                                                                                                                   Cout1
+
+
+                                                        Qprim             Qsec1                      IC1           VCC           Qsec2
+                                                                                              DSA                        DSB
+                                 PRIMARY
+                                                                                             GDA                         GDB
+                                   SIDE                                                                        IC
+                               CONTROLLER                                                     SSA                        SSB
+
+                                                                                                                   GND
+                                                                                                                                          aaa-016995
+
+                      Figure 6. Multi-output flyback application with TEA1995T
+
+
+
+
+TEA1995T                              All information provided in this document is subject to legal disclaimers.                © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                 Rev. 3 — 5 December 2017
+                                                                                                                                                          12 / 18
+NXP Semiconductors
+                                                                                                                                                                       TEA1995T
+                                                                                                            GreenChip dual synchronous rectifier controller
+
+
+13 Package outline
+
+  SO8: plastic small outline package; 8 leads; body width 3.9 mm                                                                                                                         SOT96-1
+
+
+
+
+                                                          D                                                                     E                     A
+                                                                                                                                                                   X
+
+
+
+                                                                                                c
+
+                                             y                                                                                HE                                   v M A
+
+
+                                        Z
+
+                                        8                                  5
+
+
+
+
+                                                                                                                                               Q
+                                                                                                       A2
+                                                                                                                                                   (A 3)       A
+                                                                                                             A1
+                                            pin 1 index
+                                                                                                                                                           θ
+                                                                                                                                           Lp
+
+                                        1                                  4                                                               L
+
+                                                  e                                w M                                           detail X
+                                                                      bp
+
+
+
+
+                                                                           0                   2.5                    5 mm
+                                                                                             scale
+
+
+     DIMENSIONS (inch dimensions are derived from the original mm dimensions)
+                   A
+       UNIT       max.    A1     A2          A3        bp      c         D (1)      E (2)        e         HE          L          Lp           Q      v         w       y        Z (1)       θ
+
+                          0.25   1.45                 0.49    0.25       5.0        4.0                    6.2                   1.0        0.7                                  0.7
+           mm      1.75                      0.25                                              1.27                  1.05                           0.25       0.25    0.1
+                          0.10   1.25                 0.36    0.19       4.8        3.8                    5.8                   0.4        0.6                                  0.3         8
+                                                                                                                                                                                               o
+                                                                                                                                                                                               o
+                        0.010 0.057                   0.019 0.0100 0.20            0.16                  0.244       0.039 0.028                                             0.028           0
+      inches      0.069                      0.01                                              0.05            0.041                                0.01       0.01    0.004
+                        0.004 0.049                   0.014 0.0075 0.19            0.15                  0.228       0.016 0.024                                             0.012
+
+     Notes
+     1. Plastic or metal protrusions of 0.15 mm (0.006 inch) maximum per side are not included.
+     2. Plastic or metal protrusions of 0.25 mm (0.01 inch) maximum per side are not included.
+
+
+            OUTLINE                                                    REFERENCES                                                                   EUROPEAN
+                                                                                                                                                                             ISSUE DATE
+            VERSION                   IEC                     JEDEC                          JEITA                                                 PROJECTION
+
+                                                                                                                                                                               99-12-27
+                SOT96-1           076E03                      MS-012
+                                                                                                                                                                               03-02-18
+
+
+
+ Figure 7. Package outline SOT96-1 (SO8)
+
+TEA1995T                                                      All information provided in this document is subject to legal disclaimers.                                 © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                                         Rev. 3 — 5 December 2017
+                                                                                                                                                                                                   13 / 18
+NXP Semiconductors
+                                                                                                                 TEA1995T
+                                                                                  GreenChip dual synchronous rectifier controller
+
+
+14 Abbreviations
+                     Table 7. Abbreviations
+                     Acronym           Description
+                     CDM               Charged Device Model
+                     ESD               ElectroStatic Discharge
+                     HBM               Human Body Model
+                     MOSFET            Metal-Oxide-Semiconductor Field-Effect Transistor
+                     SOI               Silicon-On-Insulator
+                     SR                Synchronous Rectification
+                     UVLO              UnderVoltage LockOut
+
+
+
+
+TEA1995T                            All information provided in this document is subject to legal disclaimers.    © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                               Rev. 3 — 5 December 2017
+                                                                                                                                            14 / 18
+NXP Semiconductors
+                                                                                                                               TEA1995T
+                                                                                         GreenChip dual synchronous rectifier controller
+
+
+15 Revision history
+Table 8. Revision history
+Document ID                 Release date           Data sheet status                                       Change notice   Supersedes
+TEA1995T v.3                20171205               Product data sheet                                      -               TEA1995T v.2
+Modifications:              • Section 10 "Thermal characteristics" has been updated.
+TEA1995T v.2                20161130               Product data sheet                                      -               TEA1995T v.1
+TEA1995T v.1                20150730               Product data sheet                                      -               -
+
+
+
+
+TEA1995T                                   All information provided in this document is subject to legal disclaimers.           © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                      Rev. 3 — 5 December 2017
+                                                                                                                                                          15 / 18
+NXP Semiconductors
+                                                                                                                                               TEA1995T
+                                                                                                     GreenChip dual synchronous rectifier controller
+
+
+16 Legal information
+
+16.1 Data sheet status
+                    [1][2]                                       [3]
+ Document status                               Product status                                Definition
+ Objective [short] data sheet                  Development                                   This document contains data from the objective specification for product
+                                                                                             development.
+ Preliminary [short] data sheet                Qualification                                 This document contains data from the preliminary specification.
+ Product [short] data sheet                    Production                                    This document contains the product specification.
+
+[1]   Please consult the most recently issued document before initiating or completing a design.
+[2]   The term 'short data sheet' is explained in section "Definitions".
+[3]   The product status of device(s) described in this document may have changed since this document was published and may differ in case of multiple
+      devices. The latest product status information is available on the Internet at URL http://www.nxp.com.
+
+
+                                                                                                Suitability for use — NXP Semiconductors products are not designed,
+                                                                                                authorized or warranted to be suitable for use in life support, life-critical or
+16.2 Definitions                                                                                safety-critical systems or equipment, nor in applications where failure or
+                                                                                                malfunction of an NXP Semiconductors product can reasonably be expected
+Draft — The document is a draft version only. The content is still under
+                                                                                                to result in personal injury, death or severe property or environmental
+internal review and subject to formal approval, which may result in
+                                                                                                damage. NXP Semiconductors and its suppliers accept no liability for
+modifications or additions. NXP Semiconductors does not give any
+                                                                                                inclusion and/or use of NXP Semiconductors products in such equipment or
+representations or warranties as to the accuracy or completeness of
+                                                                                                applications and therefore such inclusion and/or use is at the customer’s own
+information included herein and shall have no liability for the consequences
+                                                                                                risk.
+of use of such information.
+                                                                                                Applications — Applications that are described herein for any of these
+Short data sheet — A short data sheet is an extract from a full data sheet
+                                                                                                products are for illustrative purposes only. NXP Semiconductors makes
+with the same product type number(s) and title. A short data sheet is
+                                                                                                no representation or warranty that such applications will be suitable
+intended for quick reference only and should not be relied upon to contain
+                                                                                                for the specified use without further testing or modification. Customers
+detailed and full information. For detailed and full information see the
+                                                                                                are responsible for the design and operation of their applications and
+relevant full data sheet, which is available on request via the local NXP
+                                                                                                products using NXP Semiconductors products, and NXP Semiconductors
+Semiconductors sales office. In case of any inconsistency or conflict with the
+                                                                                                accepts no liability for any assistance with applications or customer product
+short data sheet, the full data sheet shall prevail.
+                                                                                                design. It is customer’s sole responsibility to determine whether the NXP
+                                                                                                Semiconductors product is suitable and fit for the customer’s applications
+Product specification — The information and data provided in a Product
+                                                                                                and products planned, as well as for the planned application and use of
+data sheet shall define the specification of the product as agreed between
+                                                                                                customer’s third party customer(s). Customers should provide appropriate
+NXP Semiconductors and its customer, unless NXP Semiconductors and
+                                                                                                design and operating safeguards to minimize the risks associated with
+customer have explicitly agreed otherwise in writing. In no event however,
+                                                                                                their applications and products. NXP Semiconductors does not accept any
+shall an agreement be valid in which the NXP Semiconductors product
+                                                                                                liability related to any default, damage, costs or problem which is based
+is deemed to offer functions and qualities beyond those described in the
+                                                                                                on any weakness or default in the customer’s applications or products, or
+Product data sheet.
+                                                                                                the application or use by customer’s third party customer(s). Customer is
+                                                                                                responsible for doing all necessary testing for the customer’s applications
+                                                                                                and products using NXP Semiconductors products in order to avoid a
+                                                                                                default of the applications and the products or of the application or use by
+16.3 Disclaimers                                                                                customer’s third party customer(s). NXP does not accept any liability in this
+                                                                                                respect.
+Limited warranty and liability — Information in this document is believed
+to be accurate and reliable. However, NXP Semiconductors does not
+                                                                                                Limiting values — Stress above one or more limiting values (as defined in
+give any representations or warranties, expressed or implied, as to the
+                                                                                                the Absolute Maximum Ratings System of IEC 60134) will cause permanent
+accuracy or completeness of such information and shall have no liability
+                                                                                                damage to the device. Limiting values are stress ratings only and (proper)
+for the consequences of use of such information. NXP Semiconductors
+                                                                                                operation of the device at these or any other conditions above those
+takes no responsibility for the content in this document if provided by an
+                                                                                                given in the Recommended operating conditions section (if present) or the
+information source outside of NXP Semiconductors. In no event shall NXP
+                                                                                                Characteristics sections of this document is not warranted. Constant or
+Semiconductors be liable for any indirect, incidental, punitive, special or
+                                                                                                repeated exposure to limiting values will permanently and irreversibly affect
+consequential damages (including - without limitation - lost profits, lost
+                                                                                                the quality and reliability of the device.
+savings, business interruption, costs related to the removal or replacement
+of any products or rework charges) whether or not such damages are based
+on tort (including negligence), warranty, breach of contract or any other                       Terms and conditions of commercial sale — NXP Semiconductors
+legal theory. Notwithstanding any damages that customer might incur for                         products are sold subject to the general terms and conditions of commercial
+any reason whatsoever, NXP Semiconductors’ aggregate and cumulative                             sale, as published at http://www.nxp.com/profile/terms, unless otherwise
+liability towards customer for the products described herein shall be limited                   agreed in a valid written individual agreement. In case an individual
+in accordance with the Terms and conditions of commercial sale of NXP                           agreement is concluded only the terms and conditions of the respective
+Semiconductors.                                                                                 agreement shall apply. NXP Semiconductors hereby expressly objects to
+                                                                                                applying the customer’s general terms and conditions with regard to the
+                                                                                                purchase of NXP Semiconductors products by customer.
+Right to make changes — NXP Semiconductors reserves the right to
+make changes to information published in this document, including without
+limitation specifications and product descriptions, at any time and without                     No offer to sell or license — Nothing in this document may be interpreted
+notice. This document supersedes and replaces all information supplied prior                    or construed as an offer to sell products that is open for acceptance or
+to the publication hereof.                                                                      the grant, conveyance or implication of any license under any copyrights,
+                                                                                                patents or other industrial or intellectual property rights.
+TEA1995T                                               All information provided in this document is subject to legal disclaimers.                   © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                                  Rev. 3 — 5 December 2017
+                                                                                                                                                                              16 / 18
+NXP Semiconductors
+                                                                                                                                               TEA1995T
+                                                                                                     GreenChip dual synchronous rectifier controller
+
+
+Export control — This document as well as the item(s) described herein                          risk, and (c) customer fully indemnifies NXP Semiconductors for any liability,
+may be subject to export control regulations. Export might require a prior                      damages or failed product claims resulting from customer design and use
+authorization from competent authorities.                                                       of the product for automotive applications beyond NXP Semiconductors’
+                                                                                                standard warranty and NXP Semiconductors’ product specifications.
+Non-automotive qualified products — Unless this data sheet expressly
+states that this specific NXP Semiconductors product is automotive qualified,                   Translations — A non-English (translated) version of a document is for
+the product is not suitable for automotive use. It is neither qualified nor                     reference only. The English version shall prevail in case of any discrepancy
+tested in accordance with automotive testing or application requirements.                       between the translated and English versions.
+NXP Semiconductors accepts no liability for inclusion and/or use of non-
+automotive qualified products in automotive equipment or applications. In
+the event that customer uses the product for design-in and use in automotive
+applications to automotive specifications and standards, customer (a) shall
+use the product without NXP Semiconductors’ warranty of the product for
+                                                                                                16.4 Trademarks
+such automotive applications, use and specifications, and (b) whenever                          Notice: All referenced brands, product names, service names and
+customer uses the product for automotive applications beyond NXP                                trademarks are the property of their respective owners.
+Semiconductors’ specifications such use shall be solely at customer’s own
+                                                                                                GreenChip — is a trademark of NXP B.V.
+
+
+
+
+TEA1995T                                               All information provided in this document is subject to legal disclaimers.                  © NXP B.V. 2017. All rights reserved.
+
+Product data sheet                                                  Rev. 3 — 5 December 2017
+                                                                                                                                                                             17 / 18
+NXP Semiconductors
+                                                                                                                                              TEA1995T
+                                                                                              GreenChip dual synchronous rectifier controller
+
+
+
+Contents
+1      General description ............................................ 1
+2      Features and benefits .........................................1
+2.1      Efficiency features ............................................. 1
+2.2      Application features ........................................... 1
+2.3      Control features ................................................. 1
+3      Applications .........................................................2
+4      Ordering information .......................................... 2
+5      Marking .................................................................2
+6      Block diagram ..................................................... 3
+7      Pinning information ............................................ 4
+7.1      Pinning ............................................................... 4
+7.2      Pin description ................................................... 4
+8      Functional description ........................................5
+8.1      Introduction ........................................................ 5
+8.2      Start-up and undervoltage lockout (VCC pin) .... 5
+8.3      Drain sense (DSA and DSB pins) ..................... 5
+8.4      Synchronous Rectification (SR; DSA, SSA,
+         DSB, and SSB pins) ..........................................6
+8.5      Gate driver (GDA and GDB pins) ...................... 7
+8.6      Source sense connection (SSA and SSB
+         pins) ................................................................... 8
+9      Limiting values .................................................... 9
+10     Thermal characteristics ......................................9
+11     Characteristics .................................................. 10
+12     Application information .................................... 11
+12.1     Application diagram resonant application ........ 11
+12.2     Application diagram multi-output flyback
+         application ........................................................12
+13     Package outline .................................................13
+14     Abbreviations .................................................... 14
+15     Revision history ................................................ 15
+16     Legal information .............................................. 16
+
+
+
+
+                                                                                       Please be aware that important notices concerning this document and the product(s)
+                                                                                       described herein, have been included in section 'Legal information'.
+
+
+                                                                                       © NXP B.V. 2017.                                                 All rights reserved.
+                                                                                       For more information, please visit: http://www.nxp.com
+                                                                                       For sales office addresses, please send an email to: salesaddresses@nxp.com
+                                                                                                                                              Date of release: 5 December 2017
+                                                                                                                                                Document identifier: TEA1995T
+

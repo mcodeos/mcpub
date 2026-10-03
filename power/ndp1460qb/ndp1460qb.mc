@@ -1,0 +1,30 @@
+// Copyright (c) 2026 MCode
+//
+// Licensed under the Apache License, Version 2.0.
+
+// =============================================================================
+//  NDP1460QB — 40V 6A synchronous step-down DC/DC, QFN 5x5-20
+//  Datasheet: NDP1460 (bundled)
+//
+//  The schematic symbol brings out 9 pins only (1=GND 6=VIN 10=BST 12=SW
+//  16=VFB 17=CSP 18=CSN1 19=CSN2 20=FS). The remaining datasheet pins
+//  (2/3=GND, 4/5=NC, 7/8=VIN, 9/11/15=NC, 13/14=SW) are not drawn on the
+//  schematic and get no instance connections — see the board's analyze
+//  notes. FS(20) floating selects the 130-300kHz range: legal no-connect.
+// =============================================================================
+component BUCK.NDP1460QB
+{
+    partno = "NDP1460QB"
+    package = PKG.QFN20_5X5
+
+    pins = [
+        psnk [[6], [1]] = [VIN, GND]::DC(5V~20V)
+        io 10 = BST                     // bootstrap (C flying cap -> R 22R/1K -> SW)
+        psrc [12] = SW                  // switching node -> inductor -> output rail
+        in 16 = VFB                     // feedback (0.8V reference, divider per channel)
+        io 17 = CSP                     // current sense + (to the output-rail side)
+        io 18 = CSN1                    // current sense -1
+        io 19 = CSN2                    // current sense -2
+        io 20 = FS                      // frequency set (floating)
+    ]
+}

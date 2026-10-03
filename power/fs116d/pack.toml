@@ -1,0 +1,22 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "fs116d"
+version = "0.1"
+category = "power"
+entry = "fs116d.mc"
+vendor = "FastSOC"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["qc", "type-a", "protocol", "ssop10", "fastsoc"]
+
+[[attachments]]
+path = "fs116d.pdf"
+kind = "datasheet"
+checksum = "sha256:de042be8481955797bbcde42646655be8ef037395befd1822dd9e8cbbac2206f"
+
+[[attachments]]
+path = "fs116d.txt"
+kind = "doc"
+checksum = "sha256:5b2bcd6edfdd6534795f58f2f5462c72c3e20eb979666b30314c633a369bcff8"

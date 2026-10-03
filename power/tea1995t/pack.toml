@@ -1,0 +1,22 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "tea1995t"
+version = "0.1"
+category = "power"
+entry = "tea1995t.mc"
+vendor = "NXP"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["sync-rectifier", "controller", "soic8", "nxp", "llc"]
+
+[[attachments]]
+path = "tea1995t.pdf"
+kind = "datasheet"
+checksum = "sha256:c53015a654fe5b1280a7447fd3169ca9907f2d6e40c25e64018e11401f5ff0ac"
+
+[[attachments]]
+path = "tea1995t.txt"
+kind = "doc"
+checksum = "sha256:6bc28a8ce3cd4c5ca93d9887056028565dd1866886dcdd8237083c6a1854a256"

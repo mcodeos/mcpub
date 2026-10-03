@@ -1,0 +1,12 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "me6203a33"
+version = "0.1"
+category = "power"
+entry = "me6203a33.mc"
+vendor = "unknown"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["ldo", "linear-regulator", "sot-89", "3v3"]

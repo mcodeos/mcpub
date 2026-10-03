@@ -1,0 +1,21 @@
+// Copyright (c) 2026 MCode
+//
+// Licensed under the Apache License, Version 2.0.
+
+// =============================================================================
+//  GT090N06D52 — dual-NMOS synchronous-rectifier FET, DFN 5x6
+//  The schematic symbol brings out six pins: 1/2/3/4/5/7.
+// =============================================================================
+component NMOS.GT090N06
+{
+    partno = "GT090N06D52"
+
+    pins = [
+        io 1 = SA                       // A source (VSS)
+        io 2 = GB                       // B gate (U3.GDB)
+        io 3 = SB                       // B source (VSS)
+        io 4 = GA                       // A gate (U3.GDA)
+        io 5 = DA                       // A drain (T1.17)
+        io 7 = DB                       // B drain (T1.11)
+    ]
+}

@@ -1,0 +1,1529 @@
+CMS8S588x Datasheet
+Enhanced 1T 8051 microcontroller with flash memory
+Rev.1.01
+
+
+
+
+Please be reminded about following CMS’s policies on intellectual property
+＊Cmsemicon Limited(denoted as ‘our company’ for later use) has already applied for relative patents and entitled legal rights. Any
+patents related to CMS’s MCU or other producrts is not authorized to use. Any individual, organization or company which infringes
+our company’s interlectual property rights will be forbidden and stopped by our company through any legal actions, and our
+company will claim the lost and required for compensation of any damage to the company.
+
+＊ The name of Cmsemicon Limited and logo are both trademarks of our company.
+
+＊Our company preserve the rights to further elaborate on the improvements about products function, reliability and design in this
+manual. However, our company is not responsible for any usage about this manual. The applications and their purposes in this
+manual are just for clarification，our company does not guarantee that these applications are feasible without further improvements
+and changes，and our company does not recommend any usage of the products in areas where people’s safety is endangered
+during accident. Our company’s products are not authorized to be used for life-saving or life support devices and systems.
+                                                                                                CMS8S588x datasheet
+
+
+
+1. Product features
+1.1       Features
+◆     Compatible with MCS-51 1T instruction system               ◆   Operating voltage range
+      -    The system clock frequency supports up to 48MHz           -   2.1V~5.5V
+      -    The fastest machine cycle supports 1TSYS @ FSYS ≤     ◆   Operating temperature range
+           24MHz                                                     -   -40℃~105℃
+      -    The fastest machine cycle supports 2TSYS @ FSYS ＝     ◆   Low voltage reset function (LVR)
+           48MHz                                                     -   1.8V/ 2.0V/ 2.5V/ 3.5V
+◆     Memory                                                     ◆   Low-voltage detection function (LVD)
+      -    program FLASH:32K×8Bit                                    -   2.0V~4.3V 8 levels optional
+      -    Data FLASH:1K×8Bit                                    ◆   High-precision 12-bit ADC
+      -    General RAM:256×8Bit                                      -   Up to 30 AD external channels
+      -    General XRAM:2K×8Bit                                      -   Optional reference voltage
+      -    Support BOOT function area, 1K/2K/4K optional                 (1.2V/ 2.0V/ 2.4V/ 3.0V/ VDD)
+      -    Program FLASH supports partition protection               -   Can detect internal 1.2V reference voltage
+◆     4 oscillation modes                                            -   Support hardware trigger start conversion function
+      -    HSI- Internal high-speed oscillation:48MHz                -   Support a set of result digital comparison function
+      -    HSE- External high-speed oscillation: 8MHz/           ◆   Buzzer driver
+           16MHz                                                     -   50% duty cycle, frequency can be set freely
+      -    LSE- External low-speed oscillator:32.768KHz          ◆   PWM
+      -    LSI- Internal low-speed oscillator:125KHz                 -   6 channels PWM
+◆     GPIO                                                           -   6 mutually independent cycle counters
+      -    Up to 30 GPIO                                             -   Support independent /complementary/ synchronous/
+      -    All support up/down resistance function                       group mode
+      -    All support edge (rising edge/ falling edge/ double       -   Support edge alignment
+           edge) interrupt                                           -   Support complementary mode dead zone delay
+      -    Support wake-up function                                      function
+◆     Interrupt source                                           ◆   Communication modules
+      -    Support all external port interrupts                      -   1 x SPI (communication rate up to 6Mb/s)
+      -    7 timer interrupts                                        -   1 x I2C (communication rate up to 400Kb/s)
+      -    Other peripheral interrupts                               -   2 x UART (baud rate up to 1Mb/s)
+◆     Timer                                                          -   UART1 can be mapped to any GPIO
+      -    WDT wake-up (watchdog timer)                          ◆   Low power mode
+      -    Timer0/1, Timer2, Timer3/4                                -   Idle mode (IDLE)
+      -    LSE_Timer (Support sleep wake function)                   -   Sleep mode (STOP)
+      -    WUT (wake-up wake-up)                                 ◆   Support 96-bit unique ID number (UID)
+      -    BRT (Serial port baud rate clock generator)               -   Each chip has an independent ID number
+◆     Cyclic redundancy check                                    ◆   Support two-wire serial programming and debugging
+      -    CRC16 (CRC16-CCITT)
+
+
+
+
+                                                           2 / 38                                             Rev. 1.01
+                                                                                      CMS8S588x datasheet
+
+1.2      Product comparison
+                             Product mode
+                                                CMS8S5887                            CMS8S5889
+  Peripheral interface
+
+          Maximum clock frequency                         Fsys=48MHz, Fcpu=24MHz
+                                APROM                           32/31/30/28 KB(1)
+                                  BOOT                            0/1/2/4 KB(1)
+      Storage module          Data FLASH                              1 KB
+
+                                  RAM                                 256 B
+                                  XRAM                                2 KB
+                                  WDT                                   1
+                               Timer0/1                             2 (16bit)
+                                  Timer2                            1 (16bit)
+          Timer                Timer3/4                             2 (16bit)
+                              LSE_Timer                             1 (16bit)
+                                  WUT                               1 (12bit)
+                                   BRT                              1 (16bit)
+                                  CRC                            CRC16-CCITT
+        Enhanced
+                               BUZZER                                   1
+  Digital peripherals
+                                  PWM                                6(16bit)
+                                   SPI                                  1
+      Communication
+                                   I2C                                  1
+         module
+                                  UART                                  2
+                               12bit-ADC
+      Analog module           ((Number of           18                                  30
+                         external channels)
+
+                     GPIOs                          18                                  30
+                       LVR                                     1.8V/2.0V/2.5V/3.5V
+                       LVD                                      2.0~4.3V, 8 levels
+
+              Operating voltage                                     2.1~5.5 V
+            Operating temperature                                  -40~105 ℃
+                  Encapsulation               TSSOP20, QFN20                          QFN32
+  Note: Set the size of APROM and BOOT space through the system configuration register, the maximum total
+          of APROM and BOOT space is 32K
+
+
+
+
+                                                 3 / 38                                          Rev. 1.01
+                                                                                                    CMS8S588x datasheet
+
+2. System overview
+2.1       System Introduction
+    The CMS8S589x series is an 8051 core, a 1T instruction system compatible with MCS-51, and a general IO type 8-bit
+chip. The operating frequency can reach up to 48MHz. The MCU has the following characteristics:
+      ➢   With a maximum of 32KB program area、256B RAM space、2KB XRAM、1KB non-volatile data area.
+      ➢   There are four oscillation modes, the system clock can be freely switched between the three clock sources (mutual
+          switching between HSE and LSE is prohibited), and the external oscillator stops oscillation detection.
+      ➢   It supports three working modes: normal, idle, and sleep, which can effectively reduce power consumption.
+      ➢   Built-in low-voltage reset LVR, low-voltage monitoring LVD, watchdog overflow reset and other protection settings,
+          can effectively improve the reliability of system operation.
+      ➢   With multiple interrupt sources such as external interrupts, timed interrupts and other peripheral interrupts, it can
+          respond to external events in a timely manner and improve the utilization of the MCU.
+      ➢   Up to 9 timers, which can realize functions such as timing, counting, input capture, output comparison, timing wake-
+          up, and baud rate generator
+      ➢   With cyclic redundancy check unit CRC
+      ➢   6-channel 16-bit PWM, supports independent, complementary, and synchronous three-mode output, and has dead
+          zone control function.
+      ➢   With 1 I2C, 1 SPI, and 2 UART communication modules, it can realize data transmission between the system and
+          other devices.
+      ➢   It has a high-precision 12-bit ADC and can choose an internal reference voltage.
+
+
+
+
+                                                             4 / 38                                                Rev. 1.01
+                                                                                           CMS8S588x datasheet
+
+2.2      Memory structure
+ 2.2.1     Program memory FLASH
+    This series has a maximum of 32KB of FLASH storage space, APROM area and BOOT area share the entire FLASH
+space.
+    The block diagram of the FLASH space allocation structure is as follows:
+
+
+
+
+                                                    0000H
+
+
+
+
+                                                                         APROM
+
+                               FLASH:32KB
+
+
+
+
+                                                                          BOOT
+                                                    7FFFH
+
+
+
+                                                                     DATA FLASH 1KB
+
+
+
+
+    The size of BOOT can be configured, the configuration method is as follows:
+                                                   32K (Program storage area)
+Address space allocation method                    APROM area                              BOOT area
+           method 0                         32K              0000H-7FFFH              --                --
+           method 1                         31K              0000H-7BFFH              1K          7C00H-7FFFH
+           method 2                         30K              0000H-77FFH              2K          7800H-7FFFH
+           method 3                         28K              0000H-6FFFH              4K          7000H-7FFFH
+
+
+
+
+                                                            5 / 38                                     Rev. 1.01
+                                                                                                        CMS8S588x datasheet
+
+ 2.2.2      Internal data memory RAM
+    The internal data memory is divided into 3 parts: low 128Bytes, high 128Bytes, SFR. The structure diagram of RAM
+space allocation is shown in the figure below:
+
+
+
+                       FFH                                           FFH
+
+
+
+                                                                                          SFR
+                                       High128bytes
+                                                                                       128bytes
+                                   (Indirect addressing)
+                                                                                  (Direct addressing)
+
+
+
+                       80H                                           80H
+
+
+                       7FH
+
+
+
+                                       Low 128bytes
+                               (Indirect or direct addressing)
+
+
+
+                       00H
+
+
+
+
+ 2.2.3      External data memory XRAM
+    There is a maximum 2KB XRAM area inside the chip, which is not related to RAM/FLASH. The structure diagram of
+XRAM space allocation is shown in the figure below.
+
+
+
+                                                     07FFH
+
+
+
+
+                                                                          XRAM
+                                                                           2 KB
+                                                                  （Indirect addressing）
+
+
+
+
+                                                     0000H
+
+
+
+
+                                                                 6 / 38                                           Rev. 1.01
+                                                                                             CMS8S588x datasheet
+
+ 2.2.4      Special function register XSFR
+    XSFR is a special register shared by the addressing space of XRAM, which mainly includes: port control register and
+other function control registers. Its addressing range is as follows:
+
+
+
+                                          FFFFH
+
+                                                                        XSFR：4K
+
+                                          F000H
+                                          EFFFH
+
+
+
+                                                                         Reserve
+
+
+                                          0800H
+                                          07FFH
+                                                                        XRAM：2K
+                                           0000H
+
+
+
+
+                                                               7 / 38                                      Rev. 1.01
+                                                                                                CMS8S588x datasheet
+
+3. Pin definition
+3.1      Pin description
+3.1.1      CMS8S5887-TSSOP20 Pin diagram
+
+
+  AN3/T0/T1/T2/NSS/NSSO0/CC3/PG3/DSCK2/P03     1              20   P02/AN2/T0G/T1G/T2EX/MISO/CC2/PG2/DSDA2
+                AN4/TXD0/NSS/NSSO1/PG4/P04     2              19   P01/AN1/SDA/MOSI/CC1/PG1
+                AN5/RXD0/NSS/NSSO2/PG5/P05     3              18   P00/AN0/SCL/SCLK/CC0/PG0
+                       AN8/SCL/SCLK/PG0/P10    4              17   P54/AN43/TXD0/NSS/NSSO1/PG4/DSCK1
+                AN9/SDA/MOSI/PG1/OSCIN2/P11    5    TSSOP20   16   P53/AN42/NSS/NSSO0/PG3/DSDA1
+      OSCOUT2/PG2/MISO/T2EX/T1G/T0G/AN10/P12   6              15   P50/AN39/SCL/SCLK/PG0/NRST
+                                        VSS    7              14   P25/PG5/NSS/NSSO2/RXD0/AN21
+              BUZZ/NSSO3/NSS/CAP2/AN14/P16     8              13   P22/PG2/CC2/MISO/T2EX/T1G/T0G/AN18
+                                        VDD    9              12   P21/PG1/CC1/MOSI/SDA/AN17
+                               PG5/AN46/P57    10             11   P20/PG0/CC0/SCLK/SCL/AN16
+
+
+
+
+                                                         8 / 38                                              Rev. 1.01
+                                                                                                  CMS8S588x datasheet
+
+3.1.2    CMS8S5887-QFN20 Pin diagram
+
+
+
+
+                                                 20   19   18   17   16
+
+                      AN8/SCL/SCLK/PG0/P10   1                            15   P00/AN0/SCL/SCLK/CC0/PG0
+               AN9/SDA/MOSI/PG1/OSCIN2/P11   2                            14   P54/AN43/TXD0/NSS/NSSO1/PG4/DSCK1
+    OSCOUT2/PG2/MISO/T2EX/T1G/T0G/AN10/P12   3         QFN20              13   P53/AN42/NSS/NSSO0/PG3/DSDA1
+                                     GND     4                            12   P50/AN39/SCL/SCLK/PG0/NRST
+             BUZZ/NSSO3/NSS/CAP2/AN14/P16    5                            11   P25/PG5/NSS/NSSO2/RXD0/AN21
+                                                 6    7     8   9
+
+
+
+
+                                                           9 / 38                                                  Rev. 1.01
+                                                                                                                            CMS8S588x datasheet
+
+3.1.3   CMS8S5889-QFN32 Pin diagram
+
+
+
+
+                                                    24   23   22   21   20   19   18   17
+                  PG0/CC0/SCLK/SCL/AN16/P20    25                                           16   P07/AN7/INT0/INT1/CLO
+
+                  PG1/CC1/MOSI/SDA/AN17/P21    26                                           15   P06/AN6/ADET/INT0/NSS/NSSO3/BUZZ
+
+         PG2/CC2/MISO/T2EX/T1G/T0G/AN18/P22    27                                           14   P05/AN5/RXD0/NSS/NSSO2/PG5
+
+         PG3/CC3/NSSO0/NSS/T2/T1/T0/AN19/P23   28                                           13   P04/AN4/TXD0/NSS/NSSO1/PG4
+                                                                   QFN32
+               PG4/NSS/NSSO1/TXD0/AN20/P24     29                                           12   P03/AN3/T0/T1/T2/NSS/NSSO0/CC3/PG3/DSCK2
+
+               PG5/NSS/NSSO2/RXD0/AN21/P25     30                                           11   P02/AN2/T0G/T1G/T2EX/MISO/CC2/PG2/DSDA2
+
+               NSS/NSSO3/ADET/INT0/AN22/P26    31                                           10   P01/AN1/SDA/MOSI/CC1/PG1
+
+                          INT0/INT1/AN23/P27   32                                            9   P00/AN0/SCL/SCLK/CC0/PG0
+                                                    1    2    3    4    5    6    7    8
+
+
+
+
+                                                                   10 / 38                                                                  Rev. 1.01
+                                                                                                     CMS8S588x datasheet
+
+
+3.2        Pin function description
+    Symbol description: I/O means digital input/output, I means digital input, O means digital output, AI means analog input,
+AO means analog output.
+                Pin number
+                                                Pin
+          CMS8S5887          CMS8S5889                     Pin Type                       Pin description
+                                              Function
+ TSSOP20         QFN20          QFN32
+                                                                       GPIO configures input and output pull up, down and
+                                                P00           I/O
+                                                                       other functions through registers
+                                                AN0           AI       ADC channel 0 input
+                                                SCL           I/O      I2C clock input and output
+                                               SCLK           I/O      SPI clock input and output
+      18           15              9
+                                                CC0            O       Timer2 compare output channel 0
+                                                PG0            O       PWM channel 0 output
+                                               TXD1            O       UART1 data output
+                                               RXD1           I/O      UART1 Data input/synchronous mode data output
+                                                                       GPIO configures input and output pull up, down and
+                                                P01           I/O
+                                                                       other functions through registers
+                                                AN1           AI       ADC channel 1 input
+                                                SDA           I/O      I2C data input and output
+                                               MOSI           I/O      SPI data master sending and slave receiving
+      19           16             10
+                                                CC1            O       Timer2 compare output channel 1
+                                                PG1            O       PWM channel 1 output
+                                               TXD1            O       UART1 data output
+                                               RXD1           I/O      UART1 Data input/synchronous mode data output
+                                                                       GPIO configures input and output pull up, down and
+                                                P02           I/O
+                                                                       other functions through registers
+                                                AN2           AI       ADC channel 2 input
+                                                T0G            I       Timer 0 gate control input
+                                                T1G            I       Timer 1 gate control input
+                                               T2EX            I       Timer2falling edge automatic reload input
+      20           17             11           MISO           I/O      SPI data master receiving and slave sending
+                                                CC2            O       Timer2 compare output channel 2
+                                                PG2            O       PWM channel 2 output
+                                                                       Programming/debugging data input and output port
+                                               DSDA2          I/O
+                                                                       2
+                                               TXD1            O       UART1 data output
+                                               RXD1           I/O      UART1 Data input/synchronous mode data output
+                                                                       GPIO configures input and output pull up, down and
+                                                P03           I/O
+                                                                       other functions through registers
+                                                AN3           AI       ADC channel 3 input
+      1            18             12             T0            I       Timer0 external clock input
+                                                 T1            I       Timer1 external clock input
+                                                 T2            I       Timer2 external event or gate control input
+
+
+                                                          11 / 38                                                  Rev. 1.01
+                                                                                         CMS8S588x datasheet
+
+             Pin number
+                                        Pin
+       CMS8S5887          CMS8S5889              Pin Type                      Pin description
+                                      Function
+TSSOP20       QFN20        QFN32
+                                        NSS                 SPI slave chip select input/master chip select 1
+                                                    I/O
+                                      (NSSO0)               output
+                                       CC3          O       Timer2 compare output channel 3
+                                       PG3          O       PWM channel 3 output
+                                      DSCK2          I      Programming/debugging clock input port2
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P04         I/O
+                                                            other functions through registers
+                                       AN4          AI      ADC channel 4 input
+                                       TXD0         O       UART0 data output
+   2            19           13         NSS                 SPI slave chip select input/master chip select 1
+                                                    I/O
+                                      (NSSO1)               output
+                                       PG4          O       PWM channel 4 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P05         I/O
+                                                            other functions through registers
+                                       AN5          AI      ADC channel 5 input
+                                       RXD0         I/O     UART0 Data input/synchronous mode data output
+   3            20           14         NSS                 SPI slave chip select input/master chip select 2
+                                                    I/O
+                                      (NSSO2)               output
+                                       PG5          O       PWM channel 5 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P06         I/O
+                                                            other functions through registers
+                                       AN6          AI      ADC channel 6 input
+                                       ADET          I      ADC external trigger input
+                                       INT0         I/O     External interrupt 0 input
+   -               -         15
+                                        NSS                 SPI slave chip select input/master chip select 3
+                                                    I/O
+                                      (NSSO3)               output
+                                       BUZZ         O       Buzzer drive output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P07         I/O
+                                                            other functions through registers
+                                       AN7          AI      ADC channel 7 input
+                                       INT0         I/O     External interrupt 0 input
+   -               -         16        INT1         I/O     External interrupt 1 input
+                                       CLO          O       System clock frequency division output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+
+
+                                                 12 / 38                                              Rev. 1.01
+                                                                                          CMS8S588x datasheet
+
+             Pin number
+                                        Pin
+       CMS8S5887          CMS8S5889              Pin Type                      Pin description
+                                      Function
+TSSOP20       QFN20        QFN32
+                                                            GPIO configures input and output pull up, down and
+                                        P10         I/O
+                                                            other functions through registers
+                                        AN8         AI      ADC channel 8 input
+                                        SCL         I/O     I2C clock input and output
+   4               1         17        SCLK         I/O     SPI clock input and output
+                                        PG0         O       PWM channel 0 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P11         I/O
+                                                            other functions through registers
+                                        AN9         AI      ADC channel 9 input
+                                        SDA         I/O     I2Cdata input and output
+                                       MOSI         I/O     SPI data master sending and slave receiving
+   5               2         18
+                                        PG1         O       PWM channel 1 output
+                                      OSCIN2        AI      External oscillation HSE input port 2
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P12         I/O
+                                                            other functions through registers
+                                       AN10         AI      ADC channel 10 input
+                                        T0G          I      Timer0 gate control input
+                                        T1G          I      Timer1 gate control input
+                                       T2EX          I      Timer2 falling edge automatic reload input
+   6               3         19
+                                       MISO         I/O     SPI data master receiving and slave sending
+                                        PG2         O       PWM channel 2 output
+                                      OSCOUT2       AO      External oscillation HSE output port 2
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P13         I/O
+                                                            other functions through registers
+                                       AN11         AI      ADC channel 11 input
+                                        T0           I      Timer0 external clock input
+                                        T1           I      Timer1 external clock input
+   -               -         20         T2           I      Timer2 external clock input
+                                        NSS                 SPI slave chip select input/master chip select 0
+                                                    I/O
+                                      (NSSO0)               output
+                                        PG3         O       PWM channel 3 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P14         I/O
+   -               -         21                             other functions through registers
+                                       AN12         AI      ADC channel 12 input
+
+                                                 13 / 38                                             Rev. 1.01
+                                                                                         CMS8S588x datasheet
+
+             Pin number
+                                        Pin
+       CMS8S5887          CMS8S5889              Pin Type                      Pin description
+                                      Function
+TSSOP20       QFN20        QFN32
+                                       CAP0          I      Timer2 input capture channel 0
+                                       TXD0         O       UART0data output
+                                        NSS                 SPI slave chip select input/master chip select 1
+                                                    I/O
+                                      (NSSO1)               output
+                                       PG4          O       PWM channel 4 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P15         I/O
+                                                            other functions through registers
+                                       AN13         AI      ADC channel 13 input
+                                       CAP1          I      Timer2 input capture channel 1
+                                       RXD0         O       UART0 data input or synchronous mode data output
+   -               -         22
+                                        NSS                 SPI slave chip select input/master chip select 2
+                                                    I/O
+                                      (NSSO2)               output
+                                       PG5          O       PWM channel 5 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P16         I/O
+                                                            other functions through registers
+                                       AN14         AI      ADC channel 14 input
+                                       CAP2          I      Timer2 input capture channel 2
+   8               5         23         NSS                 SPI slave chip select input/master chip select 3
+                                                    I/O
+                                      (NSSO3)               output
+                                       BUZZ         O       Buzzer drive output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P17         I/O
+                                                            other functions through registers
+                                       AN15         AI      ADC channel 15 input
+                                       CAP3          I      Timer2 input capture channel 3
+   -               -         24
+                                       CLO          O       System clock frequency division output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P20         I/O
+                                                            other functions through registers
+                                       AN16         AI      ADC channel 16 input
+                                       SCL          I/O     I2C clock input and output
+                                       SCLK         I/O     SPI clock input and output
+  11               8         25
+                                       CC0          O       Timer2 compare output channel 0
+                                       PG0          O       PWM channel 0 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+  12               9         26         P21         I/O     GPIO configures input and output pull up, down and
+                                                 14 / 38                                             Rev. 1.01
+                                                                                          CMS8S588x datasheet
+
+             Pin number
+                                        Pin
+       CMS8S5887          CMS8S5889              Pin Type                      Pin description
+                                      Function
+TSSOP20       QFN20        QFN32
+                                                            other functions through registers
+
+                                       AN17         AI      ADC channel 17 input
+                                       SDA          I/O     I2Cdata input and output
+                                       MOSI         I/O     SPI data master sending and slave receiving
+                                       CC1          O       Timer2 compare output channel 1
+                                       PG1          O       PWM channel 1 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P22         I/O
+                                                            other functions through registers
+                                       AN18         AI      ADC channel 18 input
+                                       T0G           I      Timer0 gate control input
+                                       T1G           I      Timer1 gate control input
+                                       T2EX          I      Timer2 falling edge automatic reload input
+  13            10           27
+                                       MISO         I/O     SPI data master receiving and slave sending
+                                       CC2          O       Timer2 compare output channel 2
+                                       PG2          O       PWM channel 2 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P23         I/O
+                                                            other functions through registers
+                                       AN19         AI      ADC channel 19 input
+                                        T0           I      Timer0 external clock input
+                                        T1           I      Timer1 external clock input
+                                        T2           I      Timer2 external event or gate control input
+   -               -         28
+                                        NSS                 SPI slave chip select input/master chip select 0
+                                                    I/O
+                                      (NSSO0)               output
+                                       CC3          O       Timer2 compare output channel 3
+                                       PG3          O       PWM channel 3 output
+                                       TXD1         O       UART1data output
+                                       RXD1         I/O     UART1Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P24         I/O
+                                                            other functions through registers
+                                       AN20         AI      ADC channel 20 input
+                                       TXD0         O       UART0data output
+   -               -         29         NSS                 SPI slave chip select input/master chip select 1
+                                                    I/O
+                                      (NSSO1)               output
+                                       PG4          O       PWM channel 4 output
+                                       TXD1         O       UART1data output
+                                       RXD1         I/O     UART1Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+  14            11           30         P25         I/O
+                                                            other functions through registers
+                                                 15 / 38                                              Rev. 1.01
+                                                                                         CMS8S588x datasheet
+
+             Pin number
+                                        Pin
+       CMS8S5887          CMS8S5889              Pin Type                      Pin description
+                                      Function
+TSSOP20       QFN20        QFN32
+                                       AN21         AI      ADC channel 21 input
+                                       RXD0         I/O     UART0Data input/synchronous mode data output
+                                        NSS                 SPI slave chip select input/master chip select 2
+                                                    I/O
+                                      (NSSO2)               output
+                                       PG5          O       PWM channel 5 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P26         I/O
+                                                            other functions through registers
+                                       AN22         AI      ADC channel 22 input
+                                       ADET          I      ADC external trigger input
+   -               -         31        INT0          I      External interrupt 0 input
+                                        NSS                 SPI slave chip select input/master chip select 3
+                                                    I/O
+                                      (NSSO3)               output
+                                       TXD1         O       UART1data output
+                                       RXD1         I/O     UART1Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P27         I/O
+                                                            other functions through registers
+                                       AN23         AI      ADC channel 23 input
+                                       INT0          I      External interrupt 0 input
+   -               -         32
+                                       INT1          I      External interrupt 1 input
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P50         I/O
+                                                            other functions through registers
+                                       AN39         AI      ADC channel 39 input
+                                       NRST          I      External reset input
+                                       SCL          I/O     I2C clock input and output
+  15            12            1
+                                       SCLK         I/O     SPI clock input and output
+                                       PG0          O       PWM channel 0 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P51         I/O
+                                                            other functions through registers
+                                       AN40         AI      ADC channel 40 input
+                                      OSCIN1        AI      External oscillation HSE/LSE input port 1
+                                       SDA          I/O     I2Cdata input and output
+   -               -          2
+                                       MOSI         I/O     SPI data master sending and slave receiving
+                                       PG1          O       PWM channel 1 output
+                                       TXD1         O       UART1data output
+                                       RXD1         I/O     UART1Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+   -               -          3         P52         I/O
+                                                            other functions through registers
+                                                 16 / 38                                             Rev. 1.01
+                                                                                      CMS8S588x datasheet
+
+             Pin number
+                                        Pin
+       CMS8S5887          CMS8S5889              Pin Type                     Pin description
+                                      Function
+TSSOP20       QFN20        QFN32
+                                       AN41         AI      ADC channel 41 input
+                                      OSCOUT1       AO      External oscillation HSE/LSE output port 1
+                                       MISO         I/O     SPI data master receiving and slave sending
+                                        PG2         O       PWM channel 2 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P53         I/O
+                                                            other functions through registers
+                                       AN42         AI      ADC channel 42 input
+                                                            Programming/debugging data input and output port
+                                       DSDA1        I/O
+                                                            1
+  16            13            6         NSS                 SPI slave chip select input/master chip select 0
+                                                    I/O
+                                      (NSSO0)               output
+                                        PG3         O       PWM channel 3 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P54         I/O
+                                                            other functions through registers
+                                       AN43         AI      ADC channel 43 input
+                                       DSCK1         I      Programming/debugging clock input port1
+                                       TXD0         O       UART 0 data output
+  17            14            7
+                                        NSS                 SPI slave chip select input/master chip select 1
+                                                    I/O
+                                      (NSSO1)               output
+                                        PG4         O       PWM channel 4 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 data input/synchronization mode
+                                                            GPIO configures input and output pull up, down and
+                                        P55         I/O
+                                                            other functions through registers
+                                       AN44         AI      ADC channel 44 input
+                                       RXD0         I/O     UART0Data input/synchronous mode data output
+                   -          8         NSS                 SPI slave chip select input/master chip select 2
+   -                                                I/O
+                                      (NSSO2)               output
+                                        PG5         O       PWM channel 5 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1Data input/synchronous mode data output
+                                                            GPIO configures input and output pull up, down and
+                                        P57         I/O
+                                                            other functions through registers
+                                       AN46         AI      ADC channel 46 input
+  10               7          -         PG5         O       PWM channel 5 output
+                                       TXD1         O       UART1 data output
+                                       RXD1         I/O     UART1 Data input/synchronous mode data output
+   9               6          5        VDD          P       Power supply voltage input pin
+   7               4          4       VSS/GND       P       Ground pin
+
+
+                                                 17 / 38                                              Rev. 1.01
+                                                                                                   CMS8S588x datasheet
+
+3.3       GPIO features
+    The pins share multiple functions, and each I/O port can be configured as any digital function or designated analog
+function. I/O as a general GPIO port has the following characteristics:
+      ➢    Configurable 2 levels of I/O output slope.
+      ➢    Can read data latch status or pin status.
+      ➢    Configurable rising edge, falling edge, double edge trigger interrupt.
+      ➢    Configurable rising edge, falling edge, double edge interrupt to wake up the chip.
+      ➢    Can be configured as normal input, pull-up input, pull-down input, push-pull output, open-drain output mode.
+
+
+
+
+                                                             18 / 38                                              Rev. 1.01
+                                                                                             CMS8S588x datasheet
+
+3.4        Pin function list
+List of digital function ports:
+                                                      Digital function configuration
+            External input
+                                   0      1     2            3                4         5        6       7
+ P00               -              GPIO   ANA   SCL         SCLK             CC0        PG0     TXD1    RXD1
+
+ P01               -              GPIO   ANA   SDA         MOSI             CC1        PG1     TXD1    RXD1
+
+ P02       T0G/T1G/T2EX           GPIO   ANA    -          MISO             CC2        PG2     TXD1    RXD1
+
+ P03          T0/T1/T2            GPIO   ANA    -      NSS(NSSO0)           CC3        PG3     TXD1    RXD1
+
+ P04               -              GPIO   ANA   TXD0    NSS(NSSO1)             -        PG4     TXD1    RXD1
+
+ P05               -              GPIO   ANA   RXD0    NSS(NSSO2)             -        PG5     TXD1    RXD1
+
+ P06         ADET/INT0            GPIO   ANA    -      NSS(NSSO3)          BUZZ         -      TXD1    RXD1
+ P07          INT0/INT1           GPIO   ANA    -             -             CLO         -      TXD1    RXD1
+ P10               -              GPIO   ANA   SCL         SCLK               -        PG0     TXD1    RXD1
+
+ P11               -              GPIO   ANA   SDA         MOSI               -        PG1     TXD1    RXD1
+
+ P12       T0G/T1G/T2EX           GPIO   ANA    -          MISO               -        PG2     TXD1    RXD1
+
+ P13          T0/T1/T2            GPIO   ANA    -      NSS(NSSO0)             -        PG3     TXD1    RXD1
+ P14            CAP0              GPIO   ANA   TXD0    NSS(NSSO1)             -        PG4     TXD1    RXD1
+ P15            CAP1              GPIO   ANA   RXD0    NSS(NSSO2)             -        PG5     TXD1    RXD1
+ P16            CAP2              GPIO   ANA    -      NSS(NSSO3)          BUZZ         -      TXD1    RXD1
+
+ P17            CAP3              GPIO   ANA    -             -             CLO         -      TXD1    RXD1
+ P20               -              GPIO   ANA   SCL         SCLK             CC0        PG0     TXD1    RXD1
+
+ P21               -              GPIO   ANA   SDA         MOSI             CC1        PG1     TXD1    RXD1
+
+ P22       T0G/T1G/T2EX           GPIO   ANA    -          MISO             CC2        PG2     TXD1    RXD1
+
+ P23          T0/T1/T2            GPIO   ANA    -      NSS(NSSO0)           CC3        PG3     TXD1    RXD1
+ P24               -              GPIO   ANA   TXD0    NSS(NSSO1)             -        PG4     TXD1    RXD1
+ P25               -              GPIO   ANA   RXD0    NSS(NSSO2)             -        PG5     TXD1    RXD1
+
+ P26         ADET/INT0            GPIO   ANA    -      NSS(NSSO3)             -         -      TXD1    RXD1
+ P27          INT0/INT1           GPIO   ANA    -             -               -         -      TXD1    RXD1
+ P50            NSRT              GPIO   ANA   SCL         SCLK               -        PG0     TXD1    RXD1
+
+ P51               -              GPIO   ANA   SDA         MOSI               -        PG1     TXD1    RXD1
+ P52               -              GPIO   ANA    -          MISO               -        PG2     TXD1    RXD1
+ P53               -              GPIO   ANA    -      NSS(NSSO0)             -        PG3     TXD1    RXD1
+
+ P54               -              GPIO   ANA   TXD0    NSS(NSSO1)             -        PG4     TXD1    RXD1
+
+ P55               -              GPIO   ANA   RXD0    NSS(NSSO2)             -        PG5     TXD1    RXD1
+ P57               -              GPIO   ANA                                  -        PG5     TXD1    RXD1
+
+
+
+
+                                                      19 / 38                                          Rev. 1.01
+                                                                   CMS8S588x datasheet
+
+Analog port, CONFIG configuration port list:
+                                                     ANA(1)
+                                                                         CONFIG
+                  ADC
+   P00             AN0                                                      -
+   P01             AN1                                                      -
+   P02             AN2                                                   DSDA2
+   P03             AN3                                                   DSCK2
+   P04             AN4                                                      -
+   P05             AN5                                                      -
+   P06             AN6
+   P07             AN7
+   P10             AN8                                                      -
+   P11             AN9                                                   OSCIN2
+   P12            AN10                                                  OSCOUT2
+   P13            AN11
+   P14            AN12
+   P15            AN13
+   P16            AN14                                                      -
+   P17            AN15
+   P20            AN16                                                      -
+   P21            AN17                                                      -
+   P22            AN18                                                      -
+   P23            AN19
+   P24            AN20
+   P25            AN21                                                      -
+   P26            AN22
+   P27            AN23
+   P50            AN39                                                    NRST
+   P51            AN40                                                   OSCIN1
+   P52            AN41                                                  OSCOUT1
+   P53            AN42                                                   DSDA1
+   P54            AN43                                                   DSCK1
+   P55            AN44
+   P57            AN46                                                      -
+Note: 1. The chip pins are subject to the actual chip.
+
+
+
+
+                                                         20 / 38                Rev. 1.01
+                                                                                                  CMS8S588x datasheet
+
+4. Function summary
+4.1       System clock
+    The system clock has 4 kinds of clock sources, which can be selected through the setting of the system configuration
+register or the user register. The system clock module has the following characteristics:
+      ➢   Optional internal high-speed oscillation HIS (48MHz).
+      ➢   Optional external high-speed crystal oscillator HSE (8MHz/16MHz).
+      ➢   Optional external low-speed crystal oscillator LSE (32.768KHz).
+      ➢   Optional internal low-speed oscillation LSI (125KHz).
+      ➢   Any pair of clock sources can be switched between each other (switching between HSE and LSE is prohibited).
+      ➢   The external high-speed and low-speed oscillators support the stop vibration monitoring function (SCM) when the
+          system clock is provided.
+
+4.2       Reset
+    The reset operation is used to complete the initialization of the internal circuit of the chip, so that the system starts
+working from a certain state. The chip has the following reset methods:
+      ➢   Power-on reset.
+      ➢   External reset.
+      ➢   Low voltage reset.
+      ➢   CONFIG state protection reset.
+      ➢   Power-on configuration monitoring reset.
+      ➢   Watchdog timeout reset.
+      ➢   Software reset.
+    Any of the above reset situations requires a certain response time, and the system provides a complete reset process to
+ensure the smooth progress of the reset action.
+
+
+
+
+                                                            21 / 38                                              Rev. 1.01
+                                                                                                  CMS8S588x datasheet
+
+4.3       Power management
+ 4.3.1      Operating mode
+    The chip has 3 different working modes to meet the power consumption requirements of different applications.
+    ➢     Normal working mode: MCU is in normal working state and peripherals are operating normally.
+    ➢     Idle mode IDLE: MCU is in idle mode, CPU stops working, and peripherals operate normally. This mode can be
+          awakened by any interrupt.
+    ➢     Sleep mode STOP: MCU is in sleep mode, CPU stops working, and peripherals stop working. This mode can be
+          awakened by INT0/1 interrupt, external interrupt, WUT timing wakeup, LSE timing wakeup.
+
+
+
+ 4.3.2      Power supply low voltage reset (LVR)
+    When the power supply voltage is lower than the set detection voltage, the system resets.
+    There are 4 options for low voltage reset: 1.8V/2.0V/2.5V/3.5V.
+
+
+
+ 4.3.3      Power supply low voltage detection (LVD)
+    The low voltage detection circuit compares the power supply voltage with the set voltage, and if the power supply voltage
+is lower than the set voltage, an interrupt request signal is generated.
+    Settable detection voltage range 2.0V~4.3V, A total of 8 levels are available.
+
+
+
+
+                                                             22 / 38                                             Rev. 1.01
+                                                                                                        CMS8S588x datasheet
+
+4.4       Interrupt control
+    The chip has multiple interrupt sources and interrupt vectors. The user-settable interrupts include INT0/1, Timer0/1,
+Timer2, Timer3/4, WDT, LSE_Timer (SCM), PWM, I2C, SPI, UART0/1, P0/P1/P2/P5, ADC, LVD, the actual number of
+interrupt sources varies by product.
+    The chip stipulates two interrupt priority levels, which can realize two-level interrupt nesting. When an interrupt has been
+responded, if a high-level interrupt sends a request, the latter can interrupt the former to achieve interrupt nesting.
+
+
+
+4.5       Timer
+ 4.5.1      WDT timer
+    The watchdog timer is an on-chip timer whose clock source is provided by the system clock. The WDT timeout will
+generate a reset. The watchdog reset is a protection setting of the system. When the system runs to an unknown state, the
+watchdog can be used to reset the system, thereby avoiding the system from entering an infinite loop. The WDT timer has the
+following characteristics:
+    ➢     8 levels of watchdog overflow time are selectable.
+    ➢     Watchdog overflow interrupt can be set.
+    ➢     Watchdog overflow reset can be set.
+
+
+
+ 4.5.2      Timer counter 0/1 (Timer0/1)
+    Timer 0 is similar in type and structure to Timer 1, and is two 16-bit up-counting timers. Timer0 has 4 working modes,
+Timer1 has 3 working modes, they provide basic timing and event counting operations.
+    In "timer mode", the timer register is incremented every 12 or 4 system cycles when the timer clock is enabled. In the
+"counter mode", the timing register will increase whenever it detects a falling edge on the corresponding input pin (T0 or T1).
+Timer0/1 has the following features:
+    ➢     Can be used as a normal timer.
+    ➢     Can be used for gated timing function.
+    ➢     External counting function can be realized.
+    ➢     Can be used for gated counting function.
+    ➢     Counter overflow interrupt.
+
+
+
+
+                                                              23 / 38                                                     Rev. 1.01
+                                                                                                           CMS8S588x datasheet
+
+ 4.5.3      Timer counter 2 (Timer2)
+    Timer 2 is a 16-bit timer, which can be used for various digital signal generation and event capture, such as pulse
+generation, pulse width modulation, pulse width measurement, etc. Timer2 has the following characteristics:
+    ➢     Can be used as a normal timer.
+    ➢     Can be used for gated timing function.
+    ➢     External counting function can be realized.
+    ➢     With reinstall prohibition, overflow auto reinstall, external pin falling edge auto reinstall function.
+    ➢     Capture can be triggered by rising edge, falling edge, both edges or writing the low byte of the capture register.
+    ➢     With a comparison function, this function can generate a periodic signal and a PWM waveform with a controllable
+          duty cycle.
+    ➢     Interrupts can be generated for timing, external trigger, capture, and comparison.
+
+ 4.5.4      Timer 3/4(Timer3/4)
+     Timer 3/4 is similar to timer 0/1 and is two 16-bit timers. Timer3 has 4 working modes, and Timer4 has 3
+working modes. Compared with Timer0/1, Timer3/4 only provides timing operation.
+     When the timer is started, the value of the register (counter) is incremented every 12 or 4 system cycles.
+
+
+ 4.5.5      LSE timer (LSE_Timer)
+    The LSE timer is a 16-bit up-counting timer with a clock source from the external low-speed clock LSE. The LSE timer
+has the following characteristics:
+    ➢     Timing function.
+    ➢     16-bit timing value can be set.
+    ➢     Can work normally in sleep mode.
+    ➢     An interrupt can be generated when the count value is equal to the timer value.
+     Timed interrupt can wake up idle mode/sleep mode.
+
+
+ 4.5.6      Wake-up timer (WUT)
+    WUT wake-up timer is a 12-bit, up-counting timer used for wake-up from sleep and a clock source from the internal low-
+speed clock LSI. After the system enters the sleep mode, the CPU and all peripheral circuits stop working, and the internal
+low-speed clock LSI provides the clock for the WUT counter. WUT has the following characteristics:
+    ➢     The system can be woken up regularly in sleep mode.
+    ➢     Count clock can be divided by 1, 8, 32, 256.
+    ➢     12-bit timing value can be set.
+
+
+ 4.5.7      BRT timer (BRT)
+    The BRT timer is a 16-bit baud rate timer whose clock source comes from the system clock. It mainly provides the clock
+for the UART module. BRT has the following characteristics:
+    ➢     With independent control switch.
+    ➢     Counting clock has 8 frequency division options.
+    ➢     16-bit up counting.
+
+                                                               24 / 38                                               Rev. 1.01
+                                                                                                       CMS8S588x datasheet
+
+4.6       Enhanced digital peripherals
+ 4.6.1      Cyclic redundancy check (CRC)
+    Cyclic Redundancy Check CRC is the most commonly used error check code in the field of data communication. Its
+characteristic is that the length of the information field and the check field can be arbitrarily selected. The chip CRC check unit
+generates a polynomial using “X16+X12+X5+1”(CRC16-CCITT), , specify the data to be verified through the program, so that
+the module is not limited to the code flash area but can be used for multi-purpose inspection.
+
+
+
+ 4.6.2      BUZZER
+    The buzzer driver is composed of an 8-bit counter, a clock driver, and a control register. It outputs a square wave with a
+duty cycle of 50%, and its frequency covers a wide range. BUZZER has the following characteristics:
+    ➢     With separate enable control switch.
+    ➢     A total of 4 levels of system clock divider ratios of 8, 16, 32, 64 can be set.
+    ➢     Output frequency 8-bit control, can be set (1~255) x 2 frequency division output.
+
+
+
+ 4.6.3      PWM
+    PWM module supports 6 PWM generators, and the period and duty cycle can be set independently. PWM has the
+following characteristics:
+    ➢     Support 2 kinds of waveform output in single and continuous mode.
+    ➢     Support 4 control modes: independent, complementary, synchronous and group control.
+    ➢     Count clock can be divided by 1, 2, 4, 8, 16.
+    ➢     Support edge alignment mode.
+    ➢     Support dead zone programming.
+    ➢     Output polarity can be set.
+    ➢     Support cycle, compare down, zero interrupt.
+
+
+
+
+                                                              25 / 38                                                 Rev. 1.01
+                                                                                                     CMS8S588x datasheet
+
+4.7       Communication module
+ 4.7.1      SPI module
+    SPI is a fully configurable SPI master/slave device that allows users to configure the polarity and phase of the serial clock
+signal. SPI allows the MCU to communicate with serial peripherals, and it can also communicate between processors in a
+multi-host system. SPI has the following characteristics:
+    ➢     Full-duplex synchronous serial data transmission.
+    ➢     Support master/slave mode.
+    ➢     Support multi-host system.
+    ➢     System error detection.
+    ➢     Support speed up to 1/4 of the system clock (FSYS≤24MHz).
+    ➢     Bit rate generates 1/4, 1/8, 1/16, 1/32, 1/64, 1/128, 1/256, 1/512 of the system clock.
+    ➢     Support four transmission formats.
+    ➢     Send/receive complete can generate interrupt.
+
+
+
+ 4.7.2      I2C module
+    The two-wire bidirectional serial bus controller I2C provides a simple and effective connection method for data exchange
+between the microprocessor and the I2C bus. The I2C module has the following characteristics:
+    ➢     Support 4 working methods: master sending, master receiving, slave sending, slave receiving.
+    ➢     Support 2 transmission speed modes:
+          Standard (up to 100Kb/s);
+          Fast （up to 400Kb/s）.
+    ➢     Perform arbitration and clock synchronization.
+    ➢     Support multi-host system.
+    ➢     The host method supports 7-bit addressing mode and 10-bit addressing mode on the I2C bus (software support).
+    ➢     The slave method supports 7-bit addressing mode on the I2C bus.
+    ➢     Allows operation in a wide range of clock frequencies (built-in 8-bit timer).
+    ➢     An interrupt can be generated when receiving/sending is complete.
+
+
+
+ 4.7.3      UARTn module
+    The UARTn module contains UART0 / UART1, 2 serial ports with the same function. UARTn has the following
+characteristics:
+    ➢     Full-duplex serial port.
+    ➢     Support synchronous mode.
+    ➢     Support 8-bit asynchronous transceiver mode with variable baud rate.
+    ➢     Support 9-bit asynchronous transceiver mode with variable baud rate.
+    ➢     Baud rate can be generated by Timer1/Timer4/Timer2/BRT module.
+    ➢     Send/receive complete can generate interrupt.
+
+
+
+
+                                                              26 / 38                                               Rev. 1.01
+                                                                                                     CMS8S588x datasheet
+
+4.8       Analog module
+ 4.8.1      Analog to digital conversion (ADC)
+    ADC module is a 12-bit successive approximation analog-to-digital converter. The port analog input signal is connected to
+the input of the analog-to-digital converter after passing through the multiplexer. The analog-to-digital converter generates a
+12-bit binary result according to the input analog signal and saves the result in the ADC result register. ADC has the following
+characteristics:
+    ➢     Up to 30 external channels.
+    ➢     ADC conversion clock has 8 clock frequencies to choose from.
+    ➢     ADC reference voltage can choose VDD/1.2V/2.0V/2.4V/3.0V.
+    ➢     A complete 12-bit conversion requires 18.5 ADC conversion cycles.
+    ➢     Support external port edge, PWM trigger ADC conversion.
+    ➢     Support ADC conversion result comparison output.
+    ➢     Support ADC conversion completion to generate interrupt.
+
+
+
+4.9       FLASH memory
+    FLASH memory includes program memory (APROM/BOOT) and non-volatile data memory (Data FLASH), It can be
+accessed through the relevant special function register (SFR) to realize the IAP function. FLASH memory supports the
+following operations:
+    ➢     Byte read operation.
+    ➢     Byte Write operation.
+    ➢     Page erase operation.
+    ➢     FLASH space CRC check operation.
+
+
+4.10 Unique ID (UID)
+    Each chip has a 96-bit unique identification number, namely Unique identification. The UID has been set at the factory
+and cannot be modified by the user.
+
+
+
+
+                                                            27 / 38                                                 Rev. 1.01
+                                                                                                      CMS8S588x datasheet
+
+5. User Configuration
+    The system configuration register (CONFIG) is the FLASH option of the MCU's initial conditions, and the program cannot
+access and operate it. The following contents can be set through the system configuration register:
+    ➢    Watchdog's working method.
+    ➢    FLASH program area partition protection, code encryption, FLASH data area encryption status.
+    ➢    Low voltage reset voltage.
+    ➢    Disable or enable debug mode.
+    ➢    Debug pin selection.
+    ➢    Oscillation method, prescaler selection.
+    ➢    Internal high-speed oscillator frequency division selection.
+    ➢    Crystal oscillator port selection.
+    ➢    Sleep wake-up waiting time.
+    ➢    APROM/BOOT space.
+
+
+
+
+                                                            28 / 38                                             Rev. 1.01
+                                                                                               CMS8S588x datasheet
+
+6. Electrical parameters
+6.1         Absolute maximum rating
+  symbol                                parameter                                 min.                max.              unit
+   TST                             Storage temperature                             -55                150                ℃
+       TA                          Working temperature                             -40                105                ℃
+ VDD-VSS                           Power supply voltage                           -0.3                5.8                V
+    VIN                                Input voltage                             VSS-0.3            VDD+0.3              V
+    IDD                        VDD maximum input current                            -                 120               mA
+    ISS                        VSS maximum output current                           -                 200               mA
+                            Maximum sink current of a single IO                     -                 50                mA
+
+       I                   Maximum source current of a single IO                    -                 40                mA
+       IO
+                              Maximum sink current of all IOs                       -                 200               mA
+                             Maximum source current of all IOs                      -                 120               mA
+
+
+
+6.2         DC electrical characteristics
+   VDD-VSS=2.1～5.5V,TA=25℃
+symbol        parameter                       test condition                       min.     typical          max.        unit
+               Working               FSYS=48MHz, machine cycle=2T
+ VDD                                                                                2.1        -             5.5          V
+               voltage            FSYS=8MHz~24MHz, machine cycle=1T
+                                VDD=5V, FSYS=48MHz, all peripherals are off
+                                                                                        -     7               -          mA
+                                            machine cycle=2T
+                                VDD=3V, FSYS=48MHz, all peripherals are off
+                                                                                        -     7               -          mA
+                                            machine cycle=2T
+                                VDD=5V, FSYS=24MHz, all peripherals are off
+                                                                                        -     5               -          mA
+                                            machine cycle=1T
+                                VDD=3V, FSYS=24MHz, all peripherals are off
+                                                                                        -     5               -          mA
+                                            machine cycle=1T
+                                VDD=5V, FSYS=16MHz, all peripherals are off
+                                                                                        -     4               -          mA
+                                            machine cycle=1T
+             Normal mode
+                                VDD=3V, FSYS=16MHz, all peripherals are off
+                                                                                        -     4               -          mA
+                                            machine cycle=1T
+                                VDD=5V, FSYS=8MHz, all peripherals are off
+                                                                                        -     3               -          mA
+                                            machine cycle=1T
+                                VDD=3V, FSYS=8MHz, all peripherals are off
+                                                                                        -     3               -          mA
+                                            machine cycle=1T
+                              VDD=5V, FSYS=32.7678KHz, all peripherals are off
+                                                                                        -    0.26             -          mA
+ IDD                                        machine cycle=1T
+                              VDD=3V, FSYS=32.7678KHz, all peripherals are off
+                                                                                        -    0.23             -          mA
+                                            machine cycle=1T
+                              VDD=5V, FSYS=48MHz, all peripherals are off               -    5.5              -          mA
+                              VDD=3V, FSYS=48MHz, all peripherals are off               -    5.5              -          mA
+                              VDD=5V, FSYS=24MHz, all peripherals are off               -    3.5              -          mA
+                              VDD=3V, FSYS=24MHz, all peripherals are off               -    3.5              -          mA
+                              VDD=5V, FSYS=16MHz, all peripherals are off               -    2.5              -          mA
+              IDLE mode
+                              VDD=3V, FSYS=16MHz, all peripherals are off               -    2.5              -          mA
+                              VDD=5V, FSYS=8MHz, all peripherals are off                -     2               -          mA
+                              VDD=3V, FSYS=8MHz, all peripherals are off                -     2               -          mA
+                              VDD=5V, FSYS=32.768KHz, all peripherals are off           -    0.26             -          mA
+                              VDD=3V, FSYS=32.768KHz, all peripherals are off           -    0.23             -          mA
+
+
+                                                          29 / 38                                                  Rev. 1.01
+                                                                                      CMS8S588x datasheet
+
+ISLEEP1    sleep current       all peripherals are off, LSE timer enable      -      20        -          uA
+ISLEEP2    sleep current     all peripherals are off,LSI、WUT timer enable     -      7         -          uA
+ISLEEP3    sleep current                all peripherals are off               -      6         -          uA
+  ILI     Input leakage                            -                          -      -        0.1         uA
+  VIL     Input low level                          -                         VSS     -      0.3VDD         V
+            Input high
+ VIH                                               -                        0.7VDD   -       VDD           V
+               level
+ V          Low output                  VDD=5V, IOL1=18mA                     -      -        0.4          V
+     OL
+              voltage                   VDD=3V, IOL1=12mA                     -      -        0.4          V
+
+ VOH       Output high                  VDD=5V, IOH1=35mA                    3.5     -         -           V
+            voltage                    VDD=3V, IOH1=13.5mA                   2.1     -         -           V
+ RPH      Pull-up resistor                         -                          -      32        -          KΩ
+            Pull-down
+ RPL                                               -                          -      32        -          KΩ
+              resistor
+
+
+
+
+                                                       30 / 38                                      Rev. 1.01
+                                                                                               CMS8S588x datasheet
+
+6.3             AC electrical parameter
+6.3.1           Power-up and power-down operations
+  TA=25℃, does not include 32.768K crystal oscillator start-up time
+  symbol                parameter                      test condition                min.   typical   max.        unit
+  TRESET                Reset time                        VDD=5V                       -      16        -         ms
+  TVDDR                VDD rise rate                      VDD=5V                      2        -        -        us/V
+  TVDDF                VDD fall rate                      VDD=5V                      2        -        -        us/V
+
+
+
+6.3.2           External oscillator
+  symbol                parameter                      test condition                min.   typical   max.        unit
+      VHSE            Working voltage            F=8/16MHz, CXT=0-47pF               2.1       -      5.5          V
+      VLSE            Working voltage          F=32.768KHz, CXT=10-22pF              2.1       -      5.5          V
+
+
+
+6.3.3           Internal oscillator
+  VDD=2.1V-5.5V
+  symbol                parameter            test condition        Frequency error   min.   typical   max.        unit
+
+      F                 Internal high       TA=0℃ to 80℃                ±1%            -      48        -        MHz
+          HSI
+                       speed 48MHz         TA=-40℃ to 105℃              ±2%            -      48        -        MHz
+
+       F                Internal low            TA=25℃                  ±5%            -     125        -        KHz
+          LSI
+                       speed 125KHz        TA=-40℃ to 105℃              ±50%           -     125        -        KHz
+
+
+
+6.3.4           Low voltage reset electrical parameter
+  symbol                                      parameter                              min.   typical   max.        unit
+
+      VLVR1                      Low voltage detection threshold 1.8V                1.65    1.8      1.95         V
+
+      VLVR2                      Low voltage detection threshold 2.0V                1.85    2.0      2.15         V
+
+      VLVR3                      Low voltage detection threshold 2.5V                2.35    2.5      2.65         V
+
+      VLVR4                      Low voltage detection threshold 3.5V                3.35    3.5      3.65         V
+
+
+
+6.3.5           LVD electrical parameter
+  symbol                                      parameter                              min.   typical   max.        unit
+      VLVD1                     Low voltage detection threshold 2.00V                1.90    2.00     2.10         V
+      VLVD2                     Low voltage detection threshold 2.20V                2.10    2.20     2.30         V
+      VLVD3                     Low voltage detection threshold 2.40V                2.30    2.40     2.50         V
+      VLVD4                     Low voltage detection threshold 2.70V                2.60    2.70     2.80         V
+      VLVD5                     Low voltage detection threshold 3.00V                2.90    3.00     3.10         V
+      VLVD6                     Low voltage detection threshold 3.70V                3.60    3.70     3.80         V
+      VLVD7                     Low voltage detection threshold 4.00V                3.90    4.00     4.10         V
+      VLVD8                     Low voltage detection threshold 4.30V                4.20    4.30     4.40         V
+
+                                                              31 / 38                                        Rev. 1.01
+                                                                                 CMS8S588x datasheet
+
+6.4        FLASH electrical parameter
+ symbol                parameter               test condition    min.     typical      max.        unit
+    VF           FLASH working voltage               -            2.1        -         5.5          V
+    TF        FLASH working temperature              -            -40       27         105         ℃
+                                              Program FLASH     20000        -          -         Cycle
+NENDURANCE    Number of erasing and writing
+                                                Data Flash      100,000                           Cycle
+   TRET            Data retention time             25℃           100         -          -         year
+  TERASE           Sector erase time                 -             -       4.5          -          ms
+  TPROG            Programming time                  -             -        7           -          us
+   IDD1               Read current                   -             -         -         2.5         mA
+   IDD2           Programming current                -             -         -         3.6         mA
+   IDD3              Erase current                   -             -         -          2          mA
+
+
+
+
+                                               32 / 38                                        Rev. 1.01
+                                                                                              CMS8S588x datasheet
+
+6.5         Analog characteristics
+6.5.1       BANDGAP electrical characteristics
+ symbol             parameter                           test condition         min.    typical     max.        unit
+  VBG         Internal reference 1.2V     VDD=2.1~5.5V、TA=-40℃ to 105℃         1.182     1.2       1.218        V
+
+
+
+6.5.2       ADC electrical characteristics
+  TA=25℃
+ symbol                                   parameter                            min.    typical     max.        unit
+  VAVDD                                 ADC 工作电压                                2.5       -         5.5         V
+  VREF1                              Reference voltage 1                         -     VAVDD         -          V
+  VREF2                         Reference voltage 2(Non- VBG )                 1.185    1.2        1.215        V
+  VREF3                              Reference voltage 3                       1.985    2.0        2.015        V
+  VREF4                              Reference voltage 4                       2.385    2.4        2.415        V
+  VREF5                             Reference voltage 压 5                      2.985    3.0        3.015        V
+  VADI                                   Input voltage                          0         -        VREF         V
+      NR                                   resolution                                    12                    Bit
+  DNL           Differential nonlinearity error (VREF=VAVDD=5V, TADCK=0.5us)             ±2                    LSB
+   INL            Integral nonlinearity error (VREF=VAVDD=5V, TADCK=0.5us)               ±4                    LSB
+  TADCK                                 ADC clock cycle                         0.5       -         32          us
+  T
+      ADC                           ADC conversion time                          -      18.5         -        TADCK
+      FS                        Sampling rate (VREF=VAVDD=5V)                            100                  Ksps
+
+
+
+
+                                                            33 / 38                                        Rev. 1.01
+                                                                                                              CMS8S588x datasheet
+
+6.6         EMC Characteristics
+ 6.6.1        EFT electrical characteristics
+  symbol                          parameter                              test condition                 max.      unit     level
+
+                 Fast transient voltage burst limits to
+                                                                        TA = + 25 ℃,
+                 beapplied through 0.1uF(capacitance) on
+  VEFTB                                                           FSYS=48MHz, conforms to               4800        V     4B
+                 VDDand VSSpins to induce a functional
+                 disturbance                                           IEC 61000-4-4
+
+
+
+
+Note：The electrical fast transient (EFT) immunity performance is closely related to system design (including power supply
+          structure, circuit design, layout, chip configuration, program structure, etc.). The EFTparameter in the above table is
+          the result measured on the CMS internal test platform, and is not suitable for all application environments. The test
+          data is only for reference. All aspects of system design may affect EFT performance. In applications with high EFT
+          performance requirements, attention should be paid to avoid interference sources affecting system operation when
+          designing. It is recommended to analyze interference paths and optimize the design to achieve the best anti-
+          interference performance.
+
+
+
+ 6.6.2        ESD Electrical characteristics
+  symbol                       parameter                             test condition                    max.       unit    level
+
+                        Electrostatic discharge                    TA = + 25℃,
+                                                                                                       8000        V       3B
+   V                  (Human body model HBM)                  JEDEC EIA/JESD22- A114
+     ESD
+                       Electrostatic discharge                     TA = + 25℃,
+                                                                                                       400         V        C
+                    (Machine discharge mode MM)               JEDEC EIA/JESD22- A115
+
+
+
+ 6.6.3        Latch-Up electrical characteristics
+ symbol                  parameter                     test condition                      Test type              min.     unit
+                                               JEDEC STANDARD NO.78D                         Class I
+    LU              Static latch-up class                                                                         ±200     mA
+                                                   NOVEMBER 2011                          (TA = +25℃)
+
+
+
+
+                                                               34 / 38                                                   Rev. 1.01
+                                              CMS8S588x datasheet
+
+7. Package information
+7.1   TSSOP20
+
+
+
+
+                               Millimeter
+      Symbol
+                  Min               Nom        Max
+        A          -                  -        1.20
+       A1        0.05                 -        0.15
+       A2        0.80               1.00       1.05
+        b        0.19                 -        0.30
+       b1        0.19               0.22       0.25
+        c        0.09                 -        0.20
+        c1       0.09                 -        0.16
+        D        6.40               6.50       6.60
+       E1        4.30               4.40       4.50
+        E        6.20               6.40       6.60
+        e                      0.65BSC
+        L        0.45               0.60       0.75
+       L1                      1.00REF
+        S        0.20                 -          -
+       Φ1                 Φ0.8×0.05~0.10DP
+       Φ2                 Φ1.50×0.05~0.15DP
+        θ         0                   -         8°
+
+
+
+
+                         35 / 38                        Rev. 1.01
+                                              CMS8S588x datasheet
+
+7.2   QFN20
+
+
+
+
+                                 Millimeter
+      Symbol
+               Min                 Nom           Max
+        A      0.70                0.75          0.80
+       A1       0                  0.02          0.05
+       A2        -                 0.55            -
+       A3                        0.203REF
+        b      0.175                0.2          0.225
+        D                         3BSC
+        E                         3BSC
+       Ne                        1.6BSC
+       Nd                        1.6BSC
+        e                        0.4BSC
+       D2       1.8                 1.9           2
+       E2       1.8                 1.9           2
+        L      0.15                0.25          0.35
+        K                         0.3REF
+
+
+                       36 / 38                           Rev. 1.01
+                                             CMS8S588x datasheet
+
+7.3   QFN32
+
+
+
+
+                                Millimeter
+      Symbol
+               Min                Nom           Max
+        A      0.70               0.75          0.80
+       A1       -                 0.02          0.05
+        b      0.18               0.25          0.30
+        c      0.18               0.20          0.25
+        D      4.90               5.00          5.10
+       D2      3.40               3.50          3.60
+        e                       0.5BSC
+       Ne                       3.5BSC
+        E      4.90               5.00          5.10
+       E2      3.40               3.50          3.60
+        L      0.35               0.40          0.45
+        h      0.30               0.35          0.40
+
+
+
+
+                      37 / 38                          Rev. 1.01
+                                                                 CMS8S588x datasheet
+
+8. Revision History
+   Revision       Date                        Modify content
+
+    V1.00       May 2020                       Initial verison
+
+    V1.01       June 2021             Modify the function of some pins
+
+
+
+
+                            38 / 38                                        Rev. 1.01
+

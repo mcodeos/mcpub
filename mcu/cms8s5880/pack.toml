@@ -1,0 +1,22 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "cms8s5880"
+version = "0.1"
+category = "mcu"
+entry = "cms8s5880.mc"
+vendor = "Cmsemicon"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["mcu", "8051", "1t-core", "ssop20", "cmsemicon"]
+
+[[attachments]]
+path = "cms8s588x.pdf"
+kind = "datasheet"
+checksum = "sha256:62a4df6c0e78ab936cec1c3b2408a778fd819004221ceac6cb120dbf5fdfcb38"
+
+[[attachments]]
+path = "cms8s588x.txt"
+kind = "doc"
+checksum = "sha256:c6e8e11a0687ef19e01a036c50fcea6ffdccdfda4ca2bc6b508a2be196054bd1"

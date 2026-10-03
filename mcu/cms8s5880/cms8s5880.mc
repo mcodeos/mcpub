@@ -1,0 +1,40 @@
+// Copyright (c) 2026 MCode
+//
+// Licensed under the Apache License, Version 2.0.
+
+// =============================================================================
+//  CMS8S5880 — Cmsemicon enhanced 1T 8051 MCU, 2.1V-4.5V, SSOP20
+//  Datasheet: CMS8S588x Rev1.01 (bundled)
+//
+//  SSOP20 pin shape, transcribed from the 120W board's MCU page and verified
+//  against the datasheet. Row comments record the source-board nets.
+// =============================================================================
+component MCU.CMS8S5880
+{
+    partno = "CMS8S5880"
+    package = PKG.SSOP20
+
+    pins = [
+        psnk [[9], [7]] = [VDD, VSS]::DC(3.3V)
+
+        io 1  = P03        // board net PDSDA1
+        io 2  = P04        // board net PDSCL1
+        io 3  = P05        // board net QCCONTROL1
+        io 4  = P10        // board net QCPER
+        io 5  = P11        // board net PDIS2
+        io 6  = P12        // board net N$7 -> Q13 gate (PDCONTROL1 open-drain drive)
+        io 8  = P16        // board net N$5 (NTC divider sense)
+        io 10 = P57        // board net PDIS1
+        io 11 = P20        // board net N$8 (OLED SCL)
+        io 12 = P21        // board net N$9 (OLED SDA)
+        io 13 = P22        // board net QCIS1
+        io 14 = P25        // board net N$2 (VPD2 divider sense)
+        io 15 = P50        // board net N$3 (VPD1 divider sense; also NRST per
+                           //   datasheet, used as an ADC input on this board)
+        io 16 = P53        // board net N$6 -> Q12 gate (PDCONTROL2 open-drain drive)
+        io 17 = P54        // board net N$1 -> Q11 gate (STANDY open-drain drive)
+        io 18 = P00        // board net N$4 (QCIS1- divider sense)
+        io 19 = P01        // board net PDSDA2
+        io 20 = P02        // board net PDSCL2
+    ]
+}

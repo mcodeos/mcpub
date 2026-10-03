@@ -1,0 +1,12 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part,
+# name follows the entry). Transcribed from the mcs/120w board project.
+[package]
+format = "1"
+name = "2n7002"
+version = "0.1"
+category = "discrete"
+entry = "2n7002.mc"
+vendor = "unknown"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["nmos", "sot-23", "small-signal", "60v"]
