@@ -46,6 +46,15 @@
 #                partno alias rows follow, search.json is regenerated, and a
 #                fresh project installs the new version through the verified
 #                signature
+#  15. cond      ETag/If-None-Match against mock-registry.py (a static host
+#                with real-server behaviors): the second search is answered
+#                304 and the client serves from its cache; the .etag sidecar
+#                is asserted in the cache dir
+#  16. errors    mock --fail-500: a failing registry surfaces "HTTP 500" by
+#                name and exits — never a hang, never a silent empty result
+#  17. rsync     publish with transport = rsync ships the delta to a second
+#                tree (the "remote" host form); the published version then
+#                installs from that tree, signature verified
 #
 # Usage: ./e2e-registry.sh [mcc-binary] [device-dir]
 #   mcc-binary  default: /Users/dan/work/mo/mcc/target/debug/mcc
@@ -328,5 +337,99 @@ EOF
 ( cd "$PROJ3" && "$MCC" build 2>&1 >/dev/null ) | grep -q "installed $PKG_NAME@$PUBVER" \
     || { echo "FAIL: verified-signature install of $PUBVER failed" >&2; exit 1; }
 echo "ok: published version installed, signature verified"
+
+# ── P3 client vs a real-server-shaped host: mock-registry.py adds ETag/304
+#    and fault injection over the same static tree (stages 11/12 keep the
+#    dumb static host as the plain-static coverage) ──
+
+start_mock() {  # start_mock <logfile> <extra args...> — sets HTTP_PID and PORT
+    local out="$BASE/mock-$1.out"; shift
+    python3 ./mock-registry.py --root "$REG" --port 0 "$@" >"$out" 2>&1 &
+    HTTP_PID=$!
+    PORT=""
+    for _ in $(seq 1 100); do
+        PORT="$(sed -n 's/MOCK port \([0-9]*\).*/\1/p' "$out" | head -1)"
+        [ -n "$PORT" ] && break
+        sleep 0.1
+    done
+    [ -n "$PORT" ] || { echo "FAIL: mock did not start" >&2; cat "$out" >&2; exit 1; }
+}
+
+stop_http() {
+    [ -n "${HTTP_PID:-}" ] && kill "$HTTP_PID" 2>/dev/null || true
+    [ -n "${HTTP_PID:-}" ] && wait "$HTTP_PID" 2>/dev/null || true
+    HTTP_PID=""
+}
+
+step "15. conditional: the 304 arm (ETag + If-None-Match) against the mock"
+stop_http   # retire the stage-12 static server; PROJ2 gets repointed below
+COND_LOG="$BASE/http-cond.log"
+start_mock cond --log "$COND_LOG"
+sed -i '' "s|url = \"http://127.0.0.1:[0-9]*\"|url = \"http://127.0.0.1:$PORT\"|" "$PROJ2/project.toml"
+# Search #1 stores the ETag beside the cached meta; search #2 must hit the
+# conditional arm and be answered 304 (the client serves from cache).
+for _ in 1 2; do
+    ( cd "$PROJ2" && "$MCC" lib search --remote "$PKG_NAME" >/dev/null 2>&1 ) \
+        || { echo "FAIL: remote search (conditional) failed" >&2; exit 1; }
+done
+grep -q ' 304$' "$COND_LOG" \
+    || { echo "FAIL: no 304 served — the conditional arm never ran" >&2; cat "$COND_LOG" >&2; exit 1; }
+[ -n "$(find "$ROOT/cache/meta" -name '*.etag' -print -quit)" ] \
+    || { echo "FAIL: no .etag sidecar parked beside the cached meta" >&2; exit 1; }
+echo "ok: 304 on revalidation, ETag parked in the cache"
+
+step "16. error face: a failing registry is named, not hung and not silent"
+# The catalog (/search.json) has no cache — a 500 there must fail by name.
+# (Metadata rows already cached survive a 500 by the offline law; that face
+# is stages 6/11's, not this one's.)
+ERR_LOG="$BASE/http-err.log"
+start_mock err --log "$ERR_LOG" --fail-500 "search.json"
+sed -i '' "s|url = \"http://127.0.0.1:[0-9]*\"|url = \"http://127.0.0.1:$PORT\"|" "$PROJ2/project.toml"
+OUT="$( cd "$PROJ2" && "$MCC" lib search --remote "$PKG_NAME" 2>&1 )" \
+    && { echo "FAIL: search --remote succeeded against a 500 registry" >&2; exit 1; }
+echo "$OUT" | grep -q 'HTTP 500' \
+    || { echo "FAIL: the 500 was not named: $OUT" >&2; exit 1; }
+echo "ok: HTTP 500 surfaced by name"
+
+step "17. transport rsync: publish ships the delta to the remote-form tree"
+stop_http
+REG2="$BASE/reg-remote"
+cp -R "$REG" "$REG2"          # the "remote host" starts from the published state
+PUBVER2="9.$(printf '%d' $((RANDOM % 9 + 1)))"   # 9.x cannot collide with PUBVER
+sed -i '' "s|^version = \".*\"|version = \"$PUBVER2\"|" "$PUBDIR/pack.toml"
+cat > "$ROOT/config/mcc.yaml" <<EOF
+registry:
+  publish:
+    key: "$KEY"
+    transport: "rsync"
+    target: "$REG2/"
+EOF
+PROJ4="$BASE/proj-rsync"
+mkdir -p "$PROJ4/src"
+cat > "$PROJ4/project.toml" <<EOF
+[project]
+name = "e2e-reg-rsync"
+version = "0.1"
+entry = "src/main.mc"
+
+[config.registry]
+url = "file://$REG2"
+EOF
+printf 'module main()\n{\n}\n' > "$PROJ4/src/main.mc"
+( cd "$PROJ4" && "$MCC" lib publish "$PUBDIR" --go 2>&1 ) | grep -q 'transported' \
+    || { echo "FAIL: rsync transport did not ship the delta" >&2; exit 1; }
+grep -q "\"$PUBVER2\"" "$REG2/lib/$PKG_NAME.json" \
+    || { echo "FAIL: version row absent from the remote tree" >&2; exit 1; }
+grep -q '"sig":"ed25519:' "$REG2/lib/$PKG_NAME.json" \
+    || { echo "FAIL: the shipped row lost its signature" >&2; exit 1; }
+cat >> "$PROJ4/project.toml" <<EOF
+
+[dependencies]
+mcode = "*"
+$PKG_NAME = "=$PUBVER2"
+EOF
+( cd "$PROJ4" && "$MCC" build 2>&1 >/dev/null ) | grep -q "installed $PKG_NAME@$PUBVER2" \
+    || { echo "FAIL: install from the rsync-published tree failed" >&2; exit 1; }
+echo "ok: delta shipped by rsync, published version installed from the remote tree"
 
 printf '\nALL GREEN — registry P2 + P3 verified end to end\n'
