@@ -1,0 +1,50 @@
+# Copyright (c) 2026 MCode
+#
+# Licensed under the Apache License, Version 2.0.
+
+// Real Ethernet 10/100 PHY transceiver (LAN8710A/LAN8710Ai, 32-QFN 5x5mm
+// 0.5mm pitch with exposed pad), transcribed from DS00002164B Rev. B 2016
+// (bullet specs p.1; pinout Table 2-8 p.14 page-verified against the Figure
+// 2-1 package drawing p.6 pin-by-pin; pin multiplexing Table 3-2 p.26; MII /
+// RMII signal directions §3.4.1-3.4.2 p.25; strap summary §3.7 p.29; power
+// Table 2-7 p.13; external components Figure 3-13 p.39; twisted-pair
+// interface Figure 3-15 p.41).
+// Pins ride the mclibs XCVR.ETH Ethernet PHY shape. The MII vs RMII mode is
+// a board decision sampled from the RXD2/RMIISEL strap (pin 9) at reset —
+// the MAC data bus therefore rides the abstract's mode-muxed bare rows;
+// board wiring adopts ifs MII/RMII at the module that owns the strap.
+// RMII note (honest gap): DS §5.6 p.65 specifies only a 25MHz crystal while
+// the RMII section requires 50MHz REF_CLK into XTAL1/CLKIN (Table 5-10
+// p.64); the DS never states whether the 25MHz crystal can be the RMII
+// REF_CLK source — no multiplier is documented in this datasheet.
+
+use mclibs.comm/eth.mc
+
+component LAN8710A : XCVR.ETH
+{
+    partno = "LAN8710A"
+    package = PKG.QFN32      // 32-QFN 5x5mm 0.5mm pitch, EP -> VSS implicit (stamped QFN §6.1 p.68; cut SQFN §6.2 p.70)
+
+    spec = [
+        vdd = 3.0V ~ 3.6V, "analog port supply (VDD1A/VDD2A); I/O ring VDDIO 1.6V ~ 3.6V"  // p.54 Table 5-4 / p.13 Table 2-7
+        rate = 100Mbps, "10BASE-T / 100BASE-TX, MII or RMII MAC interface"                  // p.1 bullet
+        mdix = 1, "HP Auto-MDIX (crossover sensing)"                                        // p.1 bullet
+        temp = 0°C ~ +85°C, "commercial grade (LAN8710A-EZC; industrial i grade -40°C ~ +85°C)"  // p.1 / p.77
+    ]
+}
+
+// Industrial-temperature grade variant: pins/funcs/spec ride the base clone;
+// the grade overrides the temperature row only (p.1 note, p.54 note 5-4).
+// Variants inherit the abstract (E5063: a concrete component cannot be
+// inherited), so the grade re-states the package with the base.
+component LAN8710Ai : XCVR.ETH
+{
+    partno = "LAN8710Ai"
+    package = PKG.QFN32
+    spec = [
+        vdd = 3.0V ~ 3.6V, "analog port supply (VDD1A/VDD2A); I/O ring VDDIO 1.6V ~ 3.6V"
+        rate = 100Mbps, "10BASE-T / 100BASE-TX, MII or RMII MAC interface"
+        mdix = 1, "HP Auto-MDIX (crossover sensing)"
+        temp = -40°C ~ +85°C, "industrial temperature grade"
+    ]
+}

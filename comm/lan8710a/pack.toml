@@ -1,0 +1,30 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
+[package]
+format = "1"
+name = "lan8710a"
+version = "0.1"
+category = "comm"
+description = "Ethernet 10/100 PHY transceiver with HP Auto-MDIX, MII/RMII (LAN8710A/LAN8710Ai)"
+entry = "lan8710a.mc"
+vendor = "Microchip"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["ethernet", "phy", "rmii", "mii", "auto-mdix", "qfn32"]
+
+[variants.LAN8710A]
+base = "LAN8710A"
+since = "0.1"
+
+[variants.LAN8710Ai]
+base = "LAN8710Ai"
+since = "0.1"
+
+[[attachments]]
+path = "lan8710a.pdf"
+kind = "datasheet"
+checksum = "sha256:0f4b8670bcfc7e6327e2053a22c892bea2f4e7722262a7e799a84dcdf17efa7d"
+
+[[attachments]]
+path = "lan8710a.txt"
+kind = "doc"
+checksum = "sha256:b82f055ee9705efae37dc31d5b2635368a1e596f1a5d54efece35b8f369329eb"
