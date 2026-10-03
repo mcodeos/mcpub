@@ -7,7 +7,7 @@
 //  Datasheet: TEA2016AAT Rev1.3 (bundled)
 //  Pin names follow the datasheet.
 // =============================================================================
-component LLC.TEA2016T
+component LLC.TEA2016AAT
 {
     partno = "TEA2016AAT"
     package = PKG.SOIC16

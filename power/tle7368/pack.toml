@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "tle7368"
-version = "0.4"
+version = "0.5"
 category = "power"
 description = "Automotive system basis IC with multiple linear regulators (TLE7368)"
 entry = "tle7368.mc"

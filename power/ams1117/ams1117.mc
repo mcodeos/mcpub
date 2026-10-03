@@ -30,16 +30,16 @@
 // site. The ADJ grade changes a pin role (pin 1: GND -> ADJ feedback), and per
 // the role-grade law (U196 ruling b3839) a role-level grade is a different
 // device shape — it gets its own base (AMS1117_ADJ below), not a variant.
-abstract component AMS1117(v_out::UV.VOLT = 3.3V)
+abstract component AMS1117(vset::UV.VOLT = 3.3V)
 {
     package = PKG.SOT_223
-    voltage = v_out
+    voltage = vset
 
     name = "AMS1117 Low-Dropout Regulator"
     description = "1A fixed-output LDO linear regulator (SOT-223)"
 
     spec = [
-        output_voltage = v_out
+        output_voltage = vset
         output_current = 1A
         input_voltage = 15V
         dropout_voltage = 1.1V
@@ -52,7 +52,7 @@ abstract component AMS1117(v_out::UV.VOLT = 3.3V)
         tab = TAB, "SOT-223 heat tab, tied to Vout (NOT GND)"
     ]
 
-    func Regulate([vin, gnd]::DC(12V), [vout]::DC(v_out))
+    func Regulate([vin, gnd]::DC(12V), [vout]::DC(vset))
     {
         vin -> Vin
         gnd -> GND
@@ -103,17 +103,17 @@ component AMS1117_5_0 : AMS1117
 // concrete component, not an abstract + partno variant pair. The output
 // voltage is set by the external divider; the formal stays pass-at-call-site
 // like the fixed family.
-component AMS1117_ADJ(v_out::UV.VOLT = 3.3V)
+component AMS1117_ADJ(vset::UV.VOLT = 3.3V)
 {
     partno = "AMS1117-ADJ"
     package = PKG.SOT_223
-    voltage = v_out
+    voltage = vset
 
     name = "AMS1117 Adjustable Low-Dropout Regulator"
     description = "1A adjustable-output LDO linear regulator (SOT-223, ADJ grade)"
 
     spec = [
-        output_voltage = v_out
+        output_voltage = vset
         output_current = 1A
         input_voltage = 15V
         dropout_voltage = 1.1V
@@ -128,7 +128,7 @@ component AMS1117_ADJ(v_out::UV.VOLT = 3.3V)
         tab = TAB, "SOT-223 heat tab, tied to Vout (NOT GND)"
     ]
 
-    func Regulate([vin]::DC(12V), [adj]::DC(1.25V), [vout]::DC(v_out))
+    func Regulate([vin]::DC(12V), [adj]::DC(1.25V), [vout]::DC(vset))
     {
         vin -> Vin
         adj -> ADJ

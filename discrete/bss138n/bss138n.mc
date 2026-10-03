@@ -17,12 +17,12 @@ component TRANS.NMOS.BSS138N
     ]
 
     spec = [
-        Vgs = -20V ~ +20V, "Gate-Source Voltage"      // pin Gate to Source Voltage could be +/-20V
-        Vds = 0V ~ 60V, "Drain-Source Voltage"        // pin Drain to Source Voltage could be up to 60V
-        Id  = 0A ~ 0.23A, "Continuous Drain Current"
-        Rdson = [                                     //"Drain-Source on-resistance"
-            case1 = 60mΩ, Vgs:-10V, Id:-4.1A          // Rdson[1]=60mΩ, under condition Vgs:-10V, Id:-4.1A
-            case2 = 87mΩ, Vgs:-4.5V, Id:-3A           // Rdson[2]=87mΩ, under condition Vgs:-10V, Id:-4.1A
+        vgs = -20V ~ +20V, "Gate-Source Voltage"      // pin Gate to Source Voltage could be +/-20V
+        vds = 0V ~ 60V, "Drain-Source Voltage"        // pin Drain to Source Voltage could be up to 60V
+        id  = 0A ~ 0.23A, "Continuous Drain Current"
+        rdson = [                                     //"Drain-Source on-resistance"
+            case1 = 60mΩ, vgs:-10V, id:-4.1A          // rdson[1]=60mΩ, under condition vgs:-10V, id:-4.1A
+            case2 = 87mΩ, vgs:-4.5V, id:-3A           // rdson[2]=87mΩ, under condition vgs:-10V, id:-4.1A
         ]
     ]
 }

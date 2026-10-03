@@ -56,7 +56,7 @@ component MCU.US513_20_F                                                  // MCU
         AVDD09_CAP - CAP(1uF, ±10%, CAP.X5R, 10V) - GND                       // AVDD09_CAP去耦（模拟参考去耦到数字 GND）
     }
 
-    func I2C(address) {
+    func Address(address) {
         //通过设置GPIO.02的电平，来确定I2C0的地址。GPIO.02高电平，I2C0的地址为 addr:0X36；GPIO.02低电平，I2C0的地址为 addr:0X35
 
         if address == 0x36

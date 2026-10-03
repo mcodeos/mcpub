@@ -2,11 +2,11 @@
 # name follows the entry). Transcribed from the mcs/120w board project.
 [package]
 format = "1"
-name = "tea2016t"
-version = "0.3"
+name = "tea2016aat"
+version = "0.4"
 category = "power"
 description = "LLC + PFC combo controller (TEA2016AAT, SOIC16, NXP)"
-entry = "tea2016t.mc"
+entry = "tea2016aat.mc"
 vendor = "NXP"
 publisher = "mcode"
 readme = "README.md"

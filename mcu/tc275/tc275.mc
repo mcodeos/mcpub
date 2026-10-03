@@ -83,15 +83,15 @@ component TC275
         top = [133:176]
     ]
 
-    func Power(v3v3, v1v3, vext, gnd, va1, va2, vddm)
+    func Power(vio, vcore, vext, gnd, vana1, vana2, vmem)
     {
         gnd  -> VSS //101
-        v1v3 -> VDD //[10,24,68,100,123]
+        vcore -> VDD //[10,24,68,100,123]
         vext -> VEXT //[25,69,99,153]
-        v3v3 -> (VDDP3, VDDFL3, VFLEX)
-        va1  -> (VAREF1, VAGND1)
-        va2  -> (VAREF2, VAGND2)
-        vddm -> (VDDM, VSSM)
+        vio   -> (VDDP3, VDDFL3, VFLEX)
+        vana1 -> (VAREF1, VAGND1)
+        vana2 -> (VAREF2, VAGND2)
+        vmem  -> (VDDM, VSSM)
     }
 
     func CapDigital(gnd)

@@ -1,4 +1,4 @@
-# tea2016t
+# tea2016aat
 
 =============================================================================
  TEA2016AAT — NXP digital configurable LLC + PFC combo controller, SO16
@@ -7,8 +7,8 @@
 =============================================================================
 
 Transcribed from the `mcs/120w` board project (component
-`LLC.TEA2016T` inlined there); consumers keep instantiating the same
-namespaced component name after `use tea2016t.tea2016t`.
+`LLC.TEA2016AAT` inlined there); consumers keep instantiating the same
+namespaced component name after `use tea2016aat.tea2016aat`.
 
 ## Source documents
 
@@ -21,11 +21,11 @@ namespaced component name after `use tea2016t.tea2016t`.
 ```toml
 # project.toml
 [dependencies]
-tea2016t = "0.1"
+tea2016aat = "0.1"
 ```
 
 ```text
-use tea2016t.tea2016t
+use tea2016aat.tea2016aat
 
-// instantiate: LLC.TEA2016T
+// instantiate: LLC.TEA2016AAT
 ```

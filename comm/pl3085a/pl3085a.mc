@@ -18,7 +18,7 @@ component PL3085A : XCVR.RS485
     spec.workingtemperature = -40°C ~ +85°C
 }
 
-module PL3085A_MDL(psnk pwr::DC(5V))
+module PL3085A_RS485(psnk pwr::DC(5V))
 {
     in UART{TX, RX}
     out RS485{A, B}
@@ -29,7 +29,7 @@ module PL3085A_MDL(psnk pwr::DC(5V))
     tvs_a.Protect(PL3085.RS485.A, pwr.GND) //SMBJ12CA (VBR min 13.3V, VC 19.9V @ IPP, 600W)
     DIO.TVS(13.3V, 19.9V, 600W) tvs_b
     tvs_b.Protect(PL3085.RS485.B, pwr.GND) //SMBJ12CA (VBR min 13.3V, VC 19.9V @ IPP, 600W)
-    PL3085.BiasMatch().AutoTrans()
+    PL3085.BiasMatch().AutoDirection()
 
     UART -> PL3085{UART | RS485} -> RS485
 }

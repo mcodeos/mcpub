@@ -91,21 +91,21 @@ component TLE7368 (partno)
         CCP - CAP ccp(220nF, 25V) - GND
     }
 
-    func LDO1()
+    func CapLdo1()
     {
         Q_T1 - CAP ct1(4.7μF,10V) - GND
         Q_T1 - CAP ct2(4.7μF,10V) - GND
         Q_LDO1 - CAP cldo1(1μF,10V) - GND
     }
 
-    func LDO2(vLdo2::UV.VOLT)
+    func StrapLdo2(vsel::UV.VOLT)
     {
         Q_LDO2 - CAP cldo2(1μF,10V) - GND
 
         SW -> IN_LDO2    // LDO2 is fed from the buck switch node
 
         // Strap table: SEL_LDO2 to GND selects 2.6 V, to Q_LDO2 selects 3.3 V
-        if (vLdo2 == 2.6V){
+        if (vsel == 2.6V){
             SEL_LDO2 + GND
         }
         else{
@@ -113,10 +113,10 @@ component TLE7368 (partno)
         }
     }
 
-    func Standby(vStdby)
+    func Standby(vstandby)
     {
         // Strap table: SEL_STBY to Q_STBY selects 1.0 V, to GND selects 2.6 V
-        if (vStdby == 1V){
+        if (vstandby == 1V){
             SEL_STBY + Q_STBY
         }
         else{
@@ -143,8 +143,8 @@ module TLE7368E(psnk pwr{VIN, GND}::DC(12V))
     .Power(pwr)
     .Reset()
     .Charge()
-    .LDO1()
-    .LDO2(3.3V)   // the V3V3 export selects the 3.3 V tap
+    .CapLdo1()
+    .StrapLdo2(3.3V)   // the V3V3 export selects the 3.3 V tap
 
     // No LDO3 fitted: with the external NPN solution dropped, DRV_EXT
     // straps to FB_EXT (b3874 removed the func - boards that fit LDO3
