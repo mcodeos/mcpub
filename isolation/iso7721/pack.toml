@@ -19,6 +19,7 @@ keywords = ["digital-isolator", "isolation", "iso7721", "capacitive-isolation", 
 [[attachments]]
 path = "iso7721.pdf"
 kind = "datasheet"
+url = ""
 checksum = "sha256:fb039c00ceb601b93618004839b2108d3358777a019f2526bca427b7f6c0649c"
 
 [[attachments]]

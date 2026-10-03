@@ -1,0 +1,451 @@
+Product Speciﬁcation
+
+
+
+
+NHD-0216K1Z-NSW-BBW-L
+
+
+
+
+Newhaven Display International, Inc.
+2661 Galvin Court, Elgin, IL 60124 USA
+                                         REACH       RoHS
+Ph: 847.844.8795 | Fx: 847.844.8796      Compliant   Compliant
+www.newhavendisplay.com
+ Table of Contents
+Document Revision History .......................................................................................................................... 2
+Mechanical Drawing .................................................................................................................................... 3
+Pin Description and Wiring Diagram............................................................................................................. 4
+Electrical Characteristics .............................................................................................................................. 5
+Optical Characteristics ................................................................................................................................. 5
+Controller Information................................................................................................................................. 5
+Table of Commands ..................................................................................................................................... 6
+Timing Characteristics .................................................................................................................................. 7
+Built-in Font Table ....................................................................................................................................... 9
+Example Initialization Program .................................................................................................................. 10
+Quality Information ................................................................................................................................... 12
+
+
+
+
+Additional Resources
+     ➢ Support Forum: https://support.newhavendisplay.com/hc/en-us/community/topics
+     ➢ GitHub: https://github.com/newhavendisplay
+     ➢ Example Code: https://support.newhavendisplay.com/hc/en-us/categories/4409527834135-Example-Code/
+     ➢    Knowledge Center: https://www.newhavendisplay.com/knowledge_center.html
+     ➢ Quality Center: https://www.newhavendisplay.com/quality_center.html
+     ➢ Precautions for using LCDs/LCMs: https://www.newhavendisplay.com/specs/precautions.pdf
+     ➢ Warranty / Terms & Conditions: https://www.newhavendisplay.com/terms.html
+
+
+
+
+                                                                                                                                                           1
+Document Revision History
+ Revision     Date                              Description                             Changed By
+
+    0       10/5/2007                          Initial Release                              -
+
+    1       12/17/2009                      User Guide Reformat                             BE
+
+    2        1/7/2010                          Optical revised                              BE
+
+    3        1/6/2011             Alternate controller information updated                 AK
+
+    4        4/5/2011    Improved Polarizer, Increased Backlight, Redesigned Module         JT
+
+    5        4/6/2011                   Mechanical drawing updated                         AK
+
+    6        4/8/2011    Electrical/Optical characteristics & Pin description updated      AK
+
+    7       12/22/2014                Electrical characteristics updated                    PB
+
+    8        6/6/2016     Quality Information Updated and added Controller Timing          TM
+
+    9       3/28/2017       Mech. Drawing and Electrical characteristics updated           TM
+
+   10       3/24/2021      Updated backlight voltage range (Min and Max values)             JT
+
+   11       07/01/2022              Updated the Electrical Characteristics                  JT
+
+
+
+
+                                                                                                     2
+           1                               2                  3                     4          5                                 6                                      7                                               8
+
+    Mechanical Drawing
+                                                                                               SYMBOL                                      REVISION                                                                       DATE
+
+
+
+A                                                                                                                                                                                                                                            A
+
+                                                                  80.0 0.5
+                                         4.95                         71.2
+                                         7.55                      66.0(VA)
+                                        12.45                      56.2(AA)
+                                                                                                                                     13.5Max
+                                          8.0             P2.54*15=38.1
+B                  5.7   10.3   12.55                   1.8 16-? 1.0 PTH      2.0              2.5                                    8.9                                                                                                    B
+
+
+                                                    1                         16
+
+                                                                                        18.3
+                                                K
+
+        36.0 0.5
+                     25.2
+                                11.5                                                           31.0
+                   16.0(VA)                                                                                                                                                                             1                 VSS
+                                                A
+C                                                                                                                                                                                                       2                 VDD                C
+
+                                                                                                                                                                                                        3                 VO
+                                                    1                       16                                                                                                                          4                  RS
+                                                        1.8                             4- 2.5 PTH                                                         1.6
+                                                                                                                                                                                                        5                 R/W
+                                                             16- 1.0 PTH    2.0         4- 5.0 PAD
+                                                8.0      P2.54*15=38.1                                                                                                                                  6                  E
+                                                                                                                                          LED B/L
+                                                         40.55                                                                                                                                          7                 DB0
+                                          2.5                        75.0                                                                                                                               8                 DB1
+D                                                                                                                                                                                                                                            D
+                                                                                                                                                                                                        9                 DB2
+                                                                                                                                                                                                        10                DB3
+                                                                                                                                                                                                        11                DB4
+                                                                                                                                                                                                        12                DB5
+                                                                                                                 3.55
+                                                                                                                                                                                                        13                DB6
+                                                                                                                2.95       0.6                                                                          14                DB7
+                                                                                                         0.6
+E
+    Product Description: 2x16 character LCD                                                             0.55
+                                                                                                                                                                                                        15                 A                 E
+
+    1. Driving:           1/16duty, 1/5bias                                                                                                                                                             16                 K
+    2. Voltage:           5.0V VDD, 3.7V VLCD                                             5.95                                         Standard Tolerance:
+    3. Display Type:      STN Blue Negative / Transmissive                                 5.55
+                                                                                              0.7
+                                                                                             0.65
+                                                                                                                                       (Unless otherwise specified)
+
+
+    4. Optimal View:      6:00                                                                                                                                          Drawing/Part Number:                                     Revision:
+                                                                                                                                        Linear:      ±0.3mm
+                                                                                                                                                                               NHD-0216K1Z-NSW-BBW-L                                  1.0
+                                                                                                                                                                                                                                 Size:
+    5. Backlight:         Side White LED                                                                                              Unless otherwise specified:
+                                                                                                                                                                        Drawn By:
+                                                                                                                                                                                      J. Thomas
+                                                                                                                                                                                                   Approved By:
+                                                                                                                                                                                                                    J.Thomas          A3
+                                                                                                                                                                                                                                 Scale:
+    6. Driver IC:         ST7066U 8/4-bit MPU Interface                                         0.4
+                                                                                                                                      • Dimensions are in Millimeters
+                                                                                                                                      • Third Angle Projection
+                                                                                                                                                                        Drawn Date:
+                                                                                                                                                                                      03/24/2021
+                                                                                                                                                                                                   Approved Date:
+                                                                                                                                                                                                                    03/24/2021        NS
+                                                                                                                                                                             Do Not Scale Drawing                      Sheet 1 of 1
+F                                                                                                              DOT SIZE                                                                                                                      F
+                                                                                                               SCALE 5/1               This drawing is solely the property of Newhaven Display International, Inc.
+                                                                                                                                       The information it contains is not to be disclosed, reproduced or copied in
+                                                                                                                                       whole or part without written approval from Newhaven Display.
+           1                               2                  3                     4          5                                 6                                      7                                               8
+Pin Description and Wiring Diagram
+ Pin No.   Symbol       External           Function Description
+                        Connection
+    1         VSS         Power Supply     Ground
+    2         VDD         Power Supply     Supply Voltage for logic (+5.0V)
+    3          V0       Adj Power Supply   Power supply for contrast (approx. 1.3V)
+    4          RS             MPU          Register Select signal. RS=0: Command, RS=1: Data
+    5         R/W             MPU          Read/Write select signal, R/W=1: Read R/W: =0: Write
+    6           E             MPU          Operation Enable signal. Falling edge triggered.
+  7-10      DB0 – DB3         MPU          Four low order bi-directional three-state data bus lines.
+                                           These four are not used during 4-bit operation.
+ 11-14      DB4 – DB7        MPU           Four high order bi-directional three-state data bus lines.
+  15          LED+        Power Supply     Backlight Anode (+5.0V via on-board resistor)
+  16          LED-        Power Supply     Backlight Cathode (Ground)
+
+
+Recommended LCD connector: 2.54mm pitch pins
+Backlight connector: --- Mates with: ---
+
+
+
+
+                                                                                                        4
+Electrical Characteristics
+                 Item            Symbol        Condition         Min.        Typ.      Max.             Unit
+ Operating Temperature Range       TOP        Absolute Max        -20          -       +70               ⁰C
+ Storage Temperature Range         TST        Absolute Max        -30          -       +80               ⁰C
+ Supply Voltage                    VDD              -             4.5         5.0      5.5               V
+ Supply Current                    IDD         TOP =25°C,         0.5         1.0      2.0              mA
+ Supply for LCD (contrast)         VIH          VDD=5.0V          3.6         3.7      3.8               V
+ “H” Level input                   VIL              -           0.7*VDD        -       VDD               V
+ “L” Level input                   VOH              -             VSS          -       0.6               V
+ “H” Level output                  VOL              -             3.9          -       VDD               V
+ “L” Level output                  TOP              -             VSS          -       0.4               V
+
+ Backlight Supply Current          ILED         VLED =5.0V        10         32            40           mA
+ Backlight Supply Voltage          VLED              -            4.9        5.0           5.1           V
+
+
+
+
+Optical Characteristics
+                    Item           Symbol      Condition       Min.       Typ.      Max.         Unit
+                  Top                ϕY+                        -          20        -            °
+  Optimal
+                  Bottom             ϕY-                        -          40        -            °
+  Viewing                                        Cr ≥ 2
+                  Left               θX-                        -          30        -            °
+  Angles
+                  Right              θX+                        -          30        -            °
+ Contrast Ratio                       Cr            -           -           3        -            -
+                      Rise            Tr            -           -         150       200          ms
+  Response Time
+                      Fall            Tf            -           -         150       200          ms
+
+
+
+
+Controller Information
+Built-in ST7066U controller.
+Please download specification at https://support.newhavendisplay.com/hc/en-us/articles/4414848155159-ST7066U
+
+
+
+DDRAM Address
+  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+  40 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F
+
+
+
+
+                                                                                                               5
+Table of Commands
+
+                                 Instruction code                                                          Execution
+Instruction                                                                     Description               time (fosc=
+                RS   R/W   DB7   DB6 DB5 DB4 DB3 DB2 DB1          DB0
+                                                                                                            270 KHZ
+                                                                        Write “20H” to DDRAM and
+Clear
+                0    0     0      0    0   0     0    0     0     1     set DDRAM address to                1.52ms
+Display
+                                                                        “00H” from AC
+                                                                        Set DDRAM Address to
+                                                                        “00H” from AC and return
+Return
+                0    0     0      0    0   0     0    0     1      -    cursor to its original position     1.52ms
+Home
+                                                                        if shifted. The contents of
+                                                                        DDRAM are not changed.
+                                                                        Sets cursor move direction
+                                                                        and specifies display shift.
+Entry mode
+                0    0     0      0    0   0     0    1     I/D   SH    These parameters are                 37µs
+Set                                                                     performed during data write
+                                                                        and read.
+                                                                        D=1: Entire display on
+Display ON/
+                0    0     0      0    0   0     1    D     C     B     C=1: Cursor on                       37µs
+OFF control
+                                                                        B=1: Blinking cursor on
+                                                                        Sets cursor moving and
+Cursor or                                                               display shift control bit, and
+                0    0     0      0    0   1    S/C   R/L    -     -                                         37µs
+Display shift                                                           the direction without
+                                                                        changing DDRAM data.
+                                                                        DL: Interface data is 8/4 bits
+Function
+                0    0     0      0    1   DL    N    F      -     -    N: Number of lines is 2/1            37µs
+set
+                                                                        F: Font size is 5x11/5x8
+Set
+                                                                        Set CGRAM address in
+CGRAM           0    0     0      1   AC5 AC4   AC3   AC2 AC1     AC0                                        37µs
+                                                                        address counter
+Address
+Set
+                                                                        Set DDRAM address in
+DDRAM           0    0     1     AC6 AC5   AC4 AC3    AC2 AC1     AC0                                        37µs
+                                                                        address counter.
+Address
+                                                             Whether during internal
+Read busy                                                    operation or not can be
+Flag and        0    1     BF    AC6 AC5 AC4 AC3 AC2 AC1 AC0 known by reading BF. The                         0s
+Address                                                      contents of address counter
+                                                             can also be read.
+Write data                                                   Write data into internal RAM
+                1    0     D7    D6   D5 D4   D3  D2  D1 D0                                                  37µs
+To Address                                                   (DDRAM/CGRAM).
+Read data                                                    Read data from internal
+                1    1     D7    D6   D5 D4   D3  D2  D1 D0                                                  37µs
+From RAM                                                     RAM (DDRAM/CGRAM).
+
+
+
+
+                                                                                                                        6
+Timing Characteristics
+
+Writing data from MPU to ST7066U
+
+
+
+
+                                   7
+Reading data from ST7066U to MPU
+
+
+
+
+                                   8
+Built-in Font Table
+
+
+
+
+                      9
+Example Initialization Program
+8-bit Initialization:
+/**********************************************************/
+void command(char i)
+{
+      P1 = i;                       //put data on output Port
+      D_I =0;                       //D/I=LOW : send instruction
+      R_W =0;                       //R/W=LOW : Write
+      E = 1;
+      Delay(1);                     //enable pulse width >= 300ns
+        E = 0;                      //Clock enable: falling edge
+}
+/**********************************************************/
+void write(char i)
+{
+      P1 = i;                       //put data on output Port
+      D_I =1;                       //D/I=HIGH : send data
+      R_W =0;                       //R/W=LOW : Write
+      E = 1;
+      Delay(1);                     //enable pulse width >= 300ns
+      E = 0;                        //Clock enable: falling edge
+}
+/**********************************************************/
+void init()
+{
+      E = 0;
+      Delay(100);                   //Wait >40 msec after power is applied
+      command(0x30);                //command 0x30 = Wake up
+      Delay(30);                    //must wait 5ms, busy flag not available
+      command(0x30);                //command 0x30 = Wake up #2
+      Delay(10);                    //must wait 160us, busy flag not available
+      command(0x30);                //command 0x30 = Wake up #3
+      Delay(10);                    //must wait 160us, busy flag not available
+      command(0x38);                //Function set: 8-bit/2-line
+      command(0x10);                //Set cursor
+      command(0x0c);                //Display ON; Cursor ON
+      command(0x06);                //Entry mode set
+}
+/**********************************************************/
+
+
+
+
+                                                                                 10
+4-bit Initialization:
+/**********************************************************/
+void command(char i)
+{
+      P1 = i;                       //put data on output Port
+      D_I =0;                       //D/I=LOW : send instruction
+      R_W =0;                       //R/W=LOW : Write
+      Nybble();                     //Send lower 4 bits
+      i = i<<4;                     //Shift over by 4 bits
+      P1 = i;                       //put data on output Port
+      Nybble();                     //Send upper 4 bits
+}
+/**********************************************************/
+void write(char i)
+{
+      P1 = i;                       //put data on output Port
+      D_I =1;                       //D/I=HIGH : send data
+      R_W =0;                       //R/W=LOW : Write
+      Nybble();                     //Clock lower 4 bits
+      i = i<<4;                     //Shift over by 4 bits
+      P1 = i;                       //put data on output Port
+      Nybble();                     //Clock upper 4 bits
+}
+/**********************************************************/
+void Nybble()
+{
+      E = 1;
+      Delay(1);                     //enable pulse width >= 300ns
+      E = 0;                        //Clock enable: falling edge
+}
+/**********************************************************/
+void init()
+{
+      P1 = 0;
+      P3 = 0;
+      Delay(100);                   //Wait >40 msec after power is applied
+      P1 = 0x30;                    //put 0x30 on the output port
+      Delay(30);                    //must wait 5ms, busy flag not available
+      Nybble();                     //command 0x30 = Wake up
+      Delay(10);                    //must wait 160us, busy flag not available
+      Nybble();                     //command 0x30 = Wake up #2
+      Delay(10);                    //must wait 160us, busy flag not available
+      Nybble();                     //command 0x30 = Wake up #3
+      Delay(10);                    //can check busy flag now instead of delay
+      P1= 0x20;                     //put 0x20 on the output port
+      Nybble();                     //Function set: 4-bit interface
+      command(0x28);                //Function set: 4-bit/2-line
+      command(0x10);                //Set cursor
+      command(0x0F);                //Display ON; Blinking cursor
+      command(0x06);                //Entry Mode set
+}
+/**********************************************************/
+
+
+
+
+                                                                                 11
+Quality Information
+          Test Item                      Content of Test                         Test Condition            Note
+ High Temperature storage   Endurance test applying the high storage      +80⁰C , 200hrs                   2
+                            temperature for a long time.
+ Low Temperature storage    Endurance test applying the low storage       -30⁰C , 200hrs                   1,2
+                            temperature for a long time.
+ High Temperature           Endurance test applying the electric stress   +70⁰C , 200hrs                   2
+ Operation                  (voltage & current) and the high thermal
+                            stress for a long time.
+ Low Temperature            Endurance test applying the electric stress   -20⁰C , 200hrs                   1,2
+ Operation                  (voltage & current) and the low thermal
+                            stress for a long time.
+ High Temperature /         Endurance test applying the electric stress   +60⁰C , 90% RH , 96hrs           1,2
+ Humidity Operation         (voltage & current) and the high thermal
+                            with high humidity stress for a long time.
+ Thermal Shock resistance   Endurance test applying the electric stress   -20⁰C, 30min -> 25⁰C, 5min ->
+                            (voltage & current) during a cycle of low     70⁰C, 30min = 1 cycle
+                            and high thermal stress.                      For 10 cycles
+ Vibration test             Endurance test applying vibration to          10-55Hz, 1.5mm amplitude.        3
+                            simulate transportation and use.              60 sec in each of 3 directions
+                                                                          X,Y,Z
+                                                                          For 15 minutes
+ Static electricity test    Endurance test applying electric static       VS=±600V(contact),±800V(air),
+                            discharge.                                    RS=330Ω, CS=150pF
+                                                                          10 times
+Note 1: No condensation to be observed.
+Note 2: Conducted after 4 hours of storage at 25⁰C, 0%RH.
+Note 3: Test performed on product itself, not inside a container.
+
+
+
+
+                                                                                                                  12
+

@@ -19,6 +19,7 @@ keywords = ["efuse", "current-limit", "overvoltage-clamp", "protection", "hot-pl
 [[attachments]]
 path = "tps25200.pdf"
 kind = "datasheet"
+url = ""
 checksum = "sha256:fafdb867c456a2b24ef4fe5908e7d6da75703c0f24a36f984864d1d2daf9cd4a"
 
 [[attachments]]
