@@ -38,7 +38,7 @@ component TLE7368 (partno)
         out [8,17] = [Q_T2,GND]::DC(-5V ~ 40V), "Tracking regulator 2 output"
 
         // LDO2
-        in [5,17] = [IN_LDO2, GND]::DC(), "LDO2 input"
+        in [5,17] = [IN_LDO2, GND]::DC(-0.3V ~ 45V), "LDO2 input"
         in 23 = SEL_LDO2, "[VSS, Q_LDO2]: GND to select 2.6 V, to Q_LDO2 to select 3.3 V"
         out [6,17] = [Q_LDO2,GND]::DC(2.6V)|[Q_LDO2,GND]::DC(3.3V), "Voltage regulator 2 output, 700mA current limitition"
 
