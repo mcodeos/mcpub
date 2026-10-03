@@ -55,6 +55,9 @@
 #  17. rsync     publish with transport = rsync ships the delta to a second
 #                tree (the "remote" host form); the published version then
 #                installs from that tree, signature verified
+#  18. trunc     mock --truncate-at: the cut /dl/ body fails the checksum by
+#                name and nothing lands in the data root (client-side twin of
+#                the shard7 in-process truncation test)
 #
 # Usage: ./e2e-registry.sh [mcc-binary] [device-dir]
 #   mcc-binary  default: /Users/dan/work/mo/mcc/target/debug/mcc
@@ -431,5 +434,38 @@ EOF
 ( cd "$PROJ4" && "$MCC" build 2>&1 >/dev/null ) | grep -q "installed $PKG_NAME@$PUBVER2" \
     || { echo "FAIL: install from the rsync-published tree failed" >&2; exit 1; }
 echo "ok: delta shipped by rsync, published version installed from the remote tree"
+
+step "18. truncation: a cut artifact fails the checksum with no half install"
+# The client-side twin of shard7's in-process truncation test (which also
+# pinned the fix: the download scratch is process-unique, so concurrent
+# installs of the same name never share a .part sibling).
+stop_http
+start_mock trunc --log "$BASE/http-trunc.log" --truncate-at 64
+PROJ5="$BASE/proj-trunc"
+mkdir -p "$PROJ5/src"
+cat > "$PROJ5/project.toml" <<EOF
+[project]
+name = "e2e-reg-trunc"
+version = "0.1"
+entry = "src/main.mc"
+
+[dependencies]
+mcode = "*"
+$PKG_NAME = "*"
+
+[config.registry]
+url = "http://127.0.0.1:$PORT"
+EOF
+printf 'module main()\n{\n}\n' > "$PROJ5/src/main.mc"
+# Remove every installed copy so the build must download afresh (a later
+# stage's 9.x install would otherwise satisfy `*` without the network).
+rm -rf "$ROOT/$PKG_NAME@"*
+OUT="$( cd "$PROJ5" && "$MCC" build 2>&1 >/dev/null )" \
+    && { echo "FAIL: a truncated artifact must fail the build" >&2; exit 1; }
+echo "$OUT" | grep -q 'checksum mismatch' \
+    || { echo "FAIL: the truncation was not named: $OUT" >&2; exit 1; }
+ls -d "$ROOT/$PKG_NAME@"* 2>/dev/null \
+    && { echo "FAIL: half install landed in the data root" >&2; exit 1; }
+echo "ok: truncated download refused by checksum, nothing installed"
 
 printf '\nALL GREEN — registry P2 + P3 verified end to end\n'
