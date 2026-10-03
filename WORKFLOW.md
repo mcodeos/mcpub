@@ -149,8 +149,15 @@ the known-red set (rfsoc grammar debts) must not grow.
 
 ## 6. Install and test locally
 
+> **Law update (2026-10-03, registry P2 / b4506)**: third-party packs no
+> longer land in the global data root — `--global` is refused for third
+> party (the global root is official-mcode territory). Install runs
+> **inside a consumer project** and vendors into
+> `<project>/libs/<name>@<ver>/` (cargo-style, committable with the project).
+
 ```bash
-mcc lib install --from <part>-<ver>.mcl      # → ~/.mcode/<part>@<ver>/, index rebuilt
+cd <consumer-project>                        # must run inside a project
+mcc lib install --from <part>-<ver>.mcl      # → <project>/libs/<part>@<ver>/
 ```
 
 Install performs the three checks (§4.2): manifest present · entry present ·
@@ -169,12 +176,14 @@ version = "0.1"
 entry = "src/main.mc"
 
 [dependencies]
-<part> = "0.1.0"
+<part> = "0.1"          # two-segment pin; resolved at load time, libs/ tier first
 ```
 
 ```text
 // src/main.mc
-use <part>.<part>        // dotted form resolves <part>@<ver> in ~/.mcode
+use <part>.<part>        // dotted form follows the shared tier law: libs/
+                         // first, then the global root (mc_use 4b, same
+                         // face as the load side's resolve_lib_root_req)
 
 module t
 {

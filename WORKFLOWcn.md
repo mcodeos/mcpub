@@ -121,8 +121,14 @@ mcc lib pack mcpub/<category>/<part>        # 出 <part>-<ver>.mcl + .thin.mcl
 
 ## 6. 本地安装测试
 
+> **律更新（2026-10-03，registry P2 / b4506 起）**：第三方包**不再进
+> 全局数据根**——`--global` 对第三方拒收（全局根是官方库 mcode 的地盘）。
+> 安装在**工程内**执行，vendor 到 `<project>/libs/<name>@<ver>/`
+> （cargo 式，随工程可提交）。
+
 ```bash
-mcc lib install --from <part>-<ver>.mcl      # → ~/.mcode/<part>@<ver>/，index 重建
+cd <consumer-project>                        # 必须在工程内跑，否则硬错
+mcc lib install --from <part>-<ver>.mcl      # → <project>/libs/<part>@<ver>/
 ```
 
 装时三查（§4.2）：清单在场 · entry 在场 · sha256 逐在场附件对账；
@@ -139,12 +145,13 @@ version = "0.1"
 entry = "src/main.mc"
 
 [dependencies]
-<part> = "0.1.0"
+<part> = "0.1"          # 两段版律；pin 在 load 期解析，libs/ 先于全局根
 ```
 
 ```text
 // src/main.mc
-use <part>.<part>        // 点形式解析 ~/.mcode 下的 <part>@<ver>
+use <part>.<part>        // 点形式走共享 tier 律：先 libs/ 后全局根
+                         // （mc_use 4b，与 load 侧 resolve_lib_root_req 同面）
 
 module t
 {

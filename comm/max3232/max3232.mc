@@ -10,7 +10,7 @@
 
 use mclibs.comm/rs232.mc
 
-component MAX3232 : UARTtoRS232
+component MAX3232 : XCVR.RS232
 {
     partno = "MAX3232"
     package = PKG.SOIC16    // 16-pin SOIC (D) / SSOP (DB) / SOIC (DW) /

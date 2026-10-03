@@ -6,7 +6,7 @@
 
 use mclibs.comm/uart2rs485.mc
 
-component PL3085A : UARTtoRS485
+component PL3085A : XCVR.RS485
 {
     name = "PL3085A"
     description = "UART/RS485 Tranciever"

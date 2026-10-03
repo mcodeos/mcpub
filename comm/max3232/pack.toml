@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "max3232"
-version = "0.2"
+version = "0.3"
 category = "comm"
 description = "Dual-channel RS-232 line transceiver (MAX3232)"
 entry = "max3232.mc"

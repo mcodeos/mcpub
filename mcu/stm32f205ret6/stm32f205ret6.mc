@@ -130,13 +130,13 @@ component STM32F205RET6                                                  // MCU 
 // 模块级封装（§6.9）：最小系统 = MCU + 主晶振（含负载电容）+ 复位 RC + BOOT0 strap。
 // 模拟域按同轨传（VDDA 分轨滤波的板子跳过本模块、自行调 uC.Power 双域）。
 // BOOT0 按 10k 上拉＝主闪存启动（DS6329 BOOT 值表；串口 bootloader 板改接地）。
-module STM32F205_MINI(psnk pwr{V3V3, GND}::DC(3.3V), freq::UV.HZ, cl::UV.CAP)
+module STM32F205_MINI(psnk pwr{V3V3, GND}::DC(3.3V), freq::UV.HZ, cload::UV.CAP)
 {
     STM32F205RET6 uC
     .Power(pwr, pwr)                                                    // 两域同轨
     .Reset(pwr.GND)
 
-    XTAL2(freq, cl) y1                                                  // 主晶振（mcode comp/xtal.mc）
+    XTAL2(freq, cload) y1                                               // 主晶振（mcode comp/xtal.mc）
     y1.Setup(pwr.GND) -> uC.XTAL{X1, X2}                                // 负载电容落在晶振脚，归属判 U200
     uC.BOOT0 - RES(10kΩ, ±1%) - pwr.V3V3                                // 主闪存启动 strap
 }
