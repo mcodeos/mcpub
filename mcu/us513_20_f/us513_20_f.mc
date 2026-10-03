@@ -65,7 +65,7 @@ component MCU.US513_20_F                                                  // MCU
             GPIO[2] - RES(100kΩ) -> GND    // GPIO.02通过100K电阻接地。
 
         // I2C接口I2C0的两个信号线各接一颗上拉电阻到VDD，以稳定信号。
-        RES(10kΩ).Pull([I2C0.SCL, VDD])  // I2C0.SCL 上拉到 VDD
-        RES(10kΩ).Pull([I2C0.SDA, VDD])  // I2C0.SDA 上拉到 VDD
+        RES(10kΩ).Pullup([I2C0.SCL, VDD])  // I2C0.SCL 上拉到 VDD
+        RES(10kΩ).Pullup([I2C0.SDA, VDD])  // I2C0.SDA 上拉到 VDD
     }
 }

@@ -128,12 +128,12 @@ component TLE7368 (partno)
 
     func PullUp_RO1()
     {
-        RES(10kΩ).Pull([RO_1, VCC]) // LDO1 reset output to MCU
+        RES(10kΩ).Pullup([RO_1, VCC]) // LDO1 reset output to MCU
     }
 
     func PullUp_RO2_FBEXT()
     {
-        RES(10kΩ).Pull([RO_2, VCC]) // LDO2/FB_EXT reset output to MCU
+        RES(10kΩ).Pullup([RO_2, VCC]) // LDO2/FB_EXT reset output to MCU
     }
 }
 
