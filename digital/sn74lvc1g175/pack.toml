@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "sn74lvc1g175"
-version = "0.2"
+version = "0.3"
 category = "digital"
 description = "Single D-type flip-flop, single-gate logic (SN74LVC1G175, SOT-23)"
 entry = "sn74lvc1g175.mc"

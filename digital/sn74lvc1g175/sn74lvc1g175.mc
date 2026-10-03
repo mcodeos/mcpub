@@ -26,7 +26,7 @@ abstract component TTL.D.SN74LVC1G175
         in 6 = _CLR, standard_signal_level
     ]
 
-    func SN74LVC1G175(pwr)
+    func Power(pwr)
     {
         pwr -> DC[VCC, GND]
     }

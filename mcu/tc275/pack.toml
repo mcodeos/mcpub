@@ -2,7 +2,7 @@
 [package]
 format = "1"
 name = "tc275"
-version = "0.3"
+version = "0.4"
 category = "mcu"
 description = "AURIX TriCore automotive MCU (SAK-TC275TP, LQFP-176, Infineon)"
 entry = "tc275.mc"

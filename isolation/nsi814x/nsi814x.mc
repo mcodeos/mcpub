@@ -37,7 +37,7 @@ component ISO.NSI8140(partno)
             out [14:11] = OUT[A,B,C,D]::GPIO(PROVIDER)  // 1 Mbps digital channels (logic side)
         ]
 
-    func NSI8140(ps1, ps2)
+    func Power(ps1, ps2)
     {
         ps1 -> DC1
         ps2 -> DC2

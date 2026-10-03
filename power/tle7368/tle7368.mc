@@ -67,7 +67,7 @@ component TLE7368 (partno)
     // The old 'func TLE7368(pwr)' conflated the partno constructor with the
     // supply binding and the 'Net.Pai' macro class does not exist, so the
     // filter is restated with library parts.
-    func PaiIn([vin, vret]::DC(12V))
+    func Power([vin, vret]::DC(12V))
     {
         vret -> GND
         vret -> GNDA
@@ -91,7 +91,7 @@ component TLE7368 (partno)
         CCP - CAP ccp(220nF, 25V) - GND
     }
 
-    func QT12LDO1()
+    func LDO1()
     {
         Q_T1 - CAP ct1(4.7μF,10V) - GND
         Q_T1 - CAP ct2(4.7μF,10V) - GND
@@ -113,7 +113,7 @@ component TLE7368 (partno)
         }
     }
 
-    func STDBY(vStdby)
+    func Standby(vStdby)
     {
         // Strap table: SEL_STBY to Q_STBY selects 1.0 V, to GND selects 2.6 V
         if (vStdby == 1V){
@@ -140,10 +140,10 @@ component TLE7368 (partno)
 module TLE7368E(psnk pwr{VIN, GND}::DC(12V))
 {
     TLE7368("TLE7368E") tle
-    .PaiIn(pwr)
+    .Power(pwr)
     .Reset()
     .Charge()
-    .QT12LDO1()
+    .LDO1()
     .LDO2(3.3V)   // the V3V3 export selects the 3.3 V tap
 
     // No LDO3 fitted: with the external NPN solution dropped, DRV_EXT

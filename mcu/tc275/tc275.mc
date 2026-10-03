@@ -83,7 +83,7 @@ component TC275
         top = [133:176]
     ]
 
-    func TC275_3E(v3v3, v1v3, vext, gnd, va1, va2, vddm)
+    func Power(v3v3, v1v3, vext, gnd, va1, va2, vddm)
     {
         gnd  -> VSS //101
         v1v3 -> VDD //[10,24,68,100,123]
