@@ -294,8 +294,8 @@ grep -q "\"$PUBVER\"" "$REG/lib/$PKG_NAME.json" \
 echo "ok: dry run staged the delta, tree untouched"
 
 # --go: signed, merged in place (file:// + transport none), aliases + search.json.
-( cd "$PROJ3" && "$MCC" lib publish "$PUBDIR" --go 2>&1 ) | grep -q ', signed' \
-    || { echo "FAIL: publish --go did not sign" >&2; exit 1; }
+( cd "$PROJ3" && "$MCC" lib publish "$PUBDIR" --go 2>&1 ) | tee "$BASE/publish-go.log" | grep -q ', signed' \
+    || { echo "FAIL: publish --go did not sign" >&2; tail -20 "$BASE/publish-go.log" >&2; exit 1; }
 python3 - "$REG" "$PKG_NAME" "$PUBVER" <<'PY'
 import json, sys
 meta = json.load(open(f"{sys.argv[1]}/lib/{sys.argv[2]}.json"))
