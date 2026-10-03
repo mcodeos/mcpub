@@ -3,10 +3,20 @@
 [package]
 format = "1"
 name = "tl431"
-version = "0.1"
+version = "0.2"
 category = "power"
 entry = "tl431.mc"
 vendor = "unknown"
 publisher = "mcode"
 readme = "README.md"
 keywords = ["shunt-reference", "tl431", "sot-23"]
+
+[[attachments]]
+path = "tl431.pdf"
+kind = "datasheet"
+checksum = "sha256:5bb067ba98a1eb5e68aaa96050b1ba2b5b944811368a35444e271116c71d8dfe"
+
+[[attachments]]
+path = "tl431.txt"
+kind = "doc"
+checksum = "sha256:6e57292b6fe6b52606320b11f895eb4c25293e69e074334de15dca673b9f711c"

@@ -11,7 +11,8 @@ namespaced component name after `use tl431.tl431`.
 
 ## Source documents
 
-- none
+- `tl431.pdf` (datasheet) — TI TL431/TL432 product datasheet, from the mo/ds central store
+- `tl431.txt` (doc)
 
 
 ## Use
