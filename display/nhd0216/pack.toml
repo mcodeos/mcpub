@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "nhd0216"
-version = "0.1"
+version = "0.2"
 category = "display"
 description = "16x2 character LCD module, STN blue negative with white LED backlight, HD44780-compatible (Newhaven NHD-0216K1Z-NSW-BBW-L)"
 entry = "nhd0216.mc"

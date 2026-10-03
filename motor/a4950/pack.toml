@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "a4950"
-version = "0.2"
+version = "0.3"
 category = "motor"
 description = "Full-bridge DMOS PWM motor driver (A4950ELJTR-T, SOICN-8)"
 entry = "a4950.mc"

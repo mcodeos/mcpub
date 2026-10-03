@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "mcp2003"
-version = "0.3"
+version = "0.4"
 category = "comm"
 description = "LIN J2602 transceiver (MCP2003, Microchip)"
 entry = "mcp2003.mc"

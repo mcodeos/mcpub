@@ -6,7 +6,7 @@
 
 # TC275 32-Bit Single-Chip Microcontroller
 
-component TC275
+component MCU.TC275
 {
     manufacturer = "Infineon"
     description = "TC275 32-Bit Single-Chip TriCore Microcontroller"
@@ -87,13 +87,29 @@ component TC275
 
     func Power(vio, vcore, vext, gnd, vana1, vana2, vmem)
     {
-        gnd  -> VSS //101
-        vcore -> VDD //[10,24,68,100,123]
-        vext -> VEXT //[25,69,99,153]
-        vio   -> (VDDP3, VDDFL3, VFLEX)
-        vana1 -> (VAREF1, VAGND1)
-        vana2 -> (VAREF2, VAGND2)
-        vmem  -> (VDDM, VSSM)
+        // Scalar pins.N endpoints throughout (the CapDigital precedent): group
+        // names (VDD/VEXT/VSS/...) do not expand as component-body connection
+        // endpoints, so the old group-name form registered no pins.
+        gnd -> pins.101          // VSS (digital return, 6 pads)
+        vcore -> pins.10         // VDD core 1.3V
+        vcore -> pins.24
+        vcore -> pins.68
+        vcore -> pins.100
+        vcore -> pins.123
+        vext -> pins.25          // VEXT
+        vext -> pins.69
+        vext -> pins.99
+        vext -> pins.153
+        vio -> pins.104          // VDDP3
+        vio -> pins.154
+        vio -> pins.155          // VDDFL3
+        vio -> pins.164          // VFLEX
+        vana1 -> pins.52         // VAREF1
+        vana1 -> pins.51         // VAGND1
+        vana2 -> pins.26         // VAREF2
+        vana2 -> pins.27         // VAGND2
+        vmem -> pins.54          // VDDM
+        vmem -> pins.53          // VSSM
     }
 
     func CapDigital(gnd)

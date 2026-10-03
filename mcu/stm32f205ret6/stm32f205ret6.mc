@@ -20,7 +20,7 @@
 // regulator capacitor terminals -- each needs its own 2.2uF to GND,
 // they are NOT extra VSS returns.
 
-component STM32F205RET6                                                  // MCU controller, LQFP64
+component MCU.STM32F205RET6                                                  // MCU controller, LQFP64
 {
     partno = "STM32F205RET6"                                            // ST STM32F205RET6 (Cortex-M3, 512KB flash)
     package = PKG.LQFP64                                                // LQFP64 package
@@ -142,7 +142,7 @@ component STM32F205RET6                                                  // MCU 
 // bootloader boards tie it to ground instead).
 module STM32F205_MINI(psnk pwr{V3V3, GND}::DC(3.3V), freq::UV.HZ, cload::UV.CAP)
 {
-    STM32F205RET6 uC
+    MCU.STM32F205RET6 uC
     .Power(pwr, pwr)                                                    // both domains on the same rail
     .Reset(pwr.GND)
 

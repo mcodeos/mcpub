@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "lan8710a"
-version = "0.1"
+version = "0.2"
 category = "comm"
 description = "Ethernet 10/100 PHY transceiver with HP Auto-MDIX, MII/RMII (LAN8710A/LAN8710Ai)"
 entry = "lan8710a.mc"

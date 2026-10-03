@@ -14,7 +14,7 @@
 
 use mclibs.motor/stepper.mc
 
-component DRV8889 : STEPDRV
+component STEPDRV.DRV8889 : STEPDRV
 {
     partno = "DRV8889QPWPRQ1"
 }

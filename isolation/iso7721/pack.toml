@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "iso7721"
-version = "0.1"
+version = "0.2"
 category = "isolation"
 description = "Dual-channel digital isolator, channel A reversed, default-high outputs (TI ISO7721 series, detail model ISO7721D, SOIC-8)"
 entry = "iso7721.mc"

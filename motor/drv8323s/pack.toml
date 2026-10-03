@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "drv8323s"
-version = "0.2"
+version = "0.3"
 category = "motor"
 description = "SPI-configured three-phase smart gate driver (DRV8323S, VQFN)"
 entry = "drv8323s.mc"

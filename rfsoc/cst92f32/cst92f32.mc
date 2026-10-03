@@ -38,7 +38,7 @@
 # Corpus note: this sheet prints ONE VOH/VOL pair with no drive classes,
 # so the drive_level kind axis is DROPPED, not defaulted (ruling 29:
 # single-class deletion is legal).
-component CST92F32 {
+component MCU.CST92F32 {
     pins = [
 
         # ── Main supply VDD (pin 8, "3.3 V power input", Table 1 p.6),

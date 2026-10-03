@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "stm32f103c8t6"
-version = "0.2"
+version = "0.3"
 category = "mcu"
 description = "Cortex-M3 72MHz motor-control MCU (STM32F103C8T6, LQFP48, ST)"
 entry = "stm32f103c8t6.mc"

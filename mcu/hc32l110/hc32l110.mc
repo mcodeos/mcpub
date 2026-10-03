@@ -29,7 +29,7 @@
 //  verified base; other packages get their own base when a project needs them.
 // =============================================================================
 
-component HC32L110
+component MCU.HC32L110
 {
     partno = "HC32L110"       // QFN20 grade: HC32L110C6UA / HC32L110C4UA
     package = PKG.QFN20       // EP -> VSS, implicit
@@ -40,7 +40,10 @@ component HC32L110
 
     pins = [
         psnk [[6], [4]] = [VDD, VSS]::DC(3.3V), "AVCC/DVCC; AVSS/DVSS"
-        psnk [5] = VCAP, "Core LDO decoupling, 4.7uF per datasheet"
+        psnk [[5], [4]] = [VCAP, VSS]::DC(), "Core LDO decoupling - internal
+            derived domain (4.17 form A: power never single-ended); the board
+            side only hangs the 4.7uF cap to VSS; nominal not stated in the
+            datasheet, so DC() stays empty per the nominal three-tier law"
         io 1 = RST{RESETB}::RST(RECEIVER)   // P00/RESETB, low-active reset
         io 2 = P01, "P01/XTHI/AIN7/VCIN7"
         io 3 = P02, "P02/XTHO/AIN8"
@@ -51,8 +54,9 @@ component HC32L110
         io 11 = P24, "P24/AIN0"
         io 12 = P25, "P25/LVDIN3/VC1"
         io 13 = P26, "P26/AIN1"
-        io 14 = SWDIO, "P27/SWDIO serial-wire data"
-        io 15 = SWCLK, "P31/SWCLK serial-wire clock"
+        io [14, 15] = SWD{SWDIO, SWCLK}::DBG.SWD(TARGET), "P27/SWDIO; P31/SWCLK
+            (4.18: the two SWD wires adopt DBG.SWD; the part has no debug-_RST
+            or VREF wire - RESETB rides RST above, AVREF stays on pin 20)"
         io 16 = P32, "P32/AIN2/VCIN2"
         io 17 = P33, "P33/AIN3/VCIN3"
         io 18 = P34, "P34/AIN4/VCIN4"

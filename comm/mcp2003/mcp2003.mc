@@ -13,7 +13,7 @@
 
 use mclibs.comm/lin.mc
 
-component MCP2003 : XCVR.LIN
+component XCVR.MCP2003 : XCVR.LIN
 {
     partno = "MCP2003"
     package = PKG.SOIC8      // 8-pin PDIP / SOIC share one pinout (p.1);

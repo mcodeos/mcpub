@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "drv8833c"
-version = "0.2"
+version = "0.3"
 category = "motor"
 description = "Dual brushed-DC H-bridge motor driver (DRV8833CPWP, HTSSOP-16)"
 entry = "drv8833c.mc"

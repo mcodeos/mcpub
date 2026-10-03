@@ -14,7 +14,7 @@
 
 use mclibs.motor/hbridge.mc
 
-component A4950 : HBRIDGE.SINGLE
+component HBRIDGE.A4950 : HBRIDGE.SINGLE
 {
     partno = "A4950ELJTR-T"
 }

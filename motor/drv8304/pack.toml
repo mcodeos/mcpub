@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "drv8304"
-version = "0.2"
+version = "0.3"
 category = "motor"
 description = "Three-phase smart gate driver (DRV8304H, VQFN)"
 entry = "drv8304.mc"

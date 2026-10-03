@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "bss138n"
-version = "0.3"
+version = "0.4"
 category = "discrete"
 description = "N-channel small-signal MOSFET for level shifting (BSS138N, SOT-23)"
 entry = "bss138n.mc"

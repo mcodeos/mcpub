@@ -23,7 +23,7 @@
 
 use mclibs.display/lcd.mc
 
-component NHD0216K1ZNSWBBWL : LCD.CHR
+component LCD.NHD0216K1ZNSWBBWL : LCD.CHR
 {
     partno = "NHD-0216K1Z-NSW-BBW-L"
     package = PKG.LCD16X2     // 80.0 x 36.0 mm module, 13.5mm max depth, 16-pin 2.54mm single row (DS p.3 mechanical drawing)

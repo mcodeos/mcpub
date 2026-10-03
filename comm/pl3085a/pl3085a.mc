@@ -8,7 +8,7 @@
 
 use mclibs.comm/uart2rs485.mc
 
-component PL3085A : XCVR.RS485
+component XCVR.PL3085A : XCVR.RS485
 {
     name = "PL3085A"
     description = "UART/RS485 Tranciever"
@@ -25,7 +25,7 @@ module PL3085A_RS485(psnk pwr::DC(5V))
     in UART{TX, RX}
     out RS485{A, B}
 
-    PL3085A PL3085(pwr)
+    XCVR.PL3085A PL3085(pwr)
     pwr.VCC - CAP(100nF,10V) - pwr.GND
     DIO.TVS(13.3V, 19.9V, 600W) tvs_a
     tvs_a.Protect(PL3085.RS485.A, pwr.GND) //SMBJ12CA (VBR min 13.3V, VC 19.9V @ IPP, 600W)

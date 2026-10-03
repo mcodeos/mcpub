@@ -35,7 +35,7 @@
 #   level.mc  drive_level (kind = ma(N mA), ruling 29) / io_leak / io_pull
 #   radio.mc  radio_band / radio_rate / rf_sens / rf_pout / rf_maxin /
 #             rf_reject / rf_block / rf_evm / rf_phase
-component ESP32_H2 {
+component MCU.ESP32_H2 {
     pins = [
 
         # -- Battery/analog rail VBAT (pin 18), return = GND pad (pin 33).

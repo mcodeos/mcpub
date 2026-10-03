@@ -8,7 +8,7 @@
 [package]
 format = "1"
 name = "atq237"
-version = "0.2"
+version = "0.3"
 category = "passive"
 description = "LLC transformer 700uH (ATQ237, ATQ3212002)"
 entry = "atq237.mc"

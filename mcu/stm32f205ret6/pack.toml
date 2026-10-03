@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "stm32f205ret6"
-version = "0.4"
+version = "0.5"
 category = "mcu"
 description = "Cortex-M3 120MHz general-purpose MCU (STM32F205RET6, LQFP64, ST)"
 entry = "stm32f205ret6.mc"

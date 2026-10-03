@@ -8,7 +8,7 @@
 //  LLC transformer ATQ23.7 (700uH; primary 4->1, pin 3 = shield/core to AGND,
 //  two secondary windings 16-17 and 11-12).
 // =============================================================================
-component TRAN.ATQ237
+component TRAFO.ATQ237
 {
     partno = "ATQ3212002-700UH"
 

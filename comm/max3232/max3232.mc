@@ -12,7 +12,7 @@
 
 use mclibs.comm/rs232.mc
 
-component MAX3232 : XCVR.RS232
+component XCVR.MAX3232 : XCVR.RS232
 {
     partno = "MAX3232"
     package = PKG.SOIC16    // 16-pin SOIC (D) / SSOP (DB) / SOIC (DW) /

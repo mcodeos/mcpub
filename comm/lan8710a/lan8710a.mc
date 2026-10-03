@@ -22,7 +22,7 @@
 
 use mclibs.comm/eth.mc
 
-component LAN8710A : XCVR.ETH
+component XCVR.LAN8710A : XCVR.ETH
 {
     partno = "LAN8710A"
     package = PKG.QFN32      // 32-QFN 5x5mm 0.5mm pitch, EP -> VSS implicit (stamped QFN §6.1 p.68; cut SQFN §6.2 p.70)
@@ -39,7 +39,7 @@ component LAN8710A : XCVR.ETH
 // the grade overrides the temperature row only (p.1 note, p.54 note 5-4).
 // Variants inherit the abstract (E5063: a concrete component cannot be
 // inherited), so the grade re-states the package with the base.
-component LAN8710Ai : XCVR.ETH
+component XCVR.LAN8710Ai : XCVR.ETH
 {
     partno = "LAN8710Ai"
     package = PKG.QFN32

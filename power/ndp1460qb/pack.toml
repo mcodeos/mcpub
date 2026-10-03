@@ -8,7 +8,7 @@
 [package]
 format = "1"
 name = "ndp1460qb"
-version = "0.2"
+version = "0.3"
 category = "power"
 description = "Synchronous buck converter, 40V 6A (NDP1460QB, QFN20)"
 entry = "ndp1460qb.mc"

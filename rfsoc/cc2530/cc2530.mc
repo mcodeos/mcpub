@@ -70,7 +70,7 @@ component LDO_3V3 {
 
 # ── §3 the component (SWRS081B, full transcription) ─────────────────────
 
-component CC2530 {
+component MCU.CC2530 {
     pins = [
 
         # ── power: ONE face instance per RAIL spanning its parallel pins

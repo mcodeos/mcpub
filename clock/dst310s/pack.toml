@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "dst310s"
-version = "0.3"
+version = "0.4"
 category = "clock"
 description = "32.768kHz tuning-fork crystal (DST310S, 3215 package)"
 entry = "dst310s.mc"

@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "sa0311"
-version = "0.1"
+version = "0.2"
 category = "display"
 description = "Single-digit 0.30 inch 7-segment LED display, high-efficiency red, common anode, right-hand decimal (Kingbright SA03-11EWA)"
 entry = "sa0311.mc"

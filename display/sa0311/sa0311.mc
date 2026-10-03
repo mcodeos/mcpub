@@ -20,7 +20,7 @@
 
 use mclibs.display/seg7.mc
 
-component SA0311EWA : SEG7.CA
+component SEG7.SA0311EWA : SEG7.CA
 {
     partno = "SA03-11EWA"
     package = PKG.DIP10       // 10-pin through-hole 2.54mm pitch, 7.6mm digit height (DS p.1/p.3 outline)

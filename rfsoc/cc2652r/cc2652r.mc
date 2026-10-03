@@ -48,7 +48,7 @@
 # stack axis is ieee154 | ble1m.
 # ── §2 the component (SWRS207J, full transcription) ─────────────────────
 
-component CC2652R {
+component MCU.CC2652R {
     pins = [
 
         # ── power: ONE face instance per RAIL (ruling 19: per-rail, not

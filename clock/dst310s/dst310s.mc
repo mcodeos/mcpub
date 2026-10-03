@@ -13,7 +13,7 @@
 // mclibs abstract waits for the U187 xtal naming-law debt to clear first
 // (bind-after-debt order, U192 table).
 
-component Crystal2.DST310S   // 2-pin passive crystal
+component CRYST.DST310S   // 2-pin passive crystal
 {
     partno = "DST310S"       // part number is DST310S
     package = PKG.XTAL_3215  // 3215 package, i.e. 3.2mm x 2.5mm

@@ -66,35 +66,35 @@ abstract component AMS1117(vset::UV.VOLT = 3.3V)
 // Fixed-output grade variants: pins/funcs/spec ride the base clone; the grade
 // differs by the orderable partno, and the output voltage stays the formal
 // (pass the actual at the instantiation, e.g. `AMS1117_5_0 U1(5V)`).
-component AMS1117_1_2 : AMS1117
+component LDO.AMS1117_1_2 : AMS1117
 {
     partno = "AMS1117-1.2"
 }
-component AMS1117_1_5 : AMS1117
+component LDO.AMS1117_1_5 : AMS1117
 {
     partno = "AMS1117-1.5"
 }
-component AMS1117_1_8 : AMS1117
+component LDO.AMS1117_1_8 : AMS1117
 {
     partno = "AMS1117-1.8"
 }
-component AMS1117_2_5 : AMS1117
+component LDO.AMS1117_2_5 : AMS1117
 {
     partno = "AMS1117-2.5"
 }
-component AMS1117_2_85 : AMS1117
+component LDO.AMS1117_2_85 : AMS1117
 {
     partno = "AMS1117-2.85"
 }
-component AMS1117_3_0 : AMS1117
+component LDO.AMS1117_3_0 : AMS1117
 {
     partno = "AMS1117-3.0"
 }
-component AMS1117_3_3 : AMS1117
+component LDO.AMS1117_3_3 : AMS1117
 {
     partno = "AMS1117-3.3"
 }
-component AMS1117_5_0 : AMS1117
+component LDO.AMS1117_5_0 : AMS1117
 {
     partno = "AMS1117-5.0"
 }
@@ -105,7 +105,7 @@ component AMS1117_5_0 : AMS1117
 // concrete component, not an abstract + partno variant pair. The output
 // voltage is set by the external divider; the formal stays pass-at-call-site
 // like the fixed family.
-component AMS1117_ADJ(vset::UV.VOLT = 3.3V)
+component LDO.AMS1117_ADJ(vset::UV.VOLT = 3.3V)
 {
     partno = "AMS1117-ADJ"
     package = PKG.SOT_223

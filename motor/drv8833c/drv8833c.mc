@@ -13,7 +13,7 @@
 
 use mclibs.motor/hbridge.mc
 
-component DRV8833C : HBRIDGE.DUAL
+component HBRIDGE.DRV8833C : HBRIDGE.DUAL
 {
     partno = "DRV8833CPWP"
 }

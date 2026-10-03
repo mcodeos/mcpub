@@ -23,7 +23,7 @@
 //  NOTE: pin 11 is INT2 and pin 12 is INT1 — easy to swap from memory.
 // =============================================================================
 
-component LIS2DH12
+component SENSOR.LIS2DH12
 {
     partno = "LIS2DH12"       // orderables: LIS2DH12TR (tape&reel) etc.
     package = PKG.FLGA        // LGA-12 2x2mm fine-pitch land grid array

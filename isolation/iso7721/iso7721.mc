@@ -22,7 +22,7 @@
 
 use mclibs.isolation/iso_dig.mc
 
-component ISO7721D : ISO.DIG2.REVA
+component ISO.ISO7721D : ISO.DIG2.REVA
 {
     partno = "ISO7721D"
     package = PKG.SOIC8         // D-8: 4.90 x 3.91 mm body, 1.75 mm max height (mechanical drawing p.34)

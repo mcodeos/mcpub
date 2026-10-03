@@ -14,7 +14,7 @@
 //  schematic and get no instance connections — see the board's analyze
 //  notes. FS(20) floating selects the 130-300kHz range: legal no-connect.
 // =============================================================================
-component BUCK.NDP1460QB
+component DCDC.NDP1460QB
 {
     partno = "NDP1460QB"
     package = PKG.QFN20_5X5

@@ -32,7 +32,7 @@
 #   level.mc  drive_level (kind = ma(N mA), ruling 29) / io_pull
 #   radio.mc  radio_band / radio_rate / rf_maxin
 
-component EFR32MG21 {
+component MCU.EFR32MG21 {
     pins = [
         # -- Digital rail DVDD (pin 25), return = die pad. MCU rows are
         #    PER-MEGAHERTZ slopes (uA/MHz), not flat currents: total =

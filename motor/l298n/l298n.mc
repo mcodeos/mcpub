@@ -13,7 +13,7 @@
 
 use mclibs.motor/hbridge.mc
 
-component L298N : HBRIDGE.DUAL.E
+component HBRIDGE.L298N : HBRIDGE.DUAL.E
 {
     partno = "L298N"
 }

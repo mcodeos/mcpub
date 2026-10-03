@@ -14,7 +14,7 @@
 
 use mclibs.mcu/mcu48.mc
 
-component STM32F103C8T6 : MCU.LQFP48
+component MCU.STM32F103C8T6 : MCU.LQFP48
 {
     partno = "STM32F103C8T6"
     package = PKG.LQFP48

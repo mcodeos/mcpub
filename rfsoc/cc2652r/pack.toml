@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "cc2652r"
-version = "0.2"
+version = "0.3"
 category = "rfsoc"
 description = "Cortex-M4 multiprotocol 2.4GHz wireless SoC (CC2652R, TI)"
 entry = "cc2652r.mc"

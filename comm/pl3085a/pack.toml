@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "pl3085a"
-version = "0.5"
+version = "0.6"
 category = "comm"
 description = "RS-485 transceiver (PL3085A)"
 entry = "pl3085a.mc"

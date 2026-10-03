@@ -15,7 +15,7 @@
 
 use mclibs.motor/gatedrv.mc
 
-component DRV8302 : GATEDRV.H6B
+component GATEDRV.DRV8302 : GATEDRV.H6B
 {
     partno = "DRV8302DCAR"
 }

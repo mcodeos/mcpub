@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "drv8302"
-version = "0.2"
+version = "0.3"
 category = "motor"
 description = "Three-phase gate driver with integrated buck and current sense (DRV8302, QFN)"
 entry = "drv8302.mc"

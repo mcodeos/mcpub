@@ -11,7 +11,7 @@
 
 use mclibs.comm/can.mc
 
-component MCP2551 : XCVR.CAN
+component XCVR.MCP2551 : XCVR.CAN
 {
     partno = "MCP2551"
     package = PKG.SOIC8      // 8-pin PDIP / SOIC share one pinout (p.1)

@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "efr32mg21"
-version = "0.2"
+version = "0.3"
 category = "rfsoc"
 description = "Cortex-M33 BLE mesh 2.4GHz wireless SoC (EFR32MG21, SiLabs)"
 entry = "efr32mg21.mc"

@@ -7,7 +7,7 @@
 [package]
 format = "1"
 name = "esp32h2"
-version = "0.2"
+version = "0.3"
 category = "rfsoc"
 description = "RISC-V BLE / Thread / ZigBee 802.15.4 SoC (ESP32-H2)"
 entry = "esp32h2.mc"
