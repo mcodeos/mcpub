@@ -12,7 +12,7 @@ cd "$(dirname "$0")"
 
 MCC="${MCC:-$(command -v mcc || echo /Users/dan/work/mo/mcc/target/debug/mcc)}"
 OUT="${OUT:-build}"
-KNOWN_RED="${KNOWN_RED:-rfsoc/cc2530 rfsoc/cc2652r rfsoc/cst92f32 rfsoc/efr32mg21 rfsoc/esp32h2}"
+KNOWN_RED="${KNOWN_RED:-rfsoc/cc2530 rfsoc/cc2652r rfsoc/cst92f32 rfsoc/efr32mg21 rfsoc/esp32h2 comm/pl3085a}"
 
 mkdir -p "$OUT"
 
