@@ -1,0 +1,108 @@
+                                    ALPS Manufacturer of Electronic Components/Parts Catalog
+
+
+ 11mm Size Metal Shaft Encoder EC11 Series
+
+
+   Detail
+Model No.                                                                            EC11E15244B2
+
+
+Structure                                                                            Vertical
+Actuator configuration                                                               Flat
+Actuator length                                                                      20mm
+Torque                                                                               10±7mN·m
+Number of detent                                                                     30
+Number of pulse                                                                      15
+Operating direction                                                                  Vertical
+Push-on switch                                                                       With
+Travel of push-on switch                                                             1.5mm
+Operating life                                                                       15,000 cycles
+Minimum packing unit (pcs.)                                                          1,200
+
+
+Operating temperature range                                                          -30℃ to +85℃
+Maximum operating current (Resistive load)                                           10mA
+                           Ratings                                                   10mA 5V DC
+                                                                                     Output of A and B signals, proportionate to
+                           Output signal
+Electrical performance                                                               phase difference
+                           Insulation resistance                                     100M       min. 250V DC
+                           Voltage proof                                             300V AC for 1 minute
+                           Push-pull strength                                        100N
+Mechanical performance     Resistance to soldering       Manual soldering            350℃ max. 3s max.
+                           heat                          Dip soldering               260±5℃, 5±1s
+Durability                 Rotational life                                           15,000 cycles
+                           Cold                                                      -40±3℃ for 240h
+Environmental
+                           Dry heat                                                  85±3℃ for 240h
+performance
+                           Damp heat                                                 60±2℃, 90 to 95%RH for 240h
+                           Circuit / number of contact                               Single pole and single throw (Push-on)
+                           Travel                                                    1.5±0.5mm
+                           Operating force                                           4±2N
+Push-on switch
+specifications             Ratational torque                                         0.5A 16V DC (1mA 16V DC min. ratings)
+                                                                                     100m for initial period;
+                           Contact resistance
+                                                                                     200m after rotational life
+                           Operating life                                            20,000 times min.
+ Photo
+
+
+
+
+ Dimensions
+
+
+
+
+ Mounting Hole Dimensions
+
+
+
+
+Viewed from mounting side.
+ Output Wave
+ Sliding Noise
+
+
+
+
+At R=5k   Chattering: 3ms max. Bounce: 2ms max.
+      Shaft Variety
+Single-shaft Type
+1) Knourled Type                                                                                                Unit : mm
+ Style (SHaft diameter : φ6)
+
+
+
+
+2) Flat Type                                                                                                    Unit : mm
+ Style (SHaft diameter : φ6)
+
+
+
+
+3) Slotted Type                                                                                                 Unit : mm
+ Style (SHaft diameter : φ6)
+
+
+
+
+                    Notes are common to this series/models.
+
+               1.   Place your purchase order in N minimum package units (N: integer).
+               2.   Ask us for the export packaging unit.
+               3.   Products other than those listed in the above chart are also available. Please contact us for details.
+               4.   This products can be used in vehicles.
+                    Although these products are designed to perform over a wide operating temperature range, please ensure that you
+                    receive and read the formal delivery specifications before use.
+
+
+      Inquiries about Products
+      For more information please contact: Products Information Center.
+      1-7, Yukigaya-otsuka-machi, Ota-ku, Tokyo, 145-8501, Japan
+      Phone: +81 (3) 5499-8154
+                                            COPYRIGHT(C) 1995-2008 ALPS ELECTRIC CO.,LTD.
+

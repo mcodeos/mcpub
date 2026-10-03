@@ -1,0 +1,22 @@
+# Device-pack manifest (registry-design.md §2 shape: one pack per part, name follows the entry).
+[package]
+format = "1"
+name = "ec11"
+version = "0.1"
+category = "sensor"
+description = "Incremental rotary encoder, 2-phase A/B with push-on switch (ALPS EC11 series, detail model EC11E15244B2, 11mm metal shaft)"
+entry = "ec11.mc"
+vendor = "ALPS Electric"
+publisher = "mcode"
+readme = "README.md"
+keywords = ["rotary-encoder", "encoder", "quadrature", "incremental", "ec11", "electromechanical"]
+
+[[attachments]]
+path = "ec11.pdf"
+kind = "datasheet"
+checksum = "sha256:e7f13762fe32f2bed7d81661799ca04dd9535fdeefe4e32c067ab1e288c09321"
+
+[[attachments]]
+path = "ec11.txt"
+kind = "doc"
+checksum = "sha256:574321be01e4cd2421cd5b1e1cbc5cafb2b5fa854b0567ddcaf40fdbe9de047f"
